@@ -2,6 +2,8 @@
 #SBATCH --job-name=benchmark-probes
 #SBATCH --account=gpu
 #SBATCH --partition=ber-gpu1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=96G
@@ -16,7 +18,7 @@ export OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=8 TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR"
 input_file="$1"
 output_dir="$2"
-srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/agentic_probes/run.py \
+srun --ntasks=1 --cpus-per-task=8 --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/agentic_probes/run.py \
   --input "$input_file" --output "$output_dir" \
   --probes experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz \
   experiment_reports/role_probes/gptoss20b_baseline/probes/layer_16.npz \

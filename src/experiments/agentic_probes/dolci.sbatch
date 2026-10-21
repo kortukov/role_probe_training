@@ -2,6 +2,8 @@
 #SBATCH --job-name=agentic-probes
 #SBATCH --account=gpu
 #SBATCH --partition=ber-gpu1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=96G
@@ -14,7 +16,7 @@ export PATH="$PWD/.tools/bin:$PATH" HF_HOME="$PWD/.cache/huggingface" HF_HUB_OFF
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton"
 export OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=8 TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR"
-srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/agentic_probes/run.py --input experiment_reports/agentic/dolci_1000/data/trajectories.jsonl \
+srun --ntasks=1 --cpus-per-task=8 --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/agentic_probes/run.py --input experiment_reports/agentic/dolci_1000/data/trajectories.jsonl \
   --output "experiment_reports/agentic/probe_transfer/predictions/dolci/shard-$SLURM_ARRAY_TASK_ID" \
   --shard-index "$SLURM_ARRAY_TASK_ID" --shard-count 4 \
   --probes experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz \
