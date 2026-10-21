@@ -1,0 +1,6 @@
+[submodule "submodules/prompt-injection-as-role-confusion"]
+	path = submodules/prompt-injection-as-role-confusion
+	url = https://github.com/role-confusion/prompt-injection-as-role-confusion
+[submodule "submodules/training_against_probes"]
+	path = submodules/training_against_probes
+	url = https://github.com/aisa-group/training_against_probes

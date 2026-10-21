@@ -1,0 +1,17 @@
+.venv/
+.uv-cache/
+.tools/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+*.sif
+# Keep reports, plots and small result tables versioned. Add experiment-specific
+# ignores for large/private artifacts rather than ignoring all experiment data.
