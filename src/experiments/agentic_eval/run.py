@@ -1,4 +1,4 @@
-"""Run a fixed pilot subset and export agent traces; use inside an allocation."""
+"""Run a reproducible benchmark selection and export agent traces; use inside an allocation."""
 import argparse
 import hashlib
 import importlib.metadata
@@ -26,6 +26,7 @@ def main():
     parser.add_argument("--benchmark", choices=["tau2_retail", "swe_bench"], default="tau2_retail")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--samples", type=int, default=20)
+    parser.add_argument("--all", action="store_true", help="Evaluate every dataset sample")
     parser.add_argument("--seed", type=int, default=123)
     parser.add_argument("--concurrency", type=int, default=8)
     parser.add_argument("--base-url", default="http://127.0.0.1:8000/v1")
@@ -50,7 +51,7 @@ def main():
         task = swe_bench()
     ordered = sorted(task.dataset, key=lambda sample: str(sample.id))
     random.Random(args.seed).shuffle(ordered)
-    full_selection = [sample.id for sample in ordered[:args.samples]]
+    full_selection = [sample.id for sample in (ordered if args.all else ordered[:args.samples])]
     selected = full_selection[args.shard_index::args.shard_count]
     if not selected:
         parser.error("empty shard")

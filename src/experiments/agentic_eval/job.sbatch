@@ -22,7 +22,8 @@ export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken"
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK" TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR" "$TIKTOKEN_CACHE_DIR"
 project=src/experiments/agentic_eval
-run_dir="$PWD/experiment_reports/agentic/tau2_retail_gptoss20b/runs/$SLURM_JOB_ID"
+report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/agentic/tau2_retail_gptoss20b}"
+run_dir="$PWD/$report_root/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))
 cleanup() {
