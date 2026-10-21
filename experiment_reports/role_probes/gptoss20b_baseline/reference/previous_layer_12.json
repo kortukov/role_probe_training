@@ -1,0 +1,100 @@
+{
+  "format_version": 1,
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "layer": 12,
+  "activation": "post_attention_layernorm_output_pre_mlp",
+  "layer_indexing": "zero_based",
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "origin": "previous project; historical comparison only",
+  "source_path": "/home/fe/kortukov/workdir/prompt_injection_interp/head_analysis/role_confusion/paper_reproduction/outputs/paper_reproduction/analysis_paperstack_cuml2510/probes_layer_12.npz",
+  "source_sha256": "cd4dc5ccba974bd7fe4befd42adaef23cd511f5e0adb777cd9c0aecb8a1c48ca",
+  "original_metadata": {
+    "stage": "hf_internal_analysis",
+    "generation_artifact": "head_analysis/role_confusion/outputs/paper_reproduction/generation/raw_trajectories.json",
+    "model": "/data/datasets/huggingface_cache/hub/models--openai--gpt-oss-20b/snapshots/6cee5e81ee83917806bbde320786a8fb61efebee",
+    "model_implementation": {
+      "model_dtype": "torch.bfloat16",
+      "expert_class": "transformers.integrations.mxfp4.Mxfp4GptOssExperts",
+      "expert_projection_dtypes": {
+        "gate_up_proj": "FloatType(bitwidth_exponent=2, bitwidth_mantissa=1, is_signed=True)",
+        "down_proj": "FloatType(bitwidth_exponent=2, bitwidth_mantissa=1, is_signed=True)"
+      },
+      "attention_implementation": "kernels-community/vllm-flash-attn3",
+      "experts_implementation": null,
+      "package_versions": {
+        "torch": "2.9.1+cu128",
+        "transformers": "4.57.5",
+        "kernels": "0.11.5",
+        "flash-attn": "2.8.3+cu128torch2.9",
+        "cuml-cu12": "25.10.0"
+      }
+    },
+    "layer": 12,
+    "configured_training_sources": 250,
+    "actual_training_sources": 249,
+    "training_content_token_counts": {
+      "system": 139042,
+      "user": 139042,
+      "cot": 139042,
+      "assistant": 139042,
+      "tool": 139042
+    },
+    "all_training_content_tokens": true,
+    "C": 0.005,
+    "solver": "cuML LogisticRegression",
+    "filtered_conversations": 82,
+    "role_spaces": {
+      "ua": [
+        "user",
+        "assistant"
+      ],
+      "uat": [
+        "user",
+        "assistant",
+        "tool"
+      ],
+      "uca": [
+        "user",
+        "cot",
+        "assistant"
+      ],
+      "ucat": [
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "sua": [
+        "system",
+        "user",
+        "assistant"
+      ],
+      "suat": [
+        "system",
+        "user",
+        "assistant",
+        "tool"
+      ],
+      "suca": [
+        "system",
+        "user",
+        "cot",
+        "assistant"
+      ],
+      "sucat": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ]
+    }
+  }
+}

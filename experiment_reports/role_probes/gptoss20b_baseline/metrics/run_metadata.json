@@ -1,0 +1,31 @@
+{
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "precision": "MXFP4 checkpoint dequantized to BF16",
+  "attention": "eager",
+  "git_commit": "f55bd071a69876e7a5aea9a38dbc63ce135052bc",
+  "git_dirty": true,
+  "upstream_commit": "ec333c40fd43fe991e1ebf66765051b6d7e35784",
+  "slurm_job_id": "1448230",
+  "gpu": "NVIDIA B200",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "4.57.6",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "datasets": "4.8.5"
+  },
+  "input_sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+  "source_sha256": {
+    "src/role_probe_training/probes/evaluation.py": "aeb72fd1b711a0f453d23399913214f78befb9a529fd2d19cc0f2df7ad195b90",
+    "src/role_probe_training/probes/__init__.py": "51cf860236e198445304124eb4d74308bd998868a1d13d1ed66116b72341c8a2",
+    "src/role_probe_training/probes/harmony.py": "397cbfa9edd69e734df62e26c2de89795ec327544d73ad86e8a3ebc65822ef8d",
+    "src/role_probe_training/probes/linear.py": "e8f7ad65f93fe9c4fc26021cfbc0dace5ceb7a4904ec3cbcb59b78f9a6b29c74",
+    "src/role_probe_training/probes/model.py": "98a665088e9c2281f29b53aa4af28012e9a56c6d332bad6630f4d53fa7007955",
+    "src/experiments/gptoss_role_probes/prepare.py": "ef47918d3f2896fe014db7520a866ca101be41caeb769eea93d17c85cc8285c4",
+    "src/experiments/gptoss_role_probes/checks.py": "b05045138eca998cc680b836ef4334df56e819a62cdf340265e2f153f6a54c3b",
+    "src/experiments/gptoss_role_probes/run.py": "1ae67c17c6fb663728957a970fa0de1f5022dd8d561b9719468978564bb0ae2d",
+    "src/experiments/gptoss_role_probes/smoke.py": "e54967bb94bb5fdecf2bbdbdc41756c76845b8036dd277e52fecfcd840536a99",
+    "src/experiments/gptoss_role_probes/plot.py": "a6b77ae9a2cffd31a25e767131d31cd49d9de981b55bd58e65274712cbf8fc06"
+  }
+}

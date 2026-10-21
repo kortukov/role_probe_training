@@ -18,7 +18,7 @@ For a fresh clone, install uv first using its
 [installation instructions](https://docs.astral.sh/uv/getting-started/installation/).
 The `.venv` and uv cache are local, ignored directories. Add dependencies with
 `uv add`; commit the resulting project metadata and lockfile together.
-Training libraries will be selected for the first experiment.
+Training dependencies are locked for the [GPT-OSS role-probe reproduction](experiment_reports/role_probes/gptoss20b_baseline/README.md).
 
 ## Layout
 

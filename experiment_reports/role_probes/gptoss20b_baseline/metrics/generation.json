@@ -1,0 +1,21 @@
+{
+  "attempted": 12,
+  "completed": 9,
+  "excluded": 3,
+  "max_new_tokens": 4000,
+  "exclusion_reason": "Reached generation length limit without a completed final answer",
+  "files": {
+    "artifacts/conversations.jsonl": {
+      "sha256": "c0c5e7b4ae6da91f1c4d9e7f40448871b789e3802edfc4fe062b504e43984e43",
+      "bytes": 65509
+    },
+    "artifacts/generation_failures.json": {
+      "sha256": "88894accdf1b9a2410489aa5f0ede0a8d2faee04ac3acde0e33206705b097397",
+      "bytes": 49589
+    },
+    "artifacts/inputs/prompts.jsonl": {
+      "sha256": "ff33d8d21ac73ac3aa8d71f8cc5d565d9a10862f17abaa75e4c4dbbf5bfd203d",
+      "bytes": 3666
+    }
+  }
+}

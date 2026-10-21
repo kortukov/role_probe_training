@@ -1,0 +1,18 @@
+{
+  "12": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 0.6808238493439229,
+    "objective": 0.6954192517490905,
+    "max_abs_gradient": 0.0007598021097824728,
+    "gradient_below_1e_4": false,
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  },
+  "16": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 0.3379704760873808,
+    "objective": 0.3570371155774392,
+    "max_abs_gradient": 0.00016600601890038322,
+    "gradient_below_1e_4": false,
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  }
+}

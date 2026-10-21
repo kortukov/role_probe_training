@@ -1,0 +1,1768 @@
+{
+  "files": {
+    "prompts.jsonl": {
+      "sha256": "ff33d8d21ac73ac3aa8d71f8cc5d565d9a10862f17abaa75e4c4dbbf5bfd203d",
+      "bytes": 3666
+    },
+    "documents.jsonl": {
+      "sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+      "bytes": 710216
+    },
+    "config.json": {
+      "sha256": "dc7d32f42e87de3f918b2a99956c0a0d2675522905030511f34e11177a53178f",
+      "bytes": 932
+    }
+  },
+  "documents": [
+    {
+      "id": "bf7c512dfbdd573a7e22e54d0242b57017f9051bdd9d4394fc5a0477723bcbb9",
+      "source": "allenai/c4",
+      "stream_index": 0,
+      "n_tokens": 159,
+      "split": "train"
+    },
+    {
+      "id": "ed11f9027332a86dad7a647926217fb7d9fdbe5d7238d2b31a4771cd0fe6b0c9",
+      "source": "allenai/c4",
+      "stream_index": 1,
+      "n_tokens": 326,
+      "split": "train"
+    },
+    {
+      "id": "01cae8464042fd1d1d54bac3ef5d1adbe34f18bb2ab04f9470bbcfc3502e1be2",
+      "source": "allenai/c4",
+      "stream_index": 2,
+      "n_tokens": 974,
+      "split": "train"
+    },
+    {
+      "id": "f02f876aca93090a3b82920a7c87a463b3d9802e0222eef9eea1e070612f1c89",
+      "source": "allenai/c4",
+      "stream_index": 3,
+      "n_tokens": 209,
+      "split": "train"
+    },
+    {
+      "id": "8010cd0976d6e5fd02a8b5ddd9bbd88fee1b185b5e15e4b3445ad0371c7bddc2",
+      "source": "allenai/c4",
+      "stream_index": 4,
+      "n_tokens": 441,
+      "split": "train"
+    },
+    {
+      "id": "966ef03d99ba79f7495a9cf3ec5403475c5a9cbc645d175730ce6acdb9353524",
+      "source": "allenai/c4",
+      "stream_index": 5,
+      "n_tokens": 80,
+      "split": "train"
+    },
+    {
+      "id": "c2c93cd0961860741bb25f273801f3a80cf04d8f08a276e68259b77c74e8956d",
+      "source": "allenai/c4",
+      "stream_index": 6,
+      "n_tokens": 486,
+      "split": "train"
+    },
+    {
+      "id": "d6482b2cc7167e36a33256cbce8821db52018d7c0f04f84678c6d774fdafee74",
+      "source": "allenai/c4",
+      "stream_index": 7,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "48c9312d81a394808be85c2df5ee43408ef0f5c71cb6bf4461ec702049c516cd",
+      "source": "allenai/c4",
+      "stream_index": 8,
+      "n_tokens": 161,
+      "split": "train"
+    },
+    {
+      "id": "74c4752f886853d5400b3f41df7a1f6fe22f994acc7fabaf329b606d1d8a34b1",
+      "source": "allenai/c4",
+      "stream_index": 9,
+      "n_tokens": 188,
+      "split": "train"
+    },
+    {
+      "id": "5dcc8d0046c4aa99bb38c75fc2bd80dd1f388606a19cf868a6edbfa5f2e6df62",
+      "source": "allenai/c4",
+      "stream_index": 10,
+      "n_tokens": 68,
+      "split": "train"
+    },
+    {
+      "id": "2ef268f40cd4f5e4c197cd1aae7c59e2005f431976b86aabae2b9664ec78631f",
+      "source": "allenai/c4",
+      "stream_index": 11,
+      "n_tokens": 189,
+      "split": "train"
+    },
+    {
+      "id": "1810404673ba71e116dba141f07e8e61dc6f54be1c044dd64a464d41b816c60f",
+      "source": "allenai/c4",
+      "stream_index": 12,
+      "n_tokens": 706,
+      "split": "train"
+    },
+    {
+      "id": "171d85f0fe97a09033045bcded14d8a86d797cd0429b1bf84a312a03e6173bed",
+      "source": "allenai/c4",
+      "stream_index": 13,
+      "n_tokens": 480,
+      "split": "train"
+    },
+    {
+      "id": "3de7a07bb8d239bdc534e41995a9ea487d8b554cb4cc6d8fc5aa38ff4bcee1f0",
+      "source": "allenai/c4",
+      "stream_index": 14,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "386dfc6002a91df590b173c0308c13b88371b0043915d2112a57ac3e0c527446",
+      "source": "allenai/c4",
+      "stream_index": 15,
+      "n_tokens": 25,
+      "split": "test"
+    },
+    {
+      "id": "19120ff011bd9a9fad16f5e33f1241d7af05e723fa884c6d2c0a0e9bf3b22a39",
+      "source": "allenai/c4",
+      "stream_index": 16,
+      "n_tokens": 91,
+      "split": "train"
+    },
+    {
+      "id": "1d60fcae093708df21c2a3c32c5bd9e8cf6bb2d5c18097002c7fc4feaf0c6f02",
+      "source": "allenai/c4",
+      "stream_index": 17,
+      "n_tokens": 166,
+      "split": "train"
+    },
+    {
+      "id": "2862af271df5f41b07d60b8b959647612992f92325735c3cd48b39c4f0ef47dc",
+      "source": "allenai/c4",
+      "stream_index": 18,
+      "n_tokens": 30,
+      "split": "train"
+    },
+    {
+      "id": "146e9ba3ce1a4755f3526c052ea51af886ab932a611e1d58ef62dc911bcbe3e9",
+      "source": "allenai/c4",
+      "stream_index": 19,
+      "n_tokens": 169,
+      "split": "train"
+    },
+    {
+      "id": "231a89dee3fc1a119880e610e30a4ec4512548b1de65e0f9b99d7bc0e5c06f3d",
+      "source": "allenai/c4",
+      "stream_index": 20,
+      "n_tokens": 75,
+      "split": "test"
+    },
+    {
+      "id": "6267b8723e086f54c33c98345f4b51a821a97ec46a970f2a3f032e612168dc84",
+      "source": "allenai/c4",
+      "stream_index": 21,
+      "n_tokens": 50,
+      "split": "train"
+    },
+    {
+      "id": "565095ed96151809aea8bcde40ca113ab5ef7bd83e238ef289821024f0f55074",
+      "source": "allenai/c4",
+      "stream_index": 22,
+      "n_tokens": 88,
+      "split": "train"
+    },
+    {
+      "id": "1042b755a1225127178becbbdb66b84e8d5e621acdd838d79bdcd4dab5181a7d",
+      "source": "allenai/c4",
+      "stream_index": 23,
+      "n_tokens": 313,
+      "split": "train"
+    },
+    {
+      "id": "c34c68881c081dabe9686ac4743906eb96a109d56bd52bab1f2dcb802b5f54bb",
+      "source": "allenai/c4",
+      "stream_index": 24,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "8efabbb98dd5ab2ee3186d31496b91d5859999b17c9c0f47738d5d1205395463",
+      "source": "allenai/c4",
+      "stream_index": 25,
+      "n_tokens": 339,
+      "split": "train"
+    },
+    {
+      "id": "a00f65f9f674f28d015a2d323f440225581abc840240e3c72874cfe16b099f2e",
+      "source": "allenai/c4",
+      "stream_index": 26,
+      "n_tokens": 552,
+      "split": "train"
+    },
+    {
+      "id": "510cb4b4c270587cd5f49331c7b3ed70bd39b6716e9a6f5f7a327188ecd3ddbf",
+      "source": "allenai/c4",
+      "stream_index": 27,
+      "n_tokens": 234,
+      "split": "train"
+    },
+    {
+      "id": "b8b611583c3cbcfd589e6bc3b7c222496839910a739e1b7ea99893af8ab191c8",
+      "source": "allenai/c4",
+      "stream_index": 28,
+      "n_tokens": 49,
+      "split": "train"
+    },
+    {
+      "id": "1b49aa993ef3ffbba7310403cf12bf0f84010ce32989a4b8edbf47c27de032a7",
+      "source": "allenai/c4",
+      "stream_index": 29,
+      "n_tokens": 319,
+      "split": "train"
+    },
+    {
+      "id": "fa6b6652646fcd73a61b9db944fa0923f899189415fef397bc4924e55fc42311",
+      "source": "allenai/c4",
+      "stream_index": 30,
+      "n_tokens": 200,
+      "split": "train"
+    },
+    {
+      "id": "d0ebd1a18eb6a3fe9c60664bad7860c04c8d05fbfd4d0d3d2c58b981f8df105e",
+      "source": "allenai/c4",
+      "stream_index": 31,
+      "n_tokens": 561,
+      "split": "train"
+    },
+    {
+      "id": "3892f7905274ba21f94242638259b7de12d80e5e4c637be3347059612ae6f4c5",
+      "source": "allenai/c4",
+      "stream_index": 32,
+      "n_tokens": 45,
+      "split": "train"
+    },
+    {
+      "id": "993ab3d232c57b7433874b8c663d26f15de5a347884905030d497f3e754a7b6b",
+      "source": "allenai/c4",
+      "stream_index": 33,
+      "n_tokens": 137,
+      "split": "train"
+    },
+    {
+      "id": "bdf5c9a585cd9de597d7edcbee4e111c107c900d0613f6adeff7a49fc406b56f",
+      "source": "allenai/c4",
+      "stream_index": 34,
+      "n_tokens": 52,
+      "split": "test"
+    },
+    {
+      "id": "3c75fdcc6e3c955f8b2d3f4f47babe37d42be954b9253010344de25415e14585",
+      "source": "allenai/c4",
+      "stream_index": 35,
+      "n_tokens": 776,
+      "split": "train"
+    },
+    {
+      "id": "6068a4b9b32d8370ba165e2551d0569cba69038cdf0462724da361cd8312538b",
+      "source": "allenai/c4",
+      "stream_index": 36,
+      "n_tokens": 69,
+      "split": "train"
+    },
+    {
+      "id": "5606a328f12b45440ce3ce651ba7c6e1526e6c941e4687680093d09bf58ea4f9",
+      "source": "allenai/c4",
+      "stream_index": 37,
+      "n_tokens": 258,
+      "split": "train"
+    },
+    {
+      "id": "0cbdab63192637eb5eb0de6f3f4a0c188493309b7fc2faf04d58cbe46e6c62e5",
+      "source": "allenai/c4",
+      "stream_index": 38,
+      "n_tokens": 40,
+      "split": "train"
+    },
+    {
+      "id": "fdb10d3f1296bb13c375fe9e57004900d1a70e9d5e2a0cc1d00cd498eb5e849e",
+      "source": "allenai/c4",
+      "stream_index": 39,
+      "n_tokens": 257,
+      "split": "train"
+    },
+    {
+      "id": "5981500d3c29a748ff6a00689839bbf43228d5bb7cb1dfd3e34fd1bb1a1166ae",
+      "source": "allenai/c4",
+      "stream_index": 40,
+      "n_tokens": 466,
+      "split": "test"
+    },
+    {
+      "id": "51b15ba3406914438687af247bd03b4f879b96ce1b3d73e06a5ea66cd2123d6c",
+      "source": "allenai/c4",
+      "stream_index": 41,
+      "n_tokens": 368,
+      "split": "train"
+    },
+    {
+      "id": "8fffb0d8796fd7c3f9efc0e9b7b6864a04798acc04c1ab9aae1b5b72486a5280",
+      "source": "allenai/c4",
+      "stream_index": 42,
+      "n_tokens": 204,
+      "split": "train"
+    },
+    {
+      "id": "0e7f72396d22999c6bfdd7f46d7f199c4763de6b53b693f8bc66b5e4331640a4",
+      "source": "allenai/c4",
+      "stream_index": 43,
+      "n_tokens": 158,
+      "split": "train"
+    },
+    {
+      "id": "fa5fbfc60c23ef011f04bfa32780c81dca86eafe881c84555d035d171aaeafcb",
+      "source": "allenai/c4",
+      "stream_index": 44,
+      "n_tokens": 497,
+      "split": "train"
+    },
+    {
+      "id": "3fcf57c05175cbe0760956ded16128fc8d91a94102a0595433b7b13426f905c9",
+      "source": "allenai/c4",
+      "stream_index": 45,
+      "n_tokens": 220,
+      "split": "train"
+    },
+    {
+      "id": "3218f064b83f9a356ca14e0a96cca23ccadf488a6347a2742461a715167d3b77",
+      "source": "allenai/c4",
+      "stream_index": 46,
+      "n_tokens": 217,
+      "split": "train"
+    },
+    {
+      "id": "13f904ea9399b9eb710fcd0c19f477034a4145d95059c30f3b40052d077a5e68",
+      "source": "allenai/c4",
+      "stream_index": 47,
+      "n_tokens": 504,
+      "split": "train"
+    },
+    {
+      "id": "e813424b3409f9ac4702e37b5029e43edcaa50eed489a9f14d492e245aec15f5",
+      "source": "allenai/c4",
+      "stream_index": 48,
+      "n_tokens": 45,
+      "split": "train"
+    },
+    {
+      "id": "8a912fcc073298f97913e32df27b98538775e11925f53f63144e4fa17747f7d5",
+      "source": "allenai/c4",
+      "stream_index": 49,
+      "n_tokens": 852,
+      "split": "train"
+    },
+    {
+      "id": "98ba29ad6846d9cfcfd6e1ed7532f4561969dc229d3182290bce7b7ee2aa8a0c",
+      "source": "allenai/c4",
+      "stream_index": 50,
+      "n_tokens": 794,
+      "split": "train"
+    },
+    {
+      "id": "0d848febec21fe9e850f98a213cb91ab86e6984983e822637b2c87aebd184f26",
+      "source": "allenai/c4",
+      "stream_index": 51,
+      "n_tokens": 37,
+      "split": "train"
+    },
+    {
+      "id": "a30537f1c2e1cba1be4b3bb0eb19390a26fe4566e31f8710ce2b886bcb5d2e16",
+      "source": "allenai/c4",
+      "stream_index": 52,
+      "n_tokens": 221,
+      "split": "train"
+    },
+    {
+      "id": "969bdfc660a299d2b9ab92511b7430d66f5cb8e8096c0bfb27914786f0d930e3",
+      "source": "allenai/c4",
+      "stream_index": 53,
+      "n_tokens": 217,
+      "split": "test"
+    },
+    {
+      "id": "0b9f7613508c3690040c0a554196727198531f511fa9e962209a570778c08f5a",
+      "source": "allenai/c4",
+      "stream_index": 54,
+      "n_tokens": 333,
+      "split": "train"
+    },
+    {
+      "id": "1d7cbc1a58a32536b8b161e85c3742c540f222627d3a856415afce239a0fcdbf",
+      "source": "allenai/c4",
+      "stream_index": 55,
+      "n_tokens": 164,
+      "split": "train"
+    },
+    {
+      "id": "149a0e470f7c8ac58a58e67c42ae2c0042ee27e170d95ecb14558307e96bb7e7",
+      "source": "allenai/c4",
+      "stream_index": 56,
+      "n_tokens": 138,
+      "split": "train"
+    },
+    {
+      "id": "3833edd664be682dd99a6067fad89fc7e2a05828293950e394274d8b74fb1005",
+      "source": "allenai/c4",
+      "stream_index": 57,
+      "n_tokens": 74,
+      "split": "train"
+    },
+    {
+      "id": "2e21057bbf8489363edb2d67036da4196f88a6db054f6a4f2a9ab34d41646e64",
+      "source": "allenai/c4",
+      "stream_index": 58,
+      "n_tokens": 252,
+      "split": "train"
+    },
+    {
+      "id": "a1c4bb7e19a442e121b3b39978cc3c4af45c51d2dd6b346e87d91f25bad2f6e9",
+      "source": "allenai/c4",
+      "stream_index": 59,
+      "n_tokens": 189,
+      "split": "train"
+    },
+    {
+      "id": "7489d562277dd29d34c55d7e8fc2c78801dd9ba084de749b66028daaa327e0f3",
+      "source": "allenai/c4",
+      "stream_index": 60,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "559bbf7951dd8821cb00cffcec97d8586fc6710f7b1b2a29ccdfb0674a7a9743",
+      "source": "allenai/c4",
+      "stream_index": 61,
+      "n_tokens": 444,
+      "split": "test"
+    },
+    {
+      "id": "4c9a5b5ea8ed48481591b8997ca5c38c24e0dd82c336b77c3652ec75e4f26c4c",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 0,
+      "n_tokens": 424,
+      "split": "train"
+    },
+    {
+      "id": "8cdf244994c48a33a227a1e0d934b949667b31f428179cd56c40361f69e6819e",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 1,
+      "n_tokens": 378,
+      "split": "train"
+    },
+    {
+      "id": "4e121e12e4c11a8ef3f4febe71d64952c8eedc98e399b83411befe66fe785337",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 2,
+      "n_tokens": 440,
+      "split": "train"
+    },
+    {
+      "id": "9b729a46ef6f0f9b0ca28d82b2169dfc4d640799d79b71c7b50c46b840fa7487",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 3,
+      "n_tokens": 340,
+      "split": "train"
+    },
+    {
+      "id": "8e3c281518955797e070600ce2deb1e4989b8ebb7be0a5a51bebefcbe316c407",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 4,
+      "n_tokens": 738,
+      "split": "train"
+    },
+    {
+      "id": "ee9cfec73c1d084d787bb53a589c6568f25acf2dde7d92fc5ce2d731356f80fb",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 5,
+      "n_tokens": 679,
+      "split": "train"
+    },
+    {
+      "id": "93cbdd22b59aacbd4f90ce64f83abc98443a4d0d211b5414c9d185affe551e91",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 6,
+      "n_tokens": 184,
+      "split": "train"
+    },
+    {
+      "id": "0e0dc24d9dbe4c53d5f509298cf4b9b924cd98c71d832c85fb4fdea746e570e6",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 7,
+      "n_tokens": 243,
+      "split": "train"
+    },
+    {
+      "id": "2352213b0dcaf4ddf4268226da4cf603b702ac2d9f3920eedd14cbcd845a5635",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 8,
+      "n_tokens": 120,
+      "split": "train"
+    },
+    {
+      "id": "94bf2c5893c0c1052314382f0869480154164b789908c8ab886545f19e43cf8b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 9,
+      "n_tokens": 870,
+      "split": "train"
+    },
+    {
+      "id": "3185ce2f2f9075e983a4a5433704eb1caa131f5cf3c294f0b8eb72362498035f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 10,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "6de2be160ff3c8fde2a63ac63d2183e2c7d067ae8feb9747ddd84693b16f8cf7",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 11,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "24918b881a7cf9664b87c1da35d547baef84465db7de4c23212352bc951fc117",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 12,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "13d805fbc8f3859f441caba05b21b71f8a218c29e7c8a0ec3079b4652ff1337d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 13,
+      "n_tokens": 226,
+      "split": "train"
+    },
+    {
+      "id": "d7635d67eaa7e98f4f05c64ff1cdebc88254f54b1ccf763d95942835a4ab9337",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 14,
+      "n_tokens": 849,
+      "split": "train"
+    },
+    {
+      "id": "c56d7dd37c0b4a22b25e953684b753f3f7aa7a365b2b1e9e8d64db182c34ab13",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 15,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "2b5e804ba3ad8f34a32914cf26f5bb20d4425d68bce7e8a684a68561938c7c53",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 16,
+      "n_tokens": 777,
+      "split": "train"
+    },
+    {
+      "id": "40915ab4d52b2e3d3f5822381a75c7ed08a730f34f967a1a7fcf45746a3a87aa",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 17,
+      "n_tokens": 690,
+      "split": "train"
+    },
+    {
+      "id": "b7d7a7e53700922ff31de0a62d8c2fa64c5b1a4a33bdd6f40ce4315b005dfdda",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 18,
+      "n_tokens": 900,
+      "split": "test"
+    },
+    {
+      "id": "32bfcb378f133ede04d7763ef65494017aabe21a2871851beb8be8abe205bba7",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 19,
+      "n_tokens": 391,
+      "split": "train"
+    },
+    {
+      "id": "ee4440c1d8da76ed0fc0e92393be5858bfc44803328dd8785c1ecf77ba38d023",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 20,
+      "n_tokens": 770,
+      "split": "train"
+    },
+    {
+      "id": "60ba06da24ab2af3a6a74807ef9a1bf6776cfe3484720481053c5e85a7f4f339",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 21,
+      "n_tokens": 890,
+      "split": "train"
+    },
+    {
+      "id": "e39ec3bc1edf1a06d627bbc51e04082ad0cdc2431b63fd1d48a7de3ebb167017",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 22,
+      "n_tokens": 567,
+      "split": "train"
+    },
+    {
+      "id": "5981fd5c5be5cb49006ab09f1b2e7f273ee63d3ae8dc669686032cf3225b0688",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 23,
+      "n_tokens": 935,
+      "split": "train"
+    },
+    {
+      "id": "8d14c74f897ef41634b5ba88e68c18cda14323553ecd2b78d4a2c46fe02e8775",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 24,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "141f3aed8fb4e39b60bbd5aca0e5d5f6e6cd82b2a0469b99d88eb25903fba410",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 25,
+      "n_tokens": 733,
+      "split": "train"
+    },
+    {
+      "id": "2951dea2194197f0ad5cff705fa9dcb11c683ee3ad5f0f61eae392cdf16c6779",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 26,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "91d07df80e9a1dc2a7b51db9dab028f188cb00f5e1a5ee63a3826e23da160837",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 27,
+      "n_tokens": 501,
+      "split": "train"
+    },
+    {
+      "id": "93ac4d4fcaf326dc8b6e89904275aad4c09300c9d346a0c448299364ebe2edaa",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 28,
+      "n_tokens": 278,
+      "split": "train"
+    },
+    {
+      "id": "81b132e250232a7d1541a13a3b8b78f995e59d0fcbd49a297d3eea690f0c2126",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 29,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "ee27618341045722c6272d3e17a10acb046ead445363974b6440a1919fb4d80a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 30,
+      "n_tokens": 746,
+      "split": "train"
+    },
+    {
+      "id": "28f39cc38118262cb94a147aa2c3427c2b7f1bdbcffcb56c454702f5a9b2a092",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 31,
+      "n_tokens": 160,
+      "split": "test"
+    },
+    {
+      "id": "f1bb9347be9a6cc6b280bd6d2d04d39bb7ca25c40dc70a04a7ababfc74506226",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 32,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "b3f25b37ea73739dbfe35038e0cea2afa3e309e67fcf3f4f79cfe9d11fa06421",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 33,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "b37d9adc45c8db4b6d5d7a1085a5ce3e848a9db24561bccf743d31bdab5bc764",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 34,
+      "n_tokens": 125,
+      "split": "train"
+    },
+    {
+      "id": "861d726831278669a5dad71fe99e6f135cae06ce6bad5e2cb9bfafcd51b0e50d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 35,
+      "n_tokens": 826,
+      "split": "test"
+    },
+    {
+      "id": "f3a3f6b63710a4593bf9673626ee18809ba1991cd30e875d6701f4ba150034fe",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 36,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "2a9813fbdf08c519b3592966acde4b55a5c2e8f0f4f22a8f9b16c359939977f9",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 37,
+      "n_tokens": 369,
+      "split": "train"
+    },
+    {
+      "id": "d42481f7b8276b0ca000f287e9932ea724dfd1d445937154962bc4d3d3ef8dd5",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 38,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "28df054ba48e9a07d9f5ae9845d6aceec15723c54c20a8bb23e54b9f35674c62",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 39,
+      "n_tokens": 447,
+      "split": "train"
+    },
+    {
+      "id": "39304862f063205370e83f7cea017be58786cf904181ce542bc51382db0752b3",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 40,
+      "n_tokens": 251,
+      "split": "train"
+    },
+    {
+      "id": "489689014d6ee6c2c7cbfae3b2c0e5fc3f2723d50d717aaba91ce04ef50434bf",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 41,
+      "n_tokens": 828,
+      "split": "train"
+    },
+    {
+      "id": "fcf5c7eaa1127486f20d30b179f807fed60101acfacee591e89952692d25c91a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 42,
+      "n_tokens": 627,
+      "split": "train"
+    },
+    {
+      "id": "eb7aab0d37853c78bc7bfdb0616d4327f4588f980cbe71fecf0737501722ba01",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 43,
+      "n_tokens": 149,
+      "split": "train"
+    },
+    {
+      "id": "5654b1629889c70923dfe513b3c4d493776d73dfd6b5d8273e4259ea10139e9f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 44,
+      "n_tokens": 260,
+      "split": "test"
+    },
+    {
+      "id": "eead30f3355d549e29ce399e0e2fb6c7146c3c1b74adf4656fd465f0a9b23040",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 45,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "94e16cece489a2afe985d4fa30d3555b1a760f1f7e6c90b0ba9c452e55f01ffd",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 46,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "e2ce19b7c088beda93070f7273ded06063e3c49355785cbc8bdf24510dc8e4b5",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 47,
+      "n_tokens": 496,
+      "split": "train"
+    },
+    {
+      "id": "8f9b66cb83842b54754eff1061e5123f262b5cb7ee212868e3aad2554b6f9fea",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 48,
+      "n_tokens": 373,
+      "split": "test"
+    },
+    {
+      "id": "e20d61378b488cc18bb62ed5e539de2dbf3206edf75f3fba99a4de829a506d78",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 49,
+      "n_tokens": 391,
+      "split": "train"
+    },
+    {
+      "id": "b7ffb8481926bc67e0281d662d4b384f5c5a316741fb4544ddbc3839e47b94d0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 50,
+      "n_tokens": 959,
+      "split": "train"
+    },
+    {
+      "id": "cdeadf5330dc1bc3175f3fb546bd785aa3a4ecb72b04949a3c7c341bad340dbf",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 51,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "1e5fbb07d019beba05be01fd6899513d5c01888796705a8646db7d1becd809d4",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 52,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "9a7537bfe612b10cd65ced93cd5a3faa941ed1edeb028d31fc6b8c028a3686c0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 53,
+      "n_tokens": 15,
+      "split": "test"
+    },
+    {
+      "id": "9e8a197c3a50c5cd83aa512bbea51e91d852f3d3d310e225948dde7c3fce0f1d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 54,
+      "n_tokens": 539,
+      "split": "train"
+    },
+    {
+      "id": "1df6daae97f54df3c6638fe48132757f27220c086bd9f790e8d32fffacef492a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 55,
+      "n_tokens": 327,
+      "split": "train"
+    },
+    {
+      "id": "fe72fe44046f859631dbb6d8fb434b9dc86b6afcf9f77cd2528bce2038fd2b3b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 56,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "b00da6a0731c097944be4f5ab84c489af9afda99eb06451711da12b94d2d35d9",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 57,
+      "n_tokens": 903,
+      "split": "train"
+    },
+    {
+      "id": "f3ea8a148a7fe3e7ef9eb53a194ab9b53778d64af4c24a8e6a9f52571915608c",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 58,
+      "n_tokens": 170,
+      "split": "train"
+    },
+    {
+      "id": "705d054face6b819cfb132209d6811c4891871927779ff7577b0d5dfeb3f4caa",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 59,
+      "n_tokens": 631,
+      "split": "train"
+    },
+    {
+      "id": "de81217497fd401585d799a4917fb28b44f2274b4e501282a33cf19f21845457",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 60,
+      "n_tokens": 771,
+      "split": "train"
+    },
+    {
+      "id": "3afc231453a6f91f3cdbca48c3b9210c2ce4eed3b129784afea0c4086c5d4a7c",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 61,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "965ceab52061c66a75cc8197a2537b56dd0743ccd750d1aff7afd7a1a0fad1da",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 62,
+      "n_tokens": 174,
+      "split": "train"
+    },
+    {
+      "id": "f341a1a4257e15e23fe7b4116d0d068a684a20f031b945e9fc987b02adaa899a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 63,
+      "n_tokens": 1024,
+      "split": "test"
+    },
+    {
+      "id": "a1b679e9192e990ee7d88d640ab2bca3a68c738a2670541628a0f33c4a1dd8cd",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 64,
+      "n_tokens": 761,
+      "split": "train"
+    },
+    {
+      "id": "58334125922b5b8318eff9967c24b50826137323c8894630af60f2b0596fe6cb",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 65,
+      "n_tokens": 118,
+      "split": "train"
+    },
+    {
+      "id": "1f6427611a403b2900704c34b5a5c757046d461818355e07120395ee847f2bb4",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 66,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "6c24f4efecde67d8139bd85a9f6c67887ee3565de4c8d0be318a563c98d02017",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 67,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "5b6aa5e3a014856b11b7d63c849d4ddad254e61cd4f0f5d4cbafa8c0906c9374",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 68,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "3443fa4cba92ac8bbd3f305762042c42f60bf787a0c07519b7e298c186fde33e",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 69,
+      "n_tokens": 259,
+      "split": "train"
+    },
+    {
+      "id": "e71c853e33376c715e6762a6037bb2846c26f06ce1ea83dc5bbc110989aadcb8",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 70,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "68f73c2963eb95288d58867a4892c45af39b2a674a39f32458bd921353f7b47d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 71,
+      "n_tokens": 301,
+      "split": "train"
+    },
+    {
+      "id": "43f71f94d6827712af2f32dcb7227d078304ccbaedc0aca215244e84b26d58eb",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 72,
+      "n_tokens": 1024,
+      "split": "test"
+    },
+    {
+      "id": "96f10542deca6ba932da949397c770374ddd06da9c4255239df2be6a80ba5cb6",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 73,
+      "n_tokens": 206,
+      "split": "train"
+    },
+    {
+      "id": "fc149235842cc06fde9018eadae589fed8996d71950cd374545dc3b4fdf3b89b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 74,
+      "n_tokens": 225,
+      "split": "train"
+    },
+    {
+      "id": "4d6d6ff6bb8d5dcaf968c2f728a8f2cbdfea00ee484d676e6c33a8e0042c0b28",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 75,
+      "n_tokens": 370,
+      "split": "train"
+    },
+    {
+      "id": "a12046ab66ff8b11d5a4ec2a897027e6b26625e475bf8a87c81c96e6a2d029fd",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 76,
+      "n_tokens": 325,
+      "split": "train"
+    },
+    {
+      "id": "00e4cb94a43854d06aeeacca44e74a477141a3be86e1c039fef2a5a07ecaab50",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 77,
+      "n_tokens": 399,
+      "split": "train"
+    },
+    {
+      "id": "7e45042c134fbce25f7fda309a48bcbd2bb254c8c6da53e62628eb5608a747c8",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 78,
+      "n_tokens": 781,
+      "split": "train"
+    },
+    {
+      "id": "1931b986642ba886bca66c5d7b08b134ec62f67d7013f75124b75722e017d3c3",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 79,
+      "n_tokens": 256,
+      "split": "test"
+    },
+    {
+      "id": "4779498bbb335daacaf040053e5f6f29cae66d77a116fe5b63b960825666a484",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 80,
+      "n_tokens": 285,
+      "split": "train"
+    },
+    {
+      "id": "a0580e14a56eab649372222d780495c79d0ec2dd9b148506a5d5c6f036adc44e",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 81,
+      "n_tokens": 214,
+      "split": "train"
+    },
+    {
+      "id": "8a11dfbec3b80caaafcecefb7151ee448057090593652bac170b12ba7c5645f2",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 82,
+      "n_tokens": 592,
+      "split": "test"
+    },
+    {
+      "id": "edb427b9a38f217765c551fed1565d27857d311a289842d1d7692785ce9953a5",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 83,
+      "n_tokens": 132,
+      "split": "train"
+    },
+    {
+      "id": "ff9ac0eaf26ee15f3a113e8732e511eb05eb04ece1bf9d0e80816e544ccc0325",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 84,
+      "n_tokens": 538,
+      "split": "train"
+    },
+    {
+      "id": "63102c07e20099c0da13a1bd81f7d63f6a162bb60ee52690e374ab819b176d83",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 85,
+      "n_tokens": 549,
+      "split": "train"
+    },
+    {
+      "id": "520623ed836f3f56f4766dbbd25cd389063471f421ecb89668756a62cf43625e",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 86,
+      "n_tokens": 702,
+      "split": "train"
+    },
+    {
+      "id": "6c58c36cfc4f61caa0cf0f548491231b779670933b1891396525efe02f0b9f68",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 87,
+      "n_tokens": 247,
+      "split": "train"
+    },
+    {
+      "id": "7c599ad52ebad14893d4aeafe958ed57a3287a8ef4538bf8131fc9a7f141be65",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 88,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "1b67d0803f13f7124333d1b095f61b66b9778ea4d139f0f76652a4105faf5aa7",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 89,
+      "n_tokens": 640,
+      "split": "train"
+    },
+    {
+      "id": "2cb2575d54bb00b8c4993fd8b01c4f17bbd28c9e84698ba58ba73aaf87123947",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 90,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "b4ebc870c0853e700b23d7ebdc2abbb57f5a3be9ea144195c50ea9808e7d9201",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 91,
+      "n_tokens": 440,
+      "split": "train"
+    },
+    {
+      "id": "40446b07ed9c616787b9c112312d9f7e6bbe767859e44db6334ba01908c4a191",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 92,
+      "n_tokens": 681,
+      "split": "train"
+    },
+    {
+      "id": "2541bc48beda64ef1ce89545e9c822f14c61654635475c547e9c02b023c191d7",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 93,
+      "n_tokens": 230,
+      "split": "test"
+    },
+    {
+      "id": "36995ea877492c7915ee9e9171f2fb6dca5acacc9eb5f660e2313709f4849605",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 94,
+      "n_tokens": 485,
+      "split": "train"
+    },
+    {
+      "id": "40a676983164020df47aefcb601623107a5a27a2f5e0c901708f12426d9efd71",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 95,
+      "n_tokens": 265,
+      "split": "train"
+    },
+    {
+      "id": "6bccaf911cdc3b55facebc7ca28895f822e7a51d7ca4a4092441e210846a9574",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 96,
+      "n_tokens": 831,
+      "split": "train"
+    },
+    {
+      "id": "067599b6756c0eb631e787651f59e5a643afc397c197684fc3302667ad114103",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 97,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "dd0cdb6e21db3cae0ff2c04251dce8a7714df6b99f3658760b758f49bf822863",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 98,
+      "n_tokens": 635,
+      "split": "train"
+    },
+    {
+      "id": "f755715eff46be2d3cbb6b52c5e72872f15cf731640707e80c3799c820d873c2",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 99,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "0b0c046843506909955c1471e9426e428d10f272c45be6a4586cb43dda03928f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 100,
+      "n_tokens": 568,
+      "split": "train"
+    },
+    {
+      "id": "e6c974c0c8a267559f57c203614e544b16ddd51744c5863d6ba3ea32e7453a05",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 101,
+      "n_tokens": 231,
+      "split": "train"
+    },
+    {
+      "id": "a1e705c98a86f03f392b25015973971ad5d128b806c30e3376ab0970bbb107c7",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 102,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "85e239db7d96caa01739a9ca01aa8e599636a9b60f6d7cc330b0530e1865dc03",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 103,
+      "n_tokens": 318,
+      "split": "train"
+    },
+    {
+      "id": "0563fe6856f5559332a95da2e3dd99f526b6f8738966e0f027727d3a81b31ad3",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 104,
+      "n_tokens": 901,
+      "split": "test"
+    },
+    {
+      "id": "76d0bce65e41aa0e463838fba2d82e081776264e18517eebc25f23469b6f8bb2",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 105,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "1a78191e0f61d1df08045db8271df3f25f872173aa5a836198c457c32b997bbd",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 106,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "849b7bd9b8416cc8c6d8df74f1cb3feb5b93a637dfa494f240341a4b36ed412a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 107,
+      "n_tokens": 914,
+      "split": "train"
+    },
+    {
+      "id": "a2fbbdf595425517c909e78d715e7263a1106bb56972ce8f8cda31903db5820a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 108,
+      "n_tokens": 245,
+      "split": "train"
+    },
+    {
+      "id": "dd40c6230e6602a10fc8ca24f3cd1ef1f0c1964b17663bf83a374abcb38a9de0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 109,
+      "n_tokens": 609,
+      "split": "train"
+    },
+    {
+      "id": "e8cb295eab5a8d0550729030450e2bdca06b470caaa211c67021bd07aa93b10c",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 110,
+      "n_tokens": 254,
+      "split": "train"
+    },
+    {
+      "id": "c2c867bbe3cdfa1a17f3f6ecd88aaa54dacd2cbbf2709ca08fed9b1c16168b21",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 111,
+      "n_tokens": 97,
+      "split": "train"
+    },
+    {
+      "id": "151e65e1a7fb9bf3585761f40fbdcf1eaaa150b6ce4724d98c2144caf04546c3",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 112,
+      "n_tokens": 596,
+      "split": "train"
+    },
+    {
+      "id": "650a4ede0acc26008d03b705ecf0ee7e09d69dedac7fefcc738aeea447b51f72",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 113,
+      "n_tokens": 145,
+      "split": "test"
+    },
+    {
+      "id": "61702913b00ebe98bf06685979acbe657f79da79b6de3be66f1900313860a07b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 114,
+      "n_tokens": 158,
+      "split": "train"
+    },
+    {
+      "id": "0d1c0f55edf4068c5905d866ed19d41a7d21f6ff2f9d0704a23956c2bf44d6a0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 115,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "bca63bb1c853ea397e136dfd3b772aa2c0020d06f0f05c5ef0d4bf19f4edb40f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 116,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "0019021b054df3b9f332623745c1a0103899fb42347d25a4657d67522c45a35f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 117,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "ad1c22d03ab6de955b83cb480722158df27f53338e99496735c9d30fc8190c44",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 118,
+      "n_tokens": 671,
+      "split": "train"
+    },
+    {
+      "id": "e3269aeb8ba9ce30e2efde2abe0df6690affccad8c9bd4d149642374cd8aa0f3",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 119,
+      "n_tokens": 518,
+      "split": "train"
+    },
+    {
+      "id": "0350d0ea9e4cedefc4fed95795f9a6f53ce7eb501b2e2a0b652e14a2146d211a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 120,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "eefcac3f3716673d44436764f24bce1435f105e7f347cad220f4604f4454dcb5",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 121,
+      "n_tokens": 615,
+      "split": "train"
+    },
+    {
+      "id": "cf41a0cbf3527d69dd6a6ab0b81e7f2453198103ae1250ef1ce4d7ac898d2201",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 122,
+      "n_tokens": 585,
+      "split": "train"
+    },
+    {
+      "id": "47315c39f213d3368d100c390a8e7ce8547f2cba427d3e2d2c0cb9a6a688eb30",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 123,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "4ad9c62b78f61dd016b0edeeaadb7935fe9fe89f5d53e4ae197e78a1542dc784",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 124,
+      "n_tokens": 138,
+      "split": "train"
+    },
+    {
+      "id": "71e63a2df6db4c0ddf408a47fffeb43ce178919f3ea5b34a55c7ab204da511f1",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 125,
+      "n_tokens": 443,
+      "split": "train"
+    },
+    {
+      "id": "eac3b09e4b550b1d5aa9037301fcce1c0738dfb0e0777f7be6e7f77aa119e1c2",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 126,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "1f0992fb89ae01d15119d0804c89e8bee2ee84645436f435f70653166f569550",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 127,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "0133368db6d4b8ac8b54d387ad890c8d98d924f52c98831b205eb4444ce03670",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 128,
+      "n_tokens": 846,
+      "split": "train"
+    },
+    {
+      "id": "ac5850fa7b2145b5a82cf5429b101403834a8628b37c013a9974d341cfc34ffb",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 129,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "62ad5615ce21424665db36323a9e96ab4c88afc5c84c3e9f9ec8a2390a945663",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 130,
+      "n_tokens": 268,
+      "split": "train"
+    },
+    {
+      "id": "73f238faf301e9e466116aa79c8c04eb09f46eb41e1d5265c441b044c5a433b0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 131,
+      "n_tokens": 321,
+      "split": "train"
+    },
+    {
+      "id": "8ff028c81c34b11e2dc4f0ea58cd5f5f7a1162597240f97570bde11df6fe7247",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 132,
+      "n_tokens": 252,
+      "split": "train"
+    },
+    {
+      "id": "377a20efdac3c7cad0417d8bb73e5c5ae2a5c016d959e6f2e2d1a0ebee28fd0f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 133,
+      "n_tokens": 124,
+      "split": "train"
+    },
+    {
+      "id": "1531cc612144f810be2f1a49fa4e85f013bf5b614d4bb4dbea9dbacbb6d9ca28",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 134,
+      "n_tokens": 833,
+      "split": "train"
+    },
+    {
+      "id": "e205f7aaeb96b79a4870e0522bc5c77c3c489c8f2745b422465a6e2138891913",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 135,
+      "n_tokens": 358,
+      "split": "train"
+    },
+    {
+      "id": "93cca4d1bcda4905a3ba369eb4d56749d48adadb6c03869c950b65b200e4d185",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 136,
+      "n_tokens": 1020,
+      "split": "train"
+    },
+    {
+      "id": "236e8101f20be8cad1b45ea8df9f25d0d71439b85049203ea523bd29df790359",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 137,
+      "n_tokens": 634,
+      "split": "train"
+    },
+    {
+      "id": "4d6e1be54b4b27e1651a821a0347bc118fffb91d2580ad5426558a86f60db86d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 138,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "44e833e9c5a9c663b90832a4f98d59f557e60d83bc528d7cdb57cd6054f5a7b1",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 139,
+      "n_tokens": 217,
+      "split": "train"
+    },
+    {
+      "id": "50ce0a624d8390deae571542b1eded262682fd30a4f6c984b4c8b7c861d79d7b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 140,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "17adaab1be389199af742f059d3b237cea5dc35199bc7d3a1d333aec11f50f3d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 141,
+      "n_tokens": 985,
+      "split": "train"
+    },
+    {
+      "id": "be2a72b30489c82cd433992d210cb590a2d3d2292c353e6d01cd9bfcc270d26f",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 142,
+      "n_tokens": 487,
+      "split": "train"
+    },
+    {
+      "id": "3a08c1e542a4545ccf8ab789e4764e4b4daf9b15646025d4a4ff9495bd47fbe7",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 143,
+      "n_tokens": 107,
+      "split": "train"
+    },
+    {
+      "id": "19e2371944b44ffd42f4420f5ffc045dca9a5546c120f82876d5a7a01865db50",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 144,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "3172fe5166e3482c01f4a0313a8f1e80eade59b80fbcbb022a48d2b4922ded96",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 145,
+      "n_tokens": 495,
+      "split": "train"
+    },
+    {
+      "id": "f5994668120ea03e96cd1882e77d115cceacf2d0066b4d2e3ca99e19bd089abc",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 146,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "a86d550e8ee98bfaa4c5712217f1658c8540b41d393b4cc23a1d1f16aa004eb6",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 147,
+      "n_tokens": 376,
+      "split": "train"
+    },
+    {
+      "id": "698740b9916581a134555c13314b1f01eadebd16732e71016495e680492ab159",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 148,
+      "n_tokens": 174,
+      "split": "train"
+    },
+    {
+      "id": "7c29f33476ec0691570ae2027af6317c718031d03052d7f6b1d3786091a39b8e",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 149,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "abc05d3c8d5d801a93bd258b0ac5581508760dc0e49b1626cffc224ed38ff1a6",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 150,
+      "n_tokens": 595,
+      "split": "train"
+    },
+    {
+      "id": "58d29accfc81aa2271dc8fb81b57f42db15c96679f203270a5a822014aab0310",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 151,
+      "n_tokens": 199,
+      "split": "train"
+    },
+    {
+      "id": "10f589461f665c0f039139f6b77ff48f8f430f9b6bcd38b2313dfd157b976fa4",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 152,
+      "n_tokens": 936,
+      "split": "train"
+    },
+    {
+      "id": "2e9f2d8a02386d4e27a0cd561297d34822011547bd4b3a09c9f2a4b3f8b4861d",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 153,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "dc4472cc322c269e8433b587bb28f82963c33d0106e51eabe672b9d1aae74b99",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 154,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "585411564fa5b13a7ed1fc24b873d8cbeea96296eda5cefbd168174d5e366de4",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 155,
+      "n_tokens": 238,
+      "split": "train"
+    },
+    {
+      "id": "ed8df612754a8429dc1bd5d69a9d5018372fd6e8cd7ea1f8b064578128158212",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 156,
+      "n_tokens": 1019,
+      "split": "test"
+    },
+    {
+      "id": "0164708029098daf8bd1416733d5bdfbf34180e872637a3adc196b0519597efa",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 157,
+      "n_tokens": 126,
+      "split": "test"
+    },
+    {
+      "id": "c61ab5c5608c0e2adf6380c661b415b78182571e71db39ac0a47c3e64b3da20b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 158,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "37e8c14e99a3571b05d4ce6b9e15037418d58df09ab99e3e446bc2a3fb533761",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 159,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "8535f26818657cddc0a462d640aa36dc2509494e08cf2751b93d7b1ad1012d2a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 160,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "3594f73a0b21a2dd3e08159e534960b242b6dbe1369d23416ceefee494b66875",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 161,
+      "n_tokens": 687,
+      "split": "test"
+    },
+    {
+      "id": "c80b8d14dbbe6394643ecd8f8eefe89af1c2218eba3c1dfad50cf945fbcd3525",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 162,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "7f2e84b9f52047a257c47b4698e1339a1c849ed84caebc1abede447bdc8dce3b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 163,
+      "n_tokens": 263,
+      "split": "train"
+    },
+    {
+      "id": "21d0b19c5dc733da870a7be93ff74199c60a6b77e17ebedd02c37bdde0d24042",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 164,
+      "n_tokens": 660,
+      "split": "train"
+    },
+    {
+      "id": "36e45a614eeefbe84daf74535aa3481603119de50dfc9cd22640957003c630a1",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 165,
+      "n_tokens": 173,
+      "split": "train"
+    },
+    {
+      "id": "72590fc93d2cb2f598de9d83260df5d8f6ca54e218fc928f53a898e09306d5a0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 166,
+      "n_tokens": 244,
+      "split": "train"
+    },
+    {
+      "id": "67caf46dbb672f00c8dfaaec4cf6c8bfead214000872ff94a4b07bf156f930df",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 167,
+      "n_tokens": 893,
+      "split": "train"
+    },
+    {
+      "id": "f8d096b052a5e7726ee2b9c939b80d11137e34cb823803fa1769851a08a8bac9",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 168,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "5effdad9f632a72de139e78c28db6da2fc926f24af9039254f74cce85bbfe888",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 169,
+      "n_tokens": 530,
+      "split": "train"
+    },
+    {
+      "id": "44ab8f93677306bc3a9f2f52a79d003cc07f891501851a52ac100426e8f44dfe",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 170,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "d3f5b49d990340f81c8cfacb2074ed46f0d43485bc298d2c994452b1a87874c0",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 171,
+      "n_tokens": 421,
+      "split": "test"
+    },
+    {
+      "id": "4c5eb64279fde2003a427dabc29781853aefde1fba5175457f1a0e2657ba4c75",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 172,
+      "n_tokens": 401,
+      "split": "train"
+    },
+    {
+      "id": "83ef4cd5f4494ba94fad2c708ddf73e27b38dd572252db4c7b41c33ee5cb8294",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 173,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "0f6b759034cea4a7067b89f7c979ebd0a5c3bdd4b4ef9e721ed86c8d6707c03a",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 174,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "09297c6c95ec06b777fd3869e642d45682fc007804846be5796f9feea5277a93",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 175,
+      "n_tokens": 298,
+      "split": "test"
+    },
+    {
+      "id": "8c6920251331d64188dc5108669632eae6919e93377c7f04226438392af5e405",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 176,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "b63025eec5ef6d9feba02a10e8447f2f69343e2c4bfaab3acf8b1fbbf42832bf",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 177,
+      "n_tokens": 275,
+      "split": "train"
+    },
+    {
+      "id": "a96f8f67f1aaf0c156dd11c64eb4799a6567f242183032aed55ab4b75297f0cf",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 178,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "43fe47e501343a5e0936b6250b2ebe9ea70ca158cc437f16d0e9e1642aac9e22",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 179,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "c3f2dbad584a743b4d61e68c24b98062e9cca2e18b0caf5fd4854cf1f49ec53e",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 180,
+      "n_tokens": 1024,
+      "split": "train"
+    },
+    {
+      "id": "c91cfec9aaa09b9eb0161a35e3bd96fbcd822281d27d3c448d4436ec66d08baa",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 181,
+      "n_tokens": 241,
+      "split": "train"
+    },
+    {
+      "id": "a042b5a873e26c213cc2bafdf339e507c8d8c3ab8b1a3a64a57601b4251109cd",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 182,
+      "n_tokens": 259,
+      "split": "train"
+    },
+    {
+      "id": "1c83da3f90657a2244ef7c3533077ad5f8df6b2f2030be74adf09bc7d0bfc400",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 183,
+      "n_tokens": 203,
+      "split": "train"
+    },
+    {
+      "id": "c0987c62c6fbeaf6a7664215b37f5242f918cd5c5e42d565de04ea9fb00d1205",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 184,
+      "n_tokens": 834,
+      "split": "train"
+    },
+    {
+      "id": "5aa12257471a9fa2bf87aed1e31d43a03f19985fae934d8999ea0b47ba571c8c",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 185,
+      "n_tokens": 753,
+      "split": "train"
+    },
+    {
+      "id": "7d3c94f9d3f8e07f4173fe9eefa6bc44302d3531fde88c28fe352f27de52323b",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 186,
+      "n_tokens": 144,
+      "split": "train"
+    },
+    {
+      "id": "73075db9d0d5a6b469e6e37a5d3ca1c5c822b5c70131efff2dfb4d5a58ab20a1",
+      "source": "allenai/dolma3_mix-150B-1025",
+      "stream_index": 187,
+      "n_tokens": 766,
+      "split": "test"
+    }
+  ]
+}

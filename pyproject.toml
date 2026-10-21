@@ -4,7 +4,19 @@ version = "0.1.0"
 description = "Experiments on training models against role probes"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "accelerate>=1,<2",
+    "cuml-cu13==26.10.0",
+    "datasets>=4,<5",
+    "huggingface-hub>=0.34,<1",
+    "matplotlib>=3.10,<4",
+    "numpy>=2,<3",
+    "scikit-learn>=1.7,<2",
+    "scipy>=1.14,<2",
+    "torch>=2.8,<3",
+    "transformers>=4.57,<5",
+    "zstandard>=0.25.0",
+]
 
 [build-system]
 requires = ["hatchling>=1.26,<2"]

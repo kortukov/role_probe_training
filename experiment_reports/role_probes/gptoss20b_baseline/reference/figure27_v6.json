@@ -1,0 +1,50 @@
+{
+  "source": "https://arxiv.org/html/2603.12277v6#A9.F27",
+  "asset": "https://arxiv.org/html/2603.12277v6/cotness-agent-rolespace.svg",
+  "note": "Transcribed from the non-injection columns. These segments are inside attack-bearing agent traces, not entirely clean chat. Rows are predicted roles; columns are actual segment roles. Rounded figure percentages may not sum to exactly 100.",
+  "predicted_roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "segment_roles": [
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "percentages": [
+    [
+      0.5,
+      1.4,
+      0.2,
+      25.3
+    ],
+    [
+      83.8,
+      0.5,
+      0.0,
+      26.4
+    ],
+    [
+      2.1,
+      60.3,
+      0.4,
+      7.0
+    ],
+    [
+      0.5,
+      7.6,
+      99.0,
+      2.8
+    ],
+    [
+      13.1,
+      30.2,
+      0.5,
+      38.5
+    ]
+  ]
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "job_id": "1448224",
+    "status": "failed",
+    "note": "Inherited CPU binding; Python not started"
+  },
+  {
+    "job_id": "1448225",
+    "status": "cancelled",
+    "note": "Pending testing partition; replaced with production-partition smoke"
+  },
+  {
+    "job_id": "1448226",
+    "status": "completed",
+    "note": "Initial post-block smoke; superseded after activation-site audit"
+  },
+  {
+    "job_id": "1448227",
+    "status": "completed",
+    "note": "Correct pre-MLP site smoke passed"
+  },
+  {
+    "job_id": "1448228",
+    "status": "failed",
+    "note": "CUDA error 802 on vca-gpu-0701-03 before model load"
+  },
+  {
+    "job_id": "1448229",
+    "status": "cancelled",
+    "note": "Pending resources; replaced with smaller resource reservation, unchanged methodology"
+  },
+  {
+    "job_id": "1448230",
+    "status": "cancelled",
+    "note": "Full extraction completed; slow CPU fit stopped before probe export. Restarting with upstream cuML GPU fitter."
+  },
+  {
+    "job_id": "1448715",
+    "status": "completed",
+    "note": "Pre-MLP extraction and cuML solver/export smoke passed"
+  },
+  {
+    "job_id": "1448716",
+    "status": "failed",
+    "note": "Both probes fitted and exported successfully. Evaluation stopped because only 4/12 generations completed within 1,536 tokens."
+  },
+  {
+    "job_id": "1448720",
+    "status": "completed",
+    "note": "Independent full-training-set gradient audit of both saved probes."
+  },
+  {
+    "job_id": "1448721",
+    "status": "completed",
+    "note": "4,000-token conversational evaluation: 9/12 completed, 3 length-limit exclusions. Both new probes and historical layer-12 reference scored."
+  }
+]

@@ -54,3 +54,24 @@
   project's initial setup. Follow cluster storage and resource rules.
 - Update documentation when a workflow changes or a useful operational fact is
   verified. Distinguish source documentation, live verification and assumptions.
+
+## Role-probe implementation
+
+- Current reproduction: [GPT-OSS-20B baseline](experiment_reports/role_probes/gptoss20b_baseline/README.md).
+  Reusable code lives in `src/role_probe_training/probes/`.
+- Upstream activations are **post-attention-layernorm outputs / pre-MLP inputs**,
+  not decoder-block outputs. Probe metadata must record this site, the zero-based
+  layer, model revision and role order. Do not apply weights to a different site.
+- Preserve the upstream training scale (configured 250 passages, up to 1,024
+  tokens, all content tokens). Do not silently subsample tokens or reduce training
+  data to save time. Small conversational evaluation is separate from training.
+- [Prior-work audit](agent_docs/PREVIOUS_ROLE_PROBES.md) documents reusable old
+  probes and methodological caveats. Import only artifacts needed for the task.
+- Ground-truth roles come from message/channel metadata. Mean role probabilities
+  and argmax role accuracy are different metrics. Tool-role transfer requires
+  validation on actual tool-bearing trajectories; clean chat alone is insufficient.
+- Completed baseline: layer 12 gives conversation-balanced true-role probabilities
+  of 88.1% user, 62.3% analysis and 99.6% final on 9/12 completed chats. Use it as
+  the initial trajectory-evaluation probe; retain layer 16 for comparison. Both
+  fits emitted line-search warnings; system-prompt transfer was poor, and actual
+  tool-message transfer remains unvalidated. Consult the report before reuse.

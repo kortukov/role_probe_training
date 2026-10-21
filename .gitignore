@@ -15,3 +15,6 @@ dist/
 *.sif
 # Keep reports, plots and small result tables versioned. Add experiment-specific
 # ignores for large/private artifacts rather than ignoring all experiment data.
+.cache/
+experiment_reports/role_probes/gptoss20b_baseline/artifacts/
+experiment_reports/role_probes/gptoss20b_baseline/logs/
