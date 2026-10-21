@@ -45,6 +45,9 @@
   in the experiment folder. Add targeted ignores as needed; do not silently lose
   the information needed to reproduce an experiment.
 
+- Put detailed confusion matrices in a separate `APPENDIX.md` and link the relevant
+  section from the main report. Keep the main README focused on results and interpretation.
+
 ## Persistent working knowledge
 
 - Keep this file concise and store detailed operational knowledge in

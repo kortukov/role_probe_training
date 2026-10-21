@@ -1,0 +1,177 @@
+{
+  "benchmark": "tau2_retail",
+  "samples": 20,
+  "metrics": {
+    "retail_scorer": {
+      "successes": 3,
+      "scored": 20,
+      "observed_samples": 20,
+      "success_rate_scored": 0.15,
+      "wilson_95_scored": [
+        0.052368745896216595,
+        0.36041886474075696
+      ],
+      "success_rate_observed_errors_as_failures": 0.15
+    }
+  },
+  "sample_errors": 0,
+  "limited_samples": 13,
+  "export_errors": 0,
+  "agent_model_errors": 3,
+  "generation_token_caps": 68,
+  "samples_with_generation_caps": 19,
+  "model_retries": 6,
+  "samples_with_limit_events": 13,
+  "simulator_stop_missing": 13,
+  "all_model_errors": 3,
+  "generation_records": 299,
+  "inspect_logs": [
+    {
+      "path": "experiment_reports/agentic/tau2_retail_gptoss20b/runs/1448719/logs/2026-10-21T16-38-36-00-00_tau2-retail_E8Z6Cze4j5jkLd5WnTdGwq.eval",
+      "status": "success",
+      "results": {
+        "total_samples": 20,
+        "completed_samples": 20,
+        "scores": [
+          {
+            "name": "retail_scorer",
+            "scorer": "retail_scorer",
+            "scored_samples": 20,
+            "unscored_samples": 0,
+            "params": {},
+            "metrics": {
+              "accuracy": {
+                "name": "accuracy",
+                "value": 0.15,
+                "params": {}
+              },
+              "stderr": {
+                "name": "stderr",
+                "value": 0.08191780219091253,
+                "params": {}
+              }
+            }
+          }
+        ],
+        "headline": {
+          "scorer": "retail_scorer",
+          "score": "retail_scorer",
+          "metric": "accuracy"
+        }
+      },
+      "stats": {
+        "started_at": "2026-10-21T16:38:36+00:00",
+        "completed_at": "2026-10-21T16:49:16+00:00",
+        "model_usage": {
+          "openai/azure/gpt-4.1": {
+            "input_tokens": 114372,
+            "output_tokens": 7383,
+            "total_tokens": 158619,
+            "input_tokens_cache_read": 36864,
+            "reasoning_tokens": 0
+          },
+          "vllm/openai/gpt-oss-20b": {
+            "input_tokens": 1309284,
+            "output_tokens": 436315,
+            "total_tokens": 1745599
+          }
+        },
+        "role_usage": {
+          "user": {
+            "input_tokens": 114372,
+            "output_tokens": 7383,
+            "total_tokens": 158619,
+            "input_tokens_cache_read": 36864,
+            "reasoning_tokens": 0
+          }
+        },
+        "connection_limit_history": []
+      }
+    }
+  ],
+  "provenance": {
+    "benchmark": "tau2_retail",
+    "sample_ids": [
+      "106",
+      "29",
+      "39",
+      "47",
+      "38",
+      "70",
+      "111",
+      "37",
+      "64",
+      "74",
+      "100",
+      "110",
+      "13",
+      "83",
+      "21",
+      "53",
+      "59",
+      "96",
+      "109",
+      "104"
+    ],
+    "selection_seed": 123,
+    "selection": "shuffle sorted full dataset with Python Random; take prefix",
+    "full_selection": [
+      "106",
+      "29",
+      "39",
+      "47",
+      "38",
+      "70",
+      "111",
+      "37",
+      "64",
+      "74",
+      "100",
+      "110",
+      "13",
+      "83",
+      "21",
+      "53",
+      "59",
+      "96",
+      "109",
+      "104"
+    ],
+    "dataset_size": 114,
+    "model_id": "openai/gpt-oss-20b",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "user_model": "openai/azure/gpt-4.1",
+    "settings": {
+      "benchmark": "tau2_retail",
+      "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/tau2_retail_gptoss20b/runs/1448719",
+      "samples": 20,
+      "seed": 123,
+      "concurrency": 8,
+      "base_url": "http://127.0.0.1:26719/v1",
+      "user_model": "openai/azure/gpt-4.1",
+      "reasoning_effort": "high",
+      "time_limit": 600,
+      "shard_index": 0,
+      "shard_count": 1,
+      "prepare_only": false
+    },
+    "git_revision": "f55bd071a69876e7a5aea9a38dbc63ce135052bc",
+    "slurm_job_id": "1448719",
+    "versions": {
+      "inspect-ai": "0.3.282",
+      "inspect-evals": "0.25.0"
+    },
+    "source_sha256": {
+      "/data/cluster/users/kortukov/role_probe_training/src/experiments/agentic_eval/run.py": "e1cda7c44d0f281b52a901a8d4a3c86a580997ffcda79c9252b84a1925efd585",
+      "/data/cluster/users/kortukov/role_probe_training/src/experiments/agentic_eval/uv.lock": "02fa6b57f97095134f4dbbcd27ad7fa6e4be55b0d4f42aa61c103b9396964c7e",
+      "/data/cluster/users/kortukov/role_probe_training/src/experiments/agentic_eval/job.sbatch": "6be07beffed21d70a267414be6affe115353045d804c91c69124270b372a33e6",
+      "/data/cluster/users/kortukov/role_probe_training/src/experiments/agentic_eval/server/uv.lock": "304591816bc2a7d4310dad11b04d0e13152aca693a7a0d121c9a2589ebe505c3",
+      "src/role_probe_training/trajectories/inspect_export.py": "276b9673f7b9c9a4ab4ee4f855e0f32147629e99e61de8cc17e959808461711c",
+      ".cache/models/gpt-oss-20b/tokenizer.json": "0614fe83cadab421296e664e1f48f4261fa8fef6e03e63bb75c20f38e37d07d3"
+    },
+    "dataset_sha256": "f082c5d5e110da6794c7111bcc9f45dcc6c9bf7844f9eabb2a82c81e262a33dd"
+  },
+  "expected_samples": 20,
+  "missing_sample_ids": [],
+  "trajectory_sha256": "57c5858ee4604cb179ac777e2c8c9e7e1638b0514a2a757646833fdcf44b5ca9"
+}

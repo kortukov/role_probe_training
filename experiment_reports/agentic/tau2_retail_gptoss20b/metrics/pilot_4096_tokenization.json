@@ -1,0 +1,147 @@
+{
+  "rendered_at": "2026-10-21T16:55:51.837318+00:00",
+  "rendering": "HF chat template, retrospective (old reasoning may be dropped)",
+  "template_sha256": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
+  "samples": [
+    {
+      "sample_id": "100",
+      "tokens": 4337,
+      "messages": 24,
+      "tool_replies": 3,
+      "reasoning_messages": 11
+    },
+    {
+      "sample_id": "104",
+      "tokens": 6288,
+      "messages": 32,
+      "tool_replies": 9,
+      "reasoning_messages": 14
+    },
+    {
+      "sample_id": "106",
+      "tokens": 4079,
+      "messages": 36,
+      "tool_replies": 1,
+      "reasoning_messages": 17
+    },
+    {
+      "sample_id": "109",
+      "tokens": 9558,
+      "messages": 25,
+      "tool_replies": 5,
+      "reasoning_messages": 12
+    },
+    {
+      "sample_id": "110",
+      "tokens": 5763,
+      "messages": 28,
+      "tool_replies": 5,
+      "reasoning_messages": 13
+    },
+    {
+      "sample_id": "111",
+      "tokens": 9458,
+      "messages": 31,
+      "tool_replies": 9,
+      "reasoning_messages": 15
+    },
+    {
+      "sample_id": "13",
+      "tokens": 6235,
+      "messages": 30,
+      "tool_replies": 6,
+      "reasoning_messages": 14
+    },
+    {
+      "sample_id": "21",
+      "tokens": 4891,
+      "messages": 30,
+      "tool_replies": 4,
+      "reasoning_messages": 14
+    },
+    {
+      "sample_id": "29",
+      "tokens": 6469,
+      "messages": 30,
+      "tool_replies": 7,
+      "reasoning_messages": 14
+    },
+    {
+      "sample_id": "37",
+      "tokens": 5671,
+      "messages": 26,
+      "tool_replies": 7,
+      "reasoning_messages": 11
+    },
+    {
+      "sample_id": "38",
+      "tokens": 5770,
+      "messages": 31,
+      "tool_replies": 7,
+      "reasoning_messages": 14
+    },
+    {
+      "sample_id": "39",
+      "tokens": 5322,
+      "messages": 26,
+      "tool_replies": 4,
+      "reasoning_messages": 12
+    },
+    {
+      "sample_id": "47",
+      "tokens": 5604,
+      "messages": 33,
+      "tool_replies": 6,
+      "reasoning_messages": 16
+    },
+    {
+      "sample_id": "53",
+      "tokens": 5502,
+      "messages": 29,
+      "tool_replies": 6,
+      "reasoning_messages": 14
+    },
+    {
+      "sample_id": "59",
+      "tokens": 5324,
+      "messages": 28,
+      "tool_replies": 5,
+      "reasoning_messages": 13
+    },
+    {
+      "sample_id": "64",
+      "tokens": 5253,
+      "messages": 21,
+      "tool_replies": 5,
+      "reasoning_messages": 10
+    },
+    {
+      "sample_id": "70",
+      "tokens": 6488,
+      "messages": 25,
+      "tool_replies": 8,
+      "reasoning_messages": 11
+    },
+    {
+      "sample_id": "74",
+      "tokens": 6165,
+      "messages": 32,
+      "tool_replies": 6,
+      "reasoning_messages": 15
+    },
+    {
+      "sample_id": "83",
+      "tokens": 5342,
+      "messages": 32,
+      "tool_replies": 6,
+      "reasoning_messages": 15
+    },
+    {
+      "sample_id": "96",
+      "tokens": 4382,
+      "messages": 30,
+      "tool_replies": 3,
+      "reasoning_messages": 14
+    }
+  ]
+}
