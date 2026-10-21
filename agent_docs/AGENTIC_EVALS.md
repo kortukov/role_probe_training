@@ -62,9 +62,9 @@ namespaced fields in our fixture; direct documented store keys are tested.
 measurement, but not necessarily the original activation context. Native vLLM
 0.11.0 GPT-OSS serving uses openai-harmony, not the cached HF Jinja template, and
 adds system/developer messages. Templates may discard old reasoning and change
-serialization. Preserve both files. Before probe evaluation, implement/validate
-one model-specific renderer against retained requests, including tool schemas,
-reasoning channels, developer-message treatment and generation-time date.
+serialization. Preserve both files. The probe experiment uses an explicit standardized retrospective renderer,
+`trajectories/replay.py`, preserving all reasoning. It does not claim to recover
+serving-time activations; original generation records support future exact replay.
 Do not feed these dictionaries directly to the baseline's simplified Harmony
 renderer: it expects already-normalized call messages and has no developer role.
 Do not infer missing channels from text. Use the probe metadata's exact model
@@ -103,14 +103,21 @@ This is a one-trial subset success rate, not pass^k or a full leaderboard result
 
 ## SWE-bench
 
-Five tasks are prepared from SWE-bench Verified's pinned test split. Stock Inspect
-needs Docker containers (official x86_64 per-instance images) and patch/test
-scoring. Docker was absent on the checked CPU node; Apptainer exists but is not a
-drop-in Inspect sandbox provider. Sandbox availability on GPU nodes is not yet
-verified. Use an approved Docker-capable execution host/provider or implement and
-validate an Apptainer adapter separately. Do not execute model-written shell
-commands directly on the host. Pre-pull only selected images and record digests.
-No SWE-bench score is available until that runtime is validated.
+Full Verified execution is now validated on Slurm with the Apptainer adapter. It
+uses writable per-sample root filesystems, isolated networking, no host-workspace
+mount and no API credentials in the sandbox. Gold-patch scoring and stock Inspect
+Python/bash-session/editor tools passed live checks. Use the separate locked SWE
+client (swebench 4.1.0), not the retail client's incompatible swebench 5.0.2.
+
+Docker Hub's anonymous pull quota interrupted the first attempt. The selected
+full run uses the same official images via mirror.gcr.io, pinned by OCI index
+digest in `swe_bench_full/image_manifest.json`. Manifest availability does not
+guarantee blob availability: two missing layers were downloaded from the official
+registry, SHA256-verified, and seeded into Apptainer's blob cache. Retry only image
+failures before model execution, retaining original attempts and selection reasons.
+Malformed generated Harmony headers produce model API failures; the stock
+30-message harness also often exhausts its budget. This configuration is not a
+reproduction of OpenAI's reported SWE score.
 
 Sources:
 - [Inspect τ² implementation](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/tau2)
@@ -135,3 +142,19 @@ The full retail experiment uses all 114 τ² retail tasks, not the original τ-b
 Dolci sampling: `src/experiments/agentic_eval/dolci.py`, 1,000 uniform rows, seed 123, revision pinned in the script/manifest. Preserve function_calls/functions and map environment to tool; do not invent analysis channels.
 
 Probe replay uses the original eager forward, capturing layers 4/8/12/16/20 together. Explicit 16,384-token windows retain every token and reset positions/context only at window boundaries. Full-window peak measured 136.67 GiB on B200. Cached whole-model chunks and query tiling showed numerical drift in BF16/MoE; these are not used in production scoring. Report windowed versus single-window coverage separately. `agentic_probes/report.py` creates README, APPENDIX, metrics and an offline standalone viewer from per-trajectory gzip JSON predictions. Keep raw data/predictions/data-filled HTML ignored; push code and aggregate reports periodically.
+
+## Canonical repairs and offline viewer
+
+Unknown generated tool names are preserved as `__unknown_tool__` with
+`name_missing: true` and `original_function`, rather than dropping the history.
+`repair_exports.py` writes corrected records into a separate run. `finalize.py`
+accepts explicit replacement runs only for export repairs or image-preparation
+failures with zero model calls. It recomputes metrics from selected records.
+`select_predictions.py` validates selected predictions against canonical messages,
+tools, scores, errors and source logs, recording hashes and linking immutable files.
+
+Large offline viewers must keep compressed trajectory payloads in separate inert
+script blocks: embedding hundreds of MB in one JavaScript literal exceeds V8's
+source-size limit. Decode only the selected trajectory. `viewer_check.py` tests
+real files offline with Chromium, including each dataset/layer and longest trace.
+Use an isolated Playwright environment so production Python locks stay unchanged.

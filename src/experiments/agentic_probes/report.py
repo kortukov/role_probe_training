@@ -27,12 +27,17 @@ for entry in a.dataset:
   if r['sample_id'] in seen: raise ValueError(f'duplicate trajectory {name}/{r["sample_id"]}')
   seen.add(r['sample_id'])
   r['layers']={k:v for k,v in r['layers'].items() if int(k) in a.layers}
-  if not r['layers']: continue
+  if set(r['layers']) != set(map(str,a.layers)): raise ValueError(f'Missing requested layers: {path}')
   item={'dataset':name,'sample_id':r['sample_id'],'tokens':len(r['input_ids']),'windows':len(r.get('context_window_starts',[0])),'layers':{}}
   mask=np.array(r['score_mask'],dtype=bool); y=np.array(r['labels'])[mask]
   for k,v in r['layers'].items():
    if k not in accum: accum[k]={'matrix':np.zeros((5,5),dtype=np.int64),'probability_sums':np.zeros(5),'trajectories':[],'single_window_matrix':np.zeros((5,5),dtype=np.int64)}
-   cm=np.array(v['confusion_matrix']); st=accum[k]; st['matrix']+=cm
+   cm=np.array(v['confusion_matrix']); st=accum[k]
+   pred=np.asarray(v['predictions']); check=np.zeros((5,5),dtype=np.int64)
+   if len(pred)!=len(r['input_ids']) or len(mask)!=len(pred): raise ValueError(f'Token length mismatch: {path}')
+   np.add.at(check,(y,pred[mask]),1)
+   if not np.array_equal(cm,check) or int(cm.sum())!=v['tokens']: raise ValueError(f'Confusion mismatch: {path}')
+   st['matrix']+=cm
    if item['windows']==1: st['single_window_matrix']+=cm
    full_probs=np.asarray(v['probabilities'],dtype=np.float64)
    probs=full_probs[mask]
@@ -73,6 +78,8 @@ if benchmarks:
 lines+=['','See [confusion matrices](APPENDIX.md#confusion-matrices) and [full metrics](metrics.json) for per-role recall, mean true-role probabilities, individual trajectories, and results restricted to traces fitting one context window.','','## Message','','These measurements describe transfer under the documented replay and context-window policy. Differences between Dolci and generated benchmarks combine policy, task, role-frequency, formatting and trajectory-length effects; they do not isolate an on-policy causal effect. Dolci is an evaluation sample here, not probe training data. Benchmark task success is distinct from role-probe accuracy.','','## Reproduction and standalone viewer','','The local `viewer.html` embeds all prediction data and works without network access in a modern browser. It supports dataset, layer and trajectory selection, role-colored tokens, ground-truth/predicted coloring, mismatch filtering and token probability inspection. The file contains data and is deliberately excluded from Git. See [RUNNING.md](RUNNING.md) for commands and data paths.']
 (a.output/'README.md').write_text('\n'.join(lines)+'\n'); (a.output/'APPENDIX.md').write_text('\n'.join(appendix)+'\n')
 commands=' '.join('--dataset '+repr(x) for x in a.dataset)
+commands+=''.join(' --expected-count '+repr(x) for x in a.expected_count)
+commands+=''.join(' --benchmark-summary '+repr(x) for x in a.benchmark_summary)
 (a.output/'RUNNING.md').write_text('# Reproduction\n\nPredictions use schema v1, one gzip JSON per trajectory. Each contains original messages, normalized replay messages, token IDs/offsets, labels, score mask, context boundaries and per-layer probabilities and argmax predictions. Input/probe hashes and job metadata are in each prediction directory’s manifest.\n\nGenerate the report and standalone viewer from the repository root:\n\n```bash\n.tools/bin/uv run --frozen --no-sync python src/experiments/agentic_probes/report.py '+commands+' --layers '+' '.join(map(str,a.layers))+' --output '+str(a.output)+'\n```\n\nAdd another `--dataset NAME=PATH` to include a dataset. See `src/experiments/agentic_probes/run.py --help` for inference and `src/experiments/agentic_eval/dolci.py` for seeded sampling. Generated predictions, trajectories and HTML remain on cluster storage; code, manifests and aggregate metrics are versioned.\n')
 template=Path(__file__).with_name('viewer.html').read_text()
 def js(value): return json.dumps(value,ensure_ascii=True,separators=(',',':')).replace('<','\\u003c')

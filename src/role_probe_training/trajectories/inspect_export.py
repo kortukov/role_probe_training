@@ -38,14 +38,18 @@ def messages_to_chat(messages):
         if m.get("tool_calls"):
             out["tool_calls"] = []
             for call in m["tool_calls"]:
-                calls[call["id"]] = call["function"]
+                calls[call["id"]] = call["function"] or "__unknown_tool__"
                 out["tool_calls"].append({"id": call["id"], "type": "function", "function": {
-                    "name": call["function"], "arguments": call["arguments"]}})
+                    "name": call["function"] or "__unknown_tool__", "arguments": call["arguments"]}})
+                if not call["function"]:
+                    out["tool_calls"][-1].update(name_missing=True, original_function=call["function"])
         if m["role"] == "tool":
             call_id = m.get("tool_call_id")
             name = m.get("function") or calls.get(call_id)
             if not name:
-                raise ValueError(f"Tool message without identifiable function: {call_id}")
+                name = "__unknown_tool__"
+            if name == "__unknown_tool__":
+                out.update(name_missing=True, original_function=m.get("function"))
             out.update(name=name, tool_call_id=call_id)
             if m.get("error"):
                 out["error"] = m["error"]
@@ -74,7 +78,7 @@ def wilson(successes, total):
     return [max(0, center-half), min(1, center+half)]
 
 
-def export_logs(paths, output, benchmark, provenance):
+def export_logs(paths, output, benchmark, provenance, sample_sources=None):
     from inspect_ai.log import read_eval_log
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -84,6 +88,8 @@ def export_logs(paths, output, benchmark, provenance):
         log_results.append({"path": str(path), "status": log.status,
                             "results": dump(log.results), "stats": dump(log.stats)})
         for sample in log.samples or []:
+            if sample_sources is not None and (str(sample.id) not in sample_sources or str(Path(path).resolve()) != str(Path(sample_sources[str(sample.id)]).resolve())):
+                continue
             key = (str(sample.id), sample.epoch)
             if key in seen:
                 raise ValueError(f"Duplicate sample/epoch across logs: {key}; select one attempt")
@@ -105,6 +111,7 @@ def export_logs(paths, output, benchmark, provenance):
             scores = {k: dump(v) for k, v in (sample.scores or {}).items()}
             row = {"schema_version": 1, "benchmark": benchmark, "sample_id": sample.id,
                    "epoch": sample.epoch, "model": log.eval.model, "provenance": provenance,
+                   "generation_records": len(events),
                    "messages": chat, "tools": tools, "scores": scores,
                    "error": dump(sample.error), "limit": dump(sample.limit),
                    "limit_events": [dump(e) for e in sample.events if "limit" in e.event],

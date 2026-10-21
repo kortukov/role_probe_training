@@ -16,6 +16,17 @@ with sync_playwright() as pw:
  page.locator('.token').first.click()
  assert 'probabilities' in page.locator('#detail').inner_text()
  page.select_option('#color','prediction');page.check('#errors');page.uncheck('#errors')
+ for dataset in page.locator('#dataset option').evaluate_all('(xs)=>xs.map(x=>x.value)'):
+  page.select_option('#dataset',dataset)
+  page.wait_for_selector('.token',timeout=120000)
+  for layer in page.locator('#layer option').evaluate_all('(xs)=>xs.map(x=>x.value)'):
+   page.select_option('#layer',layer)
+   assert 'accuracy' in page.locator('#trajectoryInfo').inner_text()
+  largest=page.evaluate('index.map((r,i)=>({...r,i})).filter(r=>r.dataset===document.getElementById("dataset").value).sort((a,b)=>b.tokens-a.tokens)[0].i')
+  page.select_option('#trajectory',str(largest))
+  page.wait_for_selector('.token',timeout=120000)
+  page.locator('.token').first.click()
+  assert 'probabilities' in page.locator('#detail').inner_text()
  page.fill('#search','__no_such_trajectory__');assert page.locator('#tokens').inner_text()=='No trajectories'
  assert not errors,errors
  assert all(u.startswith('file:') for u in requests),requests

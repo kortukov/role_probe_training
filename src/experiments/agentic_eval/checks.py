@@ -34,6 +34,16 @@ class ExportChecks(unittest.TestCase):
         with self.assertRaises(ValueError):
             messages_to_chat([{"role": "user", "content": [{"type": "image", "image": "x"}]}])
 
+    def test_missing_tool_identity_keeps_history(self):
+        chat = messages_to_chat([
+            {"role": "assistant", "content": "", "tool_calls": [
+                {"id": "broken", "function": "", "arguments": {}}]},
+            {"role": "tool", "tool_call_id": "broken", "content": "Unknown function"}])
+        self.assertEqual(chat[1]["name"], "__unknown_tool__")
+        self.assertTrue(chat[0]["tool_calls"][0]["name_missing"])
+        self.assertTrue(chat[1]["name_missing"])
+        self.assertEqual(chat[1]["role"], "tool")
+
     def test_real_log_roundtrip(self):
         with tempfile.TemporaryDirectory() as tmp:
             logs = eval(Task(dataset=[Sample(id="a", input="hello", target="Default")], solver=generate(), scorer=match()),
