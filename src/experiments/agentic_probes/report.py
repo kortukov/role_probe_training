@@ -17,13 +17,13 @@ a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
 benchmarks={}
 for item in a.benchmark_summary:
  name,path=item.split('=',1); benchmarks[name]=json.loads(Path(path).read_text())
-summary={'schema_version':1,'method':{'model':'openai/gpt-oss-20b','model_revision':'6cee5e81ee83917806bbde320786a8fb61efebee','activation':'zero-based post_attention_layernorm output / pre-MLP input','replay_precision':'MXFP4 checkpoint dequantized to BF16 in Transformers; matches probe fitting','context_policy':'one original eager forward per explicit context window; every token retained','label_policy':'structured roles/channels; content-only score mask; synthetic tool schemas excluded'},'roles':ROLES,'datasets':{},'benchmark_results':benchmarks}
+summary={'schema_version':1,'viewer_probability_decimal_places':6,'method':{'model':'openai/gpt-oss-20b','model_revision':'6cee5e81ee83917806bbde320786a8fb61efebee','activation':'zero-based post_attention_layernorm output / pre-MLP input','replay_precision':'MXFP4 checkpoint dequantized to BF16 in Transformers; matches probe fitting','context_policy':'one original eager forward per explicit context window; every token retained','label_policy':'structured roles/channels; content-only score mask; synthetic tool schemas excluded'},'roles':ROLES,'datasets':{},'benchmark_results':benchmarks}
 expected={name:int(count) for name,count in (item.split('=',1) for item in a.expected_count)}
 index=[]; blocks=[]
 for entry in a.dataset:
  name,root=entry.split('=',1); accum={}; seen=set()
  for path in sorted(Path(root).rglob('*.json.gz')):
-  packed=path.read_bytes(); raw=gzip.decompress(packed); r=json.loads(raw); original_layers=set(r['layers'])
+  raw=gzip.decompress(path.read_bytes()); r=json.loads(raw)
   if r['sample_id'] in seen: raise ValueError(f'duplicate trajectory {name}/{r["sample_id"]}')
   seen.add(r['sample_id'])
   r['layers']={k:v for k,v in r['layers'].items() if int(k) in a.layers}
@@ -34,12 +34,15 @@ for entry in a.dataset:
    if k not in accum: accum[k]={'matrix':np.zeros((5,5),dtype=np.int64),'probability_sums':np.zeros(5),'trajectories':[],'single_window_matrix':np.zeros((5,5),dtype=np.int64)}
    cm=np.array(v['confusion_matrix']); st=accum[k]; st['matrix']+=cm
    if item['windows']==1: st['single_window_matrix']+=cm
-   probs=np.array(v['probabilities'])[mask]
+   full_probs=np.asarray(v['probabilities'],dtype=np.float64)
+   probs=full_probs[mask]
    for role in range(5): st['probability_sums'][role]+=probs[y==role,role].sum()
    st['trajectories'].append({'sample_id':r['sample_id'],'tokens':v['tokens'],'accuracy':v['accuracy'],'windows':item['windows']})
    item['layers'][k]={'accuracy':v['accuracy'],'tokens':v['tokens']}
+   # Remove float32 repr noise in the viewer; retained predictions are unchanged.
+   v['probabilities']=full_probs.round(6).tolist()
   index.append(item)
-  payload=packed if set(r['layers'])==original_layers else gzip.compress(json.dumps(r,ensure_ascii=False,separators=(',',':')).encode(),compresslevel=1,mtime=0)
+  payload=gzip.compress(json.dumps(r,ensure_ascii=False,separators=(',',':')).encode(),compresslevel=1,mtime=0)
   blocks.append(base64.b64encode(payload).decode())
  if name in expected and len(seen)!=expected[name]: raise ValueError(f'{name}: expected {expected[name]} trajectories, got {len(seen)}')
  layers={}

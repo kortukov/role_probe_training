@@ -70,7 +70,8 @@
         "mean_probability": 0.4550473988056183
       }
     },
-    "converged": null
+    "converged": false,
+    "termination_note": "Observed cuML C++ L-BFGS line-search failure in training job 1460163; saved last valid iterate."
   },
   "8": {
     "n_tokens": 56510,
@@ -143,7 +144,8 @@
         "mean_probability": 0.6774593591690063
       }
     },
-    "converged": null
+    "converged": false,
+    "termination_note": "Observed cuML C++ L-BFGS line-search failure in training job 1460163; saved last valid iterate."
   },
   "20": {
     "n_tokens": 56510,
@@ -216,6 +218,7 @@
         "mean_probability": 0.5489621162414551
       }
     },
-    "converged": null
+    "converged": false,
+    "termination_note": "Observed cuML C++ L-BFGS line-search failure in training job 1460163; saved last valid iterate."
   }
 }
