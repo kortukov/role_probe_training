@@ -1,0 +1,56 @@
+{
+  "datasets": {
+    "dolci_tool_use": {
+      "trajectories": 1000,
+      "scored_tokens": 1516257
+    },
+    "tau2_retail": {
+      "trajectories": 114,
+      "scored_tokens": 2876950
+    },
+    "swe_bench": {
+      "trajectories": 500,
+      "scored_tokens": 7265153
+    }
+  },
+  "all_layers": [
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "layer12_matches_separate_report": true,
+  "token_confusions_recomputed": true,
+  "canonical_swe_predictions_match_messages_tools_scores_errors_source_log": true,
+  "viewers": {
+    "probe_transfer": {
+      "path": "experiment_reports/agentic/probe_transfer/viewer.html",
+      "bytes": 469843059,
+      "sha256": "a260eb84d8d8e52ee15a4ce8f044fe7dc20aaa03086761181764f3b4bab43586",
+      "offline_chromium_check_passed": true,
+      "checks": [
+        "all datasets and layers",
+        "longest trajectory per dataset",
+        "gzip decompression",
+        "token probability inspection",
+        "color and error filters",
+        "no network requests"
+      ]
+    },
+    "probe_layer_comparison": {
+      "path": "experiment_reports/agentic/probe_layer_comparison/viewer.html",
+      "bytes": 1730265623,
+      "sha256": "522708dcc7b2dca345efb3d938d16f63402d29498ea1b55f8380a3a725dcdbe5",
+      "offline_chromium_check_passed": true,
+      "checks": [
+        "all datasets and layers",
+        "longest trajectory per dataset",
+        "gzip decompression",
+        "token probability inspection",
+        "color and error filters",
+        "no network requests"
+      ]
+    }
+  }
+}

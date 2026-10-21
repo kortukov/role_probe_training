@@ -10,10 +10,10 @@ Same stock Inspect solver/scorer and Apptainer sandbox. Images are the official 
 
 ## Factual observations
 
-All 500 image manifests resolved successfully. Full evaluation is running.
+All 500 image manifests resolved successfully. All four shards completed. Two missing image blobs required infrastructure-only retries; two malformed tool names required normalization repairs.
 
 ## Message
 
-Model performance and probe transfer interpretation await completed runs.
+The selected, repaired 500-task result and interpretation are in the [final SWE report](../swe_bench_full/README.md). This directory preserves the original shard outputs before those repairs.
 
 See [RUNNING.md](RUNNING.md).

@@ -133,7 +133,7 @@ All 20 traces contain tools and tokenize with the HF template. Two were
 sample-time-limited, 16 had at least one output-cap hit, and four had failed
 model-call events. These are usable flagged exploratory traces, not a clean
 leaderboard reproduction. See the [report](../experiment_reports/agentic/tau2_retail_gptoss20b/README.md)
-and its small versioned `data/trajectories.jsonl.gz` archive.
+and its local `data/trajectories.jsonl.gz` archive (excluded from Git).
 
 ## Full runs and probe transfer
 
@@ -158,3 +158,19 @@ script blocks: embedding hundreds of MB in one JavaScript literal exceeds V8's
 source-size limit. Decode only the selected trajectory. `viewer_check.py` tests
 real files offline with Chromium, including each dataset/layer and longest trace.
 Use an isolated Playwright environment so production Python locks stay unchanged.
+
+## Completed full experiment (2026-10-22)
+
+All 1,614 canonical trajectories have predictions at layers 4/8/12/16/20:
+1,000 seeded Dolci rows, 114 retail tasks and 500 SWE Verified tasks. Retail scored
+73/114 (64.04%). SWE scored 11/500 (2.20% with errors as failures), including
+226 model API retry failures; it is not a matched leaderboard reproduction.
+Generation took 85 minutes on one B200 for retail and 72–84 minutes on four
+concurrent B200 shards for SWE, plus two infrastructure-only retries. Five-layer
+probe scoring took 25 minutes for retail, about 15 minutes for SWE's four shards,
+and 3–6 minutes for Dolci's four shards. The 20-task retail pilot took 27 minutes.
+
+Final reports are `agentic/probe_transfer` and `agentic/probe_layer_comparison`.
+Layer-12 accuracy is 29.17% / 29.91% / 26.98% (Dolci / retail / SWE), with weak tool
+recall. Layer 4 has much higher tool recall; layer 8 has higher reasoning recall.
+Interpret role-balanced and per-trajectory metrics alongside token accuracy.

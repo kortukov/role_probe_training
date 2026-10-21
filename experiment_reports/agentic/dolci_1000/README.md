@@ -14,6 +14,6 @@ All 1,000 trajectories have predictions at layers 4, 8, 12, 16 and 20. Layer-12 
 
 ## Message
 
-Interpretation awaits completed runs. Detailed confusion matrices belong in [APPENDIX.md](APPENDIX.md#confusion-matrices).
+The baseline layer-12 probe transfers poorly, especially to tool outputs. Dolci offers useful tool-role training material for a future experiment, but no analysis-channel labels. Keep training and evaluation rows disjoint. Detailed confusion matrices belong in [APPENDIX.md](APPENDIX.md#confusion-matrices).
 
 See [RUNNING.md](RUNNING.md) for reproduction and standalone-viewer generation.

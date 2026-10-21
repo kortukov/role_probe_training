@@ -21,3 +21,43 @@ Row-normalized percentages:
 | cot | n/a | n/a | n/a | n/a | n/a |
 | assistant | 0.2% | 0.7% | 12.2% | 85.9% | 1.0% |
 | tool | 41.7% | 14.6% | 19.4% | 12.1% | 12.2% |
+
+## tau2_retail layer 12
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 11566 | 59578 | 69960 | 0 | 28870 |
+| user | 349 | 10025 | 4648 | 16937 | 13 |
+| cot | 25163 | 5774 | 768623 | 1613144 | 1416 |
+| assistant | 39 | 1 | 4054 | 68027 | 32 |
+| tool | 2808 | 340 | 65941 | 117491 | 2151 |
+
+Row-normalized percentages:
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 6.8% | 35.1% | 41.2% | 0.0% | 17.0% |
+| user | 1.1% | 31.4% | 14.5% | 53.0% | 0.0% |
+| cot | 1.0% | 0.2% | 31.8% | 66.8% | 0.1% |
+| assistant | 0.1% | 0.0% | 5.6% | 94.3% | 0.0% |
+| tool | 1.5% | 0.2% | 34.9% | 62.3% | 1.1% |
+
+## swe_bench layer 12
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 1647 | 17242 | 10371 | 0 | 78740 |
+| user | 1951 | 221967 | 5720 | 1402 | 3531 |
+| cot | 105684 | 65607 | 1559267 | 1584601 | 53542 |
+| assistant | 1905 | 1109 | 115582 | 52163 | 16857 |
+| tool | 479975 | 1920490 | 602513 | 237871 | 125416 |
+
+Row-normalized percentages:
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 1.5% | 16.0% | 9.6% | 0.0% | 72.9% |
+| user | 0.8% | 94.6% | 2.4% | 0.6% | 1.5% |
+| cot | 3.1% | 1.9% | 46.3% | 47.0% | 1.6% |
+| assistant | 1.0% | 0.6% | 61.6% | 27.8% | 9.0% |
+| tool | 14.3% | 57.1% | 17.9% | 7.1% | 3.7% |

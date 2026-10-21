@@ -18,6 +18,8 @@ GPT-OSS-20B revision `6cee5e81ee83917806bbde320786a8fb61efebee`, high reasoning,
 
 Sample errors: 0; limited samples: 4; samples with generation-token caps: 64; failed agent model events: 32. Tool-bearing trajectories: 112/114. See [full metrics](metrics/summary.json), [provenance](metrics/provenance.json), and the [probe report](../probe_transfer/README.md) with its [confusion appendix](../probe_transfer/APPENDIX.md).
 
+The full generation job took 85 minutes on one B200; all five probe layers subsequently took 25 minutes together. The earlier 20-task pilot took 27 minutes, so small exploratory subsets do fit the desired sub-hour feedback cycle.
+
 ## Message
 
 This measures τ² retail, whereas OpenAI’s published high-reasoning GPT-OSS-20B retail score is 54.8% on the original τ-bench. Treat that as context, not a matched reproduction. Time/token limits and malformed model headers can affect this run. [OpenAI model card](https://deploymentsafety.openai.com/gpt-oss/model-architecture-data-training-and-evaluations).

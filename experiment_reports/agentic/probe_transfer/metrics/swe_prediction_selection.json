@@ -1,0 +1,3006 @@
+{
+  "trajectories": "experiment_reports/agentic/swe_bench_full/data/trajectories.jsonl",
+  "trajectories_sha256": "b8a7e2173849aa82bd3543ad92328e5791ac208f47433f83ab2dc5720f870e8f",
+  "predictions": [
+    {
+      "sample_id": "astropy__astropy-12907",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000000.json.gz",
+      "sha256": "a6ab22e376b9237ba503ea8a8b3ef9a7572f531864ca44102bbecccdb01a3893",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000000.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-13033",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000001.json.gz",
+      "sha256": "8502e41643ab574f5571c10bc8bc6f93c73b0de497af58e7a0d7ff8bf055941c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000001.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-13236",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000000.json.gz",
+      "sha256": "f5b2c93b3848f42dd357b8e53788c7058e59ef69e073bc3a203b0862611b1905",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000002.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-13398",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000000.json.gz",
+      "sha256": "354374a7a655c2dc2b1c30ee85ff8f7baad2c5c726290f67460796817422f18a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000003.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-13453",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000000.json.gz",
+      "sha256": "2107d233b31cc90ebf495621535d62a7a3905bd1782a66d43815f94cd52c630a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000004.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-13579",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000001.json.gz",
+      "sha256": "8e840a5f52d0ac71ccc7080f19ea873ae205e14350d1d8069917ef5adcca1c2d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000005.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-13977",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000001.json.gz",
+      "sha256": "79678d99cd9f795e739fc13bb6d80f37c5d7478542c1fe606e8b2cfc6de5b811",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000006.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14096",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000002.json.gz",
+      "sha256": "7c77b407d2a7455869d46c1cae3d25badfb53376fa274f5a7004614122149b12",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000007.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14182",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000001.json.gz",
+      "sha256": "26c8cb710f84c0f6a0895e995a17d67595da8e390c5a05079370cd810d39db1e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000008.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14309",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000002.json.gz",
+      "sha256": "5906aa7c1708a5f18126c3c1b7971cf2fc607e87eee36e91cc163a5f7bc75f3a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000009.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14365",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000003.json.gz",
+      "sha256": "28e57ffb0b22fcdf8bc4bb45fc2676bdceec30cf4ebb0e860ee2b5979fbd901e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000010.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14369",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000004.json.gz",
+      "sha256": "c2760cd439c1e0d81353fcc46b1d359fd4fa5f218190a9813e0d557b5b4bf3d8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000011.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14508",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000003.json.gz",
+      "sha256": "e4046a5ae567970753e1a6051316871c611cc735de2bb5c41bafa6b0df3926d6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000012.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14539",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000004.json.gz",
+      "sha256": "c7039fa4114cf592f2d13c2a4d8b220be1efe1903acfc873b3165ba24ff34ae7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000013.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14598",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000002.json.gz",
+      "sha256": "9ebef17719d7d2f2767d86b87036d1767d0fa92242e96d4c704d42da7b377683",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000014.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-14995",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000005.json.gz",
+      "sha256": "04190409f054f4c512735193d37ef5b8de8c4874cfa4aef05015672c0151b81e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000015.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-7166",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000002.json.gz",
+      "sha256": "946bf062d7f8e2ae820bd126289bbf003f4da685b45cf0a554767d983e32ea25",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000016.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-7336",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000005.json.gz",
+      "sha256": "4f0cc116e6995137cc21c44a78f634e03c39bf518b3ccff51503c1904278497a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000017.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-7606",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000006.json.gz",
+      "sha256": "11f627b31b79f283ced321042ed2e357769cff72e9c24bc0445357ff97c81590",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000018.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-7671",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000007.json.gz",
+      "sha256": "6e50b457e3b0f9b7769705b3364d31cf69b2ec70f4eddf5de62f69511637f97f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000019.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-8707",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000006.json.gz",
+      "sha256": "5ef72a1d2669230ef7f29c6c4f8081de3647444765935f033beb8542d9daa85d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000020.json.gz"
+    },
+    {
+      "sample_id": "astropy__astropy-8872",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000007.json.gz",
+      "sha256": "1d675527c22b7ffb7cad43c93b79d02d203e6a1913772c2e82548636036fa075",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000021.json.gz"
+    },
+    {
+      "sample_id": "django__django-10097",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000003.json.gz",
+      "sha256": "d38390fce2fd496eff30f8aa4523136149d0e402214e84a1e471a3078ec239c4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000022.json.gz"
+    },
+    {
+      "sample_id": "django__django-10554",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000008.json.gz",
+      "sha256": "6228f129a74cfcb01686316da26af640e1cb17ca4446b39a36aa0fcd29fae869",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000023.json.gz"
+    },
+    {
+      "sample_id": "django__django-10880",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000003.json.gz",
+      "sha256": "fafcd3397ffb60f2f06403f53bb7a81bf81598ad74e80d9f83d4c0db563e6a97",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000024.json.gz"
+    },
+    {
+      "sample_id": "django__django-10914",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000008.json.gz",
+      "sha256": "49a620c50021ac7b6067645b621c01a96d169ade2c2ea3625482541629a93519",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000025.json.gz"
+    },
+    {
+      "sample_id": "django__django-10973",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000004.json.gz",
+      "sha256": "6f881aa1fdec7146f005a70780d8980e34ee8e3be754b2d455bdcac0a3601082",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000026.json.gz"
+    },
+    {
+      "sample_id": "django__django-10999",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000004.json.gz",
+      "sha256": "79600a86ccb3f7d873cf524edb20dae6f03ab163dd91062653804335d13395ea",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000027.json.gz"
+    },
+    {
+      "sample_id": "django__django-11066",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000005.json.gz",
+      "sha256": "8a97434ce63cc1902b9fb8b0db400d167316fd3b5792d25ee8e01576e36eea4d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000028.json.gz"
+    },
+    {
+      "sample_id": "django__django-11087",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000009.json.gz",
+      "sha256": "70a714862986b295fbe9a736822012a3153ece39e2628abd44dfa9e2ef7d61db",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000029.json.gz"
+    },
+    {
+      "sample_id": "django__django-11095",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000005.json.gz",
+      "sha256": "e238a7c34891d06d17b7f390fa53edaa2e7ec4bd749c5e1d5446287e0ec4258d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000030.json.gz"
+    },
+    {
+      "sample_id": "django__django-11099",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000006.json.gz",
+      "sha256": "3e63f6b70184879fc1baefd57e1f08236b47ce6fd19b7fc9cd92a1af90148b5c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000031.json.gz"
+    },
+    {
+      "sample_id": "django__django-11119",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000006.json.gz",
+      "sha256": "a093dffbcc1bfe9ff6b8819a773195a5494a79ed2c1d57619d906ae16156907e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000032.json.gz"
+    },
+    {
+      "sample_id": "django__django-11133",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000007.json.gz",
+      "sha256": "0d6f0727b8356576af2f024801fcd3b01ed847d2b8dff566091063b677bd6737",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000033.json.gz"
+    },
+    {
+      "sample_id": "django__django-11138",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000007.json.gz",
+      "sha256": "2edc1e3ce0981699ddd4a5574eb2647ff124b69d6426ee3232f5ecd0e7931314",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000034.json.gz"
+    },
+    {
+      "sample_id": "django__django-11141",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000010.json.gz",
+      "sha256": "df59358076cb621d8389e3ee134792fb1fe480848d6026c620b52cef668f8f9a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000035.json.gz"
+    },
+    {
+      "sample_id": "django__django-11149",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000009.json.gz",
+      "sha256": "207038b4fdb9edf8b170adae5be7dc9776e24ed151ede1d615638c964ea1076b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000036.json.gz"
+    },
+    {
+      "sample_id": "django__django-11163",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000010.json.gz",
+      "sha256": "909f624126d12ba9e9258248c32d642fce54f9aaceeb011ac634f91ab3266485",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000037.json.gz"
+    },
+    {
+      "sample_id": "django__django-11179",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000008.json.gz",
+      "sha256": "1e4f69b7302f8a8d5b1c707162dc9db90bd405654897b391cdcefd88bca06164",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000038.json.gz"
+    },
+    {
+      "sample_id": "django__django-11206",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000011.json.gz",
+      "sha256": "d85f6d3fd2f1cc089077fdc46aed17f852b5879f32cfcff778afa986f0369948",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000039.json.gz"
+    },
+    {
+      "sample_id": "django__django-11211",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000011.json.gz",
+      "sha256": "47eff7ac8e6fd3e41d3dc6a975b64e15f84bf94cdee81b3bf2eabb093ced71a9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000040.json.gz"
+    },
+    {
+      "sample_id": "django__django-11239",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000012.json.gz",
+      "sha256": "5d0febe46e4b4cdb1dca6c07061cdacc945810664926c42dd01ab092e48fb9f1",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000041.json.gz"
+    },
+    {
+      "sample_id": "django__django-11265",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000009.json.gz",
+      "sha256": "b14a4abc5d419585ebe753e68443c42009d24404b38668b76a98870d2c37fb84",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000042.json.gz"
+    },
+    {
+      "sample_id": "django__django-11276",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000013.json.gz",
+      "sha256": "5609b2ee5f51a4e8bc86cbe4371bae7738946abe5c2f233c8fd26ac922e50c49",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000043.json.gz"
+    },
+    {
+      "sample_id": "django__django-11292",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000014.json.gz",
+      "sha256": "943532179ab4dd4d301c9e0216e5785936f120828000a3ae4ec6c5e3782d0903",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000044.json.gz"
+    },
+    {
+      "sample_id": "django__django-11299",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000015.json.gz",
+      "sha256": "86bf9c1157864bbb49e8f79e847ae27da2785f783a535b6238de24037d177ca3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000045.json.gz"
+    },
+    {
+      "sample_id": "django__django-11333",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000008.json.gz",
+      "sha256": "e76a1b6a421ccbff2c497654273d9a09f21d22503b446fac573f99619142d1db",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000046.json.gz"
+    },
+    {
+      "sample_id": "django__django-11400",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000012.json.gz",
+      "sha256": "bc42b8880930cfad9a04c4e9692c0b2053194092e18c6d7ef74c5bc826be4a0c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000047.json.gz"
+    },
+    {
+      "sample_id": "django__django-11433",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000010.json.gz",
+      "sha256": "565250dc7a4c1104bbead372706469dccf3e5016614ee62f4ebf295a89c4861f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000048.json.gz"
+    },
+    {
+      "sample_id": "django__django-11451",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000016.json.gz",
+      "sha256": "fa5e2701352629c4368f32c8172e366b5d8e1561de7829c88c971b3844ac5a1e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000049.json.gz"
+    },
+    {
+      "sample_id": "django__django-11477",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000013.json.gz",
+      "sha256": "ed1f477188b7ba19410b880a4216f0afb5c9633e562df7472ab5fc7478e98eb0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000050.json.gz"
+    },
+    {
+      "sample_id": "django__django-11490",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000017.json.gz",
+      "sha256": "c0d133d89bea4b67b50b20cd51644b8d4a35d8bb6bbec6ef1ffeac7b20492718",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000051.json.gz"
+    },
+    {
+      "sample_id": "django__django-11532",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000009.json.gz",
+      "sha256": "a2632f285fa46eea6d719c433f281ae67d3090b1fc247683b2901a4c98bbc573",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000052.json.gz"
+    },
+    {
+      "sample_id": "django__django-11551",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000010.json.gz",
+      "sha256": "2d325a9b5984a6e485989a138985397dd147f6cac78c043280d167f022086201",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000053.json.gz"
+    },
+    {
+      "sample_id": "django__django-11555",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000011.json.gz",
+      "sha256": "8697ccba4ea9998ddb577bd3bf2daa9e6443b3408cb68143f75575a46f910abd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000054.json.gz"
+    },
+    {
+      "sample_id": "django__django-11603",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000018.json.gz",
+      "sha256": "e5edc0e92b44344dcfd1bd1ce3700b4133641a9197326fbb03002ae7e119744f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000055.json.gz"
+    },
+    {
+      "sample_id": "django__django-11728",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000011.json.gz",
+      "sha256": "5c7650bf631a98e938aef0414f544c214e166490dc4d98e621b0533a75d0595d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000056.json.gz"
+    },
+    {
+      "sample_id": "django__django-11734",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000012.json.gz",
+      "sha256": "3ff298397c18f88b76c67b036de49245087b36ded86bc4933ac046520b048bce",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000057.json.gz"
+    },
+    {
+      "sample_id": "django__django-11740",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000013.json.gz",
+      "sha256": "b8bd9ce57f0b0c8d75885bb0f16d93fa6af3613c90a7ea2b53266484dd0f6066",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000058.json.gz"
+    },
+    {
+      "sample_id": "django__django-11749",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000019.json.gz",
+      "sha256": "6a1618bd1b83e6865157a6bdeb32021d4835d9ddf6b43794abd2410183c6c2a2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000059.json.gz"
+    },
+    {
+      "sample_id": "django__django-11790",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000020.json.gz",
+      "sha256": "676a9603d6ca1887b52c4ffe02c5cae19581892d5f8b9677676b11b8c52790cc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000060.json.gz"
+    },
+    {
+      "sample_id": "django__django-11815",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000012.json.gz",
+      "sha256": "ba5598e9f08e193ed23846673df1fa37b14325fc4ee7a3923c19239a8027e4d0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000061.json.gz"
+    },
+    {
+      "sample_id": "django__django-11820",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000013.json.gz",
+      "sha256": "ba90804360b871c1b93b699ad42da254ece92337dc02127ce0b862b1d2302c1a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000062.json.gz"
+    },
+    {
+      "sample_id": "django__django-11848",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000014.json.gz",
+      "sha256": "57bf23ddab1027a7af4079ecdabfe1ac46883bd8db060f7aed47db7244ad2bbb",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000063.json.gz"
+    },
+    {
+      "sample_id": "django__django-11880",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000014.json.gz",
+      "sha256": "1f323d60a0c8db294177c3f2a13ad7dd461c70b13923745d5f703db5ae823cf2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000064.json.gz"
+    },
+    {
+      "sample_id": "django__django-11885",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000015.json.gz",
+      "sha256": "963912036ed6da48d8b68e414e5ff228a3a4537cddf0cb883cf3167397eab0b7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000065.json.gz"
+    },
+    {
+      "sample_id": "django__django-11951",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000021.json.gz",
+      "sha256": "86ddef5a691db33e7b716ac16edb13225de11de7fe885accf18139af89318a2e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000066.json.gz"
+    },
+    {
+      "sample_id": "django__django-11964",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000014.json.gz",
+      "sha256": "36e016ea2925012fe4b3336210d243a950d6d4d87bcfb0b0f389a6801dd98d05",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000067.json.gz"
+    },
+    {
+      "sample_id": "django__django-11999",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000015.json.gz",
+      "sha256": "c7da7427de6033baff968feaa6703c8ddf2ba314a9a8e92045cca6c370f80ae7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000068.json.gz"
+    },
+    {
+      "sample_id": "django__django-12039",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000016.json.gz",
+      "sha256": "ee14810be59b9dad1ad109e788e26b9189ca4c9a349ee2fda2b7771c0f3f399c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000069.json.gz"
+    },
+    {
+      "sample_id": "django__django-12050",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000015.json.gz",
+      "sha256": "702caf79255a7ad9d5c38f6e271ff357a783f73e1898176bfe906a370ccdf3ad",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000070.json.gz"
+    },
+    {
+      "sample_id": "django__django-12125",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000017.json.gz",
+      "sha256": "7f8cbb5ee967f4f1b87caa0a996d9394a2b33a9c916a0eed0ba0089e10658508",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000071.json.gz"
+    },
+    {
+      "sample_id": "django__django-12143",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000018.json.gz",
+      "sha256": "8d54ae5708936e3855c9de355276ef291eb40438a5dd40c5e5e007afe9829a3b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000072.json.gz"
+    },
+    {
+      "sample_id": "django__django-12155",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000022.json.gz",
+      "sha256": "6035db897417f64ae675d5dd4954e887259f448d4cbe6a791ff5d35c7436189e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000073.json.gz"
+    },
+    {
+      "sample_id": "django__django-12193",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000019.json.gz",
+      "sha256": "17c1fc36bb364899d3aa0e792082c8ae494600ef4fbf4f6b4b60e28ea7f08072",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000074.json.gz"
+    },
+    {
+      "sample_id": "django__django-12209",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000020.json.gz",
+      "sha256": "bf8ce380ee8b3e4f142fea2eedce0d84bc1be80cbe7b79c02961e4e893592912",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000075.json.gz"
+    },
+    {
+      "sample_id": "django__django-12262",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000023.json.gz",
+      "sha256": "7006dea191a038cb782e20ed610707fb90690ec719263145bda91bc6393b75b9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000076.json.gz"
+    },
+    {
+      "sample_id": "django__django-12273",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000016.json.gz",
+      "sha256": "ade248cb0cd813f84af168980cb38ebd9f18e1d6e87dcf0bfb7df5f5ea258349",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000077.json.gz"
+    },
+    {
+      "sample_id": "django__django-12276",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000024.json.gz",
+      "sha256": "bc48dfd8583d65320de35aa14bbeb69b1851f83450c2b65bc9135704c843aa9b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000078.json.gz"
+    },
+    {
+      "sample_id": "django__django-12304",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000016.json.gz",
+      "sha256": "1025d040020c8c6c43a59a061a8808d03ba5cc47d4f191d27b55b90ebf8f17ed",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000079.json.gz"
+    },
+    {
+      "sample_id": "django__django-12308",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000021.json.gz",
+      "sha256": "67276345fa7427316d9a52ffd0fcb09938569bd645b273aac260f075ea80571c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000080.json.gz"
+    },
+    {
+      "sample_id": "django__django-12325",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000025.json.gz",
+      "sha256": "eaa2af9344668a4991a58d09b7bada4b0bf13d8387bfb5fa03cf62a496045f50",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000081.json.gz"
+    },
+    {
+      "sample_id": "django__django-12406",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000017.json.gz",
+      "sha256": "13f6809e2f679cc176d23c641f8d0a11e8755b48d62c2529a1e3ed16f9779a06",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000082.json.gz"
+    },
+    {
+      "sample_id": "django__django-12419",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000017.json.gz",
+      "sha256": "4d1856c3a4ca13db75964695fab1f4a531f04b8d0daf62a24ba0a54304efae2c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000083.json.gz"
+    },
+    {
+      "sample_id": "django__django-12663",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000018.json.gz",
+      "sha256": "58d27363f1f61581751ded9a528eabaf712ed5d8c343330e42f874dce76acd3f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000084.json.gz"
+    },
+    {
+      "sample_id": "django__django-12708",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000018.json.gz",
+      "sha256": "afe13d4bbde872f9dbfc2e9c1c21afeec55e5ba2dd98c1458ed2fcc5c0c2dcb5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000085.json.gz"
+    },
+    {
+      "sample_id": "django__django-12713",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000019.json.gz",
+      "sha256": "7ab739bc7702bdfaa32946f173d3d3bc389e04086c3e7629b406efe4dc4f7261",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000086.json.gz"
+    },
+    {
+      "sample_id": "django__django-12741",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000020.json.gz",
+      "sha256": "6cc9845d1bb2d71f17d433afa80e37a48192289f8f0742e22d59a42edd3b1db5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000087.json.gz"
+    },
+    {
+      "sample_id": "django__django-12754",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000026.json.gz",
+      "sha256": "24c9821e6257a948d14b241b42b81994e1a2309d3d444681583bbbb2e4d0029d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000088.json.gz"
+    },
+    {
+      "sample_id": "django__django-12774",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000019.json.gz",
+      "sha256": "b912565f9ecd52e606e4a47204ec47462205a14efb18a3448fca64afd35a0363",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000089.json.gz"
+    },
+    {
+      "sample_id": "django__django-12858",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000020.json.gz",
+      "sha256": "f590ab23273b8eaa02d05e86d837c8f6d678a28233cc1a4fa088da4a1ebd03da",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000090.json.gz"
+    },
+    {
+      "sample_id": "django__django-12965",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000021.json.gz",
+      "sha256": "3334f56c76f5478e37daf5b6fabbee2e71ffb0c5b8b59cdac563aa112a3d2f0b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000091.json.gz"
+    },
+    {
+      "sample_id": "django__django-13012",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000027.json.gz",
+      "sha256": "343139049a0773f721ff2f994bf07cbb61a56463eec6ce49ea4f8b58d6ca1bf8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000092.json.gz"
+    },
+    {
+      "sample_id": "django__django-13023",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000028.json.gz",
+      "sha256": "dcbf67523ca2ca8f056d36cedfcd53a54da1cf2d1046b1be76d098c6a77db61a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000093.json.gz"
+    },
+    {
+      "sample_id": "django__django-13028",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000021.json.gz",
+      "sha256": "4b88f90d5e61ffa9b8d5aa6a8f4b42ae6417542edd2137a55a3879007dba4c1c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000094.json.gz"
+    },
+    {
+      "sample_id": "django__django-13033",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000022.json.gz",
+      "sha256": "7d1a431c513c76cf88a7ded3dd1daf398cf19646bc0f14651f439e2e2482ea82",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000095.json.gz"
+    },
+    {
+      "sample_id": "django__django-13089",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000022.json.gz",
+      "sha256": "ad7dd5acf8c8947c521df8fd2ee0e193f98e0f810f22708f14ba472987b17387",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000096.json.gz"
+    },
+    {
+      "sample_id": "django__django-13109",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000023.json.gz",
+      "sha256": "b6041395a51ddae4c8dbab291bb187a2ffe9be767f1645235295945ff244a59d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000097.json.gz"
+    },
+    {
+      "sample_id": "django__django-13112",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000023.json.gz",
+      "sha256": "c338c34032a0b4bafc72215e25526951a4ef07b00ca911d08e580091f94cd56c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000098.json.gz"
+    },
+    {
+      "sample_id": "django__django-13121",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000024.json.gz",
+      "sha256": "f5ab0ca693de7253c4ccbb9680ccc035b2866c846c0d36da89b128efbf2633ab",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000099.json.gz"
+    },
+    {
+      "sample_id": "django__django-13128",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000025.json.gz",
+      "sha256": "8f089babf53ab7ba64c48f38a08e206bb5e57d27dccef2749bd37538710fdc16",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000100.json.gz"
+    },
+    {
+      "sample_id": "django__django-13158",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000024.json.gz",
+      "sha256": "ae2ed545be237390e02c30fc298bbbe596a480c46b9ca3417ba8388e47eb9907",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000101.json.gz"
+    },
+    {
+      "sample_id": "django__django-13195",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000022.json.gz",
+      "sha256": "f777dc907d0e5bc065dd36455f64640894d99d3dad5c4d42764d577d36db5868",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000102.json.gz"
+    },
+    {
+      "sample_id": "django__django-13212",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000029.json.gz",
+      "sha256": "e909f00b9bf712ab41b1c4392ee0370092a6e05d047c9adf5bb60c63940e0afe",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000103.json.gz"
+    },
+    {
+      "sample_id": "django__django-13279",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000025.json.gz",
+      "sha256": "b0f7b2405a579d615ea0b6dc4c7b0ecb11bcba21151b32610a5acfc75634eaf0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000104.json.gz"
+    },
+    {
+      "sample_id": "django__django-13297",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000023.json.gz",
+      "sha256": "26a40f58c508d93b5a8846f19944a72ce1b685ad0379073830a1ea7d4f1c9217",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000105.json.gz"
+    },
+    {
+      "sample_id": "django__django-13315",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000030.json.gz",
+      "sha256": "464e24e555d9c0ee9984d6e64fcbdc86444f592f8483b16ccd31736d1ed8e6e4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000106.json.gz"
+    },
+    {
+      "sample_id": "django__django-13343",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000031.json.gz",
+      "sha256": "a9bdfdff3eec9822f781396aefcd780a55a18fbb08cd1ce812340ffe71a4a178",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000107.json.gz"
+    },
+    {
+      "sample_id": "django__django-13344",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000024.json.gz",
+      "sha256": "637688427252933d15f8093d6d915749da139d27e37fe7d434a9e208dd623a7f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000108.json.gz"
+    },
+    {
+      "sample_id": "django__django-13346",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000025.json.gz",
+      "sha256": "aff19274ae26b02f03783139107f9369eae31576b501da4044e2083954f80ac9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000109.json.gz"
+    },
+    {
+      "sample_id": "django__django-13363",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000026.json.gz",
+      "sha256": "fad47aa689b68bdbe2fff9449e963122ff3e4763918ee885c0ec777cbf2b2c83",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000110.json.gz"
+    },
+    {
+      "sample_id": "django__django-13401",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000026.json.gz",
+      "sha256": "d611d70d5158869b754c082dae1ac8e808570076cd4baf56154c112867801b59",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000111.json.gz"
+    },
+    {
+      "sample_id": "django__django-13406",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000027.json.gz",
+      "sha256": "cc8c5977cf51e8b03af2baf5e7d5cccdf427f82f11cb8712787d04c418e27356",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000112.json.gz"
+    },
+    {
+      "sample_id": "django__django-13410",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000028.json.gz",
+      "sha256": "d69f558171609685337b5712e159cabf4a0a17dd2a3babbd1beecdff5f764189",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000113.json.gz"
+    },
+    {
+      "sample_id": "django__django-13417",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000029.json.gz",
+      "sha256": "f01799d485093d608aa3de537ff1e82cf03c00c88e93be5e3e528f9f5bdc3550",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000114.json.gz"
+    },
+    {
+      "sample_id": "django__django-13449",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000032.json.gz",
+      "sha256": "ed2dfe1bcc606456ee056868da8e3bc4befc932b69ef764a61280b8995aa9206",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000115.json.gz"
+    },
+    {
+      "sample_id": "django__django-13512",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000026.json.gz",
+      "sha256": "c8ceac5b976f559725a20adb3031e3af5aa492167ce300f26ea97f82d4d81900",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000116.json.gz"
+    },
+    {
+      "sample_id": "django__django-13513",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000030.json.gz",
+      "sha256": "5e922401e5169c984a2fe69813228391837a8d33c846e4d3c7aa787b283e8ca8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000117.json.gz"
+    },
+    {
+      "sample_id": "django__django-13516",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000027.json.gz",
+      "sha256": "7b138c9077e8ea575c516d4c78d076ba2d1a1e70eb2db43d7b8dd79a4db1141e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000118.json.gz"
+    },
+    {
+      "sample_id": "django__django-13551",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000033.json.gz",
+      "sha256": "366f66a67ff2a4024727bb852e003cf1fe218f5febf7dd9a2da5b28f2397e82f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000119.json.gz"
+    },
+    {
+      "sample_id": "django__django-13568",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000027.json.gz",
+      "sha256": "1d600ea0dd3a288ea6be03e2be894f2ceb59b11f4998a006fff74f0ba5906675",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000120.json.gz"
+    },
+    {
+      "sample_id": "django__django-13569",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000028.json.gz",
+      "sha256": "c34769fcc466d2af3f9f1d110d1dbfdc5f87b1f1f84b6990a729dde75c4ef180",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000121.json.gz"
+    },
+    {
+      "sample_id": "django__django-13590",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000029.json.gz",
+      "sha256": "aa41d58b7aaac05de2de8b78da3f6dc1cfa759f47c04587afe4bb9cf7df2a82a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000122.json.gz"
+    },
+    {
+      "sample_id": "django__django-13658",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000028.json.gz",
+      "sha256": "9b0d6132f1198bc7e46c8fac975c9f830c2a1fce505f7f84f589959801969008",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000123.json.gz"
+    },
+    {
+      "sample_id": "django__django-13670",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000031.json.gz",
+      "sha256": "2372ce32fb73b4f57c9ec2b25587bc7d19d72ca07f4a4d2e67a24584fc4e8b08",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000124.json.gz"
+    },
+    {
+      "sample_id": "django__django-13741",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000030.json.gz",
+      "sha256": "6f0f4639abe1776e91284a3b202debdcb07665647bb644dc775345d7ed190e39",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000125.json.gz"
+    },
+    {
+      "sample_id": "django__django-13786",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000034.json.gz",
+      "sha256": "f1b1aab4558b14616ce88e2db8767da483bdb17981ead2179f7213525c57830d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000126.json.gz"
+    },
+    {
+      "sample_id": "django__django-13794",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000035.json.gz",
+      "sha256": "80047785816b92fff1b7bf3d41f5be2368f6636a2bf24c3a791308eb1cb0dcfd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000127.json.gz"
+    },
+    {
+      "sample_id": "django__django-13807",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000036.json.gz",
+      "sha256": "a17dd120554e83952f7b405494d386eaaee0b0bf09d1cb92e9b6d4ce4f5cb422",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000128.json.gz"
+    },
+    {
+      "sample_id": "django__django-13809",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000032.json.gz",
+      "sha256": "51d32147f1a92d52c6496da2cd8c8806d9fb6c88ee61f154441ddd3047b9cdd6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000129.json.gz"
+    },
+    {
+      "sample_id": "django__django-13810",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000033.json.gz",
+      "sha256": "e17e99ee7646ef0c728790df46882da7f1944be2e24770d05573115cdaff5cbb",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000130.json.gz"
+    },
+    {
+      "sample_id": "django__django-13820",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000029.json.gz",
+      "sha256": "0927fd324d85ae41921aa471a013729ef527bc1a1bc05695970ddac33125bf81",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000131.json.gz"
+    },
+    {
+      "sample_id": "django__django-13821",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000037.json.gz",
+      "sha256": "c07b4778ab47d0456ad149ca27722fe476ee5631be80756a2a8504b91676eb2c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000132.json.gz"
+    },
+    {
+      "sample_id": "django__django-13837",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000031.json.gz",
+      "sha256": "24ca2ada9ea33138fd85dec25f1c5a74c700fa5753b1213c7f222e03fe46da8a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000133.json.gz"
+    },
+    {
+      "sample_id": "django__django-13925",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000034.json.gz",
+      "sha256": "0fba44493b2260515411a852bb3380e1f3311199a59936435186915707fc4785",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000134.json.gz"
+    },
+    {
+      "sample_id": "django__django-13933",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000035.json.gz",
+      "sha256": "2ecbc8ce8489e959f1ec8729e974dd70ae27bf7f1ee6cea32a5341e7d88cc2a7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000135.json.gz"
+    },
+    {
+      "sample_id": "django__django-13964",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000030.json.gz",
+      "sha256": "f8f9cc013d10191eca044773b5723e051b787341996c9550e88a3b5eb701c7f3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000136.json.gz"
+    },
+    {
+      "sample_id": "django__django-14007",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000031.json.gz",
+      "sha256": "334495f4c42f02781913049f81e933f0b184265062185f7594748c397d065951",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000137.json.gz"
+    },
+    {
+      "sample_id": "django__django-14011",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000032.json.gz",
+      "sha256": "64fa2bc5672214a1e5d75f0057667612c3018f4b3cbabdc4445e683b1027414d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000138.json.gz"
+    },
+    {
+      "sample_id": "django__django-14017",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000033.json.gz",
+      "sha256": "0c389c987d4e3262867ea50174330f8fc1a56cd36f71d7ec00d0012c81037ffc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000139.json.gz"
+    },
+    {
+      "sample_id": "django__django-14034",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000034.json.gz",
+      "sha256": "94d31cb2a37208f206c0c55ca504515c0a65fcda60c63ebefd6cbc73758af9c3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000140.json.gz"
+    },
+    {
+      "sample_id": "django__django-14053",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000038.json.gz",
+      "sha256": "964047c9b7f86c2af73510224ebeeaea4be31c9e1489c9e39e890b39be17ad09",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000141.json.gz"
+    },
+    {
+      "sample_id": "django__django-14089",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000035.json.gz",
+      "sha256": "8e5fda2f84c7f7be68b13528b4fdd66904672c59b7839aa2d74f02a6826d3995",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000142.json.gz"
+    },
+    {
+      "sample_id": "django__django-14122",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000036.json.gz",
+      "sha256": "68445042a113d52231ed07ff0f24e017a84fc028883dd01fd0e251f6c7590530",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000143.json.gz"
+    },
+    {
+      "sample_id": "django__django-14140",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000036.json.gz",
+      "sha256": "c4d9fe93ac0a02566897ba3d8a2571497740c4a89e506da0dd6907304a508b21",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000144.json.gz"
+    },
+    {
+      "sample_id": "django__django-14155",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000032.json.gz",
+      "sha256": "fb007ba3ad894a93af201e8a2e8d9fe3b0ef0e7dbffa8de954b97f0a5f7a0780",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000145.json.gz"
+    },
+    {
+      "sample_id": "django__django-14170",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000033.json.gz",
+      "sha256": "49453bc4c9b2d8a9b261a79041228c39056423a48a8298aa75a0e00df8867a08",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000146.json.gz"
+    },
+    {
+      "sample_id": "django__django-14238",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000039.json.gz",
+      "sha256": "120e63e2f47719be4849a647b089a6bdc487a172d5e1a1e6648a450e5e7049a4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000147.json.gz"
+    },
+    {
+      "sample_id": "django__django-14311",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000034.json.gz",
+      "sha256": "09932c0def2f441fd2cad72366779ba34b96367f3a687360b5bc8ef2ac18abf5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000148.json.gz"
+    },
+    {
+      "sample_id": "django__django-14315",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000037.json.gz",
+      "sha256": "a381c525f74ee98bf9430b5dfed0fb019ea81cfa83bdc00b322a0ed064d47cd8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000149.json.gz"
+    },
+    {
+      "sample_id": "django__django-14349",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000037.json.gz",
+      "sha256": "5dde6bdda66b0eb977dc3c9094b2c768e3e7a13f5d31dae396d8be6cbe1caa47",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000150.json.gz"
+    },
+    {
+      "sample_id": "django__django-14351",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000038.json.gz",
+      "sha256": "54f3a109f20845c0abe5485495021dcc64cd36279aad8c34d79233d252738458",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000151.json.gz"
+    },
+    {
+      "sample_id": "django__django-14373",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000038.json.gz",
+      "sha256": "1cd8990cb2c675cc62231db6b91e7f4d073001f4f1d1e922189209cabd8ab5ab",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000152.json.gz"
+    },
+    {
+      "sample_id": "django__django-14376",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000035.json.gz",
+      "sha256": "ed20c4fcfa453a43412dfb77bc644b2846476eb6ad678c5e660252b0faf598f4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000153.json.gz"
+    },
+    {
+      "sample_id": "django__django-14404",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000039.json.gz",
+      "sha256": "f39a223ff95528e6ce57d2947ff58bed1158e1fda1fbc6f8cce9c6f475cdba18",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000154.json.gz"
+    },
+    {
+      "sample_id": "django__django-14434",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000040.json.gz",
+      "sha256": "8f45fa50b153d03426e330059cb9b9832eb1e85f5c7d3b8edf3f37447e86a2bc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000155.json.gz"
+    },
+    {
+      "sample_id": "django__django-14493",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000039.json.gz",
+      "sha256": "cf67e4c5ecd7d0929989be98c0c9214fde90a88fa2c73ef67c27cf72ae369c72",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000156.json.gz"
+    },
+    {
+      "sample_id": "django__django-14500",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000040.json.gz",
+      "sha256": "815cc9205b8d365f9ae48256348e17bffcb1e10dca7913d441b90afb595f1cac",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000157.json.gz"
+    },
+    {
+      "sample_id": "django__django-14534",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000041.json.gz",
+      "sha256": "a06afb651cd668d228cf64f483c9d92951c3062806f586dd96718bfadbaf61c5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000158.json.gz"
+    },
+    {
+      "sample_id": "django__django-14539",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000040.json.gz",
+      "sha256": "cbccb28e3098ed643268ab2f2cbca156eac82036e0fb9ce8fad7094003418496",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000159.json.gz"
+    },
+    {
+      "sample_id": "django__django-14559",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000041.json.gz",
+      "sha256": "3d244afc787bce94f9f84ef63d15a741151d2827186ed601b090745c076f2663",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000160.json.gz"
+    },
+    {
+      "sample_id": "django__django-14580",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000041.json.gz",
+      "sha256": "5e6b86be92a23d1608371107faa12b058dc8a8435478e1cf4359915efa30db2f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000161.json.gz"
+    },
+    {
+      "sample_id": "django__django-14608",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000042.json.gz",
+      "sha256": "48985c98a12555da696dfd0e949a81768f313c7511f0256dd532eb57e8fee7ca",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000162.json.gz"
+    },
+    {
+      "sample_id": "django__django-14631",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000036.json.gz",
+      "sha256": "c4127da006a5495722656f46b9a80fff234ca13c5c389741efe50dd6379a5afd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000163.json.gz"
+    },
+    {
+      "sample_id": "django__django-14672",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000037.json.gz",
+      "sha256": "b952088f2c8745b26876ec5a6ad3c9d1fe28161b55fac7cb4be6e50d9ec2297a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000164.json.gz"
+    },
+    {
+      "sample_id": "django__django-14725",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000038.json.gz",
+      "sha256": "d470af85cc8ea08e2f6660a230946cb7c97412a29a342df68d1f454450d76e8a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000165.json.gz"
+    },
+    {
+      "sample_id": "django__django-14752",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000042.json.gz",
+      "sha256": "a17e1fec6d492848830cc0aaab294b6302c3c2d49e9fa88463d60427ae2fb223",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000166.json.gz"
+    },
+    {
+      "sample_id": "django__django-14765",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000043.json.gz",
+      "sha256": "97162466c385c5d4a7d6e91059793eb9fa6496ef245c641d279d367ea519fc6b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000167.json.gz"
+    },
+    {
+      "sample_id": "django__django-14771",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000039.json.gz",
+      "sha256": "82d0d26d884b340961a8b6ac501c959504de27fb676f8801a8397fa2f43254d5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000168.json.gz"
+    },
+    {
+      "sample_id": "django__django-14787",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000042.json.gz",
+      "sha256": "ea8213c6b75e56fbdc4fb5b90291df1300106c21b8b6af270475f4c49c1d4c44",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000169.json.gz"
+    },
+    {
+      "sample_id": "django__django-14792",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000043.json.gz",
+      "sha256": "077aeff5d26e3d512dee59bc0dae939670595db61346009fbb9fcda586192b00",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000170.json.gz"
+    },
+    {
+      "sample_id": "django__django-14855",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000040.json.gz",
+      "sha256": "ed36c9d50f9e65a3301e23075f7a112b72d70703b0abb7f7ef82d91ecd8ce597",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000171.json.gz"
+    },
+    {
+      "sample_id": "django__django-14915",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000043.json.gz",
+      "sha256": "8f38cb1553651c43716e346ae27c892c4642bc8fdcaaf557b5ca5b4a0ae6dd38",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000172.json.gz"
+    },
+    {
+      "sample_id": "django__django-14999",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000044.json.gz",
+      "sha256": "f1b7f6568f8aaae7ff20c19fb1aa9270325da02ea88d53f49ac2e83060bc7ada",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000173.json.gz"
+    },
+    {
+      "sample_id": "django__django-15022",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000045.json.gz",
+      "sha256": "dad42218a0bf49cb82ce7b0988a641b112de759b267e3a5c6baf33a7d8d2e0f9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000174.json.gz"
+    },
+    {
+      "sample_id": "django__django-15037",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000041.json.gz",
+      "sha256": "63bff4865e5c9065498c44e593d56553d0e22dedc3a214e489ae257f17ed0f85",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000175.json.gz"
+    },
+    {
+      "sample_id": "django__django-15098",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000044.json.gz",
+      "sha256": "0d29dedbb9213ecd503d4d0b68bd713056213488cc60c899978a05174e3398bc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000176.json.gz"
+    },
+    {
+      "sample_id": "django__django-15103",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000046.json.gz",
+      "sha256": "32b64b2a6ad25403ee5ba154a2a52ce2d24ae2efcba0da8fdb7a3f42e76fa9c9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000177.json.gz"
+    },
+    {
+      "sample_id": "django__django-15104",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000045.json.gz",
+      "sha256": "9bddf434656a8effb37ea06de0eb9b9df7fd89b2dd5dc0681d29b7acf9246d9c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000178.json.gz"
+    },
+    {
+      "sample_id": "django__django-15127",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000044.json.gz",
+      "sha256": "c798a7e866e8ca667b1ff857dca1876bcdb6416fd1a6992b9a48a5daee36a580",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000179.json.gz"
+    },
+    {
+      "sample_id": "django__django-15128",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000045.json.gz",
+      "sha256": "077bc619d6b8f4c67ac572613991d22622e48b9b756481a66c9440c027033a6f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000180.json.gz"
+    },
+    {
+      "sample_id": "django__django-15161",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000042.json.gz",
+      "sha256": "8b2a1c79a50869816faeafcd0323e78091bd9d82e71f438ef781688036477dfd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000181.json.gz"
+    },
+    {
+      "sample_id": "django__django-15252",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe_normalization/000000.json.gz",
+      "sha256": "0d6b68866810a1ec2361d82d2c14f676edfef3a515aa81f3bf9f02bf03c35cf7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000182.json.gz"
+    },
+    {
+      "sample_id": "django__django-15268",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000047.json.gz",
+      "sha256": "2c01c5436a12664bf42c1ad532c47d837e8b6e919c3832d345844d8822e48e77",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000183.json.gz"
+    },
+    {
+      "sample_id": "django__django-15277",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000047.json.gz",
+      "sha256": "abb72eee71208ccc1d49b192317351fe581dc5353cb710af098bd2e3faa968bf",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000184.json.gz"
+    },
+    {
+      "sample_id": "django__django-15278",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000046.json.gz",
+      "sha256": "53b9870b39177b2ee89900ee30b167f8306da7fc98231770fd7ced214fd60b4e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000185.json.gz"
+    },
+    {
+      "sample_id": "django__django-15280",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000048.json.gz",
+      "sha256": "2958c4d29e486762c0693f16020bbbd00ef9d9edb8c0d3ad9a02ff7657f3d17a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000186.json.gz"
+    },
+    {
+      "sample_id": "django__django-15315",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000048.json.gz",
+      "sha256": "34388baa40d1f7adc4d144022b6795eb2f07ddd487a11ed2e348582fe7345b09",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000187.json.gz"
+    },
+    {
+      "sample_id": "django__django-15368",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000047.json.gz",
+      "sha256": "fe5573edd341bf59bc5a7bedc0bf3fd3d830ccf9d9f30e7698e6a6718c466be2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000188.json.gz"
+    },
+    {
+      "sample_id": "django__django-15375",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000043.json.gz",
+      "sha256": "aa58e0799b7e9d5850fe6b9607c6939cf76695829983dc3be32cb41668466165",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000189.json.gz"
+    },
+    {
+      "sample_id": "django__django-15380",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000049.json.gz",
+      "sha256": "95e663a307e45a2d1a81ed2f879d7e8e57ad53027af235236fcd6e1286afce99",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000190.json.gz"
+    },
+    {
+      "sample_id": "django__django-15382",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000044.json.gz",
+      "sha256": "ee64c56b36ea5b171193ffc2507518e594e6192f5309c0406fecf261ab80a728",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000191.json.gz"
+    },
+    {
+      "sample_id": "django__django-15467",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000045.json.gz",
+      "sha256": "078c45b91c5c805c000206b6a0963ec67cf26a1f7bd2504e52caea73a2d0d317",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000192.json.gz"
+    },
+    {
+      "sample_id": "django__django-15499",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000046.json.gz",
+      "sha256": "bc133da450e337dd81df918869ceefe28c041a6c0b882587ddde4e47cb6668ce",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000193.json.gz"
+    },
+    {
+      "sample_id": "django__django-15503",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000050.json.gz",
+      "sha256": "d7136cd01a058e8ba84865d1bcfad498eed0ddef568631ff6d8b0dca1f1dad89",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000194.json.gz"
+    },
+    {
+      "sample_id": "django__django-15525",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000048.json.gz",
+      "sha256": "21f8293a3f05bb7b13fc427110a9823a0f1f4b5e705c9b5a61e128eb8f989145",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000195.json.gz"
+    },
+    {
+      "sample_id": "django__django-15554",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000049.json.gz",
+      "sha256": "58aba4090b3a0ad6d4b0c41243592945986957b2479de182bb5a5ad9ee118c61",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000196.json.gz"
+    },
+    {
+      "sample_id": "django__django-15561",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000050.json.gz",
+      "sha256": "e6340b5d7aa74b411d615757222db80059327ba06a956781ffe9112bbdf94a49",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000197.json.gz"
+    },
+    {
+      "sample_id": "django__django-15563",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000049.json.gz",
+      "sha256": "ad16050e6deec236a25446c95b043600abcf9f9774cba10505c2164abe31cddc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000198.json.gz"
+    },
+    {
+      "sample_id": "django__django-15569",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000047.json.gz",
+      "sha256": "b3c6c746608995bb5edb1d95bb1766347a40f0542b12f34b839d768161530f19",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000199.json.gz"
+    },
+    {
+      "sample_id": "django__django-15572",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000050.json.gz",
+      "sha256": "dccac26ff8318f9c40f38745ae6aefcb8563a10233aafd75c6ed14be0fbfec4c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000200.json.gz"
+    },
+    {
+      "sample_id": "django__django-15629",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000051.json.gz",
+      "sha256": "95c0768b40d5e72d7452e9c60c0cf97ea80ea148850be5a2182f0c28e414fc28",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000201.json.gz"
+    },
+    {
+      "sample_id": "django__django-15695",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000051.json.gz",
+      "sha256": "dd4ee24d631c79201e78ef83a9b4aba241f50dc30ec76a703ed7e287b10b2e4c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000202.json.gz"
+    },
+    {
+      "sample_id": "django__django-15731",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000051.json.gz",
+      "sha256": "538f148be33ad7fd2b71cd3566b85a1be7a9f89a5317b11c8a0af1c1f5a019bd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000203.json.gz"
+    },
+    {
+      "sample_id": "django__django-15732",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000052.json.gz",
+      "sha256": "2f8132990c2111479d606d112eb4853553e2c46719035c2b9dad00930004442f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000204.json.gz"
+    },
+    {
+      "sample_id": "django__django-15741",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000052.json.gz",
+      "sha256": "aa2ee6c68c904bb26b59fba35735c1847d83c82459dc11fcfc15a5cf5f616021",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000205.json.gz"
+    },
+    {
+      "sample_id": "django__django-15814",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000052.json.gz",
+      "sha256": "75150a80b0a5eef968e6e48cf8199b26f1f1a912254c75fb3f182a91cb83dc52",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000206.json.gz"
+    },
+    {
+      "sample_id": "django__django-15851",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000053.json.gz",
+      "sha256": "d0e1f607641011dbec216e178a2a22707671a835b2134a686d71d0b28f868ea5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000207.json.gz"
+    },
+    {
+      "sample_id": "django__django-15863",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000054.json.gz",
+      "sha256": "7a2a98326dc82a3a58db844c5de333dcca08a510b0654f71284b68caa29ea052",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000208.json.gz"
+    },
+    {
+      "sample_id": "django__django-15916",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000055.json.gz",
+      "sha256": "160ecbab890315062af81a1e60bc38682529afb1c0c80446ae4edca58d026960",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000209.json.gz"
+    },
+    {
+      "sample_id": "django__django-15930",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000053.json.gz",
+      "sha256": "23e3fb34d6b2100c3011735e97e4713ee1807e4c85a854f4d0c1655fa8923828",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000210.json.gz"
+    },
+    {
+      "sample_id": "django__django-15957",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000054.json.gz",
+      "sha256": "5c96fc460b38be0e98287608860e93a5fa9a19289c50c43e2a9bcc6513e20149",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000211.json.gz"
+    },
+    {
+      "sample_id": "django__django-15973",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000055.json.gz",
+      "sha256": "5754c544a2f88ccd1827fde4001d642ee4603550256a36e4c4aed8fbc5953d24",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000212.json.gz"
+    },
+    {
+      "sample_id": "django__django-15987",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000048.json.gz",
+      "sha256": "bf3fc2f8d6dfdf2c5b98512b444d5020d9151a09c03748ea183b20244148561d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000213.json.gz"
+    },
+    {
+      "sample_id": "django__django-16032",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000056.json.gz",
+      "sha256": "fcb87a2d2a5aeb02dba0f628aa0887ecf9b3fbfa208ef1c1813b00cd6d038957",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000214.json.gz"
+    },
+    {
+      "sample_id": "django__django-16082",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000056.json.gz",
+      "sha256": "4776209f40608c3a54be5ad443c56fe33ec917a62378425cbe405e45e32c878e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000215.json.gz"
+    },
+    {
+      "sample_id": "django__django-16100",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000053.json.gz",
+      "sha256": "324d74c7ea2b0a32bd35fe4fd14a237a40c8045a9c3e896a59db9f0da25c7fb7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000216.json.gz"
+    },
+    {
+      "sample_id": "django__django-16116",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000057.json.gz",
+      "sha256": "f8b5d9c240e0f3f4051fca9a4f0c17adbdbe74cf7d1a1462d165a9f1f4355cd9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000217.json.gz"
+    },
+    {
+      "sample_id": "django__django-16136",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000058.json.gz",
+      "sha256": "48a221ad6038c28bf7c2e101cd76b8cb27c4e0d6eb756c8fec0de708287ac25b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000218.json.gz"
+    },
+    {
+      "sample_id": "django__django-16139",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000059.json.gz",
+      "sha256": "b6b07f31cbee5b8eeae7162375c248184f3d815f8d0adc0bca11d0876288a00c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000219.json.gz"
+    },
+    {
+      "sample_id": "django__django-16145",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000060.json.gz",
+      "sha256": "c266df67e9c47fa9271e9f3bc1329666d9597433e7ed61681460b34a68848a96",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000220.json.gz"
+    },
+    {
+      "sample_id": "django__django-16255",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000061.json.gz",
+      "sha256": "adf6aefb2c94fea557b30e2b7353f94dcd304e8953a90c62f3a9ce255fe1444f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000221.json.gz"
+    },
+    {
+      "sample_id": "django__django-16256",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000054.json.gz",
+      "sha256": "b4ef277fc619cbbe535bf04ab2e48a33c76526a0d42fd954899ce6383a6d066f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000222.json.gz"
+    },
+    {
+      "sample_id": "django__django-16263",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000062.json.gz",
+      "sha256": "1fb871e3aeb140dce44324baa13a5809f8e37a48373562c08d317d30f4ab83df",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000223.json.gz"
+    },
+    {
+      "sample_id": "django__django-16315",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000057.json.gz",
+      "sha256": "3beb04bf8ae911da9f5272cec270277ac0f2598cc16348107ba3b689dd76fae5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000224.json.gz"
+    },
+    {
+      "sample_id": "django__django-16333",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000063.json.gz",
+      "sha256": "78b7a9a8c1a9ade757fce86b378c25e6f9bac3ca85472010430b2e63851eede8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000225.json.gz"
+    },
+    {
+      "sample_id": "django__django-16429",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000064.json.gz",
+      "sha256": "4da125d771d7e10b5605d8cc8f94dab62d0207036a09d053fee8544d95803b47",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000226.json.gz"
+    },
+    {
+      "sample_id": "django__django-16454",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000065.json.gz",
+      "sha256": "dbccf927a693c674e876a9d6f4e20797d66af3e836a5ef6a6275f1667262d56b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000227.json.gz"
+    },
+    {
+      "sample_id": "django__django-16485",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000058.json.gz",
+      "sha256": "aa86b01ab8edbd3710d2938b84501c2f140aedbd413e14b9b1f3a74b1003bf5e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000228.json.gz"
+    },
+    {
+      "sample_id": "django__django-16493",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000055.json.gz",
+      "sha256": "b06122643bd30cdff1712f8de23b0f65394c8aac9a38598732ee2a8bcace2ac9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000229.json.gz"
+    },
+    {
+      "sample_id": "django__django-16502",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000049.json.gz",
+      "sha256": "09c9bbbb7e431beb69e4ab52a86ab81b3c3f04f9a2afa2dbc6d5791845684553",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000230.json.gz"
+    },
+    {
+      "sample_id": "django__django-16527",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000056.json.gz",
+      "sha256": "b6949f5046a30f4f38c046ccea7f09b0437afff57994f5848a6b9e50d2fab3bc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000231.json.gz"
+    },
+    {
+      "sample_id": "django__django-16560",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000057.json.gz",
+      "sha256": "abd9503e5140c5de8dbd705e4eb5d0a00fcc29e525c420b5ea7c8eeb8a3e9d38",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000232.json.gz"
+    },
+    {
+      "sample_id": "django__django-16569",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000059.json.gz",
+      "sha256": "1bc2eca113b8b2a308c0ec1c9f92b9ed0e46e31025b5fb9cbe1bf37351168025",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000233.json.gz"
+    },
+    {
+      "sample_id": "django__django-16595",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000066.json.gz",
+      "sha256": "aeea7dea3e72f6fc3999ca31b7a745e9eeb76a03906715326623601499ddce6c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000234.json.gz"
+    },
+    {
+      "sample_id": "django__django-16612",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000050.json.gz",
+      "sha256": "5428d5b225d286c2fd174256bd2736f6c68e59545c99e605d2f380f200fc59c4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000235.json.gz"
+    },
+    {
+      "sample_id": "django__django-16631",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000058.json.gz",
+      "sha256": "caa19d9d230e59ad40c074fc4cc900d2ecf9fc20ae6b6f5302ab56db9fe1c03c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000236.json.gz"
+    },
+    {
+      "sample_id": "django__django-16642",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000051.json.gz",
+      "sha256": "3c7c179dbacfd74c5f8abbea25f8d0ee6350a24fd40db9c6e579ef5191c86ce4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000237.json.gz"
+    },
+    {
+      "sample_id": "django__django-16661",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000067.json.gz",
+      "sha256": "0cadaf592ee94eecf66c3a33a375ccc7831e022f7d2580b1dfbfe0b392db1a0e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000238.json.gz"
+    },
+    {
+      "sample_id": "django__django-16662",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000068.json.gz",
+      "sha256": "a44d720f49ec29fc56903964fd8f6338cf7a1574e10367aefd94a3ee490afd33",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000239.json.gz"
+    },
+    {
+      "sample_id": "django__django-16667",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000069.json.gz",
+      "sha256": "24e9e397542a62e2c2e199a28fbb069d7e705fd34b9feeb8d769a4f3a54fbf02",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000240.json.gz"
+    },
+    {
+      "sample_id": "django__django-16801",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000060.json.gz",
+      "sha256": "2f41534f3e3e14173462e4aabf88a539cfc3193aba9074fa28587395fa35727b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000241.json.gz"
+    },
+    {
+      "sample_id": "django__django-16819",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000061.json.gz",
+      "sha256": "1b48349e7f159ac16c264189338ade6dd69ef49f8403177ab7e665d95fd57919",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000242.json.gz"
+    },
+    {
+      "sample_id": "django__django-16877",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000062.json.gz",
+      "sha256": "aa0f66776a47d6f47ed184d0e604bd6ece4cf2c12437096baf43ab085b3b5299",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000243.json.gz"
+    },
+    {
+      "sample_id": "django__django-16899",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000059.json.gz",
+      "sha256": "81a36e7787f16d526d43f12bf2e473cdf2fa908915243fdb72eb7c5d39953911",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000244.json.gz"
+    },
+    {
+      "sample_id": "django__django-16901",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000070.json.gz",
+      "sha256": "a4cfa0bb88bcbadd08eab5e3c7855ac96cded84b4aa029d69f6410ad92ed8698",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000245.json.gz"
+    },
+    {
+      "sample_id": "django__django-16938",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000052.json.gz",
+      "sha256": "0cbdfceb9ea97fc85be6c9d92e713b93b22d89a614ec7f039c8273613bcc4e36",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000246.json.gz"
+    },
+    {
+      "sample_id": "django__django-16950",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000071.json.gz",
+      "sha256": "4ce918f2310c7752273b22b11ff14b82ba6520a826958511d169705fd2f88786",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000247.json.gz"
+    },
+    {
+      "sample_id": "django__django-17029",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000053.json.gz",
+      "sha256": "00cb26f068897d81372810eeefc1e726ced20d79b9c4d7d09de62021092ced62",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000248.json.gz"
+    },
+    {
+      "sample_id": "django__django-17084",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe_image_retry/000000.json.gz",
+      "sha256": "27b7bc0a7646867543c3810901c3ea531cbc57b5293c22b70a9627e344c5182b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000249.json.gz"
+    },
+    {
+      "sample_id": "django__django-17087",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000055.json.gz",
+      "sha256": "b7a04fe46eba90ed686918fa7a8a4ad3203f182d83e17eedc8fdfc976ffd513a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000250.json.gz"
+    },
+    {
+      "sample_id": "django__django-7530",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000060.json.gz",
+      "sha256": "b7438be70a6ad03165ad8e29d15311e7422948f4f4a1cd6e0c2a6405c469e2c2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000251.json.gz"
+    },
+    {
+      "sample_id": "django__django-9296",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000061.json.gz",
+      "sha256": "ea44b037efee24a7470803c7ffedf259642ffc371999cd35879bd914ee2a4a3a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000252.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-13989",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000063.json.gz",
+      "sha256": "e9eeb4609cf3f0d23c695fa5914a6107416a6096868b6bf0ddb3021cb66a93f6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000253.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-14623",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000062.json.gz",
+      "sha256": "6fa20b880422cf03cd731a447fcd888f53b4113b39cc836979f98af89408a0af",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000254.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-20488",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000064.json.gz",
+      "sha256": "55e62192a329698a7ce4acd02f0dd622f3fb0cebff0eeb04b3e9a038197ca168",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000255.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-20676",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000063.json.gz",
+      "sha256": "a72e246b5b580bddf73452be2f869ed1a18a0c66010ddefdaafce14d331364e6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000256.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-20826",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000072.json.gz",
+      "sha256": "39cee4e1f120b3e04df60363572af8bcf77f2efaaa0a1f751b7c84c22c233ca7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000257.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-20859",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000073.json.gz",
+      "sha256": "a07e52d1a2b273a71c02d63ef9547b6237809637c3f6b17cde1f061afd748067",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000258.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-21568",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000064.json.gz",
+      "sha256": "587bc017a3ef4286512fc2775dad7221ac848b78c45138f054591d353ddc6f64",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000259.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-22719",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000056.json.gz",
+      "sha256": "dfd5f1453454c760bcdbc8c2d3c08ffb4d44b5c88e3ede821c0cf664f876bab6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000260.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-22865",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000065.json.gz",
+      "sha256": "b8e11eee41c677cde079a3b9a9805b63a5b4838ffc40baa85eeef7452b1fede9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000261.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-22871",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000057.json.gz",
+      "sha256": "8cb273009338b1bd897d3a3ffb1dc3dd803e8e9fbb6687cbf0909a3f4fd0fbad",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000262.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-23299",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000066.json.gz",
+      "sha256": "7fbb694a0272427951c1a3df683473636785d4ab0af7e5eda7eefaa1fc413f84",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000263.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-23314",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000067.json.gz",
+      "sha256": "69ca7bb2cbeef5f3ba9016c5610c29650b1e1527e66b576c411874fc9f4b2bca",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000264.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-23412",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000065.json.gz",
+      "sha256": "6bb4d474e83e4e36b2c86161e332b2837ec44c518fc62ddc90defb9ef8fb2df5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000265.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-23476",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000068.json.gz",
+      "sha256": "8ecdbac87ab8cd4d4d63fdfb9f8f6515438528c6589dbe9792a8007f9c6e1bb2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000266.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24026",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000069.json.gz",
+      "sha256": "a795a2f1dee79a5e3cc15ffbe0ba27212ff2995164c99820f7acd3eb66ef38d6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000267.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24149",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000066.json.gz",
+      "sha256": "b0f2be65995db1902e8a9a8da97ecc68992a3830588b5d9f895d4324b4dbec0d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000268.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24177",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000058.json.gz",
+      "sha256": "dbb2d266f90f8f0c8e5523a7a914f013d151fb19c722117126a0f9daa9305a2b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000269.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24570",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000074.json.gz",
+      "sha256": "0313fa1bf2c6448b6bb9cdd78aefb6cb4d414615bb0d383e9ea8e7c61eb9382d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000270.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24627",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000059.json.gz",
+      "sha256": "6b3594f47f66f5ad1c12fe8710eb212dbc5c115361ec8504cedbb50a5e422a0d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000271.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24637",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000060.json.gz",
+      "sha256": "33b7fd3c926b76473add2b8fa668b0dcaca55d2fb5f4758042ebc7e1b959cdd3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000272.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24870",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000075.json.gz",
+      "sha256": "f32dff4ce82f5170271c729e8b2661288f44793e154f95a5ddcd4aba5a88f77f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000273.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-24970",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000076.json.gz",
+      "sha256": "5ebf287c1f46b34dc780800ed74194a6ebaae3f2090770bace9693a54ca0a060",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000274.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25122",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000077.json.gz",
+      "sha256": "3a3726c5d282e9997279d95d72372d676b831c81780cf33ecc47fae1b35d5805",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000275.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25287",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000061.json.gz",
+      "sha256": "f77fe51e99bcc4876e8ae88bfd2bd8fa273acfcc453a49a2ba0c24b52aee104f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000276.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25311",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000070.json.gz",
+      "sha256": "528b0aad77ab90a21d0e1ffef219d0b12d82dd60ef34943659d6b03cb0e47f5f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000277.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25332",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000067.json.gz",
+      "sha256": "537ee505ef48d6e35000c4e5cd5bed07dfc933b6e2780f25ed83bcd828b5e1e3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000278.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25479",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000062.json.gz",
+      "sha256": "ebd5ec5e63b610217aa7700a5ec94bcf56c3981542f8cbb4e46c5597ed4d247d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000279.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25775",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000063.json.gz",
+      "sha256": "eaa170e1e9b9446730cfc861f8b7a3225df98cd1ae139888f28a1bb90e992031",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000280.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-25960",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000064.json.gz",
+      "sha256": "208e38d4b1cbb520ade551fdda1b6e72532851a46f51776c4e5805b85ced2399",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000281.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-26113",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000068.json.gz",
+      "sha256": "74479277071cb38eb3a139ff92328b45a2041f99eb42d851d8d4ee111d2af5ec",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000282.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-26208",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000069.json.gz",
+      "sha256": "413edc76add968007daed493f0a806aa778c789467941b15568f7a6ceb7f1c9a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000283.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-26291",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000070.json.gz",
+      "sha256": "e8b8313c0e3ee93b49ffb4743913336dd3eeca2d4fbd4c233bb8d3471c2e2a78",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000284.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-26342",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe_image_retry/000001.json.gz",
+      "sha256": "2a5f14e4db6573e5a339fce79a5b22b30027b63dff35df6892db6609d6e90f72",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000285.json.gz"
+    },
+    {
+      "sample_id": "matplotlib__matplotlib-26466",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000072.json.gz",
+      "sha256": "add100313edee2b58dde977a1bc8f03564b5f7bac5a31070bf83e81bb59fbe8c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000286.json.gz"
+    },
+    {
+      "sample_id": "mwaskom__seaborn-3069",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000065.json.gz",
+      "sha256": "50abb78e629c0fcafe5fac7a8c3506a9e46be13527d64b4dd9642886cb2d8dd6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000287.json.gz"
+    },
+    {
+      "sample_id": "mwaskom__seaborn-3187",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000071.json.gz",
+      "sha256": "26cf4c3ec35544bc856868ad87ff2bebb3b250d358c932091853b706456ec8eb",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000288.json.gz"
+    },
+    {
+      "sample_id": "pallets__flask-5014",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000073.json.gz",
+      "sha256": "b58904ecd435b7f75dcc47c349461efc9f0fe8ba7fd77d425aa4d9396be16c77",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000289.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-1142",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000066.json.gz",
+      "sha256": "ac1369a1d58d198c7238dde8c82292cf07fb900854231e9f390e309e5d85ab90",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000290.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-1724",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000072.json.gz",
+      "sha256": "b22198607b395eecebb09a27e721e851f6ad37ea599f7f5688f1c55757898096",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000291.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-1766",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000074.json.gz",
+      "sha256": "06d6580882a1b839f6eaf49703867d1ec688d3570ab490dc6ca7dd87878e6d1e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000292.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-1921",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000067.json.gz",
+      "sha256": "81d764b686c8701924caaea3619ac870e3b521bab1c456f6b78f30849bacfba1",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000293.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-2317",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000075.json.gz",
+      "sha256": "32d2631d018fe8f5a4091b40046be2815da4eedbcc0b12d7dc9a0bcaa1cd5169",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000294.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-2931",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000068.json.gz",
+      "sha256": "426ec69f6a8ab92a6cef5336bc59c7df02b8816e454d28b868badd99a0533669",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000295.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-5414",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000076.json.gz",
+      "sha256": "b9dcc907d060ad0325619244b552f842fadbb7cc569995b3e8643ce3a6342e42",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000296.json.gz"
+    },
+    {
+      "sample_id": "psf__requests-6028",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000077.json.gz",
+      "sha256": "9f55922e1cf1dc704aa639c7ba8d8a596daa25c9558b5108ca1eb0420532a697",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000297.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-2905",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000078.json.gz",
+      "sha256": "a60d298c65b23ad19f37a6189c229a94c55860dc1c5aadfe115a9877dcb25ca4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000298.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-3095",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000073.json.gz",
+      "sha256": "227c86151d60be17c1464fbeb9d6721e7f192ddb3a3cd2b4a8fe9819914f2de4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000299.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-3151",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000069.json.gz",
+      "sha256": "0c60126bb95a79bfb11a685dd5db67c2426485aa24f74ef9105d327eb6a7274e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000300.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-3305",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000070.json.gz",
+      "sha256": "1d0401e4a06b4c77c0509170bbddcab4739116327d784a7634e7e39ac5affb84",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000301.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-3677",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000079.json.gz",
+      "sha256": "d0ee36460e9961628cd767a7486266c89fb2756aded55c99583c59944d5dffe7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000302.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-3993",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000080.json.gz",
+      "sha256": "47408dc61b7c5e85ff342d11aa7e202adfcc9dc7437c4623a42cf36f372cb97e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000303.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4075",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000081.json.gz",
+      "sha256": "932e84e58d8c3e3c2b6b788f43a766092d65537e134f4ce9e380948cd63c03aa",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000304.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4094",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000078.json.gz",
+      "sha256": "7b09d45e038b7692e39156ed00c555f14b2958fea9d90f19643a31ad9c51acf0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000305.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4356",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000079.json.gz",
+      "sha256": "6db6d3a2faa2c5121f3fb12b110650079cba578ec07a12fae1bf616a360625b5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000306.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4629",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000074.json.gz",
+      "sha256": "0438aea7726886cb13ea0d2d1bd1ce50b84a249f7b700bfa663acafe33c4d437",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000307.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4687",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000082.json.gz",
+      "sha256": "90c29e48b77fb630354e31f10a26c050e7842ae3afd68e3a8d652385942e580d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000308.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4695",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000071.json.gz",
+      "sha256": "2a40d81e964795a3a212d05ce49995b6dbf8f33c3b4739e016b994b4ef1b486a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000309.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-4966",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000080.json.gz",
+      "sha256": "8a7e472b151d936e8e3c9be07fadf750faf51fda55f5f75a0e77e1004b8e3a60",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000310.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-6461",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000075.json.gz",
+      "sha256": "1f62787fcd08f918468f3d6bbf53bdaedc8459920a0b0414c61e6520c37f012d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000311.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-6599",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000081.json.gz",
+      "sha256": "d62cf0882b86baa9ac5f8b5c3470d5f2b17b8fb66a50dd4e83cd5301e5260edf",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000312.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-6721",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000082.json.gz",
+      "sha256": "dd3640abc5fef65e79ef675d52314b8e6cd699805fbd2fa880288d143cc2621c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000313.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-6744",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000072.json.gz",
+      "sha256": "042b6086764ec14fea6fd26d6d760e1d7114797514f72d1921f5db0936fbed46",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000314.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-6938",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000073.json.gz",
+      "sha256": "721f2978c0c9fad27055f28de358a97bc1c4459cb5537db00b4f16c566be77bd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000315.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-6992",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000083.json.gz",
+      "sha256": "3f7f3885285f91b8892a38dce7c3694d049fd53d68e884c0d5f74182b1d285de",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000316.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-7229",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000076.json.gz",
+      "sha256": "787d5db48f3097a23b7fef3943f5f342e1f11889ebb758cbec5179ad141ef8fe",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000317.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-7233",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000077.json.gz",
+      "sha256": "d24729c766ee9c559ca63d778979e71aa532b46bb244ec797e970dd3f539c84e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000318.json.gz"
+    },
+    {
+      "sample_id": "pydata__xarray-7393",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000078.json.gz",
+      "sha256": "6aa49af68c2e26910fd92e7da01293bb0c9972d908b6aa561e9709de92ba1863",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000319.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-4551",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000074.json.gz",
+      "sha256": "d9a165366848c8b04fa0861405eb94c85c8945cda174bd5fdcce6f35b837425d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000320.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-4604",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000079.json.gz",
+      "sha256": "053940222e8c3fdcaa86a9f81876eba88182122d9eeb741db44bcc58af943605",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000321.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-4661",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000083.json.gz",
+      "sha256": "d3b37b1bf9957059661d9c16500aa86742477b2185c142a8a211e47e0a42b3be",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000322.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-4970",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000084.json.gz",
+      "sha256": "0cf0a98f2042a1729602cb33d93caa09ca45d7b39567657a999ccc84c34d3626",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000323.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-6386",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000084.json.gz",
+      "sha256": "d24d24301fb2d6c0b13921f5764b77cd4c6cc32491ff574222fbd5aade8bcff1",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000324.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-6528",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000085.json.gz",
+      "sha256": "0e49040e984c8d7915fd2fb84ba1fa86d07ffd3116db8fc19fcbac06db95f493",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000325.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-6903",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000075.json.gz",
+      "sha256": "0c9b0b3da20bd494f9f79ac613d5feabf7f8fd3058de9c1382e718db827316a0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000326.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-7080",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000085.json.gz",
+      "sha256": "04d9f8af6743cb9ae88af82d9861d861d942db19303a5973851502586bfef864",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000327.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-7277",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000086.json.gz",
+      "sha256": "e880fd1bca41be36cdc6092316e6ac1d56bad605699445ec47cb590eb2950741",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000328.json.gz"
+    },
+    {
+      "sample_id": "pylint-dev__pylint-8898",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000076.json.gz",
+      "sha256": "dcf422d1e6a48c2908421d21887418be48175d152a75d03d89b673f669e603cc",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000329.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-10051",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000086.json.gz",
+      "sha256": "7fc37533bb91f49fdf706814d0c39eecc76244968aecabd7dcbcc82318fd05d4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000330.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-10081",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000077.json.gz",
+      "sha256": "9f834814772fb73a5628911366809da2709f4da6d30365298d50a4f5e9e2c42b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000331.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-10356",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000080.json.gz",
+      "sha256": "c0d47b3ac6e5e675965279884cb8ed51776c0c0ac874488b369f8b33a86a7c82",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000332.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-5262",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000081.json.gz",
+      "sha256": "9b7b2c1316b6245f9818b427e761bb5e03175cea0d5b2932f1d89763cdf22714",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000333.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-5631",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000087.json.gz",
+      "sha256": "744b23c3624c58155292c24c67e15dd9994db491915705b39beed06f2421934e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000334.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-5787",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000078.json.gz",
+      "sha256": "eb3a56c0bf1dcaef5e7ae042ec852ad81c5964c305b62a945a51c8c17788d7f3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000335.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-5809",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000087.json.gz",
+      "sha256": "95c514b4ce8c71fa3ae657b86ad75f2dfcde3e2543d5f303381d9f39cfa5d7ec",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000336.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-5840",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000088.json.gz",
+      "sha256": "e6c30cf15006ddac1e87583578cd25a3ea72f6340bc5b6e97181533518b7fc58",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000337.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-6197",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000088.json.gz",
+      "sha256": "ac29a7dcce6625bb53c9813944bb221e3545df5b9792140976d34f1d9d2d729f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000338.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-6202",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000089.json.gz",
+      "sha256": "0696260424ef92ec5736e20e76908781b47199125c0dc7eb4784a55c68b7cabf",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000339.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7205",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000079.json.gz",
+      "sha256": "e045ca64c2b3b4b4ee270cf3434a26baa6f369a1034d93ef25f6d20fd3e4e46d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000340.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7236",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000089.json.gz",
+      "sha256": "fc17816b84738b9dcb948dd084be3eb03a5c087da3abb4928d12cce993e0a0b7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000341.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7324",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000082.json.gz",
+      "sha256": "7f209f8482036066ad48ddac825a6653d2e213727648245daad4fcc953cb0471",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000342.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7432",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000083.json.gz",
+      "sha256": "89f7c8b27428e8342c0af663a07a78e7728ab84c6544e270ada520b53b79aa93",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000343.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7490",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000090.json.gz",
+      "sha256": "5f5cc6edd4d0b5f3e9be75728ffb7c79af8319eb124d8e10411b2c96cd073d2e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000344.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7521",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000090.json.gz",
+      "sha256": "502b33739198cecf2e3ec2d48f5d9683536e50f6b302c4e0c078c5e2b512463c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000345.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7571",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000080.json.gz",
+      "sha256": "3067a37435dfcb70b5e0155054770b63b28066ed9681a9f5a5ef9d5b6d512ad0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000346.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-7982",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000081.json.gz",
+      "sha256": "b1c12f233f90a94c1b6eea8d32b80857211702f7f2058212ac66189359065daa",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000347.json.gz"
+    },
+    {
+      "sample_id": "pytest-dev__pytest-8399",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000082.json.gz",
+      "sha256": "7f99271c4dc229630ab34638aed9b523ca51691b6526f498eb4046e51be6134a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000348.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-10297",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000091.json.gz",
+      "sha256": "9f2b23f7bbd968ede2648dda28495c6b3afa502745069c0ee871d0d0998aebaf",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000349.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-10844",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000084.json.gz",
+      "sha256": "93c54b4866b71e208c997f7a2ca01d25ae752cd9693f357e347ee3d72b3463c9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000350.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-10908",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000085.json.gz",
+      "sha256": "2694f41892eddf5dc692819cdbc810e2f31eb31dd59736db64220303b2539d72",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000351.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-11310",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000083.json.gz",
+      "sha256": "518e4f7defc640c55a7d2ec402e7b99aee53c584e6e27b7ee18a50e96d6d5ff8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000352.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-11578",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000092.json.gz",
+      "sha256": "2a30d23cd42bef5ab222b5d72b9a9087ca10c3f44c520c1caec50f89f602ae18",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000353.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-12585",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000084.json.gz",
+      "sha256": "f1985e4a61e0ae3634e6a42fc9394b76f10e68c3c3aaa9449a5fe9f4f3607c34",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000354.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-12682",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000085.json.gz",
+      "sha256": "9f10885f725cd62ce2f289c7d569ced46f6989ceb8e4fc4500affc5df6b002ee",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000355.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-12973",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000086.json.gz",
+      "sha256": "103d025d66fb94c3de1c779fde10d663747dd0f91ad5cd5ee91651cd05749c21",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000356.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13124",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000093.json.gz",
+      "sha256": "a2f870779a8aa3d58366d8b7c5f2fbd437a8bcac5177a58f6a40d127f76706d3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000357.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13135",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000094.json.gz",
+      "sha256": "409b8230264ac9a4f68e25f9e9f9a4ce72ad49ab69a8e72d781777e344a82c41",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000358.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13142",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000086.json.gz",
+      "sha256": "9df3af35cc5482e63a127540e1cdba4715a2c6a0b058616dd21665659102259c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000359.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13328",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000087.json.gz",
+      "sha256": "ec808e17eafa6b0b9e9b7c20ad93ceb25b08caa920d52300193ae0fffcb89fc1",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000360.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13439",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000091.json.gz",
+      "sha256": "0116b3d40a3945fd806fae09f0a94c0b745aeffdd046c06b0b62f71ae85776cd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000361.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13496",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000095.json.gz",
+      "sha256": "5f91290b3a28565f51ab826f582c37d2b6e86d58e7d7a866ec6c50d803731eeb",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000362.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-13779",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000092.json.gz",
+      "sha256": "fa6b7f641f4eb4ce9b2e7f206a58794e6e561e26cb1ddcc5f652884ea3a89402",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000363.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14053",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000093.json.gz",
+      "sha256": "7addc0b985bb925aa22a046884c4fe5753b7b8bc2a6c18bc57d37ef55d4b2182",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000364.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14087",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000094.json.gz",
+      "sha256": "a3a0cbc999a3fa5010491d1b78b8efcec019c2d9661942e3c6f916fdb7e999d1",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000365.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14141",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000088.json.gz",
+      "sha256": "5cfc95e9418f0422168e862a01eeb0ba535dfd0ae92b74972d0e5d71e040533e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000366.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14496",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000096.json.gz",
+      "sha256": "132f8a2815b5f5faada014a13fe589126183c33a7b9fd2422bc0f0f52c07a605",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000367.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14629",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000087.json.gz",
+      "sha256": "577504f2f3adaf5a595dcfa45605454136a4a12ca0e5fef07e88cc96cf4dd048",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000368.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14710",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000088.json.gz",
+      "sha256": "47785963bd4abc064791d40fa9bce5e0f7ca8e19c058c6f80e23b7397d7417b8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000369.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14894",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000097.json.gz",
+      "sha256": "1ed1d0e2fa369c6a3b105b3180291a76d87d7f91501fea28af1c243c6ceb16c9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000370.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-14983",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000089.json.gz",
+      "sha256": "ca6aac50381b5e336d1fd23d9634bc9633582f0e515683b4fd430bbbde95f9fe",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000371.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-15100",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000090.json.gz",
+      "sha256": "83fdd07de34d0ee2d939172439bb79d9277c5484d0cfac303d48e5c7f0e96b6b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000372.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-25102",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000095.json.gz",
+      "sha256": "b3cfe6eb7f9615063afe3f97ec6c6ddacd5a7217ec1ed0d4ba51642f43ae21c3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000373.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-25232",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000089.json.gz",
+      "sha256": "4fdb1497177152282d42e2693eb67edfb14299b249e324f306c3e88cc934bdc2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000374.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-25747",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000091.json.gz",
+      "sha256": "c890e4f8c092000512eef669a82bc082c9a8374d21367e4550b5ab6ab7f4a934",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000375.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-25931",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000096.json.gz",
+      "sha256": "068f728fa3b9977102f245ab5711adc1b355fdae449b23b41ecfa24cdec99803",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000376.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-25973",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000092.json.gz",
+      "sha256": "2bedb90fc9b6dd685fea6479ebedf5a3231c5737d8492d1204299cbf92c4d526",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000377.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-26194",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000097.json.gz",
+      "sha256": "e6dc76e94fcc5515ac19b29fbd6825e94fab25de4bec56fdfbbfd804b44d1150",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000378.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-26323",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000090.json.gz",
+      "sha256": "9aa3e5df3097c75f4c705668298654f31263b6fc941c5a8b4af443aff34b1857",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000379.json.gz"
+    },
+    {
+      "sample_id": "scikit-learn__scikit-learn-9288",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000093.json.gz",
+      "sha256": "21431dd9b27b2d4ab8c09fee8cb1bf88d94ee5606cf62bf6c42059122f00e8ef",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000380.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-10323",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000098.json.gz",
+      "sha256": "f69762de9abfa95f6587376e97fa884bc515eb370670b27a84252df395393ccd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000381.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-10435",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000091.json.gz",
+      "sha256": "e600e2cf9f65349ade5ab21d296fbfe6332d174d443020a96ec403be93bf98ad",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000382.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-10449",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000094.json.gz",
+      "sha256": "d5c650271a54170eeade503acb977133758868654a0e027c1bc85cc9293f1495",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000383.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-10466",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000095.json.gz",
+      "sha256": "bfe17edbcb5f817d3930c89996eaca825fd42ed22a6ca75b7db6c14412967294",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000384.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-10614",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000099.json.gz",
+      "sha256": "eeb6dec2e366ed83d1aef4652ee76861fb11959d74542452388fc8ce48b69a41",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000385.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-10673",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000098.json.gz",
+      "sha256": "8b1adde72cc4aca0b1b9401662e0e3f1481199371264942235858371b909163c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000386.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-11445",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000096.json.gz",
+      "sha256": "522cfa90cab226791b3a768818e3a8684ac9fd0e4f23376eaa84e614083a931f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000387.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-11510",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000099.json.gz",
+      "sha256": "659b900375e3d105787fa811e3d81958a4baaf62261518a82996ef14862fce84",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000388.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7440",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000100.json.gz",
+      "sha256": "967bf499e5ff8bd0fc376461a253cec21e91992d0ebaf2e689b7a754f4530723",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000389.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7454",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000100.json.gz",
+      "sha256": "15725d4811e0c2be19adfaaca08adfb44347a9472c07a1a02ab05f79b41fba75",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000390.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7462",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000097.json.gz",
+      "sha256": "6dcfc7e6abc6e978a50cdb69e79f4647cec10de05ae5c76bb53ef88275024de8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000391.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7590",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000101.json.gz",
+      "sha256": "cc400555cc19c401d62e51e713ca87ea010e1a58dcdc6ada3f1dd897eddb1d9b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000392.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7748",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000098.json.gz",
+      "sha256": "37c99d5a331caa6c8a9cdf75b0a29bf7fa6a53b391831c375acb96ea776b3d7c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000393.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7757",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000101.json.gz",
+      "sha256": "dcf6401cfe73a9f207c576f36274e97d53d19415889c7afc7a4619e45cd89a1e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000394.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7889",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000102.json.gz",
+      "sha256": "8e00c0c1054165bb8933b4368449a18f21530858c174441b4180550d87bce9ec",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000395.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7910",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000092.json.gz",
+      "sha256": "5c1f076bd4d9b345e3409ff9914a323e3bb33e871ab4764b9742e2eaf6c8f677",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000396.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-7985",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000099.json.gz",
+      "sha256": "02509696ba84588a1e2fb00cc50a3f9e9a0912ed42fd8a899e1b8ee51c41990f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000397.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8035",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000103.json.gz",
+      "sha256": "873546a4494ae6faa613ffac763b7808357e4e198e4a291e26c260f725ee000e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000398.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8056",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000093.json.gz",
+      "sha256": "bd9557cd9372070d6a18da037f8aa1b3808cb9f5ec23ff6ad1f0b1906b87a772",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000399.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8120",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000100.json.gz",
+      "sha256": "62f3a1f12396111d8dea376658fcff8ccc5bb51210f4293ea90f46249f42b70a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000400.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8265",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000102.json.gz",
+      "sha256": "2ec150ea1e98a5e1c9487d38f867069d184be48a59de36a8aaed9ed82c9a1d77",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000401.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8269",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000103.json.gz",
+      "sha256": "55dcbe50f37dad62ba8879aff3edf57bcdc4e4bf751d1112caa2fb5e4431b74e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000402.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8459",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000094.json.gz",
+      "sha256": "fdb38cfd5c1a29905f20332a08581280d65bf4693fbb3311457789801386ec54",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000403.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8475",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000095.json.gz",
+      "sha256": "8799caf4f2f9a1b8bc01f2e319e60e9266e1717f77c340de27803a1ebbb70a23",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000404.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8548",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000096.json.gz",
+      "sha256": "5968f54117bf2d52f33691f6b8af3a755c5b06499d5839160cd4830c84a5e21f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000405.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8551",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000101.json.gz",
+      "sha256": "3816a3e1b94a7f4c0becdbce26e386a44e079d4cc627d3c78554d37aa59ccb6f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000406.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8593",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000104.json.gz",
+      "sha256": "23cc5dbd6e26324d0870118d5fa99c60bd9e2646ab54ac859f33b8ae4153c658",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000407.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8595",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000102.json.gz",
+      "sha256": "09de36393a4762f1a53aa668efc83a43f0c11291d7859266f0ed6c77abe02008",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000408.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8621",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000105.json.gz",
+      "sha256": "5ba9aab936ca72247910b956a56d2c269f63d0d6ec1fa75bc4c96977b23a3192",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000409.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8638",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000103.json.gz",
+      "sha256": "fad0b315a40ddbb9df567ed2f6b059d8dc6eef59025ca7ab7ac6a0d1cfa40fc6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000410.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-8721",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000106.json.gz",
+      "sha256": "8b92da585ec2f2936102fc3237c9cc89d4f8121ed4545231dbc0ad2f3eca44af",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000411.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9229",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000104.json.gz",
+      "sha256": "d3ca6b0d8b7ecfe6293f644f784dad5c6de97e3d9e01123c3d96b1aaf0051dd7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000412.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9230",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000105.json.gz",
+      "sha256": "17e9c77dfc39aacd373e9b4d46f0aab0b07f68f39364807b3e4954493759cfdd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000413.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9258",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000104.json.gz",
+      "sha256": "9e56142402c68c833ce00c516afc281d82da2611534476ea6476d3db7c7f01c4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000414.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9281",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000106.json.gz",
+      "sha256": "9bbb2e2c7cd7c5cd70e0310cd9f0d745521cc5398392d27716aeb8acadbc1d7d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000415.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9320",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000107.json.gz",
+      "sha256": "0c121e9a004fe72052e55bcb930607de93665897c6cc8c58e7e7b0c282e9f899",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000416.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9367",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000097.json.gz",
+      "sha256": "413974b4941f58b80ec5915b497c185e4ac830122b13075cb2481563f4f3afb8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000417.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9461",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000098.json.gz",
+      "sha256": "cd83ad10e660ccc9991d88beef19409cd53d3dca72151c67be3bc6dcc0bb7771",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000418.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9591",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000099.json.gz",
+      "sha256": "7ce98edf7e7f84bfc7dfff733c73afd94de75a3ce6e7e18720dc9731069961e5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000419.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9602",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000108.json.gz",
+      "sha256": "2a884cd8165589c6415e0d4496be74a60bc29da7e6fdf5f6965d7eaade3227b2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000420.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9658",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000105.json.gz",
+      "sha256": "d57199357aac181fec0a3f97a0ad0f76d159672f0564597615ffef0002154a45",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000421.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9673",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000100.json.gz",
+      "sha256": "560fb0d029c59b5923e3d84375ef14caed043edbbaa2adab8948cad1a2c980aa",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000422.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9698",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000101.json.gz",
+      "sha256": "f9732f5daa4486a6755e1fe6ca88d0a7a6a854a8721098b20fc3ae9715dd36bd",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000423.json.gz"
+    },
+    {
+      "sample_id": "sphinx-doc__sphinx-9711",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000106.json.gz",
+      "sha256": "3fb5945c7e8efaf32c8319a1f102fb4ba8a17d7c9525e16dcc08703f827b553c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000424.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-11618",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000102.json.gz",
+      "sha256": "7f8b0e6c212c154917d59c35dce0aff7311e1cdddc20a1f05146bad30ebb6592",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000425.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-12096",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000107.json.gz",
+      "sha256": "c25f574cecee30090b53d53ed050d3ac4a7b84a6a5e91758c24a98e831bd00a8",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000426.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-12419",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000103.json.gz",
+      "sha256": "e681c34db1e507683cf341db699e6da0ce8a9b15c59daee6f13a665c9628f683",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000427.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-12481",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000104.json.gz",
+      "sha256": "e530211d4e71bf8f67a1f42cc9d2709f00c38ba9cfc44dafb2facad5cae99fe7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000428.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-12489",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000107.json.gz",
+      "sha256": "50ce3ecf9f01bde302f90a12e8a1e84f2ba69b44b74ae089f1689e89dd21a051",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000429.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13031",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000105.json.gz",
+      "sha256": "a3c41c5402598ce02453fd016cb91b6258e57bc519ff4a33a65ecd56f38e818e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000430.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13091",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000108.json.gz",
+      "sha256": "889b83f918db16d4f3c92360a9b449f8fdc05abd112d41f306d5f070f960c27b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000431.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13372",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000109.json.gz",
+      "sha256": "4bf34b0c034d232271ed4715f9a172d811160e4a45c820f4367446e6442e6e4f",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000432.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13480",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000108.json.gz",
+      "sha256": "949e74245d00af87460cae60d0676d6049bf5adf2ffe419c2d78d2ac1c7fa195",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000433.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13551",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000109.json.gz",
+      "sha256": "cb6b4ec1a26d61483021e3db24c5f824ad4772cdb71656cd2258925641b081c0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000434.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13615",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000106.json.gz",
+      "sha256": "9aa4ac439a66346153e9f923f241f3a3b19360f4e88be7d2bd9ffdae65619b27",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000435.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13647",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000110.json.gz",
+      "sha256": "afb12423ae145b275b1f82ecb8a8e2c27c81583824ecb984c1747e30ba615c30",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000436.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13757",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000111.json.gz",
+      "sha256": "da8923329c5e0dca7a5264c0691ebfa79077c5e5ae1ff9a9e264b6e10ce52a01",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000437.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13798",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000107.json.gz",
+      "sha256": "221c3c29da36fe14a506b84485bcbbafeb70d544f56a98111b6299c77c38b14c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000438.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13852",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000112.json.gz",
+      "sha256": "adfe5349b6dada939ef71684e1083cbc4f026b552f73174ec5bc276d77a849a6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000439.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13877",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000108.json.gz",
+      "sha256": "f5732853aed9f135c91474470e2b2b816bd212f3d1e2ccb6690c93eaf8bfe51d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000440.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13878",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000109.json.gz",
+      "sha256": "72601010f24fc71eec8fbd690cfc75e6048b37670dd30ff5595e9e012834de1e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000441.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-13974",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000109.json.gz",
+      "sha256": "55138245a226d4df281cc73f44dfc362555cb68416b7e8bcbc8a5e81a6a965ee",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000442.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-14248",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000110.json.gz",
+      "sha256": "f90ae306547e07e2b717ce12f0aadc446920c68df0ef9c1ce7c927d2bdeb7386",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000443.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-14531",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000110.json.gz",
+      "sha256": "f41502d4736339b57d5bb4ef7a5e73ad9f1501d698164032d401f7f36db2ac1e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000444.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-14711",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000111.json.gz",
+      "sha256": "f905a57e301aba8b193d57eda1eb58ba186338834784c7b019df527b6c8d4f90",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000445.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-14976",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000110.json.gz",
+      "sha256": "3454d325d009bb8069984972da547ad9303288edfef335f329d3a951efa6ebf1",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000446.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15017",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000111.json.gz",
+      "sha256": "1585eb9b2ea8a1c4301606601e29df4a777c8e3c870f41ca2467e4f44e6de531",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000447.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15345",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000112.json.gz",
+      "sha256": "c80b5f00f1b548861ce6cd799c1b30567005c07de8ed64cecba9f8a0f4ecc55e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000448.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15349",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000111.json.gz",
+      "sha256": "752334440dc24c74d351b06dd7768287e3f480ece61c86805b53072d938fae54",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000449.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15599",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000112.json.gz",
+      "sha256": "6613328741b24dca7385ea95c5b55ecdc95e44a38d7e3e005efeda02a4c6bfe4",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000450.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15809",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe_normalization/000001.json.gz",
+      "sha256": "29febb3b5efd31c46f5a5f04a40e3e1121bb36bb7ad5dfe0775c8e2ed026fb30",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000451.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15875",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000113.json.gz",
+      "sha256": "89cc3fadca536b6c90de8d01204c765d1b39328a6748fbd2244a1f1eee4571f7",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000452.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-15976",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000114.json.gz",
+      "sha256": "586b89c5e83586fb5b2033d2a3b505cddb233e37d689a38ec25b1173740f11a9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000453.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-16450",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000113.json.gz",
+      "sha256": "b6d155e4023b9c3ae00210bfa832122081209961c33b83721d3b932b6d753bb3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000454.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-16597",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000112.json.gz",
+      "sha256": "4923d07f22f723c12ffaf74d50472c0349ac7700b0242e3e107ab349866a2130",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000455.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-16766",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000113.json.gz",
+      "sha256": "cb22974c125fb6e4be807ec1ba39efd72dddb372a7f52c071b05bc96a61608d3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000456.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-16792",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000114.json.gz",
+      "sha256": "1bef2ee49bb406d11e903d5e1e56e1749fd8b5436ad94baf590785211814c897",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000457.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-16886",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000115.json.gz",
+      "sha256": "3e5543ef76beed3e039935ab8b895fe9d8ca72a336c4e273fc46e589565c25b9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000458.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-17139",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000115.json.gz",
+      "sha256": "87b324194d859a9939b0984d4bfc646c126ed98c19a758d583c95d1233b58eb9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000459.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-17318",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000114.json.gz",
+      "sha256": "ab56b6a470485591ccd42b5ab0779ff839df242140d55f638d2cb43d0beb0e03",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000460.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-17630",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000116.json.gz",
+      "sha256": "e78f0d5881dfaa78bee38e0dc9c4e67b792c7b7abcaf08bbaa5dcf68cf9ceeff",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000461.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-17655",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000115.json.gz",
+      "sha256": "87c9ee1862879a2006bd2f37a58384f96b95581b4611d169487e2a5ec2d1f3a3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000462.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-18189",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000116.json.gz",
+      "sha256": "73d5b806dcf85a9b51f06ecf2b7f07572adc3c691eb6b9ed3a4add89eae9131a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000463.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-18199",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000114.json.gz",
+      "sha256": "adb884345e549dc2a5dac9fa8addd4d67a969ded3aaad95d0c1d465e2b8aa3ad",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000464.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-18211",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000117.json.gz",
+      "sha256": "65908feaccbe573939e68073375ca20077f1e28ff8ddd687fe9cedf73d80e8d5",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000465.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-18698",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000115.json.gz",
+      "sha256": "d35f00be0ea2fed1b42050b27b96a203a4c4523dc9b771d797133dbf269db154",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000466.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-18763",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000118.json.gz",
+      "sha256": "b1d8dfc021542a53698383a202b41104ae32054255f2e0edee46151dcd0708f9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000467.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-19040",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000116.json.gz",
+      "sha256": "5b3aaae5a63e0ce7dd2022d1f0c4484d1e86c820880caa102ba52cada2502f11",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000468.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-19346",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000117.json.gz",
+      "sha256": "dbc957af0c4ac7ee0ded94fa78e08e37da322963cd59d5c1138b13155863f7a9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000469.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-19495",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000118.json.gz",
+      "sha256": "6c3b7009df2c905af4d9f90f0066d1820769c26246317888c30dd0eeabeed2b3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000470.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-19637",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000119.json.gz",
+      "sha256": "cf0b9663b06ea53cdef254e978731d9046b2f28ff89dd6808fabedfcd2916a75",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000471.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-19783",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000119.json.gz",
+      "sha256": "5dffb40a98eec711be14d11c20045e709c0614ad279a5045e4c94ecdabf7257c",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000472.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-19954",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000120.json.gz",
+      "sha256": "c15ca0efc24f0e410dce53c850f64c3e3d595db7d4bd59f64a87e52ca967c879",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000473.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-20154",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000117.json.gz",
+      "sha256": "6608ffc2ae4608267415d0c1e7c6edb0d0f3cf2cf10df5ba9f13f89f6afff097",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000474.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-20428",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000118.json.gz",
+      "sha256": "2dfa5df2bc3755057f23f5b2a462772d85170f91f58041e55ae122563db32aa2",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000475.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-20438",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000119.json.gz",
+      "sha256": "5c8aa21f31c62814623293ab5ccb940189daebc1a1adf19b2302a3e14226aa97",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000476.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-20590",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000116.json.gz",
+      "sha256": "8b05114fb3cc2645ac47131a8e21b9aa9ff901e94ee418acb7330c1de546dc11",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000477.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-20801",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000117.json.gz",
+      "sha256": "5ecd9e440ced3c4da2d303d571756ba8724fdef73e6e2f991bde1cedb93e67e0",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000478.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-20916",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000120.json.gz",
+      "sha256": "b91597b233a9d4a24048245427ae6939515f5ffeebcf1268568b42e660a2ad23",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000479.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-21379",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000118.json.gz",
+      "sha256": "3888efb14f27a9d3ba9657dd1824e1219152d51208e4313113c7e327617ada6e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000480.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-21596",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000121.json.gz",
+      "sha256": "79038bcf11150bc0b56d6b21bbba901a669dc5bc8d3e744db79faa211d2aecda",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000481.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-21612",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000121.json.gz",
+      "sha256": "a07344bcb91f79f1f7db208f09cd399588cdecb8b71e0f14e49b094a0383c5d6",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000482.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-21847",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000122.json.gz",
+      "sha256": "37489d124c3ef89652aab4a51a6d766c78405dcfa347f353846931e97bdeef18",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000483.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-21930",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000120.json.gz",
+      "sha256": "5152362fa9553784c0a4efdfb948d396cd68fbedc713d0314d20e60271781581",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000484.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-22080",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000123.json.gz",
+      "sha256": "d28c4f69d585546c89fe8d542c650d45e99118de60976d7e0dfb8cd36b6ffc54",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000485.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-22456",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000119.json.gz",
+      "sha256": "482e07c476a986241436e149e455fa43f357ac12081963e7c502f3fa75b0c62e",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000486.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-22714",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000121.json.gz",
+      "sha256": "1edd3e8a3470ca2667e1a9eb0922cf1045342986c3365cb39503ddc3775d2338",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000487.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-22914",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000122.json.gz",
+      "sha256": "fad412f8d19c1b04d6918ebc2f938c4af7f898e62cf90a72b059135ca8d99371",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000488.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-23262",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000122.json.gz",
+      "sha256": "15f95d7db9bb9aa157a946c5c043eb955dba3e2da1b2ae8302c3eac4c23f4634",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000489.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-23413",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000120.json.gz",
+      "sha256": "4525aebbc367abb0779171ebe2e3f9614136406ab525f7b98bacebce4087af42",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000490.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-23534",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000123.json.gz",
+      "sha256": "884d1727bddc8786ff9f4af3a01a4490a00f9ec97206736d0e32fd2637456348",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000491.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-23824",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000123.json.gz",
+      "sha256": "749542d9df039d76b66aac3c4dd291228692bbff93342197889fa7c9948497c3",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000492.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-23950",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000121.json.gz",
+      "sha256": "928cc2a0a893f579ce4868f5fb1cc9f44195062fd182ebd9c837d9c925fa0276",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000493.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-24066",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000122.json.gz",
+      "sha256": "510a7b04a7e4cc45e2f81b3f5f129d2536840fc36b8052bd3a09a53a07828fc9",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000494.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-24213",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000123.json.gz",
+      "sha256": "1b398013e13247d499f0503d9b1e19fbeb7708e9e32b9cf0e82c7c07e191ccdf",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000495.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-24443",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-0/000124.json.gz",
+      "sha256": "158619163e19b8d1021378bce561a5fd303c0ed02f3b59cadd41d2084c868c11",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000496.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-24539",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-1/000124.json.gz",
+      "sha256": "5fb316479fe9bf57d5c7f3d56ef6d6eb03c0db65e601f2dcadd7b178d5ac593a",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000497.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-24562",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-3/000124.json.gz",
+      "sha256": "627064cb13f7a727925632714e9ba05acc2b311528862cb4c4a72f54fe6d364d",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000498.json.gz"
+    },
+    {
+      "sample_id": "sympy__sympy-24661",
+      "prediction": "experiment_reports/agentic/probe_transfer/predictions/swe/shard-2/000124.json.gz",
+      "sha256": "77cde5a5da086ac0f9c586ac3f165da8cb23babd7c9a29ffe2bd8cb73a87df6b",
+      "selected_link": "experiment_reports/agentic/probe_transfer/predictions/swe_selected/000499.json.gz"
+    }
+  ]
+}
