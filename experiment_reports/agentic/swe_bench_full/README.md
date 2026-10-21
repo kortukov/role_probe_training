@@ -10,7 +10,7 @@ All 500 verified tasks, four disjoint seeded shards; eight concurrent samples pe
 
 ## Factual observations
 
-Run in progress. No final performance claim yet. Data and predictions are excluded from Git.
+The first full attempt exhausted Docker Hub’s unauthenticated pull quota; many tasks failed before agent execution. This is an infrastructure diagnostic, not a completed model-performance evaluation. A clean full rerun uses all 500 official images through Google’s public cache, pinned by digest in [image_manifest.json](image_manifest.json). Its runs are under `../swe_bench_full_mirror/runs/`. No final performance claim yet.
 
 ## Message
 

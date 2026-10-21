@@ -10,7 +10,7 @@ Uniform seeded sample of 1,000 from 227,579 rows, seed 123. Pinned source revisi
 
 ## Factual observations
 
-Run in progress. No final performance claim yet. Data and predictions are excluded from Git.
+All 1,000 trajectories have predictions at layers 4, 8, 12, 16 and 20. Layer-12 token accuracy is 29.17%; see the [transfer report](../probe_transfer/README.md), [confusion appendix](../probe_transfer/APPENDIX.md), and [separate layer comparison](../probe_layer_comparison/README.md). Data and predictions are excluded from Git.
 
 ## Message
 

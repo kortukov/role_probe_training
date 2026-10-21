@@ -1,20 +1,32 @@
 {
   "retail_generation": 1459495,
-  "swe_generation": {
+  "dolci_probes_array": 1460968,
+  "retail_probes": 1460969,
+  "training_missing_layers": 1460163,
+  "full_forward_smoke": 1460853,
+  "notes": "Replaced initial failed/held probe arrays after validating original eager forwards and explicit Slurm task counts. SWE shard0 retried after a transient package file read failure before any sample.",
+  "swe_initial_generation": {
     "shard_0": 1460792,
     "shard_1": 1460741,
     "shard_2": 1460742,
     "shard_3": 1460737
   },
-  "dolci_probes_array": 1460968,
-  "retail_probes": 1460969,
-  "swe_probes": [
+  "swe_initial_probes_cancelled": [
     1460970,
     1460971,
     1460972,
     1460973
   ],
-  "training_missing_layers": 1460163,
-  "full_forward_smoke": 1460853,
-  "notes": "Replaced initial failed/held probe arrays after validating original eager forwards and explicit Slurm task counts. SWE shard0 retried after a transient package file read failure before any sample."
+  "swe_generation": {
+    "shard_0": 1461197,
+    "shard_1": 1461195,
+    "shard_2": 1461196,
+    "shard_3": 1461193
+  },
+  "swe_probes": [
+    1461198,
+    1461199,
+    1461200,
+    1461201
+  ]
 }

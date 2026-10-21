@@ -12,11 +12,13 @@ p.add_argument('--dataset',action='append',required=True,help='NAME=prediction-d
 p.add_argument('--output',type=Path,required=True)
 p.add_argument('--layers',type=int,nargs='+',default=[12])
 p.add_argument('--benchmark-summary',action='append',default=[],help='NAME=summary.json')
+p.add_argument('--expected-count',action='append',default=[],help='NAME=count; reject incomplete reports')
 a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
 benchmarks={}
 for item in a.benchmark_summary:
  name,path=item.split('=',1); benchmarks[name]=json.loads(Path(path).read_text())
 summary={'schema_version':1,'roles':ROLES,'datasets':{},'benchmark_results':benchmarks}
+expected={name:int(count) for name,count in (item.split('=',1) for item in a.expected_count)}
 index=[]; blocks=[]
 for entry in a.dataset:
  name,root=entry.split('=',1); accum={}; seen=set()
@@ -38,6 +40,7 @@ for entry in a.dataset:
    item['layers'][k]={'accuracy':v['accuracy'],'tokens':v['tokens']}
   index.append(item)
   blocks.append(base64.b64encode(gzip.compress(json.dumps(r,ensure_ascii=False,separators=(',',':')).encode(),mtime=0)).decode())
+ if name in expected and len(seen)!=expected[name]: raise ValueError(f'{name}: expected {expected[name]} trajectories, got {len(seen)}')
  layers={}
  for k,st in accum.items():
   cm=st['matrix']; totals=cm.sum(axis=1); recalls=np.divide(cm.diagonal(),totals,out=np.zeros(5),where=totals>0)
@@ -45,7 +48,7 @@ for entry in a.dataset:
   layers[k]={'trajectories':len(st['trajectories']),'scored_tokens':int(cm.sum()),'accuracy':float(cm.trace()/cm.sum()) if cm.sum() else None,'macro_trajectory_accuracy':float(np.mean([r['accuracy'] for r in st['trajectories'] if r['accuracy'] is not None])),'balanced_role_accuracy':float(recalls[totals>0].mean()),'roles':{role:{'tokens':int(totals[i]),'recall':float(recalls[i]) if totals[i] else None,'mean_true_role_probability':float(st['probability_sums'][i]/totals[i]) if totals[i] else None} for i,role in enumerate(ROLES)},'confusion_matrix':cm.tolist(),'windowed_trajectories':sum(r['windows']>1 for r in st['trajectories']),'single_window_accuracy':float(sw.trace()/sw.sum()) if sw.sum() else None,'trajectory_results':st['trajectories']}
  summary['datasets'][name]={'prediction_directory':root,'layers':layers}
 (a.output/'metrics.json').write_text(json.dumps(summary,indent=2)+'\n')
-lines=['# Role-probe transfer to agentic trajectories','','## Motivation & RQ','','How well do fixed role probes transfer to realistic on-policy benchmark traces and off-policy Dolci tool-use data?','','## Evaluation setup','','GPT-OSS-20B, revision `6cee5e81ee83917806bbde320786a8fb61efebee`; zero-based post-attention-layernorm / pre-MLP probes. Ground truth comes from structured roles and analysis channels. Accuracy is argmax correctness, not mean true-role probability. Structural tokens and synthetic tool-schema context are excluded from scores. All content tokens are retained; long traces use explicitly recorded 16,384-token context windows with position/context resets. Shorter trajectories preserve causal context throughout. This is standardized retrospective Harmony replay, not a byte-identical reconstruction of serving prompts. Dolci has no analysis-channel labels. Probe fitting warnings in the baseline remain applicable.','','## Factual observations','','| Dataset | Layer | Trajectories | Tokens | Token accuracy | Mean trajectory accuracy | Windowed traces |','|---|---:|---:|---:|---:|---:|---:|']
+lines=['# '+('Role-probe layer comparison on agentic trajectories' if len(a.layers)>1 else 'Layer-12 role-probe transfer to agentic trajectories'),'','## Motivation & RQ','','How well do fixed role probes transfer to realistic on-policy benchmark traces and off-policy Dolci tool-use data?','','## Evaluation setup','','GPT-OSS-20B, revision `6cee5e81ee83917806bbde320786a8fb61efebee`; zero-based post-attention-layernorm / pre-MLP probes. Ground truth comes from structured roles and analysis channels. Accuracy is argmax correctness, not mean true-role probability. Structural tokens and synthetic tool-schema context are excluded from scores. All content tokens are retained; long traces use explicitly recorded 16,384-token context windows with position/context resets. Shorter trajectories preserve causal context throughout. This is standardized retrospective Harmony replay, not a byte-identical reconstruction of serving prompts. Dolci has no analysis-channel labels. Probe fitting warnings in the baseline remain applicable.','','## Factual observations','','| Dataset | Layer | Trajectories | Tokens | Token accuracy | Mean trajectory accuracy | Windowed traces |','|---|---:|---:|---:|---:|---:|---:|']
 appendix=['# Confusion matrices','','Rows are ground truth; columns are predictions. Counts exclude headers, special tokens and synthetic tool-schema context. Missing roles have no recall estimate.']
 for name,d in summary['datasets'].items():
  for k,v in d['layers'].items():
@@ -54,6 +57,12 @@ for name,d in summary['datasets'].items():
   for role,row in zip(ROLES,v['confusion_matrix']): appendix.append('| '+role+' | '+' | '.join(map(str,row))+' |')
   appendix+=['','Row-normalized percentages:','','| True / predicted | '+' | '.join(ROLES)+' |','|---|'+'---:|'*5]
   for role,row in zip(ROLES,v['confusion_matrix']): appendix.append('| '+role+' | '+' | '.join(f'{x/sum(row):.1%}' if sum(row) else 'n/a' for x in row)+' |')
+if benchmarks:
+ lines+=['','Benchmark task performance (distinct from probe accuracy):','','| Dataset | Scorer | Successes / scored | Observed | Scored success rate | Errors |','|---|---|---:|---:|---:|---:|']
+ for name, result in benchmarks.items():
+  for scorer,v in result.get('metrics',{}).items():
+   lines.append(f"| {name} | {scorer} | {v['successes']} / {v['scored']} | {v['observed_samples']} | {v['success_rate_scored']:.2%} | {result.get('sample_errors',0)} |")
+ lines+=['','Scored-only success rates exclude errored samples; full summaries also give errors-as-failures rates and confidence intervals. Interpret serving failures, context/time/token limits, and harness differences before comparing with published model scores. Dolci has no task-success metric because GPT-OSS did not generate these static trajectories.']
 lines+=['','See [confusion matrices](APPENDIX.md#confusion-matrices) and [full metrics](metrics.json) for per-role recall, mean true-role probabilities, individual trajectories, and results restricted to traces fitting one context window.','','## Message','','These measurements describe transfer under the documented replay and context-window policy. Differences between Dolci and generated benchmarks combine policy, task, role-frequency, formatting and trajectory-length effects; they do not isolate an on-policy causal effect. Dolci is an evaluation sample here, not probe training data. Benchmark task success is distinct from role-probe accuracy.','','## Reproduction and standalone viewer','','The local `viewer.html` embeds all prediction data and works without network access in a modern browser. It supports dataset, layer and trajectory selection, role-colored tokens, ground-truth/predicted coloring, mismatch filtering and token probability inspection. The file contains data and is deliberately excluded from Git. See [RUNNING.md](RUNNING.md) for commands and data paths.']
 (a.output/'README.md').write_text('\n'.join(lines)+'\n'); (a.output/'APPENDIX.md').write_text('\n'.join(appendix)+'\n')
 commands=' '.join('--dataset '+repr(x) for x in a.dataset)
