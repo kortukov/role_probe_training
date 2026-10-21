@@ -1,0 +1,40 @@
+{
+  "benchmark": "tau2_retail",
+  "samples": 114,
+  "sample_errors": 0,
+  "limited_samples": 4,
+  "export_errors": 0,
+  "agent_model_errors": 32,
+  "generation_token_caps": 113,
+  "samples_with_generation_caps": 64,
+  "model_retries": 63,
+  "samples_with_limit_events": 4,
+  "simulator_stop_missing": 4,
+  "all_model_errors": 32,
+  "generation_records": 1631,
+  "expected_samples": 114,
+  "metrics": {
+    "retail_scorer": {
+      "successes": 73,
+      "scored": 114,
+      "observed_samples": 114,
+      "success_rate_scored": 0.6403508771929824,
+      "wilson_95_scored": [
+        0.5490091280357571,
+        0.7225421606214103
+      ],
+      "success_rate_observed_errors_as_failures": 0.6403508771929824
+    }
+  },
+  "coverage": {
+    "tool_bearing": 112,
+    "assistant_bearing": 114
+  },
+  "error_categories": {},
+  "observed_unique_samples": 114,
+  "missing_sample_ids": [],
+  "trajectories_sha256": "5e45b89d1644a6bb599a2f3993d6a6ac1ba8c4b8817bd914bd5af48ca28e6d4d",
+  "source_runs": [
+    "experiment_reports/agentic/tau2_retail_full/runs/1459495"
+  ]
+}

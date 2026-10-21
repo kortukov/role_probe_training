@@ -1,9 +1,13 @@
 # Reproduction
 
-See `src/experiments/agentic_eval/` for benchmark/download scripts and separate locked environments; `src/experiments/agentic_probes/` for inference and reports.
+Generation runs and immutable inputs are recorded in [metrics/provenance.json](metrics/provenance.json). Their raw `.eval` logs and `generations.jsonl` retain individual model calls. The consolidated chat data is `data/trajectories.jsonl`; its hash is in [metrics/summary.json](metrics/summary.json). Data is kept on cluster storage and excluded from Git.
 
-The shared data format is JSONL with `messages`, tool metadata, IDs, scores and source provenance. Raw outputs live under this report tree in ignored `runs/`, `data/`, or `predictions/` directories.
+Combine completed disjoint shards:
 
-## Standalone viewer
+```bash
+.tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/agentic_eval/finalize.py --benchmark tau2_retail --run experiment_reports/agentic/tau2_retail_full/runs/1459495 --selection-manifest experiment_reports/agentic/tau2_retail_full/runs/1459495/manifest.json --output experiment_reports/agentic/tau2_retail_full
+```
 
-Run `uv run --frozen --no-sync python src/experiments/agentic_probes/report.py --dataset NAME=PREDICTION_DIRECTORY --layers 12 --output REPORT_DIRECTORY`. Repeat `--dataset` for more inputs; use `--layers 4 8 12 16 20` for the separate layer comparison. The generated `viewer.html` embeds all data, needs no server/network, and is excluded from Git.
+## Probe predictions and standalone viewer
+
+See [probe reproduction](../probe_transfer/RUNNING.md) and [layer-comparison reproduction](../probe_layer_comparison/RUNNING.md). The shared `agentic_probes/report.py` script accepts repeated `--dataset NAME=PREDICTION_DIRECTORY`, optional benchmark summary paths, and layer choices. It embeds all data in a standalone `viewer.html`, which stays local and can be downloaded and opened without a server.
