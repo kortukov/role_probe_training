@@ -46,6 +46,6 @@ a boundary; report their coverage and single-window results separately.
 `src/experiments/agentic_probes/report.py` consumes directories of these records
 and emits aggregate metrics, a main report, an appendix of confusion matrices,
 and a standalone HTML viewer. Add datasets via repeated `--dataset NAME=PATH`.
-The viewer uses embedded gzip/base64 records, decompresses one trajectory on
+The viewer stores each gzip/base64 record in its own inert HTML data block (avoiding JavaScript source-size limits), decompresses one trajectory on
 selection, and pages token spans. It inserts untrusted trajectory text using
 DOM text nodes, never executable HTML, and needs no network requests.

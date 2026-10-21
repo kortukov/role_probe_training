@@ -23,7 +23,7 @@ index=[]; blocks=[]
 for entry in a.dataset:
  name,root=entry.split('=',1); accum={}; seen=set()
  for path in sorted(Path(root).rglob('*.json.gz')):
-  raw=gzip.decompress(path.read_bytes()); r=json.loads(raw)
+  packed=path.read_bytes(); raw=gzip.decompress(packed); r=json.loads(raw); original_layers=set(r['layers'])
   if r['sample_id'] in seen: raise ValueError(f'duplicate trajectory {name}/{r["sample_id"]}')
   seen.add(r['sample_id'])
   r['layers']={k:v for k,v in r['layers'].items() if int(k) in a.layers}
@@ -39,13 +39,14 @@ for entry in a.dataset:
    st['trajectories'].append({'sample_id':r['sample_id'],'tokens':v['tokens'],'accuracy':v['accuracy'],'windows':item['windows']})
    item['layers'][k]={'accuracy':v['accuracy'],'tokens':v['tokens']}
   index.append(item)
-  blocks.append(base64.b64encode(gzip.compress(json.dumps(r,ensure_ascii=False,separators=(',',':')).encode(),mtime=0)).decode())
+  payload=packed if set(r['layers'])==original_layers else gzip.compress(json.dumps(r,ensure_ascii=False,separators=(',',':')).encode(),compresslevel=1,mtime=0)
+  blocks.append(base64.b64encode(payload).decode())
  if name in expected and len(seen)!=expected[name]: raise ValueError(f'{name}: expected {expected[name]} trajectories, got {len(seen)}')
  layers={}
  for k,st in accum.items():
   cm=st['matrix']; totals=cm.sum(axis=1); recalls=np.divide(cm.diagonal(),totals,out=np.zeros(5),where=totals>0)
   sw=st['single_window_matrix']
-  layers[k]={'trajectories':len(st['trajectories']),'scored_tokens':int(cm.sum()),'accuracy':float(cm.trace()/cm.sum()) if cm.sum() else None,'macro_trajectory_accuracy':float(np.mean([r['accuracy'] for r in st['trajectories'] if r['accuracy'] is not None])),'balanced_role_accuracy':float(recalls[totals>0].mean()),'roles':{role:{'tokens':int(totals[i]),'recall':float(recalls[i]) if totals[i] else None,'mean_true_role_probability':float(st['probability_sums'][i]/totals[i]) if totals[i] else None} for i,role in enumerate(ROLES)},'confusion_matrix':cm.tolist(),'windowed_trajectories':sum(r['windows']>1 for r in st['trajectories']),'single_window_accuracy':float(sw.trace()/sw.sum()) if sw.sum() else None,'trajectory_results':st['trajectories']}
+  layers[k]={'trajectories':len(st['trajectories']),'scored_tokens':int(cm.sum()),'accuracy':float(cm.trace()/cm.sum()) if cm.sum() else None,'macro_trajectory_accuracy':float(np.mean([r['accuracy'] for r in st['trajectories'] if r['accuracy'] is not None])),'majority_role_accuracy':float(totals.max()/totals.sum()),'uniform_five_role_accuracy':0.2,'balanced_role_accuracy':float(recalls[totals>0].mean()),'roles':{role:{'tokens':int(totals[i]),'recall':float(recalls[i]) if totals[i] else None,'mean_true_role_probability':float(st['probability_sums'][i]/totals[i]) if totals[i] else None} for i,role in enumerate(ROLES)},'confusion_matrix':cm.tolist(),'windowed_trajectories':sum(r['windows']>1 for r in st['trajectories']),'single_window_accuracy':float(sw.trace()/sw.sum()) if sw.sum() else None,'trajectory_results':st['trajectories']}
  summary['datasets'][name]={'prediction_directory':root,'layers':layers}
 (a.output/'metrics.json').write_text(json.dumps(summary,indent=2)+'\n')
 lines=['# '+('Role-probe layer comparison on agentic trajectories' if len(a.layers)>1 else 'Layer-12 role-probe transfer to agentic trajectories'),'','## Motivation & RQ','','How well do fixed role probes transfer to realistic on-policy benchmark traces and off-policy Dolci tool-use data?','','## Evaluation setup','','GPT-OSS-20B, revision `6cee5e81ee83917806bbde320786a8fb61efebee`; zero-based post-attention-layernorm / pre-MLP probes. Ground truth comes from structured roles and analysis channels. Accuracy is argmax correctness, not mean true-role probability. Structural tokens and synthetic tool-schema context are excluded from scores. All content tokens are retained; long traces use explicitly recorded 16,384-token context windows with position/context resets. Shorter trajectories preserve causal context throughout. This is standardized retrospective Harmony replay, not a byte-identical reconstruction of serving prompts. Dolci has no analysis-channel labels. Probe fitting warnings in the baseline remain applicable.','','## Factual observations','','| Dataset | Layer | Trajectories | Tokens | Token accuracy | Mean trajectory accuracy | Windowed traces |','|---|---:|---:|---:|---:|---:|---:|']
@@ -57,6 +58,9 @@ for name,d in summary['datasets'].items():
   for role,row in zip(ROLES,v['confusion_matrix']): appendix.append('| '+role+' | '+' | '.join(map(str,row))+' |')
   appendix+=['','Row-normalized percentages:','','| True / predicted | '+' | '.join(ROLES)+' |','|---|'+'---:|'*5]
   for role,row in zip(ROLES,v['confusion_matrix']): appendix.append('| '+role+' | '+' | '.join(f'{x/sum(row):.1%}' if sum(row) else 'n/a' for x in row)+' |')
+for name,d in summary['datasets'].items():
+ first=next(iter(d['layers'].values()))
+ lines+=['',f"{name}: always predicting the most frequent ground-truth role yields {first['majority_role_accuracy']:.2%} token accuracy; uniform random prediction over the fixed five classes yields 20%. Role-balanced accuracy and mean trajectory accuracy address different aspects of the substantial token imbalance."]
 if benchmarks:
  lines+=['','Benchmark task performance (distinct from probe accuracy):','','| Dataset | Scorer | Successes / scored | Observed | Scored success rate | Errors |','|---|---|---:|---:|---:|---:|']
  for name, result in benchmarks.items():
@@ -70,5 +74,9 @@ commands=' '.join('--dataset '+repr(x) for x in a.dataset)
 template=Path(__file__).with_name('viewer.html').read_text()
 def js(value): return json.dumps(value,ensure_ascii=True,separators=(',',':')).replace('<','\\u003c')
 with (a.output/'viewer.html').open('w') as out:
- out.write(template.replace('/*SUMMARY*/null',js(summary)).replace('/*INDEX*/[]',js(index)).replace('/*BLOCKS*/[]',js(blocks)))
+ page=template.replace('/*SUMMARY*/null',js(summary)).replace('/*INDEX*/[]',js(index))
+ before,after=page.split('<!--DATA-->')
+ out.write(before)
+ for i,block in enumerate(blocks): out.write(f'<script type="application/octet-stream" id="data-{i}">'+block+'</script>\n')
+ out.write(after)
 print(json.dumps({'trajectories':len(index),'viewer_bytes':(a.output/'viewer.html').stat().st_size}))

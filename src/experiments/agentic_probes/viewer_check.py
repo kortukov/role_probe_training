@@ -8,8 +8,11 @@ with sync_playwright() as pw:
  page=browser.new_page(); errors=[]; requests=[]
  page.on('pageerror',lambda e:errors.append(str(e)))
  page.on('request',lambda r:requests.append(r.url))
- page.goto(a.html.resolve().as_uri(),wait_until='load')
- page.wait_for_selector('.token',timeout=120000)
+ page.goto(a.html.resolve().as_uri(),wait_until='load',timeout=180000)
+ try: page.wait_for_selector('.token',timeout=120000)
+ except Exception:
+  print('Browser errors:',errors,'UI:',page.locator('#tokens').inner_text())
+  raise
  page.locator('.token').first.click()
  assert 'probabilities' in page.locator('#detail').inner_text()
  page.select_option('#color','prediction');page.check('#errors');page.uncheck('#errors')

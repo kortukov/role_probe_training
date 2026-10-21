@@ -1,9 +1,11 @@
 # Reproduction
 
-See `src/experiments/agentic_eval/` for benchmark/download scripts and separate locked environments; `src/experiments/agentic_probes/` for inference and reports.
+Predictions use schema v1, one gzip JSON per trajectory. Each contains original messages, normalized replay messages, token IDs/offsets, labels, score mask, context boundaries and per-layer probabilities and argmax predictions. Input/probe hashes and job metadata are in each prediction directory’s manifest.
 
-The shared data format is JSONL with `messages`, tool metadata, IDs, scores and source provenance. Raw outputs live under this report tree in ignored `runs/`, `data/`, or `predictions/` directories.
+Generate the report and standalone viewer from the repository root:
 
-## Standalone viewer
+```bash
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentic_probes/report.py --dataset 'dolci_tool_use=experiment_reports/agentic/probe_transfer/predictions/dolci' --layers 4 8 12 16 20 --output experiment_reports/agentic/probe_layer_comparison
+```
 
-Run `uv run --frozen --no-sync python src/experiments/agentic_probes/report.py --dataset NAME=PREDICTION_DIRECTORY --layers 12 --output REPORT_DIRECTORY`. Repeat `--dataset` for more inputs; use `--layers 4 8 12 16 20` for the separate layer comparison. The generated `viewer.html` embeds all data, needs no server/network, and is excluded from Git.
+Add another `--dataset NAME=PATH` to include a dataset. See `src/experiments/agentic_probes/run.py --help` for inference and `src/experiments/agentic_eval/dolci.py` for seeded sampling. Generated predictions, trajectories and HTML remain on cluster storage; code, manifests and aggregate metrics are versioned.
