@@ -1,0 +1,41 @@
+{
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "model_path": ".cache/models/gpt-oss-20b",
+  "seed": 123,
+  "n_documents": 250,
+  "sequence_length": 1024,
+  "token_stride": 1,
+  "test_fraction": 0.1,
+  "layers": [
+    4,
+    8,
+    20
+  ],
+  "C": 0.005,
+  "n_conversations": 12,
+  "max_new_tokens": 4000,
+  "sources": [
+    {
+      "id": "allenai/c4",
+      "name": "en",
+      "split": "validation",
+      "revision": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+      "fraction": 0.25
+    },
+    {
+      "id": "allenai/dolma3_mix-150B-1025",
+      "name": null,
+      "split": "train",
+      "revision": "3a8349c2f7946cdc56f8ccf22c555672be0b3208",
+      "fraction": 0.75
+    }
+  ],
+  "conversation_source": {
+    "id": "lmsys/toxic-chat",
+    "name": "toxicchat1123",
+    "split": "test",
+    "revision": "29df8e4dba60e1f4af4b4075c0705c5b313548a8"
+  },
+  "shuffle_buffer": 50000
+}
