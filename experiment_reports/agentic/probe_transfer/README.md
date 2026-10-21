@@ -6,7 +6,7 @@ Measure role-probe transfer to realistic agentic data and compare on-policy benc
 
 ## Evaluation setup
 
-Metadata-based retrospective Harmony replay of the same trajectory schema. Capture zero-based layer 12 post-attention-layernorm output, not block output. Save per-token predictions/probabilities for every token; score content tokens only. Tool-schema context is excluded from accuracy. For traces over 32,768 tokens, reset causal context at explicit nonoverlapping window boundaries; keep every token. Cached 512-token chunks preserve causal context within each window. Dolci maximum replay length is 305,131 tokens, so one global forward is not feasible.
+Metadata-based retrospective Harmony replay of the same trajectory schema. Capture zero-based layer 12 post-attention-layernorm output, not block output. Save per-token predictions/probabilities for every token; score content tokens only. Tool-schema context is excluded from accuracy. For traces over 16,384 tokens, reset causal context at explicit nonoverlapping window boundaries; keep every token. A single model forward per window uses the original eager attention to bound memory while retaining causal context. Dolci maximum replay length is 305,131 tokens, so one global forward is not feasible.
 
 ## Factual observations
 

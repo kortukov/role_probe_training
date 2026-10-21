@@ -127,3 +127,11 @@ sample-time-limited, 16 had at least one output-cap hit, and four had failed
 model-call events. These are usable flagged exploratory traces, not a clean
 leaderboard reproduction. See the [report](../experiment_reports/agentic/tau2_retail_gptoss20b/README.md)
 and its small versioned `data/trajectories.jsonl.gz` archive.
+
+## Full runs and probe transfer
+
+The full retail experiment uses all 114 τ² retail tasks, not the original τ-bench. SWE Verified uses all 500 tasks and the separate `agentic_eval/swe` locked environment (swebench 4.1.0; version 5.0.2 fails the installed Inspect scorer import). `trajectories/apptainer.py` supplies writable isolated instances; gold-patch scoring and Inspect Python/bash-session/editor tools passed live validation. Instance-start does not accept `--pwd`; set working directory on exec.
+
+Dolci sampling: `src/experiments/agentic_eval/dolci.py`, 1,000 uniform rows, seed 123, revision pinned in the script/manifest. Preserve function_calls/functions and map environment to tool; do not invent analysis channels.
+
+Probe replay uses the original eager forward, capturing layers 4/8/12/16/20 together. Explicit 16,384-token windows retain every token and reset positions/context only at window boundaries. Full-window peak measured 136.67 GiB on B200. Cached whole-model chunks and query tiling showed numerical drift in BF16/MoE; these are not used in production scoring. Report windowed versus single-window coverage separately. `agentic_probes/report.py` creates README, APPENDIX, metrics and an offline standalone viewer from per-trajectory gzip JSON predictions. Keep raw data/predictions/data-filled HTML ignored; push code and aggregate reports periodically.

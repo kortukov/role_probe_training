@@ -1,0 +1,99 @@
+{
+  "stage": "train",
+  "generation_max_new_tokens": 4000,
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "precision": "MXFP4 checkpoint dequantized to BF16",
+  "attention": "eager",
+  "git_commit": "028b4cd3a466c24c82b48a5866ce0c3e7cd54cf6",
+  "git_dirty": true,
+  "upstream_commit": "ec333c40fd43fe991e1ebf66765051b6d7e35784",
+  "slurm_job_id": "1460163",
+  "gpu": "NVIDIA B200",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "4.57.6",
+    "scikit-learn": "1.9.1",
+    "cuml-cu13": "26.10.0",
+    "numpy": "2.4.6",
+    "datasets": "4.8.5"
+  },
+  "input_sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+  "source_sha256": {
+    "src/role_probe_training/probes/audit.py": "4e0896c889f41e5ef8b1549eaddd6542909d6231a0b04927839e71ca795bf387",
+    "src/role_probe_training/probes/evaluation.py": "aeb72fd1b711a0f453d23399913214f78befb9a529fd2d19cc0f2df7ad195b90",
+    "src/role_probe_training/probes/__init__.py": "51cf860236e198445304124eb4d74308bd998868a1d13d1ed66116b72341c8a2",
+    "src/role_probe_training/probes/harmony.py": "20b3d8b58142f3e2636d0306c706a2d058d4a690e0cad8b452118abfd17237c1",
+    "src/role_probe_training/probes/linear.py": "d88d0d6c19980366bedb31b84edc3dd026dc220d913081eca6ca1282c4abbc57",
+    "src/role_probe_training/probes/model.py": "98a665088e9c2281f29b53aa4af28012e9a56c6d332bad6630f4d53fa7007955",
+    "src/experiments/gptoss_role_probes/prepare.py": "ef47918d3f2896fe014db7520a866ca101be41caeb769eea93d17c85cc8285c4",
+    "src/experiments/gptoss_role_probes/checks.py": "160047bafe60f55dcea7b98c71d4391773a1a615c362c814f7e4ee5921597677",
+    "src/experiments/gptoss_role_probes/run.py": "e6081bc65fd181778b50336f5f1d7fb51454f44a5f9ff92cb2bcaa18709ef1d3",
+    "src/experiments/gptoss_role_probes/smoke.py": "2a97c9293a39c60e6e25329c52d94459a434c6cea621e05350af5edf7d44107b",
+    "src/experiments/gptoss_role_probes/plot.py": "a6b77ae9a2cffd31a25e767131d31cd49d9de981b55bd58e65274712cbf8fc06"
+  },
+  "layer": 20,
+  "activation": "post_attention_layernorm_output_pre_mlp",
+  "layer_indexing": "zero_based",
+  "hidden_size": 2880,
+  "training_config": {
+    "model_id": "openai/gpt-oss-20b",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "model_path": ".cache/models/gpt-oss-20b",
+    "seed": 123,
+    "n_documents": 250,
+    "sequence_length": 1024,
+    "token_stride": 1,
+    "test_fraction": 0.1,
+    "layers": [
+      4,
+      8,
+      20
+    ],
+    "C": 0.005,
+    "n_conversations": 12,
+    "max_new_tokens": 4000,
+    "sources": [
+      {
+        "id": "allenai/c4",
+        "name": "en",
+        "split": "validation",
+        "revision": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+        "fraction": 0.25
+      },
+      {
+        "id": "allenai/dolma3_mix-150B-1025",
+        "name": null,
+        "split": "train",
+        "revision": "3a8349c2f7946cdc56f8ccf22c555672be0b3208",
+        "fraction": 0.75
+      }
+    ],
+    "conversation_source": {
+      "id": "lmsys/toxic-chat",
+      "name": "toxicchat1123",
+      "split": "test",
+      "revision": "29df8e4dba60e1f4af4b4075c0705c5b313548a8"
+    },
+    "shuffle_buffer": 50000
+  },
+  "format_version": 1,
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "C": 0.005,
+  "scaling": "none",
+  "solver": "cuml",
+  "iterations": 785,
+  "max_iter": 5000,
+  "warnings": [
+    "Observed cuML C++ L-BFGS line search failed (code 1); stopped at last valid step."
+  ],
+  "converged": false,
+  "termination_note": "cuML C++ line-search warnings require log review; iteration count alone does not establish convergence.",
+  "max_saved_probability_error": 7.748603820800781e-07
+}

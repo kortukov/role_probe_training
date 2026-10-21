@@ -1,4 +1,4 @@
-"""Score all content tokens, capturing multiple pre-MLP probes in one causal replay."""
+"""Score all content tokens, capturing multiple pre-MLP probes in one forward per window."""
 import argparse
 import gzip
 import hashlib
@@ -20,8 +20,7 @@ def main():
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--probes',type=Path,nargs='+',required=True)
     p.add_argument('--model',default='.cache/models/gpt-oss-20b')
-    p.add_argument('--chunk-size',type=int,default=512)
-    p.add_argument('--context-window',type=int,default=32768,help='Reset KV cache at explicit boundaries; keep and score every token')
+    p.add_argument('--context-window',type=int,default=16384,help='Independent context windows; keep and score every token')
     p.add_argument('--shard-index',type=int,default=0)
     p.add_argument('--shard-count',type=int,default=1)
     a=p.parse_args()
@@ -34,7 +33,7 @@ def main():
         assert probe.metadata['model_revision']=='6cee5e81ee83917806bbde320786a8fb61efebee'
         assert probe.metadata['roles']==list(ROLES)
         probes[probe.metadata['layer']]=probe
-    manifest={'schema_version':1,'input':str(a.input),'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),'probe_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in a.probes},'probe_metadata':{str(k):v.metadata for k,v in probes.items()},'context_window':a.context_window,'context_policy':'nonoverlapping windows; no token dropping; positions restart at each window','chunk_size':a.chunk_size,'shard_index':a.shard_index,'shard_count':a.shard_count,'slurm_job_id':os.environ.get('SLURM_JOB_ID'),'rendering':'retrospective Harmony; preserves all reasoning; tool schemas added as system context; not exact serving prompts','labels':'content tokens only; special/header/boundary tokens excluded; synthetic tool-schema context separately identified by source_message_index=-1'}
+    manifest={'schema_version':1,'input':str(a.input),'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),'probe_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in a.probes},'probe_metadata':{str(k):v.metadata for k,v in probes.items()},'context_window':a.context_window,'context_policy':'nonoverlapping windows; no token dropping; positions restart at each window; original eager attention, single model forward per window','shard_index':a.shard_index,'shard_count':a.shard_count,'slurm_job_id':os.environ.get('SLURM_JOB_ID'),'rendering':'retrospective Harmony; preserves all reasoning; tool schemas added as system context; not exact serving prompts','labels':'content tokens only; special/header/boundary tokens excluded; synthetic tool-schema context separately identified by source_message_index=-1'}
     mp=a.output/'manifest.json'
     if mp.exists() and json.loads(mp.read_text())['input_sha256']!=manifest['input_sha256']:
         raise ValueError('Cannot resume on different input')
@@ -61,18 +60,14 @@ def main():
             try:
                 enc=encode_record(tokenizer,record)
                 ids=enc['input_ids']; n=len(ids)
-                if not 0 < a.context_window <= model.config.max_position_embeddings or a.context_window % a.chunk_size:
-                    raise ValueError('Context window must fit model and be divisible by chunk size')
-                cache=None; chunks={k:[] for k in probes}
-                for lo in range(0,n,a.chunk_size):
-                    hi=min(n,lo+a.chunk_size)
-                    if lo % a.context_window == 0: cache=None
-                    window_start=(lo//a.context_window)*a.context_window
-                    result=model.model(input_ids=torch.as_tensor(ids[lo:hi],device=model.device)[None,:], attention_mask=torch.ones((1,hi-window_start),device=model.device,dtype=torch.long), past_key_values=cache,use_cache=True)
-                    cache=result.past_key_values
+                if not 0 < a.context_window <= model.config.max_position_embeddings:
+                    raise ValueError('Context window must fit model')
+                chunks={k:[] for k in probes}
+                for lo in range(0,n,a.context_window):
+                    hi=min(n,lo+a.context_window)
+                    result=model.model(input_ids=torch.as_tensor(ids[lo:hi],device=model.device)[None,:], attention_mask=torch.ones((1,hi-lo),device=model.device,dtype=torch.long),use_cache=False)
                     for k in probes: chunks[k].append(captured[k])
                     del result
-                del cache
                 probabilities={str(k):np.concatenate(v) for k,v in chunks.items()}
                 labels=enc['labels']; valid=labels>=0
                 # Separate utterance tokens from synthetic schema context.
