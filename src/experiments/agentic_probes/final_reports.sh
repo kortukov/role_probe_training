@@ -2,10 +2,9 @@
 # Refresh both metrics/appendices/viewers; preserve authored README and RUNNING files.
 set -euo pipefail
 args=(
- --dataset dolci_tool_use=experiment_reports/agentic/probe_transfer/predictions/dolci
  --dataset tau2_retail=experiment_reports/agentic/probe_transfer/predictions/retail
- --dataset swe_bench=experiment_reports/agentic/probe_transfer/predictions/swe_selected
- --expected-count dolci_tool_use=1000 --expected-count tau2_retail=114 --expected-count swe_bench=500
+ --dataset swe_bench=experiment_reports/agentic/probe_transfer/predictions/swe
+ --expected-count tau2_retail=114 --expected-count swe_bench=500
  --benchmark-summary tau2_retail=experiment_reports/agentic/tau2_retail_full/metrics/summary.json
  --benchmark-summary swe_bench=experiment_reports/agentic/swe_bench_full/metrics/summary.json
 )

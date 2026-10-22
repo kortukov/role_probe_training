@@ -43,6 +43,10 @@
 - End the README with a link to a separate `RUNNING.md` giving brief reproduction
   commands and links to the relevant code and data. Record revisions, settings,
   output paths and essential environment details there.
+- Remove superseded experiments, obsolete attempts and unrelated historical material
+  from the current repository. Retain only artifacts needed by current conclusions
+  and reproduction; consolidate them under the current experiment. Check for stale
+  narrative, folders and links before every report push. Git history is the archive.
 - Keep small results and plots in Git. For large/private datasets and checkpoints,
   use appropriate cluster storage and put paths, provenance and retrieval details
   in the experiment folder. Add targeted ignores as needed; do not silently lose
@@ -71,14 +75,10 @@
 - Preserve the upstream training scale (configured 250 passages, up to 1,024
   tokens, all content tokens). Do not silently subsample tokens or reduce training
   data to save time. Small conversational evaluation is separate from training.
-- [Prior-work audit](agent_docs/PREVIOUS_ROLE_PROBES.md) documents reusable old
-  probes and methodological caveats. Import only artifacts needed for the task.
 - Ground-truth roles come from message/channel metadata. Mean role probabilities
   and argmax role accuracy are different metrics. Tool-role transfer requires
   validation on actual tool-bearing trajectories; clean chat alone is insufficient.
-- Completed baseline: layer 12 gives conversation-balanced true-role probabilities
-  of 88.1% user, 62.3% analysis and 99.6% final on 9/12 completed chats. Use it as
-  the initial trajectory-evaluation probe; retain layer 16 for comparison. Both
-  fits emitted line-search warnings; system-prompt transfer was poor, and that clean-chat check contained no tool
-  messages. Subsequent [agentic evaluation](experiment_reports/agentic/probe_transfer/README.md)
-  measures actual tool-message transfer. Consult both reports before reuse.
+- Current probe weights: layers 12/16 in the baseline experiment and layers 4/8/20
+  in [additional-layer fitting](experiment_reports/role_probes/gptoss20b_layers/README.md).
+  Fits have convergence limitations. Use the current [agentic evaluations](experiment_reports/agentic/probe_transfer/README.md)
+  to assess transfer to actual reasoning and tool messages.

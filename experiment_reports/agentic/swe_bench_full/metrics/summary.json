@@ -35,37 +35,37 @@
   "expected_samples": 500,
   "observed_unique_samples": 500,
   "missing_sample_ids": [],
-  "trajectories_sha256": "b8a7e2173849aa82bd3543ad92328e5791ac208f47433f83ab2dc5720f870e8f",
+  "trajectories_sha256": "e8a897414033534f40131ade1586d479f29722d10c70871a7449c07042ccc42c",
   "source_runs": [
-    "experiment_reports/agentic/swe_bench_full_mirror/runs/1461197",
-    "experiment_reports/agentic/swe_bench_full_mirror/runs/1461195",
-    "experiment_reports/agentic/swe_bench_full_mirror/runs/1461196",
-    "experiment_reports/agentic/swe_bench_full_mirror/runs/1461193"
+    "experiment_reports/agentic/swe_bench_full/runs/1461197",
+    "experiment_reports/agentic/swe_bench_full/runs/1461195",
+    "experiment_reports/agentic/swe_bench_full/runs/1461196",
+    "experiment_reports/agentic/swe_bench_full/runs/1461193"
   ],
   "repairs": [
     {
       "sample_id": "django__django-15252",
       "reason": "tool_name_normalization",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval"
     },
     {
       "sample_id": "sympy__sympy-15809",
       "reason": "tool_name_normalization",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval"
     },
     {
       "sample_id": "django__django-17084",
       "reason": "image_preparation_no_model_execution",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_image_retry/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
     },
     {
       "sample_id": "matplotlib__matplotlib-26342",
       "reason": "image_preparation_no_model_execution",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461195/logs/2026-10-21T21-43-40-00-00_swe-bench_BFn5NAKsTHaQ5JydgJkfv4.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_image_retry/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461195/logs/2026-10-21T21-43-40-00-00_swe-bench_BFn5NAKsTHaQ5JydgJkfv4.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
     }
   ]
 }

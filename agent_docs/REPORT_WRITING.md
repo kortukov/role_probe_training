@@ -69,10 +69,15 @@ the main text only when the experiment specifically studies them, and explain wh
 - Separate task performance from probe accuracy. State clearly when one does not
   measure the other. Do not bury an invalid benchmark comparison in reproduction
   notes merely to keep the main report short.
-- Identify preparation-only, intermediate and historical reports, and link to
-  the final experiment. Do not invent findings for an unexecuted experiment.
-- Preserve measurements and provenance when reorganizing prose; move rather than
-  discard details needed to audit results.
+- Remove superseded, preparation-only and intermediate reports once a current
+  experiment replaces them. Do not retain historical folders or narratives merely
+  for completeness; Git history is the archive. Consolidate artifacts still needed
+  for current results under the current experiment.
+- Retain measurements and provenance needed to audit current results. Delete
+  unrelated comparisons, obsolete attempts, abandoned settings and stale future-work
+  statements. This applies to whole directories as well as individual paragraphs.
+- Before pushing reports, check every changed report and its surrounding folders
+  for relevance to the current experiment, stale links and superseded results.
 - Treat the scientific narrative as authored text. Regeneration may update
   metrics, tables, appendices and viewers, but should not silently overwrite the
   curated README or reproduction instructions with generic boilerplate.

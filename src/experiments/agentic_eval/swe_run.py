@@ -48,7 +48,7 @@ def main():
         task = tau2_retail(shuffle=False)  # Preserve upstream's 100-turn default.
     else:
         from inspect_evals.swe_bench import swe_bench
-        from role_probe_training.trajectories.apptainer import sandbox_config
+        from role_probe_training.trajectories.apptainer_mirror import sandbox_config
         task = swe_bench(sandbox_type="apptainer", sandbox_config=sandbox_config)
     ordered = sorted(task.dataset, key=lambda sample: str(sample.id))
     random.Random(args.seed).shuffle(ordered)
@@ -68,8 +68,8 @@ def main():
                 "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
-                "sandbox_provider": "apptainer (writable isolated instance; network none; no host binds)",
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "swe/uv.lock", Path(__file__).with_name("swe_job.sbatch"), Path(__file__).parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "sandbox_provider": "apptainer (writable isolated instance; network none; no host binds); digest-pinned official images via mirror.gcr.io",
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "swe/uv.lock", Path(__file__).with_name("swe_job.sbatch"), Path(__file__).parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/agentic/swe_bench_full/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:

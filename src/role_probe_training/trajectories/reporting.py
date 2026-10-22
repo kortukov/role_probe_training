@@ -14,8 +14,7 @@ def write_probe_appendix(summary, output):
         '## Supplementary metrics', '',
         '**Averaging.** Mean conversation accuracy gives each conversation equal weight. '
         'Role-balanced accuracy averages recall equally over roles present in the dataset; '
-        'recall is the fraction of tokens of a true role classified correctly. Dolci has '
-        'four observed roles; retail and SWE have five. Uniform random prediction over '
+        'recall is the fraction of tokens of a true role classified correctly. Uniform random prediction over '
         'the five possible classes has expected accuracy 20%.', '',
         '**Segmentation.** Long histories are replayed in separate segments with context '
         'reset between them. “Segmented conversations” counts histories requiring more '

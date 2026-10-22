@@ -7,8 +7,8 @@
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=96G
-#SBATCH --time=01:00:00
-#SBATCH --output=experiment_reports/agentic/tau2_retail_gptoss20b/logs/%x-%j.out
+#SBATCH --time=03:00:00
+#SBATCH --output=experiment_reports/agentic/tau2_retail_full/logs/%x-%j.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export PATH="$PWD/.tools/bin:$PATH"
@@ -22,7 +22,7 @@ export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken"
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK" TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR" "$TIKTOKEN_CACHE_DIR"
 project=src/experiments/agentic_eval
-report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/agentic/tau2_retail_gptoss20b}"
+report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/agentic/tau2_retail_full}"
 run_dir="$PWD/$report_root/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))

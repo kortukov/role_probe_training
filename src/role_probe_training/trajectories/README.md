@@ -8,18 +8,11 @@ function metadata. Inspect exports keep the evaluated agent's messages, not the
 τ² customer simulator's privileged context. Original Inspect logs and per-call
 contexts remain available separately.
 
-Dolci's `environment` role maps explicitly to `tool`, with `source_role` retained.
-Its aggregate tool replies have `name: environment`, because one reply can contain
-multiple function outputs and the dataset supplies no reliable unique call ID.
-`function_calls` remains the original string; `functions` remains the original
-JSON schema string. No code is executed while normalizing these fields.
-No analysis channel is inferred from the prose. The source dataset revision and
-uniform sampled row indices are recorded in the manifest.
-
 `replay.py` produces the same explicit Harmony representation for all sources.
 It expands structured thinking into assistant/analysis, function calls into
 assistant/commentary directed to the named function, and replies into tool
-messages. Dolci's unparsed function-call strings use its documented XML wrapper.
+messages.
+
 Tool schemas are synthetic system context with source message index -1. Their
 tokens are predicted but excluded from accuracy. Original system messages are
 included in accuracy. This representation preserves retrospective reasoning;
@@ -44,7 +37,7 @@ smoke test. Trajectories longer than this have incomplete prior context after
 a boundary; report their coverage and single-window results separately.
 
 `src/experiments/agentic_probes/report.py` consumes directories of these records
-and emits aggregate metrics, a main report, an appendix of confusion matrices,
+and emits aggregate metrics and an appendix of confusion matrices,
 and a standalone HTML viewer. Add datasets via repeated `--dataset NAME=PATH`.
 The viewer stores each gzip/base64 record in its own inert HTML data block (avoiding JavaScript source-size limits), decompresses one trajectory on
 selection, and pages token spans. It inserts untrusted trajectory text using

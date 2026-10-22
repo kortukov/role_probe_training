@@ -21,11 +21,10 @@ def replay_messages(record):
             add({'role':'assistant','channel':'analysis','content':m['thinking']},index)
         content = m.get('content') or ''
         calls = m.get('tool_calls') or []
-        raw_calls = m.get('function_calls')
-        if content or not (calls or raw_calls or m.get('thinking')):
+        if content or not (calls or m.get('thinking')):
             out = {'role':role,'content':content}
             if role == 'assistant':
-                out.update(channel=m.get('channel','commentary' if calls or raw_calls else 'final'), ending='<|end|>' if calls or raw_calls else '<|return|>')
+                out.update(channel=m.get('channel','commentary' if calls else 'final'), ending='<|end|>' if calls else '<|return|>')
             if role == 'tool':
                 out['name'] = m.get('name') or 'environment'
             add(out,index)
@@ -33,8 +32,6 @@ def replay_messages(record):
             f = call['function']
             arguments = f['arguments']
             add({'role':'assistant','channel':'commentary','recipient':'functions.'+f['name'], 'content':arguments if isinstance(arguments,str) else json.dumps(arguments,ensure_ascii=False), 'ending':'<|call|>'},index)
-        if raw_calls:
-            add({'role':'assistant','channel':'commentary','content':'<function_calls>\n'+raw_calls+'\n</function_calls>', 'ending':'<|call|>'},index)
     return messages, origins
 
 

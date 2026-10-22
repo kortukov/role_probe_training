@@ -8,6 +8,21 @@ Combine completed disjoint shards:
 .tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/agentic_eval/finalize.py --benchmark tau2_retail --run experiment_reports/agentic/tau2_retail_full/runs/1459495 --selection-manifest experiment_reports/agentic/tau2_retail_full/runs/1459495/manifest.json --output experiment_reports/agentic/tau2_retail_full
 ```
 
+## Launching a full run
+
+Run from the repository root. The submitting shell must export `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`; credentials are inherited by Slurm and never saved in configuration or reports.
+
+```bash
+export PATH="$PWD/.tools/bin:$PATH"
+uv sync --project src/experiments/agentic_eval --locked
+uv sync --project src/experiments/agentic_eval/server --locked
+uv pip install --python src/experiments/agentic_eval/.venv/bin/python --no-deps -e .
+mkdir -p experiment_reports/agentic/tau2_retail_full/logs
+sbatch src/experiments/agentic_eval/job.sbatch --all --concurrency 16 --time-limit 1800 --user-model openai/azure/gpt-4.1
+```
+
+The pinned GPT-OSS model is staged at `.cache/models/gpt-oss-20b`. The job creates a fresh `runs/<job-id>/` directory containing source Inspect logs, exported conversations, per-call records, scores and configuration. Use the corresponding manifest when consolidating a new run.
+
 ## Probe predictions and standalone viewer
 
 See [probe reproduction](../probe_transfer/RUNNING.md) and [layer-comparison reproduction](../probe_layer_comparison/RUNNING.md). The shared `agentic_probes/report.py` script accepts repeated `--dataset NAME=PREDICTION_DIRECTORY`, optional benchmark summary paths, and layer choices. It embeds all data in a standalone `viewer.html`, which stays local and can be downloaded and opened without a server.
@@ -20,4 +35,4 @@ GPT-OSS-20B revision `6cee5e81ee83917806bbde320786a8fb61efebee`, high reasoning,
 
 ## Runtime and interpretation of configuration
 
-The full generation job took 85 minutes on one B200; scoring all five probe layers took 25 minutes together. The earlier 20-task pilot took 27 minutes including startup and export. Per-call and cumulative budgets differ: cumulative API usage includes repeated prompts and simulator calls.
+The full generation job took 85 minutes on one B200; scoring all five probe layers took 25 minutes together. Per-call and cumulative budgets differ: cumulative API usage includes repeated prompts and simulator calls.

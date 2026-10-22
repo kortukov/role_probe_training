@@ -8,7 +8,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=128G
 #SBATCH --time=02:00:00
-#SBATCH --output=experiment_reports/agentic/swe_bench_image_retry/logs/%x-%j.out
+#SBATCH --output=experiment_reports/agentic/swe_bench_full/logs/%x-%j.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export PATH="$PWD/.tools/bin:$PATH"
@@ -27,7 +27,7 @@ export APPTAINER_CACHEDIR="$LOCAL_JOB_DIR/apptainer-cache"
 export APPTAINER_TMPDIR="$LOCAL_JOB_DIR/apptainer-tmp"
 mkdir -p "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR"
 cp -a "$PWD/.cache/apptainer-repair/cache" "$APPTAINER_CACHEDIR/"
-report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/agentic/swe_bench_image_retry}"
+report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/agentic/swe_bench_full}"
 run_dir="$PWD/$report_root/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))

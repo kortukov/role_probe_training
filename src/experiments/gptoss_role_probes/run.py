@@ -100,9 +100,6 @@ def generate_conversations(config, tokenizer, model, prompts, path):
 def evaluate(config, tokenizer, model, conversations, output):
     probes = {layer: RoleProbe.load(output/'probes'/f'layer_{layer}.npz') for layer in config['layers']}
     summaries = {layer: [] for layer in probes}
-    reference_path = output/'reference'/'previous_layer_12.npz'
-    reference_probe = RoleProbe.load(reference_path) if reference_path.exists() else None
-    reference_rows = []
     prediction_path = output/'artifacts'/'token_predictions.jsonl'
     with prediction_path.open('w') as handle:
         for conv in conversations:
@@ -110,9 +107,6 @@ def evaluate(config, tokenizer, model, conversations, output):
             positions = np.flatnonzero(enc['labels'] >= 0)
             states = extract_states(model, enc['input_ids'], list(probes), positions)
             labels = enc['labels'][positions]
-            if reference_probe is not None and 12 in states:
-                reference_rows.append({'conversation_id': conv['id'], 'labels': labels,
-                    'probabilities': reference_probe.predict_proba(states[12])})
             for layer, probe in probes.items():
                 probabilities = probe.predict_proba(states[layer])
                 summaries[layer].append({'conversation_id': conv['id'], 'labels': labels,
@@ -137,16 +131,6 @@ def evaluate(config, tokenizer, model, conversations, output):
         }
         plot_summary(summary, output/'plots'/f'clean_chat_layer_{layer}.png',
                      f'GPT-OSS-20B clean conversations — block {layer}')
-    if reference_rows:
-        summary = conversation_summary(reference_rows)
-        write_json(output/'metrics'/'previous_probe_comparison.json', {
-            'note': 'Historical weights evaluated on this run BF16 activations, not the historical native-MXFP4 environment',
-            'conversation_balanced': summary,
-            'token_metrics': metrics(np.concatenate([r['labels'] for r in reference_rows]),
-                                     np.concatenate([r['probabilities'] for r in reference_rows])),
-        })
-        plot_summary(summary, output/'plots'/'previous_probe_layer_12.png',
-                     'Historical layer-12 probe on the same clean conversations')
     write_json(output/'metrics'/'conversations.json', results)
     return results
 

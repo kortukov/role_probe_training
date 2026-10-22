@@ -1,9 +1,5 @@
 {
   "datasets": {
-    "dolci_tool_use": {
-      "trajectories": 1000,
-      "scored_tokens": 1516257
-    },
     "tau2_retail": {
       "trajectories": 114,
       "scored_tokens": 2876950
@@ -26,31 +22,29 @@
   "viewers": {
     "probe_transfer": {
       "path": "experiment_reports/agentic/probe_transfer/viewer.html",
-      "bytes": 469843059,
-      "sha256": "a260eb84d8d8e52ee15a4ce8f044fe7dc20aaa03086761181764f3b4bab43586",
+      "bytes": 378992868,
+      "sha256": "82de598aef3daaa95e2e835a2e795bf78563203559b895ef98c670c8f0c2cf97",
       "offline_chromium_check_passed": true,
       "checks": [
-        "all datasets and layers",
+        "both retained datasets and all available layers",
         "longest trajectory per dataset",
-        "gzip decompression",
-        "token probability inspection",
-        "color and error filters",
+        "token probabilities and color filters",
         "no network requests"
       ]
     },
     "probe_layer_comparison": {
       "path": "experiment_reports/agentic/probe_layer_comparison/viewer.html",
-      "bytes": 1730265623,
-      "sha256": "522708dcc7b2dca345efb3d938d16f63402d29498ea1b55f8380a3a725dcdbe5",
+      "bytes": 1404237111,
+      "sha256": "c3a4e528940226e87f4f717ab6b7292a3803901922790d5cce089ac3ad2175a2",
       "offline_chromium_check_passed": true,
       "checks": [
-        "all datasets and layers",
+        "both retained datasets and all available layers",
         "longest trajectory per dataset",
-        "gzip decompression",
-        "token probability inspection",
-        "color and error filters",
+        "token probabilities and color filters",
         "no network requests"
       ]
     }
-  }
+  },
+  "canonical_swe_reproduction_hash_verified": true,
+  "retained_metrics_and_probe_weights_unchanged": true
 }

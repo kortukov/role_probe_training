@@ -1,39 +1,40 @@
 # Reproduction
 
-Predictions use schema v1, one gzip JSON per trajectory. Each contains original messages, normalized replay messages, token IDs/offsets, labels, score mask, context boundaries and per-layer probabilities and argmax predictions. Input/probe hashes and job metadata are in each prediction directory’s manifest.
+## Inputs and probes
 
-Generate the report and standalone viewer from the repository root:
+The evaluation contains 114 retail and 500 SWE-bench Verified trajectories:
 
-```bash
-.tools/bin/uv run --frozen --no-sync python src/experiments/agentic_probes/report.py --dataset 'dolci_tool_use=experiment_reports/agentic/probe_transfer/predictions/dolci' --dataset 'tau2_retail=experiment_reports/agentic/probe_transfer/predictions/retail' --dataset 'swe_bench=experiment_reports/agentic/probe_transfer/predictions/swe_selected' --expected-count 'dolci_tool_use=1000' --expected-count 'tau2_retail=114' --expected-count 'swe_bench=500' --benchmark-summary 'tau2_retail=experiment_reports/agentic/tau2_retail_full/metrics/summary.json' --benchmark-summary 'swe_bench=experiment_reports/agentic/swe_bench_full/metrics/summary.json' --layers 12 --output experiment_reports/agentic/probe_transfer
-```
-
-Add another `--dataset NAME=PATH` to include a dataset. See `src/experiments/agentic_probes/run.py --help` for inference and `src/experiments/agentic_eval/dolci.py` for seeded sampling. Generated predictions, trajectories and HTML remain on cluster storage; code, manifests and aggregate metrics are versioned.
-
-## Inputs and validation
-
-The [prediction manifests](metrics/prediction_manifests.json) record source/probe hashes, hook sites, role order, context policy and Slurm jobs. [SWE selection](metrics/swe_prediction_selection.json) maps exactly 500 canonical tasks to immutable prediction files; repair selection validates messages, tools, scores, errors and source logs. Original unselected attempts remain under ignored `runs/` and `predictions/` directories.
-
-Canonical chat inputs:
-
-- `experiment_reports/agentic/dolci_1000/data/trajectories.jsonl`
 - `experiment_reports/agentic/tau2_retail_full/data/trajectories.jsonl`
 - `experiment_reports/agentic/swe_bench_full/data/trajectories.jsonl`
 
-Both reports/viewers can be rebuilt with `bash src/experiments/agentic_probes/final_reports.sh`. This refreshes metrics, appendix tables and viewers while preserving authored README and RUNNING prose. Confusion matrices are independently recomputed from saved token predictions during report generation. Expected dataset counts and all requested layers are checked. [Slurm timings](metrics/slurm_jobs.txt) record measured costs.
+Predictions are gzip JSON records under `experiment_reports/agentic/probe_transfer/predictions/retail/` and `predictions/swe/`. Each stores the original messages, replay text, token IDs/offsets, metadata-derived labels, scoring mask, context boundaries, and probabilities/predictions for all five layers.
+
+Use the [baseline weights](../../role_probes/gptoss20b_baseline/RUNNING.md) for layers 12/16 and [additional weights](../../role_probes/gptoss20b_layers/RUNNING.md) for layers 4/8/20. [Prediction manifests](../probe_transfer/metrics/prediction_manifests.json) record the inference configuration and probe hashes; [SWE selection](../probe_transfer/metrics/swe_prediction_selection.json) identifies the 500 retained files and their hashes.
+
+## Inference
+
+Run `sbatch src/experiments/agentic_probes/benchmark.sbatch INPUT_JSONL OUTPUT_DIRECTORY` from the repository root. The job reads all five probes in one forward pass per context segment. It uses GPT-OSS-20B dequantized to BF16 with original eager attention; benchmark generation uses vLLM MXFP4. Hooks read zero-based `post_attention_layernorm` outputs, the pre-MLP input. All content tokens are retained; 16,384-token nonoverlapping segments reset position and context. Header/special tokens and synthetic tool-schema context are excluded from accuracy.
+
+The renderer is standardized retrospective Harmony, not a reconstruction of exact generation-time prompts. Model revisions and precision settings are pinned in configuration and saved manifests. Saved weights retain their fitting/convergence metadata.
+
+## Metrics and standalone viewer
+
+```bash
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentic_probes/report.py \
+  --dataset tau2_retail=experiment_reports/agentic/probe_transfer/predictions/retail \
+  --dataset swe_bench=experiment_reports/agentic/probe_transfer/predictions/swe \
+  --expected-count tau2_retail=114 --expected-count swe_bench=500 \
+  --benchmark-summary tau2_retail=experiment_reports/agentic/tau2_retail_full/metrics/summary.json \
+  --benchmark-summary swe_bench=experiment_reports/agentic/swe_bench_full/metrics/summary.json \
+  --layers 12 --output experiment_reports/agentic/probe_transfer
+```
+
+`bash src/experiments/agentic_probes/final_reports.sh` refreshes both experiments. Regeneration preserves authored README/RUNNING prose. It checks coverage, requested layers and confusion matrices against saved per-token predictions. Add a dataset with another `--dataset NAME=PATH` argument and its expected count.
+
+The local `viewer.html` embeds all data and can be downloaded and opened without a server or adjacent files. A modern browser with `DecompressionStream` support is required. It supports dataset/layer/conversation selection, role coloring, mismatch filtering and token probability inspection. Data, predictions and data-filled HTML remain excluded from Git.
 
 ```bash
 PLAYWRIGHT_BROWSERS_PATH="$PWD/.cache/playwright" .tools/bin/uv run --isolated --no-project --with playwright python src/experiments/agentic_probes/viewer_check.py experiment_reports/agentic/probe_transfer/viewer.html
 ```
 
-The HTML is a single downloadable file; no server or adjacent files are needed. Use a modern browser supporting `DecompressionStream`. Per-token JSON files retain all five layers even when this viewer displays only layer 12.
-
-Both complete HTML files passed offline Chromium checks. Their byte sizes, SHA256 values and coverage checks are recorded in [validation.json](metrics/validation.json).
-
-## Recorded execution settings
-
-GPT-OSS-20B, revision `6cee5e81ee83917806bbde320786a8fb61efebee`; zero-based post-attention-layernorm / pre-MLP probes. Replay uses the checkpoint dequantized to BF16 in Transformers, matching probe fitting; benchmark generation uses vLLM MXFP4. Ground truth comes from structured roles and analysis channels. Accuracy is argmax correctness, not mean true-role probability. Structural tokens and synthetic tool-schema context are excluded from scores. All content tokens are retained; long traces use explicitly recorded 16,384-token context windows with position/context resets. Shorter trajectories preserve causal context throughout. This is standardized retrospective Harmony replay, not a byte-identical reconstruction of serving prompts. Dolci has no analysis-channel labels. Probe fitting warnings in the baseline remain applicable.
-
-## Viewer artifact
-
-The layer-12 HTML is 470 MB (decimal); the five-layer HTML is 1.73 GB. Both are excluded from Git and remain on cluster storage. Offline browser checks covered all datasets, each available layer and the longest history per dataset.
+Artifact hashes and browser/coverage checks are recorded in [validation.json](../probe_transfer/metrics/validation.json). [Slurm timings](../probe_transfer/metrics/slurm_jobs.txt) record the current runs.

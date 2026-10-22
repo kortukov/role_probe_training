@@ -57,8 +57,6 @@ inputs with `--config ... --output <new-output>/artifacts/inputs`.
 - `artifacts/token_predictions.jsonl`: per-token labels, predictions, probabilities,
   message index and character offsets for inspection.
 - `artifacts/generation_failures.json`: incomplete generations, excluded and counted.
-- `artifacts/generation_1536/`: preserved initial generation attempt. The final
-  evaluation uses 4,000 new tokens; fitting and sampled inputs are unchanged.
 
 Reusable implementation: [probes](../../../src/role_probe_training/probes/README.md).
 Example use inside a GPU allocation after loading the same model:
@@ -84,8 +82,3 @@ rather than silently treating missing channel/tool metadata as ground truth.
 
 Upstream revision: `ec333c40fd43fe991e1ebf66765051b6d7e35784`. The run metadata records
 package versions, source hashes, input hash, GPU, Slurm ID, and Git revision/status.
-
-Historical comparison: `reference/previous_layer_12.npz` contains only the prior
-SUCAT probe, with source hash and metadata in its JSON companion. See
-[the reuse audit](../../../agent_docs/PREVIOUS_ROLE_PROBES.md). Its results are saved
-separately in `metrics/previous_probe_comparison.json`.

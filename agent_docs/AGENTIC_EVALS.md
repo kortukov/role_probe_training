@@ -1,178 +1,101 @@
 # Agentic evaluation workflow
 
-Verified on 2026-10-21 against inspect-evals 0.25.0 and the locked Inspect AI
-version in `src/experiments/agentic_eval/uv.lock`.
+## Current experiments
 
-## Scope and environments
+`experiment_reports/agentic/` contains four current experiments:
 
-Use Inspect for common execution, logs, scores and concurrency. Keep benchmark
-adapters small. `src/role_probe_training/trajectories/inspect_export.py` is the
-shared exporter; experiment entry points are in `src/experiments/agentic_eval/`.
-The evaluation client and vLLM server have separate uv projects/locks because
-current Inspect needs huggingface-hub >=1.2 while vLLM 0.11.0 with Transformers
-4.57.1 needs huggingface-hub <1. Neither environment modifies probe training.
-Install the repository package into the client with `uv pip install --no-deps -e .`
-after syncing; then use `uv run --frozen --no-sync` so uv doesn't remove it.
+- `tau2_retail_full`: 114 tasks; 73 solved (64.04%).
+- `swe_bench_full`: 500 tasks; 11 solved (2.20% counting errors as failures).
+- `probe_transfer`: layer-12 role recognition on those 614 histories.
+- `probe_layer_comparison`: layers 4, 8, 12, 16 and 20 on the same histories.
 
-## Trace contract (schema_version 1)
+SWE has 226 model API retry failures and substantial execution-limit effects.
+Its score is not a matched reproduction of the model's published capability.
+Keep these limitations visible in the current report. Scientific writing and
+stale-material removal follow [REPORT_WRITING.md](REPORT_WRITING.md).
 
-`trajectories.jsonl`: one row per benchmark/sample/epoch. Common fields:
-`benchmark`, `sample_id`, `epoch`, `model`, `provenance`, `messages`, `tools`,
-`scores`, `error`, `limit`, `export_errors`, `source_log`, `model_usage`.
+## Environments and execution
 
-Messages are dictionaries with `role` and string `content`. Assistant reasoning
-is stored separately as `thinking`; tool calls are OpenAI/HF-style dictionaries
-with `id`, `type=function`, `function.name`, and **dictionary**
-`function.arguments` (what the GPT-OSS HF template expects). Tool responses have
-`tool_call_id` and `name`. Tool error metadata is retained. Tools are separate
-function schemas, required when rendering a tool-bearing chat template.
-Unsupported multimodal/redacted content causes an explicit export error rather
-than silent loss. Roles never come from interpreting message content.
+Use Inspect for execution, logs, scores and concurrency. Clients and the vLLM
+server use separate locked uv projects because their dependency requirements
+differ. Retail uses `src/experiments/agentic_eval`; SWE uses its `swe/` project
+with swebench 4.1.0; serving uses its `server/` project with vLLM 0.11.0. After
+syncing a client lock, install the root package into that client with
+`uv pip install --python CLIENT/.venv/bin/python --no-deps -e .`, then use
+`uv run --frozen --no-sync`. Do not modify the probe-training environment.
 
-Basic retrospective tokenization (CPU-checked on a real retail trace):
+`job.sbatch` launches retail and `swe_job.sbatch` launches SWE. All output lives
+under the current benchmark's `runs/` and `logs/` directories. The runners support
+fixed selection and disjoint sharding. Use fresh run directories and reject
+duplicate task IDs when consolidating. Generation batches across conversations;
+each conversation remains sequential.
 
-```python
-import json
-from transformers import AutoTokenizer
+Retail uses Azure `openai/azure/gpt-4.1` as customer simulator, verified as
+`gpt-4.1-2025-04-14`, chat completions API version 2024-10-21. Credentials exported
+from the user's shell are inherited by Slurm and never written to manifests.
+Retail scoring checks database state and required communication; it needs no
+separate model grader.
 
-row = json.loads(open("trajectories.jsonl").readline())
-tokenizer = AutoTokenizer.from_pretrained(".cache/models/gpt-oss-20b")
-input_ids = tokenizer.apply_chat_template(
-    row["messages"], tools=row["tools"], reasoning_effort="high",
-    tokenize=True, add_generation_prompt=False,
-)
-```
+SWE uses a validated Apptainer provider with writable per-task environments,
+isolated networking, no host-workspace mount and no API credentials inside.
+Gold-patch scoring and Inspect Python/bash-session/editor tools passed validation.
+Use official task images pinned by OCI digest in `swe_bench_full/image_manifest.json`;
+`apptainer_mirror.py` retrieves them through mirror.gcr.io. This cache is a runtime
+source, not a separate experiment. Verified missing blobs can be seeded into the
+Apptainer cache with `repair_image_layers.py`. Retry infrastructure failures only
+when no model call occurred, never because an attempted solution failed.
 
-This produces a valid HF-formatted conversation; see the replay caveat below
-before interpreting its activations as the original generation-time activations.
+Generation took 85 minutes on one B200 for retail and 72–84 minutes across four
+concurrent B200 shards for SWE. Five-layer scoring took 25 minutes for retail and
+about 15 minutes across four SWE shards. Exact limits and settings are in RUNNING
+files and configurations, not the scientific narratives.
 
-`generations.jsonl`: one row per evaluated-model call, with Inspect input/output,
-tools, generation config, raw API call and error. This is the fallback for exact
-per-call context reconstruction; it excludes user-simulator/grader calls.
-Keep original `.eval` logs too. They retain simulator calls, events, scores,
-metadata and raw provider requests/responses. JSONL is an analysis convenience,
-not a replacement for the source log.
+## Trace contract
 
-**τ² trap:** `sample.messages` is the user simulator's privileged conversation.
-Export `sample.store['StoredAgentState:RetailAgent:messages']` instead. The current
-Inspect `sample.store_as(..., instance=...)` reader did not recover instance-
-namespaced fields in our fixture; direct documented store keys are tested.
+`trajectories.jsonl` has one row per benchmark/sample/epoch with `messages`,
+`tools`, scores, errors, limits and source provenance. Messages contain a role
+and string content; assistant `thinking` retains reasoning. Tool calls use
+OpenAI/HF-style function dictionaries; replies retain names and call IDs.
+Missing tool names use `__unknown_tool__`, `name_missing: true`, and
+`original_function`, preserving the history instead of dropping it. Never infer
+roles or channels from the text's meaning.
 
-**Replay caveat:** a full-history forward pass is a useful retrospective probe
-measurement, but not necessarily the original activation context. Native vLLM
-0.11.0 GPT-OSS serving uses openai-harmony, not the cached HF Jinja template, and
-adds system/developer messages. Templates may discard old reasoning and change
-serialization. Preserve both files. The probe experiment uses an explicit standardized retrospective renderer,
-`trajectories/replay.py`, preserving all reasoning. It does not claim to recover
-serving-time activations; original generation records support future exact replay.
-Do not feed these dictionaries directly to the baseline's simplified Harmony
-renderer: it expects already-normalized call messages and has no developer role.
-Do not infer missing channels from text. Use the probe metadata's exact model
-revision, layer, role order and post-attention-layernorm/pre-MLP site.
+For τ², export `sample.store['StoredAgentState:RetailAgent:messages']`.
+`sample.messages` belongs to the privileged customer simulator and must not be
+used as the agent history. `generations.jsonl` preserves individual evaluated-model
+calls; original `.eval` logs retain full scoring/event context.
 
-## Execution and metrics
+Count nested limit events and per-call output caps, not only `sample.limit`.
+A completed log does not guarantee an uninterrupted conversation. Report all
+selected tasks and distinguish scored-only rates from errors-as-failures rates.
+`finalize.py` consolidates current records with explicit guarded replacements and
+writes data/metrics while preserving authored reports.
 
-One B200 server with 8 concurrent retail samples is the initial configuration.
-Generation is sequential within each trajectory; vLLM batches across trajectories.
-Fixed selection is Python Random(123) over sorted sample IDs. For more parallelism,
-`--shard-count N --shard-index I` partitions the same chosen subset without overlap.
-Use separate output directories; merge logs explicitly and reject duplicate IDs.
-The default 20 tasks, 900-second per-sample clock limit, 16,384 output tokens per
-call and 500,000 sample tokens target a sub-hour pilot after queueing/startup.
-The initial 4,096/100,000-token pilot hit 68 per-call caps and truncated 13/20
-conversations; those budgets were inadequate for high reasoning.
-This is a budget, not a measured throughput guarantee. Limits affect comparability.
-Inspect token limits count repeated API input/output usage across calls (including
-the simulator), not the token length of the final serialized conversation.
-Keep scores for every task; don't select only successful/short trajectories.
+## Probe replay and artifacts
 
-Retail uses Azure `openai/azure/gpt-4.1` as customer simulator. A live five-token
-check confirmed model `gpt-4.1-2025-04-14`; credentials already exported from the
-user's shell are inherited by Slurm, never saved to manifests. API version
-2024-10-21, chat completions. Retail's score is deterministic (database state and
-required communicated info), so no paid grading model is needed.
+`trajectories/replay.py` renders standardized retrospective Harmony, preserving
+reasoning and tool metadata. This is not exact generation-time context recovery.
+Tool schemas are synthetic system context excluded from accuracy. Original
+message content receives labels from roles and channels; structural tokens are
+excluded. Native serving templates can omit earlier reasoning, so retain source
+logs for any future exact-context analysis.
 
-Export success rates, scored/error counts, Wilson 95% intervals, truncations,
-missing IDs and model-call errors. Upstream retail catches some model errors
-inside its loop, including SampleLimitExceededError. In the first live run,
-13 samples had `sample_limit` events despite `sample.limit is None`. Count nested
-limit events and `max_tokens` generation stop reasons, not just top-level flags.
-A completed Inspect log alone does not establish a clean run.
-Inspect's original aggregate results and usage are also retained in summary.json.
-This is a one-trial subset success rate, not pass^k or a full leaderboard result.
+Capture zero-based post-attention-layernorm outputs, the pre-MLP inputs. The
+model is dequantized to BF16 with original eager attention. All five probes read
+one forward pass per 16,384-token segment. Segments retain every token but reset
+position/context. A full segment peaked at 136.67 GiB on B200. Preserve the
+probe's model revision, activation site and class order.
 
-## SWE-bench
+Canonical per-token predictions are under `probe_transfer/predictions/retail/`
+and `predictions/swe/`. SWE selection metadata validates messages, tools, scores,
+errors and source logs against the current canonical dataset. Raw artifacts
+needed by the selected result belong under `swe_bench_full/runs/`; superseded
+experiments and excluded predictions do not need separate folders.
 
-Full Verified execution is now validated on Slurm with the Apptainer adapter. It
-uses writable per-sample root filesystems, isolated networking, no host-workspace
-mount and no API credentials in the sandbox. Gold-patch scoring and stock Inspect
-Python/bash-session/editor tools passed live checks. Use the separate locked SWE
-client (swebench 4.1.0), not the retail client's incompatible swebench 5.0.2.
-
-Docker Hub's anonymous pull quota interrupted the first attempt. The selected
-full run uses the same official images via mirror.gcr.io, pinned by OCI index
-digest in `swe_bench_full/image_manifest.json`. Manifest availability does not
-guarantee blob availability: two missing layers were downloaded from the official
-registry, SHA256-verified, and seeded into Apptainer's blob cache. Retry only image
-failures before model execution, retaining original attempts and selection reasons.
-Malformed generated Harmony headers produce model API failures; the stock
-30-message harness also often exhausts its budget. This configuration is not a
-reproduction of OpenAI's reported SWE score.
-
-Sources:
-- [Inspect τ² implementation](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/tau2)
-- [Inspect SWE-bench](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/src/inspect_evals/swe_bench)
-- [Inspect parallelism](https://inspect.aisi.org.uk/parallelism.html)
-- [GPT-OSS model card](https://deploymentsafety.openai.com/gpt-oss/model-architecture-data-training-and-evaluations)
-
-## First measured result
-
-The 20-task high-reasoning retail pilot (Slurm 1448731) completed in 27m01s,
-including startup/export, with 9/20 success (45%, Wilson 95%: 25.8–65.8%).
-All 20 traces contain tools and tokenize with the HF template. Two were
-sample-time-limited, 16 had at least one output-cap hit, and four had failed
-model-call events. These are usable flagged exploratory traces, not a clean
-leaderboard reproduction. See the [report](../experiment_reports/agentic/tau2_retail_gptoss20b/README.md)
-and its local `data/trajectories.jsonl.gz` archive (excluded from Git).
-
-## Full runs and probe transfer
-
-The full retail experiment uses all 114 τ² retail tasks, not the original τ-bench. SWE Verified uses all 500 tasks and the separate `agentic_eval/swe` locked environment (swebench 4.1.0; version 5.0.2 fails the installed Inspect scorer import). `trajectories/apptainer.py` supplies writable isolated instances; gold-patch scoring and Inspect Python/bash-session/editor tools passed live validation. Instance-start does not accept `--pwd`; set working directory on exec.
-
-Dolci sampling: `src/experiments/agentic_eval/dolci.py`, 1,000 uniform rows, seed 123, revision pinned in the script/manifest. Preserve function_calls/functions and map environment to tool; do not invent analysis channels.
-
-Probe replay uses the original eager forward, capturing layers 4/8/12/16/20 together. Explicit 16,384-token windows retain every token and reset positions/context only at window boundaries. Full-window peak measured 136.67 GiB on B200. Cached whole-model chunks and query tiling showed numerical drift in BF16/MoE; these are not used in production scoring. Report windowed versus single-window coverage separately. `agentic_probes/report.py` refreshes APPENDIX, metrics and an offline standalone viewer while preserving authored README/RUNNING prose from per-trajectory gzip JSON predictions. Keep raw data/predictions/data-filled HTML ignored; push code and aggregate reports periodically.
-
-## Canonical repairs and offline viewer
-
-Unknown generated tool names are preserved as `__unknown_tool__` with
-`name_missing: true` and `original_function`, rather than dropping the history.
-`repair_exports.py` writes corrected records into a separate run. `finalize.py`
-accepts explicit replacement runs only for export repairs or image-preparation
-failures with zero model calls. It recomputes metrics from selected records.
-`select_predictions.py` validates selected predictions against canonical messages,
-tools, scores, errors and source logs, recording hashes and linking immutable files.
-
-Large offline viewers must keep compressed trajectory payloads in separate inert
-script blocks: embedding hundreds of MB in one JavaScript literal exceeds V8's
-source-size limit. Decode only the selected trajectory. `viewer_check.py` tests
-real files offline with Chromium, including each dataset/layer and longest trace.
-Use an isolated Playwright environment so production Python locks stay unchanged.
-
-## Completed full experiment (2026-10-22)
-
-All 1,614 canonical trajectories have predictions at layers 4/8/12/16/20:
-1,000 seeded Dolci rows, 114 retail tasks and 500 SWE Verified tasks. Retail scored
-73/114 (64.04%). SWE scored 11/500 (2.20% with errors as failures), including
-226 model API retry failures; it is not a matched leaderboard reproduction.
-Generation took 85 minutes on one B200 for retail and 72–84 minutes on four
-concurrent B200 shards for SWE, plus two infrastructure-only retries. Five-layer
-probe scoring took 25 minutes for retail, about 15 minutes for SWE's four shards,
-and 3–6 minutes for Dolci's four shards. The 20-task retail pilot took 27 minutes.
-
-Final reports are `agentic/probe_transfer` and `agentic/probe_layer_comparison`.
-Layer-12 accuracy is 29.17% / 29.91% / 26.98% (Dolci / retail / SWE), with weak tool
-recall. Layer 4 has much higher tool recall; layer 8 has higher reasoning recall.
-Interpret role-balanced and per-trajectory metrics alongside token accuracy.
-
-Scientific reports follow [REPORT_WRITING.md](REPORT_WRITING.md). The benchmark finalizer writes selected data and metrics; it does not overwrite report narratives.
+`agentic_probes/report.py` refreshes metrics, appendix and offline viewer, leaving
+README/RUNNING prose intact. Compressed trajectories occupy separate inert HTML
+blocks to avoid JavaScript source-size limits; decode only the selected history.
+`viewer_check.py` validates all datasets/layers and the longest histories offline.
+Use isolated Playwright so production locks remain unchanged. Keep data-filled
+HTML, raw histories and predictions out of Git; version code, current aggregate
+results and compact provenance.

@@ -1,10 +1,10 @@
 {
-  "selection_manifest": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461197/manifest.json",
+  "selection_manifest": "experiment_reports/agentic/swe_bench_full/runs/1461197/manifest.json",
   "sources": [
     {
-      "run": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461197",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/1461197",
       "replacement": false,
-      "trajectories_sha256": "e365ae621b108cb42274bda4eb70424b1c5a288620968ea96ade83b73785e53d",
+      "trajectories_sha256": "ada5885c456e71e841af100828afccc46ad134d19818a4e69c6f005ec002cb08",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -644,7 +644,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461197",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461197",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -680,9 +680,9 @@
       }
     },
     {
-      "run": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461195",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/1461195",
       "replacement": false,
-      "trajectories_sha256": "f88ffa86247cc1bfe4bf537523863182994e626c308ef3824dcd65e9a231c9a3",
+      "trajectories_sha256": "47d08c19641985fe708e835d84305ffc95ee4617f24c44a55b52b262fe6d62d6",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -1322,7 +1322,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461195",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461195",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -1358,9 +1358,9 @@
       }
     },
     {
-      "run": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461196",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/1461196",
       "replacement": false,
-      "trajectories_sha256": "272e4b0874ceb9d8f7e203335c330123b0d7f9a8ce87c95b1e8f81411262c7fd",
+      "trajectories_sha256": "611ce5ee1b4f9dca28430bab0319d188c9af21dbe4077409aeeb24f6ae190b9d",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -2000,7 +2000,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -2036,9 +2036,9 @@
       }
     },
     {
-      "run": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461193",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/1461193",
       "replacement": false,
-      "trajectories_sha256": "36d591b292715d3a5e75afb91ad7e060e6c9cdbfbe659d0b3e05a1a9ca28d0a7",
+      "trajectories_sha256": "ab91a53b641d828725043466d34a9460ca7b6b9ccab2b54279e7dc04f86240e6",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -2678,7 +2678,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461193",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461193",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -2714,9 +2714,9 @@
       }
     },
     {
-      "run": "experiment_reports/agentic/swe_bench_normalization/runs/1461193",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/normalized-1461193",
       "replacement": true,
-      "trajectories_sha256": "d0f0b62da6303292877a3d0ff3da3a09ba06ebe5ebb4d41e1ed15b58fc00c722",
+      "trajectories_sha256": "e045a488a30aba3401af8407ab7698502ebda84d7a4e9fdb71274061420e9c77",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -3232,7 +3232,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461193",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461193",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -3265,14 +3265,14 @@
           ".cache/models/gpt-oss-20b/tokenizer.json": "0614fe83cadab421296e664e1f48f4261fa8fef6e03e63bb75c20f38e37d07d3"
         },
         "dataset_sha256": "b5eaf988ce934e602738a75ae0d38ad8f4f3be31364f38e5c5026d3c763f0fd7",
-        "repair_source": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461193",
+        "repair_source": "experiment_reports/agentic/swe_bench_full/runs/1461193",
         "repair_reason": "Preserve malformed tool identity with explicit unknown-name metadata"
       }
     },
     {
-      "run": "experiment_reports/agentic/swe_bench_normalization/runs/1461196",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/normalized-1461196",
       "replacement": true,
-      "trajectories_sha256": "661137063f2b68a8836a0edbca7f8579e1ce8c1fc61ec0866e38fc2291296c83",
+      "trajectories_sha256": "76a8e03921e096ab9b7f6e41b9cfbde9fbcb2559bea3a13f0997ba6eb12f2c52",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -3788,7 +3788,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -3821,14 +3821,14 @@
           ".cache/models/gpt-oss-20b/tokenizer.json": "0614fe83cadab421296e664e1f48f4261fa8fef6e03e63bb75c20f38e37d07d3"
         },
         "dataset_sha256": "b5eaf988ce934e602738a75ae0d38ad8f4f3be31364f38e5c5026d3c763f0fd7",
-        "repair_source": "experiment_reports/agentic/swe_bench_full_mirror/runs/1461196",
+        "repair_source": "experiment_reports/agentic/swe_bench_full/runs/1461196",
         "repair_reason": "Preserve malformed tool identity with explicit unknown-name metadata"
       }
     },
     {
-      "run": "experiment_reports/agentic/swe_bench_image_retry/runs/1463740",
+      "run": "experiment_reports/agentic/swe_bench_full/runs/1463740",
       "replacement": true,
-      "trajectories_sha256": "79155a1e31329395978daf5a4f21478fc660552485052d1eb640538a36cfcd9a",
+      "trajectories_sha256": "8962681d07dfd94ba44b7afa6aa06a66ffd6206004bbeff734d3b9a1a4d13c17",
       "manifest": {
         "benchmark": "swe_bench",
         "sample_ids": [
@@ -3847,7 +3847,7 @@
         "user_model": null,
         "settings": {
           "benchmark": "swe_bench",
-          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_image_retry/runs/1463740",
+          "output": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1463740",
           "samples": 20,
           "all": true,
           "seed": 123,
@@ -3891,26 +3891,26 @@
     {
       "sample_id": "django__django-15252",
       "reason": "tool_name_normalization",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461193/logs/2026-10-21T21-43-42-00-00_swe-bench_g48aQfBgGPbCHR8tWbZZZe.eval"
     },
     {
       "sample_id": "sympy__sympy-15809",
       "reason": "tool_name_normalization",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval"
     },
     {
       "sample_id": "django__django-17084",
       "reason": "image_preparation_no_model_execution",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_image_retry/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461196/logs/2026-10-21T21-43-40-00-00_swe-bench_95KZXYYATehrd6Aof2mwYa.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
     },
     {
       "sample_id": "matplotlib__matplotlib-26342",
       "reason": "image_preparation_no_model_execution",
-      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full_mirror/runs/1461195/logs/2026-10-21T21-43-40-00-00_swe-bench_BFn5NAKsTHaQ5JydgJkfv4.eval",
-      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_image_retry/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
+      "original_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1461195/logs/2026-10-21T21-43-40-00-00_swe-bench_BFn5NAKsTHaQ5JydgJkfv4.eval",
+      "selected_source_log": "/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/swe_bench_full/runs/1463740/logs/2026-10-21T23-11-27-00-00_swe-bench_WR5jXkVST598h4Q8zRj73Y.eval"
     }
   ]
 }
