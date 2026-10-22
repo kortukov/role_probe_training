@@ -1,4 +1,22 @@
 {
+  "train": {
+    "sources": [
+      "experiment_reports/agentic/appworld/runs/1489157/train/shard0",
+      "experiment_reports/agentic/appworld/runs/1489157/train/shard1"
+    ],
+    "tasks": 90,
+    "successes": 38,
+    "task_success": 0.4222222222222222,
+    "errors": 0,
+    "step_limited": 3,
+    "scenarios": 30,
+    "scenario_success": 0.23333333333333334,
+    "wall_seconds": 404.745157,
+    "trajectories_per_hour": 800.5037105360595,
+    "rollout_median_seconds": 49.87722648005001,
+    "gpus": 2,
+    "concurrency": 16
+  },
   "pilot_serial": {
     "sources": [
       "experiment_reports/agentic/appworld/runs/1489112/train-c1"

@@ -20,7 +20,7 @@ The four-task training pilot completed without evaluation errors:
 | One GPU, concurrent worlds | 1.81 min |
 | Two GPUs, concurrent worlds | 1.90 min |
 
-Full training and both test splits are running separately. Pilot task scores and detailed timings are in the [appendix](APPENDIX.md). These are small, single-batch measurements; sampled trajectories differ across configurations.
+The full training split completed in **6.75 minutes on two GPUs**: **38/90 tasks succeeded (42.2%)**, with no evaluation errors. Both held-out test splits are running separately. Pilot task scores and detailed timings are in the [appendix](APPENDIX.md). These are small, single-batch measurements; sampled trajectories differ across configurations.
 
 ## Message
 

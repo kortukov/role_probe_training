@@ -31,3 +31,5 @@ The official benchmark data source is `https://s3.us-west-2.amazonaws.com/appwor
 Run `appworld_check.py` in the Inspect client environment to verify two parallel reference solutions and scoring when Inspect interrupts a trajectory at a message limit.
 
 The combined report is generated with `appworld_report.py --dataset NAME=SHARD0_DIRECTORY,SHARD1_DIRECTORY --output experiment_reports/agentic/appworld`. It verifies unique, complete coverage against the shared selection manifest, writes `data/NAME.jsonl`, and updates metrics and the appendix without overwriting the main report. Combined throughput uses the interval from the first shard start to the last shard finish; both clocks are on the same node.
+
+Current collection: optimized one-GPU pilot `runs/1489112`; two-GPU pilot and full splits `runs/1489157`. Starting both inference replicas took 95 seconds with local checkpoint/compilation caches; split collection timings exclude that startup. The native checkpoint uses MXFP4 expert weights and BF16 activation computation. Consolidated training trajectories are `data/train.jsonl`; raw logs and generation contexts remain under the run directories.
