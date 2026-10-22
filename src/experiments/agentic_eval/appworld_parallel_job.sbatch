@@ -89,8 +89,13 @@ print('Two-GPU pilot validated.')
 PYCODE
  fi
 done
+report_args=()
+for split in train test_normal test_challenge; do
+ report_args+=(--dataset "$split=$run_dir/$split/shard0,$run_dir/$split/shard1")
+done
+report_args+=(--dataset "pilot_two_gpus=$run_dir/pilot/shard0,$run_dir/pilot/shard1")
+if [[ -n "${APPWORLD_PILOT_ROOT:-}" ]]; then
+ report_args+=(--dataset "pilot_serial=$APPWORLD_PILOT_ROOT/train-c1" --dataset "pilot_one_gpu=$APPWORLD_PILOT_ROOT/train-c8")
+fi
 uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_report.py" \
- --dataset "train=$run_dir/train/shard0,$run_dir/train/shard1" \
- --dataset "test_normal=$run_dir/test_normal/shard0,$run_dir/test_normal/shard1" \
- --dataset "test_challenge=$run_dir/test_challenge/shard0,$run_dir/test_challenge/shard1" \
- --output experiment_reports/agentic/appworld
+ "${report_args[@]}" --output experiment_reports/agentic/appworld

@@ -2,10 +2,11 @@
 
 ## Current experiments
 
-`experiment_reports/agentic/` contains four current experiments:
+`experiment_reports/agentic/` contains five current experiments:
 
 - `tau2_retail_full`: 114 tasks; 73 solved (64.04%).
 - `swe_bench_full`: 500 tasks; 11 solved (2.20% counting errors as failures).
+- `appworld`: separate train, normal-test and challenge-test trajectory collections.
 - `probe_transfer`: layer-12 role recognition on those 614 histories.
 - `probe_layer_comparison`: layers 4, 8, 12, 16 and 20 on the same histories.
 
@@ -19,7 +20,9 @@ stale-material removal follow [REPORT_WRITING.md](REPORT_WRITING.md).
 Use Inspect for execution, logs, scores and concurrency. Clients and the vLLM
 server use separate locked uv projects because their dependency requirements
 differ. Retail uses `src/experiments/agentic_eval`; SWE uses its `swe/` project
-with swebench 4.1.0; serving uses its `server/` project with vLLM 0.11.0. After
+with swebench 4.1.0. New AppWorld and repaired SWE runs use `server_current/`
+(vLLM 0.32.0, compiled Triton kernels). `server/` (vLLM 0.11.0) remains for
+retail and reproduction of the recorded SWE cohort. After
 syncing a client lock, install the root package into that client with
 `uv pip install --python CLIENT/.venv/bin/python --no-deps -e .`, then use
 `uv run --frozen --no-sync`. Do not modify the probe-training environment.
@@ -42,7 +45,9 @@ Gold-patch scoring and Inspect Python/bash-session/editor tools passed validatio
 Use official task images pinned by OCI digest in `swe_bench_full/image_manifest.json`;
 `apptainer_mirror.py` retrieves them through mirror.gcr.io. This cache is a runtime
 source, not a separate experiment. Verified missing blobs can be seeded into the
-Apptainer cache with `repair_image_layers.py`. Retry infrastructure failures only
+Apptainer cache with `repair_image_layers.py`. For new SWE runs, prepare selected
+SIFs on a CPU allocation with `cache_swe_image.py`; `SWE_IMAGE_CACHE` enables
+verified local images and avoids GPU-side registry/packaging stalls. Retry infrastructure failures only
 when no model call occurred, never because an attempted solution failed.
 
 Generation took 85 minutes on one B200 for retail and 72–84 minutes across four
@@ -111,3 +116,10 @@ reference solutions passed. Keep benchmark data and derived task content out of
 Git, as requested by the benchmark authors. Tune only on train/dev; inspect test
 results in aggregate. Measure rollout time with the parent's monotonic clock,
 not AppWorld's simulated time. Training-split collection does not train weights.
+
+AppWorld scoring must run even when Inspect interrupts generation at a limit.
+The adapter evaluates the final world state in a shielded `finally` block before
+closing its worker; `appworld_check.py` verifies this and parallel oracle solutions.
+The two-GPU launcher uses independent replicas and disjoint shards, not tensor
+parallelism. Batch latency and steady collection throughput are different; use
+the current report for measured values rather than extrapolating from GPU count.

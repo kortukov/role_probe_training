@@ -5,6 +5,7 @@ Task success counts all assigned attempts, including errors. Scenario success re
 | Dataset | Tasks | Successes | Errors | Step-limited | Task success | Scenario success |
 |---|---:|---:|---:|---:|---:|---:|
 | train | 90 | 38 | 0 | 3 | 42.2% | 23.3% |
+| test_normal | 168 | 45 | 0 | 9 | 26.8% | 3.6% |
 | pilot_serial | 4 | 2 | 0 | 0 | 50.0% | — |
 | pilot_one_gpu | 4 | 1 | 0 | 0 | 25.0% | — |
 | pilot_two_gpus | 4 | 2 | 0 | 0 | 50.0% | — |
@@ -16,6 +17,19 @@ Collection time includes environment initialization, model calls, tool execution
 | Dataset | GPUs | Concurrent worlds allowed | Collection minutes | Attempts/hour | Median rollout seconds |
 |---|---:|---:|---:|---:|---:|
 | train | 2 | 16 | 6.7 | 800.5 | 49.9 |
+| test_normal | 2 | 16 | 14.4 | 700.3 | 62.4 |
 | pilot_serial | 1 | 1 | 2.9 | 84.1 | 40.6 |
 | pilot_one_gpu | 1 | 8 | 1.8 | 132.3 | 50.7 |
 | pilot_two_gpus | 2 | 16 | 1.9 | 126.2 | 46.9 |
+
+## Trajectory coverage
+
+Reasoning-bearing trajectories contain an explicit assistant thinking field. Tool-bearing trajectories contain at least one tool reply. Attempts lacking either are retained, not silently removed.
+
+| Dataset | With reasoning | With tool replies | Total |
+|---|---:|---:|---:|
+| train | 90 | 88 | 90 |
+| test_normal | 168 | 163 | 168 |
+| pilot_serial | 4 | 4 | 4 |
+| pilot_one_gpu | 4 | 4 | 4 |
+| pilot_two_gpus | 4 | 4 | 4 |

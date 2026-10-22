@@ -20,11 +20,11 @@ The four-task training pilot completed without evaluation errors:
 | One GPU, concurrent worlds | 1.81 min |
 | Two GPUs, concurrent worlds | 1.90 min |
 
-The full training split completed in **6.75 minutes on two GPUs**: **38/90 tasks succeeded (42.2%)**, with no evaluation errors. Both held-out test splits are running separately. Pilot task scores and detailed timings are in the [appendix](APPENDIX.md). These are small, single-batch measurements; sampled trajectories differ across configurations.
+The full training split completed in **6.75 minutes on two GPUs**: **38/90 tasks succeeded (42.2%)**, with no evaluation errors. Normal-test evaluation is complete: **45/168 tasks succeeded (26.8%)**, with no evaluation errors. The challenge split is running. Pilot task scores and detailed timings are in the [appendix](APPENDIX.md). These are small, single-batch measurements; sampled trajectories differ across configurations.
 
 ## Message
 
-Concurrent worlds reduce the measured four-trajectory batch time, but a second GPU does not improve this small batch. One inference GPU is therefore a reasonable starting point for small on-policy batches. Full collection uses two replicas to provide more capacity across many tasks; its throughput is measured separately.
+Concurrent worlds reduce the measured four-trajectory batch time, but a second GPU did not reduce latency in this small pilot. One inference GPU is therefore a reasonable starting point for small on-policy batches. Full collection uses two replicas to provide more capacity across many tasks; its throughput is measured separately.
 
 These timings cover trajectory generation, not optimization or synchronization of updated model weights. Future on-policy training must keep each rollout batch tied to the learner's current checkpoint.
 

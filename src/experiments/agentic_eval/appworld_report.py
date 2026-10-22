@@ -43,6 +43,8 @@ def summarize(roots):
     metrics = {
         'sources': [str(root) for root in roots], 'tasks': len(rows), 'successes': successes,
         'task_success': successes / len(rows), 'errors': sum(bool(r['error']) for r in rows),
+        'reasoning_bearing': sum(any(m.get('thinking') for m in r['messages']) for r in rows),
+        'tool_bearing': sum(any(m['role'] == 'tool' for m in r['messages']) for r in rows),
         'step_limited': sum(s.get('step_limit', False) for s in samples),
         'scenarios': len(groups),
         'scenario_success': sum(all(v) for v in groups.values()) / len(groups) if complete_groups else None,
@@ -87,6 +89,12 @@ def main():
     for name, result in metrics.items():
         median = f"{result['rollout_median_seconds']:.1f}" if result['rollout_median_seconds'] is not None else '—'
         lines.append(f"| {name} | {result['gpus']} | {result['concurrency']} | {result['wall_seconds'] / 60:.1f} | {result['trajectories_per_hour']:.1f} | {median} |")
+    lines += ['', '## Trajectory coverage', '',
+        'Reasoning-bearing trajectories contain an explicit assistant thinking field. Tool-bearing trajectories contain at least one tool reply. Attempts lacking either are retained, not silently removed.', '',
+        '| Dataset | With reasoning | With tool replies | Total |',
+        '|---|---:|---:|---:|']
+    for name, result in metrics.items():
+        lines.append(f"| {name} | {result['reasoning_bearing']} | {result['tool_bearing']} | {result['tasks']} |")
     (args.output / 'APPENDIX.md').write_text('\n'.join(lines) + '\n')
     print(json.dumps(metrics, indent=2))
 
