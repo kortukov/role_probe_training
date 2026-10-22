@@ -13,6 +13,7 @@ set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export PATH="$PWD/.tools/bin:$PATH"
 source /etc/slurm/local_job_dir.sh
+export VLLM_USE_FLASHINFER_SAMPLER=0
 project=src/experiments/agentic_eval
 export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
@@ -45,7 +46,7 @@ for shard in 0 1; do
   --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$((port+shard))" \
   --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
   --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai \
-  --enable-auto-tool-choice --enforce-eager > "$run_dir/server-$shard.log" 2>&1 &
+  --enable-auto-tool-choice --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 > "$run_dir/server-$shard.log" 2>&1 &
  server_pids+=("$!")
 done
 for shard in 0 1; do
