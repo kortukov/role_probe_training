@@ -2,7 +2,13 @@
 name = "role-probe-eval-server-current"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
-dependencies = ["vllm==0.32.0"]
+dependencies = [
+    "ninja>=1.13.2",
+    "nvidia-cuda-cccl==13.0.85",
+    "nvidia-cuda-nvcc==13.0.88",
+    "nvidia-nvvm==13.0.88",
+    "vllm==0.32.0",
+]
 
 [tool.uv]
 cache-dir = ".uv-cache"

@@ -17,10 +17,14 @@ The pilot uses the same four seeded training tasks with one and eight permitted 
 
 Each worker runs in Apptainer with no network, no host home/project mounts, read-only benchmark data and its own writable output directory. AppWorld's syntax and execution guards remain enabled. Only the parent Inspect process can access the inference server. The prompt follows the API discovery and completion protocol in the [official minimal agent](https://github.com/StonyBrookNLP/appworld/blob/v0.1.3/notebooks/minimal_agent.ipynb), using a structured Python tool instead of presenting execution output as user messages.
 
-Settings: GPT-OSS-20B, high reasoning, temperature 1, seed 123, at most 50 Python interactions, 8,192 generated tokens per call, 32,768-token context, 500,000 cumulative tokens and 1,800 seconds per task. No automatic selection of successful retries. Implementation: [adapter](../../../../src/role_probe_training/trajectories/appworld.py), [runner](../../../../src/experiments/agentic_eval/appworld_run.py), [worker](../../../../src/experiments/agentic_eval/appworld_worker.py). Paths in these links are relative to this report folder.
+Server: vLLM 0.32.0 with Triton attention and MoE kernels; eager execution. The CUDA compiler packages are pinned in its lockfile.
+
+Settings: GPT-OSS-20B, high reasoning, temperature 1, seed 123, at most 50 Python interactions, 8,192 generated tokens per call, 32,768-token context, 2,000,000 cumulative tokens and 1,800 seconds per task. No automatic selection of successful retries. Implementation: [adapter](../../../../src/role_probe_training/trajectories/appworld.py), [runner](../../../../src/experiments/agentic_eval/appworld_run.py), [worker](../../../../src/experiments/agentic_eval/appworld_worker.py). Paths in these links are relative to this report folder.
 
 ## Outputs and timings
 
 `runs/<job>/<split>/` contains the selection/configuration manifest, original Inspect logs, `trajectories.jsonl`, `generations.jsonl`, task summary and `timing.json`. The trajectory schema matches the retail and SWE exports: message roles, assistant reasoning, structured tool calls and named tool replies. Timing records separate environment loading, tool execution and total rollout time. Parent-process monotonic clocks avoid AppWorld's simulated time. Data, task descriptions and generated conversations stay on cluster storage and are excluded from Git, following AppWorld's request not to publish decrypted benchmark content.
 
 The official benchmark data source is `https://s3.us-west-2.amazonaws.com/appworld.dev/data-0.1.0.bundle`; local data is `.cache/appworld/data`. Preserve manifests and the exact cached container for reproduction; a future `latest` image may differ.
+
+Run `appworld_check.py` in the Inspect client environment to verify two parallel reference solutions and scoring when Inspect interrupts a trajectory at a message limit.

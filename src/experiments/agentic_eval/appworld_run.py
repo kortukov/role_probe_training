@@ -38,7 +38,12 @@ def main():
         'model':'openai/gpt-oss-20b', 'model_revision':'6cee5e81ee83917806bbde320786a8fb61efebee',
         'git_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
         'container_sha256':hashlib.sha256(Path(args.image).read_bytes()).hexdigest(),
-        'data_source':'https://s3.us-west-2.amazonaws.com/appworld.dev/data-0.1.0.bundle'}
+        'data_source':'https://s3.us-west-2.amazonaws.com/appworld.dev/data-0.1.0.bundle',
+        'source_sha256':{str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in [
+            Path(__file__),Path(__file__).with_name('appworld_worker.py'),
+            Path(__file__).with_name('appworld_job.sbatch'),
+            Path('src/role_probe_training/trajectories/appworld.py'),
+            Path(__file__).parent/'server_current/uv.lock',Path(__file__).parent/'swe/uv.lock']}}
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     model = get_model('vllm/openai/gpt-oss-20b',base_url=args.base_url,api_key='local',
         config=GenerateConfig(temperature=1,seed=args.seed,max_tokens=args.max_tokens,
@@ -48,7 +53,7 @@ def main():
                          args.output.name,max_steps=args.max_steps)
     started=time.perf_counter()
     logs=eval(task,model=model,max_samples=args.concurrency,max_connections=args.concurrency,
-              time_limit=1800,token_limit=500000,fail_on_error=False,
+              time_limit=1800,token_limit=2000000,fail_on_error=False,
               log_dir=str(args.output/'logs'),log_model_api=True,display='plain')
     elapsed=time.perf_counter()-started
     export_logs([l.location for l in logs],args.output,'appworld_'+args.split,manifest)

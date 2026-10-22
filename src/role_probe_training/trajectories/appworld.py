@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import time
 
+import anyio
+
 from inspect_ai import Task
 from inspect_ai.dataset import Sample
 from inspect_ai.model import ChatMessageSystem, ChatMessageUser
@@ -112,13 +114,18 @@ def appworld_task(task_ids, split, image, data, outputs, experiment, max_steps=5
                 state.messages = [ChatMessageSystem(content=PROMPT), ChatMessageUser(content=
                     'Supervisor: '+json.dumps(world.info['supervisor'])+'\n\nTask: '+world.info['instruction'])]
                 state.tools = [python()]
-                await generate(state, tool_calls='loop')
-                result = await world.request('evaluate')
-                state.metadata['appworld'] = {**result, 'split': split, 'steps': steps,
-                    'completed': completed, 'step_limit': steps >= max_steps and not completed,
-                    'load_seconds': loaded-started, 'tool_seconds': tool_seconds,
-                    'rollout_seconds': time.perf_counter()-loaded,
-                    'total_seconds': time.perf_counter()-started}
+                try:
+                    state = await generate(state, tool_calls='loop')
+                finally:
+                    # Inspect still scores tasks stopped by a token/message/time limit.
+                    # Evaluate the final world state before closing its worker.
+                    with anyio.CancelScope(shield=True):
+                        result = await world.request('evaluate')
+                        state.metadata['appworld'] = {**result, 'split': split, 'steps': steps,
+                            'completed': completed, 'step_limit': steps >= max_steps and not completed,
+                            'load_seconds': loaded-started, 'tool_seconds': tool_seconds,
+                            'rollout_seconds': time.perf_counter()-loaded,
+                            'total_seconds': time.perf_counter()-started}
             return state
         return solve
     return Task(name='appworld_'+split, dataset=[Sample(id=i, input=i, metadata={}) for i in task_ids],
