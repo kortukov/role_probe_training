@@ -6,6 +6,7 @@ from pathlib import Path
 import time
 from inspect_ai.log import read_eval_log
 from openai import AsyncOpenAI
+from jsonschema import Draft202012Validator
 
 async def main():
     p=argparse.ArgumentParser(__doc__)
@@ -29,7 +30,18 @@ async def main():
         started=time.perf_counter()
         try:
             r=await client.chat.completions.create(**(request|{'temperature':temperature}))
-            result={'error':None,'finish_reason':r.choices[0].finish_reason,'usage':r.usage.model_dump(),
+            validation_errors=[]
+            schemas={t['function']['name']:t['function']['parameters'] for t in request['tools']}
+            for call in r.choices[0].message.tool_calls or []:
+                if call.function.name not in schemas:
+                    validation_errors.append('Unknown function: '+call.function.name)
+                    continue
+                try:
+                    arguments=json.loads(call.function.arguments)
+                    validation_errors.extend(error.message for error in Draft202012Validator(schemas[call.function.name]).iter_errors(arguments))
+                except json.JSONDecodeError:
+                    validation_errors.append('Invalid JSON arguments')
+            result={'error':None,'tool_validation_errors':validation_errors,'finish_reason':r.choices[0].finish_reason,'usage':r.usage.model_dump(),
                     'tool_calls':len(r.choices[0].message.tool_calls or [])}
         except Exception as exc:
             result={'error':str(exc)}

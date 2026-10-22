@@ -30,7 +30,7 @@ class ApptainerSandbox(SandboxEnvironment):
         instance = "swe-" + uuid.uuid4().hex[:16]
         obj = cls(directory, instance)
         try:
-            result = await subprocess(["apptainer", "build", "--fix-perms", "--sandbox", str(directory / "rootfs"), "docker://" + str(config)], timeout=1800)
+            result = await subprocess(["apptainer", "build", "--fix-perms", "--sandbox", str(directory / "rootfs"), str(config) if Path(str(config)).is_file() else "docker://" + str(config)], timeout=1800)
             if not result.success:
                 raise RuntimeError("Image preparation failed: " + result.stderr[-4000:])
             (directory / "image-build.log").write_text(result.stdout + result.stderr)

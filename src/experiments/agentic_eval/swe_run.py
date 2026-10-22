@@ -25,6 +25,7 @@ def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument("--benchmark", choices=["tau2_retail", "swe_bench"], default="swe_bench")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--sample-id", action="append")
     parser.add_argument("--samples", type=int, default=20)
     parser.add_argument("--all", action="store_true", help="Evaluate every dataset sample")
     parser.add_argument("--seed", type=int, default=123)
@@ -53,6 +54,10 @@ def main():
         from role_probe_training.trajectories.apptainer_mirror import sandbox_config
         task = swe_bench(sandbox_type="apptainer", sandbox_config=sandbox_config)
     ordered = sorted(task.dataset, key=lambda sample: str(sample.id))
+    if args.sample_id:
+        ordered = [sample for sample in ordered if str(sample.id) in set(args.sample_id)]
+        if len(ordered) != len(set(args.sample_id)):
+            parser.error("Unknown sample ID")
     random.Random(args.seed).shuffle(ordered)
     full_selection = [sample.id for sample in (ordered if args.all else ordered[:args.samples])]
     selected = full_selection[args.shard_index::args.shard_count]
@@ -62,8 +67,8 @@ def main():
     if (args.output / "manifest.json").exists() and not args.prepare_only:
         raise ValueError("Use a fresh output directory for each run (avoid overwriting results)")
     manifest = {"benchmark": args.benchmark, "sample_ids": selected, "selection_seed": args.seed,
-                "selection": "shuffle sorted full dataset with Python Random; take prefix",
-                "full_selection": full_selection, "dataset_size": len(ordered), "model_id": "openai/gpt-oss-20b",
+                "selection": "explicit sample IDs" if args.sample_id else "shuffle sorted full dataset with Python Random; take prefix",
+                "full_selection": full_selection, "dataset_size": len(task.dataset), "model_id": "openai/gpt-oss-20b",
                 "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
                 "user_model": args.user_model if args.benchmark == "tau2_retail" else None,
                 "settings": vars(args) | {"output": str(args.output)},
@@ -71,11 +76,11 @@ def main():
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
                 "sandbox_provider": "apptainer (writable isolated instance; network none; no host binds); digest-pinned official images via mirror.gcr.io",
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "swe/uv.lock", Path(__file__).with_name("swe_job.sbatch"), Path(__file__).parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/agentic/swe_bench_full/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "swe/uv.lock", Path(__file__).with_name("swe_job.sbatch"), Path(__file__).parent / os.environ.get("SWE_SERVER_PROJECT", "server") / "uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/agentic/swe_bench_full/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:
-        print(json.dumps({"sample_ids": selected, "dataset_size": len(ordered)}))
+        print(json.dumps({"sample_ids": selected, "dataset_size": len(task.dataset)}))
         return
     model = get_model("vllm/openai/gpt-oss-20b", base_url=args.base_url, api_key="local",
                       config=GenerateConfig(temperature=args.temperature, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,

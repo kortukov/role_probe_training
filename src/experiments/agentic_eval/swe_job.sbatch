@@ -23,6 +23,17 @@ export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK" TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR" "$TIKTOKEN_CACHE_DIR"
 project=src/experiments/agentic_eval
 client_project="$project/swe"
+export SWE_SERVER_PROJECT="${SWE_SERVER_PROJECT:-server_current}"
+export SWE_IMAGE_CACHE="${SWE_IMAGE_CACHE:-$PWD/.cache/swe-images}"
+if [[ "$SWE_SERVER_PROJECT" == server_current ]]; then
+ export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+ export PATH="$CUDA_HOME/bin:$PATH"
+ export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8 VLLM_USE_FLASHINFER_SAMPLER=0
+ server_args=(--attention-backend TRITON_ATTN --moe-backend triton
+  --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16)
+else
+ server_args=(--enforce-eager --disable-log-requests)
+fi
 export APPTAINER_CACHEDIR="$LOCAL_JOB_DIR/apptainer-cache"
 export APPTAINER_TMPDIR="$LOCAL_JOB_DIR/apptainer-tmp"
 mkdir -p "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR"
@@ -36,11 +47,11 @@ cleanup() {
     fi
     kill "$server_pid" 2>/dev/null || true
 }
-uv run --project "$project/server" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+uv run --project "$project/$SWE_SERVER_PROJECT" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
     --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
     --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
     --tool-call-parser openai --enable-auto-tool-choice \
-    --enforce-eager --disable-log-requests > "$run_dir/server.log" 2>&1 &
+    "${server_args[@]}" > "$run_dir/server.log" 2>&1 &
 server_pid=$!
 trap cleanup EXIT
 ready=0
@@ -53,4 +64,4 @@ if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
 uv run --project "$client_project" --frozen --no-sync python "$project/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
 uv run --project "$client_project" --frozen --no-sync python "$project/swe_run.py" \
-    --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" --benchmark swe_bench --concurrency 8 --time-limit 1800 --shard-index "${SLURM_ARRAY_TASK_ID:-0}" --shard-count "${SWE_SHARD_COUNT:-1}" "$@"
+    --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" --benchmark swe_bench --temperature 1 --message-limit 200 --token-limit 2000000 --concurrency 8 --time-limit 1800 --shard-index "${SLURM_ARRAY_TASK_ID:-0}" --shard-count "${SWE_SHARD_COUNT:-1}" "$@"

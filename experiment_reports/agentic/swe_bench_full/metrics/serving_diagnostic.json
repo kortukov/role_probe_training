@@ -2,6 +2,7 @@
   "contexts": 4,
   "requests": 8,
   "api_errors": 0,
+  "tool_schema_failures": 0,
   "responses_with_tool_calls": 8,
   "selection": "First failed Harmony request from each of the first four sorted task IDs in run 1461197",
   "temperatures": [
@@ -9,15 +10,15 @@
     1
   ],
   "vllm_version": "0.32.0",
-  "source": "experiment_reports/agentic/appworld/runs/1489157/swe-request-diagnostic.json",
-  "source_log_directory": "experiment_reports/agentic/swe_bench_full/runs/1461197/logs",
+  "source": "experiment_reports/agentic/swe_bench_full/diagnostic/runs/1489368/request-diagnostic.json",
   "script": "src/experiments/agentic_eval/swe_replay.py",
   "results": [
     {
       "sample_id": "astropy__astropy-14182",
       "temperature": 0,
-      "seconds": 5.003119374625385,
+      "seconds": 5.540617498103529,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 49,
@@ -37,8 +38,9 @@
     {
       "sample_id": "astropy__astropy-14182",
       "temperature": 1,
-      "seconds": 4.938787873834372,
+      "seconds": 5.475257333833724,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 46,
@@ -58,8 +60,9 @@
     {
       "sample_id": "astropy__astropy-7166",
       "temperature": 0,
-      "seconds": 5.23775447672233,
+      "seconds": 5.770471733994782,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 88,
@@ -79,8 +82,9 @@
     {
       "sample_id": "astropy__astropy-7166",
       "temperature": 1,
-      "seconds": 5.103566264733672,
+      "seconds": 5.652353573124856,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 69,
@@ -100,8 +104,9 @@
     {
       "sample_id": "django__django-10999",
       "temperature": 0,
-      "seconds": 5.125878443010151,
+      "seconds": 5.666902634315193,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 71,
@@ -121,17 +126,18 @@
     {
       "sample_id": "django__django-10999",
       "temperature": 1,
-      "seconds": 5.333584439940751,
+      "seconds": 5.715530334040523,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
-        "completion_tokens": 106,
+        "completion_tokens": 79,
         "prompt_tokens": 10838,
-        "total_tokens": 10944,
+        "total_tokens": 10917,
         "completion_tokens_details": {
           "accepted_prediction_tokens": null,
           "audio_tokens": null,
-          "reasoning_tokens": 28,
+          "reasoning_tokens": 25,
           "rejected_prediction_tokens": null,
           "text_tokens": null
         },
@@ -142,8 +148,9 @@
     {
       "sample_id": "django__django-11066",
       "temperature": 0,
-      "seconds": 5.326812652871013,
+      "seconds": 5.846054906025529,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 105,
@@ -163,8 +170,9 @@
     {
       "sample_id": "django__django-11066",
       "temperature": 1,
-      "seconds": 5.119828981813043,
+      "seconds": 5.6609760308638215,
       "error": null,
+      "tool_validation_errors": [],
       "finish_reason": "tool_calls",
       "usage": {
         "completion_tokens": 70,
@@ -181,5 +189,18 @@
       },
       "tool_calls": 1
     }
-  ]
+  ],
+  "end_to_end": {
+    "sample_id": "astropy__astropy-14182",
+    "solved": false,
+    "sample_errors": 0,
+    "model_calls": 36,
+    "model_call_errors": 0,
+    "model_retries": 0,
+    "tool_replies": 35,
+    "existing_tests_passed": 9,
+    "target_tests_passed": 0,
+    "target_tests_failed": 1,
+    "run": "experiment_reports/agentic/swe_bench_full/diagnostic/runs/1489368"
+  }
 }
