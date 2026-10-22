@@ -4,6 +4,7 @@ Images are unpacked into job-local scratch and removed after each sample.
 No host project/home mounts or network access enter the instance.
 """
 import base64
+import hashlib
 import os
 from pathlib import Path
 import shutil
@@ -30,6 +31,12 @@ class ApptainerSandbox(SandboxEnvironment):
         instance = "swe-" + uuid.uuid4().hex[:16]
         obj = cls(directory, instance)
         try:
+            # Validate only selected images, not every item while constructing the dataset.
+            if Path(str(config)).is_file() and metadata.get("local_image_sha256"):
+                with Path(str(config)).open("rb") as stream:
+                    digest = hashlib.file_digest(stream, "sha256").hexdigest()
+                if digest != metadata["local_image_sha256"]:
+                    raise ValueError(f"Cached image hash mismatch: {config}")
             result = await subprocess(["apptainer", "build", "--fix-perms", "--sandbox", str(directory / "rootfs"), str(config) if Path(str(config)).is_file() else "docker://" + str(config)], timeout=1800)
             if not result.success:
                 raise RuntimeError("Image preparation failed: " + result.stderr[-4000:])

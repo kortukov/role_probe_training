@@ -1,6 +1,5 @@
 """Same sandbox/harness, with digest-pinned official images from Google's cache."""
 import json
-import hashlib
 import os
 from pathlib import Path
 from inspect_ai.util import SandboxEnvironmentSpec
@@ -21,11 +20,7 @@ def sandbox_config(kind,sample):
         local = Path(os.environ['SWE_IMAGE_CACHE']) / f'{sample.id}.sif'
         if local.exists():
             metadata = json.loads(local.with_suffix('.json').read_text())
-            digest = hashlib.sha256()
-            with local.open('rb') as stream:
-                for block in iter(lambda: stream.read(1024 * 1024), b''):
-                    digest.update(block)
-            if metadata['source_image'] != source or metadata['sha256'] != digest.hexdigest():
+            if metadata['source_image'] != source:
                 raise ValueError(f'Cached image provenance mismatch: {local}')
             sample.metadata['local_image_sha256'] = metadata['sha256']
             source = str(local.resolve())

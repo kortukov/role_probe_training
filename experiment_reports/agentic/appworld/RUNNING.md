@@ -20,7 +20,7 @@ Each worker runs in Apptainer with no network, no host home/project mounts, read
 
 Server: vLLM 0.32.0 with Triton attention and MoE kernels; compiled execution with CUDA graph batch sizes 1, 2, 4, 8 and 16. FlashInfer sampling and unrelated kernel warmup are disabled. The CUDA compiler packages are pinned in its lockfile.
 
-Settings: GPT-OSS-20B, high reasoning, temperature 1, seed 123, at most 50 Python interactions, 8,192 generated tokens per call, 32,768-token context, 2,000,000 cumulative tokens and 1,800 seconds per task. No automatic selection of successful retries. Implementation: [adapter](../../../../src/role_probe_training/trajectories/appworld.py), [runner](../../../../src/experiments/agentic_eval/appworld_run.py), [worker](../../../../src/experiments/agentic_eval/appworld_worker.py). Paths in these links are relative to this report folder.
+Settings: GPT-OSS-20B, high reasoning, temperature 1, model/selection seed 123, AppWorld environment seed 100 (the pinned engine default), at most 50 Python interactions, 8,192 generated tokens per call, 32,768-token context, 2,000,000 cumulative tokens and 1,800 seconds per task. No automatic selection of successful retries. Implementation: [adapter](../../../src/role_probe_training/trajectories/appworld.py), [runner](../../../src/experiments/agentic_eval/appworld_run.py), [worker](../../../src/experiments/agentic_eval/appworld_worker.py). Paths in these links are relative to this report folder.
 
 ## Outputs and timings
 
@@ -33,3 +33,22 @@ Run `appworld_check.py` in the Inspect client environment to verify two parallel
 The combined report is generated with `appworld_report.py --dataset NAME=SHARD0_DIRECTORY,SHARD1_DIRECTORY --output experiment_reports/agentic/appworld`. It verifies unique, complete coverage against the shared selection manifest, writes `data/NAME.jsonl`, and updates metrics and the appendix without overwriting the main report. Combined throughput uses the interval from the first shard start to the last shard finish; both clocks are on the same node.
 
 Current collection: optimized one-GPU pilot `runs/1489112`; two-GPU pilot and full splits `runs/1489157`. Starting both inference replicas took 95 seconds with local checkpoint/compilation caches; split collection timings exclude that startup. The native checkpoint uses MXFP4 expert weights and BF16 activation computation. Consolidated training trajectories are `data/train.jsonl`; raw logs and generation contexts remain under the run directories.
+
+Only `data/train.jsonl`, `data/test_normal.jsonl` and `data/test_challenge.jsonl` form the canonical corpus. Timing pilots repeat training tasks and remain in their source run directories; report inputs named `pilot_*` update statistics without creating duplicate corpus files.
+
+The full collection job completed successfully in 1:04:37, including startup, the two-GPU pilot, export and reporting. All 675 assigned tasks are present exactly once across the three disjoint canonical files. The existing probe tokenizer was checked on a training trajectory: tokens, ground-truth role labels and message indices align. This experiment does not yet apply probes to AppWorld.
+
+To regenerate all tables and canonical files for the current results:
+
+```bash
+base=experiment_reports/agentic/appworld
+run="$base/runs/1489157"
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentic_eval/appworld_report.py \
+  --dataset "train=$run/train/shard0,$run/train/shard1" \
+  --dataset "test_normal=$run/test_normal/shard0,$run/test_normal/shard1" \
+  --dataset "test_challenge=$run/test_challenge/shard0,$run/test_challenge/shard1" \
+  --dataset "pilot_serial=$base/runs/1489112/train-c1" \
+  --dataset "pilot_one_gpu=$base/runs/1489112/train-c8" \
+  --dataset "pilot_two_gpus=$run/pilot/shard0,$run/pilot/shard1" \
+  --output "$base"
+```

@@ -68,12 +68,14 @@ def main():
         if not name.replace('_', '').replace('-', '').isalnum():
             raise ValueError('Dataset names must be simple file-safe identifiers')
         metrics[name], rows = summarize([Path(path) for path in paths.split(',')])
-        target = args.output / 'data' / f'{name}.jsonl'
-        temporary = target.with_suffix('.tmp')
-        with temporary.open('w') as stream:
-            for row in sorted(rows, key=lambda r: r['sample_id']):
-                stream.write(json.dumps(row, ensure_ascii=False) + '\n')
-        temporary.replace(target)
+        # Timing pilots repeat training tasks; keep them out of the canonical corpus.
+        if not name.startswith('pilot_'):
+            target = args.output / 'data' / f'{name}.jsonl'
+            temporary = target.with_suffix('.tmp')
+            with temporary.open('w') as stream:
+                for row in sorted(rows, key=lambda r: r['sample_id']):
+                    stream.write(json.dumps(row, ensure_ascii=False) + '\n')
+            temporary.replace(target)
     (args.output / 'metrics/results.json').write_text(json.dumps(metrics, indent=2) + '\n')
     lines = ['# Supporting results', '',
         'Task success counts all assigned attempts, including errors. Scenario success requires all three task variants to succeed and is omitted for incomplete scenario subsets. Step-limited attempts exhausted the Python interaction allowance.', '',

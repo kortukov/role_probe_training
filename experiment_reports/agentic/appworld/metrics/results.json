@@ -39,6 +39,26 @@
     "gpus": 2,
     "concurrency": 16
   },
+  "test_challenge": {
+    "sources": [
+      "experiment_reports/agentic/appworld/runs/1489157/test_challenge/shard0",
+      "experiment_reports/agentic/appworld/runs/1489157/test_challenge/shard1"
+    ],
+    "tasks": 417,
+    "successes": 105,
+    "task_success": 0.2517985611510791,
+    "errors": 0,
+    "reasoning_bearing": 417,
+    "tool_bearing": 415,
+    "step_limited": 46,
+    "scenarios": 139,
+    "scenario_success": 0.04316546762589928,
+    "wall_seconds": 2337.47668,
+    "trajectories_per_hour": 642.2310061292247,
+    "rollout_median_seconds": 76.8502965606749,
+    "gpus": 2,
+    "concurrency": 16
+  },
   "pilot_serial": {
     "sources": [
       "experiment_reports/agentic/appworld/runs/1489112/train-c1"

@@ -12,6 +12,14 @@ Can AppWorld provide useful on-policy agent trajectories, and how quickly can we
 
 ## Factual observations
 
+All 675 tasks completed without evaluation errors:
+
+| Split | Tasks solved | Task success | Collection time (two GPUs) |
+|---|---:|---:|---:|
+| Train | 38 / 90 | 42.2% | 6.75 min |
+| Normal test | 45 / 168 | 26.8% | 14.39 min |
+| Challenge test | 105 / 417 | 25.2% | 38.96 min |
+
 The four-task training pilot completed without evaluation errors:
 
 | Collection setup | Batch time |
@@ -20,11 +28,13 @@ The four-task training pilot completed without evaluation errors:
 | One GPU, concurrent worlds | 1.81 min |
 | Two GPUs, concurrent worlds | 1.90 min |
 
-The full training split completed in **6.75 minutes on two GPUs**: **38/90 tasks succeeded (42.2%)**, with no evaluation errors. Normal-test evaluation is complete: **45/168 tasks succeeded (26.8%)**, with no evaluation errors. The challenge split is running. Pilot task scores and detailed timings are in the [appendix](APPENDIX.md). These are small, single-batch measurements; sampled trajectories differ across configurations.
+All trajectories preserve explicit assistant reasoning; 666 also contain tool replies. Unsuccessful and execution-limited attempts remain in the corpus. Pilot task scores, execution limits and detailed timings are in the [appendix](APPENDIX.md). The pilot comparisons are small, single-batch measurements; sampled trajectories differ across configurations.
 
 ## Message
 
 Concurrent worlds reduce the measured four-trajectory batch time, but a second GPU did not reduce latency in this small pilot. One inference GPU is therefore a reasonable starting point for small on-policy batches. Full collection uses two replicas to provide more capacity across many tasks; its throughput is measured separately.
+
+AppWorld provides a complete corpus of reasoning-bearing agent trajectories, with successful and unsuccessful attempts in each split. Training tasks have higher measured success than either test split; test data remains held out from future probe training.
 
 These timings cover trajectory generation, not optimization or synchronization of updated model weights. Future on-policy training must keep each rollout batch tied to the learner's current checkpoint.
 
