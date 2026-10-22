@@ -32,3 +32,9 @@ All 500 SWE-bench Verified tasks, pinned dataset revision `c104f840cc67f8b6eec6f
 ## Runtime and interpretation of configuration
 
 The four successful generation shards took 72–84 minutes concurrently on four B200 GPUs. Infrastructure-only retries took another 10 minutes. Generation used temperature 0 and a 32K serving context with the stock 30-message Inspect cap. The official model repository recommends temperature 1/top-p 1; these settings were not changed midway through collection. See [model sampling guidance](https://github.com/openai/gpt-oss). This setup differs from the published terminal harness and evaluation subset.
+
+## Serving repair check
+
+`src/experiments/agentic_eval/swe_replay.py --base-url URL --output FILE` replays four deterministic failed contexts at temperatures 0 and 1 without executing any tools. It resolves all Inspect attachments before sending requests. The passing check used vLLM 0.32.0 from `server_current`, with the same checkpoint, Triton kernels and compiled execution configured by the AppWorld job. Source selection and results are in [metrics/serving_diagnostic.json](metrics/serving_diagnostic.json). This check must not be combined with the full-run success metric or substituted into probe inputs.
+
+`swe_run.py` now exposes `--temperature` and `--message-limit` for a future validated rerun; defaults preserve the recorded configuration.

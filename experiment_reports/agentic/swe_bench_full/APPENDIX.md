@@ -28,3 +28,9 @@ All remaining evaluation errors are model API retry failures. Two image failures
 See [layer 12](../probe_transfer/APPENDIX.md#swe_bench-layer-12) and the [five-layer comparison](../probe_layer_comparison/APPENDIX.md#swe_bench-layer-4). These measure role recognition, separately from benchmark task success.
 
 [Complete benchmark metrics](metrics/summary.json) and [reproduction settings](RUNNING.md).
+
+## Serving diagnosis
+
+All 774 recorded model-call errors contain the same Harmony header-parsing failure. The server rejects malformed generated headers; this is separate from the short conversation limit that stopped many scored attempts.
+
+With the updated serving stack, four previously failing request contexts were replayed at two sampling temperatures. All eight returned a tool call without an API error. This is a targeted request-level check, not a new task-success estimate: the selected contexts came from failures, and their tools were not executed. The original 500-task score remains unchanged. [Diagnostic measurements](metrics/serving_diagnostic.json).

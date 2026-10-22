@@ -1,0 +1,185 @@
+{
+  "contexts": 4,
+  "requests": 8,
+  "api_errors": 0,
+  "responses_with_tool_calls": 8,
+  "selection": "First failed Harmony request from each of the first four sorted task IDs in run 1461197",
+  "temperatures": [
+    0,
+    1
+  ],
+  "vllm_version": "0.32.0",
+  "source": "experiment_reports/agentic/appworld/runs/1489157/swe-request-diagnostic.json",
+  "source_log_directory": "experiment_reports/agentic/swe_bench_full/runs/1461197/logs",
+  "script": "src/experiments/agentic_eval/swe_replay.py",
+  "results": [
+    {
+      "sample_id": "astropy__astropy-14182",
+      "temperature": 0,
+      "seconds": 5.003119374625385,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 49,
+        "prompt_tokens": 13220,
+        "total_tokens": 13269,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 28,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "astropy__astropy-14182",
+      "temperature": 1,
+      "seconds": 4.938787873834372,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 46,
+        "prompt_tokens": 13220,
+        "total_tokens": 13266,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 25,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "astropy__astropy-7166",
+      "temperature": 0,
+      "seconds": 5.23775447672233,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 88,
+        "prompt_tokens": 8664,
+        "total_tokens": 8752,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 27,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "astropy__astropy-7166",
+      "temperature": 1,
+      "seconds": 5.103566264733672,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 69,
+        "prompt_tokens": 8664,
+        "total_tokens": 8733,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 25,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "django__django-10999",
+      "temperature": 0,
+      "seconds": 5.125878443010151,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 71,
+        "prompt_tokens": 10838,
+        "total_tokens": 10909,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 28,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "django__django-10999",
+      "temperature": 1,
+      "seconds": 5.333584439940751,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 106,
+        "prompt_tokens": 10838,
+        "total_tokens": 10944,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 28,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "django__django-11066",
+      "temperature": 0,
+      "seconds": 5.326812652871013,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 105,
+        "prompt_tokens": 11717,
+        "total_tokens": 11822,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 40,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    },
+    {
+      "sample_id": "django__django-11066",
+      "temperature": 1,
+      "seconds": 5.119828981813043,
+      "error": null,
+      "finish_reason": "tool_calls",
+      "usage": {
+        "completion_tokens": 70,
+        "prompt_tokens": 11717,
+        "total_tokens": 11787,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 40,
+          "rejected_prediction_tokens": null,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": null
+      },
+      "tool_calls": 1
+    }
+  ]
+}

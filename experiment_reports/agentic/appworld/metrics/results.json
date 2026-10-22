@@ -1,0 +1,54 @@
+{
+  "pilot_serial": {
+    "sources": [
+      "experiment_reports/agentic/appworld/runs/1489112/train-c1"
+    ],
+    "tasks": 4,
+    "successes": 2,
+    "task_success": 0.5,
+    "errors": 0,
+    "step_limited": 0,
+    "scenarios": 4,
+    "scenario_success": null,
+    "wall_seconds": 171.19315749499947,
+    "trajectories_per_hour": 84.11551145331624,
+    "rollout_median_seconds": 40.58357521961443,
+    "gpus": 1,
+    "concurrency": 1
+  },
+  "pilot_one_gpu": {
+    "sources": [
+      "experiment_reports/agentic/appworld/runs/1489112/train-c8"
+    ],
+    "tasks": 4,
+    "successes": 1,
+    "task_success": 0.25,
+    "errors": 0,
+    "step_limited": 0,
+    "scenarios": 4,
+    "scenario_success": null,
+    "wall_seconds": 108.8107871147804,
+    "trajectories_per_hour": 132.3398201761925,
+    "rollout_median_seconds": 50.656477119540796,
+    "gpus": 1,
+    "concurrency": 8
+  },
+  "pilot_two_gpus": {
+    "sources": [
+      "experiment_reports/agentic/appworld/runs/1489157/pilot/shard0",
+      "experiment_reports/agentic/appworld/runs/1489157/pilot/shard1"
+    ],
+    "tasks": 4,
+    "successes": 2,
+    "task_success": 0.5,
+    "errors": 0,
+    "step_limited": 0,
+    "scenarios": 4,
+    "scenario_success": null,
+    "wall_seconds": 114.146675,
+    "trajectories_per_hour": 126.15347753230657,
+    "rollout_median_seconds": 46.92658843821846,
+    "gpus": 2,
+    "concurrency": 16
+  }
+}
