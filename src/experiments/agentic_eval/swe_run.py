@@ -33,6 +33,8 @@ def main():
     parser.add_argument("--user-model", default="openai/azure/gpt-4.1")
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default="high")
     parser.add_argument("--time-limit", type=int, default=900)
+    parser.add_argument("--temperature", type=float, default=0)
+    parser.add_argument("--message-limit", type=int, default=30)
     parser.add_argument("--max-tokens", type=int, default=16384)
     parser.add_argument("--token-limit", type=int, default=500000)
     parser.add_argument("--shard-index", type=int, default=0)
@@ -76,7 +78,7 @@ def main():
         print(json.dumps({"sample_ids": selected, "dataset_size": len(ordered)}))
         return
     model = get_model("vllm/openai/gpt-oss-20b", base_url=args.base_url, api_key="local",
-                      config=GenerateConfig(temperature=0, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
+                      config=GenerateConfig(temperature=args.temperature, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
                                             reasoning_effort=args.reasoning_effort, max_connections=args.concurrency))
     user = None
     if args.benchmark == "tau2_retail":
@@ -85,7 +87,7 @@ def main():
             **({"api_version": "2024-10-21", "responses_api": False} if "/azure/" in args.user_model else {}))
     logs = eval(task, model=model, model_roles={"user": user} if args.benchmark == "tau2_retail" else None,
                 sample_id=selected, epochs=1, max_samples=args.concurrency, max_connections=args.concurrency,
-                time_limit=args.time_limit, token_limit=args.token_limit, fail_on_error=False,
+                time_limit=args.time_limit, token_limit=args.token_limit, message_limit=args.message_limit, fail_on_error=False,
                 log_dir=str(args.output / "logs"), log_model_api=True, display="plain")
     export_logs([log.location for log in logs], args.output, args.benchmark, manifest)
     if any(log.status != "success" for log in logs):

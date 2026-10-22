@@ -84,7 +84,7 @@ def export_logs(paths, output, benchmark, provenance, sample_sources=None):
     output.mkdir(parents=True, exist_ok=True)
     rows, requests, seen, log_results = [], [], set(), []
     for path in paths:
-        log = read_eval_log(str(path))
+        log = read_eval_log(str(path), resolve_attachments="full")
         log_results.append({"path": str(path), "status": log.status,
                             "results": dump(log.results), "stats": dump(log.stats)})
         for sample in log.samples or []:

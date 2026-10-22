@@ -99,3 +99,15 @@ blocks to avoid JavaScript source-size limits; decode only the selected history.
 Use isolated Playwright so production locks remain unchanged. Keep data-filled
 HTML, raw histories and predictions out of Git; version code, current aggregate
 results and compact provenance.
+
+## AppWorld
+
+The [AppWorld experiment](../experiment_reports/agentic/appworld/README.md) collects
+training and both test splits separately. Each world needs its own process;
+threads or async worlds in one process are unsafe because AppWorld changes global
+time and database state. Our Inspect adapter uses one network-isolated Apptainer
+worker per world, sharing a host-side GPU inference server. Two parallel training
+reference solutions passed. Keep benchmark data and derived task content out of
+Git, as requested by the benchmark authors. Tune only on train/dev; inspect test
+results in aggregate. Measure rollout time with the parent's monotonic clock,
+not AppWorld's simulated time. Training-split collection does not train weights.

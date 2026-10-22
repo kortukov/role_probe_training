@@ -53,4 +53,4 @@ if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
 uv run --project "$client_project" --frozen --no-sync python "$project/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
 uv run --project "$client_project" --frozen --no-sync python "$project/swe_run.py" \
-    --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" --benchmark swe_bench --all --concurrency 8 --time-limit 1800 --shard-index "$SLURM_ARRAY_TASK_ID" --shard-count 4 "$@"
+    --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" --benchmark swe_bench --concurrency 8 --time-limit 1800 --shard-index "${SLURM_ARRAY_TASK_ID:-0}" --shard-count "${SWE_SHARD_COUNT:-1}" "$@"

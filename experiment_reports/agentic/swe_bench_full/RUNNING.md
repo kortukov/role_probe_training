@@ -14,7 +14,7 @@ The isolated client and server projects are `src/experiments/agentic_eval/swe` a
 
 ```bash
 mkdir -p experiment_reports/agentic/swe_bench_full/logs
-sbatch --array=0-3 --exclude=vca-gpu-0701-03 src/experiments/agentic_eval/swe_job.sbatch
+SWE_SHARD_COUNT=4 sbatch --array=0-3 --exclude=vca-gpu-0701-03 src/experiments/agentic_eval/swe_job.sbatch --all
 ```
 
 The two image-layer repairs are recorded in [image_layer_repairs.json](image_layer_repairs.json); `repair_image_layers.py` verifies the official blob hashes before populating the cache. The separate `swe_repair_job.sbatch` explicitly selects only those two tasks. Normalization repairs use `repair_exports.py`, preserving original logs. Finalization rejects replacements unless they repair export errors or image failures with zero prior model calls. See selected-run provenance above; never silently replace failed model attempts with successful retries.

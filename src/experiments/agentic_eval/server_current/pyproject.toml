@@ -1,0 +1,8 @@
+[project]
+name = "role-probe-eval-server-current"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["vllm==0.32.0"]
+
+[tool.uv]
+cache-dir = ".uv-cache"
