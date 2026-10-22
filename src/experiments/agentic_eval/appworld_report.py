@@ -1,60 +1,95 @@
-"""Aggregate split-separated AppWorld scores and rollout timings, without rewriting prose."""
+"""Aggregate disjoint AppWorld shards and timings without rewriting authored prose."""
 import argparse
 from collections import defaultdict
+from datetime import datetime
 import json
 from pathlib import Path
 import statistics
 
 
-def summarize(root):
-    manifest=json.loads((root/'manifest.json').read_text())
-    rows=[json.loads(l) for l in (root/'trajectories.jsonl').open()]
-    expected=set(manifest['sample_ids'])
-    if len(rows)!=len(expected) or {r['sample_id'] for r in rows}!=expected:
-        raise ValueError(f'Incomplete or duplicate selection: {root}')
+def summarize(roots):
+    rows, samples, timings, selections = [], [], [], []
+    for root in roots:
+        manifest = json.loads((root / 'manifest.json').read_text())
+        part = [json.loads(line) for line in (root / 'trajectories.jsonl').open()]
+        expected = set(manifest['sample_ids'])
+        if len(part) != len(expected) or {r['sample_id'] for r in part} != expected:
+            raise ValueError(f'Incomplete or duplicate shard: {root}')
+        selections.append(set(manifest.get('full_selection', manifest['sample_ids'])))
+        rows.extend(part)
+        timing = json.loads((root / 'timing.json').read_text())
+        timings.append(timing)
+        samples.extend(timing['samples'])
+    if any(s != selections[0] for s in selections):
+        raise ValueError('Shards have different full selections')
+    if len(rows) != len(selections[0]) or {r['sample_id'] for r in rows} != selections[0]:
+        raise ValueError('Missing or duplicated tasks across shards')
     if any('attachment://' in json.dumps(r['messages']) for r in rows):
         raise ValueError('Unresolved conversation attachments')
-    groups=defaultdict(list)
-    successes=0
-    for r in rows:
-        success=not r['error'] and r['scores'].get('appworld_success',{}).get('value') in ('C',1)
-        successes+=success
-        groups[r['sample_id'].rsplit('_',1)[0]].append(success)
-    timing=json.loads((root/'timing.json').read_text())
-    durations=[r['rollout_seconds'] for r in timing['samples'] if 'rollout_seconds' in r]
-    complete_groups=all(len(v)==3 for v in groups.values())
-    return {'source':str(root),'tasks':len(rows),'successes':successes,
-        'task_success':successes/len(rows),'errors':sum(bool(r['error']) for r in rows),
-        'scenarios':len(groups),'scenario_success':sum(all(v) for v in groups.values())/len(groups) if complete_groups else None,
-        'wall_seconds':timing['wall_seconds'],'trajectories_per_hour':timing['trajectories_per_hour'],
-        'rollout_median_seconds':statistics.median(durations) if durations else None,
-        'concurrency':timing['concurrency']}
+    groups = defaultdict(list)
+    successes = 0
+    for row in rows:
+        success = not row['error'] and row['scores'].get('appworld_success', {}).get('value') in ('C', 1)
+        successes += success
+        groups[row['sample_id'].rsplit('_', 1)[0]].append(success)
+    durations = [sample['rollout_seconds'] for sample in samples if 'rollout_seconds' in sample]
+    if len(roots) == 1:
+        elapsed = timings[0]['wall_seconds']
+    else:
+        starts = [datetime.fromisoformat(t['started_utc']) for t in timings]
+        ends = [datetime.fromisoformat(t['completed_utc']) for t in timings]
+        elapsed = (max(ends) - min(starts)).total_seconds()
+    complete_groups = all(len(values) == 3 for values in groups.values())
+    metrics = {
+        'sources': [str(root) for root in roots], 'tasks': len(rows), 'successes': successes,
+        'task_success': successes / len(rows), 'errors': sum(bool(r['error']) for r in rows),
+        'step_limited': sum(s.get('step_limit', False) for s in samples),
+        'scenarios': len(groups),
+        'scenario_success': sum(all(v) for v in groups.values()) / len(groups) if complete_groups else None,
+        'wall_seconds': elapsed, 'trajectories_per_hour': len(rows) * 3600 / elapsed,
+        'rollout_median_seconds': statistics.median(durations) if durations else None,
+        'gpus': len(roots), 'concurrency': sum(t['concurrency'] for t in timings),
+    }
+    return metrics, rows
 
 
 def main():
-    p=argparse.ArgumentParser(__doc__)
-    p.add_argument('--dataset',action='append',required=True,help='NAME=RUN_DIRECTORY')
-    p.add_argument('--output',type=Path,required=True)
-    a=p.parse_args()
-    metrics={name:summarize(Path(path)) for name,path in (x.split('=',1) for x in a.dataset)}
-    a.output.mkdir(parents=True,exist_ok=True)
-    (a.output/'metrics').mkdir(exist_ok=True)
-    (a.output/'metrics/results.json').write_text(json.dumps(metrics,indent=2)+'\n')
-    lines=['# Supporting results','',
-        'Task success counts all assigned attempts, including errors. Scenario success requires all three task variants to succeed and is omitted for incomplete scenario subsets.', '',
-        '| Dataset | Tasks | Successes | Errors | Task success | Scenario success |',
+    parser = argparse.ArgumentParser(__doc__)
+    parser.add_argument('--dataset', action='append', required=True, help='NAME=RUN_DIRECTORY[,RUN_DIRECTORY]')
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    (args.output / 'metrics').mkdir(parents=True, exist_ok=True)
+    (args.output / 'data').mkdir(exist_ok=True)
+    metrics = {}
+    for spec in args.dataset:
+        name, paths = spec.split('=', 1)
+        if not name.replace('_', '').replace('-', '').isalnum():
+            raise ValueError('Dataset names must be simple file-safe identifiers')
+        metrics[name], rows = summarize([Path(path) for path in paths.split(',')])
+        target = args.output / 'data' / f'{name}.jsonl'
+        temporary = target.with_suffix('.tmp')
+        with temporary.open('w') as stream:
+            for row in sorted(rows, key=lambda r: r['sample_id']):
+                stream.write(json.dumps(row, ensure_ascii=False) + '\n')
+        temporary.replace(target)
+    (args.output / 'metrics/results.json').write_text(json.dumps(metrics, indent=2) + '\n')
+    lines = ['# Supporting results', '',
+        'Task success counts all assigned attempts, including errors. Scenario success requires all three task variants to succeed and is omitted for incomplete scenario subsets. Step-limited attempts exhausted the Python interaction allowance.', '',
+        '| Dataset | Tasks | Successes | Errors | Step-limited | Task success | Scenario success |',
+        '|---|---:|---:|---:|---:|---:|---:|']
+    for name, result in metrics.items():
+        scenario = f"{100 * result['scenario_success']:.1f}%" if result['scenario_success'] is not None else '—'
+        lines.append(f"| {name} | {result['tasks']} | {result['successes']} | {result['errors']} | {result['step_limited']} | {100 * result['task_success']:.1f}% | {scenario} |")
+    lines += ['', '## Collection throughput', '',
+        'Collection time includes environment initialization, model calls, tool execution and scoring, but excludes inference-server startup and export. Parallel shards use the interval from the earliest start to the latest finish on the same node. Throughput counts attempts, not successes. Median rollout time excludes initialization and is available only for attempts reaching scoring.', '',
+        '| Dataset | GPUs | Concurrent worlds allowed | Collection minutes | Attempts/hour | Median rollout seconds |',
         '|---|---:|---:|---:|---:|---:|']
-    for name,m in metrics.items():
-        scenario=f"{100*m['scenario_success']:.1f}%" if m['scenario_success'] is not None else '—'
-        lines.append(f"| {name} | {m['tasks']} | {m['successes']} | {m['errors']} | {100*m['task_success']:.1f}% | {scenario} |")
-    lines+=['','## Collection throughput','',
-        'Wall time includes environment initialization, model calls, tool execution and scoring, but excludes inference-server startup. Throughput counts attempts, not successes. Median rollout time excludes environment initialization and is available only for attempts reaching scoring.', '',
-        '| Dataset | Concurrent worlds allowed | Collection minutes | Attempts/hour | Median rollout seconds |',
-        '|---|---:|---:|---:|---:|']
-    for name,m in metrics.items():
-        median=f"{m['rollout_median_seconds']:.1f}" if m['rollout_median_seconds'] is not None else '—'
-        lines.append(f"| {name} | {m['concurrency']} | {m['wall_seconds']/60:.1f} | {m['trajectories_per_hour']:.1f} | {median} |")
-    (a.output/'APPENDIX.md').write_text('\n'.join(lines)+'\n')
-    print(json.dumps(metrics,indent=2))
+    for name, result in metrics.items():
+        median = f"{result['rollout_median_seconds']:.1f}" if result['rollout_median_seconds'] is not None else '—'
+        lines.append(f"| {name} | {result['gpus']} | {result['concurrency']} | {result['wall_seconds'] / 60:.1f} | {result['trajectories_per_hour']:.1f} | {median} |")
+    (args.output / 'APPENDIX.md').write_text('\n'.join(lines) + '\n')
+    print(json.dumps(metrics, indent=2))
 
-if __name__=='__main__':main()
+
+if __name__ == '__main__':
+    main()

@@ -6,6 +6,7 @@ from pathlib import Path
 import random
 import subprocess
 import time
+from datetime import datetime, timezone
 
 from inspect_ai import eval
 from inspect_ai.log import read_eval_log
@@ -21,6 +22,8 @@ def main():
     p.add_argument('--split', choices=['train','dev','test_normal','test_challenge'], required=True)
     p.add_argument('--samples', type=int)
     p.add_argument('--concurrency', type=int, default=8)
+    p.add_argument('--shard-index', type=int, default=0)
+    p.add_argument('--shard-count', type=int, default=1)
     p.add_argument('--seed', type=int, default=123)
     p.add_argument('--max-steps', type=int, default=50)
     p.add_argument('--max-tokens', type=int, default=8192)
@@ -30,10 +33,16 @@ def main():
     ids = sorted((Path(args.data)/'datasets'/f'{args.split}.txt').read_text().splitlines())
     random.Random(args.seed).shuffle(ids)
     ids = ids[:args.samples] if args.samples else ids
+    full_selection = ids
+    if not 0 <= args.shard_index < args.shard_count:
+        p.error('Invalid shard index/count')
+    ids = ids[args.shard_index::args.shard_count]
+    if not ids:
+        p.error('Empty shard')
     args.output.mkdir(parents=True, exist_ok=True)
     if (args.output/'manifest.json').exists():
         raise ValueError('Use a fresh output directory')
-    manifest = {'benchmark':'appworld_'+args.split, 'sample_ids':ids,
+    manifest = {'benchmark':'appworld_'+args.split, 'sample_ids':ids, 'full_selection':full_selection,
         'settings':vars(args)|{'output':str(args.output)},
         'model':'openai/gpt-oss-20b', 'model_revision':'6cee5e81ee83917806bbde320786a8fb61efebee',
         'git_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
@@ -42,6 +51,7 @@ def main():
         'source_sha256':{str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in [
             Path(__file__),Path(__file__).with_name('appworld_worker.py'),
             Path(__file__).with_name('appworld_job.sbatch'),
+            Path(__file__).with_name('appworld_parallel_job.sbatch'),
             Path('src/role_probe_training/trajectories/appworld.py'),
             Path(__file__).parent/'server_current/uv.lock',Path(__file__).parent/'swe/uv.lock']}}
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
@@ -51,11 +61,13 @@ def main():
                               max_connections=args.concurrency))
     task = appworld_task(ids,args.split,args.image,args.data,args.output/'worlds',
                          args.output.name,max_steps=args.max_steps)
+    started_utc=datetime.now(timezone.utc).isoformat()
     started=time.perf_counter()
     logs=eval(task,model=model,max_samples=args.concurrency,max_connections=args.concurrency,
               time_limit=1800,token_limit=2000000,fail_on_error=False,
               log_dir=str(args.output/'logs'),log_model_api=True,display='plain')
     elapsed=time.perf_counter()-started
+    completed_utc=datetime.now(timezone.utc).isoformat()
     export_logs([l.location for l in logs],args.output,'appworld_'+args.split,manifest)
     timings=[]
     for log in logs:
@@ -63,6 +75,7 @@ def main():
             timings.append({'sample_id':s.id, **(s.metadata or {}).get('appworld',{}),
                             'error':bool(s.error)})
     (args.output/'timing.json').write_text(json.dumps({'split':args.split,
+        'started_utc':started_utc,'completed_utc':completed_utc,
         'wall_seconds':elapsed,'tasks':len(ids),'concurrency':args.concurrency,
         'trajectories_per_hour':len(timings)*3600/elapsed,'samples':timings},indent=2)+'\n')
     if len(timings)!=len(ids) or any(l.status!='success' for l in logs):
