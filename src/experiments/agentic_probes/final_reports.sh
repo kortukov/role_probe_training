@@ -1,5 +1,5 @@
 #!/bin/bash
-# Rebuild both reports/viewers after all canonical predictions are available.
+# Refresh both metrics/appendices/viewers; preserve authored README and RUNNING files.
 set -euo pipefail
 args=(
  --dataset dolci_tool_use=experiment_reports/agentic/probe_transfer/predictions/dolci

@@ -22,3 +22,7 @@ images and record immutable image digests before evaluation. Keep per-instance
 patches/tests and original `.eval` logs as well as the common JSONL exports.
 
 [Operational notes](../../../agent_docs/AGENTIC_EVALS.md)
+
+## Current workflow
+
+This file preserves the unexecuted pilot preparation. For the validated Apptainer runtime and full evaluation, use [full SWE reproduction](../swe_bench_full/RUNNING.md). Dataset versions and selected IDs remain in [preparation/manifest.json](preparation/manifest.json).

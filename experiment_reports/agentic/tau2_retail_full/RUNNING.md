@@ -11,3 +11,13 @@ Combine completed disjoint shards:
 ## Probe predictions and standalone viewer
 
 See [probe reproduction](../probe_transfer/RUNNING.md) and [layer-comparison reproduction](../probe_layer_comparison/RUNNING.md). The shared `agentic_probes/report.py` script accepts repeated `--dataset NAME=PREDICTION_DIRECTORY`, optional benchmark summary paths, and layer choices. It embeds all data in a standalone `viewer.html`, which stays local and can be downloaded and opened without a server.
+
+## Recorded execution settings
+
+GPT-OSS-20B revision `6cee5e81ee83917806bbde320786a8fb61efebee`, high reasoning, temperature 0, seed 123, vLLM 0.11.0. One attempt per task in this selected run; all dataset tasks included. Per-call output limit 16,384; per-sample cumulative token limit 500,000 and wall-time limit 1,800 seconds. Source manifests record exact versions, task IDs, code hashes, Slurm jobs and model configuration.
+
+114 τ²-bench retail tasks; Azure GPT-4.1 customer simulator (`gpt-4.1-2025-04-14`), 16 concurrent samples. The original upstream 100-turn cap is retained.
+
+## Runtime and interpretation of configuration
+
+The full generation job took 85 minutes on one B200; scoring all five probe layers took 25 minutes together. The earlier 20-task pilot took 27 minutes including startup and export. Per-call and cumulative budgets differ: cumulative API usage includes repeated prompts and simulator calls.

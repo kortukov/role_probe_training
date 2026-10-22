@@ -1,19 +1,19 @@
-# Full SWE-bench Verified: pinned public-cache images
+# SWE-bench full collection: intermediate run
 
 ## Motivation & RQ
 
-Complete the full 500-task benchmark and produce on-policy role-probe trajectories after the first attempt hit Docker Hub pull limits.
+Can the complete SWE-bench dataset be executed after image-download limits interrupted the initial collection?
 
 ## Evaluation setup
 
-Same stock Inspect solver/scorer and Apptainer sandbox. Images are the official `swebench` images cached at `mirror.gcr.io`, with all 500 digests recorded in [image_manifest.json](../swe_bench_full/image_manifest.json). This is not a change to an independently rebuilt image collection. Four shards, eight concurrent samples per shard. Generation run IDs: 1461197 (shard 0), 1461195 (1), 1461196 (2), 1461193 (3).
+We keep the same 500 tasks, agent and test-based scoring while retrieving the official task environments through a public image cache. This is an infrastructure recovery step, not a new scientific comparison. Coverage means the number of tasks for which a selected agent history is available.
 
 ## Factual observations
 
-All 500 image manifests resolved successfully. All four shards completed. Two missing image blobs required infrastructure-only retries; two malformed tool names required normalization repairs.
+All four evaluation shards completed. Two unavailable image layers required retries before model execution; two malformed tool names required repairs to the saved message representation. The resulting 500-task collection and scores are reported in the [final SWE experiment](../swe_bench_full/README.md).
 
 ## Message
 
-The selected, repaired 500-task result and interpretation are in the [final SWE report](../swe_bench_full/README.md). This directory preserves the original shard outputs before those repairs.
+The collection is complete after explicit repairs. Use the final report for scientific conclusions; this directory preserves intermediate attempts and their provenance.
 
-See [RUNNING.md](RUNNING.md).
+See [RUNNING.md](RUNNING.md) for image sources, job records and repair details.

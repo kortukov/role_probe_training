@@ -1,29 +1,27 @@
-# Full τ²-bench retail: GPT-OSS-20B
+# GPT-OSS-20B on full τ²-bench retail
 
 ## Motivation & RQ
 
-Measure model task performance and collect realistic on-policy trajectories for role-probe transfer evaluation.
+How often does GPT-OSS-20B complete retail customer-service tasks, and do its conversations provide realistic data for role-probe evaluation?
 
 ## Evaluation setup
 
-GPT-OSS-20B revision `6cee5e81ee83917806bbde320786a8fb61efebee`, high reasoning, temperature 0, seed 123, vLLM 0.11.0. One attempt per task in this selected run; all dataset tasks included. Per-call output limit 16,384; per-sample cumulative token limit 500,000 and wall-time limit 1,800 seconds. Source manifests record exact versions, task IDs, code hashes, Slurm jobs and model configuration.
+**Tasks and agent.** We evaluate all 114 τ²-bench retail tasks once. GPT-OSS-20B acts as the retail assistant, interacting with a GPT-4.1 customer simulator and using retail tools. The benchmark checks the resulting database state and required communicated information. Successful and unsuccessful histories are both retained.
 
-114 τ²-bench retail tasks; Azure GPT-4.1 customer simulator (`gpt-4.1-2025-04-14`), 16 concurrent samples. The original upstream 100-turn cap is retained.
+**Metrics.** Task success is the fraction of all selected tasks passed; errors and interrupted attempts are not excluded. A 95% Wilson confidence interval describes uncertainty in this one-attempt success rate. We also count histories containing tool replies to establish their usefulness for probe evaluation.
 
 ## Factual observations
 
-| Scorer | Successes / scored | All tasks | Scored rate | Errors as failures | 95% Wilson CI (scored) |
-|---|---:|---:|---:|---:|---|
-| retail_scorer | 73 / 114 | 114 | 64.04% | 64.04% | 54.90%–72.25% |
+| Tasks solved | Task success | 95% confidence interval | Histories containing tool replies |
+|---|---:|---|---:|
+| 73 / 114 | 64.04% | 54.90%–72.25% | 112 / 114 |
 
-Sample errors: 0; limited samples: 4; samples with generation-token caps: 64; failed agent model events: 32. Tool-bearing trajectories: 112/114. See [full metrics](metrics/summary.json), [provenance](metrics/provenance.json), and the [probe report](../probe_transfer/README.md) with its [confusion appendix](../probe_transfer/APPENDIX.md).
-
-The full generation job took 85 minutes on one B200; all five probe layers subsequently took 25 minutes together. The earlier 20-task pilot took 27 minutes, so small exploratory subsets do fit the desired sub-hour feedback cycle.
+Four attempts reached an execution limit. Although no task ended with a top-level evaluation error, recoverable model-call failures and output truncation occurred. [Additional diagnostics](APPENDIX.md) describe these limitations. The histories were subsequently used in the [probe-transfer experiment](../probe_transfer/README.md).
 
 ## Message
 
-This measures τ² retail, whereas OpenAI’s published high-reasoning GPT-OSS-20B retail score is 54.8% on the original τ-bench. Treat that as context, not a matched reproduction. Time/token limits and malformed model headers can affect this run. [OpenAI model card](https://deploymentsafety.openai.com/gpt-oss/model-architecture-data-training-and-evaluations).
+The run produces a complete, scored set of realistic retail histories. The 64.04% result is contextual evidence of task competence, not a reproduction of the published 54.8% result: that reference uses the original τ-bench, whereas this experiment uses τ²-bench. [OpenAI model card](https://deploymentsafety.openai.com/gpt-oss/model-architecture-data-training-and-evaluations).
 
-The trace set includes both successful and unsuccessful/error-ending attempts. Probe metrics describe the retained conversational tokens, not task success.
+Probe recognition and task success answer different questions. The retained failed and interrupted attempts are part of the probe evaluation, rather than selecting only successful conversations.
 
-See [RUNNING.md](RUNNING.md) for reproduction and standalone viewer generation.
+See [RUNNING.md](RUNNING.md) for execution settings, data and viewer reproduction.

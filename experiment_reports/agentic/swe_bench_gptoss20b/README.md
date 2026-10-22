@@ -1,37 +1,21 @@
-# GPT-OSS-20B on SWE-bench Verified: pilot preparation
+# SWE-bench Verified pilot preparation
 
-Status: dataset prepared; execution runtime not validated. Date: 2026-10-21.
+Historical preparation record; subsequent execution is reported in the [full SWE experiment](../swe_bench_full/README.md).
 
-## 1. Motivation & RQ
+## Motivation & RQ
 
-Can a small software-engineering pilot provide task scores and tool-bearing
-trajectories in the same format as retail for role-probe analysis?
+Can a small software-repair pilot provide task scores and tool-use histories in the same format as the retail evaluation?
 
-## 2. Evaluation setup
+## Evaluation setup
 
-Inspect Evals 0.25.0 `swe_bench`; `princeton-nlp/SWE-bench_Verified`, test split,
-revision `c104f840cc67f8b6eec6f759ebc8b2693d585d4a`. Five tasks selected with seed
-123 from 500 sorted IDs; [manifest](preparation/manifest.json). Planned model:
-GPT-OSS-20B, same revision and serving settings as retail. Use the default Inspect
-agent/scorer, official x86_64 instance images, and report resolved fraction,
-Wilson interval, errors, timeouts and token usage. Five cases give pipeline
-signal, not a reliable estimate of full SWE-bench performance. The published
-high-reasoning reference is 60.7% in the
-[model card](https://deploymentsafety.openai.com/gpt-oss/model-architecture-data-training-and-evaluations),
-with a different scaffold/budget.
+We selected five tasks from SWE-bench Verified for GPT-OSS-20B. The planned agent would inspect and modify each repository, with the benchmark test suite determining success. The intended primary metric was the fraction of selected tasks solved. Five tasks would test the collection pipeline, not provide a precise capability estimate.
 
-## 3. Factual observations
+## Factual observations
 
-The pinned dataset and five task manifests were prepared successfully. No
-benchmark inference or scoring has run. The checked cluster node has Apptainer
-but no Docker command; stock Inspect's Docker sandbox cannot run there as-is.
+The dataset and task selection were prepared. No model inference or task scoring was performed in this pilot: the cluster's available container runtime first needed integration with Inspect.
 
-## 4. Message — interpretation and conclusion
+## Message
 
-The same exporter and runner support this benchmark. Execution requires a
-validated Docker-capable host/provider or a separately tested Apptainer adapter.
-An under-hour cold run cannot yet be promised because image preparation and test
-execution may dominate. Start with five tasks, two concurrent sandboxes, after
-pre-pulling the selected images. Do not replace the test scorer with an LLM judge.
+This preparation established the inputs but provided no performance evidence. Runtime integration and validation were subsequently completed for the full experiment; do not treat this unexecuted pilot as a benchmark result.
 
-[How to run this experiment](RUNNING.md)
+See [RUNNING.md](RUNNING.md) for the historical preparation command and a link to the current execution workflow.

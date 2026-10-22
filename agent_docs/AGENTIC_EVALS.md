@@ -141,7 +141,7 @@ The full retail experiment uses all 114 τ² retail tasks, not the original τ-b
 
 Dolci sampling: `src/experiments/agentic_eval/dolci.py`, 1,000 uniform rows, seed 123, revision pinned in the script/manifest. Preserve function_calls/functions and map environment to tool; do not invent analysis channels.
 
-Probe replay uses the original eager forward, capturing layers 4/8/12/16/20 together. Explicit 16,384-token windows retain every token and reset positions/context only at window boundaries. Full-window peak measured 136.67 GiB on B200. Cached whole-model chunks and query tiling showed numerical drift in BF16/MoE; these are not used in production scoring. Report windowed versus single-window coverage separately. `agentic_probes/report.py` creates README, APPENDIX, metrics and an offline standalone viewer from per-trajectory gzip JSON predictions. Keep raw data/predictions/data-filled HTML ignored; push code and aggregate reports periodically.
+Probe replay uses the original eager forward, capturing layers 4/8/12/16/20 together. Explicit 16,384-token windows retain every token and reset positions/context only at window boundaries. Full-window peak measured 136.67 GiB on B200. Cached whole-model chunks and query tiling showed numerical drift in BF16/MoE; these are not used in production scoring. Report windowed versus single-window coverage separately. `agentic_probes/report.py` refreshes APPENDIX, metrics and an offline standalone viewer while preserving authored README/RUNNING prose from per-trajectory gzip JSON predictions. Keep raw data/predictions/data-filled HTML ignored; push code and aggregate reports periodically.
 
 ## Canonical repairs and offline viewer
 
@@ -174,3 +174,5 @@ Final reports are `agentic/probe_transfer` and `agentic/probe_layer_comparison`.
 Layer-12 accuracy is 29.17% / 29.91% / 26.98% (Dolci / retail / SWE), with weak tool
 recall. Layer 4 has much higher tool recall; layer 8 has higher reasoning recall.
 Interpret role-balanced and per-trajectory metrics alongside token accuracy.
+
+Scientific reports follow [REPORT_WRITING.md](REPORT_WRITING.md). The benchmark finalizer writes selected data and metrics; it does not overwrite report narratives.

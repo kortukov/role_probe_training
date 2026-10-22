@@ -30,10 +30,13 @@
 - Store reports, related data and plots under nested
   `experiment_reports/<topic>/<experiment>/` directories. Each experiment's
   `README.md` is the main entry point. Start from `experiment_reports/_template/`.
+- Follow [report-writing rules](agent_docs/REPORT_WRITING.md): keep the main report
+  brief, conceptual and readable; put supporting analyses in APPENDIX and
+  execution details in RUNNING/configuration.
 - Completed reports must contain, in order:
   1. Motivation & RQ.
-  2. Evaluation setup: metrics, baselines, methods, datasets/splits, models,
-     seeds and relevant configuration.
+  2. Evaluation setup: conceptual methods, datasets/splits, models, metrics and
+     baselines. Define every quantity used in the main results before presenting it.
   3. Factual observations, usually supported by plots/tables. Separate what was
      measured from interpretation; do not invent or overstate findings.
   4. Message: interpretation and conclusion, explicitly answering the RQ.
@@ -76,5 +79,6 @@
 - Completed baseline: layer 12 gives conversation-balanced true-role probabilities
   of 88.1% user, 62.3% analysis and 99.6% final on 9/12 completed chats. Use it as
   the initial trajectory-evaluation probe; retain layer 16 for comparison. Both
-  fits emitted line-search warnings; system-prompt transfer was poor, and actual
-  tool-message transfer remains unvalidated. Consult the report before reuse.
+  fits emitted line-search warnings; system-prompt transfer was poor, and that clean-chat check contained no tool
+  messages. Subsequent [agentic evaluation](experiment_reports/agentic/probe_transfer/README.md)
+  measures actual tool-message transfer. Consult both reports before reuse.

@@ -62,7 +62,7 @@ this check does not assert equivalence to vLLM's native Harmony serving prompts.
 
 Main run: Slurm 1448731 on `vca-gpu-0701-02`, completed 2026-10-21; 27m01s
 allocation, 25m25s evaluation. The small summary, manifest, per-task CSV and
-compressed normalized messages are versioned in `metrics/` and `data/`.
+summary artifacts are versioned in `metrics/`; compressed normalized messages remain local in `data/`.
 The full raw run is retained at:
 `/data/cluster/users/kortukov/role_probe_training/experiment_reports/agentic/tau2_retail_gptoss20b/runs/1448731/`.
 The initial budget-limited run is the adjacent `1448719/` directory.
@@ -84,3 +84,34 @@ message/tool/reasoning counts, caps, errors and limit types. `metrics/summary.js
 and `metrics/manifest.json` are copies of the run's corresponding files.
 Keep the original `.eval` and `generations.jsonl` for provider-level reconstruction;
 the portable archive intentionally contains only the evaluated agent's history.
+
+## Recorded pilot configuration
+
+- Inspect AI 0.3.282 / Inspect Evals 0.25.0, `tau2_retail`, base split (114 tasks).
+  Twenty fixed tasks, seed 123, one trial per task per run. The same subset was
+  used for both budget settings. [Final manifest](metrics/manifest.json).
+- GPT-OSS-20B revision `6cee5e81ee83917806bbde320786a8fb61efebee`, native MXFP4,
+  vLLM 0.11.0 / Transformers 4.57.1 / Torch 2.8.0, one B200, eight concurrent
+  samples. High reasoning, temperature 0, generation seed 123. Native Harmony
+  serving with the OpenAI tool parser; eager execution and prefix caching.
+- Azure customer simulator: deployment `gpt-4.1`, verified response model
+  `gpt-4.1-2025-04-14`, temperature 0, 2,048 output tokens/call. Chat completions,
+  API version 2024-10-21. Retail's scorer is deterministic: database state plus
+  required communicated information. There is no model-based grading charge.
+- Main run: 32,768 context tokens, 16,384 output tokens/call, 500,000 cumulative
+  API tokens/sample, 900 seconds/sample, upstream 100 simulator-turn limit;
+  one-hour Slurm job. The earlier pilot had tighter limits, listed below.
+
+## Artifact index
+
+
+
+- [Reusable trajectories.jsonl.gz](data/trajectories.jsonl.gz) — 20 full message
+  records including reasoning, tools, scores, provenance and quality flags; 326 KiB.
+- [Main summary](metrics/summary.json), [per-task CSV](metrics/trajectories.csv),
+  [trace audit](metrics/trace_audit.json), [tokenization checks](metrics/tokenization.json).
+- [Initial pilot summary](metrics/pilot_4096_summary.json) and
+  [job history](metrics/jobs.json), including the corrected tool-parser smoke test
+  and one production-node CUDA startup failure before inference.
+- Raw `.eval` logs, per-generation JSONL and server logs remain under
+  `runs/1448731/` on cluster storage; exact paths and hashes are in the manifests.

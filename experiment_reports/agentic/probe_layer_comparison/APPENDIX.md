@@ -1,6 +1,32 @@
 # Confusion matrices
 
-Rows are ground truth; columns are predictions. Counts exclude headers, special tokens and synthetic tool-schema context. Missing roles have no recall estimate.
+Rows are ground-truth roles; columns are predicted roles. Counts include message-content tokens only. Headers, special tokens and synthetic tool-schema context are excluded. `cot` denotes assistant reasoning; `assistant` denotes non-reasoning assistant content, including tool calls. A missing true role has no recall estimate.
+
+## Supplementary metrics
+
+**Averaging.** Mean conversation accuracy gives each conversation equal weight. Role-balanced accuracy averages recall equally over roles present in the dataset; recall is the fraction of tokens of a true role classified correctly. Dolci has four observed roles; retail and SWE have five. Uniform random prediction over the five possible classes has expected accuracy 20%.
+
+**Segmentation.** Long histories are replayed in separate segments with context reset between them. “Segmented conversations” counts histories requiring more than one segment. “Unsegmented accuracy” is token accuracy restricted to histories that fit in one segment. It measures a different subset, not a controlled effect of segmentation. The segment size is documented in RUNNING.md.
+
+| Dataset | Layer | Content tokens | Mean conversation accuracy | Role-balanced accuracy | Segmented conversations | Unsegmented accuracy |
+|---|---:|---:|---:|---:|---:|---:|
+| dolci_tool_use | 4 | 1,516,257 | 43.55% | 43.32% | 11 / 1000 | 56.50% |
+| dolci_tool_use | 8 | 1,516,257 | 48.75% | 48.93% | 11 / 1000 | 42.18% |
+| dolci_tool_use | 12 | 1,516,257 | 43.84% | 40.37% | 11 / 1000 | 38.93% |
+| dolci_tool_use | 16 | 1,516,257 | 47.91% | 39.71% | 11 / 1000 | 43.40% |
+| dolci_tool_use | 20 | 1,516,257 | 45.88% | 41.37% | 11 / 1000 | 44.45% |
+| tau2_retail | 4 | 2,876,950 | 21.88% | 26.33% | 79 / 114 | 28.78% |
+| tau2_retail | 8 | 2,876,950 | 69.45% | 44.93% | 79 / 114 | 64.33% |
+| tau2_retail | 12 | 2,876,950 | 31.60% | 33.08% | 79 / 114 | 35.66% |
+| tau2_retail | 16 | 2,876,950 | 39.53% | 31.47% | 79 / 114 | 46.14% |
+| tau2_retail | 20 | 2,876,950 | 60.83% | 40.91% | 79 / 114 | 47.01% |
+| swe_bench | 4 | 7,265,153 | 55.97% | 34.52% | 144 / 500 | 63.08% |
+| swe_bench | 8 | 7,265,153 | 36.76% | 40.37% | 144 / 500 | 27.24% |
+| swe_bench | 12 | 7,265,153 | 28.43% | 34.79% | 144 / 500 | 24.59% |
+| swe_bench | 16 | 7,265,153 | 23.00% | 34.25% | 144 / 500 | 22.09% |
+| swe_bench | 20 | 7,265,153 | 34.95% | 39.35% | 144 / 500 | 30.48% |
+
+The [machine-readable results](metrics.json) also report mean true-role probability: the average probability assigned to the correct role, within each true role. This differs from accuracy, which uses the highest-probability class. Individual conversation results are included there and in the viewer.
 
 ## dolci_tool_use layer 4
 
@@ -12,7 +38,7 @@ Rows are ground truth; columns are predictions. Counts exclude headers, special 
 | assistant | 1230 | 3270 | 49949 | 106475 | 145552 |
 | tool | 10925 | 8670 | 78401 | 117325 | 849146 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -32,7 +58,7 @@ Row-normalized percentages:
 | assistant | 964 | 4015 | 44896 | 255644 | 957 |
 | tool | 423159 | 257558 | 165566 | 110651 | 107533 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -52,7 +78,7 @@ Row-normalized percentages:
 | assistant | 761 | 2247 | 37295 | 263127 | 3046 |
 | tool | 443467 | 155398 | 206779 | 128533 | 130290 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -72,7 +98,7 @@ Row-normalized percentages:
 | assistant | 2173 | 754 | 15433 | 281559 | 6557 |
 | tool | 479576 | 151439 | 111017 | 187773 | 134662 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -92,7 +118,7 @@ Row-normalized percentages:
 | assistant | 1190 | 18840 | 16456 | 259179 | 10811 |
 | tool | 342099 | 315085 | 79642 | 135208 | 192433 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -112,7 +138,7 @@ Row-normalized percentages:
 | assistant | 30 | 22 | 3580 | 10773 | 57748 |
 | tool | 83 | 294 | 6132 | 5115 | 177107 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -132,7 +158,7 @@ Row-normalized percentages:
 | assistant | 19 | 2 | 7450 | 64656 | 26 |
 | tool | 955 | 79 | 126386 | 53795 | 7516 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -152,7 +178,7 @@ Row-normalized percentages:
 | assistant | 39 | 1 | 4054 | 68027 | 32 |
 | tool | 2808 | 340 | 65941 | 117491 | 2151 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -172,7 +198,7 @@ Row-normalized percentages:
 | assistant | 282 | 10 | 566 | 70513 | 782 |
 | tool | 7496 | 517 | 9225 | 162459 | 9034 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -192,7 +218,7 @@ Row-normalized percentages:
 | assistant | 512 | 3436 | 639 | 66860 | 706 |
 | tool | 26744 | 8905 | 24756 | 106453 | 21873 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -212,7 +238,7 @@ Row-normalized percentages:
 | assistant | 568 | 4221 | 12170 | 8948 | 161709 |
 | tool | 49836 | 464799 | 36704 | 8003 | 2806923 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -232,7 +258,7 @@ Row-normalized percentages:
 | assistant | 2499 | 2797 | 156325 | 15624 | 10371 |
 | tool | 440058 | 2548311 | 296868 | 21910 | 59118 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -252,7 +278,7 @@ Row-normalized percentages:
 | assistant | 1905 | 1109 | 115582 | 52163 | 16857 |
 | tool | 479975 | 1920490 | 602513 | 237871 | 125416 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -272,7 +298,7 @@ Row-normalized percentages:
 | assistant | 16912 | 16553 | 7525 | 72086 | 74540 |
 | tool | 1295519 | 1351354 | 99421 | 146035 | 473936 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -292,7 +318,7 @@ Row-normalized percentages:
 | assistant | 6264 | 90937 | 9504 | 48108 | 32803 |
 | tool | 799852 | 1226704 | 525102 | 69837 | 744770 |
 
-Row-normalized percentages:
+Row-normalized percentages (the diagonal is role recall):
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
