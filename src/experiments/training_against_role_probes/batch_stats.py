@@ -18,12 +18,22 @@ def main():
     args = p.parse_args()
     tokenizer = AutoTokenizer.from_pretrained('.cache/models/gpt-oss-20b', local_files_only=True)
     lengths, messages, roles = [], [], Counter()
+    prefix_tools = {cap: [] for cap in (4096, 8192, 16384)}
     for line in args.data.open():
         row = json.loads(line)
         encoded = encode_record(tokenizer, row)
         lengths.append(len(encoded['input_ids']))
         messages.append(len(row['messages']))
         roles.update(int(label) for label in encoded['labels'] if label >= 0)
+        last_token = {}
+        for position, message in enumerate(encoded['message_ids']):
+            if message >= 0:
+                origin = encoded['source_message_indices'][int(message)]
+                if origin >= 0:
+                    last_token[origin] = position
+        for cap in prefix_tools:
+            prefix_tools[cap].append(sum(row['messages'][i]['role'] == 'tool' and pos < cap
+                                         for i, pos in last_token.items()))
     ordered = sorted(lengths)
     shuffled = lengths.copy()
     random.Random(123).shuffle(shuffled)
@@ -48,6 +58,14 @@ def main():
         'over_context': {str(n): sum(x > n for x in lengths) for n in (16384,32768,65536,131072)},
         'optimizer_updates_per_epoch_at_16_trajectories': math.ceil(len(lengths)/16),
         'padding': costs,
+        'prefixes': {str(cap): {
+            'total_tokens': sum(min(n, cap) for n in lengths),
+            'mean_tokens': statistics.mean(min(n, cap) for n in lengths),
+            'intact_trajectories': sum(n <= cap for n in lengths),
+            'median_complete_tool_replies': statistics.median(prefix_tools[cap]),
+            'fraction_with_at_least_two_complete_tool_replies':
+                sum(n >= 2 for n in prefix_tools[cap])/len(lengths),
+        } for cap in prefix_tools},
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2)+'\n')

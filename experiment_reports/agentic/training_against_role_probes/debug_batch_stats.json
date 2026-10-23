@@ -85,5 +85,27 @@
       "quadratic_attention_ratio": 1.1327474772531558
     }
   },
-  "purpose": "debug"
+  "prefixes": {
+    "4096": {
+      "total_tokens": 1228800,
+      "mean_tokens": 4096,
+      "intact_trajectories": 0,
+      "median_complete_tool_replies": 4.0,
+      "fraction_with_at_least_two_complete_tool_replies": 0.9633333333333334
+    },
+    "8192": {
+      "total_tokens": 2420255,
+      "mean_tokens": 8067.516666666666,
+      "intact_trajectories": 36,
+      "median_complete_tool_replies": 14.0,
+      "fraction_with_at_least_two_complete_tool_replies": 0.9933333333333333
+    },
+    "16384": {
+      "total_tokens": 3738278,
+      "mean_tokens": 12460.926666666666,
+      "intact_trajectories": 214,
+      "median_complete_tool_replies": 20.0,
+      "fraction_with_at_least_two_complete_tool_replies": 0.9933333333333333
+    }
+  }
 }

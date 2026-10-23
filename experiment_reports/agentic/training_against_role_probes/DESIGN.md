@@ -102,3 +102,22 @@ training-side data only, and evaluated on held-out development tasks. It receive
 no warm-start weights from the probe used to optimize the model. Apply the same
 fit/evaluation protocol to the base and trained checkpoints to measure whether
 role recovery improved beyond co-adaptation with the training probe.
+
+## Independent probe check in plain language
+
+The main check is not applying the old base-model probe to the final model.
+Instead, freeze the base model and fit a new probe; freeze the final model and
+fit another new probe with the same training budget. Evaluate each probe on its
+own model's activations for the same held-out tasks. Does a probe learning from
+scratch recover roles more accurately on the trained model?
+
+Yes, the final check is essentially one extra probe fit at the end. The difference
+is resetting its weights rather than continuing the probe that supplied the
+training gradients. It is an optional diagnostic, not another model-training loop.
+An old probe transferred directly to the final model instead tests whether its
+original decision boundary still works, which is a different question.
+
+Authentication is verified on the user's W&B server. Capacity estimates and their
+explicit unmeasured throughput assumptions are in RUNNING.md. Probe-fitting pool
+size remains a consequential unresolved choice; do not silently use only300 out
+of the27,000 requested training trajectories.

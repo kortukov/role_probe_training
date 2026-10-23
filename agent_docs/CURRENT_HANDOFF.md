@@ -41,6 +41,15 @@ Debug median12466/max33241 tokens,4.10M total; allreasoning,117/300success,noerr
 Read DESIGN.md: full training ~369Mtokens extrapolated,1688updates/epoch atbatch16.
 Need decide full-run update budget and probe-refit pool (all27k everyupdate costly).
 Warm-started upstream probes, KL ordinary Dolci-Instruct-SFT baseGPT-OSS answers.
-W&B key absent from checked environment; user asked how to authenticate.
+W&B verified via netrc read-only API as kortukov at https://api.forge.coreweave.com.
+Set WANDB_BASE_URL to that host in jobs; no login needed.
 Fresh independent probes = new initializations, fit training-side data on frozen
 base/final checkpoints, same held-out dev evaluation; no test fitting.
+
+Capacity discussion: batch_stats.py now measures4k/8k/16k prefixes and complete
+tool replies. estimate_cost.py/cost_estimate.json contain illustrative UNMEASURED
+rates2000train/8000extract tokens/s/GPU; do not cite those as benchmarks. Full
+epoch1688updates and369Mtokens. All27k refitted everyupdate implies~623Btoken
+positions: not a viable default. Fitting pool/budget remains undecided. Meta
+parameter count BF16base38.96GiB; candidate all-expert+attention LoRA64 state
+~11.02GiB. Peak training memory/runtime not measured; no training loop exists yet.
