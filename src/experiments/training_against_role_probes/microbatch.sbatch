@@ -9,7 +9,7 @@
 #SBATCH --mem=256G
 #SBATCH --time=01:00:00
 #SBATCH --exclude=vca-gpu-0701-03
-#SBATCH --output=experiment_reports/agentic/training_against_role_probes/logs/%x-%j.out
+#SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%j.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 source /etc/slurm/local_job_dir.sh
@@ -21,10 +21,10 @@ export TOKENIZERS_PARALLELISM=false
 export WANDB_BASE_URL=https://api.forge.coreweave.com
 export WANDB_ENTITY=kortukov
 export WANDB_PROJECT=training_against_role_probes
-export WANDB_DIR="$PWD/experiment_reports/agentic/training_against_role_probes/wandb"
+export WANDB_DIR="$PWD/experiment_reports/training_against_role_probes/wandb"
 mkdir -p "$TMPDIR" "$WANDB_DIR"
 runtime=src/experiments/training_against_role_probes/runtime
-output=experiment_reports/agentic/training_against_role_probes/data/microbatch/$SLURM_JOB_ID
+output=experiment_reports/training_against_role_probes/data/microbatch/$SLURM_JOB_ID
 mkdir -p "$output"
 # Independent runs reset model, adapters and optimizer for each microbatch size.
 failed=0
@@ -32,7 +32,7 @@ for microbatch in 1 2 4; do
   if .tools/bin/uv run --project "$runtime" --frozen --no-sync torchrun --standalone --nproc-per-node=2 \
       --module role_probe_training.training.throughput --context 0 \
       --microbatch-size "$microbatch" --length-grouped --check-padding --updates 5 \
-      --data experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl \
+      --data experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl \
       --output "$output/$microbatch"; then
     echo "Microbatch $microbatch complete"
   else

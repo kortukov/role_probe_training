@@ -9,7 +9,7 @@
 #SBATCH --mem=128G
 #SBATCH --time=02:00:00
 #SBATCH --array=0-3
-#SBATCH --output=experiment_reports/agentic/training_against_role_probes/logs/%x-%A_%a.out
+#SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%A_%a.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export PATH="$PWD/.tools/bin:$PATH"
@@ -23,7 +23,7 @@ project=src/experiments/agentic_eval
 export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
 export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8
-run_dir="$PWD/experiment_reports/agentic/training_against_role_probes/runs/$SLURM_ARRAY_JOB_ID/shard$SLURM_ARRAY_TASK_ID"
+run_dir="$PWD/experiment_reports/training_against_role_probes/runs/$SLURM_ARRAY_JOB_ID/shard$SLURM_ARRAY_TASK_ID"
 mkdir -p "$run_dir"
 port=$((18000+SLURM_JOB_ID%10000))
 server_started=$SECONDS

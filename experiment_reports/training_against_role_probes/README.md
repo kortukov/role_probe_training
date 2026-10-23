@@ -7,8 +7,8 @@ roles easier to recover on agent trajectories, while preserving useful behavior?
 
 ## Evaluation setup
 
-**Data.** The planned off-policy training corpus contains 300 independently seeded
-attempts for each of AppWorld's 90 training tasks: **27,000 trajectories**. Text
+**Data.** The planned off-policy training corpus contains 30 independently seeded
+attempts for each of AppWorld's 90 training tasks: **2,700 trajectories**. Text
 will remain fixed during optimization while activations are recomputed as the
 model changes. A separate, completed **300-trajectory debug corpus** is reserved
 for pipeline correctness, memory and timing checks. Neither corpus is held-out
@@ -55,8 +55,7 @@ These timings exclude KL and probe refitting and do not measure learning quality
 The debug corpus is complete: 300 trajectories, all with reasoning, no evaluation
 errors, and 117 successful attempts (39%). It contains 4.10 million tokens; median
 trajectory length is 12,466 tokens and the maximum is 33,241. The planned
-27,000-trajectory training corpus has not been collected; production training has
-not started.
+2,700-trajectory training corpus is being collected; production training has not started.
 
 | Trajectories per GPU microbatch | Seconds/update | Peak memory/GPU (GiB) | Padding |
 |---|---:|---:|---:|
@@ -83,5 +82,5 @@ The debug corpus supports implementation checks, not conclusions about the full
 training experiment. Matching trajectory counts alone does not match the paper's
 token or optimization budget.
 
-The proposed first training run is described in [DESIGN.md](DESIGN.md).
+The first training run is described in [DESIGN.md](DESIGN.md).
 See [RUNNING.md](RUNNING.md) for collection and reproduction.

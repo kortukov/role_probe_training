@@ -137,5 +137,5 @@
   },
   "purpose": "debug",
   "dataset_split": "train",
-  "path": "experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl"
+  "path": "experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl"
 }

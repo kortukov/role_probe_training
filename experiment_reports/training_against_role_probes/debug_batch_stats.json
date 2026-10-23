@@ -1,5 +1,5 @@
 {
-  "source": "experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl",
+  "source": "experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl",
   "trajectories": 300,
   "total_tokens": 4098694,
   "labeled_tokens_by_index": {

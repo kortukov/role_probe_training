@@ -1,4 +1,4 @@
-# First-run design for discussion
+# First training run
 
 The user-confirmed objective is **improved role recoverability**. The model should
 strengthen correct-role predictions, not hide roles or fool the probes.
@@ -50,15 +50,14 @@ be described as identical original sampled rows without verification.
   warm-started probe refits. This is a deliberate multiclass adaptation of the
   paper's binary hinge objective; its numerical loss scale is different.
 - Preserve all metadata-labeled content roles, excluding formatting tokens.
-  Report both overall token accuracy and macro recall. Choose the role weighting
-  explicitly before launching: equal tokens matches existing accuracy, whereas
-  equal roles prevents reasoning/tool volume from dominating.
-- The training target is **27,000 trajectories**, 300 attempts for each of 90
+  Report both overall token accuracy and macro recall. The first run weights content tokens equally, matching the throughput
+  calibration. Roles are not artificially rebalanced.
+- The training target is **2,700 trajectories**, 30 attempts for each of 90
   tasks. Existing 300 trajectories are debug data only. At an effective batch of
-  16 complete trajectories, one full training pass takes 1688 model updates;
-  30 updates cover only about 1.8% of the corpus. The full-run budget must be
-  settled explicitly rather than inherited accidentally from the paper.
-- Preserve complete trajectories, using one trajectory per microbatch and
+  16 complete trajectories, one full training pass takes 169 model updates;
+  30 updates cover only about 17.8% of the corpus. The first run is one epoch; this is an explicit adaptation of the paper’s
+  30-update budget.
+- Preserve complete trajectories, using two trajectories per GPU microbatch and
   accumulating gradients across trajectories if necessary. Padding is supported
   in principle, but avoid it where it adds unnecessary computation. If full
   trajectories prove infeasible, discuss start-anchored prefixes preserving several
@@ -73,15 +72,17 @@ be described as identical original sampled rows without verification.
   Keep new trajectory generation out of frequent logging; evaluate task success
   separately at the start/end. Measure logging/validation overhead.
 
-Before optimization, settle role weighting, effective batch size and full-run
-update budget. Layer 12 and correct-role cross-entropy are user-approved.
+The first run uses layer 12, token-weighted cross-entropy, effective batch16,
+microbatch2 per GPU and one epoch. Standard-data refits use 2000 SGD steps,
+32 passage-role examples per step with every content token retained; this
+multiclass, token-level objective adapts the upstream binary sequence objective.
 
 ## Debug-corpus measurements and batching
 
 The completed debug corpus has 300 trajectories and 4,098,694 tokens. Median length
 is 12,466, the 95th percentile 24,041 and maximum 33,241; median message count is 44.
 At 16 trajectories/update, this debug corpus takes 19 updates per epoch. These
-counts do not describe the planned 27,000-trajectory training corpus.
+counts do not describe the planned 2,700-trajectory training corpus.
 
 Random batches of 16 allocate 7,638,512 padded token positions for this corpus:
 46.3% padding, or 1.86× unpadded token work. Sorting into similar-length groups
@@ -94,7 +95,7 @@ All debug trajectories fit the model's configured 131,072-position limit; one
 exceeds the previous inference server's 32,768 limit. Training memory is a separate
 constraint and must be tested with efficient attention and gradient checkpointing.
 
-Extrapolating the debug mean to 27,000 trajectories gives approximately 369 million
+Extrapolating the debug mean to 2,700 trajectories gives approximately 36.9 million
 tokens for model updates. Probe refitting has its own fixed standard-data cost;
 it does not re-extract the AppWorld corpus.
 
@@ -112,8 +113,8 @@ training gradients. It is an optional diagnostic, not another model-training loo
 An old probe transferred directly to the final model instead tests whether its
 original decision boundary still works, which is a different question.
 
-Authentication is verified on the user's W&B server. The authorized two-GPU
-throughput calibration compares 4K, 8K, 16K prefixes and full debug trajectories.
-It initially holds the existing standard-data probe fixed to isolate role-update
-cost. KL and standard-data refitting must be measured separately before estimating
-end-to-end training time. Production collection and training are not launched.
+Authentication is verified on the user's W&B server. Data collection is active.
+The complete training loop is implemented and awaiting its GPU pilot, including
+KL, standard-data refitting, coordinated microbatch fallback and checkpoint/resume.
+The communication file will announce readiness only after tests pass and the
+first AppWorld training run starts.

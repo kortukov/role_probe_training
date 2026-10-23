@@ -11,8 +11,8 @@ benchmark trajectories are not silently included in this new corpus.
 ```bash
 sbatch --exclude=vca-gpu-0701-03 src/experiments/training_against_role_probes/collect_debug.sbatch
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble_debug.py \
-  --runs experiment_reports/agentic/training_against_role_probes/runs/JOB_ID \
-  --output experiment_reports/agentic/training_against_role_probes/data/debug
+  --runs experiment_reports/training_against_role_probes/runs/JOB_ID \
+  --output experiment_reports/training_against_role_probes/data/debug
 ```
 
 The assembler requires complete error-free exports with 300 distinct attempt IDs
@@ -24,7 +24,7 @@ be bitwise deterministic. JSONL retains messages, channels, tools and scores.
 Large data, logs, checkpoints and W&B local files are ignored. Keep the resulting
 small corpus manifest and training metrics in Git. Collection uses the existing
 locked `agentic_eval/swe` and `agentic_eval/server_current` environments; see the
-[AppWorld reproduction guide](../appworld/RUNNING.md) for exact runtime details.
+[AppWorld reproduction guide](../agentic/appworld/RUNNING.md) for exact runtime details.
 
 ## Upstream reference and training status
 
@@ -34,7 +34,7 @@ Training source: `submodules/training_against_probes`, revision
 `src/utils/finetune_utils.py` (KL), `src/probes/build_kl_rollouts.py` (anchor).
 
 The production alternating training loop has not been launched: [DESIGN.md](DESIGN.md)
-records the concrete adaptations awaiting discussion. W&B project: `training_against_role_probes`; authentication is verified below.
+records the concrete current training configuration. W&B project: `training_against_role_probes`; authentication is verified below.
 No credentials or task text should be put in tracked config or W&B logs.
 
 ## Completed debug collection
@@ -45,16 +45,16 @@ metrics are in `debug_corpus.json`. `debug_submission.json` records the original
 collection-code revision and seeds. Original split metadata remains `train` because
 these are AppWorld training tasks; the corpus purpose is `debug`.
 
-The planned training corpus is **300 attempts per task × 90 tasks = 27,000**.
-It is separate from the debug corpus and has not been launched. The four-shard
+The planned training corpus is **30 attempts per task × 90 tasks = 2,700**.
+It is separate from the debug corpus; collection array1501202 is running. The four-shard
 script above reproduces debug collection only, not production collection.
 
 Compute debug length/padding statistics without loading model weights:
 
 ```bash
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/batch_stats.py \
-  --data experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl \
-  --output experiment_reports/agentic/training_against_role_probes/debug_batch_stats.json
+  --data experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl \
+  --output experiment_reports/training_against_role_probes/debug_batch_stats.json
 ```
 
 ## W&B authentication
@@ -102,7 +102,7 @@ loss, accuracy, gradient norm and elapsed time. W&B receives numeric metrics onl
 local JSONL remains the result source if logging is unavailable. These brief loss
 traces do not establish convergence or comparative model quality.
 
-A full pass over 27,000 trajectories at effective batch 16 would take 1,688
+A full pass over 2,700 trajectories at effective batch 16 would take 169
 updates. Context-dependent epoch estimates must use measured timings and add KL,
 standard-data activation extraction, probe optimization and validation separately.
 No end-to-end throughput estimate is available yet.
@@ -127,8 +127,8 @@ longest trajectory across the entire microbatch.
 ```bash
 sbatch src/experiments/training_against_role_probes/microbatch.sbatch
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/summarize_microbatch.py \
-  --runs experiment_reports/agentic/training_against_role_probes/data/microbatch/1500991 \
-  --output experiment_reports/agentic/training_against_role_probes/microbatch_results.json
+  --runs experiment_reports/training_against_role_probes/data/microbatch/1500991 \
+  --output experiment_reports/training_against_role_probes/microbatch_results.json
 ```
 
 The paired comparison reruns microbatch 1 with the same ordering and explicit
@@ -143,3 +143,41 @@ Small validated aggregates are `microbatch_results.json` and `context_results.js
 The original context run used source commit `166ff7b`; the current benchmark adds
 explicit padding masks and length grouping for the paired microbatch comparison.
 All three conditions and both ranks completed; no OOM or retry occurred.
+
+## First off-policy training run
+
+Collection array1501202 runs seeds8301–8330 on all90AppWorld training tasks,
+30attempts/task. Assembly1501282 requires all2700attempts and zero infrastructure
+or export errors. Evaluation1501283 scores layers4/8/12/16/20 with full history;
+per-token compressed NumPy arrays and source IDs are under `predictions/train2700`.
+KL prompts use the first5000valid first-user prompts of ordinary
+`allenai/Dolci-Instruct-SFT`, shuffled withseed42, selecting800. The pinned source
+revision is recorded in `data/kl/source.json`. GPT-OSS generates fixed greedy
+1536-token completions with Harmony token IDs, including incomplete completions.
+The KL loss scores completion positions under a2048-token combined cap, matching
+the upstream honesty objective and coefficient16. Base logits use disabled LoRA;
+vocabulary projection chunks are checkpointed to bound backward memory.
+
+The first run uses `src/experiments/training_against_role_probes/train_config.json`:
+one epoch,169updates,effective batch16,microbatch2/GPU,twoGPUs. The last batch has
+12trajectories, with the same global token-mean normalization. Standard probe
+refitting uses all250C4/Dolma passages, their five role renderings and original
+train/test split. Each warm-start refit runs2000SGDsteps atlr1e-3,weightdecay1e-4,
+50-stepwarmup/cosine decay and clipping1. A probe minibatch consists of32
+passage-role examples with all content tokens, adapting the upstream binary
+sequence-level probe to multiclass token labels without subsampling tokens.
+Model updates use AdamW5e-5,weightdecay1e-4,LoRA64/alpha128/dropout0 and clipping1.
+
+```bash
+.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/training_against_role_probes/checks.py
+sbatch src/experiments/training_against_role_probes/train.sbatch src/experiments/training_against_role_probes/train_config.json
+# Restart with the same input artifacts and the latest complete checkpoint:
+sbatch src/experiments/training_against_role_probes/train.sbatch src/experiments/training_against_role_probes/train_config.json --resume CHECKPOINT_DIRECTORY
+```
+
+Checkpoint directories contain the adapter, probe, optimizer and configuration;
+only the latest two complete restart states are retained. Updates retry on both
+ranks with microbatch1 after an OOM during role/KL accumulation, preserving the
+same examples and objective. An OOM at microbatch1 stops explicitly for recovery.
+W&B logs batch loss/accuracy,KL,gradientnorm,phase timings and held-out dev metrics.
+No production training has started yet; the complete GPU pilot is pending.

@@ -1,10 +1,49 @@
 # Current handoff — 2026-10-23
 
+## Active first-training preparation
+
+User authorized **2,700 AppWorld trajectories**, 30 seeded attempts per each90train
+ tasks, baseline probe evaluation, implementation and launch of first training.
+Experiment MOVED to `experiment_reports/training_against_role_probes` (data too).
+All own source/report paths updated. Do not recreate old agentic location.
+`AGENT_COMMUNICATION.md` starts as a placeholder; second agent has appended dataset
+and GPU coordination notes. PRESERVE those notes. Announce READY only after actual
+complete-pipeline GPU tests pass and AppWorld production training is RUNNING.
+Other agent owns ASTRA/DepthBench data adapters, replay.py ending support and its
+subreports. Do not stage/change their files. Coordinate GPU jobs via file; the user explicitly removed the aggregate four-GPU cap.
+
+Current own jobs:
+-1501202 array0..29%2: collection90trajectories/seed8301..8330, twoGPUs concurrently.
+-1501282: assembly afterok1501202; output data/train2700, train_corpus.json.
+-1501283 array0..1: five-layer full-context probe scoring afterokassembly; predictions/train2700.
+-1501243: fixedKLgeneration800ordinaryDolci prompts, baseGPT-OSS greedy1536tokens.
+-1501280: dev8tasks, afterokKL, currently HELD to coordinate GPUs withotheragent.
+Otheragent1501326ASTRAbaseline,1501281DepthBench. User removed aggregate GPU cap; DepthBench dependency removed. Pilot can proceed alongside these jobs.
+
+Shared training implemented under `src/role_probe_training/training/`:
+ data.py,model.py,objectives.py,refit.py,train.py,score.py.
+Train configs/jobs under `src/experiments/training_against_role_probes/`.
+CPUchecks.py passed KLdirection/mask/checkpointedgradients andpadding.
+**GPU pilot NOT SUBMITTED YET.** Need KLcomplete+devcomplete. Use train.sbatch
+pilot_config.json on2GPUs (ber-testing,time1h acceptable forvalidation), then
+resume checkpoint withmax_updates2 toprove restart. Pilot config usesdebug300,
+fullprotocoloneupdate,2000refitsteps,16KLpairs,deliberate coordinatedOOMretry.
+Production config train_config.json:2700,oneepoch169updates,fulltrajectories,
+microbatch2/GPU,effective16,tokenweightedCE,layer12,KLcoefficient16.
+Regular validation8devtasks every5updates;checkpoint every10,keeplast2.
+Warmstart probeSGD2000steps,lr1e-3,wd1e-4,batch32passage-roleexamples,allcontenttokens,
+original250C4/Dolmapassages/originalsplit. NOTAppWorldprobe fitting.
+Standardactivationextraction batched16/rank,cachedGPU. Measure real refitcost.
+W&B configuredat api.forge.coreweave.com entitykortukov projecttraining_against_role_probes.
+Need finish reportupdates, commitownfiles only, testGPU/fix, evaluate2700 corpus,
+launchproductionafterfullbaseline, updatecommunicationREADYthenreportuser.
+No productiontrainjob submitted yet; userexplicitlyauthorizedlaunchwhenready.
+
 ## Completed throughput calibration
 
 Original context job1493850 completed all4settings in9m28s. Role-only update means
 4K11.8s,8K16.9s,16K20.2s,full21.5s; fullpeak59.9GiB,33kstress63.8GiB.
-Small results: `experiment_reports/agentic/training_against_role_probes/context_results.json`.
+Small results: `experiment_reports/training_against_role_probes/context_results.json`.
 No KL/refitting overhead measured; these are not end-to-end training estimates.
 
 User requested paired full-trajectory microbatch1/2/4 comparison, effectivebatch16.
@@ -16,10 +55,10 @@ Script `src/experiments/training_against_role_probes/microbatch.sbatch`, shared
 implementation `src/role_probe_training/training/throughput.py`, isolated runtime.
 Five identical seeded batches percondition, sortwithinbatchbylength, one warmup,
 four measured updates, plus repeatedlongesttrajectory stressbackward.
-Outputs `experiment_reports/agentic/training_against_role_probes/data/microbatch/1500991/`.
+Outputs `experiment_reports/training_against_role_probes/data/microbatch/1500991/`.
 Log `logs/role-microbatch-1500991.out` in that experiment.
 Aggregator: `summarize_microbatch.py --runs ... --output .../microbatch_results.json`.
-No benchmark remains active. No productioncollection/training launched.
+Throughput benchmark complete; current collection/training preparation described above.
 
 Production OOM recovery is not implemented. The discussed design is to retry a
 whole optimizer update on both ranks with smaller microbatches and unchanged
@@ -35,19 +74,17 @@ Improve role recoverability, five-class cross-entropy, layer12 post-attention no
 (pre-MLP, zero-based). Probe refitting uses ONLY the standard role-confusion
 C4/Dolma250passages × five roles,1024tokens,originalsplit,allcontenttokens.
 Never fit probes on AppWorld. Removed obsolete AppWorld-refitting cost scenarios.
-AppWorld fixed text is model-update data. Planned corpus:300attempts/task ×90tasks
-=27,000trajectories. Existing300 are debug-only, allreasoning,117solved,noerrors,
+AppWorld fixed text is model-update data. First corpus:30attempts/task ×90tasks =2,700trajectories. Existing300 are debug-only, allreasoning,117solved,noerrors,
 median12466/max33241tokens. Debug source is `data/debug/trajectories.jsonl`.
 Prefer full trajectories; benchmark start-anchored prefixes, no arbitrary windows.
 Warm-start refits after each model update. KL ordinary Dolci-Instruct-SFT prompts
 plus once-generated baseGPT-OSS answers, KL(base||adapted), coefficient16,16pairs.
-KL anchor data not prepared yet. W&B credentials verified, netrc; server
+KL anchor generation is active. W&B credentials verified, netrc; server
 https://api.forge.coreweave.com, entity kortukov. Never print keys.
 Working defaults LoRA64/alpha128/dropout0,AdamW5e-5,weightdecay1e-4.
 Benchmark targets attention q/k/v/o and fused expert gate/up/down,739,639,296
 trainable parameters; token weighting and clipping1 are calibration settings.
-Final role weighting, context, effective batch and update budget remain decisions.
-Atbatch16 one27kepoch means1688updates. Do not equate upstream30updates tooneepoch.
+First run uses token weighting, full context, effective batch16 and one epoch169updates.
 
 ## SWE rerun incomplete
 
@@ -72,7 +109,7 @@ browser-validated; five-layer viewer1.746GB. Reports already pushed before viewe
 
 ## Standing preferences
 
-Use uv, maximum four experiment GPUs, two preferred for training. No subagents
+Use uv. User explicitly allows more than four experiment GPUs; request reasonable resources per job. Two GPUs remain preferred for training. No subagents
 unless requested. Push code/reports, never trajectory data. Brief paper-style
 reports per `agent_docs/REPORT_WRITING.md`; remove superseded material. Publish
 report tables first, then build/validate large viewers. Timed waits, no busy polling.

@@ -5,10 +5,10 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
 #SBATCH --time=00:10:00
-#SBATCH --output=experiment_reports/agentic/training_against_role_probes/logs/%x-%j.out
+#SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%j.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
-root=experiment_reports/agentic/training_against_role_probes
+root=experiment_reports/training_against_role_probes
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble_debug.py \
  --runs "$root/runs/$1" --output "$root/data/debug"
 cp "$root/data/debug/manifest.json" "$root/debug_corpus.json"

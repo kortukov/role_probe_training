@@ -17,8 +17,8 @@ is separate from the paired microbatch comparison in the main report.
 | Full trajectories | 21.5 | 59.9 |
 
 The longest full trajectory has 33,241 tokens; its separate backward test peaked
-at 63.8 GiB. A single pass over 27,000 trajectories at batch 16 needs 1,688 updates.
-Extrapolating the original full-context mean gives 10.1 hours for role updates
+at 63.8 GiB. A single pass over 2,700 trajectories at batch 16 needs 169 updates.
+Extrapolating the original full-context mean gives 1.0 hour for role updates
 only, conditional on similar trajectory lengths and throughput. This excludes
 KL, probe refitting, validation, checkpointing and trajectory generation.
 
