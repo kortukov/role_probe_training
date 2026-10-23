@@ -1,4 +1,4 @@
-"""Validate and combine 300 fixed AppWorld training attempts, preserving provenance."""
+"""Validate and combine 300 AppWorld debug attempts, preserving provenance."""
 import argparse
 from collections import Counter
 import hashlib
@@ -36,7 +36,7 @@ def main():
     assert len(rows) == len({r['trajectory_id'] for r in rows}) == 300
     assert len(counts) == 90 and set(counts.values()) == {3, 4}
     args.output.mkdir(parents=True, exist_ok=True)
-    target = args.output / 'train.jsonl'
+    target = args.output / 'trajectories.jsonl'
     if target.exists():
         raise FileExistsError(target)
     temporary = target.with_suffix('.tmp')
@@ -44,7 +44,7 @@ def main():
         for row in rows:
             stream.write(json.dumps(row, ensure_ascii=False) + '\n')
     temporary.replace(target)
-    result = {'trajectories': 300, 'unique_tasks': 90,
+    result = {'purpose': 'debug', 'dataset_split': 'train', 'path': str(target), 'trajectories': 300, 'unique_tasks': 90,
               'attempts_per_task': dict(sorted(counts.items())),
               'generation_seeds': list(range(7301, 7305)),
               'sha256': hashlib.sha256(target.read_bytes()).hexdigest(),

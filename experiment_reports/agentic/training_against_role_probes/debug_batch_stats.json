@@ -1,0 +1,89 @@
+{
+  "source": "experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl",
+  "trajectories": 300,
+  "total_tokens": 4098694,
+  "labeled_tokens_by_index": {
+    "0": 97500,
+    "1": 20934,
+    "2": 287062,
+    "3": 1444603,
+    "4": 2042264
+  },
+  "mean_tokens": 13662.313333333334,
+  "median_tokens": 12466.0,
+  "min_tokens": 5205,
+  "p90_tokens": 21217,
+  "p95_tokens": 24041,
+  "max_tokens": 33241,
+  "median_messages": 44.0,
+  "over_context": {
+    "16384": 86,
+    "32768": 1,
+    "65536": 0,
+    "131072": 0
+  },
+  "optimizer_updates_per_epoch_at_16_trajectories": 19,
+  "padding": {
+    "random_batch1": {
+      "token_slots": 4098694,
+      "padding_fraction": 0.0,
+      "token_cost_ratio": 1.0,
+      "quadratic_attention_ratio": 1.0
+    },
+    "random_batch2": {
+      "token_slots": 4958624,
+      "padding_fraction": 0.17342109423904695,
+      "token_cost_ratio": 1.209805855230959,
+      "quadratic_attention_ratio": 1.4061315217655723
+    },
+    "random_batch4": {
+      "token_slots": 5886744,
+      "padding_fraction": 0.30374176284886856,
+      "token_cost_ratio": 1.4362487172743317,
+      "quadratic_attention_ratio": 1.9129519024262194
+    },
+    "random_batch8": {
+      "token_slots": 6836448,
+      "padding_fraction": 0.4004643932053604,
+      "token_cost_ratio": 1.6679576469968238,
+      "quadratic_attention_ratio": 2.497052552967662
+    },
+    "random_batch16": {
+      "token_slots": 7638512,
+      "padding_fraction": 0.4634172205267204,
+      "token_cost_ratio": 1.8636453465420937,
+      "quadratic_attention_ratio": 3.087345764709863
+    },
+    "length_sorted_batch1": {
+      "token_slots": 4098694,
+      "padding_fraction": 0.0,
+      "token_cost_ratio": 1.0,
+      "quadratic_attention_ratio": 1.0
+    },
+    "length_sorted_batch2": {
+      "token_slots": 4113672,
+      "padding_fraction": 0.0036410292313048265,
+      "token_cost_ratio": 1.0036543347710272,
+      "quadratic_attention_ratio": 1.0096204841585235
+    },
+    "length_sorted_batch4": {
+      "token_slots": 4147808,
+      "padding_fraction": 0.011840953101011409,
+      "token_cost_ratio": 1.011982841363615,
+      "quadratic_attention_ratio": 1.0309214939732312
+    },
+    "length_sorted_batch8": {
+      "token_slots": 4197956,
+      "padding_fraction": 0.02364531691137306,
+      "token_cost_ratio": 1.0242179582081512,
+      "quadratic_attention_ratio": 1.0580775796383886
+    },
+    "length_sorted_batch16": {
+      "token_slots": 4317756,
+      "padding_fraction": 0.05073515038830356,
+      "token_cost_ratio": 1.0534467808526327,
+      "quadratic_attention_ratio": 1.1327474772531558
+    }
+  },
+  "purpose": "debug"
+}

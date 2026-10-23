@@ -1,6 +1,6 @@
 # Reproduction
 
-## Collection
+## Debug collection
 
 The collection job reuses the validated AppWorld agent, environment, evaluator,
 server and normalized JSONL export. Each shard has its own inference GPU and eight
@@ -9,10 +9,10 @@ concurrent worlds. Seeds 7301–7303 collect all 90 training tasks; seed 7304 co
 benchmark trajectories are not silently included in this new corpus.
 
 ```bash
-sbatch --exclude=vca-gpu-0701-03 src/experiments/training_against_role_probes/collect.sbatch
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble.py \
+sbatch --exclude=vca-gpu-0701-03 src/experiments/training_against_role_probes/collect_debug.sbatch
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble_debug.py \
   --runs experiment_reports/agentic/training_against_role_probes/runs/JOB_ID \
-  --output experiment_reports/agentic/training_against_role_probes/data
+  --output experiment_reports/agentic/training_against_role_probes/data/debug
 ```
 
 The assembler requires complete error-free exports with 300 distinct attempt IDs
@@ -38,13 +38,25 @@ records the concrete adaptations awaiting discussion. W&B project intended:
 `training_against_role_probes`; verify authenticated account before the first run.
 No credentials or task text should be put in tracked config or W&B logs.
 
-## Current submission
+## Completed debug collection
 
-Collection array **1492660** has four one-GPU shards. CPU assembly job **1492664**
-requires all four to succeed and writes the canonical JSONL plus `corpus.json`.
-`submission.json` records seeds and the collection-code revision. SWE inference
-1492632 now also waits for this array to finish, keeping total inference allocation
-within four GPUs while SWE CPU image preparation proceeds concurrently.
+Collection array **1492660** and assembly job **1492664** completed successfully.
+The debug corpus is `data/debug/trajectories.jsonl`; its checksum and collection
+metrics are in `debug_corpus.json`. `debug_submission.json` records the original
+collection-code revision and seeds. Original split metadata remains `train` because
+these are AppWorld training tasks; the corpus purpose is `debug`.
+
+The planned training corpus is **300 attempts per task × 90 tasks = 27,000**.
+It is separate from the debug corpus and has not been launched. The four-shard
+script above reproduces debug collection only, not production collection.
+
+Compute debug length/padding statistics without loading model weights:
+
+```bash
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/batch_stats.py \
+  --data experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl \
+  --output experiment_reports/agentic/training_against_role_probes/debug_batch_stats.json
+```
 
 W&B authentication was checked through the configured `~/.env` environment; no
 `WANDB_API_KEY` was present. Online logging is not verified. A GitHub-linked W&B

@@ -41,7 +41,7 @@ Harmony channels in our serialization. Exact original prompt identities are not
 available in the committed upstream repository, so identical source/setup must not
 be described as identical original sampled rows without verification.
 
-## Recommended adaptations, not yet launched
+## Agreed choices and remaining design decisions
 
 - Start with layer 12's post-attention-layernorm output, keeping the five-class
   linear architecture. Use correct-label cross-entropy for model updates and
@@ -51,14 +51,16 @@ be described as identical original sampled rows without verification.
   Report both overall token accuracy and macro recall. Choose the role weighting
   explicitly before launching: equal tokens matches existing accuracy, whereas
   equal roles prevents reasoning/tool volume from dominating.
-- Start from the paper's 30 model updates and 16 role examples per update, plus
-  16 KL examples. Determine what constitutes a role example after tokenizing the
-  corpus: a complete trajectory can be far longer than the paper's completion.
-  Splitting into shorter sequences changes available context and must be reported.
-  Do not silently truncate or discard most of each trajectory.
-- Do not call this one epoch: 30 x 16 = 480 example presentations, potentially
-  with reuse. Report unique trajectories, training sequences and labeled tokens
-  seen; a full pass over all sequences is a different stopping rule.
+- The training target is **27,000 trajectories**, 300 attempts for each of 90
+  tasks. Existing 300 trajectories are debug data only. At an effective batch of
+  16 complete trajectories, one full training pass takes 1688 model updates;
+  30 updates cover only about 1.8% of the corpus. The full-run budget must be
+  settled explicitly rather than inherited accidentally from the paper.
+- Preserve complete trajectories, using one trajectory per microbatch and
+  accumulating gradients across trajectories if necessary. Padding is supported
+  in principle, but avoid it where it adds unnecessary computation. If full
+  trajectories prove infeasible, discuss start-anchored prefixes preserving several
+  turns; do not replace them with arbitrary middle-of-trajectory segments.
 - Match rank/alpha/learning rate/weight decay/KL weight first. GPT-OSS uses fused
   MoE expert parameters, unlike the upstream dense models. Validate adapter target
   coverage and a backward pass before promising the same target-module coverage.
@@ -69,21 +71,34 @@ be described as identical original sampled rows without verification.
   Keep new trajectory generation out of frequent logging; evaluate task success
   separately at the start/end. Measure logging/validation overhead.
 
-Before optimization, settle role weighting, layer selection, sequence unit/context
-length and whether 30 updates or one complete corpus pass is the desired budget.
-Collection does not depend on those choices.
+Before optimization, settle role weighting, effective batch size and full-run
+update budget. Layer 12 and correct-role cross-entropy are user-approved.
 
-## Measured sequence scale
+## Debug-corpus measurements and batching
 
-Tokenizing the previous 90 training trajectories with our existing Harmony replay
-produced 1,162,340 tokens: median 11,073, 90th percentile 19,773, maximum 33,532.
-All 90 exceed 4096 tokens. These are planning measurements from the earlier corpus,
-not counts for the new 300-attempt corpus; see `pilot_lengths.json`.
+The completed debug corpus has 300 trajectories and 4,098,694 tokens. Median length
+is 12,466, the 95th percentile 24,041 and maximum 33,241; median message count is 44.
+At 16 trajectories/update, this debug corpus takes 19 updates per epoch. These
+counts do not describe the planned 27,000-trajectory training corpus.
 
-One concrete starting option is 4096-token segments, 16 segments per model update,
-with gradient accumulation. Keep every segment in the corpus instead of truncating
-each trajectory to its first segment. Later segments then lose earlier context;
-this is an explicit approximation, requiring comparison with longer-context
-validation. Thirty updates expose at most 1,966,080 token positions and are not
-necessarily a full corpus pass. A full shuffled pass is an alternative budget,
-whose update count should be calculated from the completed corpus.
+Random batches of 16 allocate 7,638,512 padded token positions for this corpus:
+46.3% padding, or 1.86× unpadded token work. Sorting into similar-length groups
+reduces padding to 5.1%. These are token-allocation estimates, not measured runtime.
+A microbatch of one full trajectory needs no padding. Weight accumulated gradients
+by the chosen loss denominator, so microbatching preserves the effective-batch
+objective rather than accidentally averaging trajectories equally.
+
+All debug trajectories fit the model's configured 131,072-position limit; one
+exceeds the previous inference server's 32,768 limit. Training memory is a separate
+constraint and must be tested with efficient attention and gradient checkpointing.
+
+Extrapolating the debug mean to 27,000 trajectories gives approximately 369 million
+tokens. Recomputing activations for the entire corpus after every model update
+would be a major cost. Decide the probe fitting pool and refit budget explicitly
+before scaling; do not silently subsample the requested data.
+
+An independent fresh probe is newly initialized on a frozen checkpoint, fitted on
+training-side data only, and evaluated on held-out development tasks. It receives
+no warm-start weights from the probe used to optimize the model. Apply the same
+fit/evaluation protocol to the base and trained checkpoints to measure whether
+role recovery improved beyond co-adaptation with the training probe.
