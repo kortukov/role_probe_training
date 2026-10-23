@@ -8,7 +8,7 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
 #SBATCH --time=03:00:00
-#SBATCH --array=0-29%2
+#SBATCH --array=0-29%4
 #SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%A_%a.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
