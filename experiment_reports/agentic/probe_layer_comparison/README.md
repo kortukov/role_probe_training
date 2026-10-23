@@ -10,7 +10,7 @@ Does the layer from which we read activations change how well role probes recogn
 
 **Probes.** Each layer has its own linear, five-class logistic-regression probe, trained on the same neutral C4/Dolma text role-labeling task and document split. The probes predict system, user, reasoning, assistant or tool from token activations after attention normalization and before the feed-forward network. Layers 4, 8, 12, 16 and 20 are evaluated without retraining on these conversations. We collect all five layers together while replaying each history, using identical token labels and scoring masks. Long histories are segmented, which removes earlier context from later segments.
 
-**Metrics and baseline.** Token accuracy is the fraction of message-content tokens classified correctly. The majority-role baseline always predicts the dataset's most frequent true role. Role recall measures correctness within one true role. Mean conversation accuracy gives conversations equal weight; role-balanced accuracy averages recall equally across roles present in the dataset. These latter metrics help distinguish broad recognition from success on the most frequent role.
+**Metrics.** Token accuracy is the fraction of message-content tokens classified correctly. Role recall measures correctness within one true role. Mean conversation accuracy gives conversations equal weight; role-balanced accuracy averages recall equally across roles present in the dataset. These latter metrics help distinguish broad recognition from success on the most frequent role.
 
 ## Factual observations
 
@@ -23,9 +23,23 @@ Token accuracy on the same conversations:
 | 12 | 29.91% | 26.98% |
 | 16 | 35.51% | 21.71% |
 | 20 | 67.79% | 41.38% |
-| Majority-role baseline | 83.91% | 46.37% |
 
-Layer 4 leads token accuracy on SWE; layer 8 leads retail. Only SWE layer 4 exceeds its majority-role baseline, by 0.34 percentage points.
+Per-role accuracy is the fraction of tokens with that ground-truth role classified correctly (role recall). Overall accuracy pools all content tokens; it is not the average of the five role columns.
+
+| Dataset | Layer | Overall | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| τ² retail | 4 | 17.52% | 0.35% | 9.59% | 12.94% | 14.93% | 93.84% |
+| τ² retail | 8 | 71.95% | 24.34% | 26.02% | 80.70% | 89.61% | 3.98% |
+| τ² retail | 12 | 29.91% | 6.80% | 31.36% | 31.84% | 94.28% | 1.14% |
+| τ² retail | 16 | 35.51% | 9.23% | 7.33% | 38.28% | 97.73% | 4.79% |
+| τ² retail | 20 | 67.79% | 1.32% | 22.23% | 76.73% | 92.66% | 11.59% |
+| SWE-bench Verified | 4 | 46.71% | 2.74% | 69.49% | 12.23% | 4.77% | 83.38% |
+| SWE-bench Verified | 8 | 45.02% | 8.23% | 95.57% | 87.97% | 8.33% | 1.76% |
+| SWE-bench Verified | 12 | 26.98% | 1.52% | 94.63% | 46.29% | 27.80% | 3.73% |
+| SWE-bench Verified | 16 | 21.71% | 1.96% | 92.70% | 24.10% | 38.42% | 14.08% |
+| SWE-bench Verified | 20 | 41.38% | 0.01% | 89.51% | 59.47% | 25.64% | 22.12% |
+
+Layer 4 leads token accuracy on SWE; layer 8 leads retail.
 
 The layers recognize different roles. Layer 4 tool recall is 93.84% on retail and 83.38% on SWE, but reasoning recall is only about 13% on retail and 12% on SWE. Layer 8 recognizes reasoning much better (80.70% and 87.97%) while rarely recognizing tool tokens (3.98% and 1.76%). Layer 8 has the highest role-balanced accuracy on both datasets.
 
