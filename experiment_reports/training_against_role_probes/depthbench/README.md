@@ -8,9 +8,9 @@ with TIER; the local experiment uses the dataset name.
 
 ## Evaluation setup
 
-**Data.** Collect 20 independently seeded rollouts for every one of the 944
+**Data.** Collected 20 independently seeded rollouts for every one of the 944
 upstream training prompts, retaining separate required-call groups 0–6. Explicitly
-combine groups 1, 2 and 3 into the model-update corpus. The expected totals are
+combine groups 1, 2 and 3 into the model-update corpus. The totals are
 18,880 collected rollouts and 12,980 model-update histories. Required-call count
 comes from the task definition; actual agent calls may differ. No validation or
 test tasks enter collection. Each task exposes relevant tools and three seeded
@@ -31,7 +31,14 @@ This training-corpus sanity check does not measure held-out transfer or task suc
 ## Factual observations
 
 The pinned upstream split yields 50/410/55/184/145/60/40 prompts for required-call
-counts 0/1/2/3/4/5/6. Collection is running. No rollout or probe results are reported yet.
+counts 0/1/2/3/4/5/6. Exact task/attempt coverage has been verified for all18,880
+histories. The combined1–3 corpus contains12,980 histories, all with reasoning;
+12,418 also contain tool responses. One training attempt ended after a malformed
+generated tool name caused the next API request to be rejected. Its original
+partial history and error are retained unchanged. A separate group5 attempt hit
+the output-token cap. No attempts were discarded or regenerated based on success.
+The full training-corpus probe evaluation is running or queued; no probe results
+are reported yet.
 
 ## Message
 

@@ -12,8 +12,9 @@
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 collection=${1:?Pass the completed collection directory}
+shift
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble_depthbench.py \
- --collection "$collection"
+ --collection "$collection" "$@"
 bash src/experiments/training_against_role_probes/evaluate_corpus.sbatch \
  --input experiment_reports/training_against_role_probes/depthbench/data/train_1_2_3/trajectories.jsonl \
  --output experiment_reports/training_against_role_probes/depthbench/data/baseline

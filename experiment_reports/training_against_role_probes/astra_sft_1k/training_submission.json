@@ -36,7 +36,8 @@
   "gpus": 2,
   "cpus": 16,
   "host_memory_gib": 128,
-  "walltime": "12:00:00",
+  "walltime": "04:00:00",
   "baseline_job": 1501446,
-  "readiness": "EXPLICIT READY \u2014 2026-10-24 in ../AGENT_COMMUNICATION.md"
+  "readiness": "EXPLICIT READY \u2014 2026-10-24 in ../AGENT_COMMUNICATION.md",
+  "walltime_rationale": "63 updates; measured warmed AppWorld updates roughly73\u201382s, with longer histories. Four hours includes startup/validation/checkpoint headroom."
 }

@@ -1,0 +1,14 @@
+{
+  "collection_job": 1501281,
+  "decision": "Retain the original failed attempt, including all recorded messages and the error; no regeneration or success filtering.",
+  "trajectories": [
+    {
+      "trajectory_id": "depthbench/364/attempt17",
+      "error_sha256": "05b9a66ad33e959a10aa311b916a4279c5ef417d9142a195eaceea1191b0f072",
+      "record_sha256": "b93a0bf290477b6104a887ff30c5e488f302c0630cb33210ed303c950bd63a7d",
+      "record_path": "experiment_reports/training_against_role_probes/depthbench/runs/1501281/collection/calls_3/0364_17.json",
+      "classification": "generated_malformed_tool_name_rejected_by_server",
+      "reason": "The model generated a tool name containing literal Harmony control tokens. The subsequent request was rejected by the server encoder. All four prior assistant responses and tool observations remain valid recorded history; no final response is fabricated."
+    }
+  ]
+}

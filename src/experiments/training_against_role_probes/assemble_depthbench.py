@@ -1,5 +1,6 @@
 """Verify all task/attempt pairs and explicitly merge the 1/2/3-call corpus."""
 import argparse
+import hashlib
 from collections import Counter
 import json
 from pathlib import Path
@@ -10,7 +11,12 @@ def main():
     p = argparse.ArgumentParser(__doc__)
     p.add_argument('--collection', type=Path, required=True)
     p.add_argument('--root', type=Path, default=Path('experiment_reports/training_against_role_probes/depthbench'))
+    p.add_argument('--error-audit', type=Path, help='Explicitly reviewed failure records to retain unchanged')
     a = p.parse_args()
+    audit = json.loads(a.error_audit.read_text()) if a.error_audit else {'trajectories': []}
+    audited = {r['trajectory_id']: r for r in audit['trajectories']}
+    assert len(audited) == len(audit['trajectories'])
+    observed_errors = set()
     manifest = json.loads((a.root/'data_manifest.json').read_text())
     settings = json.loads((a.collection/'manifest.json').read_text())
     assert settings['attempts'] == 20 and not settings['smoke']
@@ -25,13 +31,24 @@ def main():
         actual = {(r['task_id'], r['attempt']) for r in rows}
         assert actual == expected and len(rows) == len(expected), (n, len(rows), len(expected))
         assert all(r['required_calls'] == n and r['dataset_split'] == 'train' for r in rows)
-        assert all(not r['error'] and not r['export_errors'] for r in rows)
+        assert all(not r['export_errors'] for r in rows)
+        for r in rows:
+            if r['error']:
+                identifier = r['trajectory_id']
+                assert identifier in audited, f'Unaudited failure: {identifier}'
+                entry = audited[identifier]
+                assert hashlib.sha256(r['error'].encode()).hexdigest() == entry['error_sha256']
+                source = a.collection / f'calls_{n}' / f"{int(r['task_id']):04d}_{r['attempt']:02d}.json"
+                assert sha256(source) == entry['record_sha256']
+                observed_errors.add(identifier)
         assert len({r['trajectory_id'] for r in rows}) == len(rows)
         output = a.root/f'data/calls_{n}/trajectories.jsonl'
         write_jsonl(output, rows)
         grouped[n] = rows
         provenance['groups'][n] = corpus_summary(rows) | {'sha256': sha256(output),
             'path': str(output), 'limits': dict(Counter(str(r['limit']) for r in rows))}
+    assert observed_errors == set(audited), 'Audit must match exactly the retained failures'
+    provenance['error_audit'] = audit
     combined = [r for n in (1, 2, 3) for r in grouped[n]]
     assert len(combined) == manifest['expected_training_rollouts']
     output = a.root/'data/train_1_2_3/trajectories.jsonl'

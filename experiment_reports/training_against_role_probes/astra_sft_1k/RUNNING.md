@@ -62,7 +62,7 @@ The complete 1,000-history baseline finished successfully before model training.
 
 Configuration: [astra_sft_1k_config.json](../../../src/experiments/training_against_role_probes/astra_sft_1k_config.json).
 Submission provenance: [training_submission.json](training_submission.json).
-Two B200 GPUs, sixteen CPUs, 128 GB host RAM, twelve-hour limit.
+Two B200 GPUs, sixteen CPUs, 128 GB host RAM, four-hour limit.
 One epoch uses all 1,000 histories: 63 updates, with an effective batch of16
 except the final partial batch. Initial microbatch2 per GPU, learning rate5e-5,
 KL coefficient16, 2,000 standard-data probe-refit steps after each model update.
@@ -72,7 +72,7 @@ evaluation is explicitly cross-domain, not held-out ASTRA validation.
 
 ```bash
 sbatch --chdir=/data/cluster/users/kortukov/role_probe_training \
-  --job-name=astra-role-training --time=12:00:00 \
+  --job-name=astra-role-training --time=04:00:00 \
   src/experiments/training_against_role_probes/train.sbatch \
   src/experiments/training_against_role_probes/astra_sft_1k_config.json
 ```

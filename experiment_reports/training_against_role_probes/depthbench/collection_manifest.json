@@ -1,0 +1,177 @@
+{
+  "collection": "experiment_reports/training_against_role_probes/depthbench/runs/1501281/collection",
+  "settings": {
+    "dataset_revision": "7e309ca7b651a02b5ee23d2b208ff360b1ff0d9a",
+    "attempts": 20,
+    "temperature": 1,
+    "reasoning_effort": "medium",
+    "max_tokens_per_call": 8192,
+    "max_assistant_turns": 24,
+    "extra_functions": 3,
+    "seed_formula": "9100000 + task_id*10000 + attempt*100 + turn",
+    "model": "openai/gpt-oss-20b",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "smoke": false,
+    "concurrency": 16,
+    "collector_sha256": "ad0538db61505cb0cf8b9005ea60fc137f5c7634fcab397f92c089c4a154e315",
+    "environment_sha256": "a8243c0ed372902706dc2d4f503c6ae7324ba6b53173dc3c422000cfa0891309"
+  },
+  "groups": {
+    "0": {
+      "trajectories": 1000,
+      "roles": {
+        "system": 1000,
+        "user": 1000,
+        "assistant": 1114,
+        "tool": 114
+      },
+      "reasoning_bearing": 1000,
+      "tool_bearing": 77,
+      "finished_assistant": 1000,
+      "sha256": "51bdf40becaadaf7132445b16b07779682343e8a6eda35df057d371785f62eda",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_0/trajectories.jsonl",
+      "limits": {
+        "None": 1000
+      }
+    },
+    "1": {
+      "trajectories": 8200,
+      "roles": {
+        "system": 8200,
+        "user": 8200,
+        "assistant": 17420,
+        "tool": 9222
+      },
+      "reasoning_bearing": 8200,
+      "tool_bearing": 7684,
+      "finished_assistant": 8200,
+      "sha256": "89a46f67debfd6ebfd2efb59390932a6f6b18edbd29a55ec2e7fb8edd19f7014",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_1/trajectories.jsonl",
+      "limits": {
+        "None": 8200
+      }
+    },
+    "2": {
+      "trajectories": 1100,
+      "roles": {
+        "system": 1100,
+        "user": 1100,
+        "assistant": 3045,
+        "tool": 1945
+      },
+      "reasoning_bearing": 1100,
+      "tool_bearing": 1087,
+      "finished_assistant": 1100,
+      "sha256": "1d192987d2f88ced5840dd0e020a25a3402e79ccbff000e464e9241d9694c9e5",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_2/trajectories.jsonl",
+      "limits": {
+        "None": 1100
+      }
+    },
+    "3": {
+      "trajectories": 3680,
+      "roles": {
+        "system": 3680,
+        "user": 3680,
+        "assistant": 14318,
+        "tool": 10647
+      },
+      "reasoning_bearing": 3680,
+      "tool_bearing": 3647,
+      "finished_assistant": 3679,
+      "sha256": "91551821a49369d6bc9f60427148a7ce0ecc69182217f8180c0e198beb1e18b6",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_3/trajectories.jsonl",
+      "limits": {
+        "None": 3680
+      }
+    },
+    "4": {
+      "trajectories": 2900,
+      "roles": {
+        "system": 2900,
+        "user": 2900,
+        "assistant": 8297,
+        "tool": 5397
+      },
+      "reasoning_bearing": 2900,
+      "tool_bearing": 2695,
+      "finished_assistant": 2900,
+      "sha256": "42015e472aba1cabaea71740eb5ea5f788600c7a7352086d019d5a0fce6c651e",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_4/trajectories.jsonl",
+      "limits": {
+        "None": 2900
+      }
+    },
+    "5": {
+      "trajectories": 1200,
+      "roles": {
+        "system": 1200,
+        "user": 1200,
+        "assistant": 4297,
+        "tool": 3100
+      },
+      "reasoning_bearing": 1200,
+      "tool_bearing": 1165,
+      "finished_assistant": 1200,
+      "sha256": "39280e6f281d11d6b34457cf30279a844d6e65079ce9725ac25141cf7f1f601f",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_5/trajectories.jsonl",
+      "limits": {
+        "None": 1199,
+        "generation_tokens": 1
+      }
+    },
+    "6": {
+      "trajectories": 800,
+      "roles": {
+        "system": 800,
+        "user": 800,
+        "assistant": 1656,
+        "tool": 857
+      },
+      "reasoning_bearing": 800,
+      "tool_bearing": 424,
+      "finished_assistant": 800,
+      "sha256": "dce1fca1595cb04285377ebb21f45303db3a4b6ed94afb877c4f11958a15e3ae",
+      "path": "experiment_reports/training_against_role_probes/depthbench/data/calls_6/trajectories.jsonl",
+      "limits": {
+        "None": 800
+      }
+    }
+  },
+  "error_audit": {
+    "collection_job": 1501281,
+    "decision": "Retain the original failed attempt, including all recorded messages and the error; no regeneration or success filtering.",
+    "trajectories": [
+      {
+        "trajectory_id": "depthbench/364/attempt17",
+        "error_sha256": "05b9a66ad33e959a10aa311b916a4279c5ef417d9142a195eaceea1191b0f072",
+        "record_sha256": "b93a0bf290477b6104a887ff30c5e488f302c0630cb33210ed303c950bd63a7d",
+        "record_path": "experiment_reports/training_against_role_probes/depthbench/runs/1501281/collection/calls_3/0364_17.json",
+        "classification": "generated_malformed_tool_name_rejected_by_server",
+        "reason": "The model generated a tool name containing literal Harmony control tokens. The subsequent request was rejected by the server encoder. All four prior assistant responses and tool observations remain valid recorded history; no final response is fabricated."
+      }
+    ]
+  },
+  "training": {
+    "trajectories": 12980,
+    "roles": {
+      "system": 12980,
+      "user": 12980,
+      "assistant": 34783,
+      "tool": 21814
+    },
+    "reasoning_bearing": 12980,
+    "tool_bearing": 12418,
+    "finished_assistant": 12979,
+    "groups": [
+      1,
+      2,
+      3
+    ],
+    "sha256": "ea0911eab11dba2352767fb5e85f4a516058c593ad5eb7776157e8481fe4fd5c",
+    "path": "experiment_reports/training_against_role_probes/depthbench/data/train_1_2_3/trajectories.jsonl",
+    "limits": {
+      "None": 12980
+    }
+  }
+}

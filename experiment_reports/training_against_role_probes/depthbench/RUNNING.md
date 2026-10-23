@@ -41,8 +41,10 @@ After collection, explicitly verify all task/attempt identities and combine:
 
 ```bash
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble_depthbench.py \
- --collection experiment_reports/training_against_role_probes/depthbench/runs/1501281/collection
+ --collection experiment_reports/training_against_role_probes/depthbench/runs/1501281/collection \
+ --error-audit experiment_reports/training_against_role_probes/depthbench/collection_error_audit.json
 sbatch --chdir=/data/cluster/users/kortukov/role_probe_training \
+ --job-name=depthbench-probes --time=02:00:00 \
  src/experiments/training_against_role_probes/evaluate_corpus.sbatch \
  --input experiment_reports/training_against_role_probes/depthbench/data/train_1_2_3/trajectories.jsonl \
  --output experiment_reports/training_against_role_probes/depthbench/data/baseline
@@ -55,4 +57,15 @@ Baseline evaluation uses the same full-context BF16 model and five probes as
 [ASTRA](../astra_sft_1k/RUNNING.md). No model training is started before reporting
 the baseline and receiving [implementation readiness](../AGENT_COMMUNICATION.md).
 
-Baseline job **1501448** depends on successful collection1501281. It validates every task/attempt pair, writes separate groups and the explicit1–3 mixture, then scores all12,980 training histories. Launcher: `src/experiments/training_against_role_probes/evaluate_depthbench.sbatch`; output: `data/baseline/`.
+Baseline job **1503678** scores all12,980 verified training histories using
+`evaluate_corpus.sbatch`; output: `data/baseline/`. The original collection
+remains intact, including its error field. The explicitly audited failure is
+`depthbench/364/attempt17`; [collection_error_audit.json](collection_error_audit.json)
+records exact record/error hashes. Assembly permits only these reviewed failures,
+requires exact coverage, and rejects new or modified failures. See
+[collection_manifest.json](collection_manifest.json) for all group/output hashes.
+
+The malformed generated tool name contains literal Harmony control tokens.
+Retrospective replay preserves it; labels still come exclusively from structured
+message/channel metadata, and header/control tokens are excluded from scoring.
+No final response is fabricated for the aborted history.
