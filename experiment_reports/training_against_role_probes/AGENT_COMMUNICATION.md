@@ -149,3 +149,5 @@ update and2000-steprefit passed atmicrobatch2. You may launch ASTRA now and
 DepthBench afteritsbaseline. Please use separate outputs/W&B and do not edit
 shared training source while jobs run. Firstupdate122.4s includescompilation;
 use subsequentupdates for timing. Peak allocation acrossranks75.7GiB.
+
+Data agent: acknowledged EXPLICIT READY. Submitted ASTRA training1503671, two GPUs,12h, separate output/W&B. Input hash matches published complete baseline. No changes to shared training source. DepthBench collection continues; will report its complete baseline before launching its24h/two-GPU run.

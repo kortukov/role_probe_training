@@ -63,11 +63,26 @@ def main():
     body += '(excluding periodic validation and checkpoint saving).\n\n'
     body += 'The development set contains eight tasks; this is an early signal, not a precise\n'
     body += 'generalization estimate. Model and probe both change between rows.\n'
+    changes = [(role, after - before) for role, before, after in zip(
+        ROLES, first['metrics']['per_role_recall'], last['metrics']['per_role_recall'])]
+    declines = [(role, delta) for role, delta in changes if delta <= -0.05]
+    if declines:
+        body += 'Per-role regressions of at least five percentage points: ' + ', '.join(
+            f'{role} ({delta * 100:+.1f} points)' for role, delta in declines) + '.\n'
+        body += 'Overall accuracy should therefore not be read as uniform improvement across roles.\n'
     body += '[Development confusion matrices](APPENDIX.md#development-confusions) separate the roles.\n'
     path = args.report / 'README.md'
     text = replace_section(path.read_text(), 'training-results', body, before='## Message')
     text = text.replace('production training has not started.', 'production training has started.')
     text = text.replace('No learning result is available yet.', 'The table above reports the current learning result.')
+    message_start = text.index('## Message')
+    reproduction_start = text.index('See [RUNNING.md]', message_start)
+    direction = 'increased' if last['metrics']['accuracy'] > first['metrics']['accuracy'] else 'did not increase'
+    conclusion = f'## Message\n\nAfter {last["step"]} updates, role accuracy {direction} on the small fixed development\nset with the continually refitted probe. '
+    if declines:
+        conclusion += 'The per-role regressions show that this does not\nmean all roles became easier to recover. '
+    conclusion += 'An independently fitted probe and new task\nrollouts are needed to establish broader recoverability and behavioral effects.\n\n'
+    text = text[:message_start] + conclusion + text[reproduction_start:]
     path.write_text(text)
     appendix = '## Development confusions\n\nRows are true content roles; columns are predicted roles. Values are token counts.\n'
     for label, row in [('Before training', first), (f'After update {last["step"]}', last)]:

@@ -108,3 +108,50 @@ Row-normalized percentages:
 | cot | 0.8% | 7.3% | 23.3% | 5.1% | 63.4% |
 | assistant | 1.9% | 8.7% | 21.8% | 11.4% | 56.1% |
 | tool | 9.0% | 31.2% | 3.2% | 8.4% | 48.2% |
+
+<!-- development-results -->
+## Development confusions
+
+Rows are true content roles; columns are predicted roles. Values are token counts.
+
+### Before training
+
+| True / predicted | system | user | reasoning | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 24 | 16 | 144 | 0 | 1768 |
+| user | 0 | 218 | 9 | 0 | 304 |
+| reasoning | 1 | 397 | 4601 | 403 | 542 |
+| assistant | 21 | 253 | 21359 | 15331 | 833 |
+| tool | 3447 | 9508 | 22515 | 9057 | 8961 |
+
+Row-normalized percentages:
+
+| True / predicted | system | user | reasoning | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 1.2% | 0.8% | 7.4% | 0.0% | 90.6% |
+| user | 0.0% | 41.1% | 1.7% | 0.0% | 57.3% |
+| reasoning | 0.0% | 6.7% | 77.4% | 6.8% | 9.1% |
+| assistant | 0.1% | 0.7% | 56.5% | 40.6% | 2.2% |
+| tool | 6.4% | 17.8% | 42.1% | 16.9% | 16.8% |
+
+### After update 5
+
+| True / predicted | system | user | reasoning | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 128 | 0 | 0 | 8 | 1816 |
+| user | 13 | 104 | 1 | 1 | 412 |
+| reasoning | 1 | 111 | 821 | 3039 | 1972 |
+| assistant | 16 | 65 | 2107 | 30324 | 5285 |
+| tool | 462 | 705 | 516 | 2826 | 48979 |
+
+Row-normalized percentages:
+
+| True / predicted | system | user | reasoning | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 6.6% | 0.0% | 0.0% | 0.4% | 93.0% |
+| user | 2.4% | 19.6% | 0.2% | 0.2% | 77.6% |
+| reasoning | 0.0% | 1.9% | 13.8% | 51.1% | 33.2% |
+| assistant | 0.0% | 0.2% | 5.6% | 80.2% | 14.0% |
+| tool | 0.9% | 1.3% | 1.0% | 5.3% | 91.6% |
+<!-- /development-results -->
+

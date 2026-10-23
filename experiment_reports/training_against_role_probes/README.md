@@ -49,8 +49,6 @@ from the first shard's evaluation start to the last finish was **90.2 minutes**;
 parallelism increased during collection to at most eight GPUs. These are measured
 collection costs, not a controlled scaling comparison.
 
-Baseline evaluation is complete. Production training is running on two GPUs.
-
 <!-- corpus-results -->
 ### Training-corpus baseline
 
@@ -71,11 +69,30 @@ not held-out generalization.
 [Confusion matrices](APPENDIX.md#training-corpus-baseline-confusions) are in the appendix.
 <!-- /corpus-results -->
 
+<!-- training-results -->
+### Learning results
+
+Training is **in progress**, with **6 model updates** recorded. The latest development evaluation is after update 5.
+
+| Model / probe | Overall | Macro recall | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Base model / original probe | 29.2% | 35.4% | 1.2% | 41.1% | 77.4% | 40.6% | 16.8% |
+| Update 5 / refitted probe | 80.6% | 42.4% | 6.6% | 19.6% | 13.8% | 80.2% | 91.6% |
+
+Across the last 6 recorded updates, mean role loss was 1.634, mean KL was 0.0051, and mean update-plus-refit time was 85.1 seconds (excluding periodic validation and checkpoint saving).
+
+The development set contains eight tasks; this is an early signal, not a precise
+generalization estimate. Model and probe both change between rows.
+Per-role regressions of at least five percentage points: user (-21.5 points), reasoning (-63.6 points).
+Overall accuracy should therefore not be read as uniform improvement across roles.
+[Development confusion matrices](APPENDIX.md#development-confusions) separate the roles.
+<!-- /training-results -->
+
 ## Message
 
-No learning result is available yet. Improved accuracy with the continually
-refitted probe would show that its predictions better match conversational roles
-on fixed text. An independently fitted probe and new task rollouts would be needed
-to establish broader recoverability and behavioral effects.
+After 5 updates, role accuracy increased on the small fixed development
+set with the continually refitted probe. The per-role regressions show that this does not
+mean all roles became easier to recover. An independently fitted probe and new task
+rollouts are needed to establish broader recoverability and behavioral effects.
 
 See [RUNNING.md](RUNNING.md) for reproduction, configurations and artifact locations.

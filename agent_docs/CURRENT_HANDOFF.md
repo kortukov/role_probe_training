@@ -1,95 +1,53 @@
-# Current handoff — 2026-10-23
+# Current handoff — 2026-10-24
 
-## Active first-training preparation
+## Active AppWorld training
 
-User authorized **2,700 AppWorld trajectories**, 30 seeded attempts per each90train
- tasks, baseline probe evaluation, implementation and launch of first training.
-Experiment MOVED to `experiment_reports/training_against_role_probes` (data too).
-All own source/report paths updated. Do not recreate old agentic location.
-`AGENT_COMMUNICATION.md` starts as a placeholder; second agent has appended dataset
-and GPU coordination notes. PRESERVE those notes. The shared implementation passed GPU tests and has a scoped READY-for-reuse
-signal. Do not claim AppWorld production is running until job1501541 actually starts.
-Other agent owns ASTRA/DepthBench data adapters, replay.py ending support and its
-subreports. Do not stage/change their files. Coordinate GPU jobs via file; the user explicitly removed the aggregate four-GPU cap.
+User requested2700AppWorld training trajectories, baseline probes, and a complete
+training implementation/start. All prerequisites completed and production is RUNNING.
+Report root: `experiment_reports/training_against_role_probes/` (moved outofagentic).
 
-Current own jobs:
--1501202 COMPLETED all30shards:2700attempts,1032solved(38.2%),allreasoning,noerrors/limits.
--1501282 COMPLETED assembly:data/train2700/trajectories.jsonl,train_corpus.json.
--1501329 array0..1 COMPLETED: all2700trajectories/fivelayers; pertokenpredictionssaved.
--1501382 COMPLETED:baseline report pusheda61a58e; layer12accuracy26.12%,macro33.73%.
--1501541 RUNNING onvca-gpu-0702-03:productiontwoGPUtraining,169updates,oneepoch. Livewalltime12h. Firstcompleteupdate122.4s, microbatch2, peak75.7GiB.
--1501542 queued afterany1501541:publish finalnumericresults/README/APPENDIXtoGitHub.
--1501243 COMPLETED:fixedKL800ordinaryDolci anchors.
--1501280 COMPLETED:eightdisjointdevtasks.
-Pilot1501447+resume1501491passedcompleteupdates/refits/W&B/checkpoints/OOMretry.
-SharedimplementationREADYforotheragentreuse at03c1937; AppWorldproductionRUNNING.
-READY-for-ASTRA release is at topofAGENT_COMMUNICATION; preserveotheragentnotes.
+- Collection1501202 and assembly1501282 COMPLETED:2700attempts=30×90tasks,
+  1032solved(38.2%), allreasoning, zeroerrors/limits. Canonicaldata/train2700/trajectories.jsonl.
+- Baseline1501329 COMPLETED:all2700,fivelayers4/8/12/16/20,fullhistory,
+  pertokenpredictionsunderpredictions/train2700. Layer12accuracy26.12%,macro33.73%.
+  Report/appendix+baseline_probe_results.json pusheda61a58e.
+- Production **1501541 RUNNING**,twoB200s,vca-gpu-0702-03,livewalltime12h.
+  Oneepoch169updates,effective16,microbatch2/GPU,fulltrajectories.
+  Outputs:runs/training/appworld2700; config:src/experiments/training_against_role_probes/train_config.json.
+- Finalreportpublisher **1503672** afterany1501541 updates/pushes numericresults,
+  README andAPPENDIX. Reproduce via report_training.py --run RUN_DIRECTORY.
+- Initial5updates:devaccuracy29.2%→80.6%,macro35.4%→42.4%; reasonrecall77.4%→13.8%,
+  user41.1%→19.6%; assistant/toolsimproved. Do not present overallgain asuniformrecovery.
+  Reporterautomaticallyflagsperroledeclines. Keepagreedtokenweightedobjectiveunchanged.
+- Warmupdates73–83s includingrefit32s; initial122s. Memorypeak<79GiB sofar, noOOMretry.
+- W&B:https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/appworld2700-l12-epoch1
 
-Shared training implemented under `src/role_probe_training/training/`:
- data.py,model.py,objectives.py,refit.py,train.py,score.py.
-Train configs/jobs under `src/experiments/training_against_role_probes/`.
-CPUchecks.py passed KLdirection/mask/checkpointedgradients andpadding.
-**GPU pilot1501447 and resume1501491 COMPLETED successfully** in ber-testing. Attention compile limit raised to64;
-fails explicitly at limit instead of quadratic eager fallback. Uses train.sbatch
-pilot_config.json on2GPUs (ber-testing,time1h acceptable forvalidation), and
-resume checkpoint withmax_updates2 proved restart. Pilot config usesdebug300,
-fullprotocoloneupdate,2000refitsteps,16KLpairs,deliberate coordinatedOOMretry.
-Production config train_config.json:2700,oneepoch169updates,fulltrajectories,
-microbatch2/GPU,effective16,tokenweightedCE,layer12,KLcoefficient16.
-Regular validation8devtasks every5updates;checkpoint every10,keeplast2.
-Warmstart probeSGD2000steps,lr1e-3,wd1e-4,batch32passage-roleexamples,allcontenttokens,
-original250C4/Dolmapassages/originalsplit. NOTAppWorldprobe fitting.
-Standardactivationextraction batched16/rank,cachedGPU. Measure real refitcost.
-W&B configuredat api.forge.coreweave.com entitykortukov projecttraining_against_role_probes.
-Need finish reportupdates, commitownfiles only, evaluate2700 corpus,
-launchproductionafterfullbaseline, updatecommunicationREADYthenreportuser.
-Productiontrain1501541 is queued; userexplicitlyauthorizedlaunchwhenready.
+Training code stable at03c1937; do notedit sharedtraining/*.py whilejobsrun/queued.
+Pilot1501447+resume1501491 passed fullupdates,KL,all2000refitsteps,dev,W&B,
+checkpointsave/restore(optimizer+probe+adapter) andcoordinatedinjectedOOMretry.
+Production retries wholeupdateatmicrobatch1, samebatch/objective; failurethere stops.
+Attentioncompilelimit64/fail-explicit preventsquadratic eagerfallback.
+Checkpointinitial,every10updates,final;keeplast2. ResumeCLI inRUNNING.md.
 
-## Completed throughput calibration
+Modelgoal: IMPROVE role recoverability, layer12 postattentionnorm/preMLP, fiveclassCE.
+Probe refit ONLY standard250C4/Dolma passages/originalsplit/allcontenttokens; neverAppWorld.
+WarmSGD2000steps,lr1e-3,wd1e-4,32passageroleexamples/minibatch,50warmup+cosine.
+ModelLoRA64alpha128dropout0,AdamW5e-5wd1e-4,clip1,globaltokenmean.
+KL800fixedordinaryDolci+GPTOSSbaseanswers,data/kl/anchors.jsonl (job1501243complete),
+16sampled/update,coefficient16,unshifted2048completionmask upstreamprotocol.
+SamefrozenmodelwithLoRAdisabled actsasteacher; nosecondfullmodel.
+Dev8disjointAppWorldtasks(job1501280) runs/dev/1501280/dev/trajectories.jsonl.
+Fulltrainingcorpus fixed/offpolicy. Validationfixedbase-modeltrajectories; taskbehaviornotyettested.
 
-Original context job1493850 completed all4settings in9m28s. Role-only update means
-4K11.8s,8K16.9s,16K20.2s,full21.5s; fullpeak59.9GiB,33kstress63.8GiB.
-Small results: `experiment_reports/training_against_role_probes/context_results.json`.
-No KL/refitting overhead measured; these are not end-to-end training estimates.
+## Concurrent data/training agent
 
-User requested paired full-trajectory microbatch1/2/4 comparison, effectivebatch16.
-Job **1500991** COMPLETED in10m51s on two B200s in ber-testing (vca-gpu-0701-01).
-Microbatch1/2/4 means26.60/23.18/24.48s/update; peakupdate63.0/76.5/104.1GiB;
-stress63.8/79.7/111.8GiB. Microbatch2 throughput1.148×baseline; padding0/7.9/21.9%.
-Allconditions/rankscompleted. Smallsummary `microbatch_results.json`; reportupdated.
-Script `src/experiments/training_against_role_probes/microbatch.sbatch`, shared
-implementation `src/role_probe_training/training/throughput.py`, isolated runtime.
-Five identical seeded batches percondition, sortwithinbatchbylength, one warmup,
-four measured updates, plus repeatedlongesttrajectory stressbackward.
-Outputs `experiment_reports/training_against_role_probes/data/microbatch/1500991/`.
-Log `logs/role-microbatch-1500991.out` in that experiment.
-Aggregator: `summarize_microbatch.py --runs ... --output .../microbatch_results.json`.
-Throughput benchmark complete; current collection/training preparation described above.
-
-Production OOM recovery retries the whole optimizer update on both ranks with
-microbatch1 and unchanged effective batch size; pilot tests this with an injection. Keep resolved correctness investigations in code/local
-logs, not scientific reports or published result summaries.
-
-W&B project: https://forge.coreweave.com/wandb/kortukov/training_against_role_probes
-Standing auth to push code/reports, no data. Results summarized in README/APPENDIX/RUNNING; push code and small results only.
-
-## Confirmed training design
-
-Improve role recoverability, five-class cross-entropy, layer12 post-attention norm
-(pre-MLP, zero-based). Probe refitting uses ONLY the standard role-confusion
-C4/Dolma250passages × five roles,1024tokens,originalsplit,allcontenttokens.
-Never fit probes on AppWorld. Removed obsolete AppWorld-refitting cost scenarios.
-AppWorld fixed text is model-update data. First corpus:30attempts/task ×90tasks =2,700trajectories. Existing300 are debug-only, allreasoning,117solved,noerrors,
-median12466/max33241tokens. Debug source is `data/debug/trajectories.jsonl`.
-Prefer full trajectories; benchmark start-anchored prefixes, no arbitrary windows.
-Warm-start refits after each model update. KL ordinary Dolci-Instruct-SFT prompts
-plus once-generated baseGPT-OSS answers, KL(base||adapted), coefficient16,16pairs.
-KL anchor generation is complete. W&B credentials verified, netrc; server
-https://api.forge.coreweave.com, entity kortukov. Never print keys.
-Working defaults LoRA64/alpha128/dropout0,AdamW5e-5,weightdecay1e-4.
-Benchmark targets attention q/k/v/o and fused expert gate/up/down,739,639,296
-trainable parameters; token weighting and clipping1 are calibration settings.
-First run uses token weighting, full context, effective batch16 and one epoch169updates.
+EXPLICIT READY atAGENT_COMMUNICATION.md; AppWorldproductionstarted, allrequirementsmet.
+Secondagent owns ASTRA/DepthBench adapters/configs/subreports and replay.py optionalending.
+Preserve theirfiles/notes; stageonlyyourownfiles. ASTRAtraining **1503671** submittedtwoGPUs12h,
+1000histories63updates afterpublishedbaseline. DepthBench1501281 collecting,baseline1501448
+queued; owntrainingafterbaseline,12980histories(groups1/2/3),812updates,24h planned.
+The user removedaggregatefourGPUcap; use reasonable resources,trainingtwoGPUs/run.
+Allruns distinctoutput/W&B. Shareddev/KL allowed; explicitlycross-domainforotherdatasets.
 
 ## SWE rerun incomplete
 
