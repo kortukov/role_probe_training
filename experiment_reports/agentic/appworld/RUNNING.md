@@ -52,3 +52,13 @@ run="$base/runs/1489157"
   --dataset "pilot_two_gpus=$run/pilot/shard0,$run/pilot/shard1" \
   --output "$base"
 ```
+
+## Normal-test probe evaluation and viewer
+
+Frozen probe results for all 168 normal-test trajectories are reproduced by
+`src/experiments/agentic_probes/appworld.sbatch` followed by
+`src/experiments/agentic_probes/appworld_report.sbatch`.
+[Detailed reproduction](../appworld_probe_transfer/RUNNING.md) records the scoring
+protocol and prediction paths. The generated standalone viewer is
+`experiment_reports/agentic/appworld_probe_transfer/viewer.html`; it embeds all
+per-token predictions and can be downloaded and opened without adjacent files.

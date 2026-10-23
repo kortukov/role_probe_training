@@ -1,0 +1,15 @@
+{
+  "trajectories": 168,
+  "exact_source_id_coverage": true,
+  "layers": [
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "viewer_offline_browser_check": "passed: all layers, largest trajectory, token probabilities, filters, no network requests",
+  "viewer_bytes": 341820663,
+  "input_sha256": "13a1e7566ccc36db540094a082c3976cb97bb69d89b4f4afd45457e733872af2",
+  "viewer_sha256": "d2242fe0e22e7a39941c4553e6503f634bcb31410ecff9daeb0adb59c405d52f"
+}
