@@ -19,7 +19,8 @@ attempts remain included.
 assistant and tool roles from pre-MLP activations. Labels come from conversation
 metadata. Alternating updates first improve the model's correct-role predictions
 with probe weights fixed, then refit the probes on the updated model with model
-weights fixed. This strengthens role recoverability. The starting proposal is a
+weights fixed. Probe fitting uses the standard role-confusion C4/Dolma passages
+and their original split, separately from the AppWorld model-update corpus. This strengthens role recoverability. The starting proposal is a
 layer-12 experiment with warm-started probe refits after each model update.
 
 We adapt the continuously updated method in
@@ -43,8 +44,9 @@ updates, activation extraction, probe fitting and validation.
 
 The debug corpus is complete: 300 trajectories, all with reasoning, no evaluation
 errors, and 117 successful attempts (39%). It contains 4.10 million tokens; median
-trajectory length is 12,466 tokens and the maximum is 33,241. No model optimization
-has run, and the planned 27,000-trajectory training corpus has not been collected.
+trajectory length is 12,466 tokens and the maximum is 33,241. The two-GPU throughput calibration is running on debug data, comparing short
+prefixes with full trajectories. Results are pending. The planned 27,000-trajectory
+training corpus has not been collected and production training has not started.
 
 ## Message
 

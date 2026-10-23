@@ -1,73 +1,68 @@
 # Current handoff — 2026-10-23
 
+## Active throughput calibration
+
+User resumed training work specifically to start throughput measurements.
+Job **1493850**, two B200s on vca-gpu-0701-04, passed its two-replica smoke test.
+It proceeds through 4096/8192/16384/full debug trajectories, effective batch16,
+microbatch1, one warmup and two measured updates, plus longest-example backward.
+Entry: `src/experiments/training_against_role_probes/throughput.sbatch`.
+Implementation: `src/role_probe_training/training/throughput.py`.
+Runtime is isolated under the experiment's `runtime/`; do not change active code.
+Outputs: `experiment_reports/agentic/training_against_role_probes/data/throughput/1493850/`.
+Logs: that experiment's `logs/role-throughput-1493850.out`.
+W&B project: https://forge.coreweave.com/wandb/kortukov/training_against_role_probes
+
+This first phase measures **role-only model updates with a fixed standard-data
+probe**. It excludes KL and probe-refit costs; never label it end-to-end throughput.
+No production training or 27k trajectory collection is authorized by this benchmark
+request. No full training checkpoint is saved/promoted. Measure KL and standard-data
+extraction/refitting separately before projecting end-to-end cost. Review measured
+memory and timing; GPU smoke success alone does not verify full-context feasibility.
+
+## Confirmed training design
+
+Improve role recoverability, five-class cross-entropy, layer12 post-attention norm
+(pre-MLP, zero-based). Probe refitting uses ONLY the standard role-confusion
+C4/Dolma250passages × five roles,1024tokens,originalsplit,allcontenttokens.
+Never fit probes on AppWorld. Removed obsolete AppWorld-refitting cost scenarios.
+AppWorld fixed text is model-update data. Planned corpus:300attempts/task ×90tasks
+=27,000trajectories. Existing300 are debug-only, allreasoning,117solved,noerrors,
+median12466/max33241tokens. Debug source is `data/debug/trajectories.jsonl`.
+Prefer full trajectories; benchmark start-anchored prefixes, no arbitrary windows.
+Warm-start refits after each model update. KL ordinary Dolci-Instruct-SFT prompts
+plus once-generated baseGPT-OSS answers, KL(base||adapted), coefficient16,16pairs.
+KL anchor data not prepared yet. W&B credentials verified, netrc; server
+https://api.forge.coreweave.com, entity kortukov. Never print keys.
+Working defaults LoRA64/alpha128/dropout0,AdamW5e-5,weightdecay1e-4.
+Benchmark targets attention q/k/v/o and fused expert gate/up/down,739,639,296
+trainable parameters; token weighting and clipping1 are calibration settings.
+Final role weighting, context, effective batch and update budget remain decisions.
+Atbatch16 one27kepoch means1688updates. Do not equate upstream30updates tooneepoch.
+
 ## Active SWE rerun
 
-Current jobs: image-preparation retry **1492728_10** (one CPU, single-threaded
-compression), dependent four-GPU evaluation array **1492729**, all500tasks.
-488/500images cached; remaining12 all belong to preparation shard10.
-Original image array1492631 had31successfulshards, one mksquashfs segfault139;
-therefore original GPUarray1492632 was cancelled without ever starting inference.
-Retry/evaluation submitted under the existing authorization. Do not claim model
-inference started until1492729 actually runs. Monitor squeue/sacct and logs.
-Source settings unchanged: modernvLLM0.32,temperature1,highreasoning,8192tokens/call,
+Image preparation completed; evaluation array **1492729** started. Last seen shards
+0 and1 running. Check all four shards via sacct before declaring complete.
+All500tasks, modernvLLM0.32,temperature1,highreasoning,8192tokens/call,
 200messages,2Mcumulative tokens,1800s/task,8tasks/GPU. Prior500task/probe results
-still describe oldcohort; finalize only the complete newcohort separately.
-Submission metadata: experiment_reports/agentic/swe_bench_full/metrics/rerun_submission.json.
+still describe oldcohort; finalize complete newcohort separately.
+Submission metadata: `experiment_reports/agentic/swe_bench_full/metrics/rerun_submission.json`.
 
-## AppWorld ready for discussion
+## AppWorld and probe reports complete
 
-All 675 tasks collected, no evaluation errors, no model/probe optimization performed:
-- Train: 38/90 solved (42.2%), 6.75 minutes on two GPUs.
-- Normal test: 45/168 (26.8%), 14.39 minutes.
-- Challenge test: 105/417 (25.2%), 38.96 minutes.
-- Four-task train timing pilot: one GPU sequential 2.85 min; one GPU concurrent 1.81 min; two GPUs concurrent 1.90 min. Single sampled batches, not a controlled throughput scaling claim.
-- Canonical corpus: `experiment_reports/agentic/appworld/data/{train,test_normal,test_challenge}.jsonl`; all preserve reasoning; role/token alignment checked with existing probe tokenizer. No AppWorld probe predictions yet.
-- Full run 1489157; one-GPU pilot 1489112. Train/test IDs disjoint. Keep test content held out; use train for development.
-- Report and reproduction: `experiment_reports/agentic/appworld/{README,RUNNING,APPENDIX}.md`.
+All675tasks collected without evaluation errors. Train38/90,normaltest45/168,
+challengetest105/417. Canonical JSONL under `experiment_reports/agentic/appworld/data/`.
+Normaltest168trajectories scored at layers4,8,12,16,20; predictions under
+`experiment_reports/agentic/appworld_probe_transfer/predictions/`.
+Both combined reports include AppWorld: layer12 `probe_transfer` and five-layer
+`probe_layer_comparison`, per-role tables and appendix confusion matrices.
+No majority-baseline rows in layer tables. Local standalone viewers updated and
+browser-validated; five-layer viewer1.746GB. Reports already pushed before viewers.
 
 ## Standing preferences
 
-Use uv and existing locked environments; no more than four GPUs. No subagents unless requested. Push code/reports, never trajectory data. Paper-style concise reports per `agent_docs/REPORT_WRITING.md`; remove superseded material once replaced. Use timed waits, not busy polling. Do not change code used by active jobs. User wants to discuss AppWorld training next; do not launch optimization without a defined experiment.
-
-## Off-policy role training — active preparation
-
-User-confirmed objective: improve role recoverability; layer12 and multiclass CE.
-**Corrected data target: 300 attempts PER TASK × 90 tasks = 27,000 trajectories.**
-Existing collection1492660/assembly1492664 completed; those300 are **debug only**.
-Path: `experiment_reports/agentic/training_against_role_probes/data/debug/trajectories.jsonl`.
-Small metadata: debug_corpus.json, debug_batch_stats.json, debug_submission.json.
-Scripts now collect_debug.sbatch / assemble_debug.py / assemble_debug.sbatch.
-No production27k collection or model optimization launched. User prefers full
-trajectories; consider microbatch1/gradient accumulation before any truncation.
-Debug median12466/max33241 tokens,4.10M total; allreasoning,117/300success,noerrors.
-Read DESIGN.md: full training ~369Mtokens extrapolated,1688updates/epoch atbatch16.
-Need decide full-run update budget and probe-refit pool (all27k everyupdate costly).
-Warm-started upstream probes, KL ordinary Dolci-Instruct-SFT baseGPT-OSS answers.
-W&B verified via netrc read-only API as kortukov at https://api.forge.coreweave.com.
-Set WANDB_BASE_URL to that host in jobs; no login needed.
-Fresh independent probes = new initializations, fit training-side data on frozen
-base/final checkpoints, same held-out dev evaluation; no test fitting.
-
-Capacity discussion: batch_stats.py now measures4k/8k/16k prefixes and complete
-tool replies. estimate_cost.py/cost_estimate.json contain illustrative UNMEASURED
-rates2000train/8000extract tokens/s/GPU; do not cite those as benchmarks. Full
-epoch1688updates and369Mtokens. All27k refitted everyupdate implies~623Btoken
-positions: not a viable default. Fitting pool/budget remains undecided. Meta
-parameter count BF16base38.96GiB; candidate all-expert+attention LoRA64 state
-~11.02GiB. Peak training memory/runtime not measured; no training loop exists yet.
-
-## User pause — training work
-
-Training-related work is explicitly paused. No training GPU job was launched.
-Interrupted isolated runtime uv sync; untracked runtime files are preparation only.
-Before resuming, correct design: probes refit ONLY on standard role-confusion
-C4/Dolma data (existing250passages/fiveroles/originalsplit), never AppWorld.
-AppWorld is model-update data. Earlier refit-on-AppWorld cost scenarios are invalid
-for the intended experiment and must be replaced when training work resumes.
-User requests only adding AppWorld normal-test observations/confusion matrices to
-agentic/probe_transfer now. Standalone AppWorld results already pushed5091d2a.
-Both combined reports now include AppWorld: layer12 transfer and five-layer
-comparison, including per-role accuracy tables and confusion matrices. Report
-pushed9712608 before final viewer validation. Both viewers passed offline browser
-checks; layer-comparison viewer is1.746GB and stays local. Publish reports before
-large viewer work in future. Training remains explicitly paused.
+Use uv, maximum four experiment GPUs, two preferred for training. No subagents
+unless requested. Push code/reports, never trajectory data. Brief paper-style
+reports per `agent_docs/REPORT_WRITING.md`; remove superseded material. Publish
+report tables first, then build/validate large viewers. Timed waits, no busy polling.

@@ -1,0 +1,22 @@
+{
+  "job_id": "1493850",
+  "gpus": 2,
+  "gpu_type": "NVIDIA B200",
+  "status_at_recording": "smoke_passed_context_comparison_running",
+  "scope": "role-only model optimizer steps; fixed standard-data layer12 probe; excludes KL and refitting",
+  "contexts": [
+    4096,
+    8192,
+    16384,
+    null
+  ],
+  "effective_batch": 16,
+  "updates_per_context": 3,
+  "warmup_updates": 1,
+  "seed": 123,
+  "trainable_parameters": 739639296,
+  "source": "data/debug/trajectories.jsonl",
+  "output": "data/throughput/1493850",
+  "parent_commit": "bdceabf644bf39521dda1c7c870e4161124cfecb",
+  "wandb_project": "https://forge.coreweave.com/wandb/kortukov/training_against_role_probes"
+}

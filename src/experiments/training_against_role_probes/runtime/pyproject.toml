@@ -1,0 +1,15 @@
+[project]
+name = "role-probe-training-benchmark"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "role-probe-training",
+  "peft==0.20.0",
+  "wandb>=0.25,<1",
+]
+
+[tool.uv.sources]
+role-probe-training = { path = "../../../..", editable = true }
+
+[tool.uv]
+cache-dir = ".uv-cache"

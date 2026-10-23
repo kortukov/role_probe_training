@@ -8,13 +8,15 @@ strengthen correct-role predictions, not hide roles or fool the probes.
 1. Select a batch from the fixed AppWorld training corpus and run the current model.
 2. Freeze the role probes and backpropagate correct-role loss through their inputs
    to a LoRA adapter. Include the KL anchor in this same optimizer update.
-3. Freeze the model, recompute fitting activations, and update the probes against
-   metadata labels. Old cached activations cannot be reused after a model update.
+3. Freeze the model, recompute activations on the standard role-confusion
+   C4/Dolma passages, and refit probes against their assigned role labels. Old cached activations cannot be reused after a model update.
 4. Log already computed batch metrics; periodically score fixed development data.
 
 There is no trajectory generation inside this loop. Probe fitting and model
 optimization are separate optimizers. Refit data remains fixed; representations
-change. Do not split repeated attempts of one task between fitting and validation.
+change. Probe fitting uses the existing 250 passages, five role renderings,
+1,024-token limit and original train/test split, never AppWorld. AppWorld
+model-update tasks and development tasks remain separate.
 
 ## Verified upstream choices
 
@@ -93,21 +95,14 @@ exceeds the previous inference server's 32,768 limit. Training memory is a separ
 constraint and must be tested with efficient attention and gradient checkpointing.
 
 Extrapolating the debug mean to 27,000 trajectories gives approximately 369 million
-tokens. Recomputing activations for the entire corpus after every model update
-would be a major cost. Decide the probe fitting pool and refit budget explicitly
-before scaling; do not silently subsample the requested data.
-
-An independent fresh probe is newly initialized on a frozen checkpoint, fitted on
-training-side data only, and evaluated on held-out development tasks. It receives
-no warm-start weights from the probe used to optimize the model. Apply the same
-fit/evaluation protocol to the base and trained checkpoints to measure whether
-role recovery improved beyond co-adaptation with the training probe.
+tokens for model updates. Probe refitting has its own fixed standard-data cost;
+it does not re-extract the AppWorld corpus.
 
 ## Independent probe check in plain language
 
 The main check is not applying the old base-model probe to the final model.
 Instead, freeze the base model and fit a new probe; freeze the final model and
-fit another new probe with the same training budget. Evaluate each probe on its
+fit another new probe with the same standard C4/Dolma training data and budget. Evaluate each probe on its
 own model's activations for the same held-out tasks. Does a probe learning from
 scratch recover roles more accurately on the trained model?
 
@@ -117,7 +112,8 @@ training gradients. It is an optional diagnostic, not another model-training loo
 An old probe transferred directly to the final model instead tests whether its
 original decision boundary still works, which is a different question.
 
-Authentication is verified on the user's W&B server. Capacity estimates and their
-explicit unmeasured throughput assumptions are in RUNNING.md. Probe-fitting pool
-size remains a consequential unresolved choice; do not silently use only300 out
-of the27,000 requested training trajectories.
+Authentication is verified on the user's W&B server. The authorized two-GPU
+throughput calibration compares 4K, 8K, 16K prefixes and full debug trajectories.
+It initially holds the existing standard-data probe fixed to isolate role-update
+cost. KL and standard-data refitting must be measured separately before estimating
+end-to-end training time. Production collection and training are not launched.

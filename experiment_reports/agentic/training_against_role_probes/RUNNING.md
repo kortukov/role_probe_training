@@ -33,9 +33,8 @@ Training source: `submodules/training_against_probes`, revision
 `configs_runs/honesty_example.yaml`, `src/finetune.py` (model/refit loop),
 `src/utils/finetune_utils.py` (KL), `src/probes/build_kl_rollouts.py` (anchor).
 
-The role training loop is not implemented or launched yet: [DESIGN.md](DESIGN.md)
-records the concrete adaptations awaiting discussion. W&B project intended:
-`training_against_role_probes`; verify authenticated account before the first run.
+The production alternating training loop has not been launched: [DESIGN.md](DESIGN.md)
+records the concrete adaptations awaiting discussion. W&B project: `training_against_role_probes`; authentication is verified below.
 No credentials or task text should be put in tracked config or W&B logs.
 
 ## Completed debug collection
@@ -65,93 +64,48 @@ server's read-only viewer query. Credentials are in the user's netrc, not the re
 Set `WANDB_BASE_URL=https://api.forge.coreweave.com`, `WANDB_ENTITY=kortukov` and
 `WANDB_PROJECT=training_against_role_probes` in training jobs. No new login is needed.
 
-## Capacity arithmetic (not a training benchmark)
+## Two-GPU throughput calibration
 
-`debug_batch_stats.json` measures actual corpus sizes. `cost_estimate.json` applies
-explicit, **unmeasured** throughput assumptions: 2000 role-update tokens/s/GPU and
-8000 activation-extraction tokens/s/GPU, ideal data parallel scaling and no padding.
-They are sensitivity inputs, not hardware-derived predictions. Halving both rates
-doubles the calculated times. Real throughput varies with length, kernels and
-adapter targets; benchmark before scheduling production training.
+Job **1493850** runs on two B200 GPUs. The isolated runtime preserves the environments
+used by evaluation jobs. Reproduce with:
 
 ```bash
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/estimate_cost.py \
-  --stats experiment_reports/agentic/training_against_role_probes/debug_batch_stats.json \
-  --output experiment_reports/agentic/training_against_role_probes/cost_estimate.json
+.tools/bin/uv sync --locked --project src/experiments/training_against_role_probes/runtime
+sbatch src/experiments/training_against_role_probes/throughput.sbatch
 ```
 
-For one epoch of 27,000 trajectories, effective batch 16 means 1688 model updates.
-Each example below retains the beginning of the trajectory up to its cap. Token
-counts extrapolate the 300-debug-trajectory distribution by a factor of 90.
+Implementation: `src/role_probe_training/training/throughput.py`. Outputs are
+`data/throughput/1493850/{smoke,4096,8192,16384,0}/rank{0,1}.jsonl`; zero denotes
+full trajectories. Logs are under `logs/role-throughput-1493850.out`.
 
-| Context | Estimated epoch tokens | Model role updates, 2 GPUs | Model role updates, 4 GPUs |
-|---|---:|---:|---:|
-| First 4096 tokens | 110.6M | 7.7h | 3.8h |
-| First 8192 tokens | 217.8M | 15.1h | 7.6h |
-| First 16384 tokens | 336.4M | 23.4h | 11.7h |
-| Full trajectories | 368.9M | 25.6h | 12.8h |
+This is a **role-loss-only calibration**, not end-to-end alternating training.
+The fixed layer-12 probe was fitted on standard role-confusion data; no probe is
+fitted on AppWorld. KL and standard-data refitting overhead remain to be measured.
+The effective batch is 16 trajectories, with microbatch one and token-weighted
+accumulation over two replicas. Each condition resets the model/adapters, uses
+seed 123 and identical trajectory batches, and runs one warmup plus two measured
+updates. A separate longest-trajectory backward tests peak-length feasibility.
+The short smoke phase first checks loading, backward and optimizer execution.
 
-These are **role model updates only**. At 16 KL pairs/update capped at 2048 tokens,
-KL adds an illustrative 4.8h on 2 GPUs or 2.4h on 4 GPUs, using the same training rate
-plus a separate teacher forward at the extraction rate. Shorter KL sequences
-reduce this token count. KL does not shrink when AppWorld prefixes are shortened.
+Configuration: BF16 dequantized base, FlexAttention with attention sinks, non-reentrant
+gradient checkpointing, LoRA rank 64 / alpha 128 / dropout zero on q/k/v/o and
+fused expert gate/up and down parameters, AdamW learning rate 5e-5 and weight decay
+1e-4, gradient clipping at 1. Loss averages labeled content tokens; formatting and
+synthetic tool-schema tokens are excluded. This token weighting is a calibration
+choice, not a final decision about role balancing. Probe capture is zero-based
+layer 12's post-attention-layernorm output. The backbone runs without vocabulary
+logits. No adapter checkpoint is promoted to a trained model.
 
-Probe refitting needs new activations after every model update. Including initial
-fitting, the full 27k corpus would require about 623B token positions of extraction
-for one epoch. Under the above rates that alone is 451 days on 2 GPUs or 225 days on4.
-This is not a viable default; no change to fitting data has been silently made.
+Reported times must distinguish warmup/compilation, ordinary updates and the
+longest-example stress check. Both ranks record peak allocated/reserved memory,
+loss, accuracy, gradient norm and elapsed time. W&B receives numeric metrics only;
+local JSONL remains the result source if logging is unavailable. These brief loss
+traces do not establish convergence or comparative model quality.
 
-For comparison only, a fixed **hypothetical 300-trajectory training-side fitting
-pool**, distinct from the debug corpus, yields the following combined model-role,
-KL and extraction times. This pool size is not approved or implemented.
-
-| Context | 2 GPUs | 4 GPUs |
-|---|---:|---:|
-| First 4096 | 48.5h | 24.3h |
-| First 8192 | 90.9h | 45.5h |
-| First 16384 | 137.8h | 68.9h |
-| Full | 150.6h | 75.3h |
-
-Both tables exclude actual probe optimizer time, validation, checkpoint I/O,
-communication inefficiency, loading and trajectory collection. For 1688 refits,
-even 10 seconds of probe optimization per phase adds 4.7 hours, and 60 seconds adds 28.1h.
-Do not infer end-to-end speed from these tables before measuring those components.
-
-At the debug collection's observed aggregate rollout cost, generating 27k full
-trajectories extrapolates to 71.4 GPU-hours: roughly 35.7h with 2 GPUs or 17.9h with 4,
-before startup, queue delays and variation in sampled trajectories.
-
-### Memory arithmetic
-
-CPU-only meta-model inspection counts 20,914,757,184 parameters: **38.96GiB** in BF16.
-Candidate rank 64 adapters for q/k/v/o plus each expert's fused gate/up and down
-projections total 739,639,296 parameters. A conservative 16 bytes/adapter parameter
-(weights, gradients, FP32 moments and master copy) is 11.02 GiB. Exact target support
-and optimizer layout remain to be validated; attention-only adapters are much
-smaller, but would change the requested upstream adaptation.
-
-With microbatch 1 and checkpointing, storing one BF16 hidden input per decoder
-layer costs `24 × sequence_length × 2880 × 2` bytes:
-
-| Maximum length | Checkpoint input tensors | One naive BF16 attention-score tensor |
-|---|---:|---:|
-| 4096 | 0.53GiB | 2GiB |
-| 8192 | 1.05GiB | 8GiB |
-| 16384 | 2.11GiB | 32GiB |
-| 33241 (debug maximum) | 4.28GiB | 131.72GiB |
-
-The attention tensor calculation is `64 × length² × 2` bytes and illustrates
-why eager attention is unsuitable; efficient attention must avoid materializing
-it. Base + candidate adapters + checkpoint inputs are roughly 50.5–54.3GiB, **not
-peak memory**. Expert intermediates, attention backward, logits, temporary buffers
-and allocator overhead remain. Role-only passes should avoid full-vocabulary
-logits; KL uses its separate short sequences. Whole-corpus layer 12 BF16 activations
-would occupy about 1.93 TiB; a 300-trajectory pool about 22 GiB before labels/overhead.
-
-Two or four data-parallel GPUs each hold a model replica: more GPUs increase
-throughput but do not divide per-GPU model memory. Full trajectories look feasible
-within the cluster's 192GB-class GPUs with efficient kernels and microbatch 1, but
-no training backward/peak-memory measurement has verified this yet.
+A full pass over 27,000 trajectories at effective batch 16 would take 1,688
+updates. Context-dependent epoch estimates must use measured timings and add KL,
+standard-data activation extraction, probe optimization and validation separately.
+No end-to-end throughput estimate is available yet.
 
 ### Truncation retains some multi-turn context but changes the data
 
