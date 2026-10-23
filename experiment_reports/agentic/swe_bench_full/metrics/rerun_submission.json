@@ -1,8 +1,30 @@
 {
-  "image_preparation_array": "1492631",
-  "evaluation_array": "1492632",
+  "image_preparation_retry": "1492728",
+  "evaluation_array": "1492729",
   "tasks": 500,
   "gpu_shards": 4,
   "max_tokens": 8192,
-  "git_revision": "9717277635d58404eeb8bf5bdff02a1e57e8a092"
+  "cached_images_before_retry": 488,
+  "pending_images": [
+    "django__django-14011",
+    "django__django-14792",
+    "django__django-15695",
+    "django__django-16595",
+    "matplotlib__matplotlib-23476",
+    "pydata__xarray-2905",
+    "pytest-dev__pytest-10051",
+    "scikit-learn__scikit-learn-13496",
+    "sphinx-doc__sphinx-7757",
+    "sympy__sympy-12096",
+    "sympy__sympy-16886",
+    "sympy__sympy-23413"
+  ],
+  "preparation_cpus_per_task": 1,
+  "git_revision": "53510552fc224590febdad84d42e7aab34fd2e99",
+  "preparation_failure": {
+    "array": "1492631",
+    "failed_shard": 10,
+    "reason": "mksquashfs exit139 while building django__django-14011",
+    "cancelled_evaluation_array": "1492632"
+  }
 }

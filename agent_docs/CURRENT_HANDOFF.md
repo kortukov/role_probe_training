@@ -2,15 +2,17 @@
 
 ## Active SWE rerun
 
-User requested the full repaired SWE-bench Verified rerun, then conversation compaction before discussing AppWorld training.
-
-- CPU image-preparation array: **1492631**, 32 shards with at most 16 concurrent. Uses pinned official images and verified repair blobs; writes `.cache/swe-images/*.sif` and provenance sidecars.
-- Dependent GPU evaluation array: **1492632**, four one-GPU shards, all 500 tasks. Starts only after all image preparation succeeds; dependency failure cancels it.
-- Inspect `squeue` / `sacct` and `experiment_reports/agentic/swe_bench_full/logs/`. Runs export automatically under `runs/<job-ID>/`.
-- Configuration/reproduction: `experiment_reports/agentic/swe_bench_full/RUNNING.md`, submission metadata under `metrics/rerun_submission.json`.
-- Modern vLLM 0.32.0 fixed the observed Harmony failures: 8 request replays passed; one complete task reached scoring with 36 model calls and no infrastructure errors (patch unsuccessful).
-- New full run: temperature 1, high reasoning, 200-message limit, 8192 tokens/call, 2m cumulative tokens, 1800 seconds/task, concurrency 8 per GPU. Current published 11/500 and probe reports still use the prior cohort; replace only after complete finalization. Do not combine old and new model attempts.
-- If image preparation fails, fix/retry infrastructure and resubmit dependent GPU array; never claim evaluation has started while waiting on dependency.
+Current jobs: image-preparation retry **1492728_10** (one CPU, single-threaded
+compression), dependent four-GPU evaluation array **1492729**, all500tasks.
+488/500images cached; remaining12 all belong to preparation shard10.
+Original image array1492631 had31successfulshards, one mksquashfs segfault139;
+therefore original GPUarray1492632 was cancelled without ever starting inference.
+Retry/evaluation submitted under the existing authorization. Do not claim model
+inference started until1492729 actually runs. Monitor squeue/sacct and logs.
+Source settings unchanged: modernvLLM0.32,temperature1,highreasoning,8192tokens/call,
+200messages,2Mcumulative tokens,1800s/task,8tasks/GPU. Prior500task/probe results
+still describe oldcohort; finalize only the complete newcohort separately.
+Submission metadata: experiment_reports/agentic/swe_bench_full/metrics/rerun_submission.json.
 
 ## AppWorld ready for discussion
 

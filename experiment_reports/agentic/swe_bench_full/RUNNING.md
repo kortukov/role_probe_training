@@ -54,7 +54,7 @@ Skip preparation if that image is already cached. The cache contains a SIF and i
 
 ## Full repaired rerun
 
-Submitted on 2026-10-23: image preparation array `1492631` (32 CPU shards, at most 16 concurrent) followed automatically by evaluation array `1492632` (four one-GPU shards, all 500 tasks). The GPU array depends on successful completion of every image shard; preparation failures prevent GPU allocation. Submission metadata is in [metrics/rerun_submission.json](metrics/rerun_submission.json).
+Current submission: image-preparation retry `1492728_10`, followed by evaluation array `1492729` (four one-GPU shards, all 500 tasks). Already cached: 488/500 official images; the retry prepares the remaining 12 with single-threaded compression. The GPU array starts only after preparation succeeds. A prior `mksquashfs` crash prevented inference from starting; failure and resubmission provenance are in [metrics/rerun_submission.json](metrics/rerun_submission.json).
 
 ```bash
 prep=$(sbatch --parsable src/experiments/agentic_eval/swe_images_job.sbatch)
