@@ -13,7 +13,7 @@ Other agent owns ASTRA/DepthBench data adapters, replay.py ending support and it
 subreports. Do not stage/change their files. Coordinate GPU jobs via file; the user explicitly removed the aggregate four-GPU cap.
 
 Current own jobs:
--1501202 array0..29%4: collection90trajectories/seed8301..8330, fourGPUs maximum concurrently.
+-1501202 array0..29%4: collection90trajectories/seed8301..8330, eightGPUs maximum concurrently.
 -1501282: assembly afterok1501202; output data/train2700, train_corpus.json.
 -1501329 array0..1: five-layer full-context probe scoring afterokassembly; predictions/train2700.
 -1501243 COMPLETED: fixedKL800 ordinaryDolci prompts, baseGPT-OSS greedy1536tokens.
@@ -24,10 +24,10 @@ Shared training implemented under `src/role_probe_training/training/`:
  data.py,model.py,objectives.py,refit.py,train.py,score.py.
 Train configs/jobs under `src/experiments/training_against_role_probes/`.
 CPUchecks.py passed KLdirection/mask/checkpointedgradients andpadding.
-**GPU pilot1501447 RUNNING** in ber-testing. Attention compile limit raised to64;
+**GPU pilot1501447 and resume1501491 COMPLETED successfully** in ber-testing. Attention compile limit raised to64;
 fails explicitly at limit instead of quadratic eager fallback. Uses train.sbatch
-pilot_config.json on2GPUs (ber-testing,time1h acceptable forvalidation), then
-resume checkpoint withmax_updates2 toprove restart. Pilot config usesdebug300,
+pilot_config.json on2GPUs (ber-testing,time1h acceptable forvalidation), and
+resume checkpoint withmax_updates2 proved restart. Pilot config usesdebug300,
 fullprotocoloneupdate,2000refitsteps,16KLpairs,deliberate coordinatedOOMretry.
 Production config train_config.json:2700,oneepoch169updates,fulltrajectories,
 microbatch2/GPU,effective16,tokenweightedCE,layer12,KLcoefficient16.
@@ -36,7 +36,7 @@ Warmstart probeSGD2000steps,lr1e-3,wd1e-4,batch32passage-roleexamples,allcontent
 original250C4/Dolmapassages/originalsplit. NOTAppWorldprobe fitting.
 Standardactivationextraction batched16/rank,cachedGPU. Measure real refitcost.
 W&B configuredat api.forge.coreweave.com entitykortukov projecttraining_against_role_probes.
-Need finish reportupdates, commitownfiles only, testGPU/fix, evaluate2700 corpus,
+Need finish reportupdates, commitownfiles only, evaluate2700 corpus,
 launchproductionafterfullbaseline, updatecommunicationREADYthenreportuser.
 No productiontrainjob submitted yet; userexplicitlyauthorizedlaunchwhenready.
 
@@ -113,3 +113,8 @@ Use uv. User explicitly allows more than four experiment GPUs; request reasonabl
 unless requested. Push code/reports, never trajectory data. Brief paper-style
 reports per `agent_docs/REPORT_WRITING.md`; remove superseded material. Publish
 report tables first, then build/validate large viewers. Timed waits, no busy polling.
+
+Pilot completed two updates with a checkpoint restart. Dev accuracy29.2%→39.2%→54.7%,
+KL secondstep0.00150, refit47–51s. Keep pilot measurements out of main report.
+Production waits for corpus assembly1501282, score1501329 and report1501382.
+Automatic final-report publisher: report_training.sbatch RUN_DIRECTORY (afterany training).

@@ -1,0 +1,22 @@
+{
+  "name": "appworld-debug-pipeline-test",
+  "wandb_id": "appworld-pipeline-checked-attention",
+  "model": ".cache/models/gpt-oss-20b",
+  "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
+  "trajectories": "experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl",
+  "expected_trajectories": 300,
+  "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
+  "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
+  "kl_anchors": "experiment_reports/training_against_role_probes/data/kl/anchors.jsonl",
+  "output": "experiment_reports/training_against_role_probes/runs/training/pilot_checked_attention",
+  "seed": 123,
+  "epochs": 1,
+  "microbatch": 2,
+  "learning_rate": 5e-05,
+  "kl_coefficient": 16,
+  "refit_steps": 2000,
+  "eval_interval": 5,
+  "checkpoint_interval": 1,
+  "max_updates": 2,
+  "test_oom_recovery": false
+}

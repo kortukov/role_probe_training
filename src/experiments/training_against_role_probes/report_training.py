@@ -20,15 +20,17 @@ def replace_section(text, name, body, before=None):
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--run', type=Path, required=True)
+    parser.add_argument('--finished-job', action='store_true', help='The training job has exited; distinguish stopped from running.')
     parser.add_argument('--report', type=Path, default=Path('experiment_reports/training_against_role_probes'))
     args = parser.parse_args()
     rows = []
-    for line in (args.run / 'rank0.jsonl').read_text().splitlines():
+    lines = (args.run / 'rank0.jsonl').read_text().splitlines()
+    for index, line in enumerate(lines):
         try:
             rows.append(json.loads(line))
         except json.JSONDecodeError:
             # The writer may be appending its last row during a live report.
-            if line != (args.run / 'rank0.jsonl').read_text().splitlines()[-1]:
+            if index != len(lines) - 1:
                 raise
     updates = {r['step']: r for r in rows if r['event'] == 'update'}
     validations = {r['step']: r for r in rows if r['event'] == 'validation'}
@@ -44,7 +46,7 @@ def main():
                   updates=[updates[k] for k in sorted(updates)],
                   validations=[validations[k] for k in sorted(validations)])
     (args.report / 'training_results.json').write_text(json.dumps(result, indent=2) + '\n')
-    state = 'completed' if completed else 'in progress'
+    state = 'completed' if completed else ('stopped before completion' if args.finished_job else 'in progress')
     body = f'### Learning results\n\nTraining is **{state}**, with **{latest} model updates** recorded. '
     body += f'The latest development evaluation is after update {last["step"]}.\n\n'
     body += '| Model / probe | Overall | Macro recall | System | User | Reasoning | Assistant | Tool |\n'

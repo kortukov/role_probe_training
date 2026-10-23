@@ -117,6 +117,8 @@ def main():
     try:
         if start_step==0:
             metrics=evaluate(runtime,validation); log('validation',step=0,metrics=metrics)
+            if run: run.log({'validation/accuracy':metrics['accuracy'],
+                             'validation/macro_recall':metrics['macro_recall']},step=0)
             save_checkpoint(runtime,optimizer,root/'checkpoints',0,manifest,microbatch)
         for index,batch in enumerate(batches):
             if index<start_step: continue
