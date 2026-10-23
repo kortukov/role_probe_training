@@ -2,12 +2,13 @@
 
 ## Inputs and probes
 
-The evaluation contains 114 retail and 500 SWE-bench Verified trajectories:
+The evaluation contains 114 retail, 500 SWE-bench Verified and 168 AppWorld normal-test trajectories:
 
 - `experiment_reports/agentic/tau2_retail_full/data/trajectories.jsonl`
 - `experiment_reports/agentic/swe_bench_full/data/trajectories.jsonl`
+- `experiment_reports/agentic/appworld/data/test_normal.jsonl`
 
-Predictions are gzip JSON records under `experiment_reports/agentic/probe_transfer/predictions/retail/` and `predictions/swe/`. Each stores the original messages, replay text, token IDs/offsets, metadata-derived labels, scoring mask, context boundaries, and probabilities/predictions for all five layers.
+Predictions are gzip JSON records under `experiment_reports/agentic/probe_transfer/predictions/retail/` and `predictions/swe/`. AppWorld predictions are under `experiment_reports/agentic/appworld_probe_transfer/predictions/shard*/`. Each stores the original messages, replay text, token IDs/offsets, metadata-derived labels, scoring mask, context boundaries, and probabilities/predictions for all five layers.
 
 Use the [baseline weights](../../role_probes/gptoss20b_baseline/RUNNING.md) for layers 12/16 and [additional weights](../../role_probes/gptoss20b_layers/RUNNING.md) for layers 4/8/20. [Prediction manifests](../probe_transfer/metrics/prediction_manifests.json) record the inference configuration and probe hashes; [SWE selection](../probe_transfer/metrics/swe_prediction_selection.json) identifies the 500 retained files and their hashes.
 
@@ -23,7 +24,8 @@ The renderer is standardized retrospective Harmony, not a reconstruction of exac
 .tools/bin/uv run --frozen --no-sync python src/experiments/agentic_probes/report.py \
   --dataset tau2_retail=experiment_reports/agentic/probe_transfer/predictions/retail \
   --dataset swe_bench=experiment_reports/agentic/probe_transfer/predictions/swe \
-  --expected-count tau2_retail=114 --expected-count swe_bench=500 \
+  --dataset appworld_test_normal=experiment_reports/agentic/appworld_probe_transfer/predictions \
+  --expected-count tau2_retail=114 --expected-count swe_bench=500 --expected-count appworld_test_normal=168 \
   --benchmark-summary tau2_retail=experiment_reports/agentic/tau2_retail_full/metrics/summary.json \
   --benchmark-summary swe_bench=experiment_reports/agentic/swe_bench_full/metrics/summary.json \
   --layers 12 --output experiment_reports/agentic/probe_transfer

@@ -12,6 +12,7 @@ Rows are ground-truth roles; columns are predicted roles. Counts include message
 |---|---:|---:|---:|---:|---:|---:|
 | tau2_retail | 12 | 2,876,950 | 31.60% | 33.08% | 79 / 114 | 35.66% |
 | swe_bench | 12 | 7,265,153 | 28.43% | 34.79% | 144 / 500 | 24.59% |
+| appworld_test_normal | 12 | 2,364,547 | 24.70% | 33.38% | 59 / 168 | 25.92% |
 
 The [machine-readable results](metrics.json) also report mean true-role probability: the average probability assigned to the correct role, within each true role. This differs from accuracy, which uses the highest-probability class. Individual conversation results are included there and in the viewer.
 
@@ -54,3 +55,23 @@ Row-normalized percentages (the diagonal is role recall):
 | cot | 3.1% | 1.9% | 46.3% | 47.0% | 1.6% |
 | assistant | 1.0% | 0.6% | 61.6% | 27.8% | 9.0% |
 | tool | 14.3% | 57.1% | 17.9% | 7.1% | 3.7% |
+
+## appworld_test_normal layer 12
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 490 | 331 | 2826 | 0 | 37345 |
+| user | 2 | 6513 | 246 | 0 | 6356 |
+| cot | 21 | 6418 | 140009 | 27872 | 13163 |
+| assistant | 1771 | 6038 | 630767 | 248911 | 21571 |
+| tool | 124409 | 169943 | 530325 | 219153 | 170067 |
+
+Row-normalized percentages (the diagonal is role recall):
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 1.2% | 0.8% | 6.9% | 0.0% | 91.1% |
+| user | 0.0% | 49.7% | 1.9% | 0.0% | 48.5% |
+| cot | 0.0% | 3.4% | 74.7% | 14.9% | 7.0% |
+| assistant | 0.2% | 0.7% | 69.4% | 27.4% | 2.4% |
+| tool | 10.2% | 14.0% | 43.7% | 18.1% | 14.0% |

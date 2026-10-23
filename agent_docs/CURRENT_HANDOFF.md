@@ -53,3 +53,16 @@ epoch1688updates and369Mtokens. All27k refitted everyupdate implies~623Btoken
 positions: not a viable default. Fitting pool/budget remains undecided. Meta
 parameter count BF16base38.96GiB; candidate all-expert+attention LoRA64 state
 ~11.02GiB. Peak training memory/runtime not measured; no training loop exists yet.
+
+## User pause — training work
+
+Training-related work is explicitly paused. No training GPU job was launched.
+Interrupted isolated runtime uv sync; untracked runtime files are preparation only.
+Before resuming, correct design: probes refit ONLY on standard role-confusion
+C4/Dolma data (existing250passages/fiveroles/originalsplit), never AppWorld.
+AppWorld is model-update data. Earlier refit-on-AppWorld cost scenarios are invalid
+for the intended experiment and must be replaced when training work resumes.
+User requests only adding AppWorld normal-test observations/confusion matrices to
+agentic/probe_transfer now. Standalone AppWorld results already pushed5091d2a.
+Combined layer12 report/viewer regenerated for782trajectories; layer-comparison
+regeneration intentionally stopped, its tracked README restored unchanged.

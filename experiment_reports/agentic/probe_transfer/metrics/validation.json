@@ -7,6 +7,10 @@
     "swe_bench": {
       "trajectories": 500,
       "scored_tokens": 7265153
+    },
+    "appworld_test_normal": {
+      "trajectories": 168,
+      "scored_tokens": 2364547
     }
   },
   "all_layers": [
@@ -22,11 +26,11 @@
   "viewers": {
     "probe_transfer": {
       "path": "experiment_reports/agentic/probe_transfer/viewer.html",
-      "bytes": 378992868,
-      "sha256": "82de598aef3daaa95e2e835a2e795bf78563203559b895ef98c670c8f0c2cf97",
+      "bytes": 473611435,
+      "sha256": "eaf68dfc5332a379f1b6d4e426cd65bfbf5d3d5a8de75d2dcf9e62a17cec08f6",
       "offline_chromium_check_passed": true,
       "checks": [
-        "both retained datasets and all available layers",
+        "all three datasets and available layers",
         "longest trajectory per dataset",
         "token probabilities and color filters",
         "no network requests"
@@ -46,5 +50,7 @@
     }
   },
   "canonical_swe_reproduction_hash_verified": true,
-  "retained_metrics_and_probe_weights_unchanged": true
+  "retained_metrics_and_probe_weights_unchanged": true,
+  "appworld_layer12_matches_separate_report": true,
+  "retail_and_swe_metrics_unchanged": true
 }

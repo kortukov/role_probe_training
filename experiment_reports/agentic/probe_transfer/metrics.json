@@ -3864,6 +3864,1096 @@
           ]
         }
       }
+    },
+    "appworld_test_normal": {
+      "prediction_directory": "experiment_reports/agentic/appworld_probe_transfer/predictions",
+      "layers": {
+        "12": {
+          "trajectories": 168,
+          "scored_tokens": 2364547,
+          "accuracy": 0.2393650876891007,
+          "macro_trajectory_accuracy": 0.24695635051911266,
+          "majority_role_accuracy": 0.5133740204783411,
+          "uniform_five_role_accuracy": 0.2,
+          "balanced_role_accuracy": 0.3338358365664806,
+          "roles": {
+            "system": {
+              "tokens": 40992,
+              "recall": 0.011953551912568305,
+              "mean_true_role_probability": 0.024916508230803523
+            },
+            "user": {
+              "tokens": 13117,
+              "recall": 0.4965312190287413,
+              "mean_true_role_probability": 0.4888052448774076
+            },
+            "cot": {
+              "tokens": 187483,
+              "recall": 0.7467823749353275,
+              "mean_true_role_probability": 0.6757169583096775
+            },
+            "assistant": {
+              "tokens": 909058,
+              "recall": 0.27381201199483424,
+              "mean_true_role_probability": 0.287189102758469
+            },
+            "tool": {
+              "tokens": 1213897,
+              "recall": 0.1401000249609316,
+              "mean_true_role_probability": 0.16721659417669366
+            }
+          },
+          "confusion_matrix": [
+            [
+              490,
+              331,
+              2826,
+              0,
+              37345
+            ],
+            [
+              2,
+              6513,
+              246,
+              0,
+              6356
+            ],
+            [
+              21,
+              6418,
+              140009,
+              27872,
+              13163
+            ],
+            [
+              1771,
+              6038,
+              630767,
+              248911,
+              21571
+            ],
+            [
+              124409,
+              169943,
+              530325,
+              219153,
+              170067
+            ]
+          ],
+          "windowed_trajectories": 59,
+          "single_window_accuracy": 0.2592093599799409,
+          "trajectory_results": [
+            {
+              "sample_id": "024c982_1",
+              "tokens": 9903,
+              "accuracy": 0.1673230334242149,
+              "windows": 1
+            },
+            {
+              "sample_id": "042a9fc_2",
+              "tokens": 19252,
+              "accuracy": 0.16772283399127363,
+              "windows": 2
+            },
+            {
+              "sample_id": "09b0ee6_3",
+              "tokens": 8038,
+              "accuracy": 0.2356307539188853,
+              "windows": 1
+            },
+            {
+              "sample_id": "0d01c76_1",
+              "tokens": 10140,
+              "accuracy": 0.14270216962524654,
+              "windows": 1
+            },
+            {
+              "sample_id": "0de03ea_2",
+              "tokens": 14672,
+              "accuracy": 0.3077290076335878,
+              "windows": 1
+            },
+            {
+              "sample_id": "1150ed6_3",
+              "tokens": 7701,
+              "accuracy": 0.21984157901571225,
+              "windows": 1
+            },
+            {
+              "sample_id": "166f4ff_1",
+              "tokens": 12261,
+              "accuracy": 0.19500856373868364,
+              "windows": 1
+            },
+            {
+              "sample_id": "21abae1_2",
+              "tokens": 13513,
+              "accuracy": 0.26715015170576484,
+              "windows": 1
+            },
+            {
+              "sample_id": "270f1ff_3",
+              "tokens": 23570,
+              "accuracy": 0.2439117522274077,
+              "windows": 2
+            },
+            {
+              "sample_id": "2c544f9_1",
+              "tokens": 20961,
+              "accuracy": 0.23224082820476122,
+              "windows": 2
+            },
+            {
+              "sample_id": "2d9f728_2",
+              "tokens": 12540,
+              "accuracy": 0.35,
+              "windows": 1
+            },
+            {
+              "sample_id": "31dc501_3",
+              "tokens": 5299,
+              "accuracy": 0.2243819588601623,
+              "windows": 1
+            },
+            {
+              "sample_id": "32616b5_1",
+              "tokens": 12028,
+              "accuracy": 0.2256401729298304,
+              "windows": 1
+            },
+            {
+              "sample_id": "3aa1a22_2",
+              "tokens": 23013,
+              "accuracy": 0.19050102116195194,
+              "windows": 2
+            },
+            {
+              "sample_id": "3b8fb7a_3",
+              "tokens": 18152,
+              "accuracy": 0.15326134861172322,
+              "windows": 2
+            },
+            {
+              "sample_id": "425a494_1",
+              "tokens": 9402,
+              "accuracy": 0.1770899808551372,
+              "windows": 1
+            },
+            {
+              "sample_id": "522e5e5_2",
+              "tokens": 11609,
+              "accuracy": 0.2145748987854251,
+              "windows": 1
+            },
+            {
+              "sample_id": "552869a_3",
+              "tokens": 7910,
+              "accuracy": 0.1802781289506953,
+              "windows": 1
+            },
+            {
+              "sample_id": "5a83b05_1",
+              "tokens": 15995,
+              "accuracy": 0.29746795873710535,
+              "windows": 2
+            },
+            {
+              "sample_id": "634f342_2",
+              "tokens": 14951,
+              "accuracy": 0.28707109892314897,
+              "windows": 1
+            },
+            {
+              "sample_id": "652485c_3",
+              "tokens": 20178,
+              "accuracy": 0.1296461492714838,
+              "windows": 2
+            },
+            {
+              "sample_id": "6f4b9a5_1",
+              "tokens": 19629,
+              "accuracy": 0.19415151052014876,
+              "windows": 2
+            },
+            {
+              "sample_id": "7847649_2",
+              "tokens": 5450,
+              "accuracy": 0.14917431192660552,
+              "windows": 1
+            },
+            {
+              "sample_id": "83a7951_3",
+              "tokens": 26914,
+              "accuracy": 0.21304897079586832,
+              "windows": 2
+            },
+            {
+              "sample_id": "8ce6779_1",
+              "tokens": 28772,
+              "accuracy": 0.13784234672598358,
+              "windows": 2
+            },
+            {
+              "sample_id": "9016950_2",
+              "tokens": 16172,
+              "accuracy": 0.22409102151867424,
+              "windows": 2
+            },
+            {
+              "sample_id": "90adc3f_3",
+              "tokens": 6064,
+              "accuracy": 0.19937335092348285,
+              "windows": 1
+            },
+            {
+              "sample_id": "9dabbc9_1",
+              "tokens": 9197,
+              "accuracy": 0.19952158312493204,
+              "windows": 1
+            },
+            {
+              "sample_id": "9ef798c_2",
+              "tokens": 9014,
+              "accuracy": 0.2600399378744176,
+              "windows": 1
+            },
+            {
+              "sample_id": "a30375d_3",
+              "tokens": 8925,
+              "accuracy": 0.3353501400560224,
+              "windows": 1
+            },
+            {
+              "sample_id": "b6d1104_1",
+              "tokens": 15464,
+              "accuracy": 0.19018365235385412,
+              "windows": 1
+            },
+            {
+              "sample_id": "b9c5c9a_2",
+              "tokens": 18346,
+              "accuracy": 0.3062247901449907,
+              "windows": 2
+            },
+            {
+              "sample_id": "bde252e_3",
+              "tokens": 24182,
+              "accuracy": 0.15131089239930526,
+              "windows": 2
+            },
+            {
+              "sample_id": "ccf4b82_1",
+              "tokens": 11222,
+              "accuracy": 0.3322937087863126,
+              "windows": 1
+            },
+            {
+              "sample_id": "cef9191_2",
+              "tokens": 6863,
+              "accuracy": 0.20778085385399972,
+              "windows": 1
+            },
+            {
+              "sample_id": "d18139b_3",
+              "tokens": 10060,
+              "accuracy": 0.21242544731610338,
+              "windows": 1
+            },
+            {
+              "sample_id": "d6ac34d_1",
+              "tokens": 10095,
+              "accuracy": 0.34462605250123823,
+              "windows": 1
+            },
+            {
+              "sample_id": "dac78d9_2",
+              "tokens": 10230,
+              "accuracy": 0.5326490713587487,
+              "windows": 1
+            },
+            {
+              "sample_id": "f323bae_3",
+              "tokens": 17565,
+              "accuracy": 0.22880728721890123,
+              "windows": 2
+            },
+            {
+              "sample_id": "f861c32_1",
+              "tokens": 17148,
+              "accuracy": 0.29962677863307674,
+              "windows": 2
+            },
+            {
+              "sample_id": "fd1f8fa_2",
+              "tokens": 13374,
+              "accuracy": 0.19291161956034095,
+              "windows": 1
+            },
+            {
+              "sample_id": "ff58e36_3",
+              "tokens": 16594,
+              "accuracy": 0.22562371941665663,
+              "windows": 2
+            },
+            {
+              "sample_id": "024c982_2",
+              "tokens": 8445,
+              "accuracy": 0.2108940201302546,
+              "windows": 1
+            },
+            {
+              "sample_id": "042a9fc_3",
+              "tokens": 17286,
+              "accuracy": 0.14728682170542637,
+              "windows": 2
+            },
+            {
+              "sample_id": "0a9d82a_1",
+              "tokens": 9078,
+              "accuracy": 0.24741132408019387,
+              "windows": 1
+            },
+            {
+              "sample_id": "0d01c76_2",
+              "tokens": 14855,
+              "accuracy": 0.21204981487714575,
+              "windows": 1
+            },
+            {
+              "sample_id": "0de03ea_3",
+              "tokens": 14489,
+              "accuracy": 0.23369452688246256,
+              "windows": 1
+            },
+            {
+              "sample_id": "13547f5_1",
+              "tokens": 17065,
+              "accuracy": 0.31549956050395545,
+              "windows": 2
+            },
+            {
+              "sample_id": "166f4ff_2",
+              "tokens": 9225,
+              "accuracy": 0.21387533875338754,
+              "windows": 1
+            },
+            {
+              "sample_id": "21abae1_3",
+              "tokens": 8369,
+              "accuracy": 0.27972278647389176,
+              "windows": 1
+            },
+            {
+              "sample_id": "29a7b7e_1",
+              "tokens": 13382,
+              "accuracy": 0.24293827529517262,
+              "windows": 1
+            },
+            {
+              "sample_id": "2c544f9_2",
+              "tokens": 14707,
+              "accuracy": 0.373155640171347,
+              "windows": 1
+            },
+            {
+              "sample_id": "2d9f728_3",
+              "tokens": 28115,
+              "accuracy": 0.18025964787479992,
+              "windows": 2
+            },
+            {
+              "sample_id": "325d6ec_1",
+              "tokens": 9952,
+              "accuracy": 0.33440514469453375,
+              "windows": 1
+            },
+            {
+              "sample_id": "32616b5_2",
+              "tokens": 8517,
+              "accuracy": 0.7149230949864976,
+              "windows": 1
+            },
+            {
+              "sample_id": "3aa1a22_3",
+              "tokens": 18019,
+              "accuracy": 0.32743215494755534,
+              "windows": 2
+            },
+            {
+              "sample_id": "3d9a636_1",
+              "tokens": 22666,
+              "accuracy": 0.2418600547074914,
+              "windows": 2
+            },
+            {
+              "sample_id": "425a494_2",
+              "tokens": 11071,
+              "accuracy": 0.3374582241893235,
+              "windows": 1
+            },
+            {
+              "sample_id": "522e5e5_3",
+              "tokens": 12106,
+              "accuracy": 0.27333553609780276,
+              "windows": 1
+            },
+            {
+              "sample_id": "59fae45_1",
+              "tokens": 10785,
+              "accuracy": 0.22484932777005098,
+              "windows": 1
+            },
+            {
+              "sample_id": "5a83b05_2",
+              "tokens": 8485,
+              "accuracy": 0.3886859163229228,
+              "windows": 1
+            },
+            {
+              "sample_id": "634f342_3",
+              "tokens": 13823,
+              "accuracy": 0.2877088909788034,
+              "windows": 1
+            },
+            {
+              "sample_id": "6b6ca61_1",
+              "tokens": 28597,
+              "accuracy": 0.23198237577368255,
+              "windows": 2
+            },
+            {
+              "sample_id": "6f4b9a5_2",
+              "tokens": 16117,
+              "accuracy": 0.17763851833467767,
+              "windows": 2
+            },
+            {
+              "sample_id": "7847649_3",
+              "tokens": 5567,
+              "accuracy": 0.22561523262080116,
+              "windows": 1
+            },
+            {
+              "sample_id": "8749218_1",
+              "tokens": 8611,
+              "accuracy": 0.22482870746719313,
+              "windows": 1
+            },
+            {
+              "sample_id": "8ce6779_2",
+              "tokens": 24661,
+              "accuracy": 0.29905518835408135,
+              "windows": 2
+            },
+            {
+              "sample_id": "9016950_3",
+              "tokens": 9141,
+              "accuracy": 0.23137512307187397,
+              "windows": 1
+            },
+            {
+              "sample_id": "986aa4e_1",
+              "tokens": 16375,
+              "accuracy": 0.1850381679389313,
+              "windows": 2
+            },
+            {
+              "sample_id": "9dabbc9_2",
+              "tokens": 9276,
+              "accuracy": 0.2238033635187581,
+              "windows": 1
+            },
+            {
+              "sample_id": "9ef798c_3",
+              "tokens": 16037,
+              "accuracy": 0.3440793165804078,
+              "windows": 2
+            },
+            {
+              "sample_id": "afc4005_1",
+              "tokens": 8600,
+              "accuracy": 0.24430232558139534,
+              "windows": 1
+            },
+            {
+              "sample_id": "b6d1104_2",
+              "tokens": 12782,
+              "accuracy": 0.2787513691128149,
+              "windows": 1
+            },
+            {
+              "sample_id": "b9c5c9a_3",
+              "tokens": 27349,
+              "accuracy": 0.23130644630516656,
+              "windows": 2
+            },
+            {
+              "sample_id": "c77c005_1",
+              "tokens": 14771,
+              "accuracy": 0.5008462527926342,
+              "windows": 1
+            },
+            {
+              "sample_id": "ccf4b82_2",
+              "tokens": 17459,
+              "accuracy": 0.28787444870840256,
+              "windows": 2
+            },
+            {
+              "sample_id": "cef9191_3",
+              "tokens": 6933,
+              "accuracy": 0.2179431703447281,
+              "windows": 1
+            },
+            {
+              "sample_id": "d194965_1",
+              "tokens": 21386,
+              "accuracy": 0.18946974656317217,
+              "windows": 2
+            },
+            {
+              "sample_id": "d6ac34d_2",
+              "tokens": 8502,
+              "accuracy": 0.7945189367207716,
+              "windows": 1
+            },
+            {
+              "sample_id": "dac78d9_3",
+              "tokens": 6332,
+              "accuracy": 0.18430195830701201,
+              "windows": 1
+            },
+            {
+              "sample_id": "f3f60f0_1",
+              "tokens": 17637,
+              "accuracy": 0.14787095310993933,
+              "windows": 2
+            },
+            {
+              "sample_id": "f861c32_2",
+              "tokens": 18601,
+              "accuracy": 0.28186656631363904,
+              "windows": 2
+            },
+            {
+              "sample_id": "fd1f8fa_3",
+              "tokens": 12672,
+              "accuracy": 0.2645991161616162,
+              "windows": 1
+            },
+            {
+              "sample_id": "ffe6d5e_1",
+              "tokens": 7041,
+              "accuracy": 0.2057946314443971,
+              "windows": 1
+            },
+            {
+              "sample_id": "024c982_3",
+              "tokens": 8469,
+              "accuracy": 0.2590624631007203,
+              "windows": 1
+            },
+            {
+              "sample_id": "09b0ee6_1",
+              "tokens": 8458,
+              "accuracy": 0.21636320643178056,
+              "windows": 1
+            },
+            {
+              "sample_id": "0a9d82a_2",
+              "tokens": 14953,
+              "accuracy": 0.36828730020731626,
+              "windows": 1
+            },
+            {
+              "sample_id": "0d01c76_3",
+              "tokens": 8418,
+              "accuracy": 0.1907816583511523,
+              "windows": 1
+            },
+            {
+              "sample_id": "1150ed6_1",
+              "tokens": 8891,
+              "accuracy": 0.26836126419975254,
+              "windows": 1
+            },
+            {
+              "sample_id": "13547f5_2",
+              "tokens": 5526,
+              "accuracy": 0.247557003257329,
+              "windows": 1
+            },
+            {
+              "sample_id": "166f4ff_3",
+              "tokens": 9495,
+              "accuracy": 0.16240126382306477,
+              "windows": 1
+            },
+            {
+              "sample_id": "270f1ff_1",
+              "tokens": 25160,
+              "accuracy": 0.19964228934817171,
+              "windows": 2
+            },
+            {
+              "sample_id": "29a7b7e_2",
+              "tokens": 15829,
+              "accuracy": 0.320361362056984,
+              "windows": 2
+            },
+            {
+              "sample_id": "2c544f9_3",
+              "tokens": 18468,
+              "accuracy": 0.247346761966645,
+              "windows": 2
+            },
+            {
+              "sample_id": "31dc501_1",
+              "tokens": 5039,
+              "accuracy": 0.24389759872990674,
+              "windows": 1
+            },
+            {
+              "sample_id": "325d6ec_2",
+              "tokens": 8820,
+              "accuracy": 0.3348072562358277,
+              "windows": 1
+            },
+            {
+              "sample_id": "32616b5_3",
+              "tokens": 22696,
+              "accuracy": 0.26335037010927037,
+              "windows": 2
+            },
+            {
+              "sample_id": "3b8fb7a_1",
+              "tokens": 19292,
+              "accuracy": 0.18743520630313082,
+              "windows": 2
+            },
+            {
+              "sample_id": "3d9a636_2",
+              "tokens": 14018,
+              "accuracy": 0.24518476244828077,
+              "windows": 1
+            },
+            {
+              "sample_id": "425a494_3",
+              "tokens": 6624,
+              "accuracy": 0.23882850241545894,
+              "windows": 1
+            },
+            {
+              "sample_id": "552869a_1",
+              "tokens": 15232,
+              "accuracy": 0.17423844537815125,
+              "windows": 1
+            },
+            {
+              "sample_id": "59fae45_2",
+              "tokens": 9961,
+              "accuracy": 0.21845196265435196,
+              "windows": 1
+            },
+            {
+              "sample_id": "5a83b05_3",
+              "tokens": 24552,
+              "accuracy": 0.19688823721081786,
+              "windows": 2
+            },
+            {
+              "sample_id": "652485c_1",
+              "tokens": 19940,
+              "accuracy": 0.18420260782347042,
+              "windows": 2
+            },
+            {
+              "sample_id": "6b6ca61_2",
+              "tokens": 8576,
+              "accuracy": 0.8051539179104478,
+              "windows": 1
+            },
+            {
+              "sample_id": "6f4b9a5_3",
+              "tokens": 25818,
+              "accuracy": 0.16473003331009373,
+              "windows": 2
+            },
+            {
+              "sample_id": "83a7951_1",
+              "tokens": 22374,
+              "accuracy": 0.18208635022794314,
+              "windows": 2
+            },
+            {
+              "sample_id": "8749218_2",
+              "tokens": 9115,
+              "accuracy": 0.2029621503017005,
+              "windows": 1
+            },
+            {
+              "sample_id": "8ce6779_3",
+              "tokens": 15732,
+              "accuracy": 0.2437070938215103,
+              "windows": 2
+            },
+            {
+              "sample_id": "90adc3f_1",
+              "tokens": 9699,
+              "accuracy": 0.22992061037220332,
+              "windows": 1
+            },
+            {
+              "sample_id": "986aa4e_2",
+              "tokens": 22494,
+              "accuracy": 0.16635547257046324,
+              "windows": 2
+            },
+            {
+              "sample_id": "9dabbc9_3",
+              "tokens": 10003,
+              "accuracy": 0.17984604618614417,
+              "windows": 1
+            },
+            {
+              "sample_id": "a30375d_1",
+              "tokens": 8493,
+              "accuracy": 0.49111032615094785,
+              "windows": 1
+            },
+            {
+              "sample_id": "afc4005_2",
+              "tokens": 18361,
+              "accuracy": 0.2765099940090409,
+              "windows": 2
+            },
+            {
+              "sample_id": "b6d1104_3",
+              "tokens": 12051,
+              "accuracy": 0.1677869056509833,
+              "windows": 1
+            },
+            {
+              "sample_id": "bde252e_1",
+              "tokens": 24577,
+              "accuracy": 0.12206534564837043,
+              "windows": 2
+            },
+            {
+              "sample_id": "c77c005_2",
+              "tokens": 11695,
+              "accuracy": 0.18828559213339033,
+              "windows": 1
+            },
+            {
+              "sample_id": "ccf4b82_3",
+              "tokens": 14730,
+              "accuracy": 0.20672097759674135,
+              "windows": 1
+            },
+            {
+              "sample_id": "d18139b_1",
+              "tokens": 14367,
+              "accuracy": 0.207419781443586,
+              "windows": 1
+            },
+            {
+              "sample_id": "d194965_2",
+              "tokens": 14032,
+              "accuracy": 0.15143956670467504,
+              "windows": 1
+            },
+            {
+              "sample_id": "d6ac34d_3",
+              "tokens": 9846,
+              "accuracy": 0.3598415600243754,
+              "windows": 1
+            },
+            {
+              "sample_id": "f323bae_1",
+              "tokens": 11492,
+              "accuracy": 0.2470414201183432,
+              "windows": 1
+            },
+            {
+              "sample_id": "f3f60f0_2",
+              "tokens": 7920,
+              "accuracy": 0.21893939393939393,
+              "windows": 1
+            },
+            {
+              "sample_id": "f861c32_3",
+              "tokens": 25013,
+              "accuracy": 0.3582537080718027,
+              "windows": 2
+            },
+            {
+              "sample_id": "ff58e36_1",
+              "tokens": 17669,
+              "accuracy": 0.23046012790763484,
+              "windows": 2
+            },
+            {
+              "sample_id": "ffe6d5e_2",
+              "tokens": 16205,
+              "accuracy": 0.19993829065103363,
+              "windows": 2
+            },
+            {
+              "sample_id": "042a9fc_1",
+              "tokens": 21363,
+              "accuracy": 0.13734026119926976,
+              "windows": 2
+            },
+            {
+              "sample_id": "09b0ee6_2",
+              "tokens": 13320,
+              "accuracy": 0.2627627627627628,
+              "windows": 1
+            },
+            {
+              "sample_id": "0a9d82a_3",
+              "tokens": 18246,
+              "accuracy": 0.14436040776060508,
+              "windows": 2
+            },
+            {
+              "sample_id": "0de03ea_1",
+              "tokens": 9606,
+              "accuracy": 0.24359775140537165,
+              "windows": 1
+            },
+            {
+              "sample_id": "1150ed6_2",
+              "tokens": 8039,
+              "accuracy": 0.2318696355268068,
+              "windows": 1
+            },
+            {
+              "sample_id": "13547f5_3",
+              "tokens": 4597,
+              "accuracy": 0.24537742005655863,
+              "windows": 1
+            },
+            {
+              "sample_id": "21abae1_1",
+              "tokens": 8470,
+              "accuracy": 0.21298701298701297,
+              "windows": 1
+            },
+            {
+              "sample_id": "270f1ff_2",
+              "tokens": 11958,
+              "accuracy": 0.2015387188493059,
+              "windows": 1
+            },
+            {
+              "sample_id": "29a7b7e_3",
+              "tokens": 21518,
+              "accuracy": 0.29254577562970535,
+              "windows": 2
+            },
+            {
+              "sample_id": "2d9f728_1",
+              "tokens": 12672,
+              "accuracy": 0.19381313131313133,
+              "windows": 1
+            },
+            {
+              "sample_id": "31dc501_2",
+              "tokens": 4489,
+              "accuracy": 0.2263310314101136,
+              "windows": 1
+            },
+            {
+              "sample_id": "325d6ec_3",
+              "tokens": 11768,
+              "accuracy": 0.32138001359619306,
+              "windows": 1
+            },
+            {
+              "sample_id": "3aa1a22_1",
+              "tokens": 10224,
+              "accuracy": 0.19806338028169015,
+              "windows": 1
+            },
+            {
+              "sample_id": "3b8fb7a_2",
+              "tokens": 14095,
+              "accuracy": 0.213905640297978,
+              "windows": 1
+            },
+            {
+              "sample_id": "3d9a636_3",
+              "tokens": 17476,
+              "accuracy": 0.35059510185397114,
+              "windows": 2
+            },
+            {
+              "sample_id": "522e5e5_1",
+              "tokens": 7560,
+              "accuracy": 0.23306878306878306,
+              "windows": 1
+            },
+            {
+              "sample_id": "552869a_2",
+              "tokens": 12252,
+              "accuracy": 0.19564152791380998,
+              "windows": 1
+            },
+            {
+              "sample_id": "59fae45_3",
+              "tokens": 7926,
+              "accuracy": 0.23088569265707798,
+              "windows": 1
+            },
+            {
+              "sample_id": "634f342_1",
+              "tokens": 16876,
+              "accuracy": 0.22315714624318558,
+              "windows": 2
+            },
+            {
+              "sample_id": "652485c_2",
+              "tokens": 20754,
+              "accuracy": 0.1739905560373904,
+              "windows": 2
+            },
+            {
+              "sample_id": "6b6ca61_3",
+              "tokens": 28737,
+              "accuracy": 0.2176984375543724,
+              "windows": 2
+            },
+            {
+              "sample_id": "7847649_1",
+              "tokens": 19187,
+              "accuracy": 0.2900401313389274,
+              "windows": 2
+            },
+            {
+              "sample_id": "83a7951_2",
+              "tokens": 28926,
+              "accuracy": 0.3029800179769066,
+              "windows": 2
+            },
+            {
+              "sample_id": "8749218_3",
+              "tokens": 12928,
+              "accuracy": 0.23151299504950495,
+              "windows": 1
+            },
+            {
+              "sample_id": "9016950_1",
+              "tokens": 9381,
+              "accuracy": 0.22534910990299542,
+              "windows": 1
+            },
+            {
+              "sample_id": "90adc3f_2",
+              "tokens": 11869,
+              "accuracy": 0.21113825933103042,
+              "windows": 1
+            },
+            {
+              "sample_id": "986aa4e_3",
+              "tokens": 28723,
+              "accuracy": 0.20899627476238555,
+              "windows": 2
+            },
+            {
+              "sample_id": "9ef798c_1",
+              "tokens": 9789,
+              "accuracy": 0.20042905301869446,
+              "windows": 1
+            },
+            {
+              "sample_id": "a30375d_2",
+              "tokens": 8844,
+              "accuracy": 0.3389868837630032,
+              "windows": 1
+            },
+            {
+              "sample_id": "afc4005_3",
+              "tokens": 7566,
+              "accuracy": 0.21808088818398097,
+              "windows": 1
+            },
+            {
+              "sample_id": "b9c5c9a_1",
+              "tokens": 13221,
+              "accuracy": 0.3077679449360865,
+              "windows": 1
+            },
+            {
+              "sample_id": "bde252e_2",
+              "tokens": 18460,
+              "accuracy": 0.1861863488624052,
+              "windows": 2
+            },
+            {
+              "sample_id": "c77c005_3",
+              "tokens": 12092,
+              "accuracy": 0.29217664571617596,
+              "windows": 1
+            },
+            {
+              "sample_id": "cef9191_1",
+              "tokens": 14168,
+              "accuracy": 0.20680406549971767,
+              "windows": 1
+            },
+            {
+              "sample_id": "d18139b_2",
+              "tokens": 10766,
+              "accuracy": 0.18149730633475758,
+              "windows": 1
+            },
+            {
+              "sample_id": "d194965_3",
+              "tokens": 14673,
+              "accuracy": 0.16240714237034007,
+              "windows": 1
+            },
+            {
+              "sample_id": "dac78d9_1",
+              "tokens": 9331,
+              "accuracy": 0.211767227521166,
+              "windows": 1
+            },
+            {
+              "sample_id": "f323bae_2",
+              "tokens": 14361,
+              "accuracy": 0.2382842420444259,
+              "windows": 1
+            },
+            {
+              "sample_id": "f3f60f0_3",
+              "tokens": 13948,
+              "accuracy": 0.25200745626613136,
+              "windows": 1
+            },
+            {
+              "sample_id": "fd1f8fa_1",
+              "tokens": 23636,
+              "accuracy": 0.13686749026908107,
+              "windows": 2
+            },
+            {
+              "sample_id": "ff58e36_2",
+              "tokens": 13893,
+              "accuracy": 0.2775498452458072,
+              "windows": 1
+            },
+            {
+              "sample_id": "ffe6d5e_3",
+              "tokens": 9481,
+              "accuracy": 0.18236472945891782,
+              "windows": 1
+            }
+          ]
+        }
+      }
     }
   },
   "benchmark_results": {
