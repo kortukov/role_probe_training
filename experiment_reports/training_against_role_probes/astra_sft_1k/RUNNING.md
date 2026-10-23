@@ -41,8 +41,9 @@ Intermediate assistant speech is commentary; the final assistant response is fin
 No inferred reasoning, regenerated answers, or fabricated tool outputs are added.
 This retrospective rendering is not a claim of original serving-prompt recovery.
 
-Training has not started. It requires the completed baseline report and the
-implementation agent's explicit READY signal in [AGENT_COMMUNICATION.md](../AGENT_COMMUNICATION.md).
+Training job **1503671** was submitted after the complete baseline was reported
+and the implementation agent posted EXPLICIT READY in
+[AGENT_COMMUNICATION.md](../AGENT_COMMUNICATION.md).
 
 Generate the compact results and appendix (the main report is authored separately):
 
@@ -56,3 +57,26 @@ Generate the compact results and appendix (the main report is authored separatel
 [baseline_submission.json](baseline_submission.json) records code/probe hashes;
 [baseline_manifest.json](baseline_manifest.json) records replay/model settings.
 The complete 1,000-history baseline finished successfully before model training.
+
+## Model training
+
+Configuration: [astra_sft_1k_config.json](../../../src/experiments/training_against_role_probes/astra_sft_1k_config.json).
+Submission provenance: [training_submission.json](training_submission.json).
+Two B200 GPUs, sixteen CPUs, 128 GB host RAM, twelve-hour limit.
+One epoch uses all 1,000 histories: 63 updates, with an effective batch of16
+except the final partial batch. Initial microbatch2 per GPU, learning rate5e-5,
+KL coefficient16, 2,000 standard-data probe-refit steps after each model update.
+The role probe is refitted on the original C4/Dolma passages, never ASTRA.
+The common800 KL anchors and eight-task AppWorld dev corpus are reused; this dev
+evaluation is explicitly cross-domain, not held-out ASTRA validation.
+
+```bash
+sbatch --chdir=/data/cluster/users/kortukov/role_probe_training \
+  --job-name=astra-role-training --time=12:00:00 \
+  src/experiments/training_against_role_probes/train.sbatch \
+  src/experiments/training_against_role_probes/astra_sft_1k_config.json
+```
+
+Logs: `../logs/astra-role-training-1503671.out`. Checkpoints and rank logs:
+`runs/training/epoch1/`.
+[W&B run](https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/astra_sft_1k-l12-epoch1).

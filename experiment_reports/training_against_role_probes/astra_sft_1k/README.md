@@ -61,6 +61,7 @@ role recovery or evidence that training will improve behavior. Layer comparisons
 also show that conclusions depend on the probe/readout layer. These are descriptive
 scores on the intended training data; they do not estimate held-out generalization.
 
-The baseline report is complete. Model training awaits the shared implementation's
-explicit readiness signal. See [RUNNING.md](RUNNING.md) for sources, conversion
+The baseline report is complete. One-epoch model training has been submitted
+after the implementation agent’s explicit readiness signal; no post-training
+results are available yet. See [RUNNING.md](RUNNING.md) for sources, conversion
 and reproduction.
