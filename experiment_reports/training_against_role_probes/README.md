@@ -49,7 +49,27 @@ from the first shard's evaluation start to the last finish was **90.2 minutes**;
 parallelism increased during collection to at most eight GPUs. These are measured
 collection costs, not a controlled scaling comparison.
 
-Production training is queued behind the full-corpus probe evaluation.
+Baseline evaluation is complete. Production training is queued for two GPUs.
+
+<!-- corpus-results -->
+### Training-corpus baseline
+
+The 2,700 training trajectories are complete. The table evaluates the original
+standard-data probes on the unchanged base model, using full trajectory history.
+Overall accuracy weights content tokens equally; each role column is recall
+among that ground-truth role’s tokens. This is training-corpus characterization,
+not held-out generalization.
+
+| Layer | Overall | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|---:|
+| 4 | 51.7% | 7.0% | 50.7% | 49.6% | 2.3% | 88.6% |
+| 8 | 21.4% | 6.6% | 92.7% | 91.7% | 8.5% | 20.5% |
+| 12 | 26.1% | 1.2% | 44.4% | 74.6% | 33.7% | 14.7% |
+| 16 | 33.9% | 2.5% | 61.0% | 15.8% | 22.6% | 45.2% |
+| 20 | 31.9% | 0.8% | 88.4% | 23.3% | 11.4% | 48.2% |
+
+[Confusion matrices](APPENDIX.md#training-corpus-baseline-confusions) are in the appendix.
+<!-- /corpus-results -->
 
 ## Message
 
