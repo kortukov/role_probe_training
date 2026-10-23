@@ -39,7 +39,17 @@ reported separately. Confusion matrices are in the [appendix](APPENDIX.md).
 
 ## Factual observations
 
-The 2,700-trajectory corpus is being collected; production training has not started.
+The corpus is complete: **2,700 trajectories**, all with reasoning and no sample,
+export or execution-limit errors. GPT-OSS-20B solved **1,032 attempts (38.2%)**.
+This is success per attempt on the training tasks, not held-out task performance.
+
+A 90-attempt shard took a median **13.8 minutes on one GPU**. Across all shards,
+evaluation consumed **6.94 GPU-hours**, excluding server startup. The interval
+from the first shard's evaluation start to the last finish was **90.2 minutes**;
+parallelism increased during collection to at most eight GPUs. These are measured
+collection costs, not a controlled scaling comparison.
+
+Production training is queued behind the full-corpus probe evaluation.
 
 ## Message
 

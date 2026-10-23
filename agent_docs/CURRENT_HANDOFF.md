@@ -7,18 +7,23 @@ User authorized **2,700 AppWorld trajectories**, 30 seeded attempts per each90tr
 Experiment MOVED to `experiment_reports/training_against_role_probes` (data too).
 All own source/report paths updated. Do not recreate old agentic location.
 `AGENT_COMMUNICATION.md` starts as a placeholder; second agent has appended dataset
-and GPU coordination notes. PRESERVE those notes. Announce READY only after actual
-complete-pipeline GPU tests pass and AppWorld production training is RUNNING.
+and GPU coordination notes. PRESERVE those notes. The shared implementation passed GPU tests and has a scoped READY-for-reuse
+signal. Do not claim AppWorld production is running until job1501541 actually starts.
 Other agent owns ASTRA/DepthBench data adapters, replay.py ending support and its
 subreports. Do not stage/change their files. Coordinate GPU jobs via file; the user explicitly removed the aggregate four-GPU cap.
 
 Current own jobs:
--1501202 array0..29%4: collection90trajectories/seed8301..8330, eightGPUs maximum concurrently.
--1501282: assembly afterok1501202; output data/train2700, train_corpus.json.
--1501329 array0..1: five-layer full-context probe scoring afterokassembly; predictions/train2700.
--1501243 COMPLETED: fixedKL800 ordinaryDolci prompts, baseGPT-OSS greedy1536tokens.
--1501280 COMPLETED: eight dev tasks, no sample/export errors.
-Otheragent1501446ASTRAbaseline,1501281DepthBench. User removed aggregate GPU cap; DepthBench dependency removed. Pilot can proceed alongside these jobs.
+-1501202 COMPLETED all30shards:2700attempts,1032solved(38.2%),allreasoning,noerrors/limits.
+-1501282 COMPLETED assembly:data/train2700/trajectories.jsonl,train_corpus.json.
+-1501329 array0..1 RUNNING: five-layer full-history baseline scoring.
+-1501382 queued afterscoring:baseline report.
+-1501541 queued afterbaseline report:productiontwoGPUtraining,169updates,oneepoch.
+-1501542 queued afterany1501541:publish finalnumericresults/README/APPENDIXtoGitHub.
+-1501243 COMPLETED:fixedKL800ordinaryDolci anchors.
+-1501280 COMPLETED:eightdisjointdevtasks.
+Pilot1501447+resume1501491passedcompleteupdates/refits/W&B/checkpoints/OOMretry.
+SharedimplementationREADYforotheragentreuse at03c1937; AppWorldproductionnotyetstarted.
+READY-for-ASTRA release is at topofAGENT_COMMUNICATION; preserveotheragentnotes.
 
 Shared training implemented under `src/role_probe_training/training/`:
  data.py,model.py,objectives.py,refit.py,train.py,score.py.
@@ -38,7 +43,7 @@ Standardactivationextraction batched16/rank,cachedGPU. Measure real refitcost.
 W&B configuredat api.forge.coreweave.com entitykortukov projecttraining_against_role_probes.
 Need finish reportupdates, commitownfiles only, evaluate2700 corpus,
 launchproductionafterfullbaseline, updatecommunicationREADYthenreportuser.
-No productiontrainjob submitted yet; userexplicitlyauthorizedlaunchwhenready.
+Productiontrain1501541 is queued; userexplicitlyauthorizedlaunchwhenready.
 
 ## Completed throughput calibration
 
