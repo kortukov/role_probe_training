@@ -1,6 +1,6 @@
 {
   "completed": false,
-  "completed_updates": 6,
+  "completed_updates": 10,
   "expected_trajectories": 2700,
   "source_sha256": {
     "trajectories": "c8e7b40b0580a99322721d1ceb7ba8a0ac402d481b1a2c4a730e4c85075bb485",
@@ -111,6 +111,74 @@
       "refit_seconds": 32.100329774897546,
       "probe_heldout_accuracy": 0.7567332983016968,
       "total_seconds": 81.98102194303647
+    },
+    {
+      "event": "update",
+      "rank": 0,
+      "step": 7,
+      "role_loss": 0.5335118580864553,
+      "kl": 0.01021625953026337,
+      "role_accuracy": 0.8356031179428101,
+      "gradient_norm": 5.9980340003967285,
+      "microbatch": 2,
+      "update_seconds": 41.29346000868827,
+      "role_seconds": 19.580938688945025,
+      "kl_seconds": 20.610740402247757,
+      "peak_update_gib": 69.76809167861938,
+      "refit_seconds": 32.093717749696225,
+      "probe_heldout_accuracy": 0.7431074380874634,
+      "total_seconds": 73.38871240289882
+    },
+    {
+      "event": "update",
+      "rank": 0,
+      "step": 8,
+      "role_loss": 0.8813589479429852,
+      "kl": 0.008320184506767659,
+      "role_accuracy": 0.8169079422950745,
+      "gradient_norm": 20.239574432373047,
+      "microbatch": 2,
+      "update_seconds": 46.93407053826377,
+      "role_seconds": 24.369161615148187,
+      "kl_seconds": 18.0860005649738,
+      "peak_update_gib": 76.11755514144897,
+      "refit_seconds": 32.0348756168969,
+      "probe_heldout_accuracy": 0.7414439916610718,
+      "total_seconds": 78.97006448591128
+    },
+    {
+      "event": "update",
+      "rank": 0,
+      "step": 9,
+      "role_loss": 0.5169910887882982,
+      "kl": 0.012568611357503014,
+      "role_accuracy": 0.8661457300186157,
+      "gradient_norm": 13.901030540466309,
+      "microbatch": 2,
+      "update_seconds": 42.43153549730778,
+      "role_seconds": 20.166949494276196,
+      "kl_seconds": 20.61882468080148,
+      "peak_update_gib": 75.30148458480835,
+      "refit_seconds": 32.01720769191161,
+      "probe_heldout_accuracy": 0.7432667016983032,
+      "total_seconds": 74.44986254815012
+    },
+    {
+      "event": "update",
+      "rank": 0,
+      "step": 10,
+      "role_loss": 0.5242638997462874,
+      "kl": 0.011044554581324724,
+      "role_accuracy": 0.8621220588684082,
+      "gradient_norm": 6.814905166625977,
+      "microbatch": 2,
+      "update_seconds": 41.058683732990175,
+      "role_seconds": 17.94675154797733,
+      "kl_seconds": 20.708751797210425,
+      "peak_update_gib": 71.25146770477295,
+      "refit_seconds": 32.02089924691245,
+      "probe_heldout_accuracy": 0.7425057291984558,
+      "total_seconds": 73.08076114114374
     }
   ],
   "validations": [
@@ -271,6 +339,115 @@
         ],
         "extraction_seconds": 31.14253136701882,
         "seconds": 32.12486169394106,
+        "steps": 2000,
+        "batch_passage_roles": 32,
+        "training_examples": 1125,
+        "training_tokens": 642530
+      }
+    },
+    {
+      "event": "validation",
+      "rank": 0,
+      "step": 10,
+      "metrics": {
+        "tokens": 99712,
+        "accuracy": 0.8978056907653809,
+        "macro_recall": 0.633915893041211,
+        "per_role_recall": [
+          0.8729508196721312,
+          0.2768361581920904,
+          0.13189771197846567,
+          0.8981400640262455,
+          0.9897547113371223
+        ],
+        "confusion_counts": [
+          [
+            1704,
+            0,
+            0,
+            0,
+            248
+          ],
+          [
+            95,
+            147,
+            2,
+            1,
+            286
+          ],
+          [
+            1,
+            50,
+            784,
+            4315,
+            794
+          ],
+          [
+            0,
+            16,
+            615,
+            33947,
+            3219
+          ],
+          [
+            5,
+            15,
+            53,
+            475,
+            52940
+          ]
+        ]
+      },
+      "standard_probe": {
+        "tokens": 56510,
+        "accuracy": 0.7425057291984558,
+        "macro_recall": 0.7425057511944789,
+        "per_role_recall": [
+          0.7158025128295877,
+          0.8070253052557069,
+          0.6129003716156433,
+          0.8646257299592992,
+          0.7121748363121572
+        ],
+        "confusion_counts": [
+          [
+            8090,
+            1574,
+            427,
+            85,
+            1126
+          ],
+          [
+            1632,
+            9121,
+            101,
+            10,
+            438
+          ],
+          [
+            1139,
+            206,
+            6927,
+            988,
+            2042
+          ],
+          [
+            264,
+            16,
+            1025,
+            9772,
+            225
+          ],
+          [
+            1106,
+            311,
+            1530,
+            306,
+            8049
+          ]
+        ],
+        "extraction_seconds": 31.033819152973592,
+        "seconds": 32.02089924691245,
         "steps": 2000,
         "batch_passage_roles": 32,
         "training_examples": 1125,

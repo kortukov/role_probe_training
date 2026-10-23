@@ -14,11 +14,12 @@ Report root: `experiment_reports/training_against_role_probes/` (moved outofagen
 - Production **1501541 RUNNING**,twoB200s,vca-gpu-0702-03,livewalltime12h.
   Oneepoch169updates,effective16,microbatch2/GPU,fulltrajectories.
   Outputs:runs/training/appworld2700; config:src/experiments/training_against_role_probes/train_config.json.
-- Finalreportpublisher **1503672** afterany1501541 updates/pushes numericresults,
+- Finalreportpublisher **1503673** afterany1501541 updates/pushes numericresults,
   README andAPPENDIX. Reproduce via report_training.py --run RUN_DIRECTORY.
-- Initial5updates:devaccuracy29.2%→80.6%,macro35.4%→42.4%; reasonrecall77.4%→13.8%,
-  user41.1%→19.6%; assistant/toolsimproved. Do not present overallgain asuniformrecovery.
-  Reporterautomaticallyflagsperroledeclines. Keepagreedtokenweightedobjectiveunchanged.
+- Latestdev10updates:accuracy29.2%→89.8%,macro35.4%→63.4%; reasonrecall77.4%→13.2%,
+  user41.1%→27.7%; system87.3%,assistant89.8%,tool99.0%. Do notpresentoverallgainasuniform.
+  Checkpointstep00010 COMPLETE, optimizer/adapter/probe saved. Continueagreedobjective.
+  Reporterautomaticallyflagsperroledeclines; productionstillrunning169updatesplanned.
 - Warmupdates73–83s includingrefit32s; initial122s. Memorypeak<79GiB sofar, noOOMretry.
 - W&B:https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/appworld2700-l12-epoch1
 

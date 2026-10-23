@@ -134,24 +134,23 @@ Row-normalized percentages:
 | assistant | 0.1% | 0.7% | 56.5% | 40.6% | 2.2% |
 | tool | 6.4% | 17.8% | 42.1% | 16.9% | 16.8% |
 
-### After update 5
+### After update 10
 
 | True / predicted | system | user | reasoning | assistant | tool |
 |---|---:|---:|---:|---:|---:|
-| system | 128 | 0 | 0 | 8 | 1816 |
-| user | 13 | 104 | 1 | 1 | 412 |
-| reasoning | 1 | 111 | 821 | 3039 | 1972 |
-| assistant | 16 | 65 | 2107 | 30324 | 5285 |
-| tool | 462 | 705 | 516 | 2826 | 48979 |
+| system | 1704 | 0 | 0 | 0 | 248 |
+| user | 95 | 147 | 2 | 1 | 286 |
+| reasoning | 1 | 50 | 784 | 4315 | 794 |
+| assistant | 0 | 16 | 615 | 33947 | 3219 |
+| tool | 5 | 15 | 53 | 475 | 52940 |
 
 Row-normalized percentages:
 
 | True / predicted | system | user | reasoning | assistant | tool |
 |---|---:|---:|---:|---:|---:|
-| system | 6.6% | 0.0% | 0.0% | 0.4% | 93.0% |
-| user | 2.4% | 19.6% | 0.2% | 0.2% | 77.6% |
-| reasoning | 0.0% | 1.9% | 13.8% | 51.1% | 33.2% |
-| assistant | 0.0% | 0.2% | 5.6% | 80.2% | 14.0% |
-| tool | 0.9% | 1.3% | 1.0% | 5.3% | 91.6% |
+| system | 87.3% | 0.0% | 0.0% | 0.0% | 12.7% |
+| user | 17.9% | 27.7% | 0.4% | 0.2% | 53.9% |
+| reasoning | 0.0% | 0.8% | 13.2% | 72.6% | 13.4% |
+| assistant | 0.0% | 0.0% | 1.6% | 89.8% | 8.5% |
+| tool | 0.0% | 0.0% | 0.1% | 0.9% | 99.0% |
 <!-- /development-results -->
-
