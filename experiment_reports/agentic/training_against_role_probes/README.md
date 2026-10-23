@@ -41,7 +41,8 @@ updates, activation extraction, probe fitting and validation.
 
 ## Factual observations
 
-The data-collection pipeline is prepared. No model optimization or probe refitting
+Four collection shards are running under Slurm array 1492660, with automatic
+corpus validation queued as job 1492664. No model optimization or probe refitting
 has been performed in this experiment, and no training outcome is available yet.
 
 ## Message
@@ -51,5 +52,5 @@ improves behavior on newly generated trajectories requires a separate evaluation
 Three hundred trajectories are a starting corpus size, not an established match
 to the paper's data budget; token and sequence counts will determine its scale.
 
-See [RUNNING.md](RUNNING.md) for collection and reproduction, and
-[DESIGN.md](DESIGN.md) for the proposed first training run.
+The proposed first training run is described in [DESIGN.md](DESIGN.md).
+See [RUNNING.md](RUNNING.md) for collection and reproduction.

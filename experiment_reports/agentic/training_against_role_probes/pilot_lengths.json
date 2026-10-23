@@ -1,0 +1,10 @@
+{
+  "source": "experiment_reports/agentic/appworld/data/train.jsonl",
+  "trajectories": 90,
+  "tokens_total": 1162340,
+  "tokens_median": 11073.0,
+  "tokens_p90": 19773,
+  "tokens_max": 33532,
+  "over_4096": 90,
+  "over_32768": 1
+}

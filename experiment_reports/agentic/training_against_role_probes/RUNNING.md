@@ -37,3 +37,16 @@ The role training loop is not implemented or launched yet: [DESIGN.md](DESIGN.md
 records the concrete adaptations awaiting discussion. W&B project intended:
 `training_against_role_probes`; verify authenticated account before the first run.
 No credentials or task text should be put in tracked config or W&B logs.
+
+## Current submission
+
+Collection array **1492660** has four one-GPU shards. CPU assembly job **1492664**
+requires all four to succeed and writes the canonical JSONL plus `corpus.json`.
+`submission.json` records seeds and the collection-code revision. SWE inference
+1492632 now also waits for this array to finish, keeping total inference allocation
+within four GPUs while SWE CPU image preparation proceeds concurrently.
+
+W&B authentication was checked through the configured `~/.env` environment; no
+`WANDB_API_KEY` was present. Online logging is not verified. A GitHub-linked W&B
+account still needs runtime credentials (for example `wandb login` in the training
+environment); do not paste secrets into reports or chat.

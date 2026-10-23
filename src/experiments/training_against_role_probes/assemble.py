@@ -52,6 +52,14 @@ def main():
               'reasoning_bearing': sum(any(m.get('thinking') for m in r['messages']) for r in rows),
               'collection_shards': [{k: t[k] for k in ('started_utc', 'completed_utc', 'wall_seconds', 'tasks')}
                                     for t in timings]}
+    scorer_names = sorted({name for row in rows for name in row['scores']})
+    result['task_metrics'] = {}
+    for name in scorer_names:
+        values = [row['scores'][name]['value'] for row in rows]
+        assert all(value in ('C', 'I', 0, 1) for value in values)
+        successes = sum(value in ('C', 1) for value in values)
+        result['task_metrics'][name] = {'successes': successes, 'attempts': len(rows),
+                                      'success_rate': successes / len(rows)}
     (args.output / 'manifest.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({k: v for k, v in result.items() if k != 'attempts_per_task'}, indent=2))
 

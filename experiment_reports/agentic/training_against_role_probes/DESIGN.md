@@ -72,3 +72,18 @@ be described as identical original sampled rows without verification.
 Before optimization, settle role weighting, layer selection, sequence unit/context
 length and whether 30 updates or one complete corpus pass is the desired budget.
 Collection does not depend on those choices.
+
+## Measured sequence scale
+
+Tokenizing the previous 90 training trajectories with our existing Harmony replay
+produced 1,162,340 tokens: median 11,073, 90th percentile 19,773, maximum 33,532.
+All 90 exceed 4096 tokens. These are planning measurements from the earlier corpus,
+not counts for the new 300-attempt corpus; see `pilot_lengths.json`.
+
+One concrete starting option is 4096-token segments, 16 segments per model update,
+with gradient accumulation. Keep every segment in the corpus instead of truncating
+each trajectory to its first segment. Later segments then lose earlier context;
+this is an explicit approximation, requiring comparison with longer-context
+validation. Thirty updates expose at most 1,966,080 token positions and are not
+necessarily a full corpus pass. A full shuffled pass is an alternative budget,
+whose update count should be calculated from the completed corpus.
