@@ -38,11 +38,11 @@
     },
     "probe_layer_comparison": {
       "path": "experiment_reports/agentic/probe_layer_comparison/viewer.html",
-      "bytes": 1404237111,
-      "sha256": "c3a4e528940226e87f4f717ab6b7292a3803901922790d5cce089ac3ad2175a2",
+      "bytes": 1746049348,
+      "sha256": "1856c712cff66dd76231d68a160c4ca74241d5ddea041fbe82352b3dc4fe4628",
       "offline_chromium_check_passed": true,
       "checks": [
-        "both retained datasets and all available layers",
+        "all three datasets and all five layers",
         "longest trajectory per dataset",
         "token probabilities and color filters",
         "no network requests"
@@ -52,5 +52,6 @@
   "canonical_swe_reproduction_hash_verified": true,
   "retained_metrics_and_probe_weights_unchanged": true,
   "appworld_layer12_matches_separate_report": true,
-  "retail_and_swe_metrics_unchanged": true
+  "retail_and_swe_metrics_unchanged": true,
+  "appworld_all_layers_match_separate_report": true
 }

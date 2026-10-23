@@ -66,5 +66,8 @@ AppWorld is model-update data. Earlier refit-on-AppWorld cost scenarios are inva
 for the intended experiment and must be replaced when training work resumes.
 User requests only adding AppWorld normal-test observations/confusion matrices to
 agentic/probe_transfer now. Standalone AppWorld results already pushed5091d2a.
-Combined layer12 report/viewer regenerated for782trajectories; layer-comparison
-regeneration intentionally stopped, its tracked README restored unchanged.
+Both combined reports now include AppWorld: layer12 transfer and five-layer
+comparison, including per-role accuracy tables and confusion matrices. Report
+pushed9712608 before final viewer validation. Both viewers passed offline browser
+checks; layer-comparison viewer is1.746GB and stays local. Publish reports before
+large viewer work in future. Training remains explicitly paused.

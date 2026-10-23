@@ -81,3 +81,7 @@ the main text only when the experiment specifically studies them, and explain wh
 - Treat the scientific narrative as authored text. Regeneration may update
   metrics, tables, appendices and viewers, but should not silently overwrite the
   curated README or reproduction instructions with generic boilerplate.
+
+When updating results, push validated report tables and appendices before building
+or checking large interactive viewers. Viewer work must not delay access to the
+scientific report.
