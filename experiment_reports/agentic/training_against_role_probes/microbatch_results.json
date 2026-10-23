@@ -12,28 +12,6 @@
     {
       "microbatch_per_gpu": 1,
       "accumulation_steps": 8,
-      "padding_checks": [
-        {
-          "event": "padding_check",
-          "reference_loss": 2.5243699537897166,
-          "batched_loss": 2.525411831946422,
-          "relative_loss_error": 0.0004127279977886365,
-          "gradient_cosine": 0.9989061063579319,
-          "relative_gradient_error": 0.04694062300286903,
-          "labeled_tokens": 5618,
-          "passed": true
-        },
-        {
-          "event": "padding_check",
-          "reference_loss": 2.5243699537897166,
-          "batched_loss": 2.525411831946422,
-          "relative_loss_error": 0.0004127279977886365,
-          "gradient_cosine": 0.9989061063579319,
-          "relative_gradient_error": 0.04694062300286903,
-          "labeled_tokens": 5618,
-          "passed": true
-        }
-      ],
       "update_seconds": [
         28.013951272005215,
         25.576985683001112,
@@ -66,28 +44,6 @@
     {
       "microbatch_per_gpu": 2,
       "accumulation_steps": 4,
-      "padding_checks": [
-        {
-          "event": "padding_check",
-          "reference_loss": 2.5243699537897166,
-          "batched_loss": 2.525411831946422,
-          "relative_loss_error": 0.0004127279977886365,
-          "gradient_cosine": 0.9989061063579319,
-          "relative_gradient_error": 0.04694062300286903,
-          "labeled_tokens": 5618,
-          "passed": true
-        },
-        {
-          "event": "padding_check",
-          "reference_loss": 2.5243699537897166,
-          "batched_loss": 2.525411831946422,
-          "relative_loss_error": 0.0004127279977886365,
-          "gradient_cosine": 0.9989061063579319,
-          "relative_gradient_error": 0.04694062300286903,
-          "labeled_tokens": 5618,
-          "passed": true
-        }
-      ],
       "update_seconds": [
         24.286544781993143,
         23.03183238604106,
@@ -120,28 +76,6 @@
     {
       "microbatch_per_gpu": 4,
       "accumulation_steps": 2,
-      "padding_checks": [
-        {
-          "event": "padding_check",
-          "reference_loss": 2.5243699537897166,
-          "batched_loss": 2.525411831946422,
-          "relative_loss_error": 0.0004127279977886365,
-          "gradient_cosine": 0.9989061063579319,
-          "relative_gradient_error": 0.04694062300286903,
-          "labeled_tokens": 5618,
-          "passed": true
-        },
-        {
-          "event": "padding_check",
-          "reference_loss": 2.5243699537897166,
-          "batched_loss": 2.525411831946422,
-          "relative_loss_error": 0.0004127279977886365,
-          "gradient_cosine": 0.9989061063579319,
-          "relative_gradient_error": 0.04694062300286903,
-          "labeled_tokens": 5618,
-          "passed": true
-        }
-      ],
       "update_seconds": [
         27.041609049018007,
         23.320503173978068,

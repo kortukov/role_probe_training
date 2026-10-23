@@ -124,14 +124,6 @@ batch and alternating ranks. One update is warmup; four are measured. Right
 padding is masked out of attention and loss. A separate stress test repeats the
 longest trajectory across the entire microbatch.
 
-Before timing, compare token-weighted cross-entropy and all adapter gradients
-from individually processed versus jointly padded examples, without updating
-weights. The four seed-selected prefixes contain 2048/1536/1792/1024 tokens.
-Calibration gates are loss relative error <1%, gradient cosine >0.99 and gradient
-relative L2 error <10%; these are practical checks, not universal guarantees.
-The existing Transformers FlexAttention implementation is unchanged. Hidden
-activations are not required to be bitwise identical across batch shapes.
-
 ```bash
 sbatch src/experiments/training_against_role_probes/microbatch.sbatch
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/summarize_microbatch.py \

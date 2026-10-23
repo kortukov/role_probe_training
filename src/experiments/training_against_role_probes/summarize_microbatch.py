@@ -34,7 +34,6 @@ def main():
         stress = [r for rows in ranks for r in rows if r['event'] == 'longest_backward']
         results.append(dict(
             microbatch_per_gpu=microbatch, accumulation_steps=8//microbatch,
-            padding_checks=[r for rows in ranks for r in rows if r['event']=='padding_check'],
             update_seconds=times, mean_update_seconds=statistics.mean(times),
             median_update_seconds=statistics.median(times),
             peak_update_allocated_gib=allocated,

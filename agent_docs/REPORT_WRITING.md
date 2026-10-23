@@ -76,6 +76,10 @@ the main text only when the experiment specifically studies them, and explain wh
 - Retain measurements and provenance needed to audit current results. Delete
   unrelated comparisons, obsolete attempts, abandoned settings and stale future-work
   statements. This applies to whole directories as well as individual paragraphs.
+- Routine correctness checks and resolved debugging investigations belong in code
+  and local logs, not reports, appendices or published result summaries. Keep them
+  in the narrative only if they reveal an unresolved limitation that changes the
+  scientific interpretation; do not preserve the debugging history.
 - Before pushing reports, check every changed report and its surrounding folders
   for relevance to the current experiment, stale links and superseded results.
 - Treat the scientific narrative as authored text. Regeneration may update

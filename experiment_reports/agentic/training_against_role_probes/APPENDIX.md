@@ -24,15 +24,7 @@ KL, probe refitting, validation, checkpointing and trajectory generation.
 
 Source: [context_results.json](context_results.json).
 
-## Microbatch numerical check and stress test
-
-Before each timing condition, four unequal-length prefixes were processed
-individually and as a padded batch, without an optimizer update. They contained
-5,618 labeled tokens. Mean cross-entropy was 2.524370 individually and 2.525412
-batched: 0.0413% relative difference. Across all adapter gradients, cosine
-similarity was 0.998906 and relative L2 difference was 4.694%. Both GPU ranks
-agreed. This supports a throughput calibration, not numerical identity or
-identical long-term optimization outcomes.
+## Microbatch memory stress test
 
 The stress test repeats the same 33,241-token trajectory across every slot of the
 microbatch on each GPU. Peak allocated memory includes the already initialized

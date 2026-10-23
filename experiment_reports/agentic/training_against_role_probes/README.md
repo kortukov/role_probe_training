@@ -67,10 +67,8 @@ not started.
 Microbatch 2 achieved 1.15× the throughput of microbatch 1. Microbatch 4 used more
 memory and padding without improving on microbatch 2. All settings passed a
 separate backward test with the longest trajectory repeated across the microbatch.
-A small numerical check found 0.041% loss difference and 0.9989 gradient cosine
-similarity between padded and individual forwards; they are close, not identical.
-[The appendix](APPENDIX.md) gives numerical checks, loss traces, stress-test memory
-and the separate context-length comparison.
+[The appendix](APPENDIX.md) gives loss traces, stress-test memory and the separate
+context-length comparison.
 
 ## Message
 

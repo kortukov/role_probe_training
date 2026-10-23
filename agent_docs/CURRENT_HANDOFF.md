@@ -21,15 +21,10 @@ Log `logs/role-microbatch-1500991.out` in that experiment.
 Aggregator: `summarize_microbatch.py --runs ... --output .../microbatch_results.json`.
 No benchmark remains active. No productioncollection/training launched.
 
-User agreed activation identity is not necessary; check loss/gradient agreement.
-On4unequalprefixes/5618labeledtokens, batchedvsindividual lossrelativeerror0.0413%,
-gradientcosine0.998906,gradientrelativeL2error4.694%. Bothranks passed.
-Use original TransformersFlexAttention. Trial FP32sinknormalization did not resolve
-activation differences and was removed. No unvalidated kernel adaptation remains.
-Gate loss<1%,gradientcosine>.99,gradientrelativeerror<10%; numericalcalibration,
-not universaltrainingguarantee. User asked about OOMresilience: production could
-retrywholeupdatecoordinatedacrossranks withsmallermicrobatch/sameeffectivebatch,
-but this is not implemented; benchmarkkeepssizestoenablefaircomparison.
+Production OOM recovery is not implemented. The discussed design is to retry a
+whole optimizer update on both ranks with smaller microbatches and unchanged
+effective batch size. Keep resolved correctness investigations in code/local
+logs, not scientific reports or published result summaries.
 
 W&B project: https://forge.coreweave.com/wandb/kortukov/training_against_role_probes
 Standing auth to push code/reports, no data. Results summarized in README/APPENDIX/RUNNING; push code and small results only.
@@ -54,10 +49,11 @@ trainable parameters; token weighting and clipping1 are calibration settings.
 Final role weighting, context, effective batch and update budget remain decisions.
 Atbatch16 one27kepoch means1688updates. Do not equate upstream30updates tooneepoch.
 
-## Active SWE rerun
+## SWE rerun incomplete
 
-Image preparation completed; evaluation array **1492729** started. Last seen shards
-0 and1 running. Check all four shards via sacct before declaring complete.
+Array **1492729** finished: shards0/1 completed; shards2/3 failed during startup
+(exit1 after15seconds). No SWE job is running. Investigate failed shards and
+finish the cohort before reporting a new full-evaluation result.
 All500tasks, modernvLLM0.32,temperature1,highreasoning,8192tokens/call,
 200messages,2Mcumulative tokens,1800s/task,8tasks/GPU. Prior500task/probe results
 still describe oldcohort; finalize complete newcohort separately.
