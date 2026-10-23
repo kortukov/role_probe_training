@@ -1,0 +1,8 @@
+{
+  "image_preparation_array": "1492631",
+  "evaluation_array": "1492632",
+  "tasks": 500,
+  "gpu_shards": 4,
+  "max_tokens": 8192,
+  "git_revision": "9717277635d58404eeb8bf5bdff02a1e57e8a092"
+}

@@ -51,3 +51,17 @@ AGENTIC_REPORT_ROOT=experiment_reports/agentic/swe_bench_full/diagnostic sbatch 
 ```
 
 Skip preparation if that image is already cached. The cache contains a SIF and its source-image/hash sidecar; the sandbox checks both before use. This avoids spending GPU time on registry access and image compression. The completed check is `diagnostic/runs/1489368`; its original Inspect log, exported trace and manifest remain local. It is kept separate from the 500 selected probe-evaluation histories.
+
+## Full repaired rerun
+
+Submitted on 2026-10-23: image preparation array `1492631` (32 CPU shards, at most 16 concurrent) followed automatically by evaluation array `1492632` (four one-GPU shards, all 500 tasks). The GPU array depends on successful completion of every image shard; preparation failures prevent GPU allocation. Submission metadata is in [metrics/rerun_submission.json](metrics/rerun_submission.json).
+
+```bash
+prep=$(sbatch --parsable src/experiments/agentic_eval/swe_images_job.sbatch)
+SWE_SHARD_COUNT=4 SWE_SERVER_PROJECT=server_current sbatch \
+  --array=0-3 --dependency="afterok:$prep" --kill-on-invalid-dep=yes \
+  --exclude=vca-gpu-0701-03 src/experiments/agentic_eval/swe_job.sbatch \
+  --all --max-tokens 8192
+```
+
+This rerun uses the repaired diagnostic configuration: vLLM 0.32.0, temperature 1, high reasoning, 200 messages, 8,192 output tokens per call, two million cumulative tokens, 1,800 seconds per task, and eight concurrent tasks per GPU. Its results must be finalized as a new complete cohort; do not mix these attempts into the previous 500-task result. Each shard exports to `runs/<Slurm-job-ID>/`. Until finalization, the main report and probe results still describe the previous cohort.
