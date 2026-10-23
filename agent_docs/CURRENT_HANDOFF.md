@@ -15,14 +15,14 @@ subreports. Do not stage/change their files. Coordinate GPU jobs via file; the u
 Current own jobs:
 -1501202 COMPLETED all30shards:2700attempts,1032solved(38.2%),allreasoning,noerrors/limits.
 -1501282 COMPLETED assembly:data/train2700/trajectories.jsonl,train_corpus.json.
--1501329 array0..1 RUNNING: five-layer full-history baseline scoring.
--1501382 queued afterscoring:baseline report.
--1501541 queued afterbaseline report:productiontwoGPUtraining,169updates,oneepoch.
+-1501329 array0..1 COMPLETED: all2700trajectories/fivelayers; pertokenpredictionssaved.
+-1501382 COMPLETED:baseline report pusheda61a58e; layer12accuracy26.12%,macro33.73%.
+-1501541 RUNNING onvca-gpu-0702-03:productiontwoGPUtraining,169updates,oneepoch. Livewalltime12h. Firstcompleteupdate122.4s, microbatch2, peak75.7GiB.
 -1501542 queued afterany1501541:publish finalnumericresults/README/APPENDIXtoGitHub.
 -1501243 COMPLETED:fixedKL800ordinaryDolci anchors.
 -1501280 COMPLETED:eightdisjointdevtasks.
 Pilot1501447+resume1501491passedcompleteupdates/refits/W&B/checkpoints/OOMretry.
-SharedimplementationREADYforotheragentreuse at03c1937; AppWorldproductionnotyetstarted.
+SharedimplementationREADYforotheragentreuse at03c1937; AppWorldproductionRUNNING.
 READY-for-ASTRA release is at topofAGENT_COMMUNICATION; preserveotheragentnotes.
 
 Shared training implemented under `src/role_probe_training/training/`:
@@ -121,5 +121,6 @@ report tables first, then build/validate large viewers. Timed waits, no busy pol
 
 Pilot completed two updates with a checkpoint restart. Dev accuracy29.2%→39.2%→54.7%,
 KL secondstep0.00150, refit47–51s. Keep pilot measurements out of main report.
-Production waits for corpus assembly1501282, score1501329 and report1501382.
+All data/scoring/report prerequisites completed. Production running; wait fordevstep5,
+run report_training.py andpush initialresults. Finalpublisher1501542 handlescompletion.
 Automatic final-report publisher: report_training.sbatch RUN_DIRECTORY (afterany training).

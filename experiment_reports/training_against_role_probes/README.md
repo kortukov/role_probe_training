@@ -49,7 +49,7 @@ from the first shard's evaluation start to the last finish was **90.2 minutes**;
 parallelism increased during collection to at most eight GPUs. These are measured
 collection costs, not a controlled scaling comparison.
 
-Baseline evaluation is complete. Production training is queued for two GPUs.
+Baseline evaluation is complete. Production training is running on two GPUs.
 
 <!-- corpus-results -->
 ### Training-corpus baseline
