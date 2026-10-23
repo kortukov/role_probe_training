@@ -1,0 +1,20 @@
+{
+  "trajectories": 1000,
+  "roles": {
+    "system": 1000,
+    "user": 1000,
+    "assistant": 8585,
+    "tool": 4352
+  },
+  "reasoning_bearing": 1000,
+  "tool_bearing": 1000,
+  "finished_assistant": 1000,
+  "source_revision": "a154c6f50b685b6248415dfe3cd4c511cf1c4862",
+  "source_sha256": "67fe0519c34579b44e36c09efc784891bb008acaf10754589fafac02d97c785d",
+  "trajectory_sha256": "61fd7252d9e35b9460beff4e63c24c519f1abf1f374e805846e0d1e091ea3412",
+  "dataset_split": "train",
+  "source": "https://huggingface.co/datasets/Emperorizzis/ASTRA-SFT-1k",
+  "conversion": "All 1000 rows, all messages, reasoning_content -> thinking; function -> tool; no truncation",
+  "tools": "mcp_info.base_info.tool_list; synthetic context excluded from probe metrics",
+  "adapter_sha256": "0c4ce59f290c2a37afad32af49c0f808f19cd8d46a7072c192b483913bcbb638"
+}

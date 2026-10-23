@@ -1,0 +1,15 @@
+{
+  "git_head": "03ec21dfdef08f971e04d576ccefe337b7d9ea77",
+  "source_sha256": {
+    "src/experiments/training_against_role_probes/evaluate_corpus.py": "660dcd6eaf021eb895899ac80cc202806844867e35fda43c94dbc8815cf3cba8",
+    "src/experiments/training_against_role_probes/evaluate_corpus.sbatch": "947705de8b39ae556c738d3773f1a23cec49d7afd0f67c0085316bc3266569c4",
+    "src/role_probe_training/trajectories/replay.py": "1641795e15459d2ca7ac096de48cb0af71b70e4ca47714cb8aace64ab4b82f03",
+    "src/role_probe_training/probes/harmony.py": "20b3d8b58142f3e2636d0306c706a2d058d4a690e0cad8b452118abfd17237c1",
+    "experiment_reports/role_probes/gptoss20b_layers/probes/layer_4.npz": "c1200ea547688d3d99f1f6d4ae8d86b3cf2751f8086ceaa55a390f999e56aabf",
+    "experiment_reports/role_probes/gptoss20b_layers/probes/layer_8.npz": "1b645505d42cc66386bb2f9386dbfae164e312917d4a0c7a1f6622897e3d762c",
+    "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz": "45b97daf451f3d559351a027d6a8a94715b1d309884e463702b9178dea8b8dda",
+    "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_16.npz": "5a15de1b4dfe76cff699026c7ef138155c3a1ddb08be3ca74f687fffc8156b59",
+    "experiment_reports/role_probes/gptoss20b_layers/probes/layer_20.npz": "a64fcad5d23472342bde4f1ec9c36798822dbbcca642604e00c690bba8448b38"
+  },
+  "job_id": 1501446
+}

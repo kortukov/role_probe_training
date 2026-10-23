@@ -24,7 +24,8 @@ def replay_messages(record):
         if content or not (calls or m.get('thinking')):
             out = {'role':role,'content':content}
             if role == 'assistant':
-                out.update(channel=m.get('channel','commentary' if calls else 'final'), ending='<|end|>' if calls else '<|return|>')
+                out.update(channel=m.get('channel','commentary' if calls else 'final'),
+                           ending=m.get('ending', '<|end|>' if calls else '<|return|>'))
             if role == 'tool':
                 out['name'] = m.get('name') or 'environment'
             add(out,index)
