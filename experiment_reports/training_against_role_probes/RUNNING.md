@@ -1,184 +1,127 @@
 # Reproduction
 
-## Debug collection
+## Code and environment
 
-The collection job reuses the validated AppWorld agent, environment, evaluator,
-server and normalized JSONL export. Each shard has its own inference GPU and eight
-concurrent worlds. Seeds 7301–7303 collect all 90 training tasks; seed 7304 collects
-30 after deterministic shuffling. Sampling temperature is one. Existing 90-task
-benchmark trajectories are not silently included in this new corpus.
-
-```bash
-sbatch --exclude=vca-gpu-0701-03 src/experiments/training_against_role_probes/collect_debug.sbatch
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/assemble_debug.py \
-  --runs experiment_reports/training_against_role_probes/runs/JOB_ID \
-  --output experiment_reports/training_against_role_probes/data/debug
-```
-
-The assembler requires complete error-free exports with 300 distinct attempt IDs
-and 90 distinct tasks. Execution-limited and unsuccessful attempts remain included.
-An attempt's unique ID includes its original task ID and generation seed. Generation
-seeds and task sampling are recorded; concurrent GPU execution is not promised to
-be bitwise deterministic. JSONL retains messages, channels, tools and scores.
-
-Large data, logs, checkpoints and W&B local files are ignored. Keep the resulting
-small corpus manifest and training metrics in Git. Collection uses the existing
-locked `agentic_eval/swe` and `agentic_eval/server_current` environments; see the
-[AppWorld reproduction guide](../agentic/appworld/RUNNING.md) for exact runtime details.
-
-## Upstream reference and training status
-
-Training source: `submodules/training_against_probes`, revision
-`9c3f80cc6d6d6fa2a434ca49ffdd150c4223c427`. Relevant code:
-`configs_runs/honesty_example.yaml`, `src/finetune.py` (model/refit loop),
-`src/utils/finetune_utils.py` (KL), `src/probes/build_kl_rollouts.py` (anchor).
-
-The production alternating training loop has not been launched: [DESIGN.md](DESIGN.md)
-records the concrete current training configuration. W&B project: `training_against_role_probes`; authentication is verified below.
-No credentials or task text should be put in tracked config or W&B logs.
-
-## Completed debug collection
-
-Collection array **1492660** and assembly job **1492664** completed successfully.
-The debug corpus is `data/debug/trajectories.jsonl`; its checksum and collection
-metrics are in `debug_corpus.json`. `debug_submission.json` records the original
-collection-code revision and seeds. Original split metadata remains `train` because
-these are AppWorld training tasks; the corpus purpose is `debug`.
-
-The planned training corpus is **30 attempts per task × 90 tasks = 2,700**.
-It is separate from the debug corpus; collection array1501202 is running. The four-shard
-script above reproduces debug collection only, not production collection.
-
-Compute debug length/padding statistics without loading model weights:
-
-```bash
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/batch_stats.py \
-  --data experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl \
-  --output experiment_reports/training_against_role_probes/debug_batch_stats.json
-```
-
-## W&B authentication
-
-Authenticated as `kortukov` at `https://api.forge.coreweave.com`; verified via the
-server's read-only viewer query. Credentials are in the user's netrc, not the repo.
-Set `WANDB_BASE_URL=https://api.forge.coreweave.com`, `WANDB_ENTITY=kortukov` and
-`WANDB_PROJECT=training_against_role_probes` in training jobs. No new login is needed.
-
-## Two-GPU throughput calibration
-
-Job **1493850** completed on two B200 GPUs in 9 minutes 28 seconds. The isolated runtime preserves the environments
-used by evaluation jobs. Reproduce with:
+Reusable implementation: `src/role_probe_training/training/`. Entry points,
+configurations and Slurm scripts: `src/experiments/training_against_role_probes/`.
+Training uses the isolated, locked `runtime/` environment (PyTorch 2.9.1+cu128,
+Transformers 4.57.6, PEFT 0.20). Prepare it with:
 
 ```bash
 .tools/bin/uv sync --locked --project src/experiments/training_against_role_probes/runtime
-sbatch src/experiments/training_against_role_probes/throughput.sbatch
 ```
 
-Implementation: `src/role_probe_training/training/throughput.py`. Outputs are
-`data/throughput/1493850/{smoke,4096,8192,16384,0}/rank{0,1}.jsonl`; zero denotes
-full trajectories. Logs are under `logs/role-throughput-1493850.out`.
+Base model: `.cache/models/gpt-oss-20b`, revision
+`6cee5e81ee83917806bbde320786a8fb61efebee`. Training dequantizes to BF16, uses
+FlexAttention with attention sinks, and enables non-reentrant gradient
+checkpointing. Compile-cache overflow fails explicitly rather than selecting
+quadratic eager attention. Two B200 GPUs hold one model replica each; model
+adapter gradients are summed after globally token-normalized accumulation.
 
-This is a **role-loss-only calibration**, not end-to-end alternating training.
-The fixed layer-12 probe was fitted on standard role-confusion data; no probe is
-fitted on AppWorld. KL and standard-data refitting overhead remain to be measured.
-The effective batch is 16 trajectories, with microbatch one and token-weighted
-accumulation over two replicas. Each condition resets the model/adapters, uses
-seed 123 and identical trajectory batches, and runs one warmup plus two measured
-updates. A separate longest-trajectory backward tests peak-length feasibility.
-The short smoke phase first checks loading, backward and optimizer execution.
+Upstream reference: `submodules/training_against_probes`, revision
+`9c3f80cc6d6d6fa2a434ca49ffdd150c4223c427`. Relevant files are
+`configs_runs/honesty_example.yaml`, `src/finetune.py`,
+`src/utils/finetune_utils.py` and `src/probes/build_kl_rollouts.py`.
+Each run's `manifest.json` records source hashes, Git revision and input hashes.
 
-Configuration: BF16 dequantized base, FlexAttention with attention sinks, non-reentrant
-gradient checkpointing, LoRA rank 64 / alpha 128 / dropout zero on q/k/v/o and
-fused expert gate/up and down parameters, AdamW learning rate 5e-5 and weight decay
-1e-4, gradient clipping at 1. Loss averages labeled content tokens; formatting and
-synthetic tool-schema tokens are excluded. The production run also uses token weighting. Probe capture is zero-based
-layer 12's post-attention-layernorm output. The backbone runs without vocabulary
-logits. No adapter checkpoint is promoted to a trained model.
+## Trajectories and baseline probes
 
-Reported times must distinguish warmup/compilation, ordinary updates and the
-longest-example stress check. Both ranks record peak allocated/reserved memory,
-loss, accuracy, gradient norm and elapsed time. W&B receives numeric metrics only;
-local JSONL remains the result source if logging is unavailable. These brief loss
-traces do not establish convergence or comparative model quality.
-
-A full pass over 2,700 trajectories at effective batch 16 would take 169
-updates. Context-dependent epoch estimates must use measured timings and add KL,
-standard-data activation extraction, probe optimization and validation separately.
-No end-to-end throughput estimate is available yet.
-
-### Truncation retains some multi-turn context but changes the data
-
-In debug data, first 4096 tokens retain a median 4 complete tool replies; 96.3% retain
-at least two. First 8192tokens retain a median 14 complete tool replies; 99.3% retain
-at least two. Only 12% of full trajectories fit 8192 tokens; 71.3% fit 16384. Prefix
-truncation therefore drops later interactions and often task completion. These
-counts use complete tool-message content spans, not token-budget guesses.
-
-## Full-trajectory microbatch comparison
-
-Job **1500991** completed in 10 minutes 51 seconds, comparing microbatches 1, 2 and 4 per GPU on two B200s in the
-short-job `ber-testing` partition. All conditions retain effective batch 16 and
-use the same five seeded batches, sorting trajectories by length within each
-batch and alternating ranks. One update is warmup; four are measured. Right
-padding is masked out of attention and loss. A separate stress test repeats the
-longest trajectory across the entire microbatch.
+Collection array **1501202** runs seeds 8301–8330 on all 90 AppWorld train tasks,
+with up to eight concurrent one-GPU shards. Each shard runs eight worlds in
+parallel, temperature 1, high reasoning, 8,192 output tokens per call and a
+32,768-token server context. Complete environment and export settings are in
+[AppWorld reproduction](../agentic/appworld/RUNNING.md) and the per-shard manifests.
+Assembly requires 2,700 unique attempts, exactly 30 per task, and no infrastructure
+or export errors. Unsuccessful and execution-limited attempts remain included.
 
 ```bash
-sbatch src/experiments/training_against_role_probes/microbatch.sbatch
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/summarize_microbatch.py \
-  --runs experiment_reports/training_against_role_probes/data/microbatch/1500991 \
-  --output experiment_reports/training_against_role_probes/microbatch_results.json
+sbatch --exclude=vca-gpu-0701-03 src/experiments/training_against_role_probes/collect_train.sbatch
+sbatch --dependency=afterok:COLLECTION_JOB src/experiments/training_against_role_probes/assemble_train.sbatch COLLECTION_JOB
+sbatch --dependency=afterok:ASSEMBLY_JOB src/experiments/training_against_role_probes/score_train.sbatch
+sbatch --dependency=afterok:SCORING_JOB src/experiments/training_against_role_probes/report_train.sbatch
 ```
 
-The paired comparison reruns microbatch 1 with the same ordering and explicit
-attention mask as larger batches. Use this paired baseline for speedups, rather
-than the earlier context experiment. Local outputs: `data/microbatch/1500991/`;
-log: `logs/role-microbatch-1500991.out`. KL and probe refitting remain excluded.
-Automatic OOM fallback is intentionally disabled in this fixed-size calibration.
-Production retries a complete update on both ranks with microbatch one after an
-OOM; the effective batch and loss normalization remain unchanged.
+Current jobs: assembly **1501282**, baseline scoring **1501329**, report **1501382**.
+Canonical data: `data/train2700/trajectories.jsonl`; provenance and generation
+success rates: `train_corpus.json`. Records preserve roles, reasoning channels,
+tool metadata and task/seed IDs. Generation is seeded but concurrent inference
+is not guaranteed bitwise reproducible. Collection timing is retained per shard.
+The separate 300-trajectory debug corpus is under `data/debug/`.
 
-Small validated aggregates are `microbatch_results.json` and `context_results.json`.
-The original context run used source commit `166ff7b`; the current benchmark adds
-explicit padding masks and length grouping for the paired microbatch comparison.
-All three conditions and both ranks completed; no OOM or retry occurred.
+Baseline scoring uses the original probes at layers 4, 8, 12, 16 and 20, with
+full history and no independent windows. Per-token outputs are under
+`predictions/train2700/shard{0,1}/`. Each compressed NPZ contains `input_ids[N]`,
+`labels[N]`, `layers[K]`, `predictions[K,N]` and `probabilities[K,N,5]`; the adjacent
+index maps files to trajectory IDs and records confusion counts. Labels -1
+exclude formatting and synthetic tool-schema tokens. Role order is recorded in
+`manifest.json`. Small aggregates are in `baseline_probe_results.json`.
 
-## First off-policy training run
+## KL and probe-refit data
 
-Collection array1501202 runs seeds8301–8330 on all90AppWorld training tasks,
-30attempts/task. Assembly1501282 requires all2700attempts and zero infrastructure
-or export errors. Evaluation1501329 scores layers4/8/12/16/20 with full history;
-per-token compressed NumPy arrays and source IDs are under `predictions/train2700`.
-KL prompts use the first5000valid first-user prompts of ordinary
-`allenai/Dolci-Instruct-SFT`, shuffled withseed42, selecting800. The pinned source
-revision is recorded in `data/kl/source.json`. GPT-OSS generates fixed greedy
-1536-token completions with Harmony token IDs, including incomplete completions.
-The KL loss scores completion positions under a2048-token combined cap, matching
-the upstream honesty objective and coefficient16. Base logits use disabled LoRA;
-vocabulary projection chunks are checkpointed to bound backward memory.
+The fixed KL pool uses the first 5,000 valid first-user prompts from ordinary
+`allenai/Dolci-Instruct-SFT`, shuffled with seed 42, selecting 800. Source revision:
+`bd3c8f3a9b2cc5a9682e44b96ddd0bb2ff027221`. The selection follows the upstream
+loader recipe; identical prompt IDs to the original authors' private local pool
+are not established. GPT-OSS generates greedy completions of up to 1,536 tokens.
+Exact Harmony prompt/completion token IDs are stored in `data/kl/anchors.jsonl`;
+source and generation manifests are adjacent. Generation job **1501243** completed.
 
-The first run uses `src/experiments/training_against_role_probes/train_config.json`:
-one epoch,169updates,effective batch16,microbatch2/GPU,twoGPUs. The last batch has
-12trajectories, with the same global token-mean normalization. Standard probe
-refitting uses all250C4/Dolma passages, their five role renderings and original
-train/test split. Each warm-start refit runs2000SGDsteps atlr1e-3,weightdecay1e-4,
-50-stepwarmup/cosine decay and clipping1. A probe minibatch consists of32
-passage-role examples with all content tokens, adapting the upstream binary
-sequence-level probe to multiclass token labels without subsampling tokens.
-Model updates use AdamW5e-5,weightdecay1e-4,LoRA64/alpha128/dropout0 and clipping1.
+KL(base || adapted) scores unshifted completion positions under the upstream
+2,048-token combined cap, with coefficient 16 and 16 sampled anchors per update.
+Three anchors have no completion positions within this cap and contribute no KL
+tokens. The reference pass disables LoRA on the same model; there is no second
+teacher model. Vocabulary projections are checkpointed in 64-token chunks.
+Reproduction entry points are `prepare_kl.py` and `generate_kl.sbatch`.
+
+Probe refitting uses only the original 250 C4/Dolma passages from
+`experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl`,
+all five role renderings, all content tokens and the original passage split.
+Each refit warm-starts the probe and runs 2,000 SGD steps: learning rate 1e-3,
+weight decay 1e-4, 50-step warmup followed by cosine decay, clipping 1. A minibatch
+contains 32 passage-role examples with all their content tokens. This adapts the
+upstream sequence-level binary probe to token-level multiclass labels.
+
+## Model training and restart
+
+Configuration: `train_config.json`; production job **1501541** depends on the
+completed baseline report. One epoch gives 169 updates at effective batch 16;
+the final batch contains 12 trajectories. Full trajectories are right-padded,
+with microbatch 2 per GPU and global content-token normalization. LoRA rank 64,
+alpha 128 and dropout 0 target q/k/v/o and fused expert gate/up/down parameters.
+AdamW uses learning rate 5e-5, weight decay 1e-4 and gradient clipping 1.
+
+Layer 12 means zero-based post-attention-layernorm output / pre-MLP input.
+Eight separate AppWorld dev trajectories from job **1501280** are evaluated
+before training, every five updates and at completion. Their path is pinned in
+the config; task IDs must be disjoint from training. These are fixed base-model
+trajectories, not fresh rollouts of the adapted model.
 
 ```bash
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/training_against_role_probes/checks.py
 sbatch src/experiments/training_against_role_probes/train.sbatch src/experiments/training_against_role_probes/train_config.json
-# Restart with the same input artifacts and the latest complete checkpoint:
 sbatch src/experiments/training_against_role_probes/train.sbatch src/experiments/training_against_role_probes/train_config.json --resume CHECKPOINT_DIRECTORY
 ```
 
-Checkpoint directories contain the adapter, probe, optimizer and configuration;
-only the latest two complete restart states are retained. Updates retry on both
-ranks with microbatch1 after an OOM during role/KL accumulation, preserving the
-same examples and objective. An OOM at microbatch1 stops explicitly for recovery.
-W&B logs batch loss/accuracy,KL,gradientnorm,phase timings and held-out dev metrics.
-No production training has started yet; the complete GPU pilot is running.
-Attention compilation permits 64 specializations and fails explicitly at its
-cache limit, rather than falling back to quadratic eager attention.
+Outputs: `runs/training/appworld2700/`. Checkpoints contain the adapter, probe,
+optimizer and configuration; the latest two complete states are retained.
+Checkpoints are written initially, every ten updates and at completion. If a
+role/KL microbatch runs out of GPU memory, both ranks discard the partial update
+and retry the same examples with microbatch 1. An OOM at microbatch 1 stops
+explicitly; it never silently skips or truncates a trajectory.
+
+W&B: [AppWorld training run](https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/appworld2700-l12-epoch1).
+Authentication uses the user's netrc with `WANDB_BASE_URL=https://api.forge.coreweave.com`
+and entity `kortukov`. Numeric logs include losses, KL, accuracy, gradient norms,
+phase timing, memory and dev metrics. Credentials and task text are not logged.
+
+## Creating the report
+
+```bash
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/report_training.py \
+  --run experiment_reports/training_against_role_probes/runs/training/appworld2700
+```
+
+This updates `training_results.json`, the main report and appendix confusion
+matrices. Job **1501542**, dependent on training exit, runs `report_training.sbatch`
+and pushes only these small report files. Data, predictions, logs, W&B local
+files and checkpoints are ignored by Git. A standalone trained-model viewer is
+not generated by this training pipeline.
