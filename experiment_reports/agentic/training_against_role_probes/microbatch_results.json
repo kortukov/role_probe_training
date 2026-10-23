@@ -1,0 +1,175 @@
+{
+  "job_id": "1500991",
+  "scope": "role-only updates; fixed standard-data probe; no KL/refitting",
+  "gpus": 2,
+  "gpu": "NVIDIA B200",
+  "effective_batch": 16,
+  "context": "full trajectories",
+  "ordering": "seed123 shuffle; sort by length within each batch16; alternate ranks",
+  "warmup_updates": 1,
+  "measured_updates": 4,
+  "results": [
+    {
+      "microbatch_per_gpu": 1,
+      "accumulation_steps": 8,
+      "padding_checks": [
+        {
+          "event": "padding_check",
+          "reference_loss": 2.5243699537897166,
+          "batched_loss": 2.525411831946422,
+          "relative_loss_error": 0.0004127279977886365,
+          "gradient_cosine": 0.9989061063579319,
+          "relative_gradient_error": 0.04694062300286903,
+          "labeled_tokens": 5618,
+          "passed": true
+        },
+        {
+          "event": "padding_check",
+          "reference_loss": 2.5243699537897166,
+          "batched_loss": 2.525411831946422,
+          "relative_loss_error": 0.0004127279977886365,
+          "gradient_cosine": 0.9989061063579319,
+          "relative_gradient_error": 0.04694062300286903,
+          "labeled_tokens": 5618,
+          "passed": true
+        }
+      ],
+      "update_seconds": [
+        28.013951272005215,
+        25.576985683001112,
+        27.030789298005402,
+        25.79666155198356
+      ],
+      "mean_update_seconds": 26.604596951248823,
+      "median_update_seconds": 26.41372542499448,
+      "peak_update_allocated_gib": 63.021385192871094,
+      "peak_stress_allocated_gib": 63.82393550872803,
+      "stress_sequence_tokens": 33241,
+      "padding_fraction": 0.0,
+      "real_tokens_per_second": 8472.050917103628,
+      "role_loss_by_update": [
+        3.0026853937628313,
+        2.1007101407593463,
+        1.2390947209040657,
+        0.896857587015174,
+        0.7423572111682962
+      ],
+      "role_accuracy_by_update": [
+        0.23604328925433776,
+        0.4154397711845418,
+        0.6242369629672694,
+        0.7378827999078977,
+        0.7957660566917832
+      ],
+      "speedup_vs_microbatch1": 1.0
+    },
+    {
+      "microbatch_per_gpu": 2,
+      "accumulation_steps": 4,
+      "padding_checks": [
+        {
+          "event": "padding_check",
+          "reference_loss": 2.5243699537897166,
+          "batched_loss": 2.525411831946422,
+          "relative_loss_error": 0.0004127279977886365,
+          "gradient_cosine": 0.9989061063579319,
+          "relative_gradient_error": 0.04694062300286903,
+          "labeled_tokens": 5618,
+          "passed": true
+        },
+        {
+          "event": "padding_check",
+          "reference_loss": 2.5243699537897166,
+          "batched_loss": 2.525411831946422,
+          "relative_loss_error": 0.0004127279977886365,
+          "gradient_cosine": 0.9989061063579319,
+          "relative_gradient_error": 0.04694062300286903,
+          "labeled_tokens": 5618,
+          "passed": true
+        }
+      ],
+      "update_seconds": [
+        24.286544781993143,
+        23.03183238604106,
+        24.13623126602033,
+        21.254204700002447
+      ],
+      "mean_update_seconds": 23.177203283514245,
+      "median_update_seconds": 23.584031826030696,
+      "peak_update_allocated_gib": 76.51487827301025,
+      "peak_stress_allocated_gib": 79.65771150588989,
+      "stress_sequence_tokens": 33241,
+      "padding_fraction": 0.07862690593958221,
+      "real_tokens_per_second": 9724.8791082711,
+      "role_loss_by_update": [
+        3.002688011064864,
+        2.0997164245827236,
+        1.238817334611723,
+        0.8970105168788136,
+        0.7446204055660208
+      ],
+      "role_accuracy_by_update": [
+        0.2360379290197739,
+        0.41455667004969093,
+        0.6241642927736759,
+        0.7378012510553381,
+        0.7958760913766296
+      ],
+      "speedup_vs_microbatch1": 1.1478777929247597
+    },
+    {
+      "microbatch_per_gpu": 4,
+      "accumulation_steps": 2,
+      "padding_checks": [
+        {
+          "event": "padding_check",
+          "reference_loss": 2.5243699537897166,
+          "batched_loss": 2.525411831946422,
+          "relative_loss_error": 0.0004127279977886365,
+          "gradient_cosine": 0.9989061063579319,
+          "relative_gradient_error": 0.04694062300286903,
+          "labeled_tokens": 5618,
+          "passed": true
+        },
+        {
+          "event": "padding_check",
+          "reference_loss": 2.5243699537897166,
+          "batched_loss": 2.525411831946422,
+          "relative_loss_error": 0.0004127279977886365,
+          "gradient_cosine": 0.9989061063579319,
+          "relative_gradient_error": 0.04694062300286903,
+          "labeled_tokens": 5618,
+          "passed": true
+        }
+      ],
+      "update_seconds": [
+        27.041609049018007,
+        23.320503173978068,
+        26.821705559967086,
+        20.75431336602196
+      ],
+      "mean_update_seconds": 24.48453278724628,
+      "median_update_seconds": 25.071104366972577,
+      "peak_update_allocated_gib": 104.14264917373657,
+      "peak_stress_allocated_gib": 111.80589866638184,
+      "stress_sequence_tokens": 33241,
+      "padding_fraction": 0.2192608115831587,
+      "real_tokens_per_second": 9205.62797577277,
+      "role_loss_by_update": [
+        3.00275289921687,
+        2.0993925384544414,
+        1.2378112025342518,
+        0.8966589498816342,
+        0.7448498142417175
+      ],
+      "role_accuracy_by_update": [
+        0.23603256878521003,
+        0.4152420619752468,
+        0.6239172141154584,
+        0.7379931307084197,
+        0.7958617390264322
+      ],
+      "speedup_vs_microbatch1": 1.08658789540419
+    }
+  ]
+}

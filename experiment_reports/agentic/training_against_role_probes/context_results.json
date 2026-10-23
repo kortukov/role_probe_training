@@ -1,0 +1,49 @@
+{
+  "job_id": "1493850",
+  "gpus": 2,
+  "effective_batch": 16,
+  "microbatch_per_gpu": 1,
+  "scope": "role-only, excludes KL and probe refitting",
+  "results": [
+    {
+      "context_tokens": 4096,
+      "mean_update_seconds": 11.798962298547849,
+      "update_seconds": [
+        12.010921280365437,
+        11.58700331673026
+      ],
+      "peak_update_allocated_gib": 51.78645706176758,
+      "peak_stress_allocated_gib": 51.42434310913086
+    },
+    {
+      "context_tokens": 8192,
+      "mean_update_seconds": 16.864861340029165,
+      "update_seconds": [
+        19.17714686691761,
+        14.55257581314072
+      ],
+      "peak_update_allocated_gib": 53.66765880584717,
+      "peak_stress_allocated_gib": 53.08659839630127
+    },
+    {
+      "context_tokens": 16384,
+      "mean_update_seconds": 20.205404750537127,
+      "update_seconds": [
+        20.532454757019877,
+        19.878354744054377
+      ],
+      "peak_update_allocated_gib": 57.41581106185913,
+      "peak_stress_allocated_gib": 56.3679404258728
+    },
+    {
+      "context_tokens": null,
+      "mean_update_seconds": 21.529005181975663,
+      "update_seconds": [
+        21.916512032039464,
+        21.141498331911862
+      ],
+      "peak_update_allocated_gib": 59.93427896499634,
+      "peak_stress_allocated_gib": 63.83112382888794
+    }
+  ]
+}

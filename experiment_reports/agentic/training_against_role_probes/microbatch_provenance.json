@@ -1,0 +1,11 @@
+{
+  "job_id": "1500991",
+  "source_sha256": {
+    "src/role_probe_training/training/throughput.py": "aa918ceef567d742e5c4535f7f70da9d40ea1a3179641b8327278af0f900c40d",
+    "src/experiments/training_against_role_probes/microbatch.sbatch": "629d6519784c830a1b8b1846d07fa46ae17eb506b6cdaf647b7aacc9558ba6aa",
+    "src/experiments/training_against_role_probes/runtime/uv.lock": "1b34e00e92a16ec3b1edc0b32e8cc31de8a109afff6663efc4afa3bd8352e973"
+  },
+  "data_sha256": "cdba9cfc58642deffcf30e362552a7c7205f5da6ed42580cb41c297ac7fcb0e9",
+  "seed": 123,
+  "wandb_project": "https://forge.coreweave.com/wandb/kortukov/training_against_role_probes"
+}

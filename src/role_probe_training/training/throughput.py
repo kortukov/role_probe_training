@@ -55,12 +55,15 @@ def main():
     p.add_argument('--updates', type=int, default=3, help='First update is warmup')
     p.add_argument('--batch-size', type=int, default=16)
     p.add_argument('--smoke', action='store_true')
+    p.add_argument('--microbatch-size', type=int, default=1)
+    p.add_argument('--length-grouped', action='store_true')
+    p.add_argument('--check-padding', action='store_true')
     args = p.parse_args()
     rank, world = int(os.environ['LOCAL_RANK']), int(os.environ['WORLD_SIZE'])
     torch.cuda.set_device(rank)
     dist.init_process_group('nccl', timeout=timedelta(minutes=30))
-    if args.batch_size % world:
-        raise ValueError('Effective batch must be divisible by replicas')
+    if args.microbatch_size < 1 or args.batch_size % (world * args.microbatch_size):
+        raise ValueError('Effective batch must be divisible by replicas times microbatch size')
     torch.manual_seed(123)
     args.output.mkdir(parents=True, exist_ok=True)
     def emit(record):
@@ -99,48 +102,121 @@ def main():
           'trainable_parameters': sum(p.numel() for p in parameters),
           'data_sha256': hashlib.sha256(args.data.read_bytes()).hexdigest(),
           'scope': 'role-only; fixed standard-data probe; excludes KL and probe refitting',
-          'effective_batch': args.batch_size, 'seed': 123})
+          'effective_batch': args.batch_size, 'seed': 123,
+          'microbatch_size': args.microbatch_size, 'length_grouped': args.length_grouped})
     run = None
     if rank == 0:
         try:
             import wandb
             run = wandb.init(project='training_against_role_probes',
-                             name=f'throughput-{os.environ.get("SLURM_JOB_ID", "local")}-{args.context}',
+                             name=f'throughput-{os.environ.get("SLURM_JOB_ID", "local")}-{args.context}-mb{args.microbatch_size}',
                              job_type='throughput', config={
                                  'context': args.context, 'effective_batch': args.batch_size,
                                  'layer': 12, 'scope': 'role_only', 'lora_rank': 64,
+                                 'microbatch_size': args.microbatch_size,
+                                 'length_grouped': args.length_grouped,
                                  'learning_rate': 5e-5, 'fixed_probe': True})
         except Exception as exc:
             emit({'event': 'wandb_unavailable', 'error_type': type(exc).__name__})
-    def loss_for(example):
-        ids = torch.tensor(example['ids'], device=rank).unsqueeze(0)
-        labels = torch.tensor(example['labels'], device=rank)
+    def forward_batch(batch, minimum_length=0):
+        # Right padding preserves each trajectory's original position indices.
+        length = max(minimum_length, max(len(x['ids']) for x in batch))
+        pad_id = tokenizer.pad_token_id
+        if pad_id is None:
+            pad_id = tokenizer.eos_token_id
+        ids = torch.full((len(batch), length), pad_id, device=rank, dtype=torch.long)
+        labels = torch.full_like(ids, -1)
+        mask = torch.zeros_like(ids)
+        for i, example in enumerate(batch):
+            n = len(example['ids'])
+            ids[i, :n] = torch.tensor(example['ids'], device=rank)
+            labels[i, :n] = torch.tensor(example['labels'], device=rank)
+            mask[i, :n] = 1
         captured.clear()
-        # No vocabulary projection is needed for the role objective.
-        base.model(input_ids=ids, use_cache=False)
-        hidden = captured.pop('hidden')[0]
+        # Padding is excluded from attention and loss. Every row is independent.
+        base.model(input_ids=ids, attention_mask=mask, use_cache=False)
+        hidden = captured.pop('hidden')
+        return hidden, labels
+
+    def loss_for(batch):
+        hidden, labels = forward_batch(batch)
         valid = labels >= 0
         logits = F.linear(hidden[valid].float(), weight, bias)
         loss = F.cross_entropy(logits, labels[valid], reduction='sum')
         correct = (logits.argmax(-1) == labels[valid]).sum()
         return loss, correct
     try:
+        if args.check_padding:
+            # Compare the actual objective and all adapter gradients, not hidden
+            # state identity. No optimizer update occurs in this diagnostic.
+            check = [dict(x, ids=x['ids'][:n], labels=x['labels'][:n])
+                     for x, n in zip(examples, (2048, 1536, 1792, 1024))]
+            denominator = sum(sum(y >= 0 for y in x['labels']) for x in check)
+            optimizer.zero_grad(set_to_none=True)
+            reference_loss = 0.
+            for example in check:
+                loss, _ = loss_for([example])
+                reference_loss += loss.detach().item() / denominator
+                (loss / denominator).backward()
+            reference = {name: param.grad.detach().cpu().clone()
+                         for name, param in model.named_parameters() if param.grad is not None}
+            optimizer.zero_grad(set_to_none=True)
+            loss, _ = loss_for(check)
+            batched_loss = loss.detach().item() / denominator
+            (loss / denominator).backward()
+            dot = norm_a = norm_b = difference = 0.
+            for name, param in model.named_parameters():
+                if name not in reference:
+                    if param.grad is not None:
+                        raise RuntimeError(f'Gradient presence changed for {name}')
+                    continue
+                if param.grad is None:
+                    raise RuntimeError(f'Gradient missing for {name}')
+                left, right = reference.pop(name).double(), param.grad.detach().cpu().double()
+                dot += (left * right).sum().item()
+                norm_a += left.square().sum().item()
+                norm_b += right.square().sum().item()
+                difference += (left-right).square().sum().item()
+            cosine = dot / (norm_a*norm_b)**.5
+            relative_gradient_error = (difference/norm_a)**.5
+            relative_loss_error = abs(batched_loss-reference_loss)/abs(reference_loss)
+            # Practical calibration gates, not universal numerical guarantees.
+            passed = (relative_loss_error < .01 and cosine > .99
+                      and relative_gradient_error < .1)
+            emit(dict(event='padding_check', reference_loss=reference_loss,
+                      batched_loss=batched_loss, relative_loss_error=relative_loss_error,
+                      gradient_cosine=cosine, relative_gradient_error=relative_gradient_error,
+                      labeled_tokens=denominator, passed=passed))
+            del reference, left, right, loss
+            optimizer.zero_grad(set_to_none=True)
+            if not passed:
+                raise RuntimeError('Loss/gradient batching check exceeded calibration tolerances')
         for step in range(1 if args.smoke else args.updates):
             batch = examples[step*args.batch_size:(step+1)*args.batch_size]
             if len(batch) != args.batch_size:
                 raise ValueError('Not enough distinct debug examples')
             if args.smoke:
                 batch = [dict(x, ids=x['ids'][:128], labels=x['labels'][:128]) for x in batch]
+            if args.length_grouped:
+                batch = sorted(batch, key=lambda x: len(x['ids']))
             denominator = sum(sum(y >= 0 for y in x['labels']) for x in batch)
             local = batch[rank::world]
+            microbatches = [local[i:i+args.microbatch_size]
+                            for i in range(0, len(local), args.microbatch_size)]
+            padded_tokens = sum(
+                len(group) * max(len(x['ids']) for x in group)
+                for replica in range(world)
+                for sequence in [batch[replica::world]]
+                for i in range(0, len(sequence), args.microbatch_size)
+                for group in [sequence[i:i+args.microbatch_size]])
             optimizer.zero_grad(set_to_none=True)
             dist.barrier()
             torch.cuda.synchronize()
             torch.cuda.reset_peak_memory_stats()
             started = time.perf_counter()
             totals = torch.zeros(2, device=rank, dtype=torch.float64)
-            for example in local:
-                loss, correct = loss_for(example)
+            for microbatch in microbatches:
+                loss, correct = loss_for(microbatch)
                 (loss / denominator).backward()
                 totals += torch.stack((loss.detach().double(), correct.double()))
                 del loss, correct
@@ -161,6 +237,7 @@ def main():
             record = dict(event='update', step=step, warmup=step == 0, rank=rank,
                           seconds=elapsed, forward_backward_seconds=forward_backward,
                           tokens=sum(len(x['ids']) for x in batch), labeled_tokens=denominator,
+                          padded_tokens=padded_tokens, microbatch_size=args.microbatch_size,
                           max_local_length=max(len(x['ids']) for x in local),
                           role_loss=totals[0].item()/denominator,
                           role_accuracy=totals[1].item()/denominator,
@@ -177,10 +254,11 @@ def main():
             dist.barrier()
             torch.cuda.reset_peak_memory_stats()
             started = time.perf_counter()
-            loss, _ = loss_for(longest)
-            (loss / sum(y >= 0 for y in longest['labels'])).backward()
+            loss, _ = loss_for([longest] * args.microbatch_size)
+            (loss / (args.microbatch_size * sum(y >= 0 for y in longest['labels']))).backward()
             torch.cuda.synchronize()
             emit(dict(event='longest_backward', rank=rank, tokens=len(longest['ids']),
+                      microbatch_size=args.microbatch_size,
                       seconds=time.perf_counter()-started,
                       peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
                       peak_reserved_gib=torch.cuda.max_memory_reserved()/2**30))

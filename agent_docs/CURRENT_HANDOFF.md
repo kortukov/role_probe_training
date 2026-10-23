@@ -1,24 +1,38 @@
 # Current handoff — 2026-10-23
 
-## Active throughput calibration
+## Completed throughput calibration
 
-User resumed training work specifically to start throughput measurements.
-Job **1493850**, two B200s on vca-gpu-0701-04, passed its two-replica smoke test.
-It proceeds through 4096/8192/16384/full debug trajectories, effective batch16,
-microbatch1, one warmup and two measured updates, plus longest-example backward.
-Entry: `src/experiments/training_against_role_probes/throughput.sbatch`.
-Implementation: `src/role_probe_training/training/throughput.py`.
-Runtime is isolated under the experiment's `runtime/`; do not change active code.
-Outputs: `experiment_reports/agentic/training_against_role_probes/data/throughput/1493850/`.
-Logs: that experiment's `logs/role-throughput-1493850.out`.
+Original context job1493850 completed all4settings in9m28s. Role-only update means
+4K11.8s,8K16.9s,16K20.2s,full21.5s; fullpeak59.9GiB,33kstress63.8GiB.
+Small results: `experiment_reports/agentic/training_against_role_probes/context_results.json`.
+No KL/refitting overhead measured; these are not end-to-end training estimates.
+
+User requested paired full-trajectory microbatch1/2/4 comparison, effectivebatch16.
+Job **1500991** COMPLETED in10m51s on two B200s in ber-testing (vca-gpu-0701-01).
+Microbatch1/2/4 means26.60/23.18/24.48s/update; peakupdate63.0/76.5/104.1GiB;
+stress63.8/79.7/111.8GiB. Microbatch2 throughput1.148×baseline; padding0/7.9/21.9%.
+Allconditions/rankscompleted. Smallsummary `microbatch_results.json`; reportupdated.
+Script `src/experiments/training_against_role_probes/microbatch.sbatch`, shared
+implementation `src/role_probe_training/training/throughput.py`, isolated runtime.
+Five identical seeded batches percondition, sortwithinbatchbylength, one warmup,
+four measured updates, plus repeatedlongesttrajectory stressbackward.
+Outputs `experiment_reports/agentic/training_against_role_probes/data/microbatch/1500991/`.
+Log `logs/role-microbatch-1500991.out` in that experiment.
+Aggregator: `summarize_microbatch.py --runs ... --output .../microbatch_results.json`.
+No benchmark remains active. No productioncollection/training launched.
+
+User agreed activation identity is not necessary; check loss/gradient agreement.
+On4unequalprefixes/5618labeledtokens, batchedvsindividual lossrelativeerror0.0413%,
+gradientcosine0.998906,gradientrelativeL2error4.694%. Bothranks passed.
+Use original TransformersFlexAttention. Trial FP32sinknormalization did not resolve
+activation differences and was removed. No unvalidated kernel adaptation remains.
+Gate loss<1%,gradientcosine>.99,gradientrelativeerror<10%; numericalcalibration,
+not universaltrainingguarantee. User asked about OOMresilience: production could
+retrywholeupdatecoordinatedacrossranks withsmallermicrobatch/sameeffectivebatch,
+but this is not implemented; benchmarkkeepssizestoenablefaircomparison.
+
 W&B project: https://forge.coreweave.com/wandb/kortukov/training_against_role_probes
-
-This first phase measures **role-only model updates with a fixed standard-data
-probe**. It excludes KL and probe-refit costs; never label it end-to-end throughput.
-No production training or 27k trajectory collection is authorized by this benchmark
-request. No full training checkpoint is saved/promoted. Measure KL and standard-data
-extraction/refitting separately before projecting end-to-end cost. Review measured
-memory and timing; GPU smoke success alone does not verify full-context feasibility.
+Standing auth to push code/reports, no data. Results summarized in README/APPENDIX/RUNNING; push code and small results only.
 
 ## Confirmed training design
 

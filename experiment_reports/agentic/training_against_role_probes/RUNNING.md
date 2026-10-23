@@ -66,7 +66,7 @@ Set `WANDB_BASE_URL=https://api.forge.coreweave.com`, `WANDB_ENTITY=kortukov` an
 
 ## Two-GPU throughput calibration
 
-Job **1493850** runs on two B200 GPUs. The isolated runtime preserves the environments
+Job **1493850** completed on two B200 GPUs in 9 minutes 28 seconds. The isolated runtime preserves the environments
 used by evaluation jobs. Reproduce with:
 
 ```bash
@@ -114,3 +114,40 @@ at least two. First 8192tokens retain a median 14 complete tool replies; 99.3% r
 at least two. Only 12% of full trajectories fit 8192 tokens; 71.3% fit 16384. Prefix
 truncation therefore drops later interactions and often task completion. These
 counts use complete tool-message content spans, not token-budget guesses.
+
+## Full-trajectory microbatch comparison
+
+Job **1500991** completed in 10 minutes 51 seconds, comparing microbatches 1, 2 and 4 per GPU on two B200s in the
+short-job `ber-testing` partition. All conditions retain effective batch 16 and
+use the same five seeded batches, sorting trajectories by length within each
+batch and alternating ranks. One update is warmup; four are measured. Right
+padding is masked out of attention and loss. A separate stress test repeats the
+longest trajectory across the entire microbatch.
+
+Before timing, compare token-weighted cross-entropy and all adapter gradients
+from individually processed versus jointly padded examples, without updating
+weights. The four seed-selected prefixes contain 2048/1536/1792/1024 tokens.
+Calibration gates are loss relative error <1%, gradient cosine >0.99 and gradient
+relative L2 error <10%; these are practical checks, not universal guarantees.
+The existing Transformers FlexAttention implementation is unchanged. Hidden
+activations are not required to be bitwise identical across batch shapes.
+
+```bash
+sbatch src/experiments/training_against_role_probes/microbatch.sbatch
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/summarize_microbatch.py \
+  --runs experiment_reports/agentic/training_against_role_probes/data/microbatch/1500991 \
+  --output experiment_reports/agentic/training_against_role_probes/microbatch_results.json
+```
+
+The paired comparison reruns microbatch 1 with the same ordering and explicit
+attention mask as larger batches. Use this paired baseline for speedups, rather
+than the earlier context experiment. Local outputs: `data/microbatch/1500991/`;
+log: `logs/role-microbatch-1500991.out`. KL and probe refitting remain excluded.
+Automatic OOM fallback is intentionally disabled in this fixed-size calibration.
+For production, consider conservative padded-token budgets and coordinated
+whole-update retries with smaller microbatches; this is not yet implemented.
+
+Small validated aggregates are `microbatch_results.json` and `context_results.json`.
+The original context run used source commit `166ff7b`; the current benchmark adds
+explicit padding masks and length grouping for the paired microbatch comparison.
+All three conditions and both ranks completed; no OOM or retry occurred.
