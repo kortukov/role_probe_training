@@ -7,7 +7,7 @@
 #SBATCH --ntasks=1
 #SBATCH --gpus=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=256G
+#SBATCH --mem=128G
 #SBATCH --time=04:00:00
 #SBATCH --exclude=vca-gpu-0701-03
 #SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%A_%a.out

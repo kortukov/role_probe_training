@@ -13,18 +13,19 @@ Other agent owns ASTRA/DepthBench data adapters, replay.py ending support and it
 subreports. Do not stage/change their files. Coordinate GPU jobs via file; the user explicitly removed the aggregate four-GPU cap.
 
 Current own jobs:
--1501202 array0..29%2: collection90trajectories/seed8301..8330, twoGPUs concurrently.
+-1501202 array0..29%4: collection90trajectories/seed8301..8330, fourGPUs maximum concurrently.
 -1501282: assembly afterok1501202; output data/train2700, train_corpus.json.
--1501283 array0..1: five-layer full-context probe scoring afterokassembly; predictions/train2700.
--1501243: fixedKLgeneration800ordinaryDolci prompts, baseGPT-OSS greedy1536tokens.
--1501280: dev8tasks, afterokKL, currently HELD to coordinate GPUs withotheragent.
-Otheragent1501326ASTRAbaseline,1501281DepthBench. User removed aggregate GPU cap; DepthBench dependency removed. Pilot can proceed alongside these jobs.
+-1501329 array0..1: five-layer full-context probe scoring afterokassembly; predictions/train2700.
+-1501243 COMPLETED: fixedKL800 ordinaryDolci prompts, baseGPT-OSS greedy1536tokens.
+-1501280 COMPLETED: eight dev tasks, no sample/export errors.
+Otheragent1501446ASTRAbaseline,1501281DepthBench. User removed aggregate GPU cap; DepthBench dependency removed. Pilot can proceed alongside these jobs.
 
 Shared training implemented under `src/role_probe_training/training/`:
  data.py,model.py,objectives.py,refit.py,train.py,score.py.
 Train configs/jobs under `src/experiments/training_against_role_probes/`.
 CPUchecks.py passed KLdirection/mask/checkpointedgradients andpadding.
-**GPU pilot NOT SUBMITTED YET.** Need KLcomplete+devcomplete. Use train.sbatch
+**GPU pilot1501447 RUNNING** in ber-testing. Attention compile limit raised to64;
+fails explicitly at limit instead of quadratic eager fallback. Uses train.sbatch
 pilot_config.json on2GPUs (ber-testing,time1h acceptable forvalidation), then
 resume checkpoint withmax_updates2 toprove restart. Pilot config usesdebug300,
 fullprotocoloneupdate,2000refitsteps,16KLpairs,deliberate coordinatedOOMretry.
@@ -60,9 +61,8 @@ Log `logs/role-microbatch-1500991.out` in that experiment.
 Aggregator: `summarize_microbatch.py --runs ... --output .../microbatch_results.json`.
 Throughput benchmark complete; current collection/training preparation described above.
 
-Production OOM recovery is not implemented. The discussed design is to retry a
-whole optimizer update on both ranks with smaller microbatches and unchanged
-effective batch size. Keep resolved correctness investigations in code/local
+Production OOM recovery retries the whole optimizer update on both ranks with
+microbatch1 and unchanged effective batch size; pilot tests this with an injection. Keep resolved correctness investigations in code/local
 logs, not scientific reports or published result summaries.
 
 W&B project: https://forge.coreweave.com/wandb/kortukov/training_against_role_probes
@@ -79,7 +79,7 @@ median12466/max33241tokens. Debug source is `data/debug/trajectories.jsonl`.
 Prefer full trajectories; benchmark start-anchored prefixes, no arbitrary windows.
 Warm-start refits after each model update. KL ordinary Dolci-Instruct-SFT prompts
 plus once-generated baseGPT-OSS answers, KL(base||adapted), coefficient16,16pairs.
-KL anchor generation is active. W&B credentials verified, netrc; server
+KL anchor generation is complete. W&B credentials verified, netrc; server
 https://api.forge.coreweave.com, entity kortukov. Never print keys.
 Working defaults LoRA64/alpha128/dropout0,AdamW5e-5,weightdecay1e-4.
 Benchmark targets attention q/k/v/o and fused expert gate/up/down,739,639,296

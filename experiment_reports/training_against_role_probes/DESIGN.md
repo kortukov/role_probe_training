@@ -34,9 +34,7 @@ hinge-trained probes differ from our five-class logistic probes.
 
 The honesty KL anchor uses ordinary `allenai/Dolci-Instruct-SFT` training prompts
 with answers generated once by the unmodified reasoning model. Its documented
-construction uses 800 prompts, seed 42 and a 1536-token generation limit. This is
-not the removed Dolci Tool-Use role-training dataset. For our experiment the base
-answers must come from GPT-OSS-20B, not Qwen. The objective is KL(base || adapted),
+construction uses 800 prompts, seed 42 and a 1536-token generation limit. For this experiment the base answers come from GPT-OSS-20B. The objective is KL(base || adapted),
 with upstream completion-position masking, coefficient 16 and 16 pairs per update.
 Use the upstream data selection and loss implementation where compatible; preserve
 Harmony channels in our serialization. Exact original prompt identities are not

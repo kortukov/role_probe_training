@@ -1,6 +1,6 @@
 {
   "name": "appworld-debug-pipeline-test",
-  "wandb_id": "appworld-debug-pipeline-test",
+  "wandb_id": "appworld-pipeline-checked-attention",
   "model": ".cache/models/gpt-oss-20b",
   "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
   "trajectories": "experiment_reports/training_against_role_probes/data/debug/trajectories.jsonl",
@@ -8,7 +8,7 @@
   "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
   "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
   "kl_anchors": "experiment_reports/training_against_role_probes/data/kl/anchors.jsonl",
-  "output": "experiment_reports/training_against_role_probes/runs/training/pilot",
+  "output": "experiment_reports/training_against_role_probes/runs/training/pilot_checked_attention",
   "seed": 123,
   "epochs": 1,
   "microbatch": 2,

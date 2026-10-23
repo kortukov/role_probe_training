@@ -11,6 +11,11 @@ from .data import collate
 
 class RoleModel:
     def __init__(self, model_path, probe_path, device, *, adapters=True):
+        # Full histories, KL, and probe refits exercise distinct attention masks.
+        # Never fall back to quadratic eager attention when the compile cache fills.
+        torch._dynamo.config.recompile_limit = 64
+        torch._dynamo.config.accumulated_recompile_limit = 512
+        torch._dynamo.config.fail_on_recompile_limit_hit = True
         self.device=device
         self.tokenizer=AutoTokenizer.from_pretrained(model_path,local_files_only=True)
         self.pad_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id

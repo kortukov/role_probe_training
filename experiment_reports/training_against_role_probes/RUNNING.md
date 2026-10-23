@@ -91,8 +91,7 @@ Configuration: BF16 dequantized base, FlexAttention with attention sinks, non-re
 gradient checkpointing, LoRA rank 64 / alpha 128 / dropout zero on q/k/v/o and
 fused expert gate/up and down parameters, AdamW learning rate 5e-5 and weight decay
 1e-4, gradient clipping at 1. Loss averages labeled content tokens; formatting and
-synthetic tool-schema tokens are excluded. This token weighting is a calibration
-choice, not a final decision about role balancing. Probe capture is zero-based
+synthetic tool-schema tokens are excluded. The production run also uses token weighting. Probe capture is zero-based
 layer 12's post-attention-layernorm output. The backbone runs without vocabulary
 logits. No adapter checkpoint is promoted to a trained model.
 
@@ -136,8 +135,8 @@ attention mask as larger batches. Use this paired baseline for speedups, rather
 than the earlier context experiment. Local outputs: `data/microbatch/1500991/`;
 log: `logs/role-microbatch-1500991.out`. KL and probe refitting remain excluded.
 Automatic OOM fallback is intentionally disabled in this fixed-size calibration.
-For production, consider conservative padded-token budgets and coordinated
-whole-update retries with smaller microbatches; this is not yet implemented.
+Production retries a complete update on both ranks with microbatch one after an
+OOM; the effective batch and loss normalization remain unchanged.
 
 Small validated aggregates are `microbatch_results.json` and `context_results.json`.
 The original context run used source commit `166ff7b`; the current benchmark adds
@@ -148,7 +147,7 @@ All three conditions and both ranks completed; no OOM or retry occurred.
 
 Collection array1501202 runs seeds8301–8330 on all90AppWorld training tasks,
 30attempts/task. Assembly1501282 requires all2700attempts and zero infrastructure
-or export errors. Evaluation1501283 scores layers4/8/12/16/20 with full history;
+or export errors. Evaluation1501329 scores layers4/8/12/16/20 with full history;
 per-token compressed NumPy arrays and source IDs are under `predictions/train2700`.
 KL prompts use the first5000valid first-user prompts of ordinary
 `allenai/Dolci-Instruct-SFT`, shuffled withseed42, selecting800. The pinned source
@@ -180,4 +179,6 @@ only the latest two complete restart states are retained. Updates retry on both
 ranks with microbatch1 after an OOM during role/KL accumulation, preserving the
 same examples and objective. An OOM at microbatch1 stops explicitly for recovery.
 W&B logs batch loss/accuracy,KL,gradientnorm,phase timings and held-out dev metrics.
-No production training has started yet; the complete GPU pilot is pending.
+No production training has started yet; the complete GPU pilot is running.
+Attention compilation permits 64 specializations and fails explicitly at its
+cache limit, rather than falling back to quadratic eager attention.
