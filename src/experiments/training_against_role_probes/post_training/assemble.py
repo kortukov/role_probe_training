@@ -5,10 +5,13 @@ import json
 from pathlib import Path
 p=argparse.ArgumentParser(__doc__);p.add_argument('--root',type=Path,required=True);p.add_argument('--collection-id',required=True)
 a=p.parse_args(); results={}
+source_file=a.root/'post_training/shard_sources.json'
+source_jobs=json.loads(source_file.read_text())['shard_jobs'] if source_file.exists() else {}
 for benchmark,shards,expected in [('appworld_test',[0,1],168),('tau2_retail',[2],114),('swe_bench',[3,4,5,6],500)]:
     rows=[]; selected=set(); manifests=[]
     for shard in shards:
-        directory=a.root/f'runs/post_training/{a.collection_id}/shard{shard}/{benchmark}'
+        collection=source_jobs.get(str(shard),a.collection_id)
+        directory=a.root/f'runs/post_training/{collection}/shard{shard}/{benchmark}'
         manifest=json.loads((directory/'manifest.json').read_text());manifests.append(manifest)
         selected.update(map(str,manifest['full_selection']))
         rows.extend(json.loads(line) for line in (directory/'trajectories.jsonl').read_text().splitlines())

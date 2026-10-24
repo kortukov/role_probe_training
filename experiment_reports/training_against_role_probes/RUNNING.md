@@ -161,7 +161,10 @@ reasoning effort is high. AppWorld/SWE use temperature 1 and 8,192 output tokens
 per call; retail uses temperature 0 and 16,384 tokens. Task time limit is 1,800s.
 AppWorld allows 50 steps, SWE 200 messages, and retail its native 100-turn cap.
 Retail uses the authorized Azure GPT-4.1 customer simulator inherited from the
-submission environment. Exact settings and source hashes are in each run manifest.
+submission environment. Exact settings and source hashes are in each run manifest. Exclude
+`vca-gpu-0701-03,vca-gpu-0701-05` when submitting these jobs (see the cluster guide).
+If infrastructure requires whole-shard replacement, `post_training/shard_sources.json`
+records the source job for each replaced shard; assembly validates full task coverage.
 
 Fresh probes use all content tokens from the original 250-passage source at
 `experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl`,
@@ -177,5 +180,7 @@ cohorts; `predictions/post_training/BENCHMARK/` contains per-token NPZ files,
 trajectory index and summary. These paths are excluded from Git. Small task and
 probe results are published in `post_training/results.json`; the report script
 validates coverage and matching input/model hashes before updating report tables
-and percentage-only appendix matrices. Raw benchmark artifacts use the same
+and percentage-only appendix matrices. A dependent `publish.sbatch ROOT` commits
+and pushes only that report and its small results after successful validation.
+Raw benchmark artifacts use the same
 message schema as the existing agentic evaluations.

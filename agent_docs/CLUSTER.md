@@ -167,3 +167,11 @@ seeds, configuration and hardware in the experiment's `RUNNING.md`. Link logs,
 metrics and plots from its README. Investigate failures before scaling up.
 Cluster support: `hpc-cluster@hhi.fraunhofer.de`;
 [current status](https://viwiki.fe.hhi.de/wiki/HPC_Cluster_Status).
+
+### Verified node failure (2026-10-24)
+
+Exclude `vca-gpu-0701-05` from these evaluations as well as the previously excluded
+`vca-gpu-0701-03`. On `0701-05`, SWE job1504057_3 produced repeated Apptainer
+`lookup userid 11850603: connection refused` failures; job1504057_6 failed to create
+its Slurm local directory with permission denied. The same pipeline ran on other
+nodes. This is a live observation, not a diagnosis of the node's account service.

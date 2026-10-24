@@ -1,0 +1,7 @@
+{
+  "shard_jobs": {
+    "3": "1504125",
+    "6": "1504125"
+  },
+  "reason": "Replace both whole SWE shards allocated to vca-gpu-0701-05 after account-lookup and local-directory failures. Replacement selected by infrastructure failure, not task success."
+}

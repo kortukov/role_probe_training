@@ -105,7 +105,8 @@ generalization estimate. Model and probe both change between rows.
 ## Message
 
 After 169 updates, role accuracy increased on the small fixed development
-set with the continually refitted probe. An independently fitted probe and new task
-rollouts are needed to establish broader recoverability and behavioral effects.
+set with the continually refitted probe. Fixed-text role accuracy alone does not
+establish preserved task performance. Fresh-rollout evaluation tests task completion
+and role recovery separately, using a new probe fitted independently of training.
 
 See [RUNNING.md](RUNNING.md) for reproduction, configurations and artifact locations.

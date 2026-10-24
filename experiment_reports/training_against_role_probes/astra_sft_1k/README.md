@@ -77,6 +77,5 @@ role recovery or evidence that training will improve behavior. Layer comparisons
 also show that conclusions depend on the probe/readout layer. These are descriptive
 scores on the intended training data; they do not estimate held-out generalization.
 
-One-epoch model training is complete. Fresh-rollout evaluation is queued;
-no fresh-rollout results are available yet. See [RUNNING.md](RUNNING.md) for sources, conversion
-and reproduction.
+Fresh-rollout evaluation separately tests task completion and role recovery after
+model training. See [RUNNING.md](RUNNING.md) for sources, conversion and reproduction.

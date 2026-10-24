@@ -85,7 +85,5 @@ it does not establish good overall role recovery or future behavioral improvemen
 Despite short individual histories, the 20-attempt corpus contains substantially
 more total tokens than ASTRA-SFT-1k.
 
-The baseline was reported before training. One-epoch training is running
-using the explicitly released shared pipeline; no post-training results are
-available yet. See [RUNNING.md](RUNNING.md) for
-sources, the failure audit and reproduction.
+Fresh-rollout evaluation separately tests task completion and role recovery after
+model training. See [RUNNING.md](RUNNING.md) for sources, the failure audit and reproduction.
