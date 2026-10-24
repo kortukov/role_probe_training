@@ -29,6 +29,8 @@ def main():
     p.add_argument('--max-tokens', type=int, default=8192)
     p.add_argument('--image', default='.cache/appworld/appworld.sif')
     p.add_argument('--data', default='.cache/appworld/data')
+    p.add_argument('--model-id', default='openai/gpt-oss-20b')
+    p.add_argument('--model-revision', default='6cee5e81ee83917806bbde320786a8fb61efebee')
     args = p.parse_args()
     ids = sorted((Path(args.data)/'datasets'/f'{args.split}.txt').read_text().splitlines())
     random.Random(args.seed).shuffle(ids)
@@ -44,7 +46,7 @@ def main():
         raise ValueError('Use a fresh output directory')
     manifest = {'benchmark':'appworld_'+args.split, 'sample_ids':ids, 'full_selection':full_selection,
         'settings':vars(args)|{'output':str(args.output)},
-        'model':'openai/gpt-oss-20b', 'model_revision':'6cee5e81ee83917806bbde320786a8fb61efebee',
+        'model':args.model_id, 'model_revision':args.model_revision,
         'git_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
         'container_sha256':hashlib.sha256(Path(args.image).read_bytes()).hexdigest(),
         'data_source':'https://s3.us-west-2.amazonaws.com/appworld.dev/data-0.1.0.bundle',
@@ -55,7 +57,7 @@ def main():
             Path('src/role_probe_training/trajectories/appworld.py'),
             Path(__file__).parent/'server_current/uv.lock',Path(__file__).parent/'swe/uv.lock']}}
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    model = get_model('vllm/openai/gpt-oss-20b',base_url=args.base_url,api_key='local',
+    model = get_model('vllm/'+args.model_id,base_url=args.base_url,api_key='local',
         config=GenerateConfig(temperature=1,seed=args.seed,max_tokens=args.max_tokens,
                               reasoning_effort='high',max_retries=1,timeout=300,
                               max_connections=args.concurrency))

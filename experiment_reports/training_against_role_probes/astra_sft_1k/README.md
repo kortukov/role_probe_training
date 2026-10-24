@@ -26,6 +26,22 @@ trajectory accuracy weights trajectories equally. The majority-role baseline
 predicts the corpus's most frequent role. Per-role mean correct-label probability
 is distinct from argmax recall. Training-data scores are not held-out validation.
 
+<!-- fresh-rollout-setup -->
+**Fresh-rollout evaluation.** The final trained model generates new attempts on
+AppWorld's 168 normal-test tasks, all 114 τ² retail tasks and all 500 SWE-bench
+Verified tasks. These benchmarks do not supply model-update or probe-fitting
+examples. For each trained model, we fit a new five-class linear layer-12 probe
+from scratch on the standard 250 C4/Dolma passages, preserving their original
+passage-level train/test split. This probe is independent of the warm-started
+probes used during model training. It reads post-attention-layernorm outputs
+(pre-MLP inputs) across each complete trajectory; message and channel metadata
+provide the ground-truth roles, excluding formatting and synthetic tool schemas.
+Task completion is successful attempts divided by all benchmark tasks, including
+evaluation errors as unsuccessful attempts and reporting those errors separately.
+Role accuracy and macro recall include all retained attempts, including failures;
+macro recall averages recall over roles present in the cohort.
+<!-- /fresh-rollout-setup -->
+
 ## Factual observations
 
 All 1,000 trajectories were evaluated, covering 2,776,972 original content tokens.
@@ -61,7 +77,6 @@ role recovery or evidence that training will improve behavior. Layer comparisons
 also show that conclusions depend on the probe/readout layer. These are descriptive
 scores on the intended training data; they do not estimate held-out generalization.
 
-The baseline report is complete. One-epoch model training is running
-after the implementation agent’s explicit readiness signal; no post-training
-results are available yet. See [RUNNING.md](RUNNING.md) for sources, conversion
+One-epoch model training is complete. Fresh-rollout evaluation is queued;
+no fresh-rollout results are available yet. See [RUNNING.md](RUNNING.md) for sources, conversion
 and reproduction.

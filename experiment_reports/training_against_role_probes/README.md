@@ -37,6 +37,22 @@ with the continually refitted layer-12 probe. These measure recoverability on
 fixed text, not task performance after training. Collection task success is
 reported separately. Confusion matrices are in the [appendix](APPENDIX.md).
 
+<!-- fresh-rollout-setup -->
+**Fresh-rollout evaluation.** The final trained model generates new attempts on
+AppWorld's 168 normal-test tasks, all 114 τ² retail tasks and all 500 SWE-bench
+Verified tasks. These benchmarks do not supply model-update or probe-fitting
+examples. For each trained model, we fit a new five-class linear layer-12 probe
+from scratch on the standard 250 C4/Dolma passages, preserving their original
+passage-level train/test split. This probe is independent of the warm-started
+probes used during model training. It reads post-attention-layernorm outputs
+(pre-MLP inputs) across each complete trajectory; message and channel metadata
+provide the ground-truth roles, excluding formatting and synthetic tool schemas.
+Task completion is successful attempts divided by all benchmark tasks, including
+evaluation errors as unsuccessful attempts and reporting those errors separately.
+Role accuracy and macro recall include all retained attempts, including failures;
+macro recall averages recall over roles present in the cohort.
+<!-- /fresh-rollout-setup -->
+
 ## Factual observations
 
 The corpus is complete: **2,700 trajectories**, all with reasoning and no sample,

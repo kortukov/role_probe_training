@@ -41,6 +41,8 @@ def main():
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--prepare-only", action="store_true")
+    parser.add_argument('--model-id', default='openai/gpt-oss-20b')
+    parser.add_argument('--model-revision', default='6cee5e81ee83917806bbde320786a8fb61efebee')
     args = parser.parse_args()
     if not 0 <= args.shard_index < args.shard_count:
         parser.error("require 0 <= shard-index < shard-count")
@@ -68,8 +70,8 @@ def main():
         raise ValueError("Use a fresh output directory for each run (avoid overwriting results)")
     manifest = {"benchmark": args.benchmark, "sample_ids": selected, "selection_seed": args.seed,
                 "selection": "explicit sample IDs" if args.sample_id else "shuffle sorted full dataset with Python Random; take prefix",
-                "full_selection": full_selection, "dataset_size": len(task.dataset), "model_id": "openai/gpt-oss-20b",
-                "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+                "full_selection": full_selection, "dataset_size": len(task.dataset), "model_id": args.model_id,
+                "model_revision": args.model_revision,
                 "user_model": args.user_model if args.benchmark == "tau2_retail" else None,
                 "settings": vars(args) | {"output": str(args.output)},
                 "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
@@ -82,7 +84,7 @@ def main():
     if args.prepare_only:
         print(json.dumps({"sample_ids": selected, "dataset_size": len(task.dataset)}))
         return
-    model = get_model("vllm/openai/gpt-oss-20b", base_url=args.base_url, api_key="local",
+    model = get_model("vllm/"+args.model_id, base_url=args.base_url, api_key="local",
                       config=GenerateConfig(temperature=args.temperature, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
                                             reasoning_effort=args.reasoning_effort, max_connections=args.concurrency))
     user = None
@@ -92,7 +94,7 @@ def main():
             **({"api_version": "2024-10-21", "responses_api": False} if "/azure/" in args.user_model else {}))
     logs = eval(task, model=model, model_roles={"user": user} if args.benchmark == "tau2_retail" else None,
                 sample_id=selected, epochs=1, max_samples=args.concurrency, max_connections=args.concurrency,
-                time_limit=args.time_limit, token_limit=args.token_limit, message_limit=args.message_limit, fail_on_error=False,
+                time_limit=args.time_limit, token_limit=args.token_limit, message_limit=args.message_limit if args.benchmark=="swe_bench" else None, fail_on_error=False,
                 log_dir=str(args.output / "logs"), log_model_api=True, display="plain")
     export_logs([log.location for log in logs], args.output, args.benchmark, manifest)
     if any(log.status != "success" for log in logs):
