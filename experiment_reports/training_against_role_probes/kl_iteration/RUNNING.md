@@ -100,3 +100,8 @@ in [same_batch/pilot_validation.json](same_batch/pilot_validation.json); startup
 verified matching trajectory IDs and identical KL/role token IDs. Full training
 jobs **1504830** (fixed 800) and **1504852** (same batch) are running. Benchmark
 results remain pending until their dependent evaluation and report jobs finish.
+
+Automatic publication job **1504908** waits for both validated reports and the
+corrected baseline refresh, then revalidates and pushes Markdown reports and
+aggregate metrics to GitHub `kortukov/role_probe_training`, branch `main`.
+It excludes weights, raw trajectories and task text. User approval: 2026-10-25.

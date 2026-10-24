@@ -1,0 +1,12 @@
+{
+  "job_id": "1504908",
+  "dependencies": [
+    "1504840",
+    "1504859",
+    "1504865"
+  ],
+  "destination": "https://github.com/kortukov/role_probe_training.git",
+  "branch": "main",
+  "scope": "Markdown reports and aggregate numeric metrics only; no weights, raw trajectories, or task text",
+  "user_approved": "2026-10-25"
+}
