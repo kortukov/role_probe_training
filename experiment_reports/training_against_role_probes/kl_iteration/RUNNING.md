@@ -89,3 +89,8 @@ To submit the same evaluation graph for a new training job in a fresh variant
 folder, use `submit_evaluation.py VARIANT --training JOB --native-gate GATE` from
 the iteration entry-point directory. It refuses to overwrite an existing job
 manifest. Do not resubmit the graph while its recorded jobs are active.
+
+Baseline table refresh job **1504865** depends on the existing corrected-SWE
+publication job **1504825**. It rereads the canonical four-model comparison and
+refreshes only this iteration's table; it does not change the other agent's
+results or jobs. Per-variant report jobs also refresh that table on completion.
