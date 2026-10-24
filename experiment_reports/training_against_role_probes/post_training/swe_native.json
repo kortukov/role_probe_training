@@ -131,5 +131,16 @@
       ],
       "replacement_script_sha256": "d82176daebb0e4dba3fa11a7516714f81752b98a18a8f2597ceb131ca01621b9"
     }
-  ]
+  ],
+  "runtime_error_audit": {
+    "status": "Some completed attempts have sandbox Python/runtime errors or scoring timeouts; cause not yet established. Retain their original attempts and count errors in task denominators.",
+    "control_sample": "django__django-14559",
+    "node": "vca-gpu-0701-02",
+    "fresh_image_python_healthy": true,
+    "fresh_writable_sandbox_python_healthy": true,
+    "free_node_disk_gib_observed": 455,
+    "control_output": "experiment_reports/training_against_role_probes/logs/sandbox-runtime-django-14559.json",
+    "control_script": "src/experiments/training_against_role_probes/post_training/check_sandbox_runtime.py",
+    "attempts_replaced": false
+  }
 }
