@@ -1,0 +1,503 @@
+{
+  "appworld_test": {
+    "task": {
+      "benchmark": "appworld_test",
+      "samples": 168,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 0,
+      "metrics": {
+        "appworld_success": {
+          "successes": 1,
+          "scored": 168,
+          "total": 168,
+          "success_rate": 0.005952380952380952
+        }
+      },
+      "input_sha256": "5eef601c2ea4efb8464b1f5d63dcb527b3d2625e6ec905f3ab9c148a4558fc57"
+    },
+    "probe": {
+      "trajectories": 168,
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "accuracy": 0.9896817521050619,
+      "macro_recall": 0.9810608514548195,
+      "per_role_recall": [
+        1.0,
+        0.995730731112297,
+        0.999486706848015,
+        0.9102103534892859,
+        0.9998764658244991
+      ],
+      "mean_trajectory_accuracy": 0.991687588244729,
+      "confusion_counts": [
+        [
+          40992,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          13061,
+          47,
+          0,
+          1
+        ],
+        [
+          8,
+          303,
+          876242,
+          10,
+          129
+        ],
+        [
+          0,
+          0,
+          2065,
+          129725,
+          10732
+        ],
+        [
+          8,
+          11,
+          8,
+          0,
+          218536
+        ]
+      ],
+      "input_sha256": "5eef601c2ea4efb8464b1f5d63dcb527b3d2625e6ec905f3ab9c148a4558fc57",
+      "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+      "model_revision": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
+      "context_policy": "full trajectory, no windows or truncation"
+    },
+    "task_metric": "appworld_success"
+  },
+  "tau2_retail": {
+    "task": {
+      "benchmark": "tau2_retail",
+      "samples": 114,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 14,
+      "metrics": {
+        "retail_scorer": {
+          "successes": 27,
+          "scored": 114,
+          "total": 114,
+          "success_rate": 0.23684210526315788
+        }
+      },
+      "input_sha256": "1cdea19993e3d15dd302dba755037814ca2fd1313921c958ab3193210b89a8be"
+    },
+    "probe": {
+      "accuracy": 0.5359924123181795,
+      "macro_recall": 0.6597731184429666,
+      "per_role_recall": [
+        0.49899396378269617,
+        0.3213943229766015,
+        0.52286379264368,
+        0.9589823468328141,
+        0.9966311659790408
+      ],
+      "mean_true_role_probability": [
+        0.47964596899449924,
+        0.324316018977902,
+        0.5164533002206609,
+        0.9501356987702677,
+        0.995074618966295
+      ],
+      "mean_trajectory_accuracy": 0.5608739871734617,
+      "confusion_counts": [
+        [
+          56544,
+          24700,
+          32072,
+          0,
+          0
+        ],
+        [
+          5151,
+          6703,
+          1645,
+          6265,
+          1092
+        ],
+        [
+          1159946,
+          408,
+          2348975,
+          982726,
+          463
+        ],
+        [
+          375,
+          0,
+          46,
+          55410,
+          1949
+        ],
+        [
+          28,
+          0,
+          127,
+          161,
+          93485
+        ]
+      ],
+      "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+      "layers": {
+        "12": {
+          "accuracy": 0.5359924123181795,
+          "macro_recall": 0.6597731184429666,
+          "per_role_recall": [
+            0.49899396378269617,
+            0.3213943229766015,
+            0.52286379264368,
+            0.9589823468328141,
+            0.9966311659790408
+          ],
+          "mean_true_role_probability": [
+            0.47964596899449924,
+            0.324316018977902,
+            0.5164533002206609,
+            0.9501356987702677,
+            0.995074618966295
+          ],
+          "mean_trajectory_accuracy": 0.5608739871734617,
+          "confusion_counts": [
+            [
+              56544,
+              24700,
+              32072,
+              0,
+              0
+            ],
+            [
+              5151,
+              6703,
+              1645,
+              6265,
+              1092
+            ],
+            [
+              1159946,
+              408,
+              2348975,
+              982726,
+              463
+            ],
+            [
+              375,
+              0,
+              46,
+              55410,
+              1949
+            ],
+            [
+              28,
+              0,
+              127,
+              161,
+              93485
+            ]
+          ],
+          "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc"
+        }
+      },
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "trajectories": 114,
+      "scored_trajectories": 76,
+      "excluded_trajectories": [
+        {
+          "trajectory_id": "tau2_retail/100",
+          "tokens": 203231,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/102",
+          "tokens": 145320,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/106",
+          "tokens": 144004,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/107",
+          "tokens": 140466,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/109",
+          "tokens": 237710,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/110",
+          "tokens": 152562,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/111",
+          "tokens": 185455,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/112",
+          "tokens": 198885,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/14",
+          "tokens": 139814,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/20",
+          "tokens": 191033,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/21",
+          "tokens": 136962,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/23",
+          "tokens": 141520,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/25",
+          "tokens": 138185,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/26",
+          "tokens": 156180,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/29",
+          "tokens": 189782,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/31",
+          "tokens": 168959,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/32",
+          "tokens": 142481,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/34",
+          "tokens": 178101,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/36",
+          "tokens": 154648,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/37",
+          "tokens": 189644,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/45",
+          "tokens": 140817,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/46",
+          "tokens": 154418,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/47",
+          "tokens": 188227,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/5",
+          "tokens": 177535,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/53",
+          "tokens": 190991,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/54",
+          "tokens": 171396,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/63",
+          "tokens": 157837,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/65",
+          "tokens": 188805,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/7",
+          "tokens": 173624,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/70",
+          "tokens": 140530,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/77",
+          "tokens": 187906,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/81",
+          "tokens": 135810,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/89",
+          "tokens": 189916,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/90",
+          "tokens": 185613,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/91",
+          "tokens": 185388,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/92",
+          "tokens": 172956,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/95",
+          "tokens": 186587,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/97",
+          "tokens": 203633,
+          "reason": "exceeds_native_context"
+        }
+      ],
+      "context_limit": 131072,
+      "input_sha256": "1cdea19993e3d15dd302dba755037814ca2fd1313921c958ab3193210b89a8be",
+      "model_revision": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
+      "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+      "overlength_policy": "exclude"
+    },
+    "task_metric": "retail_scorer"
+  },
+  "swe_bench": {
+    "task": {
+      "benchmark": "swe_bench",
+      "samples": 500,
+      "sample_errors": 6,
+      "export_errors": 0,
+      "limited_samples": 1,
+      "metrics": {
+        "swe_bench_scorer": {
+          "successes": 14,
+          "scored": 494,
+          "total": 500,
+          "success_rate": 0.028
+        }
+      },
+      "input_sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20"
+    },
+    "probe": {
+      "trajectories": 500,
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "accuracy": 0.8723381953434493,
+      "macro_recall": 0.8146089839442524,
+      "per_role_recall": [
+        0.39814814814814814,
+        0.9473495406640168,
+        0.9793829769968817,
+        0.8983673590879833,
+        0.8497968948242318
+      ],
+      "mean_trajectory_accuracy": 0.8724527180873792,
+      "confusion_counts": [
+        [
+          42656,
+          53568,
+          10416,
+          0,
+          496
+        ],
+        [
+          682,
+          229755,
+          3866,
+          1572,
+          6649
+        ],
+        [
+          181,
+          18182,
+          1013822,
+          933,
+          2046
+        ],
+        [
+          326,
+          52,
+          28123,
+          1448709,
+          135392
+        ],
+        [
+          109580,
+          565441,
+          125342,
+          404,
+          4530461
+        ]
+      ],
+      "input_sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20",
+      "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+      "model_revision": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
+      "context_policy": "full trajectory, no windows or truncation"
+    },
+    "task_metric": "swe_bench_scorer"
+  }
+}

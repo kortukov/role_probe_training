@@ -4,7 +4,11 @@
   "collection": "1504057",
   "assembly": "1504126",
   "score": "1504127",
-  "report": "1504128",
-  "publish": "1504129",
-  "replacement_collection": "1504125"
+  "report": "manual_after_complete",
+  "publish": "manual_after_review",
+  "replacement_collection": "1504125",
+  "whole_history_retail_score": "1504762",
+  "whole_history_retail_predictions": "experiment_reports/training_against_role_probes/predictions/post_training_whole/tau2_retail",
+  "overlength_policy": "explicitly unscorable; task scores retained",
+  "full_history_comparison": "post_training/comparison.json in parent experiment"
 }

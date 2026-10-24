@@ -27,8 +27,17 @@
   "solver": "cuml",
   "iterations": 375,
   "max_iter": 5000,
-  "warnings": [],
-  "converged": null,
+  "warnings": [
+    "[2026-10-24 12:46:05.447] [CUML] [warning] L-BFGS stopped, because the line search failed to advance (step delta = 0.000000)"
+  ],
+  "converged": false,
   "termination_note": "cuML C++ line-search warnings require log review; iteration count alone does not establish convergence.",
-  "max_saved_probability_error": 2.980232238769531e-07
+  "max_saved_probability_error": 2.980232238769531e-07,
+  "fit_log_review": {
+    "job_id": "1504080",
+    "cuml_warnings": [
+      "[2026-10-24 12:46:05.447] [CUML] [warning] L-BFGS stopped, because the line search failed to advance (step delta = 0.000000)"
+    ],
+    "note": "Log inspected; absence of warning alone is not an independent convergence audit."
+  }
 }

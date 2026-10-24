@@ -1,0 +1,370 @@
+{
+  "appworld_test": {
+    "task": {
+      "benchmark": "appworld_test",
+      "samples": 168,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 0,
+      "metrics": {
+        "appworld_success": {
+          "successes": 24,
+          "scored": 168,
+          "total": 168,
+          "success_rate": 0.14285714285714285
+        }
+      },
+      "input_sha256": "6058e960538912504ebc445423cb1f1618097794e07ea311765df591ff771e4c"
+    },
+    "probe": {
+      "trajectories": 168,
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "accuracy": 0.7271158527234262,
+      "macro_recall": 0.700839205591697,
+      "per_role_recall": [
+        0.47540983606557374,
+        0.8913623541968438,
+        0.939442784387025,
+        0.21831382696469775,
+        0.9796672263443447
+      ],
+      "mean_trajectory_accuracy": 0.7629733705231826,
+      "confusion_counts": [
+        [
+          19488,
+          841,
+          8400,
+          0,
+          12263
+        ],
+        [
+          20,
+          11692,
+          176,
+          0,
+          1229
+        ],
+        [
+          9,
+          2312,
+          522209,
+          31300,
+          41
+        ],
+        [
+          10,
+          363,
+          519628,
+          146465,
+          4426
+        ],
+        [
+          389,
+          205,
+          17385,
+          658,
+          897962
+        ]
+      ],
+      "input_sha256": "6058e960538912504ebc445423cb1f1618097794e07ea311765df591ff771e4c",
+      "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b",
+      "model_revision": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
+      "context_policy": "full trajectory, no windows or truncation"
+    },
+    "task_metric": "appworld_success"
+  },
+  "tau2_retail": {
+    "task": {
+      "benchmark": "tau2_retail",
+      "samples": 114,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 11,
+      "metrics": {
+        "retail_scorer": {
+          "successes": 44,
+          "scored": 114,
+          "total": 114,
+          "success_rate": 0.38596491228070173
+        }
+      },
+      "input_sha256": "c2a7109a6f6c1e87d6759ecb4599eef159c838b35de76c35eec724a96c5943d6"
+    },
+    "probe": {
+      "accuracy": 0.4421692137613335,
+      "macro_recall": 0.5642106341935545,
+      "per_role_recall": [
+        0.28169014084507044,
+        0.394225760845301,
+        0.38000654208501217,
+        0.8349093199572909,
+        0.9302214072350986
+      ],
+      "mean_true_role_probability": [
+        0.29051493383485105,
+        0.39281347320958804,
+        0.3886372229748382,
+        0.8161424325680484,
+        0.9128485554686337
+      ],
+      "mean_trajectory_accuracy": 0.5416915702634358,
+      "confusion_counts": [
+        [
+          43260,
+          35123,
+          36359,
+          0,
+          38831
+        ],
+        [
+          3477,
+          10596,
+          984,
+          11814,
+          7
+        ],
+        [
+          193166,
+          686,
+          1239565,
+          1827223,
+          1317
+        ],
+        [
+          11396,
+          27,
+          46653,
+          326073,
+          6400
+        ],
+        [
+          136,
+          0,
+          6576,
+          4057,
+          143562
+        ]
+      ],
+      "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b",
+      "layers": {
+        "12": {
+          "accuracy": 0.4421692137613335,
+          "macro_recall": 0.5642106341935545,
+          "per_role_recall": [
+            0.28169014084507044,
+            0.394225760845301,
+            0.38000654208501217,
+            0.8349093199572909,
+            0.9302214072350986
+          ],
+          "mean_true_role_probability": [
+            0.29051493383485105,
+            0.39281347320958804,
+            0.3886372229748382,
+            0.8161424325680484,
+            0.9128485554686337
+          ],
+          "mean_trajectory_accuracy": 0.5416915702634358,
+          "confusion_counts": [
+            [
+              43260,
+              35123,
+              36359,
+              0,
+              38831
+            ],
+            [
+              3477,
+              10596,
+              984,
+              11814,
+              7
+            ],
+            [
+              193166,
+              686,
+              1239565,
+              1827223,
+              1317
+            ],
+            [
+              11396,
+              27,
+              46653,
+              326073,
+              6400
+            ],
+            [
+              136,
+              0,
+              6576,
+              4057,
+              143562
+            ]
+          ],
+          "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b"
+        }
+      },
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "trajectories": 114,
+      "scored_trajectories": 103,
+      "excluded_trajectories": [
+        {
+          "trajectory_id": "tau2_retail/0",
+          "tokens": 157371,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/103",
+          "tokens": 135738,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/104",
+          "tokens": 145261,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/20",
+          "tokens": 172356,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/28",
+          "tokens": 164806,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/29",
+          "tokens": 164531,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/59",
+          "tokens": 144593,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/70",
+          "tokens": 185411,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/78",
+          "tokens": 174110,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/84",
+          "tokens": 207896,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/93",
+          "tokens": 143978,
+          "reason": "exceeds_native_context"
+        }
+      ],
+      "context_limit": 131072,
+      "input_sha256": "c2a7109a6f6c1e87d6759ecb4599eef159c838b35de76c35eec724a96c5943d6",
+      "model_revision": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
+      "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+      "overlength_policy": "exclude"
+    },
+    "task_metric": "retail_scorer"
+  },
+  "swe_bench": {
+    "task": {
+      "benchmark": "swe_bench",
+      "samples": 500,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 2,
+      "metrics": {
+        "swe_bench_scorer": {
+          "successes": 67,
+          "scored": 500,
+          "total": 500,
+          "success_rate": 0.134
+        }
+      },
+      "input_sha256": "614b2468b2ed72097157c1960db0d6eda7aeadd3e1499be2ba9631c16ca62d2d"
+    },
+    "probe": {
+      "trajectories": 500,
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "accuracy": 0.7108653329113774,
+      "macro_recall": 0.6244125450876468,
+      "per_role_recall": [
+        0.18981481481481483,
+        0.8913838229443665,
+        0.9685666815009535,
+        0.2790450948687141,
+        0.7932523113093852
+      ],
+      "mean_trajectory_accuracy": 0.7168383302183814,
+      "confusion_counts": [
+        [
+          20500,
+          17500,
+          3500,
+          0,
+          66500
+        ],
+        [
+          1125,
+          212858,
+          7235,
+          2882,
+          14695
+        ],
+        [
+          295,
+          11333,
+          1869540,
+          48562,
+          483
+        ],
+        [
+          636,
+          1540,
+          2021194,
+          801953,
+          48596
+        ],
+        [
+          561926,
+          136143,
+          1125425,
+          75584,
+          7286408
+        ]
+      ],
+      "input_sha256": "614b2468b2ed72097157c1960db0d6eda7aeadd3e1499be2ba9631c16ca62d2d",
+      "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b",
+      "model_revision": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
+      "context_policy": "Full history when within model context; otherwise nonoverlapping context-sized segments, all tokens retained",
+      "context_limit": 131072,
+      "segmented_trajectories": []
+    },
+    "task_metric": "swe_bench_scorer"
+  }
+}

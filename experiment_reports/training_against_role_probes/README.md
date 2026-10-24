@@ -2,111 +2,85 @@
 
 ## Motivation & RQ
 
-Does training GPT-OSS-20B with continually refitted role probes make conversational
-roles easier to recover on agent trajectories while preserving the base model's behavior?
+Does training against continually updated role probes improve role recovery on
+new agent conversations while preserving the model's ability to complete tasks?
 
 ## Evaluation setup
 
-**Data.** We collect 30 independently seeded attempts on each of AppWorld's 90
-training tasks: **2,700 trajectories**, including successful and unsuccessful
-attempts. This is off-policy training: the conversations remain fixed throughout
-optimization. Eight separate development tasks provide a small held-out check.
+**Models and training data.** We compare unchanged GPT-OSS-20B with three models
+trained for one epoch: AppWorld (**2,700 trajectories**, 30 attempts on each of 90
+training tasks), ASTRA-SFT-1k (**1,000 demonstrations**), and DepthBench
+(**12,980 trajectories**, 20 attempts on each of 649 training prompts).
 
-**Method.** A linear five-class probe reads layer 12's pre-MLP activations and
-predicts system, user, reasoning, assistant or tool roles. Ground truth comes
-from message and channel metadata; formatting tokens are excluded. Each model
-update minimizes correct-role cross-entropy with the probe fixed. We then refit
-the probe on the updated model, using only the standard role-confusion C4/Dolma
-passages and their original train/test split—never the AppWorld trajectories.
-Refits start from the preceding probe's weights.
+**Training.** Model updates encourage a linear layer-12 probe to predict the
+correct message role, with a KL penalty anchoring behavior to the base model.
+The probe is continually refitted on neutral C4/Dolma passages, never on benchmark
+evaluation histories. This adapts [training against updated probes](https://arxiv.org/html/2609.38645)
+to five-class role recovery. Training uses fixed histories, not newly generated
+conversations at each update.
 
-We adapt the continually updated probe method of
-[Libon et al.](https://arxiv.org/html/2609.38645) to improve multiclass role
-recoverability. A KL penalty against the unchanged base model on separate benign
-prompts and base-model answers discourages changes to its original behavior.
-The first run uses one epoch of complete trajectories, with 16 trajectories per
-model update. Padding and gradient accumulation preserve full conversation history.
+**Evaluation.** Each trained model generates separate attempts on AppWorld normal
+test (app/API use), SWE-bench Verified (software repair), and τ² retail (customer
+service with tools). Base-model trajectories and task scores are reused from the
+existing evaluations. Each trained model gets a fresh layer-12 multinomial linear
+probe fitted from scratch using the standard 250 C4/Dolma passages, original
+passage split, and all content tokens. The base uses its original standard-data
+probe. All read the post-attention-normalized pre-MLP activations. Message roles
+and reasoning channels supply labels; headers and synthetic tool schemas are
+excluded. Every scored history is replayed whole, with no chunking or truncation.
+Histories above the native context limit have no role score, but retain their task outcome.
 
-**Measurements.** Overall accuracy weights labeled content tokens equally.
-Per-role accuracy is recall among tokens of that ground-truth role; macro recall
-averages across roles present in the evaluated data. Mean trajectory accuracy
-gives every trajectory equal weight. Baseline characterization applies the
-original standard-data probes at layers 4, 8, 12, 16 and 20 to the base model.
-During training, we track role loss, KL, batch accuracy and development accuracy
-with the continually refitted layer-12 probe. These measure recoverability on
-fixed text, not task performance after training. Collection task success is
-reported separately. Confusion matrices are in the [appendix](APPENDIX.md).
-
-<!-- fresh-rollout-setup -->
-**Fresh-rollout evaluation.** The final trained model generates new attempts on
-AppWorld's 168 normal-test tasks, all 114 τ² retail tasks and all 500 SWE-bench
-Verified tasks. These fresh evaluation trajectories are never used for model
-updates or probe fitting. For each trained model, we fit a new five-class linear layer-12 probe
-from scratch on the standard 250 C4/Dolma passages, preserving their original
-passage-level train/test split. This probe is independent of the warm-started
-probes used during model training. It reads post-attention-layernorm outputs
-(pre-MLP inputs) across each complete trajectory; message and channel metadata
-provide the ground-truth roles, excluding formatting and synthetic tool schemas.
-Task completion is successful attempts divided by all benchmark tasks, including
-evaluation errors as unsuccessful attempts and reporting those errors separately.
-Role accuracy and macro recall include all retained attempts, including failures;
-macro recall averages recall over roles present in the cohort.
-<!-- /fresh-rollout-setup -->
+**Metrics.** Task success is successful tasks divided by all assigned tasks,
+including evaluation errors as failures. Overall role accuracy is the fraction
+of scored content tokens classified correctly. Per-role accuracy is recall:
+the fraction of tokens with that true role classified correctly. These measure
+role recovery, not task competence. Each model is scored on its own conversations.
 
 ## Factual observations
 
-The corpus is complete: **2,700 trajectories**, all with reasoning and no sample,
-export or execution-limit errors. GPT-OSS-20B solved **1,032 attempts (38.2%)**.
-This is success per attempt on the training tasks, not held-out task performance.
+<!-- fresh-rollout-results -->
+### Task performance and role recovery
 
-A 90-attempt shard took a median **13.8 minutes on one GPU**. Across all shards,
-evaluation consumed **6.94 GPU-hours**, excluding server startup. The interval
-from the first shard's evaluation start to the last finish was **90.2 minutes**;
-parallelism increased during collection to at most eight GPUs. These are measured
-collection costs, not a controlled scaling comparison.
+All values are percentages. Role columns are recall within that true role.
 
-<!-- corpus-results -->
-### Training-corpus baseline
+| Benchmark | Model | Task success | Overall role | System | User | Reasoning | Assistant | Tool |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| AppWorld test_normal | Base | 26.8 | 26.5 | 1.2 | 49.9 | 73.1 | 35.4 | 13.3 |
+| AppWorld test_normal | AppWorld-trained | 0.6 | 99.0 | 100.0 | 99.6 | 99.9 | 91.0 | 100.0 |
+| AppWorld test_normal | ASTRA-trained | 14.3 | 72.7 | 47.5 | 89.1 | 93.9 | 21.8 | 98.0 |
+| AppWorld test_normal | DepthBench-trained | 5.4 | 86.4 | 48.8 | 79.0 | 97.8 | 63.0 | 85.8 |
+| τ² retail | Base | 64.0 | 19.9 | 6.6 | 29.9 | 20.0 | 95.0 | 0.7 |
+| τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
+| τ² retail | ASTRA-trained | 38.6 | 44.2 | 28.2 | 39.4 | 38.0 | 83.5 | 93.0 |
+| τ² retail | DepthBench-trained | 37.7 | 43.2 | 65.5 | 37.6 | 40.6 | 99.6 | 97.7 |
+| SWE-bench Verified | Base | 2.2 | 22.6 | 1.4 | 94.5 | 37.0 | 30.4 | 3.5 |
+| SWE-bench Verified | AppWorld-trained | 2.8 | 87.2 | 39.8 | 94.7 | 97.9 | 89.8 | 85.0 |
+| SWE-bench Verified | ASTRA-trained | 13.4 | 71.1 | 19.0 | 89.1 | 96.9 | 27.9 | 79.3 |
+| SWE-bench Verified | DepthBench-trained | 7.6 | 48.6 | 60.6 | 91.3 | 98.1 | 49.4 | 31.0 |
 
-The 2,700 training trajectories are complete. The table evaluates the original
-standard-data probes on the unchanged base model, using full trajectory history.
-Overall accuracy weights content tokens equally; each role column is recall
-among that ground-truth role’s tokens. This is training-corpus characterization,
-not held-out generalization.
+**Evaluation sizes:** AppWorld normal test: 168 tasks; SWE-bench Verified: 500; τ² retail: 114, with one attempt per model per task. Task success includes all attempts. Role metrics exclude only histories above the native context limit; [coverage and percentage confusion matrices](APPENDIX.md#whole-history-coverage) are in the appendix.
 
-| Layer | Overall | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|---:|
-| 4 | 51.7% | 7.0% | 50.7% | 49.6% | 2.3% | 88.6% |
-| 8 | 21.4% | 6.6% | 92.7% | 91.7% | 8.5% | 20.5% |
-| 12 | 26.1% | 1.2% | 44.4% | 74.6% | 33.7% | 14.7% |
-| 16 | 33.9% | 2.5% | 61.0% | 15.8% | 22.6% | 45.2% |
-| 20 | 31.9% | 0.8% | 88.4% | 23.3% | 11.4% | 48.2% |
+**Retail role-score coverage:** Base: 113/114, AppWorld-trained: 76/114, ASTRA-trained: 103/114, DepthBench-trained: 95/114. Exclusions differ by model, so role scores describe different eligible subsets.
 
-[Confusion matrices](APPENDIX.md#training-corpus-baseline-confusions) are in the appendix.
-<!-- /corpus-results -->
+The base trajectories/task scores are reused from the earlier evaluations; base probe scores were recomputed on whole histories. Base SWE had 226 API-error attempts and older generation settings, so its task score is not a controlled measure of training effects. Base generation also used native MXFP4, versus BF16 with adapters for trained models. SWE attempts also encountered the 32K serving context ceiling (42/500 AppWorld-trained, 319/500 ASTRA-trained, 133/500 DepthBench-trained); these task results do not measure unconstrained capability. [Failure audit](APPENDIX.md#swe-bench-failure-audit).
+<!-- /fresh-rollout-results -->
 
-<!-- training-results -->
-### Learning results
-
-Training is **completed**, with **169 model updates** recorded. The latest development evaluation is after update 169.
-
-| Model / probe | Overall | Macro recall | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Base model / original probe | 29.2% | 35.4% | 1.2% | 41.1% | 77.4% | 40.6% | 16.8% |
-| Update 169 / refitted probe | 100.0% | 100.0% | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% |
-
-Across the last 10 recorded updates, mean role loss was 0.000, mean KL was 0.0081, and mean update-plus-refit time was 72.7 seconds (excluding periodic validation and checkpoint saving).
-
-The development set contains eight tasks; this is an early signal, not a precise
-generalization estimate. Model and probe both change between rows.
-[Development confusion matrices](APPENDIX.md#development-confusions) separate the roles.
-<!-- /training-results -->
+Retail traces reveal repeated reasoning without useful action, particularly after
+AppWorld training. An output-token cap can end a response without ending the task;
+the customer simulator then continues. The [appendix](APPENDIX.md#retail-length-and-generation-failures)
+quantifies these failures and explains why saved histories can exceed the context
+used in any individual generation call.
 
 ## Message
 
-After 169 updates, role accuracy increased on the small fixed development
-set with the continually refitted probe. Fixed-text role accuracy alone does not
-establish preserved task performance. Fresh-rollout evaluation tests task completion
-and role recovery separately, using a new probe fitted independently of training.
+On AppWorld, higher role accuracy coexists with poorer task completion. Recovering
+role labels is therefore insufficient evidence that the trained model remains a
+useful agent. The fresh-trajectory evaluation tests this distinction separately
+from the near-perfect role scores on fixed development histories.
 
-See [RUNNING.md](RUNNING.md) for reproduction, configurations and artifact locations.
+Generation settings differ between the reused base run and trained runs, especially
+for SWE; these results describe observed transfer and behavior, rather than
+isolating every change as a causal effect of training. Probe fits also have
+optimizer-convergence limitations, recorded with their weights.
+
+[How to reproduce the experiment](RUNNING.md)

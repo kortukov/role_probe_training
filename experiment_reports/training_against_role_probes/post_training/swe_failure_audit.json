@@ -1,0 +1,120 @@
+{
+  "base_original": {
+    "counts": {
+      "tasks": 500,
+      "evaluation_errors": 226,
+      "execution_limit_events": 271,
+      "histories_with_output_cap": 73,
+      "context_limit_responses": 0,
+      "solved": 11,
+      "solved_despite_context_limit": 0,
+      "scored": 274,
+      "empty_scored_patches": 257,
+      "empty_scored_patches_with_context_limit": 0
+    },
+    "sources": [
+      {
+        "path": "experiment_reports/agentic/swe_bench_full/data/trajectories.jsonl",
+        "sha256": "e8a897414033534f40131ade1586d479f29722d10c70871a7449c07042ccc42c"
+      }
+    ]
+  },
+  "base_repaired_partial": {
+    "counts": {
+      "tasks": 250,
+      "evaluation_errors": 1,
+      "execution_limit_events": 4,
+      "histories_with_output_cap": 115,
+      "context_limit_responses": 204,
+      "solved": 42,
+      "solved_despite_context_limit": 18,
+      "scored": 249,
+      "empty_scored_patches": 120,
+      "empty_scored_patches_with_context_limit": 115
+    },
+    "sources": [
+      {
+        "path": "experiment_reports/agentic/swe_bench_full/runs/1492764/trajectories.jsonl",
+        "sha256": "5797ccaacb02135b429ff12e14e639edfbe93d8c718ee2725104e6182a14fddb"
+      },
+      {
+        "path": "experiment_reports/agentic/swe_bench_full/runs/1492765/trajectories.jsonl",
+        "sha256": "a3fe246dc287feb81d616a684fb9c2ca65b3fee4d44cb909a300bfb39b703c4d"
+      }
+    ]
+  },
+  "AppWorld-trained": {
+    "counts": {
+      "tasks": 500,
+      "evaluation_errors": 6,
+      "execution_limit_events": 1,
+      "histories_with_output_cap": 39,
+      "context_limit_responses": 42,
+      "solved": 14,
+      "solved_despite_context_limit": 0,
+      "scored": 494,
+      "empty_scored_patches": 209,
+      "empty_scored_patches_with_context_limit": 4
+    },
+    "sources": [
+      {
+        "path": "experiment_reports/training_against_role_probes/data/post_training/swe_bench/trajectories.jsonl",
+        "sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20"
+      }
+    ]
+  },
+  "ASTRA-trained": {
+    "counts": {
+      "tasks": 500,
+      "evaluation_errors": 0,
+      "execution_limit_events": 2,
+      "histories_with_output_cap": 157,
+      "context_limit_responses": 319,
+      "solved": 67,
+      "solved_despite_context_limit": 16,
+      "scored": 500,
+      "empty_scored_patches": 223,
+      "empty_scored_patches_with_context_limit": 161
+    },
+    "sources": [
+      {
+        "path": "experiment_reports/training_against_role_probes/astra_sft_1k/data/post_training/swe_bench/trajectories.jsonl",
+        "sha256": "614b2468b2ed72097157c1960db0d6eda7aeadd3e1499be2ba9631c16ca62d2d"
+      }
+    ]
+  },
+  "DepthBench-trained": {
+    "counts": {
+      "tasks": 500,
+      "evaluation_errors": 0,
+      "execution_limit_events": 2,
+      "histories_with_output_cap": 112,
+      "context_limit_responses": 133,
+      "solved": 38,
+      "solved_despite_context_limit": 0,
+      "scored": 500,
+      "empty_scored_patches": 243,
+      "empty_scored_patches_with_context_limit": 58
+    },
+    "sources": [
+      {
+        "path": "experiment_reports/training_against_role_probes/depthbench/data/post_training/swe_bench/trajectories.jsonl",
+        "sha256": "def93c00105a4441b6d7ee4f2b89692be2a0e23860bc0e8e460787bc1d2f9e84"
+      }
+    ]
+  },
+  "base_original_on_repaired_task_ids": {
+    "counts": {
+      "tasks": 250,
+      "evaluation_errors": 115,
+      "execution_limit_events": 133,
+      "histories_with_output_cap": 39,
+      "context_limit_responses": 0,
+      "solved": 8,
+      "solved_despite_context_limit": 0,
+      "scored": 135,
+      "empty_scored_patches": 125,
+      "empty_scored_patches_with_context_limit": 0
+    }
+  }
+}

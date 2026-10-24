@@ -4,6 +4,11 @@
   "collection": "1504063",
   "assembly": "1504130",
   "score": "1504131",
-  "report": "1504132",
-  "publish": "1504133"
+  "report": "manual_after_complete",
+  "publish": "manual_after_review",
+  "whole_history_retail_score": "1504763",
+  "whole_history_retail_predictions": "experiment_reports/training_against_role_probes/astra_sft_1k/predictions/post_training_whole/tau2_retail",
+  "overlength_policy": "explicitly unscorable; task scores retained",
+  "full_history_comparison": "post_training/comparison.json in parent experiment",
+  "swe_score_retry": "1504730_2 (completed; no histories segmented)"
 }

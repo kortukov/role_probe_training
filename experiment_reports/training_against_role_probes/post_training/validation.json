@@ -1,0 +1,98 @@
+[
+  {
+    "model": "appworld_trained",
+    "benchmark": "appworld_test",
+    "scored_histories": 168,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "appworld_trained",
+    "benchmark": "tau2_retail",
+    "scored_histories": 76,
+    "unscorable_histories": 38,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "appworld_trained",
+    "benchmark": "swe_bench",
+    "scored_histories": 500,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "astra_sft_1k",
+    "benchmark": "appworld_test",
+    "scored_histories": 168,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "astra_sft_1k",
+    "benchmark": "tau2_retail",
+    "scored_histories": 103,
+    "unscorable_histories": 11,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "astra_sft_1k",
+    "benchmark": "swe_bench",
+    "scored_histories": 500,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "depthbench",
+    "benchmark": "appworld_test",
+    "scored_histories": 168,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "depthbench",
+    "benchmark": "tau2_retail",
+    "scored_histories": 95,
+    "unscorable_histories": 19,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "depthbench",
+    "benchmark": "swe_bench",
+    "scored_histories": 500,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "base_model",
+    "benchmark": "appworld_test",
+    "scored_histories": 168,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "base_model",
+    "benchmark": "tau2_retail",
+    "scored_histories": 113,
+    "unscorable_histories": 1,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  },
+  {
+    "model": "base_model",
+    "benchmark": "swe_bench",
+    "scored_histories": 500,
+    "unscorable_histories": 0,
+    "index_confusions_match": true,
+    "sampled_token_artifacts_valid": true
+  }
+]

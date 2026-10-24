@@ -1,0 +1,12 @@
+{
+  "whole_history_score": "1504747",
+  "generation": "reuse existing agentic cohorts; no new generation",
+  "source_trajectories": {
+    "appworld_test": "experiment_reports/agentic/appworld/data/test_normal.jsonl",
+    "tau2_retail": "experiment_reports/agentic/tau2_retail_full/data/trajectories.jsonl",
+    "swe_bench": "experiment_reports/agentic/swe_bench_full/data/trajectories.jsonl"
+  },
+  "whole_history_retail_score": "1504765",
+  "whole_history_retail_predictions": "experiment_reports/training_against_role_probes/base_model/predictions/post_training_whole/tau2_retail",
+  "overlength_policy": "explicitly unscorable; task scores retained"
+}

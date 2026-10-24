@@ -82,3 +82,8 @@
   in [additional-layer fitting](experiment_reports/role_probes/gptoss20b_layers/README.md).
   Fits have convergence limitations. Use the current [agentic evaluations](experiment_reports/agentic/probe_transfer/README.md)
   to assess transfer to actual reasoning and tool messages.
+
+- Probe evaluation must replay each scored conversation whole, without chunking
+  or truncation. Histories above the model's native context limit are explicitly
+  unscorable for role metrics; retain every attempt in task-success denominators
+  and report coverage. Reuse saved trajectories when changing probe evaluation.

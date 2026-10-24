@@ -1,0 +1,50 @@
+{
+  "appworld_test": {
+    "benchmark": "appworld_test",
+    "samples": 168,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 0,
+    "metrics": {
+      "appworld_success": {
+        "successes": 9,
+        "scored": 168,
+        "total": 168,
+        "success_rate": 0.05357142857142857
+      }
+    },
+    "input_sha256": "58d55bfc6dc2e7c9d01b24287b25da0eeb3b2cb23c0f77ea5374bf4a06230a6d"
+  },
+  "tau2_retail": {
+    "benchmark": "tau2_retail",
+    "samples": 114,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 8,
+    "metrics": {
+      "retail_scorer": {
+        "successes": 43,
+        "scored": 114,
+        "total": 114,
+        "success_rate": 0.37719298245614036
+      }
+    },
+    "input_sha256": "f4fee0dc7bfb05b4f578cce20cef8d6a2c8b01814705e3965bd432e5ba18b06b"
+  },
+  "swe_bench": {
+    "benchmark": "swe_bench",
+    "samples": 500,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 2,
+    "metrics": {
+      "swe_bench_scorer": {
+        "successes": 38,
+        "scored": 500,
+        "total": 500,
+        "success_rate": 0.076
+      }
+    },
+    "input_sha256": "def93c00105a4441b6d7ee4f2b89692be2a0e23860bc0e8e460787bc1d2f9e84"
+  }
+}

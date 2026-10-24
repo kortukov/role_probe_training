@@ -11,7 +11,9 @@
 #SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%A_%a.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
-source /etc/slurm/local_job_dir.sh
+job_scratch=$(mktemp -d /tmp/role-eval-${SLURM_JOB_ID}-XXXXXX)
+export LOCAL_JOB_DIR="$job_scratch"
+trap 'rm -rf "$job_scratch"' EXIT
 root=${1:?report root}; name=${2:?model name}; mode=${3:-full}
 project=src/experiments/agentic_eval
 export PATH="$PWD/.tools/bin:$PATH" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
@@ -39,7 +41,7 @@ uv run --project "$project/server_current" --frozen --no-sync vllm serve "$model
  --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 \
  > "$run/server.log" 2>&1 &
 server_pid=$!
-trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$job_scratch"' EXIT
 ready=0
 for ((i=0;i<180;i++)); do
  if curl --silent --fail "http://127.0.0.1:$port/health" >/dev/null; then ready=1; break; fi

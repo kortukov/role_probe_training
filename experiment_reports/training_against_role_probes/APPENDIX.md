@@ -1,23 +1,15 @@
 # Supplementary results
 
 Rows denote true metadata-derived roles;
-columns denote predicted roles. Counts and row-normalized percentages are reported
-separately.
+columns denote predicted roles. Values are row-normalized percentages.
 
 ## Training-corpus baseline confusions
 
-Rows are ground-truth content roles; columns are predicted roles. Counts include
+Rows are ground-truth content roles; columns are predicted roles. Metrics include
 all metadata-labeled content tokens from the 2,700 full trajectories.
 
 ### Layer 4
 
-| True / predicted | system | user | cot | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 45900 | 167400 | 29700 | 180900 | 234900 |
-| user | 480 | 95370 | 18150 | 48180 | 25830 |
-| cot | 1560 | 71385 | 1268893 | 145010 | 1070890 |
-| assistant | 9571 | 31141 | 1327140 | 296596 | 11365375 |
-| tool | 23951 | 23882 | 1308743 | 743815 | 16286191 |
 
 Row-normalized percentages:
 
@@ -31,13 +23,6 @@ Row-normalized percentages:
 
 ### Layer 8
 
-| True / predicted | system | user | cot | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 43200 | 102600 | 110700 | 0 | 402300 |
-| user | 0 | 174360 | 3270 | 0 | 10380 |
-| cot | 1592 | 64965 | 2344683 | 57747 | 88751 |
-| assistant | 38474 | 64966 | 11300701 | 1109900 | 515782 |
-| tool | 2715273 | 4633141 | 5982347 | 1290331 | 3765490 |
 
 Row-normalized percentages:
 
@@ -51,13 +36,6 @@ Row-normalized percentages:
 
 ### Layer 12
 
-| True / predicted | system | user | cot | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 8100 | 5400 | 48600 | 0 | 596700 |
-| user | 0 | 83520 | 2790 | 0 | 101700 |
-| cot | 555 | 104237 | 1907122 | 333831 | 211993 |
-| assistant | 15377 | 97072 | 8225590 | 4390467 | 301317 |
-| tool | 1457323 | 3044718 | 7620092 | 3558629 | 2705820 |
 
 Row-normalized percentages:
 
@@ -71,13 +49,6 @@ Row-normalized percentages:
 
 ### Layer 16
 
-| True / predicted | system | user | cot | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 16200 | 189000 | 27000 | 0 | 426600 |
-| user | 300 | 114630 | 1770 | 30 | 71280 |
-| cot | 15922 | 11265 | 402844 | 156409 | 1971298 |
-| assistant | 317051 | 17674 | 2421353 | 2941681 | 7332064 |
-| tool | 2273437 | 2738595 | 553341 | 4504912 | 8316297 |
 
 Row-normalized percentages:
 
@@ -91,13 +62,6 @@ Row-normalized percentages:
 
 ### Layer 20
 
-| True / predicted | system | user | cot | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 5400 | 361800 | 70200 | 0 | 221400 |
-| user | 150 | 166230 | 2160 | 330 | 19140 |
-| cot | 21718 | 186307 | 597219 | 131100 | 1621394 |
-| assistant | 250695 | 1138448 | 2845886 | 1480014 | 7314780 |
-| tool | 1660106 | 5730382 | 581705 | 1546774 | 8867615 |
 
 Row-normalized percentages:
 
@@ -112,17 +76,10 @@ Row-normalized percentages:
 <!-- development-results -->
 ## Development confusions
 
-Rows are true content roles; columns are predicted roles. Values are token counts.
+Rows are true content roles; columns are predicted roles. Values are row-normalized percentages.
 
 ### Before training
 
-| True / predicted | system | user | reasoning | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 24 | 16 | 144 | 0 | 1768 |
-| user | 0 | 218 | 9 | 0 | 304 |
-| reasoning | 1 | 397 | 4601 | 403 | 542 |
-| assistant | 21 | 253 | 21359 | 15331 | 833 |
-| tool | 3447 | 9508 | 22515 | 9057 | 8961 |
 
 Row-normalized percentages:
 
@@ -136,13 +93,6 @@ Row-normalized percentages:
 
 ### After update 169
 
-| True / predicted | system | user | reasoning | assistant | tool |
-|---|---:|---:|---:|---:|---:|
-| system | 1952 | 0 | 0 | 0 | 0 |
-| user | 0 | 531 | 0 | 0 | 0 |
-| reasoning | 0 | 10 | 5933 | 1 | 0 |
-| assistant | 0 | 0 | 0 | 37797 | 0 |
-| tool | 0 | 0 | 0 | 0 | 53488 |
 
 Row-normalized percentages:
 
@@ -154,3 +104,232 @@ Row-normalized percentages:
 | assistant | 0.0% | 0.0% | 0.0% | 100.0% | 0.0% |
 | tool | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% |
 <!-- /development-results -->
+
+## Retail length and generation failures
+
+Saved histories retain every reasoning message. The native serving formatter omits
+historical reasoning, so concatenated replay length is not the input length of any
+single generation call. The largest recorded API inputs were 8,996 tokens for the
+base model, 15,921 for AppWorld-trained, 32,646 for ASTRA-trained and 31,784 for
+DepthBench-trained, all within the 32,768-token serving context.
+
+| Measure (114 tasks per model) | Base | AppWorld-trained | ASTRA-trained | DepthBench-trained |
+|---|---:|---:|---:|---:|
+| Tasks solved | 73 | 27 | 44 | 43 |
+| Median reconstructed-history tokens | 23,382 | 90,388 | 40,913 | 78,575 |
+| Histories above 131,072 tokens | 1 | 38 | 11 | 19 |
+| Successful tasks among those long histories | 0 | 4 | 4 | 4 |
+| Histories with at least one output-cap stop | 64 | 111 | 80 | 100 |
+| Reasoning-only assistant turns | 96 / 1,580 | 631 / 1,678 | 280 / 1,661 | 455 / 1,646 |
+
+An output-cap stop ends a generation, not automatically the retail task. The
+simulator removes reasoning from the assistant reply; a reasoning-only response
+therefore supplies no visible answer and the customer can continue asking for
+help. The loop ends at a simulator stop marker or an overall execution limit.
+The task scorer checks the required database changes and communicated information;
+`error = None` means no evaluation exception, not task success.
+
+Inspection found degenerate repetition, not only longer coherent planning. On
+retail task 37, the AppWorld-trained model repeated “The user is basically asking
+for confirmation” 2,034 times in one reasoning message and failed a task the base
+model solved. On task 110, the DepthBench-trained model repeated “The assistant
+responded with nothing” 1,623 times in one reasoning message, made no tool calls,
+and failed where the base model succeeded. These are inspected examples, not an
+exhaustive automatic classification of incoherence. Four long histories in each
+trained cohort still succeeded, so overlength alone must not be relabeled failure.
+
+The old base run and trained runs differ in serving precision/software; this
+comparison documents observed failure patterns and does not isolate their cause.
+[Machine-readable length audit](post_training/retail_length_audit.json) and
+[the audit script](../../src/experiments/training_against_role_probes/post_training/audit_retail.py)
+record lengths, caps, and task outcomes. Native rendering and simulator stopping
+rules were checked in the pinned installed runtime source.
+
+## Fresh-probe fitting check
+
+The three trained models each receive a new multinomial linear layer-12 probe,
+fitted from scratch on the original 250 C4/Dolma passages. All content tokens,
+the original passage split, C=0.005 and the pre-MLP readout are retained. This is
+independent of the warm-started probes used during model training. No benchmark
+trajectories are used for fitting or selecting probes.
+
+| Model | Accuracy on held-out standard passages |
+|---|---:|
+| Base (original probe) | 68.93% |
+| AppWorld-trained (fresh probe) | 91.06% |
+| ASTRA-trained (fresh probe) | 87.86% |
+| DepthBench-trained (fresh probe) | 82.44% |
+
+These are controlled-text probe checks, not agent-task scores. AppWorld and
+DepthBench fresh fits emitted line-search warnings; no strict convergence claim
+is made. Weights, exact source/model hashes and fitting diagnostics accompany the
+[AppWorld](post_training/probes/layer_12.json),
+[ASTRA](astra_sft_1k/post_training/probes/layer_12.json), and
+[DepthBench](depthbench/post_training/probes/layer_12.json) artifacts.
+
+## SWE-bench failure audit
+
+Inspect supplies the standard SWE-bench task, tools and scorer; its agent and serving configuration still differ from the model-card evaluation. The original base cohort had 226/500 terminal API errors and 271 execution-limit attempts (categories may overlap). Its 774 failed model calls reported malformed Harmony headers on vLLM 0.11.0. The 30-message budget also constrained attempts.
+
+An existing repaired base rerun completed two of four shards: **42/250 solved (16.8%)**, versus **8/250 (3.2%)** on the same task IDs originally. It used vLLM 0.32.0, temperature 1 and 200 messages. It had no recorded model-call errors, but one test-scoring timeout. The other two shards failed during server startup with missing Transformers files; no model attempt occurred. This partial cohort is diagnostic only and is not mixed into the main 500-task comparison.
+
+The remaining major constraint is **32,768-token serving context**, although the model's native limit is 131,072. In the repaired base subset, 204/250 histories contain a server context-limit response; 18 still passed using an already written patch. Of 249 scored attempts, 120 had empty patches, including 115 with a context-limit response. Inspect converts this HTTP 400 into a `model_length` response and scores the current patch, so these are usually not counted as API errors or execution-limit events. The recorded response text is an infrastructure message, not model-generated prose.
+
+| Cohort | Tasks | Context-limit responses | Solved |
+|---|---:|---:|---:|
+| Repaired base (partial, separate cohort) | 250 | 204 | 42 |
+| AppWorld-trained | 500 | 42 | 14 |
+| ASTRA-trained | 500 | 319 | 67 |
+| DepthBench-trained | 500 | 133 | 38 |
+
+These limits materially constrain the task results. They do not explain every failed patch, nor establish that expanding context alone will recover the model card's 60.7% high-reasoning result. The card describes a 477-task validated subset, whereas ours uses all 500. Inspect recommends checking patches with the original SWE-bench harness before public leaderboard comparisons. Our existing gold-patch and end-to-end checks support a working scoring path, but are not a full scorer-parity audit.
+
+The next capability evaluation should use matched base/trained generation settings and the native context allowance, first checking representative patches with the official scorer. No new generation was launched for this audit.
+
+[Audit measurements](post_training/swe_failure_audit.json) · [Inspect implementation and parity guidance](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/swe_bench/README.md) · [Model-card evaluations](https://deploymentsafety.openai.com/gpt-oss/evaluation).
+
+<!-- fresh-rollout-confusions -->
+## Fresh-trajectory confusions
+
+Rows are true roles; columns are predicted roles. Each row sums to 100% (up to rounding). Only whole histories within native context are scored. Over-limit histories retain their task outcome but have no role score.
+
+
+### AppWorld test_normal — Base
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 1.23% | 0.82% | 7.38% | 0.00% | 90.57% |
+| User | 0.02% | 49.94% | 1.94% | 0.00% | 48.10% |
+| Reasoning | 0.01% | 3.43% | 73.14% | 16.54% | 6.88% |
+| Assistant | 0.17% | 0.65% | 61.69% | 35.39% | 2.09% |
+| Tool | 9.21% | 13.25% | 41.38% | 22.84% | 13.32% |
+
+### AppWorld test_normal — AppWorld-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 100.00% | 0.00% | 0.00% | 0.00% | 0.00% |
+| User | 0.06% | 99.57% | 0.36% | 0.00% | 0.01% |
+| Reasoning | 0.00% | 0.03% | 99.95% | 0.00% | 0.01% |
+| Assistant | 0.00% | 0.00% | 1.45% | 91.02% | 7.53% |
+| Tool | 0.00% | 0.01% | 0.00% | 0.00% | 99.99% |
+
+### AppWorld test_normal — ASTRA-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 47.54% | 2.05% | 20.49% | 0.00% | 29.92% |
+| User | 0.15% | 89.14% | 1.34% | 0.00% | 9.37% |
+| Reasoning | 0.00% | 0.42% | 93.94% | 5.63% | 0.01% |
+| Assistant | 0.00% | 0.05% | 77.45% | 21.83% | 0.66% |
+| Tool | 0.04% | 0.02% | 1.90% | 0.07% | 97.97% |
+
+### AppWorld test_normal — DepthBench-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 48.77% | 0.00% | 24.18% | 0.00% | 27.06% |
+| User | 0.31% | 79.02% | 0.38% | 0.00% | 20.29% |
+| Reasoning | 0.00% | 0.41% | 97.81% | 1.72% | 0.07% |
+| Assistant | 0.00% | 0.00% | 34.86% | 63.02% | 2.11% |
+| Tool | 0.45% | 7.97% | 5.04% | 0.79% | 85.75% |
+
+### τ² retail — Base
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 6.64% | 35.55% | 41.58% | 0.00% | 16.23% |
+| User | 2.37% | 29.89% | 11.40% | 56.33% | 0.01% |
+| Reasoning | 0.67% | 0.24% | 20.03% | 79.05% | 0.01% |
+| Assistant | 0.05% | 0.00% | 4.98% | 94.95% | 0.02% |
+| Tool | 1.24% | 0.08% | 24.23% | 73.76% | 0.69% |
+
+### τ² retail — AppWorld-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 49.90% | 21.80% | 28.30% | 0.00% | 0.00% |
+| User | 24.70% | 32.14% | 7.89% | 30.04% | 5.24% |
+| Reasoning | 25.82% | 0.01% | 52.29% | 21.87% | 0.01% |
+| Assistant | 0.65% | 0.00% | 0.08% | 95.90% | 3.37% |
+| Tool | 0.03% | 0.00% | 0.14% | 0.17% | 99.66% |
+
+### τ² retail — ASTRA-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 28.17% | 22.87% | 23.68% | 0.00% | 25.29% |
+| User | 12.94% | 39.42% | 3.66% | 43.95% | 0.03% |
+| Reasoning | 5.92% | 0.02% | 38.00% | 56.02% | 0.04% |
+| Assistant | 2.92% | 0.01% | 11.95% | 83.49% | 1.64% |
+| Tool | 0.09% | 0.00% | 4.26% | 2.63% | 93.02% |
+
+### τ² retail — DepthBench-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 65.46% | 16.57% | 14.29% | 0.00% | 3.69% |
+| User | 19.89% | 37.56% | 9.53% | 32.95% | 0.06% |
+| Reasoning | 4.14% | 0.01% | 40.58% | 55.21% | 0.06% |
+| Assistant | 0.05% | 0.00% | 0.28% | 99.63% | 0.03% |
+| Tool | 1.26% | 0.16% | 0.43% | 0.49% | 97.67% |
+
+### SWE-bench Verified — Base
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 1.39% | 16.20% | 10.65% | 0.00% | 71.76% |
+| User | 1.24% | 94.53% | 1.96% | 0.77% | 1.50% |
+| Reasoning | 2.52% | 1.90% | 37.00% | 57.28% | 1.30% |
+| Assistant | 1.47% | 0.58% | 58.77% | 30.38% | 8.80% |
+| Tool | 14.92% | 55.95% | 16.94% | 8.66% | 3.53% |
+
+### SWE-bench Verified — AppWorld-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 39.81% | 50.00% | 9.72% | 0.00% | 0.46% |
+| User | 0.28% | 94.73% | 1.59% | 0.65% | 2.74% |
+| Reasoning | 0.02% | 1.76% | 97.94% | 0.09% | 0.20% |
+| Assistant | 0.02% | 0.00% | 1.74% | 89.84% | 8.40% |
+| Tool | 2.06% | 10.61% | 2.35% | 0.01% | 84.98% |
+
+### SWE-bench Verified — ASTRA-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 18.98% | 16.20% | 3.24% | 0.00% | 61.57% |
+| User | 0.47% | 89.14% | 3.03% | 1.21% | 6.15% |
+| Reasoning | 0.02% | 0.59% | 96.86% | 2.52% | 0.03% |
+| Assistant | 0.02% | 0.05% | 70.33% | 27.90% | 1.69% |
+| Tool | 6.12% | 1.48% | 12.25% | 0.82% | 79.33% |
+
+### SWE-bench Verified — DepthBench-trained
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 60.65% | 5.56% | 18.06% | 0.00% | 15.74% |
+| User | 1.21% | 91.31% | 3.84% | 1.34% | 2.30% |
+| Reasoning | 0.02% | 0.88% | 98.09% | 0.82% | 0.18% |
+| Assistant | 0.02% | 0.04% | 46.73% | 49.44% | 3.78% |
+| Tool | 8.02% | 30.85% | 25.49% | 4.62% | 31.02% |
+<!-- /fresh-rollout-confusions -->
+
+<!-- whole-history-coverage -->
+## Whole-history coverage
+
+| Benchmark | Model | Histories scored | Unscorable | Evaluation errors |
+|---|---|---:|---:|---:|
+| AppWorld test_normal | Base | 168/168 | 0 | 0 |
+| AppWorld test_normal | AppWorld-trained | 168/168 | 0 | 0 |
+| AppWorld test_normal | ASTRA-trained | 168/168 | 0 | 0 |
+| AppWorld test_normal | DepthBench-trained | 168/168 | 0 | 0 |
+| τ² retail | Base | 113/114 | 1 | 0 |
+| τ² retail | AppWorld-trained | 76/114 | 38 | 0 |
+| τ² retail | ASTRA-trained | 103/114 | 11 | 0 |
+| τ² retail | DepthBench-trained | 95/114 | 19 | 0 |
+| SWE-bench Verified | Base | 500/500 | 0 | 226 |
+| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 6 |
+| SWE-bench Verified | ASTRA-trained | 500/500 | 0 | 0 |
+| SWE-bench Verified | DepthBench-trained | 500/500 | 0 | 0 |
+<!-- /whole-history-coverage -->

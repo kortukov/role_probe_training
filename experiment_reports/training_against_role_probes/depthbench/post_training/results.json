@@ -1,0 +1,408 @@
+{
+  "appworld_test": {
+    "task": {
+      "benchmark": "appworld_test",
+      "samples": 168,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 0,
+      "metrics": {
+        "appworld_success": {
+          "successes": 9,
+          "scored": 168,
+          "total": 168,
+          "success_rate": 0.05357142857142857
+        }
+      },
+      "input_sha256": "58d55bfc6dc2e7c9d01b24287b25da0eeb3b2cb23c0f77ea5374bf4a06230a6d"
+    },
+    "probe": {
+      "trajectories": 168,
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "accuracy": 0.8641528776787488,
+      "macro_recall": 0.7487277767966232,
+      "per_role_recall": [
+        0.4876561280249805,
+        0.7901959289471678,
+        0.9780519874582786,
+        0.6302279251822089,
+        0.8575069143704799
+      ],
+      "mean_trajectory_accuracy": 0.8723252329328363,
+      "confusion_counts": [
+        [
+          19990,
+          0,
+          9910,
+          0,
+          11092
+        ],
+        [
+          41,
+          10365,
+          50,
+          0,
+          2661
+        ],
+        [
+          11,
+          3499,
+          841290,
+          14764,
+          605
+        ],
+        [
+          1,
+          14,
+          114281,
+          206578,
+          6909
+        ],
+        [
+          3330,
+          58672,
+          37090,
+          5804,
+          631252
+        ]
+      ],
+      "input_sha256": "58d55bfc6dc2e7c9d01b24287b25da0eeb3b2cb23c0f77ea5374bf4a06230a6d",
+      "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+      "model_revision": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
+      "context_policy": "full trajectory, no windows or truncation"
+    },
+    "task_metric": "appworld_success"
+  },
+  "tau2_retail": {
+    "task": {
+      "benchmark": "tau2_retail",
+      "samples": 114,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 8,
+      "metrics": {
+        "retail_scorer": {
+          "successes": 43,
+          "scored": 114,
+          "total": 114,
+          "success_rate": 0.37719298245614036
+        }
+      },
+      "input_sha256": "f4fee0dc7bfb05b4f578cce20cef8d6a2c8b01814705e3965bd432e5ba18b06b"
+    },
+    "probe": {
+      "accuracy": 0.43192833750457243,
+      "macro_recall": 0.6817941410275707,
+      "per_role_recall": [
+        0.6545942320590208,
+        0.37560347602188604,
+        0.4057652971600727,
+        0.996316042080139,
+        0.9766916578167351
+      ],
+      "mean_true_role_probability": [
+        0.5935010309516946,
+        0.3763910468969229,
+        0.411155052956791,
+        0.9951548259050617,
+        0.9662847069017539
+      ],
+      "mean_trajectory_accuracy": 0.5093558227860739,
+      "confusion_counts": [
+        [
+          92720,
+          23465,
+          20235,
+          0,
+          5225
+        ],
+        [
+          4944,
+          9336,
+          2370,
+          8191,
+          15
+        ],
+        [
+          225486,
+          346,
+          2208277,
+          3004774,
+          3369
+        ],
+        [
+          40,
+          0,
+          219,
+          76807,
+          25
+        ],
+        [
+          1593,
+          197,
+          539,
+          612,
+          123237
+        ]
+      ],
+      "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+      "layers": {
+        "12": {
+          "accuracy": 0.43192833750457243,
+          "macro_recall": 0.6817941410275707,
+          "per_role_recall": [
+            0.6545942320590208,
+            0.37560347602188604,
+            0.4057652971600727,
+            0.996316042080139,
+            0.9766916578167351
+          ],
+          "mean_true_role_probability": [
+            0.5935010309516946,
+            0.3763910468969229,
+            0.411155052956791,
+            0.9951548259050617,
+            0.9662847069017539
+          ],
+          "mean_trajectory_accuracy": 0.5093558227860739,
+          "confusion_counts": [
+            [
+              92720,
+              23465,
+              20235,
+              0,
+              5225
+            ],
+            [
+              4944,
+              9336,
+              2370,
+              8191,
+              15
+            ],
+            [
+              225486,
+              346,
+              2208277,
+              3004774,
+              3369
+            ],
+            [
+              40,
+              0,
+              219,
+              76807,
+              25
+            ],
+            [
+              1593,
+              197,
+              539,
+              612,
+              123237
+            ]
+          ],
+          "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303"
+        }
+      },
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "trajectories": 114,
+      "scored_trajectories": 95,
+      "excluded_trajectories": [
+        {
+          "trajectory_id": "tau2_retail/1",
+          "tokens": 150122,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/10",
+          "tokens": 135846,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/110",
+          "tokens": 185285,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/13",
+          "tokens": 142000,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/20",
+          "tokens": 134653,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/21",
+          "tokens": 186091,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/24",
+          "tokens": 186888,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/29",
+          "tokens": 170221,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/35",
+          "tokens": 153784,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/41",
+          "tokens": 185961,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/44",
+          "tokens": 141557,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/53",
+          "tokens": 185251,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/55",
+          "tokens": 150024,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/6",
+          "tokens": 133400,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/60",
+          "tokens": 140173,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/83",
+          "tokens": 151793,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/90",
+          "tokens": 174744,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/98",
+          "tokens": 176662,
+          "reason": "exceeds_native_context"
+        },
+        {
+          "trajectory_id": "tau2_retail/99",
+          "tokens": 143534,
+          "reason": "exceeds_native_context"
+        }
+      ],
+      "context_limit": 131072,
+      "input_sha256": "f4fee0dc7bfb05b4f578cce20cef8d6a2c8b01814705e3965bd432e5ba18b06b",
+      "model_revision": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
+      "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+      "overlength_policy": "exclude"
+    },
+    "task_metric": "retail_scorer"
+  },
+  "swe_bench": {
+    "task": {
+      "benchmark": "swe_bench",
+      "samples": 500,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 2,
+      "metrics": {
+        "swe_bench_scorer": {
+          "successes": 38,
+          "scored": 500,
+          "total": 500,
+          "success_rate": 0.076
+        }
+      },
+      "input_sha256": "def93c00105a4441b6d7ee4f2b89692be2a0e23860bc0e8e460787bc1d2f9e84"
+    },
+    "probe": {
+      "trajectories": 500,
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "accuracy": 0.4858460924777301,
+      "macro_recall": 0.661005441769116,
+      "per_role_recall": [
+        0.6064814814814815,
+        0.9130827929052188,
+        0.9808780804748403,
+        0.4943744914197573,
+        0.31021036256428186
+      ],
+      "mean_trajectory_accuracy": 0.49963484090336224,
+      "confusion_counts": [
+        [
+          65500,
+          6000,
+          19500,
+          0,
+          17000
+        ],
+        [
+          2965,
+          223162,
+          9396,
+          3265,
+          5617
+        ],
+        [
+          491,
+          20529,
+          2276568,
+          19140,
+          4221
+        ],
+        [
+          361,
+          816,
+          1022729,
+          1082033,
+          82752
+        ],
+        [
+          586556,
+          2257477,
+          1865213,
+          337673,
+          2269687
+        ]
+      ],
+      "input_sha256": "def93c00105a4441b6d7ee4f2b89692be2a0e23860bc0e8e460787bc1d2f9e84",
+      "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+      "model_revision": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
+      "context_policy": "full trajectory, no windows or truncation"
+    },
+    "task_metric": "swe_bench_scorer"
+  }
+}

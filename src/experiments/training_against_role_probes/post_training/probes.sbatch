@@ -10,7 +10,9 @@
 #SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%j.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
-source /etc/slurm/local_job_dir.sh
+job_scratch=$(mktemp -d /tmp/role-eval-${SLURM_JOB_ID}-XXXXXX)
+export LOCAL_JOB_DIR="$job_scratch"
+trap 'rm -rf "$job_scratch"' EXIT
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TORCHINDUCTOR_CACHE_DIR="$LOCAL_JOB_DIR/inductor" TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton" OMP_NUM_THREADS=4
 mkdir -p "$TMPDIR"
 .tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python -m role_probe_training.post_training.probes "$@"

@@ -175,3 +175,5 @@ Exclude `vca-gpu-0701-05` from these evaluations as well as the previously exclu
 `lookup userid 11850603: connection refused` failures; job1504057_6 failed to create
 its Slurm local directory with permission denied. The same pipeline ran on other
 nodes. This is a live observation, not a diagnosis of the node's account service.
+
+GPU-only whole-history probe scoring was verified on `0701-05` on 2026-10-24 using a unique `/tmp` scratch directory. This does not resolve its Apptainer account lookup failure: exclude it from benchmark generation, but it can run container-free scoring.

@@ -4,6 +4,10 @@
   "collection": "1504067",
   "assembly": "1504134",
   "score": "1504135",
-  "report": "1504136",
-  "publish": "1504137"
+  "report": "manual_after_complete",
+  "publish": "manual_after_review",
+  "whole_history_retail_score": "1504764",
+  "whole_history_retail_predictions": "experiment_reports/training_against_role_probes/depthbench/predictions/post_training_whole/tau2_retail",
+  "overlength_policy": "explicitly unscorable; task scores retained",
+  "full_history_comparison": "post_training/comparison.json in parent experiment"
 }

@@ -54,7 +54,7 @@ Skip preparation if that image is already cached. The cache contains a SIF and i
 
 ## Full repaired rerun
 
-Current submission: image-preparation retry `1492728_10`, followed by evaluation array `1492729` (four one-GPU shards, all 500 tasks). Already cached: 488/500 official images; the retry prepares the remaining 12 with single-threaded compression. The GPU array starts only after preparation succeeds. A prior `mksquashfs` crash prevented inference from starting; failure and resubmission provenance are in [metrics/rerun_submission.json](metrics/rerun_submission.json).
+Recorded submission: image-preparation retry `1492728_10`, followed by evaluation array `1492729` (four one-GPU shards, all 500 tasks). Already cached: 488/500 official images; the retry prepares the remaining 12 with single-threaded compression. The GPU array starts only after preparation succeeds. A prior `mksquashfs` crash prevented inference from starting; failure and resubmission provenance are in [metrics/rerun_submission.json](metrics/rerun_submission.json).
 
 ```bash
 prep=$(sbatch --parsable src/experiments/agentic_eval/swe_images_job.sbatch)
@@ -65,3 +65,5 @@ SWE_SHARD_COUNT=4 SWE_SERVER_PROJECT=server_current sbatch \
 ```
 
 This rerun uses the repaired diagnostic configuration: vLLM 0.32.0, temperature 1, high reasoning, 200 messages, 8,192 output tokens per call, two million cumulative tokens, 1,800 seconds per task, and eight concurrent tasks per GPU. Its results must be finalized as a new complete cohort; do not mix these attempts into the previous 500-task result. Each shard exports to `runs/<Slurm-job-ID>/`. Until finalization, the main report and probe results still describe the previous cohort.
+
+Audit update: shards `1492764` and `1492765` completed (250 distinct tasks); the other two failed at server startup with missing Transformers files. No jobs from this rerun remain active. See the [failure audit](../../training_against_role_probes/APPENDIX.md#swe-bench-failure-audit); do not mix this partial cohort into the original full run.

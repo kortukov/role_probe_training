@@ -30,7 +30,7 @@ def main():
     assert len(seen)==2700==corpus['trajectories']
     result={'trajectories':2700,'source_sha256':corpus['sha256'],'roles':list(ROLES),'layers':{}}
     table='| Layer | Overall | System | User | Reasoning | Assistant | Tool |\n|---|---:|---:|---:|---:|---:|---:|\n'
-    appendix='\n## Training-corpus baseline confusions\n\nRows are ground-truth content roles; columns are predicted roles. Counts include\nall metadata-labeled content tokens from the 2,700 full trajectories.\n'
+    appendix='\n## Training-corpus baseline confusions\n\nRows are ground-truth content roles; columns are predicted roles. Row-normalized percentages include\nall metadata-labeled content tokens from the 2,700 full trajectories.\n'
     for layer in layers:
         matrix=matrices[layer]; support=matrix.sum(1)
         recall=np.divide(matrix.diagonal(),support,out=np.zeros(5),where=support>0)
@@ -40,8 +40,6 @@ def main():
             per_role_accuracy=dict(zip(ROLES,recall.tolist())),confusion_counts=matrix.tolist())
         table+=f'| {layer} | '+' | '.join(f'{x:.1%}' for x in [accuracy,*recall])+' |\n'
         appendix+=f'\n### Layer {layer}\n\n| True / predicted | '+' | '.join(ROLES)+' |\n|---|'+'---:|'*5+'\n'
-        for role,row in zip(ROLES,matrix): appendix+='| '+role+' | '+' | '.join(str(int(v)) for v in row)+' |\n'
-        appendix+='\nRow-normalized percentages:\n\n| True / predicted | '+' | '.join(ROLES)+' |\n|---|'+'---:|'*5+'\n'
         for role,row,count in zip(ROLES,matrix,support):
             appendix+='| '+role+' | '+' | '.join(f'{(v/count if count else 0):.1%}' for v in row)+' |\n'
     (a.root/'baseline_probe_results.json').write_text(json.dumps(result,indent=2)+'\n')

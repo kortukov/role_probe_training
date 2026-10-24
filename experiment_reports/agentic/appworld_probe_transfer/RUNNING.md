@@ -1,39 +1,25 @@
 # Reproduction
 
-## Input and scoring
+The original agent trajectories and task scores are reused. Current whole-history
+predictions are referenced in [metrics.json](metrics.json), under
+`experiment_reports/training_against_role_probes/base_model/predictions/`.
+The old chunked viewer/predictions are not the source of these results.
 
-Input: `experiment_reports/agentic/appworld/data/test_normal.jsonl` (168 tasks).
-The existing probes are frozen; no probe or model training uses this test split.
-Layer 12 and 16 weights come from `experiment_reports/role_probes/gptoss20b_baseline/probes/`;
-layers 4, 8, 20 from `experiment_reports/role_probes/gptoss20b_layers/probes/`.
+Run `src/experiments/training_against_role_probes/post_training/whole_score.sbatch`
+with root `experiment_reports/training_against_role_probes/base_model`, `--base`,
+and `--overlength exclude`. Retail output is explicitly selected with `--output`
+pointing to `predictions/post_training_whole/tau2_retail`. Read
+[the shared reproduction guide](../../training_against_role_probes/RUNNING.md#fresh-rollout-evaluation)
+for environments, source paths and job provenance. No new model generations or
+probe fits are needed for this baseline rerun.
 
-```bash
-sbatch --exclude=vca-gpu-0701-03 src/experiments/agentic_probes/appworld.sbatch
-sbatch --dependency=afterok:SCORING_ARRAY --kill-on-invalid-dep=yes src/experiments/agentic_probes/appworld_report.sbatch
-```
-
-Four one-GPU shards read all five zero-based post-attention-layernorm / pre-MLP
-probes in the same forward. Scoring uses GPT-OSS-20B dequantized to BF16 and the
-existing eager-attention implementation. Independent 16384-token contexts retain
-all tokens but restart positions and lose earlier context in later segments.
-Retrospective Harmony preserves reasoning, tool names/calls and message roles;
-it does not reproduce the original serving prompts exactly. Role labels come
-from metadata. Headers, special tokens and synthetic tool-schema context are
-excluded from accuracy. The protocol matches the existing agentic probe reports.
-
-The four `predictions/shard*/manifest.json` files record input/probe hashes and
-configuration. Per-trajectory compressed JSON stores probabilities, predictions,
-labels, offsets, messages and score masks. Large predictions and the data-filled
-viewer remain excluded from Git. Scoring array: 1492721; dependent report job: 1492726.
-
-## Report and standalone viewer
-
-The CPU report job checks coverage and confusion matrices, writes `metrics.json`
-and `APPENDIX.md`, and creates `viewer.html` with all data embedded. Download the
-HTML and open it in a modern browser supporting DecompressionStream. No adjacent
-files or server are needed. Add further datasets using repeated `--dataset` and
-`--expected-count` arguments to `src/experiments/agentic_probes/report.py`.
+Regenerate these summaries with:
 
 ```bash
-PLAYWRIGHT_BROWSERS_PATH="$PWD/.cache/playwright" .tools/bin/uv run --isolated --no-project --with playwright python src/experiments/agentic_probes/viewer_check.py experiment_reports/agentic/appworld_probe_transfer/viewer.html
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/refresh_base_reports.py
 ```
+
+Inputs retain all recorded reasoning and tool messages in retrospective Harmony;
+this is not a reconstruction of each generation-time prompt. The runtime uses
+BF16 dequantization and flex attention. All metadata-labeled content tokens in
+eligible histories are scored; synthetic tool schemas are excluded.

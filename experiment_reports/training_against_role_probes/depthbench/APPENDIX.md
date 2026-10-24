@@ -48,13 +48,6 @@ Rows are ground-truth roles and columns are predicted roles. Cells are content-t
 
 ### Layer 4
 
-| True / predicted | system | user | cot | assistant | tool |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| system | 222,803 | 69,812 | 4,259 | 13,392 | 338,734 |
-| user | 3,679 | 102,083 | 35,301 | 38,974 | 27,983 |
-| cot | 2,501 | 36,900 | 1,924,636 | 182,171 | 1,524,237 |
-| assistant | 1,441 | 3,326 | 1,040,209 | 609,470 | 2,710,602 |
-| tool | 1,316 | 4,413 | 1,455,689 | 275,491 | 2,190,719 |
 
 | True / predicted (%) | system | user | cot | assistant | tool |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -66,13 +59,6 @@ Rows are ground-truth roles and columns are predicted roles. Cells are content-t
 
 ### Layer 8
 
-| True / predicted | system | user | cot | assistant | tool |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| system | 99,753 | 148,241 | 122,616 | 0 | 278,390 |
-| user | 100 | 207,360 | 280 | 240 | 40 |
-| cot | 305 | 63,237 | 3,513,413 | 54,945 | 38,545 |
-| assistant | 3,667 | 8,763 | 1,812,600 | 2,508,542 | 31,476 |
-| tool | 4,573 | 19,534 | 3,621,958 | 114,141 | 167,422 |
 
 | True / predicted (%) | system | user | cot | assistant | tool |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -84,13 +70,6 @@ Rows are ground-truth roles and columns are predicted roles. Cells are content-t
 
 ### Layer 12
 
-| True / predicted | system | user | cot | assistant | tool |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| system | 1,672 | 39,614 | 246,785 | 0 | 360,929 |
-| user | 20 | 191,340 | 14,600 | 120 | 1,940 |
-| cot | 37 | 41,882 | 2,961,804 | 640,877 | 25,845 |
-| assistant | 4,787 | 6,466 | 1,300,578 | 3,027,550 | 25,667 |
-| tool | 6,019 | 60,856 | 3,324,675 | 360,138 | 175,940 |
 
 | True / predicted (%) | system | user | cot | assistant | tool |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -102,13 +81,6 @@ Rows are ground-truth roles and columns are predicted roles. Cells are content-t
 
 ### Layer 16
 
-| True / predicted | system | user | cot | assistant | tool |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| system | 72,333 | 231,826 | 8,605 | 0 | 336,236 |
-| user | 1,184 | 181,758 | 4,896 | 4,681 | 15,501 |
-| cot | 16,460 | 17,378 | 2,589,880 | 176,386 | 870,341 |
-| assistant | 24,389 | 11,266 | 294,720 | 3,764,393 | 270,280 |
-| tool | 75,660 | 26,289 | 622,177 | 2,672,219 | 531,283 |
 
 | True / predicted (%) | system | user | cot | assistant | tool |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -120,13 +92,6 @@ Rows are ground-truth roles and columns are predicted roles. Cells are content-t
 
 ### Layer 20
 
-| True / predicted | system | user | cot | assistant | tool |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| system | 16,219 | 265,837 | 57,582 | 996 | 308,366 |
-| user | 979 | 190,163 | 2,560 | 1,912 | 12,406 |
-| cot | 20,909 | 317,302 | 2,007,568 | 194,243 | 1,130,423 |
-| assistant | 40,548 | 490,477 | 325,832 | 3,298,845 | 209,346 |
-| tool | 68,526 | 144,932 | 394,540 | 2,839,989 | 479,641 |
 
 | True / predicted (%) | system | user | cot | assistant | tool |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -137,3 +102,46 @@ Rows are ground-truth roles and columns are predicted roles. Cells are content-t
 | tool | 1.74 | 3.69 | 10.05 | 72.31 | 12.21 |
 
 Machine-readable results: [baseline_metrics.json](baseline_metrics.json). Execution metadata: [baseline_manifest.json](baseline_manifest.json).
+
+<!-- fresh-rollout-confusions -->
+## Fresh-trajectory confusions
+
+Each row is a ground-truth content role and each column a predicted role. Values are percentages of tokens in that row; rounding may affect totals. A dash denotes a role absent from the cohort. Probe scores include only whole histories within native context; task scores include every attempt.
+
+
+### AppWorld test_normal
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 48.77% | 0.00% | 24.18% | 0.00% | 27.06% |
+| User | 0.31% | 79.02% | 0.38% | 0.00% | 20.29% |
+| Reasoning | 0.00% | 0.41% | 97.81% | 1.72% | 0.07% |
+| Assistant | 0.00% | 0.00% | 34.86% | 63.02% | 2.11% |
+| Tool | 0.45% | 7.97% | 5.04% | 0.79% | 85.75% |
+
+Probe coverage: 168/168 whole histories. 0 exceed native context and have no probe score; task completion still includes every attempt.
+
+### τ² retail
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 65.46% | 16.57% | 14.29% | 0.00% | 3.69% |
+| User | 19.89% | 37.56% | 9.53% | 32.95% | 0.06% |
+| Reasoning | 4.14% | 0.01% | 40.58% | 55.21% | 0.06% |
+| Assistant | 0.05% | 0.00% | 0.28% | 99.63% | 0.03% |
+| Tool | 1.26% | 0.16% | 0.43% | 0.49% | 97.67% |
+
+Probe coverage: 95/114 whole histories. 19 exceed native context and have no probe score; task completion still includes every attempt.
+
+### SWE-bench Verified
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 60.65% | 5.56% | 18.06% | 0.00% | 15.74% |
+| User | 1.21% | 91.31% | 3.84% | 1.34% | 2.30% |
+| Reasoning | 0.02% | 0.88% | 98.09% | 0.82% | 0.18% |
+| Assistant | 0.02% | 0.04% | 46.73% | 49.44% | 3.78% |
+| Tool | 8.02% | 30.85% | 25.49% | 4.62% | 31.02% |
+
+Probe coverage: 500/500 whole histories. 0 exceed native context and have no probe score; task completion still includes every attempt.
+<!-- /fresh-rollout-confusions -->

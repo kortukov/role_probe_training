@@ -138,7 +138,7 @@ Install this package in the server environment without changing its dependencies
 Entry points are in `src/experiments/training_against_role_probes/post_training/`:
 `export.sbatch CHECKPOINT OUTPUT`, `probes.sbatch fit --root ROOT`,
 `collect.sbatch ROOT MODEL_NAME`, `assemble.sbatch ROOT COLLECTION_JOB_ID`,
-`score.sbatch ROOT`, then `report.sbatch ROOT`. Export must finish before fitting
+`whole_score.sbatch ROOT --overlength exclude`, then `report.sbatch ROOT`. Export must finish before fitting
 and collecting; scoring requires both fitting and assembly. Collection array
 indices 0–1 are AppWorld, 2 is τ² retail, and 3–6 are SWE-bench. Each server uses
 one B200, 32,768-token context and at most 16 active sequences. Inspect runs eight
@@ -166,7 +166,39 @@ cohorts; `predictions/post_training/BENCHMARK/` contains per-token NPZ files,
 trajectory index and summary. These paths are excluded from Git. Small task and
 probe results are published in `post_training/results.json`; the report script
 validates coverage and matching input/model hashes before updating report tables
-and percentage-only appendix matrices. A dependent `publish.sbatch ROOT` commits
-and pushes only that report and its small results after successful validation.
+and percentage-only appendix matrices. The current four-model report is validated and published together; earlier automatic publisher jobs were cancelled.
 Raw benchmark artifacts use the same
 message schema as the existing agentic evaluations.
+
+## Current whole-history comparison
+
+The main report is regenerated only after all model/benchmark cohorts are ready:
+
+```bash
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/validate.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/compare.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/refresh_base_reports.py
+```
+
+`post_training/comparison.json` in the parent experiment consolidates all four
+models. Baseline task results and histories are reused from `experiment_reports/agentic/`;
+its original five probes are reapplied with whole contexts, without new generation.
+The three trained models use their separately generated cohorts and fresh standard-data
+layer-12 probes. The original base SWE run has 226 API-error attempts and different
+settings; its task score is retained with this limitation, not treated as a controlled
+training comparison.
+
+No probe evaluation chunks or truncates text. Histories above the native 131,072-token
+limit are explicitly unscorable, while task metrics still include them. Current
+retail NPZs and `summary.json` live in `predictions/post_training_whole/tau2_retail/`;
+AppWorld and SWE live in `predictions/post_training/BENCHMARK/`. Pass `--output`
+explicitly for retail. Partial earlier scoring outputs are not report inputs.
+Recorded per-call contexts remain in the source `generations.jsonl` files; whole
+retrospective replay includes past reasoning that the native generation formatter
+can omit. The retail-length audit is reproduced by `post_training/audit_retail.py`
+in the same experiment-code directory.
+
+The GPU-only extraction jobs use unique node-local `/tmp` scratch directories.
+Node `vca-gpu-0701-05` works for this scoring but still fails benchmark-container
+startup; exclude it from new container-based generation. Node `vca-gpu-0701-03`
+still fails CUDA initialization and remains excluded throughout.

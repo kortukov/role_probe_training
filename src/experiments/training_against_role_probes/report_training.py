@@ -84,12 +84,9 @@ def main():
     conclusion += 'An independently fitted probe and new task\nrollouts are needed to establish broader recoverability and behavioral effects.\n\n'
     text = text[:message_start] + conclusion + text[reproduction_start:]
     path.write_text(text.rstrip() + '\n')
-    appendix = '## Development confusions\n\nRows are true content roles; columns are predicted roles. Values are token counts.\n'
+    appendix = '## Development confusions\n\nRows are true content roles; columns are predicted roles. Values are row-normalized percentages.\n'
     for label, row in [('Before training', first), (f'After update {last["step"]}', last)]:
         appendix += f'\n### {label}\n\n| True / predicted | ' + ' | '.join(ROLES) + ' |\n|---|' + '---:|' * 5 + '\n'
-        for role, counts in zip(ROLES, row['metrics']['confusion_counts']):
-            appendix += '| ' + role + ' | ' + ' | '.join(map(str, counts)) + ' |\n'
-        appendix += '\nRow-normalized percentages:\n\n| True / predicted | ' + ' | '.join(ROLES) + ' |\n|---|' + '---:|' * 5 + '\n'
         for role, counts in zip(ROLES, row['metrics']['confusion_counts']):
             n = sum(counts)
             appendix += '| ' + role + ' | ' + ' | '.join(f'{x/n:.1%}' if n else '—' for x in counts) + ' |\n'
