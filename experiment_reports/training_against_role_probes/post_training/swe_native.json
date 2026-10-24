@@ -1,5 +1,5 @@
 {
-  "status": "full evaluation running; ASTRA shard 1 retried after pre-inference startup failure",
+  "status": "full evaluation running; two zero-attempt startup failures replaced",
   "base_export_job": "1504793",
   "scorer_control_job": "1504794",
   "scorer_controls": [
@@ -80,9 +80,9 @@
       "scoring": "1504813"
     },
     "appworld_trained": {
-      "collection": "1504809",
-      "assembly": "1504814",
-      "scoring": "1504815"
+      "collection": "1504809_0,1504809_2,1504809_3,1504903_1",
+      "assembly": "1504904",
+      "scoring": "1504905"
     },
     "astra_sft_1k": {
       "collection": "1504810_0,1504810_2,1504810_3,1504897_1",
@@ -95,7 +95,7 @@
       "scoring": "1504819"
     }
   },
-  "report_job": "1504900",
+  "report_job": "1504906",
   "report_publication": "dependent job updates local reports after validation; review and git push afterward",
   "infrastructure_repairs": [
     {
@@ -113,6 +113,23 @@
         "1504817",
         "1504825"
       ]
+    },
+    {
+      "model": "appworld_trained",
+      "failed_job": "1504809_1 (raw job 1504888)",
+      "replacement_job": "1504903_1",
+      "reason": "FileExistsError in shared vLLM Torch AOT compilation cache; replacement uses job-local vLLM and Inductor caches",
+      "prior_model_attempts": 0,
+      "failure_artifact": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard1_startup_failure_1504888",
+      "canonical_shard": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard1",
+      "replacement_shard": "experiment_reports/training_against_role_probes/runs/swe_native/1504903/shard1",
+      "assembly_collection_id": "1504809",
+      "superseded_pending_jobs": [
+        "1504814",
+        "1504815",
+        "1504900"
+      ],
+      "replacement_script_sha256": "d82176daebb0e4dba3fa11a7516714f81752b98a18a8f2597ceb131ca01621b9"
     }
   ]
 }

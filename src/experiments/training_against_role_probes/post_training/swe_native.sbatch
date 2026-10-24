@@ -19,7 +19,7 @@ export PATH="$PWD/.tools/bin:$PATH" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=fal
 export TMPDIR="$native_scratch/tmp" TRITON_CACHE_DIR="$native_scratch/triton"
 export HF_HOME="$PWD/.cache/huggingface" HF_DATASETS_CACHE="$PWD/.cache/datasets"
 export INSPECT_EVALS_CACHE_DIR="$PWD/.cache/inspect-evals" SWE_IMAGE_CACHE="$PWD/.cache/swe-images"
-export SWE_SERVER_PROJECT=server_current VLLM_CACHE_ROOT="$PWD/.cache/vllm-agentic"
+export SWE_SERVER_PROJECT=server_current VLLM_CACHE_ROOT="$native_scratch/vllm" TORCHINDUCTOR_CACHE_DIR="$native_scratch/inductor"
 export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken" VLLM_USE_FLASHINFER_SAMPLER=0
 export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH" FLASHINFER_WORKSPACE_BASE="$native_scratch" MAX_JOBS=8

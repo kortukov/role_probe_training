@@ -255,3 +255,9 @@ a 30-minute progress timeout. The resumed session reviews/pushes ready results,
 handles failures, or rearms the watcher. It requires the Codex daemon to remain
 available. Local PID/thread/log details are in `logs/swe-watcher.json`; stop an
 armed watcher by terminating that PID. Do not start duplicate watchers.
+
+Startup-only shard replacements are recorded in `post_training/swe_native.json`
+under `infrastructure_repairs`. Their canonical shard directories are symlinks to
+the replacement run; the original startup log is retained separately. Recreate
+these links when assembling those recorded runs. Replacement jobs use private
+vLLM/Inductor caches to avoid concurrent writes to the shared compilation cache.
