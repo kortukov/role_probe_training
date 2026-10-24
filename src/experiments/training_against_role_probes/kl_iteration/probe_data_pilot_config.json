@@ -1,0 +1,21 @@
+{
+  "name": "appworld2700-kl-probe_data",
+  "wandb_id": "appworld2700-kl-probe_data-v1",
+  "model": ".cache/models/gpt-oss-20b",
+  "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
+  "trajectories": "experiment_reports/training_against_role_probes/data/train2700/trajectories.jsonl",
+  "expected_trajectories": 2700,
+  "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
+  "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
+  "kl_anchors": "experiment_reports/training_against_role_probes/kl_iteration/probe_data/data/anchors.jsonl",
+  "output": "experiment_reports/training_against_role_probes/kl_iteration/probe_data/runs/training/epoch1",
+  "seed": 123,
+  "epochs": 1,
+  "microbatch": 2,
+  "learning_rate": 5e-05,
+  "kl_coefficient": 16,
+  "refit_steps": 2000,
+  "eval_interval": 5,
+  "checkpoint_interval": 10,
+  "max_updates": 2
+}

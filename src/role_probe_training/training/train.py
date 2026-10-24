@@ -81,6 +81,8 @@ def main():
     if training_tasks & validation_tasks: raise ValueError('Training and validation tasks overlap')
     standard=probe_examples(runtime.tokenizer,config['probe_documents'])
     anchors=kl_examples(config['kl_anchors'])
+    if any(len(x['ids'])>runtime.base.config.max_position_embeddings for x in anchors):
+        raise ValueError('KL history exceeds native context; no truncation is allowed')
     if len(training)!=config['expected_trajectories']:
         raise ValueError('Unexpected training corpus size')
     manifest={**config,'world_size':world,'trainable_parameters':sum(x.numel() for x in parameters),

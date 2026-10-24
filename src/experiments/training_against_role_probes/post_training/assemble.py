@@ -4,10 +4,12 @@ import hashlib
 import json
 from pathlib import Path
 p=argparse.ArgumentParser(__doc__);p.add_argument('--root',type=Path,required=True);p.add_argument('--collection-id',required=True)
+p.add_argument('--benchmarks',nargs='+',choices=['appworld_test','tau2_retail','swe_bench'],default=['appworld_test','tau2_retail','swe_bench'])
 a=p.parse_args(); results={}
 source_file=a.root/'post_training/shard_sources.json'
 source_jobs=json.loads(source_file.read_text())['shard_jobs'] if source_file.exists() else {}
 for benchmark,shards,expected in [('appworld_test',[0,1],168),('tau2_retail',[2],114),('swe_bench',[3,4,5,6],500)]:
+    if benchmark not in a.benchmarks: continue
     rows=[]; selected=set(); manifests=[]
     for shard in shards:
         collection=source_jobs.get(str(shard),a.collection_id)

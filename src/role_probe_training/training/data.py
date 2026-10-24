@@ -43,9 +43,15 @@ def probe_examples(tokenizer,path):
 def kl_examples(path, max_length=2048):
     examples=[]
     for row in read_jsonl(path):
-        prefix=row['prompt_ids']; ids=(prefix+row['completion_ids'])[:max_length]
-        # Upstream scores completion positions without shifting this mask.
-        mask=[i>=len(prefix) for i in range(len(ids))]
+        if 'input_ids' in row:
+            # Explicit agentic masks preserve the complete history and its role labels.
+            ids=row['input_ids']; mask=row['completion_mask']
+            if len(ids)!=len(mask) or not ids or not all(type(v) is bool for v in mask):
+                raise ValueError('Invalid full-history KL mask')
+        else:
+            prefix=row['prompt_ids']; ids=(prefix+row['completion_ids'])[:max_length]
+            # Preserve the original upstream unshifted completion-position protocol.
+            mask=[i>=len(prefix) for i in range(len(ids))]
         examples.append(dict(id=str(row['id']),ids=ids,completion_mask=mask))
     if not examples or not any(any(x['completion_mask']) for x in examples):
         raise ValueError('KL anchor contains no scored completion tokens')
