@@ -245,3 +245,13 @@ Whole-history probe extraction uses that new input and a separate prediction
 folder; no old cohort is overwritten or combined with pilot attempts.
 
 After all four native cohorts finish, `validate.py --native-swe` and `compare.py --native-swe` validate and replace the SWE rows and appendix matrices together. The dependent report job updates local reports only; inspect them before committing the new results.
+
+### Session wake-up
+
+`post_training/watch_swe.sh THREAD_UUID` is a one-shot background watcher using
+`sacct`, `sleep`, and `codex queue`. It checks every minute and queues a message
+back to the specified existing Codex session on pipeline completion, failure, or
+a 30-minute progress timeout. The resumed session reviews/pushes ready results,
+handles failures, or rearms the watcher. It requires the Codex daemon to remain
+available. Local PID/thread/log details are in `logs/swe-watcher.json`; stop an
+armed watcher by terminating that PID. Do not start duplicate watchers.
