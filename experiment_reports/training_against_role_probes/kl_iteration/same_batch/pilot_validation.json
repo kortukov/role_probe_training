@@ -1,0 +1,47 @@
+{
+  "job_id": "1504851",
+  "completed_updates": 2,
+  "updates": [
+    {
+      "event": "update",
+      "rank": 0,
+      "step": 1,
+      "role_loss": 2.9219247548408043,
+      "kl": 5.038905509460436e-09,
+      "role_accuracy": 0.28121212124824524,
+      "gradient_norm": 26.739070892333984,
+      "microbatch": 2,
+      "update_seconds": 110.59995310520753,
+      "role_seconds": 37.9161496409215,
+      "kl_seconds": 60.63571604993194,
+      "peak_update_gib": 62.83730983734131,
+      "refit_seconds": 46.993501224089414,
+      "probe_heldout_accuracy": 0.7042293548583984,
+      "total_seconds": 157.59469672013074
+    },
+    {
+      "event": "update",
+      "rank": 0,
+      "step": 2,
+      "role_loss": 2.1480710895885062,
+      "kl": 0.0032580707956846536,
+      "role_accuracy": 0.3840591311454773,
+      "gradient_norm": 19.245319366455078,
+      "microbatch": 2,
+      "update_seconds": 66.90468784607947,
+      "role_seconds": 18.663791966624558,
+      "kl_seconds": 43.39365824917331,
+      "peak_update_gib": 71.02899646759033,
+      "refit_seconds": 32.98956114100292,
+      "probe_heldout_accuracy": 0.7279242873191833,
+      "total_seconds": 99.89576648687944
+    }
+  ],
+  "checks": [
+    "CPU KL direction and gradient checks passed",
+    "Full-history and legacy-mask regression checks passed",
+    "Exact role/KL trajectory-ID coverage and token equality checked at startup",
+    "Two GPU updates and full standard-data refits completed",
+    "step00002 checkpoint saved; full epoch resume submitted"
+  ]
+}

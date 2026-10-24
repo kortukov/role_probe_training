@@ -94,3 +94,9 @@ Baseline table refresh job **1504865** depends on the existing corrected-SWE
 publication job **1504825**. It rereads the canonical four-model comparison and
 refreshes only this iteration's table; it does not change the other agent's
 results or jobs. Per-variant report jobs also refresh that table on completion.
+
+Both two-update GPU pilots completed successfully. Same-batch validation is saved
+in [same_batch/pilot_validation.json](same_batch/pilot_validation.json); startup
+verified matching trajectory IDs and identical KL/role token IDs. Full training
+jobs **1504830** (fixed 800) and **1504852** (same batch) are running. Benchmark
+results remain pending until their dependent evaluation and report jobs finish.
