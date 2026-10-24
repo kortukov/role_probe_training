@@ -1,5 +1,5 @@
 {
-  "status": "pilot running; full rerun not yet submitted",
+  "status": "full rerun and whole-history scoring queued behind pilot validation gate",
   "base_export_job": "1504793",
   "scorer_control_job": "1504794",
   "scorer_controls": [
@@ -71,5 +71,30 @@
       "completion_tokens": 1,
       "request_above_32k_passed": true
     }
-  }
+  },
+  "gate_job": "1504807",
+  "full_jobs": {
+    "base_model": {
+      "collection": "1504808",
+      "assembly": "1504812",
+      "scoring": "1504813"
+    },
+    "appworld_trained": {
+      "collection": "1504809",
+      "assembly": "1504814",
+      "scoring": "1504815"
+    },
+    "astra_sft_1k": {
+      "collection": "1504810",
+      "assembly": "1504816",
+      "scoring": "1504817"
+    },
+    "depthbench": {
+      "collection": "1504811",
+      "assembly": "1504818",
+      "scoring": "1504819"
+    }
+  },
+  "report_job": "1504825",
+  "report_publication": "dependent job updates local reports after validation; review and git push afterward"
 }

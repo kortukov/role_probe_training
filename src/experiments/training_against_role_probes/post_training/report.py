@@ -30,7 +30,7 @@ def section(path, name, body, before=None):
     path.write_text(text)
 
 
-def publish(root):
+def publish(root, native_swe=False):
     tasks = json.loads((root / "post_training/task_results.json").read_text())
     export = json.loads((root / "data/post_training/model/export.json").read_text())
     probe = json.loads((root / "post_training/probes/layer_12.json").read_text())
@@ -53,6 +53,9 @@ def publish(root):
         prediction = root / f"predictions/post_training/{key}"
         if key == "tau2_retail":
             prediction = root / "predictions/post_training_whole/tau2_retail"
+        if native_swe and key == "swe_bench":
+            prediction = root / "predictions/swe_native"
+            task = json.loads((root / "post_training/swe_native_task_results.json").read_text())
         score = json.loads((prediction / "summary.json").read_text())
         assert task["samples"] == score["trajectories"] == expected
         assert score["input_sha256"] == task["input_sha256"]
@@ -103,6 +106,8 @@ def publish(root):
         "SWE generation used a 32K serving limit; context exhaustion constrains these task results "
         "([comparison and failure audit](" + ("APPENDIX.md#swe-bench-failure-audit" if root.name == "training_against_role_probes" else "../APPENDIX.md#swe-bench-failure-audit") + "))."
     ])
+    if native_swe:
+        table[-1] = table[-1].split("SWE generation used")[0] + "SWE uses the native 131K serving allowance with matched base/trained settings; see the [four-model comparison](../README.md)."
     section(root / "README.md", "fresh-rollout-results", "\n".join(table), before="## Message")
     section(root / "APPENDIX.md", "fresh-rollout-confusions", "\n".join(appendix))
     (root / "post_training/results.json").write_text(json.dumps(results, indent=2) + "\n")

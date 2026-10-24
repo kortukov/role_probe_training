@@ -240,7 +240,8 @@ it is retained as a task outcome and explicitly counted in exported metrics.
 Before tasks run, each server must accept a 40K-token request and pass tool-call
 checks. `post_training/validate_swe_scorer.py` verifies gold and unchanged-patch
 controls on two repositories through the pinned images and upstream grader.
-Completed native cohorts are assembled with `post_training/assemble_swe_native.py
---root ROOT --collection-id JOB` into `ROOT/data/swe_native/evaluation/`.
+Completed native cohorts are assembled with `post_training/assemble_swe_native.py --root ROOT --collection-id JOB` into `ROOT/data/swe_native/evaluation/`.
 Whole-history probe extraction uses that new input and a separate prediction
 folder; no old cohort is overwritten or combined with pilot attempts.
+
+After all four native cohorts finish, `validate.py --native-swe` and `compare.py --native-swe` validate and replace the SWE rows and appendix matrices together. The dependent report job updates local reports only; inspect them before committing the new results.

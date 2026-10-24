@@ -1,13 +1,19 @@
 """Independently validate score aggregates, coverage and saved token artifacts."""
+import argparse
 import json
 from pathlib import Path
 import numpy as np
 
 root=Path('experiment_reports/training_against_role_probes')
+parser=argparse.ArgumentParser(__doc__)
+parser.add_argument('--native-swe',action='store_true')
+args=parser.parse_args()
 checks=[]
 for sub in ['', 'astra_sft_1k','depthbench','base_model']:
     for benchmark,expected in [('appworld_test',168),('tau2_retail',114),('swe_bench',500)]:
         directory=root/sub/f'predictions/{"post_training_whole" if benchmark=="tau2_retail" else "post_training"}/{benchmark}'
+        if args.native_swe and benchmark=='swe_bench':
+            directory=root/sub/'predictions/swe_native'
         summary=json.loads((directory/'summary.json').read_text())
         assert summary['trajectories']==expected
         assert not summary.get('segmented_trajectories')
