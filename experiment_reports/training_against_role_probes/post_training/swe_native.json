@@ -1,5 +1,5 @@
 {
-  "status": "full rerun and whole-history scoring queued behind pilot validation gate",
+  "status": "full evaluation running; ASTRA shard 1 retried after pre-inference startup failure",
   "base_export_job": "1504793",
   "scorer_control_job": "1504794",
   "scorer_controls": [
@@ -85,9 +85,9 @@
       "scoring": "1504815"
     },
     "astra_sft_1k": {
-      "collection": "1504810",
-      "assembly": "1504816",
-      "scoring": "1504817"
+      "collection": "1504810_0,1504810_2,1504810_3,1504897_1",
+      "assembly": "1504898",
+      "scoring": "1504899"
     },
     "depthbench": {
       "collection": "1504811",
@@ -95,6 +95,24 @@
       "scoring": "1504819"
     }
   },
-  "report_job": "1504825",
-  "report_publication": "dependent job updates local reports after validation; review and git push afterward"
+  "report_job": "1504900",
+  "report_publication": "dependent job updates local reports after validation; review and git push afterward",
+  "infrastructure_repairs": [
+    {
+      "model": "astra_sft_1k",
+      "failed_job": "1504810_1 (raw job 1504890)",
+      "replacement_job": "1504897_1",
+      "reason": "FastAPI/Pydantic import failed: email-validator metadata version returned None; current import verified successfully, no environment changes",
+      "prior_model_attempts": 0,
+      "failure_artifact": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504810/shard1_startup_failure_1504890",
+      "canonical_shard": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504810/shard1",
+      "replacement_shard": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504897/shard1",
+      "assembly_collection_id": "1504810",
+      "superseded_pending_jobs": [
+        "1504816",
+        "1504817",
+        "1504825"
+      ]
+    }
+  ]
 }
