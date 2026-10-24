@@ -71,6 +71,10 @@ Refresh the separate iteration section without editing the four-model table:
 Authoritative dependency graphs: [agentic800/jobs.json](agentic800/jobs.json) and
 [same_batch/jobs.json](same_batch/jobs.json). Preparation jobs are 1504826 and 1504850.
 GPU pilots are 1504827 and 1504851; full epochs are 1504830 and 1504852.
+Both preparation jobs passed the CPU KL direction/gradient and full-history mask
+checks. Agentic pilot 1504827 completed both updates and all probe refits; the
+full epoch resumed successfully from step 2. Its [pilot validation](agentic800/pilot_validation.json)
+records timing and memory, not benchmark results.
 Each full run resumes the pilot's two completed updates, for 169 total updates.
 
 Export → fresh probe fit and benchmark generation → complete cohort assembly →
