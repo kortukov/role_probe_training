@@ -57,7 +57,7 @@ Baseline evaluation uses the same full-context BF16 model and five probes as
 [ASTRA](../astra_sft_1k/RUNNING.md). No model training is started before reporting
 the baseline and receiving [implementation readiness](../AGENT_COMMUNICATION.md).
 
-Baseline job **1503678** scores all12,980 verified training histories using
+Completed baseline job **1503678** scored all12,980 verified training histories using
 `evaluate_corpus.sbatch`; output: `data/baseline/`. The original collection
 remains intact, including its error field. The explicitly audited failure is
 `depthbench/364/attempt17`; [collection_error_audit.json](collection_error_audit.json)
@@ -69,3 +69,16 @@ The malformed generated tool name contains literal Harmony control tokens.
 Retrospective replay preserves it; labels still come exclusively from structured
 message/channel metadata, and header/control tokens are excluded from scoring.
 No final response is fabricated for the aborted history.
+
+Generate the compact metrics and appendix:
+
+```bash
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/summarize_corpus.py \
+ --baseline experiment_reports/training_against_role_probes/depthbench/data/baseline \
+ --report experiment_reports/training_against_role_probes/depthbench \
+ --expected-trajectories 12980
+```
+
+[baseline_submission.json](baseline_submission.json) records source/probe hashes;
+[baseline_manifest.json](baseline_manifest.json) records model/replay settings.
+All histories use full context; no truncation, segmentation or downsampling.
