@@ -2,15 +2,15 @@
 import argparse
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 from role_probe_training.probes.harmony import ROLES
-from role_probe_training.probes.linear import RoleProbe, fit_probe
+from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states
-from role_probe_training.probes.evaluation import metrics
 from role_probe_training.training.data import probe_examples, trajectory_examples
 
 
@@ -40,18 +40,23 @@ def fit(root):
     x=np.concatenate(features); del features
     y=np.concatenate(labels); mask=np.asarray(splits)=='train'
     export=json.loads((model_path/'export.json').read_text())
-    probe=fit_probe(x[mask],y[mask],C=0.005,max_iter=5000,backend='cuml',metadata={
+    cache=root/'data/post_training/probe_features'; cache.mkdir(parents=True,exist_ok=True)
+    np.save(cache/'states.npy',x); np.save(cache/'labels.npy',y); np.save(cache/'train.npy',mask)
+    metadata={
         'model_revision':export['adapter_sha256'],'model_export':str(model_path),
         'base_model_revision':export['base_revision'],'layer':12,'layer_indexing':'zero_based',
         'activation':'post_attention_layernorm_output_pre_mlp','fresh_fit':True,
         'initialization':'from scratch; no training-loop probe weights',
         'documents_sha256':hashlib.sha256(documents.read_bytes()).hexdigest(),
         'passages':250,'train_tokens':int(mask.sum()),'test_tokens':int((~mask).sum()),
-        'token_stride':1,'train_split':'original passage split','sequence_length':1024})
-    output=root/'post_training'; probe.save(output/'probes/layer_12.npz')
-    result=metrics(y[~mask],probe.predict_proba(x[~mask]))
-    (output/'probe_fit.json').write_text(json.dumps(result,indent=2)+'\n')
-    print(json.dumps({'heldout_standard_accuracy':result['accuracy']}),flush=True)
+        'token_stride':1,'train_split':'original passage split','sequence_length':1024}
+    (cache/'metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
+    del x, y, model
+    torch.cuda.empty_cache()
+    # cuML uses CUDA 13; keep its libraries separate from the PEFT/CUDA-12 runtime.
+    subprocess.run([str(Path.cwd()/'.venv/bin/python'),'-m',
+        'role_probe_training.post_training.fit_saved','--root',str(root)],check=True)
+
 
 
 def score(root,input_path,output):

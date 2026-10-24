@@ -140,7 +140,9 @@ the FP32 attention adapters at inference; probe scoring loads the same adapters
 through PEFT. Use one GPU per server (no tensor/pipeline parallelism).
 
 Environments are the existing `agentic_eval/server_current` (vLLM),
-`agentic_eval/swe` (Inspect), and `training_against_role_probes/runtime` (probes).
+`agentic_eval/swe` (Inspect), and `training_against_role_probes/runtime` (activation extraction/scoring), and the
+root `.venv` (cuML fitting in a separate CUDA-13 process). Standard-data activations
+are retained under `data/post_training/probe_features/`.
 Install this package in the server environment without changing its dependencies:
 
 ```bash
