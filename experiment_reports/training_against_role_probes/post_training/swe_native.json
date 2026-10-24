@@ -1,0 +1,75 @@
+{
+  "status": "pilot running; full rerun not yet submitted",
+  "base_export_job": "1504793",
+  "scorer_control_job": "1504794",
+  "scorer_controls": [
+    {
+      "control": "gold",
+      "sample_id": "django__django-14155",
+      "scores": {
+        "swe_bench_scorer": 1.0
+      },
+      "error": null
+    },
+    {
+      "control": "gold",
+      "sample_id": "sympy__sympy-13878",
+      "scores": {
+        "swe_bench_scorer": 1.0
+      },
+      "error": null
+    },
+    {
+      "control": "unchanged",
+      "sample_id": "django__django-14155",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null
+    },
+    {
+      "control": "unchanged",
+      "sample_id": "sympy__sympy-13878",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null
+    }
+  ],
+  "pilot_jobs": {
+    "base_model": "1504795",
+    "astra_sft_1k": "1504796"
+  },
+  "settings": {
+    "context_limit": 131072,
+    "temperature": 1,
+    "reasoning_effort": "high",
+    "max_output_tokens": 16384,
+    "message_limit": 200,
+    "cumulative_token_limit": 10000000,
+    "time_limit_seconds": 3600,
+    "concurrency": 4,
+    "model_dtype": "bfloat16"
+  },
+  "base_export": "base_model/data/swe_native/model",
+  "probe_policy": "reuse current standard-data probes; whole histories only; over-native histories unscorable, all task scores retained",
+  "source_sha256": {
+    "src/experiments/training_against_role_probes/post_training/swe_native.sbatch": "84ca01dd5a7d727c35b4a0c8ad5a8ce33a6fe3eabd2a81b6231f1e2323c960ad",
+    "src/experiments/training_against_role_probes/post_training/native_context_check.py": "3584a86f005736d37fd491e08dab93f55be4eaf91184ed78101ac81707684f7a",
+    "src/role_probe_training/trajectories/inspect_export.py": "a70a2354a2322cdf58295bb7a057b962255b970745177484c6e80f5cfaf4b169"
+  },
+  "native_context_checks": {
+    "base_model": {
+      "server_context_limit": 131072,
+      "prompt_tokens": 40075,
+      "completion_tokens": 1,
+      "request_above_32k_passed": true
+    },
+    "astra_sft_1k": {
+      "server_context_limit": 131072,
+      "prompt_tokens": 40075,
+      "completion_tokens": 1,
+      "request_above_32k_passed": true
+    }
+  }
+}

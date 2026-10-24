@@ -218,3 +218,29 @@ startup; exclude it from new container-based generation. Node `vca-gpu-0701-03`
 still fails CUDA initialization and remains excluded throughout.
 
 Recompute the existing-data SWE failure audit with `uv run python src/experiments/training_against_role_probes/post_training/audit_swe.py`; it reads existing trajectories only and records their hashes in `post_training/swe_failure_audit.json`.
+
+## Corrected SWE evaluation
+
+The native-context rerun is separate from the published constrained cohort until
+all models finish and their new trajectories are probed. Its settings and job IDs
+are recorded in [post_training/swe_native.json](post_training/swe_native.json).
+The base is exported without updates to BF16 by `post_training/export_base.py`,
+matching trained expert precision. Existing trained model exports and independently
+fitted probes are reused.
+
+`post_training/swe_native.sbatch ROOT pilot` runs six diagnostic tasks;
+`sbatch --array=0-3 post_training/swe_native.sbatch ROOT full` covers all 500 tasks
+in disjoint shards. Both use 131,072 context tokens, high reasoning, temperature 1,
+16,384 output tokens per call, 200 messages, ten million cumulative tokens and
+3,600 seconds per task, with four concurrent samples. Increasing the cumulative
+budget avoids imposing the previous two-million-token ceiling when longer inputs
+are repeatedly sent. The native context still bounds individual calls; exceeding
+it is retained as a task outcome and explicitly counted in exported metrics.
+
+Before tasks run, each server must accept a 40K-token request and pass tool-call
+checks. `post_training/validate_swe_scorer.py` verifies gold and unchanged-patch
+controls on two repositories through the pinned images and upstream grader.
+Completed native cohorts are assembled with `post_training/assemble_swe_native.py
+--root ROOT --collection-id JOB` into `ROOT/data/swe_native/evaluation/`.
+Whole-history probe extraction uses that new input and a separate prediction
+folder; no old cohort is overwritten or combined with pilot attempts.
