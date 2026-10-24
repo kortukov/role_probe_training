@@ -40,8 +40,8 @@ reported separately. Confusion matrices are in the [appendix](APPENDIX.md).
 <!-- fresh-rollout-setup -->
 **Fresh-rollout evaluation.** The final trained model generates new attempts on
 AppWorld's 168 normal-test tasks, all 114 τ² retail tasks and all 500 SWE-bench
-Verified tasks. These benchmarks do not supply model-update or probe-fitting
-examples. For each trained model, we fit a new five-class linear layer-12 probe
+Verified tasks. These fresh evaluation trajectories are never used for model
+updates or probe fitting. For each trained model, we fit a new five-class linear layer-12 probe
 from scratch on the standard 250 C4/Dolma passages, preserving their original
 passage-level train/test split. This probe is independent of the warm-started
 probes used during model training. It reads post-attention-layernorm outputs
