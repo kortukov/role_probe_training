@@ -1,0 +1,42 @@
+{
+  "job_id": 1503688,
+  "git_commit": "a17a60b0fd82bb2c8d6295be9c2e1215cea4ef5f",
+  "config": {
+    "name": "depthbench-layer12-epoch1",
+    "wandb_id": "depthbench-l12-epoch1",
+    "model": ".cache/models/gpt-oss-20b",
+    "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
+    "trajectories": "experiment_reports/training_against_role_probes/depthbench/data/train_1_2_3/trajectories.jsonl",
+    "expected_trajectories": 12980,
+    "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
+    "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
+    "kl_anchors": "experiment_reports/training_against_role_probes/data/kl/anchors.jsonl",
+    "output": "experiment_reports/training_against_role_probes/depthbench/runs/training/epoch1",
+    "seed": 123,
+    "epochs": 1,
+    "microbatch": 2,
+    "learning_rate": 5e-05,
+    "kl_coefficient": 16,
+    "refit_steps": 2000,
+    "eval_interval": 5,
+    "checkpoint_interval": 10
+  },
+  "source_sha256": {
+    "src/experiments/training_against_role_probes/depthbench_config.json": "9416d9cb8b8dc1ead0554117b3e8bab68bd36f8eb374580f713b08b073bdf847",
+    "src/experiments/training_against_role_probes/train.sbatch": "afe2d347a3027f56aea6138d5505934f8c7acfa746860144c808b79a15839b82",
+    "src/role_probe_training/training/data.py": "049e053b703ee72ccffe50ad7176ca3ba03a86642b03ae5f26a0600f14c06ca2",
+    "src/role_probe_training/training/throughput.py": "aa918ceef567d742e5c4535f7f70da9d40ea1a3179641b8327278af0f900c40d",
+    "src/role_probe_training/training/refit.py": "91c03fd70c5b304d91531ce9bd3bf94060d5be27aa523338404e10e034066893",
+    "src/role_probe_training/training/objectives.py": "e7b988538870b2cd350011c40ba478b2f6c496c6204621d25c26d53a2fab0859",
+    "src/role_probe_training/training/score.py": "a810e240f21eb10902ae56d6dda4a82da95536dc6be2b9e709078d9c84dad362",
+    "src/role_probe_training/training/__init__.py": "8a05c04c4c96aaa0610d78a455296feaba20a2d6440ad2422e1a24a00cdfcc2b",
+    "src/role_probe_training/training/train.py": "5025f83ad52cf12ea1a3c9024f5ce0767302b47a44e7f5907783ca9d266b517c",
+    "src/role_probe_training/training/model.py": "61820519d382ed86eb021b2611e24eb4b9350b844cba2847e5ba76d00657aa81"
+  },
+  "gpus": 2,
+  "cpus": 16,
+  "host_memory_gib": 128,
+  "walltime": "24:00:00",
+  "baseline_job": 1503678,
+  "readiness": "EXPLICIT READY \u2014 2026-10-24 in ../AGENT_COMMUNICATION.md"
+}

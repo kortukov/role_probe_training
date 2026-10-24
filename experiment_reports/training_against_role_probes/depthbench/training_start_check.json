@@ -1,0 +1,28 @@
+{
+  "ready": {
+    "event": "ready",
+    "rank": 0,
+    "updates": 812,
+    "start_step": 0,
+    "trajectories": 12980,
+    "kl_pairs": 800,
+    "probe_passage_roles": 1250
+  },
+  "first_complete_update": {
+    "event": "update",
+    "rank": 0,
+    "step": 1,
+    "role_loss": 2.2651102070401827,
+    "kl": 6.1328375842803016e-09,
+    "role_accuracy": 0.41966676712036133,
+    "gradient_norm": 31.19799041748047,
+    "microbatch": 2,
+    "update_seconds": 61.80125368479639,
+    "role_seconds": 24.990565274842083,
+    "kl_seconds": 36.56121157575399,
+    "peak_update_gib": 52.777835845947266,
+    "refit_seconds": 47.65905417315662,
+    "probe_heldout_accuracy": 0.6794726848602295,
+    "total_seconds": 109.46174426795915
+  }
+}

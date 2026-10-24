@@ -80,3 +80,6 @@ sbatch --chdir=/data/cluster/users/kortukov/role_probe_training \
 Logs: `../logs/astra-role-training-1503671.out`. Checkpoints and rank logs:
 `runs/training/epoch1/`.
 [W&B run](https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/astra_sft_1k-l12-epoch1).
+
+[training_manifest.json](training_manifest.json) captures actual input hashes,
+training source hashes, GPU type and runtime version from the running job.

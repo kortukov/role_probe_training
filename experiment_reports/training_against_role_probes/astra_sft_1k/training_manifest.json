@@ -1,0 +1,42 @@
+{
+  "name": "astra_sft_1k-layer12-epoch1",
+  "wandb_id": "astra_sft_1k-l12-epoch1",
+  "model": ".cache/models/gpt-oss-20b",
+  "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
+  "trajectories": "experiment_reports/training_against_role_probes/astra_sft_1k/data/trajectories.jsonl",
+  "expected_trajectories": 1000,
+  "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
+  "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
+  "kl_anchors": "experiment_reports/training_against_role_probes/data/kl/anchors.jsonl",
+  "output": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/training/epoch1",
+  "seed": 123,
+  "epochs": 1,
+  "microbatch": 2,
+  "learning_rate": 5e-05,
+  "kl_coefficient": 16,
+  "refit_steps": 2000,
+  "eval_interval": 5,
+  "checkpoint_interval": 10,
+  "world_size": 2,
+  "trainable_parameters": 739639296,
+  "sha256": {
+    "trajectories": "61fd7252d9e35b9460beff4e63c24c519f1abf1f374e805846e0d1e091ea3412",
+    "validation": "ea22b93901821b012a30dfdb2903d20e17854812c1b2a1d7689c3b24a898f293",
+    "probe_documents": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+    "kl_anchors": "dc99bee0306c18693f6df16262af5d737a2c8848641aa363c1379c9886ebba01",
+    "probe": "45b97daf451f3d559351a027d6a8a94715b1d309884e463702b9178dea8b8dda"
+  },
+  "gpu": "NVIDIA B200",
+  "torch": "2.9.1+cu128",
+  "git_commit": "ac0adc736c61f6a4b77a6464d2df92e7d2aaae0b",
+  "source_sha256": {
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/data.py": "049e053b703ee72ccffe50ad7176ca3ba03a86642b03ae5f26a0600f14c06ca2",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/throughput.py": "aa918ceef567d742e5c4535f7f70da9d40ea1a3179641b8327278af0f900c40d",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/refit.py": "91c03fd70c5b304d91531ce9bd3bf94060d5be27aa523338404e10e034066893",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/objectives.py": "e7b988538870b2cd350011c40ba478b2f6c496c6204621d25c26d53a2fab0859",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/score.py": "a810e240f21eb10902ae56d6dda4a82da95536dc6be2b9e709078d9c84dad362",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/__init__.py": "8a05c04c4c96aaa0610d78a455296feaba20a2d6440ad2422e1a24a00cdfcc2b",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/train.py": "5025f83ad52cf12ea1a3c9024f5ce0767302b47a44e7f5907783ca9d266b517c",
+    "/data/cluster/users/kortukov/role_probe_training/src/role_probe_training/training/model.py": "61820519d382ed86eb021b2611e24eb4b9350b844cba2847e5ba76d00657aa81"
+  }
+}

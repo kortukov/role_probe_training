@@ -82,3 +82,32 @@ Generate the compact metrics and appendix:
 [baseline_submission.json](baseline_submission.json) records source/probe hashes;
 [baseline_manifest.json](baseline_manifest.json) records model/replay settings.
 All histories use full context; no truncation, segmentation or downsampling.
+
+## Model training
+
+Job **1503688** was submitted after the complete baseline was reported and the
+implementation agent explicitly released the pipeline. Configuration:
+[depthbench_config.json](../../../src/experiments/training_against_role_probes/depthbench_config.json).
+Provenance: [training_submission.json](training_submission.json). Two B200 GPUs,
+sixteen CPUs, 128 GB host RAM, 24-hour limit.
+
+One epoch uses all12,980 histories:812updates, effective batch16 except the final
+partial batch, initial microbatch2 per GPU, learning rate5e-5, KL coefficient16.
+After each model update, the probe is refitted for2,000steps on the original
+C4/Dolma passages, never DepthBench. The common800 KL anchors and eight-task
+AppWorld dev corpus are reused; this is cross-domain dev evaluation, not held-out
+DepthBench validation. Groups0/4/5/6 do not enter model-update training.
+
+```bash
+sbatch --chdir=/data/cluster/users/kortukov/role_probe_training \
+ --job-name=depthbench-role-training --time=24:00:00 \
+ src/experiments/training_against_role_probes/train.sbatch \
+ src/experiments/training_against_role_probes/depthbench_config.json
+```
+
+Logs: `../logs/depthbench-role-training-1503688.out`. Checkpoints and rank logs:
+`runs/training/epoch1/`.
+[W&B run](https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/depthbench-l12-epoch1).
+
+[training_manifest.json](training_manifest.json) captures actual input hashes,
+training source hashes, GPU type and runtime version from the running job.
