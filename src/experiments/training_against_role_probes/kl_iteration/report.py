@@ -8,7 +8,7 @@ BENCHMARKS = [('appworld_test', 'AppWorld test_normal', 168, 'appworld_success')
               ('tau2_retail', 'τ² retail', 114, 'retail_scorer'),
               ('swe_bench', 'SWE-bench Verified', 500, 'swe_bench_scorer')]
 VARIANTS = [('agentic800', 'AppWorld + agentic KL (800)'),
-            ('probe_data', 'AppWorld + probe-data KL')]
+            ('same_batch', 'AppWorld + same-batch KL')]
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
         'data and optimizer settings. Agentic KL reuses 800 base-model training rollouts '
         'without selecting by outcome, scoring model-authored content over complete histories. '
         'Unlike the original KL run, these histories are not capped at 2,048 tokens. '
-        'Probe-data KL uses all training-split C4/Dolma passage-role examples and all their content tokens; held-out passages are excluded.\n',
+        'Same-batch KL scores the exact AppWorld trajectories used for each role-loss update, across the full 2,700-trajectory training corpus. Both variants score the same model-authored roles.\n',
         'All values are percentages; **pending** means no completed evaluation is available. '
         'Base and original AppWorld rows repeat the published comparison above.\n',
         '| Benchmark | Model | Task success | Overall role | System | User | Reasoning | Assistant | Tool |',

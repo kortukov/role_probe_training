@@ -68,7 +68,7 @@ The base trajectories/task scores are reused from the earlier evaluations; base 
 <!-- kl-iteration-results -->
 ### AppWorld training: KL-data iteration
 
-This comparison asks whether changing the KL data preserves task performance while retaining role recovery. Both new runs keep the original AppWorld role-training data and optimizer settings. Agentic KL reuses 800 base-model training rollouts without selecting by outcome, scoring model-authored content over complete histories. Unlike the original KL run, these histories are not capped at 2,048 tokens. Probe-data KL uses all training-split C4/Dolma passage-role examples and all their content tokens; held-out passages are excluded.
+This comparison asks whether changing the KL data preserves task performance while retaining role recovery. Both new runs keep the original AppWorld role-training data and optimizer settings. Agentic KL reuses 800 base-model training rollouts without selecting by outcome, scoring model-authored content over complete histories. Unlike the original KL run, these histories are not capped at 2,048 tokens. Same-batch KL scores the exact AppWorld trajectories used for each role-loss update, across the full 2,700-trajectory training corpus. Both variants score the same model-authored roles.
 
 All values are percentages; **pending** means no completed evaluation is available. Base and original AppWorld rows repeat the published comparison above.
 
@@ -77,15 +77,15 @@ All values are percentages; **pending** means no completed evaluation is availab
 | AppWorld test_normal | Base | 26.8 | 26.5 | 1.2 | 49.9 | 73.1 | 35.4 | 13.3 |
 | AppWorld test_normal | AppWorld-trained | 0.6 | 99.0 | 100.0 | 99.6 | 99.9 | 91.0 | 100.0 |
 | AppWorld test_normal | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
-| AppWorld test_normal | AppWorld + probe-data KL | pending | pending | pending | pending | pending | pending | pending |
+| AppWorld test_normal | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
 | τ² retail | Base | 64.0 | 19.9 | 6.6 | 29.9 | 20.0 | 95.0 | 0.7 |
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
-| τ² retail | AppWorld + probe-data KL | pending | pending | pending | pending | pending | pending | pending |
+| τ² retail | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
 | SWE-bench Verified | Base | 2.2 | 22.6 | 1.4 | 94.5 | 37.0 | 30.4 | 3.5 |
 | SWE-bench Verified | AppWorld-trained | 2.8 | 87.2 | 39.8 | 94.7 | 97.9 | 89.8 | 85.0 |
 | SWE-bench Verified | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
-| SWE-bench Verified | AppWorld + probe-data KL | pending | pending | pending | pending | pending | pending | pending |
+| SWE-bench Verified | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
 
 The coverage and generation-setting limitations of the original rows also apply here. New results will use fresh trajectories and independently fitted standard-data probes. [Run details](kl_iteration/RUNNING.md).
 <!-- /kl-iteration-results -->

@@ -11,7 +11,7 @@ EXCLUDE = 'vca-gpu-0701-03,vca-gpu-0701-05'
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
-    parser.add_argument('variant', choices=['agentic800','probe_data'])
+    parser.add_argument('variant', choices=['agentic800','same_batch'])
     parser.add_argument('--training', required=True)
     parser.add_argument('--native-gate', required=True)
     args = parser.parse_args()

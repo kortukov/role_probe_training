@@ -1,0 +1,13 @@
+{
+  "training": "1504852",
+  "native_gate": "1504807",
+  "export": "1504853",
+  "probe_fit": "1504854",
+  "collect": "1504855",
+  "swe_collect": "1504856",
+  "assemble": "1504857",
+  "score": "1504858",
+  "report": "1504859",
+  "preparation": "1504850",
+  "pilot": "1504851"
+}

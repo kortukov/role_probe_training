@@ -7,34 +7,32 @@ from pathlib import Path
 import random
 
 from transformers import AutoTokenizer
-from role_probe_training.training.data import probe_examples, read_jsonl, trajectory_examples
+from role_probe_training.training.data import trajectory_examples
 
 ROOT = Path('experiment_reports/training_against_role_probes')
-DOCUMENTS = Path('experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
 
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
-    parser.add_argument('variant', choices=['agentic800', 'probe_data'])
+    parser.add_argument('variant', choices=['agentic800', 'same_batch'])
     args = parser.parse_args()
     output = ROOT/'kl_iteration'/args.variant
     target = output/'data/anchors.jsonl'
     if target.exists():
         raise FileExistsError(target)
     tokenizer = AutoTokenizer.from_pretrained('.cache/models/gpt-oss-20b', local_files_only=True)
-    source = ROOT/'data/train2700/trajectories.jsonl' if args.variant == 'agentic800' else DOCUMENTS
+    source = ROOT/'data/train2700/trajectories.jsonl'
+    examples = trajectory_examples(tokenizer, source)
+    assert len(examples) == 2700
+    label_set = {2, 3}
     if args.variant == 'agentic800':
-        examples = trajectory_examples(tokenizer, source)
-        assert len(examples) == 2700
         examples = random.Random(42).sample(examples, 800)
         # Same unshifted KL convention as the existing run, on model-authored
         # reasoning, answers and tool-call arguments. Environment outputs are context.
         label_set = {2, 3}
         selection = '800 of 2700 saved base AppWorld train trajectories; seed 42; no outcome filtering'
     else:
-        examples = [x for x in probe_examples(tokenizer, source) if x['split'] == 'train']
-        label_set = {0, 1, 2, 3, 4}
-        selection = 'All training-split standard passage-role examples; held-out probe passages excluded'
+        selection = 'All 2700 AppWorld role-training trajectories; KL uses the exact current role-loss batch'
     target.parent.mkdir(parents=True, exist_ok=True)
     lengths = []; scored = []; role_counts = Counter()
     with target.open('w') as f:

@@ -3,7 +3,7 @@
 The role-training data remain the original 2,700 AppWorld train trajectories.
 Each variant starts from the base model, runs one epoch (169 updates), and retains
 layer 12 pre-MLP role loss, effective batch 16, LoRA rank 64/alpha 128, learning
-rate 5e-5, KL coefficient 16 and 16 KL examples sampled per update. All standard
+rate 5e-5, KL coefficient 16. The fixed pool samples 16 KL examples per update; same-batch KL uses the exact role batch (16 trajectories, or 12 in the final update). All standard
 probe refits retain 250 passages, their original split, all content tokens and
 2,000 optimizer steps. The final evaluation fits a fresh independent probe.
 
@@ -11,8 +11,10 @@ probe refits retain 250 passages, their original split, all content tokens and
 without success filtering. These overlap the role-training corpus intentionally;
 no test or dev trajectories enter KL. KL scores reasoning and assistant content,
 including tool-call arguments. Tool responses and system/user messages are context.
-`probe_data` uses all training-split C4/Dolma passage-role examples and scores all
-content positions. It excludes the original held-out probe passages.
+`same_batch` uses all 2,700 AppWorld trajectories over the epoch, applying KL to
+the exact batch used for each role-loss update. It scores the same reasoning and
+assistant content mask as the fixed pool. No C4/Dolma examples enter either KL
+loss; those passages are used only for the unchanged probe-refitting procedure.
 
 Both use KL(base || adapted) with the original unshifted position convention.
 Unlike the original Dolci pool, explicit masks preserve full histories without
@@ -34,7 +36,7 @@ Prepare the locked environment and each pool:
 ```bash
 .tools/bin/uv sync --locked --project src/experiments/training_against_role_probes/runtime
 sbatch src/experiments/training_against_role_probes/kl_iteration/prepare.sbatch agentic800
-sbatch src/experiments/training_against_role_probes/kl_iteration/prepare.sbatch probe_data
+sbatch src/experiments/training_against_role_probes/kl_iteration/prepare.sbatch same_batch
 ```
 
 Each two-update pilot uses the production corpus, objectives and probe-refit
@@ -47,7 +49,12 @@ sbatch --exclude=vca-gpu-0701-03,vca-gpu-0701-05 src/experiments/training_agains
 sbatch --exclude=vca-gpu-0701-03,vca-gpu-0701-05 src/experiments/training_against_role_probes/train.sbatch src/experiments/training_against_role_probes/kl_iteration/agentic800_config.json --resume experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/training/epoch1/checkpoints/step00002
 ```
 
-Use the equivalent `probe_data` paths for the other variant. Final checkpoints
+For `same_batch`, use its corresponding config paths and the isolated
+`kl_iteration/train_same_batch.sbatch` wrapper. It invokes
+`role_probe_training.training.train_same_batch`, a copy of the trainer whose only
+objective change is selecting the exact role batch for KL. The shared fixed-pool
+trainer remains unchanged while that experiment is active. Startup requires exact
+trajectory-ID coverage and identical role/KL token IDs. Final checkpoints
 are `VARIANT/runs/training/epoch1/checkpoints/step00169`. Evaluation will use
 168 AppWorld normal-test tasks, 114 retail tasks and 500 SWE Verified tasks,
 with the corrected native-context SWE protocol. Score complete histories;
@@ -62,8 +69,8 @@ Refresh the separate iteration section without editing the four-model table:
 ## Submitted jobs
 
 Authoritative dependency graphs: [agentic800/jobs.json](agentic800/jobs.json) and
-[probe_data/jobs.json](probe_data/jobs.json). Preparation jobs 1504826 and 1504828
-completed. GPU pilots are 1504827 and 1504829; full epochs are 1504830 and 1504831.
+[same_batch/jobs.json](same_batch/jobs.json). Preparation jobs are 1504826 and 1504850.
+GPU pilots are 1504827 and 1504851; full epochs are 1504830 and 1504852.
 Each full run resumes the pilot's two completed updates, for 169 total updates.
 
 Export → fresh probe fit and benchmark generation → complete cohort assembly →
