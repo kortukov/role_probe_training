@@ -28,6 +28,15 @@ training 1505947 resumes that checkpoint for the remaining 1,686 updates.
 The 72-hour training allocation reserves 256 GiB host memory for the larger
 corpus; the objective and effective batch size are unchanged.
 
+Collection audit: shard 184 (seed 8485), task `6104387_1`, contains a
+model-caused failure. The model replaced `requester.request` with an incompatible
+`debug_request` function, causing the subsequent task-completion check to raise
+a missing-argument error. Preserve its original saved history and error metadata;
+do not reroll or omit the attempt. Assembly allows only this identified case and
+checks its error signature and saved monkey-patch code. Missing task scores count
+as unsuccessful in collection metrics. All export errors and other sample errors
+remain fatal validation failures. The assembled manifest records the exception.
+
 Export 1505948, fresh probe fit 1505949, evaluation collection 1505950
 (indices 0–2 only), assembly 1505951 and role scoring 1505952 (indices 0–1
 only) depend on successful upstream stages. These jobs do not run SWE.
