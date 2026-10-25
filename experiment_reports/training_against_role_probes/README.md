@@ -79,7 +79,7 @@ All values are percentages; **pending** means no completed evaluation is availab
 | AppWorld test_normal | Base | 26.8 | 26.5 | 1.2 | 49.9 | 73.1 | 35.4 | 13.3 |
 | AppWorld test_normal | AppWorld-trained | 0.6 | 99.0 | 100.0 | 99.6 | 99.9 | 91.0 | 100.0 |
 | AppWorld test_normal | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
-| AppWorld test_normal | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
+| AppWorld test_normal | AppWorld + same-batch KL | 36.9 | pending | pending | pending | pending | pending | pending |
 | τ² retail | Base | 64.0 | 19.9 | 6.6 | 29.9 | 20.0 | 95.0 | 0.7 |
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | AppWorld + agentic KL (800) | 50.9 | 72.1 | 19.5 | 43.9 | 91.7 | 73.4 | 37.4 |

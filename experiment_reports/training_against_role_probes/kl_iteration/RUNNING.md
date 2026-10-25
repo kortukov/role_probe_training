@@ -49,6 +49,10 @@ then resumed `checkpoints/step00002` to finish 169 updates total. Final checkpoi
 are `VARIANT/runs/training/epoch1/checkpoints/step00169`. Per-run `manifest.json`
 records code/input hashes, model revision, configuration and hardware. Training
 jobs 1504830 and 1504852 completed successfully in approximately five hours each.
+Their manifests record Git revisions `6c502518f57341a70c62da9f9c6b0902ab5e3f19`
+and `d52a4feed80ef827c362364b99bcf78593d24765`, respectively; both used
+PyTorch 2.9.1+cu128 on NVIDIA B200s. Source-file hashes in those manifests resolve
+any uncommitted-source differences at startup.
 
 ## Evaluation and canonical sources
 
