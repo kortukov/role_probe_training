@@ -9,5 +9,10 @@
   "benchmarks": [
     "appworld_test",
     "tau2_retail"
-  ]
+  ],
+  "status": "published and verified",
+  "commit": "1ff67a61ca1f1530cd0cca14bd422dde2a8c09b8",
+  "verified_metric_rows": 8,
+  "verified_metric_cells": 56,
+  "swe_status": "Stopped and deferred at user request; no new-model SWE scores published"
 }

@@ -1,0 +1,302 @@
+{
+  "appworld_test": {
+    "task": {
+      "benchmark": "appworld_test",
+      "samples": 168,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 0,
+      "metrics": {
+        "appworld_success": {
+          "successes": 62,
+          "scored": 168,
+          "total": 168,
+          "success_rate": 0.36904761904761907
+        }
+      },
+      "input_sha256": "f03fc0e055fd08cf4208c971ca67a8ede44549a4fc596bfda43f622b9412963c"
+    },
+    "probe": {
+      "accuracy": 0.9935159449550846,
+      "macro_recall": 0.991023683669655,
+      "per_role_recall": [
+        1.0,
+        0.9994663413890371,
+        0.9642313175168437,
+        0.994503062052682,
+        0.9969176973897119
+      ],
+      "mean_true_role_probability": [
+        0.9995539720918312,
+        0.9987326409546886,
+        0.9581543095418992,
+        0.9898190491732131,
+        0.9922499824892861
+      ],
+      "mean_trajectory_accuracy": 0.9942525310449626,
+      "confusion_counts": [
+        [
+          40992,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          13110,
+          6,
+          0,
+          0
+        ],
+        [
+          4,
+          555,
+          177892,
+          5520,
+          520
+        ],
+        [
+          1,
+          60,
+          2309,
+          754796,
+          1802
+        ],
+        [
+          0,
+          11,
+          97,
+          3797,
+          1263005
+        ]
+      ],
+      "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50",
+      "layers": {
+        "12": {
+          "accuracy": 0.9935159449550846,
+          "macro_recall": 0.991023683669655,
+          "per_role_recall": [
+            1.0,
+            0.9994663413890371,
+            0.9642313175168437,
+            0.994503062052682,
+            0.9969176973897119
+          ],
+          "mean_true_role_probability": [
+            0.9995539720918312,
+            0.9987326409546886,
+            0.9581543095418992,
+            0.9898190491732131,
+            0.9922499824892861
+          ],
+          "mean_trajectory_accuracy": 0.9942525310449626,
+          "confusion_counts": [
+            [
+              40992,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              13110,
+              6,
+              0,
+              0
+            ],
+            [
+              4,
+              555,
+              177892,
+              5520,
+              520
+            ],
+            [
+              1,
+              60,
+              2309,
+              754796,
+              1802
+            ],
+            [
+              0,
+              11,
+              97,
+              3797,
+              1263005
+            ]
+          ],
+          "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50"
+        }
+      },
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "trajectories": 168,
+      "scored_trajectories": 168,
+      "excluded_trajectories": [],
+      "context_limit": 131072,
+      "input_sha256": "f03fc0e055fd08cf4208c971ca67a8ede44549a4fc596bfda43f622b9412963c",
+      "model_revision": "b7b11ef147d19b090ceab6fa3de267504554ca152f995febaa0f6df1ca4ae038",
+      "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+      "overlength_policy": "exclude"
+    },
+    "task_metric": "appworld_success"
+  },
+  "tau2_retail": {
+    "task": {
+      "benchmark": "tau2_retail",
+      "samples": 114,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 5,
+      "metrics": {
+        "retail_scorer": {
+          "successes": 58,
+          "scored": 114,
+          "total": 114,
+          "success_rate": 0.5087719298245614
+        }
+      },
+      "input_sha256": "3c78cea2f341c509ec8d21a75433a50f77f2962b51756d0e9878db4e2c13b7ac"
+    },
+    "probe": {
+      "accuracy": 0.720901937543471,
+      "macro_recall": 0.5318420002158056,
+      "per_role_recall": [
+        0.19450033534540576,
+        0.4391067454531502,
+        0.9169816365909534,
+        0.7341872608063607,
+        0.3744340228831584
+      ],
+      "mean_true_role_probability": [
+        0.21006753733267577,
+        0.4381783504670845,
+        0.9053831075762405,
+        0.7309923794844826,
+        0.3783490484278178
+      ],
+      "mean_trajectory_accuracy": 0.6459720309984668,
+      "confusion_counts": [
+        [
+          33060,
+          103398,
+          30096,
+          0,
+          3420
+        ],
+        [
+          870,
+          11444,
+          1681,
+          11773,
+          294
+        ],
+        [
+          15276,
+          345,
+          761313,
+          53216,
+          88
+        ],
+        [
+          1411,
+          5,
+          70162,
+          197978,
+          100
+        ],
+        [
+          244,
+          878,
+          41924,
+          82542,
+          75171
+        ]
+      ],
+      "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50",
+      "layers": {
+        "12": {
+          "accuracy": 0.720901937543471,
+          "macro_recall": 0.5318420002158056,
+          "per_role_recall": [
+            0.19450033534540576,
+            0.4391067454531502,
+            0.9169816365909534,
+            0.7341872608063607,
+            0.3744340228831584
+          ],
+          "mean_true_role_probability": [
+            0.21006753733267577,
+            0.4381783504670845,
+            0.9053831075762405,
+            0.7309923794844826,
+            0.3783490484278178
+          ],
+          "mean_trajectory_accuracy": 0.6459720309984668,
+          "confusion_counts": [
+            [
+              33060,
+              103398,
+              30096,
+              0,
+              3420
+            ],
+            [
+              870,
+              11444,
+              1681,
+              11773,
+              294
+            ],
+            [
+              15276,
+              345,
+              761313,
+              53216,
+              88
+            ],
+            [
+              1411,
+              5,
+              70162,
+              197978,
+              100
+            ],
+            [
+              244,
+              878,
+              41924,
+              82542,
+              75171
+            ]
+          ],
+          "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50"
+        }
+      },
+      "roles": [
+        "system",
+        "user",
+        "cot",
+        "assistant",
+        "tool"
+      ],
+      "trajectories": 114,
+      "scored_trajectories": 114,
+      "excluded_trajectories": [],
+      "context_limit": 131072,
+      "input_sha256": "3c78cea2f341c509ec8d21a75433a50f77f2962b51756d0e9878db4e2c13b7ac",
+      "model_revision": "b7b11ef147d19b090ceab6fa3de267504554ca152f995febaa0f6df1ca4ae038",
+      "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+      "overlength_policy": "exclude"
+    },
+    "task_metric": "retail_scorer"
+  }
+}

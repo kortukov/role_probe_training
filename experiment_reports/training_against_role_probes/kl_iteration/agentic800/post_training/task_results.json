@@ -1,0 +1,34 @@
+{
+  "tau2_retail": {
+    "benchmark": "tau2_retail",
+    "samples": 114,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 5,
+    "metrics": {
+      "retail_scorer": {
+        "successes": 58,
+        "scored": 114,
+        "total": 114,
+        "success_rate": 0.5087719298245614
+      }
+    },
+    "input_sha256": "3c78cea2f341c509ec8d21a75433a50f77f2962b51756d0e9878db4e2c13b7ac"
+  },
+  "appworld_test": {
+    "benchmark": "appworld_test",
+    "samples": 168,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 0,
+    "metrics": {
+      "appworld_success": {
+        "successes": 62,
+        "scored": 168,
+        "total": 168,
+        "success_rate": 0.36904761904761907
+      }
+    },
+    "input_sha256": "f03fc0e055fd08cf4208c971ca67a8ede44549a4fc596bfda43f622b9412963c"
+  }
+}

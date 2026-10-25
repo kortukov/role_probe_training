@@ -1,0 +1,14 @@
+[
+  {
+    "benchmark": "appworld_test",
+    "scored": 168,
+    "total": 168,
+    "excluded": []
+  },
+  {
+    "benchmark": "tau2_retail",
+    "scored": 114,
+    "total": 114,
+    "excluded": []
+  }
+]
