@@ -62,20 +62,20 @@ fitted from scratch with the original 250 passages, original split, all content
 tokens, C=0.005 and 5,000 maximum iterations. The refitted training-loop probe is
 not used for benchmark reporting. Fresh-probe jobs 1504835/1504854 completed.
 
-AppWorld normal test uses 168 tasks, retail 114, and SWE Verified 500. AppWorld
-and retail retain the original evaluation settings. SWE uses the corrected
-131,072-token serving context, high reasoning, temperature 1, 16,384 output tokens
-per call, 200 messages, ten million cumulative tokens, 3,600 seconds per task and
-four concurrent tasks. Baseline and original-model SWE were regenerated using
-these settings; their AppWorld/retail cohorts are reused. See the parent report
-for precision and role-coverage limitations.
+The completed comparison covers AppWorld normal test (168 tasks) and retail (114 tasks).
+SWE Verified is deferred at the user’s request on 2026-10-25; its saved attempts
+are retained for another agent to evaluate after fixing the environment. AppWorld and retail retain the original evaluation settings, and reuse the
+base and original AppWorld-trained model’s cohorts and probes. See the parent
+report for precision and role-coverage limitations. The concurrent SWE audit
+identified a tool-environment bug; no new-model SWE result is included in this
+comparison. The historical SWE rows in the parent report remain separate.
 
 Canonical collection jobs by shard:
 
-| Variant | AppWorld shards 0 / 1 | Retail shard 2 | SWE shards 0 / 1 / 2 / 3 |
-|---|---|---|---|
-| Fixed 800 | 1505894 / 1505884 | 1504836 | 1505886 / 1505895 / 1505886 / 1505886 |
-| Same batch | 1504855 / 1505885 | 1504855 | 1505887 / 1504856 / 1504856 / 1504856 |
+| Variant | AppWorld shards 0 / 1 | Retail shard 2 |
+|---|---|---|
+| Fixed 800 | 1505894 / 1505884 | 1504836 |
+| Same batch | 1504855 / 1505885 | 1504855 |
 
 Source artifacts live under `VARIANT/runs/post_training/JOB/shardN/BENCHMARK/`
 and `VARIANT/runs/swe_native/JOB/shardN/swe_bench/`. Per-variant
@@ -90,7 +90,7 @@ job-local caches; bounded startup retries do not retry benchmark tasks.
 ## Scoring, validation and publication
 
 Canonical inputs are `VARIANT/data/post_training/BENCHMARK/trajectories.jsonl`;
-SWE points to `VARIANT/data/swe_native/evaluation/`. Predictions live under
+Only AppWorld and retail enter the final report. Predictions live under
 `VARIANT/predictions/post_training/BENCHMARK/`. Every scored history is replayed
 whole. Histories above 131,072 tokens are unscorable for role metrics and remain
 in task denominators. No evaluation history is truncated or chunked.
@@ -108,9 +108,11 @@ all corrected SWE attempts.
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/kl_iteration/finalize.py --root experiment_reports/training_against_role_probes/kl_iteration/same_batch
 ```
 
-Final report jobs are 1504840/1504859; publication job 1504908 waits for both to
-succeed, revalidates, and pushes report Markdown and aggregate numeric metrics to
-GitHub `kortukov/role_probe_training`, branch `main`, as approved on 2026-10-25.
+The previous three-benchmark report jobs and publisher 1504908 were cancelled
+when the user deferred SWE. AppWorld and retail were finalized and validated
+directly. Publication uses `kl_iteration/publish.sbatch` after validation; its
+explicit payload is report Markdown and aggregate numeric metrics to GitHub
+`kortukov/role_probe_training`, branch `main`, as approved on 2026-10-25.
 It excludes weights, raw trajectories and task text. Large artifacts remain under
 `/data/cluster/users/kortukov/role_probe_training/experiment_reports/training_against_role_probes/kl_iteration/`.
 The published per-variant `publication_metrics.json` contains aggregate task/role

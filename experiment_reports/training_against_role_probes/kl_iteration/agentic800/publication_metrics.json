@@ -1,0 +1,130 @@
+{
+  "appworld_test": {
+    "task": {
+      "successes": 62,
+      "scored": 168,
+      "total": 168,
+      "success_rate": 0.36904761904761907
+    },
+    "evaluation_errors": 0,
+    "role_accuracy": 0.9935159449550846,
+    "roles": [
+      "system",
+      "user",
+      "cot",
+      "assistant",
+      "tool"
+    ],
+    "per_role_recall": [
+      1.0,
+      0.9994663413890371,
+      0.9642313175168437,
+      0.994503062052682,
+      0.9969176973897119
+    ],
+    "confusion_counts": [
+      [
+        40992,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        13110,
+        6,
+        0,
+        0
+      ],
+      [
+        4,
+        555,
+        177892,
+        5520,
+        520
+      ],
+      [
+        1,
+        60,
+        2309,
+        754796,
+        1802
+      ],
+      [
+        0,
+        11,
+        97,
+        3797,
+        1263005
+      ]
+    ],
+    "histories_scored": 168,
+    "total_histories": 168,
+    "unscorable_histories": 0
+  },
+  "tau2_retail": {
+    "task": {
+      "successes": 58,
+      "scored": 114,
+      "total": 114,
+      "success_rate": 0.5087719298245614
+    },
+    "evaluation_errors": 0,
+    "role_accuracy": 0.720901937543471,
+    "roles": [
+      "system",
+      "user",
+      "cot",
+      "assistant",
+      "tool"
+    ],
+    "per_role_recall": [
+      0.19450033534540576,
+      0.4391067454531502,
+      0.9169816365909534,
+      0.7341872608063607,
+      0.3744340228831584
+    ],
+    "confusion_counts": [
+      [
+        33060,
+        103398,
+        30096,
+        0,
+        3420
+      ],
+      [
+        870,
+        11444,
+        1681,
+        11773,
+        294
+      ],
+      [
+        15276,
+        345,
+        761313,
+        53216,
+        88
+      ],
+      [
+        1411,
+        5,
+        70162,
+        197978,
+        100
+      ],
+      [
+        244,
+        878,
+        41924,
+        82542,
+        75171
+      ]
+    ],
+    "histories_scored": 114,
+    "total_histories": 114,
+    "unscorable_histories": 0
+  }
+}
