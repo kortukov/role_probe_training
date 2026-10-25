@@ -39,21 +39,36 @@ idx=${SLURM_ARRAY_TASK_ID:-0}
 run="$root/runs/swe_corrected/${SLURM_ARRAY_JOB_ID:-$SLURM_JOB_ID}/shard$idx"
 mkdir -p "$run"
 port=$((18000+SLURM_JOB_ID%10000))
-uv run --project "$project/server_current" --frozen --no-sync vllm serve "$model" \
+# Retry transient imports/server initialization only, before any benchmark call.
+start_server() {
+ local attempt i ready
+ for attempt in 1 2 3; do
+  "$@" > "$run/server.log" 2>&1 &
+  server_pid=$!
+  ready=0
+  for ((i=0;i<180;i++)); do
+   if curl --silent --fail "http://127.0.0.1:$port/health" >/dev/null; then ready=1; break; fi
+   if ! kill -0 "$server_pid" 2>/dev/null; then break; fi
+   sleep 5
+  done
+  if [[ "$ready" == 1 ]]; then return 0; fi
+  kill "$server_pid" 2>/dev/null || true
+  wait "$server_pid" 2>/dev/null || true
+  cp "$run/server.log" "$run/server-startup-failure-$attempt.log"
+  tail -12 "$run/server.log"
+  sleep 5
+ done
+ echo 'Server failed all three startup attempts before benchmark generation.' >&2
+ return 1
+}
+
+start_server uv run --project "$project/server_current" --frozen --no-sync vllm serve "$model" \
  --served-model-name "$served" --host 127.0.0.1 --port "$port" \
  --max-model-len 131072 --max-num-seqs 4 --gpu-memory-utilization 0.85 \
  --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice \
  "${worker[@]}" --kernel-config '{"enable_jit_warmup":false}' \
- --cudagraph-capture-sizes 1 2 4 --max-cudagraph-capture-size 4 > "$run/server.log" 2>&1 &
-server_pid=$!
+ --cudagraph-capture-sizes 1 2 4 --max-cudagraph-capture-size 4
 trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$native_scratch"' EXIT
-ready=0
-for ((i=0;i<180;i++)); do
- if curl --silent --fail "http://127.0.0.1:$port/health" >/dev/null; then ready=1; break; fi
- if ! kill -0 "$server_pid" 2>/dev/null; then tail -60 "$run/server.log"; exit 1; fi
- sleep 5
-done
-[[ "$ready" == 1 ]]
 uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/context_check.json"
 uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \

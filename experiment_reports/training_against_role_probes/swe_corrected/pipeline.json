@@ -1,5 +1,5 @@
 {
-  "status": "corrected base collection submitted; trained models await baseline review",
+  "status": "base shards 1/2 running; shards 0/3 restarted after zero-attempt server import failures",
   "created_utc": "2026-10-25T11:36:40.815412+00:00",
   "thread": "01a15f19-6651-7571-83ab-5f091f1eb7e3",
   "controls_job": "1505926",
@@ -106,9 +106,24 @@
   },
   "base_collection": "1505929",
   "watch_jobs": [
-    "1505929",
-    "1505930"
+    "1505929_1",
+    "1505929_2",
+    "1505940",
+    "1505941"
   ],
-  "ready_job": "1505930",
-  "base_review": "1505930"
+  "ready_job": "1505941",
+  "base_review": "1505941",
+  "infrastructure_repairs": [
+    {
+      "failed_jobs": [
+        "1505929_0",
+        "1505929_3"
+      ],
+      "replacement_collection": "1505940",
+      "reason": "Server imports failed reading Transformers/Torch files; files now verified present. Add bounded pre-generation startup retries only. No environment changes.",
+      "prior_benchmark_model_attempts": 0,
+      "script_sha256": "ac2cadb1645ad0d71c9804d269e14101abae04f2b931fa7a885bb89ed4d0782c",
+      "superseded_review": "1505930"
+    }
+  ]
 }
