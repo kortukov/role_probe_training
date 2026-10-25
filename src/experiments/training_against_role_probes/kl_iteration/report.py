@@ -6,8 +6,7 @@ from validate import validate
 
 ROOT = Path('experiment_reports/training_against_role_probes')
 BENCHMARKS = [('appworld_test', 'AppWorld test_normal', 168, 'appworld_success'),
-              ('tau2_retail', 'τ² retail', 114, 'retail_scorer'),
-              ('swe_bench', 'SWE-bench Verified', 500, 'swe_bench_scorer')]
+              ('tau2_retail', 'τ² retail', 114, 'retail_scorer')]
 VARIANTS = [('agentic800', 'AppWorld + agentic KL (800)'),
             ('same_batch', 'AppWorld + same-batch KL')]
 
@@ -65,7 +64,8 @@ def main():
             table.append('| '+label+' | '+name+' | '+' | '.join(cells)+' |')
     table += ['\nThe coverage and generation-setting limitations of the original rows also apply here. '
               'The new models are evaluated on fresh trajectories with independently fitted standard-data probes. '
-              '[Run details](kl_iteration/RUNNING.md).']
+              '[Run details](kl_iteration/RUNNING.md).',
+              '\n**Scope:** SWE-bench evaluation is paused at the user’s request pending environment fixes by another agent. The KL-data comparison reports only AppWorld and retail; the older SWE rows above are historical and are not results for the new variants.']
     if coverage:
         matrix_links=(' Detailed confusion matrices: [fixed-800](kl_iteration/agentic800/APPENDIX.md), [same-batch](kl_iteration/same_batch/APPENDIX.md).' if complete else '')
         table.append('\n**New-model role-score coverage:** '+ '; '.join(coverage)+'. Over-limit attempts remain in task denominators.'+matrix_links)
@@ -97,10 +97,10 @@ def main():
                 task_gains+=task>old
                 base_matches+=task>=base
                 role_gains+=results[key]['probe']['accuracy']>comparison['Base'][key]['probe']['accuracy']
-            conclusions.append(f'{name} has higher observed task success than the original AppWorld-trained model on {task_gains}/3 benchmarks, and higher overall role accuracy than base on {role_gains}/3. It matches or exceeds base task success on {base_matches}/3 benchmarks.')
-            if base_matches==3: recovered.append(name)
+            conclusions.append(f'{name} has higher observed task success than the original AppWorld-trained model on {task_gains}/{len(BENCHMARKS)} benchmarks, and higher overall role accuracy than base on {role_gains}/{len(BENCHMARKS)}. It matches or exceeds base task success on {base_matches}/{len(BENCHMARKS)} benchmarks.')
+            if base_matches==len(BENCHMARKS): recovered.append(name)
         if not recovered:
-            conclusions.append('The tested variants therefore do not fully retain base task performance across all three benchmarks. Changing KL data and retaining full KL histories are coupled in this comparison; their separate contributions are not isolated.')
+            conclusions.append('The tested variants therefore do not fully retain base task performance across both evaluated benchmarks. Changing KL data and retaining full KL histories are coupled in this comparison; their separate contributions are not isolated.')
         message_start,message_end='<!-- kl-iteration-message -->','<!-- /kl-iteration-message -->'
         message=message_start+'\n'+'\n\n'.join(conclusions)+'\n'+message_end
         if message_start in text:
@@ -109,6 +109,9 @@ def main():
         else:
             text=text.replace('[How to reproduce the experiment](RUNNING.md)',message+'\n\n[How to reproduce the experiment](RUNNING.md)')
     path.write_text(text)
+    if complete:
+        from audit_report import audit
+        audit(path)
 
 
 if __name__ == '__main__':

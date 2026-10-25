@@ -8,7 +8,7 @@ import numpy as np
 
 def validate(root, benchmarks=None):
     checks=[]
-    for benchmark,expected in [('appworld_test',168),('tau2_retail',114),('swe_bench',500)]:
+    for benchmark,expected in [('appworld_test',168),('tau2_retail',114)]:
         if benchmarks is not None and benchmark not in benchmarks: continue
         folder=root/'predictions/post_training'/benchmark
         summary=json.loads((folder/'summary.json').read_text())
@@ -57,6 +57,6 @@ def validate(root, benchmarks=None):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__)
     parser.add_argument('--root',type=Path,required=True)
-    parser.add_argument('--benchmarks',nargs='+',choices=['appworld_test','tau2_retail','swe_bench'])
+    parser.add_argument('--benchmarks',nargs='+',choices=['appworld_test','tau2_retail'])
     args=parser.parse_args()
     validate(args.root,args.benchmarks)

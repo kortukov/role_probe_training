@@ -13,5 +13,11 @@
   "collection_repair": "1505885",
   "swe_collection_repair": "1505887",
   "appworld_assembly": "1505897",
-  "retail_scoring_released_independently": true
+  "retail_scoring_released_independently": true,
+  "scope": [
+    "appworld_test",
+    "tau2_retail"
+  ],
+  "swe_status": "Stopped at user request on 2026-10-25; saved artifacts retained for the other agent",
+  "report_status": "Finalized locally for AppWorld and retail"
 }

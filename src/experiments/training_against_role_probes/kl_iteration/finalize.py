@@ -57,7 +57,11 @@ def main():
     (root/'post_training/results.json').write_text(json.dumps(results,indent=2)+'\n')
     (root/'APPENDIX.md').write_text('\n'.join(appendix)+'\n')
     (root/'coverage.json').write_text(json.dumps(coverage,indent=2)+'\n')
-    (root/'README.md').write_text('# AppWorld KL variant: '+root.name+'\n\n## Motivation & RQ\n\nDoes changing KL data preserve task success while improving role recovery?\n\n## Evaluation setup\n\n[Shared setup and reproduction](../RUNNING.md). Task success includes all assigned attempts. Overall role accuracy is token-weighted accuracy on whole histories within native context, using a fresh standard-data layer-12 probe.\n\n## Factual observations\n\nAll values are percentages.\n\n'+'\n'.join(table)+'\n\n[Confusions and coverage](APPENDIX.md).\n\n## Message\n\nInterpret the task and role metrics together in the [main comparison](../../README.md); role recovery alone does not establish retained agent capability.\n\n[Reproduction](../RUNNING.md)\n')
+    comparison=json.loads((ROOT/'post_training/comparison.json').read_text())
+    gains=sum(results[key]['task']['metrics'][metric]['success_rate']>comparison['AppWorld-trained'][key]['task']['metrics'][metric]['success_rate'] for key,_,_,metric in BENCHMARKS)
+    matches=sum(results[key]['task']['metrics'][metric]['success_rate']>=comparison['Base'][key]['task']['metrics'][metric]['success_rate'] for key,_,_,metric in BENCHMARKS)
+    message=f'Task success exceeds the original AppWorld-trained model on {gains}/{len(BENCHMARKS)} evaluated benchmarks, while matching or exceeding base task success on {matches}/{len(BENCHMARKS)}. Role accuracy and task success must be assessed together; per-role gains are not uniform. SWE-bench is deferred pending fixes by another agent. See the [main comparison](../../README.md).'
+    (root/'README.md').write_text('# AppWorld KL variant: '+root.name+'\n\n## Motivation & RQ\n\nDoes changing KL data preserve task success while improving role recovery?\n\n## Evaluation setup\n\n[Shared setup and reproduction](../RUNNING.md). Task success includes all assigned attempts. Overall role accuracy is token-weighted accuracy on whole histories within native context, using a fresh standard-data layer-12 probe.\n\n## Factual observations\n\nAll values are percentages.\n\n'+'\n'.join(table)+'\n\n[Confusions and coverage](APPENDIX.md).\n\n## Message\n\n'+message+'\n\n[Reproduction](../RUNNING.md)\n')
     refresh_table()
 
 

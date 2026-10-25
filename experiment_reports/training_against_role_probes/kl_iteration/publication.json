@@ -1,13 +1,13 @@
 {
-  "job_id": "1504908",
-  "dependencies": [
-    "1504840",
-    "1504859",
-    "1504865"
-  ],
+  "job_id": "1504908 (cancelled when SWE was deferred)",
   "destination": "https://github.com/kortukov/role_probe_training.git",
   "branch": "main",
   "scope": "Markdown reports and aggregate numeric metrics only; no weights, raw trajectories, or task text",
   "user_approved": "2026-10-25",
-  "baseline_refresh_prerequisite": "1505356 (verified COMPLETED; obsolete dependency 1504825 removed)"
+  "baseline_refresh_prerequisite": "1505356 (verified COMPLETED; obsolete dependency 1504825 removed)",
+  "publication_mode": "Run validated report-only publisher directly after completing AppWorld and retail",
+  "benchmarks": [
+    "appworld_test",
+    "tau2_retail"
+  ]
 }
