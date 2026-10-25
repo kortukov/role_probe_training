@@ -99,13 +99,18 @@ def compare(root, native_swe=False):
                      'for all four models with matched settings, BF16 weights and the native 131K context allowance. '
                      'SWE attempts reaching the model context bound: '+stops+'. All remain in task metrics. '
                      'AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. '
-                     '[Earlier SWE failure audit](APPENDIX.md#swe-bench-failure-audit).')
+                     '[SWE evaluation limitations](APPENDIX.md#swe-bench-failure-audit).')
     retail_coverage = []
     for _, label in MODELS:
         score = all_results[label]['tau2_retail']['probe']
         retail_coverage.append(f"{label}: {score.get('scored_trajectories', 114)}/114")
     table.insert(-1, '\n**Retail role-score coverage:** '+', '.join(retail_coverage)+
                  '. Exclusions differ by model, so role scores describe different eligible subsets.')
+    if native_swe:
+        errors = ', '.join(f"{label}: {all_results[label]['swe_bench']['task']['sample_errors']}/500"
+                           for _, label in MODELS)
+        table.append('\nSWE evaluation errors, counted as task failures: '+errors+
+                     '. These are sandbox runtime errors or scoring/tool timeouts; see the appendix.')
     section(root/'README.md','fresh-rollout-results','\n'.join(table),before='## Message')
     section(root/'APPENDIX.md','fresh-rollout-confusions','\n'.join(appendix))
     section(root/'APPENDIX.md','whole-history-coverage','\n'.join(coverage))
@@ -117,6 +122,12 @@ def compare(root, native_swe=False):
         text = text.replace(
             'Generation settings differ between the reused base run and trained runs, especially\nfor SWE; these results describe observed transfer and behavior, rather than\nisolating every change as a causal effect of training.',
             'AppWorld/retail reuse older base generations, so their comparisons do not isolate\nevery change as a causal effect of training. SWE uses matched generation settings;\nall models are still bounded by native context and the stated task budgets.')
+        # Keep repeated reference rows consistent without changing KL experiment results.
+        current_rows = {line.split(' | ')[2]: line for line in table
+                        if line.startswith('| SWE-bench Verified | ')}
+        text = '\n'.join(current_rows.get(line.split(' | ')[2], line)
+                         if line.startswith('| SWE-bench Verified | ') else line
+                         for line in text.splitlines()) + '\n'
         main.write_text(text)
         for sub in ['astra_sft_1k', 'depthbench']:
             path = root/sub/'README.md'

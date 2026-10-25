@@ -147,23 +147,23 @@ message schema as the existing agentic evaluations.
 The main report is regenerated only after all model/benchmark cohorts are ready:
 
 ```bash
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/validate.py
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/compare.py
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/refresh_base_reports.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/validate.py --native-swe
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/compare.py --native-swe
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/refresh_base_reports.py --native-swe
 ```
 
 `post_training/comparison.json` in the parent experiment consolidates all four
-models. Baseline task results and histories are reused from `experiment_reports/agentic/`;
-its original five probes are reapplied with whole contexts, without new generation.
-The three trained models use their separately generated cohorts and fresh standard-data
-layer-12 probes. The original base SWE run has 226 API-error attempts and different
-settings; its task score is retained with this limitation, not treated as a controlled
-training comparison.
+models. Base AppWorld/retail histories and task scores are reused from
+`experiment_reports/agentic/`. SWE uses the completed matched native-context
+cohorts for all four models. Original base probes and independently fitted
+standard-data probes for the trained models are reused. See the
+[shared SWE reproduction guide](../RUNNING.md#corrected-swe-evaluation).
 
 No probe evaluation chunks or truncates text. Histories above the native 131,072-token
 limit are explicitly unscorable, while task metrics still include them. Current
 retail NPZs and `summary.json` live in `predictions/post_training_whole/tau2_retail/`;
-AppWorld and SWE live in `predictions/post_training/BENCHMARK/`. Pass `--output`
+AppWorld lives in `predictions/post_training/appworld_test/`; current SWE outputs
+live in `predictions/swe_native/`. Pass `--output`
 explicitly for retail. Partial earlier scoring outputs are not report inputs.
 Recorded per-call contexts remain in the source `generations.jsonl` files; whole
 retrospective replay includes past reasoning that the native generation formatter

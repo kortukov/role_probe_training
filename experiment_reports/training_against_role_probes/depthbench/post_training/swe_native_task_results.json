@@ -1,0 +1,44 @@
+{
+  "benchmark": "swe_bench",
+  "samples": 500,
+  "sample_errors": 1,
+  "export_errors": 0,
+  "limited_samples": 12,
+  "samples_with_model_context_stops": 2,
+  "metrics": {
+    "swe_bench_scorer": {
+      "successes": 51.0,
+      "scored": 499,
+      "total": 500,
+      "success_rate": 0.102
+    }
+  },
+  "input_sha256": "33066355ff8c7e480b1f7fbff2cf8d94b497690d2f7cf782e0c095430543c85a",
+  "sources": [
+    {
+      "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard0/swe_bench/trajectories.jsonl",
+      "sha256": "d168f1b1e21dd479e41c91876fa6cd806711b7b4b76f363febe799727abd9d06"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard1/swe_bench/trajectories.jsonl",
+      "sha256": "ace756cef815f06776c2b9bbc32414a80c5d95588f0c8e96f4cf93be084f4e45"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard2/swe_bench/trajectories.jsonl",
+      "sha256": "b0aa77a946fd77ddad8c2569a470e5cc41bac38137107adcd356b0e2cc9358f5"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard3/swe_bench/trajectories.jsonl",
+      "sha256": "276eacb83f051b715dacd285e6dfca40f8296d3daaf963ffccdfe23e3b425c53"
+    }
+  ],
+  "settings": {
+    "temperature": 1.0,
+    "reasoning_effort": "high",
+    "max_tokens": 16384,
+    "message_limit": 200,
+    "token_limit": 10000000,
+    "time_limit": 3600,
+    "concurrency": 4
+  }
+}

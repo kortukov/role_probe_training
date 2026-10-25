@@ -138,10 +138,10 @@ Probe coverage: 103/114 whole histories. 11 exceed native context and have no pr
 | True / predicted | System | User | Reasoning | Assistant | Tool |
 |---|---:|---:|---:|---:|---:|
 | System | 18.98% | 16.20% | 3.24% | 0.00% | 61.57% |
-| User | 0.47% | 89.14% | 3.03% | 1.21% | 6.15% |
-| Reasoning | 0.02% | 0.59% | 96.86% | 2.52% | 0.03% |
-| Assistant | 0.02% | 0.05% | 70.33% | 27.90% | 1.69% |
-| Tool | 6.12% | 1.48% | 12.25% | 0.82% | 79.33% |
+| User | 0.59% | 87.46% | 3.12% | 3.06% | 5.77% |
+| Reasoning | 0.04% | 0.43% | 93.98% | 5.53% | 0.02% |
+| Assistant | 0.05% | 0.03% | 65.88% | 33.16% | 0.88% |
+| Tool | 8.15% | 1.09% | 17.77% | 3.45% | 69.54% |
 
 Probe coverage: 500/500 whole histories. 0 exceed native context and have no probe score; task completion still includes every attempt.
 <!-- /fresh-rollout-confusions -->

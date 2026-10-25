@@ -1878,3083 +1878,3083 @@
       }
     },
     "swe_bench": {
-      "prediction_directory": "experiment_reports/training_against_role_probes/base_model/predictions/post_training/swe_bench",
+      "prediction_directory": "experiment_reports/training_against_role_probes/base_model/predictions/swe_native",
       "layers": {
         "12": {
           "trajectories": 500,
           "available_trajectories": 500,
-          "scored_tokens": 7265153,
-          "accuracy": 0.2264904813429256,
-          "macro_trajectory_accuracy": 0.2687084483459897,
-          "majority_role_accuracy": 0.46367929209474323,
+          "scored_tokens": 26262784,
+          "accuracy": 0.362168534760062,
+          "macro_trajectory_accuracy": 0.3518512370307624,
+          "majority_role_accuracy": 0.5180312186248038,
           "uniform_five_role_accuracy": 0.2,
-          "balanced_role_accuracy": 0.3336599720199084,
+          "balanced_role_accuracy": 0.43636151439904863,
           "roles": {
             "system": {
               "tokens": 108000,
-              "recall": 0.013888888888888888,
-              "mean_true_role_probability": 0.0518915876156943
+              "recall": 0.009259259259259259,
+              "mean_true_role_probability": 0.034737036539194445
             },
             "user": {
-              "tokens": 234571,
-              "recall": 0.9453044067681,
-              "mean_true_role_probability": 0.913922038851751
+              "tokens": 239521,
+              "recall": 0.9247999131600152,
+              "mean_true_role_probability": 0.8949573850088102
             },
             "cot": {
-              "tokens": 3368701,
-              "recall": 0.3699880161522201,
-              "mean_true_role_probability": 0.35412103522169597
+              "tokens": 2250676,
+              "recall": 0.42820068281707363,
+              "mean_true_role_probability": 0.4103200286705828
             },
             "assistant": {
-              "tokens": 187616,
-              "recall": 0.30380671158110184,
-              "mean_true_role_probability": 0.3125608492115067
+              "tokens": 10059645,
+              "recall": 0.7967160868996869,
+              "mean_true_role_probability": 0.7816700367452546
             },
             "tool": {
-              "tokens": 3366265,
-              "recall": 0.03531183670923115,
-              "mean_true_role_probability": 0.05357419470933717
+              "tokens": 13604942,
+              "recall": 0.022831629859208512,
+              "mean_true_role_probability": 0.03548921524450875
             }
           },
           "confusion_matrix": [
             [
-              1500,
-              17500,
-              11500,
+              1000,
+              24000,
+              18500,
               0,
-              77500
+              64500
             ],
             [
-              2916,
-              221741,
-              4591,
-              1815,
-              3508
+              1291,
+              221509,
+              3581,
+              9700,
+              3440
             ],
             [
-              84776,
-              63953,
-              1246379,
-              1929681,
-              43912
+              6859,
+              32051,
+              963741,
+              1213323,
+              34702
             ],
             [
-              2762,
-              1091,
-              110253,
-              56999,
-              16511
+              21928,
+              13746,
+              1930865,
+              8014681,
+              78425
             ],
             [
-              502223,
-              1883517,
-              570221,
-              291435,
-              118869
+              2871483,
+              2635168,
+              1929353,
+              5858315,
+              310623
             ]
           ],
           "windowed_trajectories": 0,
           "excluded_trajectories": [],
-          "single_window_accuracy": 0.2264904813429256,
+          "single_window_accuracy": 0.362168534760062,
           "trajectory_results": [
             {
-              "sample_id": "astropy__astropy-13398",
-              "tokens": 4188,
-              "accuracy": 0.6148519579751671,
+              "sample_id": "swe_bench/astropy__astropy-13398",
+              "tokens": 73840,
+              "accuracy": 0.2806744312026002,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14182",
-              "tokens": 16611,
-              "accuracy": 0.29022936608271627,
+              "sample_id": "swe_bench/astropy__astropy-14182",
+              "tokens": 61806,
+              "accuracy": 0.16448241271074004,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-7166",
-              "tokens": 7159,
-              "accuracy": 0.04022908227406062,
+              "sample_id": "swe_bench/astropy__astropy-7166",
+              "tokens": 69117,
+              "accuracy": 0.4156864447241634,
               "windows": 1
             },
             {
-              "sample_id": "django__django-10880",
-              "tokens": 16998,
-              "accuracy": 0.29603482762677963,
+              "sample_id": "swe_bench/django__django-10880",
+              "tokens": 15953,
+              "accuracy": 0.37453770450698926,
               "windows": 1
             },
             {
-              "sample_id": "django__django-10999",
-              "tokens": 9292,
-              "accuracy": 0.228906586310805,
+              "sample_id": "swe_bench/django__django-10999",
+              "tokens": 46432,
+              "accuracy": 0.44699776016540316,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11066",
-              "tokens": 10130,
-              "accuracy": 0.13928923988154,
+              "sample_id": "swe_bench/django__django-11066",
+              "tokens": 27443,
+              "accuracy": 0.2406806835987319,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11119",
-              "tokens": 16939,
-              "accuracy": 0.2702638880689533,
+              "sample_id": "swe_bench/django__django-11119",
+              "tokens": 38125,
+              "accuracy": 0.3443409836065574,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11133",
-              "tokens": 9044,
-              "accuracy": 0.08414418398938522,
+              "sample_id": "swe_bench/django__django-11133",
+              "tokens": 42577,
+              "accuracy": 0.39098574347652487,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11333",
-              "tokens": 1463,
-              "accuracy": 0.596719070403281,
+              "sample_id": "swe_bench/django__django-11333",
+              "tokens": 17717,
+              "accuracy": 0.2907377095445053,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11532",
-              "tokens": 9332,
-              "accuracy": 0.3479425632233176,
+              "sample_id": "swe_bench/django__django-11532",
+              "tokens": 28004,
+              "accuracy": 0.3676617626053421,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11551",
-              "tokens": 2744,
-              "accuracy": 0.7230320699708455,
+              "sample_id": "swe_bench/django__django-11551",
+              "tokens": 47056,
+              "accuracy": 0.4383925535532132,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11555",
-              "tokens": 7302,
-              "accuracy": 0.14530265680635443,
+              "sample_id": "swe_bench/django__django-11555",
+              "tokens": 72713,
+              "accuracy": 0.40247273527429756,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11815",
-              "tokens": 15438,
-              "accuracy": 0.3401347324783003,
+              "sample_id": "swe_bench/django__django-11815",
+              "tokens": 46932,
+              "accuracy": 0.46354299838063584,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11820",
-              "tokens": 40635,
-              "accuracy": 0.0812599975390673,
+              "sample_id": "swe_bench/django__django-11820",
+              "tokens": 82438,
+              "accuracy": 0.2256241053882918,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11848",
-              "tokens": 52092,
-              "accuracy": 0.183079935498733,
+              "sample_id": "swe_bench/django__django-11848",
+              "tokens": 47411,
+              "accuracy": 0.4244162747041826,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11885",
-              "tokens": 15080,
-              "accuracy": 0.26213527851458884,
+              "sample_id": "swe_bench/django__django-11885",
+              "tokens": 82572,
+              "accuracy": 0.33627621954173326,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12039",
-              "tokens": 7016,
-              "accuracy": 0.443557582668187,
+              "sample_id": "swe_bench/django__django-12039",
+              "tokens": 39871,
+              "accuracy": 0.3602116826766321,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12125",
-              "tokens": 7471,
-              "accuracy": 0.1572747958773926,
+              "sample_id": "swe_bench/django__django-12125",
+              "tokens": 74364,
+              "accuracy": 0.35630143617879617,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12143",
-              "tokens": 18646,
-              "accuracy": 0.2870857020272444,
+              "sample_id": "swe_bench/django__django-12143",
+              "tokens": 13993,
+              "accuracy": 0.1660830415207604,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12193",
-              "tokens": 7060,
-              "accuracy": 0.11713881019830029,
+              "sample_id": "swe_bench/django__django-12193",
+              "tokens": 19783,
+              "accuracy": 0.18399636051155033,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12209",
-              "tokens": 9122,
-              "accuracy": 0.18943214207410655,
+              "sample_id": "swe_bench/django__django-12209",
+              "tokens": 55734,
+              "accuracy": 0.5518713890982165,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12308",
-              "tokens": 11088,
-              "accuracy": 0.14862914862914864,
+              "sample_id": "swe_bench/django__django-12308",
+              "tokens": 17735,
+              "accuracy": 0.1864110515928954,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13033",
-              "tokens": 14521,
-              "accuracy": 0.3566558776943737,
+              "sample_id": "swe_bench/django__django-13033",
+              "tokens": 84663,
+              "accuracy": 0.4571064101201233,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13112",
-              "tokens": 55548,
-              "accuracy": 0.14843018650536474,
+              "sample_id": "swe_bench/django__django-13112",
+              "tokens": 39083,
+              "accuracy": 0.39582427142235754,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13121",
-              "tokens": 14404,
-              "accuracy": 0.23208830880311024,
+              "sample_id": "swe_bench/django__django-13121",
+              "tokens": 69952,
+              "accuracy": 0.23234503659652334,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13128",
-              "tokens": 70368,
-              "accuracy": 0.09298260572987721,
+              "sample_id": "swe_bench/django__django-13128",
+              "tokens": 26353,
+              "accuracy": 0.1873031533411756,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13401",
-              "tokens": 20524,
-              "accuracy": 0.37994542974079126,
+              "sample_id": "swe_bench/django__django-13401",
+              "tokens": 39830,
+              "accuracy": 0.3774290735626412,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13406",
-              "tokens": 10293,
-              "accuracy": 0.21752647430292432,
+              "sample_id": "swe_bench/django__django-13406",
+              "tokens": 45092,
+              "accuracy": 0.5137718442295751,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13410",
-              "tokens": 52773,
-              "accuracy": 0.08951547192693234,
+              "sample_id": "swe_bench/django__django-13410",
+              "tokens": 27753,
+              "accuracy": 0.5192591791878356,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13417",
-              "tokens": 11297,
-              "accuracy": 0.3237142604231212,
+              "sample_id": "swe_bench/django__django-13417",
+              "tokens": 37039,
+              "accuracy": 0.2975512297848214,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13513",
-              "tokens": 19861,
-              "accuracy": 0.3801923367403454,
+              "sample_id": "swe_bench/django__django-13513",
+              "tokens": 60798,
+              "accuracy": 0.3851771439849995,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13670",
-              "tokens": 12772,
-              "accuracy": 0.16536172878171,
+              "sample_id": "swe_bench/django__django-13670",
+              "tokens": 64421,
+              "accuracy": 0.4122103040933857,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13809",
-              "tokens": 10936,
-              "accuracy": 0.11731894659839064,
+              "sample_id": "swe_bench/django__django-13809",
+              "tokens": 64742,
+              "accuracy": 0.3189119891260696,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13810",
-              "tokens": 37538,
-              "accuracy": 0.12712451382598966,
+              "sample_id": "swe_bench/django__django-13810",
+              "tokens": 61072,
+              "accuracy": 0.3776198585276395,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13925",
-              "tokens": 20500,
-              "accuracy": 0.48897560975609755,
+              "sample_id": "swe_bench/django__django-13925",
+              "tokens": 44186,
+              "accuracy": 0.3605666953333635,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13933",
-              "tokens": 11145,
-              "accuracy": 0.19129654553611486,
+              "sample_id": "swe_bench/django__django-13933",
+              "tokens": 54148,
+              "accuracy": 0.3089864814951614,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14122",
-              "tokens": 9768,
-              "accuracy": 0.15694103194103193,
+              "sample_id": "swe_bench/django__django-14122",
+              "tokens": 80020,
+              "accuracy": 0.27455636090977253,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14315",
-              "tokens": 9311,
-              "accuracy": 0.12318762753732145,
+              "sample_id": "swe_bench/django__django-14315",
+              "tokens": 29271,
+              "accuracy": 0.17867513921628916,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14373",
-              "tokens": 6466,
-              "accuracy": 0.07871945561398082,
+              "sample_id": "swe_bench/django__django-14373",
+              "tokens": 23899,
+              "accuracy": 0.14255826603623584,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14404",
-              "tokens": 1867,
-              "accuracy": 0.3085163363685056,
+              "sample_id": "swe_bench/django__django-14404",
+              "tokens": 62560,
+              "accuracy": 0.385997442455243,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14434",
-              "tokens": 6550,
-              "accuracy": 0.08259541984732824,
+              "sample_id": "swe_bench/django__django-14434",
+              "tokens": 36531,
+              "accuracy": 0.21012290930990118,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14559",
-              "tokens": 9711,
-              "accuracy": 0.18906394810009267,
+              "sample_id": "swe_bench/django__django-14559",
+              "tokens": 56281,
+              "accuracy": 0.4740853929390025,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14608",
-              "tokens": 6693,
-              "accuracy": 0.0811295383236217,
+              "sample_id": "swe_bench/django__django-14608",
+              "tokens": 77419,
+              "accuracy": 0.354473708004495,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14765",
-              "tokens": 7235,
-              "accuracy": 0.13586731167933655,
+              "sample_id": "swe_bench/django__django-14765",
+              "tokens": 47766,
+              "accuracy": 0.32209102709039905,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14999",
-              "tokens": 1027,
-              "accuracy": 0.3777994157740993,
+              "sample_id": "swe_bench/django__django-14999",
+              "tokens": 119078,
+              "accuracy": 0.3379549538957658,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15022",
-              "tokens": 1470,
-              "accuracy": 0.45850340136054424,
+              "sample_id": "swe_bench/django__django-15022",
+              "tokens": 43017,
+              "accuracy": 0.39498337866424904,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15103",
-              "tokens": 6816,
-              "accuracy": 0.09917840375586855,
+              "sample_id": "swe_bench/django__django-15103",
+              "tokens": 60161,
+              "accuracy": 0.4087199348415086,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15268",
-              "tokens": 13704,
-              "accuracy": 0.164112667834209,
+              "sample_id": "swe_bench/django__django-15268",
+              "tokens": 70106,
+              "accuracy": 0.5273300430776253,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15315",
-              "tokens": 10843,
-              "accuracy": 0.16194780042423684,
+              "sample_id": "swe_bench/django__django-15315",
+              "tokens": 25530,
+              "accuracy": 0.3938503721112417,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15380",
-              "tokens": 17380,
-              "accuracy": 0.2518987341772152,
+              "sample_id": "swe_bench/django__django-15380",
+              "tokens": 62890,
+              "accuracy": 0.39904595325170933,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15503",
-              "tokens": 7432,
-              "accuracy": 0.17195909580193758,
+              "sample_id": "swe_bench/django__django-15503",
+              "tokens": 66476,
+              "accuracy": 0.3890877910824959,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15629",
-              "tokens": 3822,
-              "accuracy": 0.6051805337519623,
+              "sample_id": "swe_bench/django__django-15629",
+              "tokens": 48752,
+              "accuracy": 0.32833524778470624,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15814",
-              "tokens": 13119,
-              "accuracy": 0.33272353075691746,
+              "sample_id": "swe_bench/django__django-15814",
+              "tokens": 36327,
+              "accuracy": 0.391774713023371,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15930",
-              "tokens": 8354,
-              "accuracy": 0.6781182666985875,
+              "sample_id": "swe_bench/django__django-15930",
+              "tokens": 72359,
+              "accuracy": 0.31870258019043934,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15957",
-              "tokens": 13186,
-              "accuracy": 0.4416805703018353,
+              "sample_id": "swe_bench/django__django-15957",
+              "tokens": 34945,
+              "accuracy": 0.2343396766347117,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15973",
-              "tokens": 39177,
-              "accuracy": 0.27664190724149373,
+              "sample_id": "swe_bench/django__django-15973",
+              "tokens": 65013,
+              "accuracy": 0.45677018442465356,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16082",
-              "tokens": 10774,
-              "accuracy": 0.11323556710599592,
+              "sample_id": "swe_bench/django__django-16082",
+              "tokens": 62855,
+              "accuracy": 0.48615066422718956,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16315",
-              "tokens": 7484,
-              "accuracy": 0.1726349545697488,
+              "sample_id": "swe_bench/django__django-16315",
+              "tokens": 50574,
+              "accuracy": 0.39263257800450824,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16485",
-              "tokens": 2550,
-              "accuracy": 0.6325490196078432,
+              "sample_id": "swe_bench/django__django-16485",
+              "tokens": 28457,
+              "accuracy": 0.30182380433636713,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16569",
-              "tokens": 6297,
-              "accuracy": 0.4876925520088931,
+              "sample_id": "swe_bench/django__django-16569",
+              "tokens": 45463,
+              "accuracy": 0.42810637221476805,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16801",
-              "tokens": 18949,
-              "accuracy": 0.28196738614174893,
+              "sample_id": "swe_bench/django__django-16801",
+              "tokens": 22320,
+              "accuracy": 0.26052867383512546,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16819",
-              "tokens": 7557,
-              "accuracy": 0.1611750694720127,
+              "sample_id": "swe_bench/django__django-16819",
+              "tokens": 36682,
+              "accuracy": 0.1852952401722916,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16877",
-              "tokens": 8073,
-              "accuracy": 0.1830794004707048,
+              "sample_id": "swe_bench/django__django-16877",
+              "tokens": 35497,
+              "accuracy": 0.12096796912415134,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-13989",
-              "tokens": 7629,
-              "accuracy": 0.13252064490758947,
+              "sample_id": "swe_bench/matplotlib__matplotlib-13989",
+              "tokens": 34866,
+              "accuracy": 0.30559857741065793,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-20488",
-              "tokens": 19731,
-              "accuracy": 0.10850945213116416,
+              "sample_id": "swe_bench/matplotlib__matplotlib-20488",
+              "tokens": 66157,
+              "accuracy": 0.3756820895747993,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-23412",
-              "tokens": 10420,
-              "accuracy": 0.16026871401151632,
+              "sample_id": "swe_bench/matplotlib__matplotlib-23412",
+              "tokens": 55302,
+              "accuracy": 0.4865285161476981,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-24149",
-              "tokens": 8256,
-              "accuracy": 0.46632751937984496,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24149",
+              "tokens": 34338,
+              "accuracy": 0.1740928417496651,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-25332",
-              "tokens": 7823,
-              "accuracy": 0.08053176530742683,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25332",
+              "tokens": 40976,
+              "accuracy": 0.5185474424053105,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-26113",
-              "tokens": 27879,
-              "accuracy": 0.30664657986297933,
+              "sample_id": "swe_bench/matplotlib__matplotlib-26113",
+              "tokens": 50825,
+              "accuracy": 0.45333989178553863,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-26208",
-              "tokens": 8898,
-              "accuracy": 0.13441222746684647,
+              "sample_id": "swe_bench/matplotlib__matplotlib-26208",
+              "tokens": 74073,
+              "accuracy": 0.24319252629163124,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-26291",
-              "tokens": 15416,
-              "accuracy": 0.4711338868707836,
+              "sample_id": "swe_bench/matplotlib__matplotlib-26291",
+              "tokens": 62765,
+              "accuracy": 0.4366286943360153,
               "windows": 1
             },
             {
-              "sample_id": "mwaskom__seaborn-3187",
-              "tokens": 3934,
-              "accuracy": 0.3469750889679715,
+              "sample_id": "swe_bench/mwaskom__seaborn-3187",
+              "tokens": 51127,
+              "accuracy": 0.4681479453126528,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-1724",
-              "tokens": 9909,
-              "accuracy": 0.45049954586739327,
+              "sample_id": "swe_bench/psf__requests-1724",
+              "tokens": 60344,
+              "accuracy": 0.4556045340050378,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-3095",
-              "tokens": 9767,
-              "accuracy": 0.324459916043821,
+              "sample_id": "swe_bench/pydata__xarray-3095",
+              "tokens": 34479,
+              "accuracy": 0.2280808608138287,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-4629",
-              "tokens": 4632,
-              "accuracy": 0.42055267702936094,
+              "sample_id": "swe_bench/pydata__xarray-4629",
+              "tokens": 22815,
+              "accuracy": 0.2425597194827964,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-6461",
-              "tokens": 9635,
-              "accuracy": 0.18972496107939804,
+              "sample_id": "swe_bench/pydata__xarray-6461",
+              "tokens": 45573,
+              "accuracy": 0.28099971474337876,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-7229",
-              "tokens": 5308,
-              "accuracy": 0.2910700828937453,
+              "sample_id": "swe_bench/pydata__xarray-7229",
+              "tokens": 66338,
+              "accuracy": 0.24396273628990925,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-7233",
-              "tokens": 110312,
-              "accuracy": 0.0817227500181304,
+              "sample_id": "swe_bench/pydata__xarray-7233",
+              "tokens": 86896,
+              "accuracy": 0.28039265328668755,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-7393",
-              "tokens": 6842,
-              "accuracy": 0.2098801520023385,
+              "sample_id": "swe_bench/pydata__xarray-7393",
+              "tokens": 104790,
+              "accuracy": 0.14506155167477813,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-4604",
-              "tokens": 8697,
-              "accuracy": 0.19696447050707142,
+              "sample_id": "swe_bench/pylint-dev__pylint-4604",
+              "tokens": 57764,
+              "accuracy": 0.33368534035039127,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-10356",
-              "tokens": 13499,
-              "accuracy": 0.3298022075709312,
+              "sample_id": "swe_bench/pytest-dev__pytest-10356",
+              "tokens": 62657,
+              "accuracy": 0.20205244426001884,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-5262",
-              "tokens": 15039,
-              "accuracy": 0.3503557417381475,
+              "sample_id": "swe_bench/pytest-dev__pytest-5262",
+              "tokens": 34062,
+              "accuracy": 0.31322294639187365,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7324",
-              "tokens": 10841,
-              "accuracy": 0.34258832211050644,
+              "sample_id": "swe_bench/pytest-dev__pytest-7324",
+              "tokens": 52782,
+              "accuracy": 0.5186048274032814,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7432",
-              "tokens": 23493,
-              "accuracy": 0.3472523730472907,
+              "sample_id": "swe_bench/pytest-dev__pytest-7432",
+              "tokens": 50548,
+              "accuracy": 0.38731502730078343,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-10844",
-              "tokens": 30078,
-              "accuracy": 0.2128465988430082,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-10844",
+              "tokens": 20782,
+              "accuracy": 0.2035415263208546,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-10908",
-              "tokens": 7902,
-              "accuracy": 0.16147810680840294,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-10908",
+              "tokens": 68433,
+              "accuracy": 0.3464410445253021,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-13142",
-              "tokens": 12365,
-              "accuracy": 0.18463404771532552,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13142",
+              "tokens": 34468,
+              "accuracy": 0.48125797841476153,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-13328",
-              "tokens": 19805,
-              "accuracy": 0.2502903307245645,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13328",
+              "tokens": 35319,
+              "accuracy": 0.35748463999546987,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-14141",
-              "tokens": 7121,
-              "accuracy": 0.04802696250526611,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14141",
+              "tokens": 49575,
+              "accuracy": 0.24282400403429147,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-14983",
-              "tokens": 6334,
-              "accuracy": 0.2754973160719924,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14983",
+              "tokens": 48199,
+              "accuracy": 0.23006701383846137,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-15100",
-              "tokens": 7671,
-              "accuracy": 0.14365793247295008,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-15100",
+              "tokens": 75486,
+              "accuracy": 0.42034284503086666,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-25747",
-              "tokens": 15776,
-              "accuracy": 0.4275481744421907,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-25747",
+              "tokens": 29092,
+              "accuracy": 0.3164443833356249,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-25973",
-              "tokens": 16426,
-              "accuracy": 0.18671618166321685,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-25973",
+              "tokens": 46295,
+              "accuracy": 0.24542607193001403,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-9288",
-              "tokens": 30439,
-              "accuracy": 0.150004927888564,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-9288",
+              "tokens": 67801,
+              "accuracy": 0.3975752570021091,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-10449",
-              "tokens": 10986,
-              "accuracy": 0.230202075368651,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-10449",
+              "tokens": 71803,
+              "accuracy": 0.4114730582287648,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-10466",
-              "tokens": 14766,
-              "accuracy": 0.207842340511987,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-10466",
+              "tokens": 17813,
+              "accuracy": 0.3033739403806209,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-11445",
-              "tokens": 64927,
-              "accuracy": 0.18871963897916122,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-11445",
+              "tokens": 42442,
+              "accuracy": 0.39017953913576175,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-7462",
-              "tokens": 12237,
-              "accuracy": 0.20339952602762115,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7462",
+              "tokens": 40835,
+              "accuracy": 0.3360107750704053,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-7748",
-              "tokens": 7208,
-              "accuracy": 0.06728634850166482,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7748",
+              "tokens": 70154,
+              "accuracy": 0.4116942726002794,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-7985",
-              "tokens": 26942,
-              "accuracy": 0.31482443768094426,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7985",
+              "tokens": 62984,
+              "accuracy": 0.24164867267877557,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8120",
-              "tokens": 11557,
-              "accuracy": 0.140607424071991,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8120",
+              "tokens": 50446,
+              "accuracy": 0.35005748721405067,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8551",
-              "tokens": 11714,
-              "accuracy": 0.3029708041659553,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8551",
+              "tokens": 75715,
+              "accuracy": 0.4245922208281054,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8595",
-              "tokens": 8952,
-              "accuracy": 0.37254244861483465,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8595",
+              "tokens": 22644,
+              "accuracy": 0.24580462815756934,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8638",
-              "tokens": 21887,
-              "accuracy": 0.32951066843331656,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8638",
+              "tokens": 69884,
+              "accuracy": 0.22020777288077387,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9258",
-              "tokens": 21409,
-              "accuracy": 0.1533934326685039,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9258",
+              "tokens": 60806,
+              "accuracy": 0.21762655001151202,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9658",
-              "tokens": 2823,
-              "accuracy": 0.4771519659936238,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9658",
+              "tokens": 80319,
+              "accuracy": 0.360325701266201,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9711",
-              "tokens": 18027,
-              "accuracy": 0.20774393964608642,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9711",
+              "tokens": 57727,
+              "accuracy": 0.36213556914442113,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-12489",
-              "tokens": 22260,
-              "accuracy": 0.18935309973045822,
+              "sample_id": "swe_bench/sympy__sympy-12489",
+              "tokens": 73390,
+              "accuracy": 0.2877231230412863,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13091",
-              "tokens": 7237,
-              "accuracy": 0.5554787895536825,
+              "sample_id": "swe_bench/sympy__sympy-13091",
+              "tokens": 38047,
+              "accuracy": 0.33124819302441716,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13878",
-              "tokens": 8792,
-              "accuracy": 0.2584167424931756,
+              "sample_id": "swe_bench/sympy__sympy-13878",
+              "tokens": 103880,
+              "accuracy": 0.593559876780901,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-14531",
-              "tokens": 8283,
-              "accuracy": 0.1761439092116383,
+              "sample_id": "swe_bench/sympy__sympy-14531",
+              "tokens": 51564,
+              "accuracy": 0.36754324722674736,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-15349",
-              "tokens": 51454,
-              "accuracy": 0.12014614995918685,
+              "sample_id": "swe_bench/sympy__sympy-15349",
+              "tokens": 25266,
+              "accuracy": 0.23042824348927413,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-16597",
-              "tokens": 13982,
-              "accuracy": 0.2068373623229867,
+              "sample_id": "swe_bench/sympy__sympy-16597",
+              "tokens": 52034,
+              "accuracy": 0.45946880885574815,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-16766",
-              "tokens": 1046,
-              "accuracy": 0.4847036328871893,
+              "sample_id": "swe_bench/sympy__sympy-16766",
+              "tokens": 39726,
+              "accuracy": 0.3077833157126315,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-16792",
-              "tokens": 9037,
-              "accuracy": 0.20659510899634834,
+              "sample_id": "swe_bench/sympy__sympy-16792",
+              "tokens": 27267,
+              "accuracy": 0.15509590347306268,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-17139",
+              "sample_id": "swe_bench/sympy__sympy-17139",
+              "tokens": 40528,
+              "accuracy": 0.3831918673509672,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-18189",
+              "tokens": 36587,
+              "accuracy": 0.29972394566376037,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-20154",
+              "tokens": 70431,
+              "accuracy": 0.3439110618903608,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-20428",
+              "tokens": 45168,
+              "accuracy": 0.38843871767623095,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-20438",
+              "tokens": 59098,
+              "accuracy": 0.3600629462925987,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-21930",
+              "tokens": 23620,
+              "accuracy": 0.22489415749364944,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-22714",
+              "tokens": 79205,
+              "accuracy": 0.3504450476611325,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-22914",
+              "tokens": 49752,
+              "accuracy": 0.35021707670043417,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-23824",
+              "tokens": 47161,
+              "accuracy": 0.2783019868111363,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/sympy__sympy-24443",
+              "tokens": 82917,
+              "accuracy": 0.36257944691679633,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-12907",
+              "tokens": 32939,
+              "accuracy": 0.2966392422356477,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-13033",
+              "tokens": 40502,
+              "accuracy": 0.47071749543232433,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-14096",
+              "tokens": 76227,
+              "accuracy": 0.6367691238012778,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-14365",
+              "tokens": 52047,
+              "accuracy": 0.42882394758583586,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-14369",
+              "tokens": 53679,
+              "accuracy": 0.45747871607146184,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-7336",
+              "tokens": 22810,
+              "accuracy": 0.32082419991231914,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-7606",
+              "tokens": 28767,
+              "accuracy": 0.27893071922689194,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/astropy__astropy-7671",
+              "tokens": 42566,
+              "accuracy": 0.37435981769487386,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-10914",
+              "tokens": 49510,
+              "accuracy": 0.4040395879620279,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11087",
+              "tokens": 65840,
+              "accuracy": 0.5200182260024301,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11141",
+              "tokens": 40397,
+              "accuracy": 0.40696091293907966,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11206",
+              "tokens": 68819,
+              "accuracy": 0.6101512663653933,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11239",
+              "tokens": 49645,
+              "accuracy": 0.45319770369624335,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11276",
+              "tokens": 45842,
+              "accuracy": 0.2709524017276733,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11292",
+              "tokens": 44978,
+              "accuracy": 0.3769620703455022,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11299",
+              "tokens": 59395,
+              "accuracy": 0.27116760670090073,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11451",
+              "tokens": 40833,
+              "accuracy": 0.24737344794651384,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11490",
+              "tokens": 54340,
+              "accuracy": 0.3971843945528156,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11603",
+              "tokens": 25926,
+              "accuracy": 0.13210676540924168,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11749",
+              "tokens": 51806,
+              "accuracy": 0.4129058410222754,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11790",
+              "tokens": 45447,
+              "accuracy": 0.5171078399014236,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-11951",
+              "tokens": 39495,
+              "accuracy": 0.3850614001772376,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-12155",
+              "tokens": 32140,
+              "accuracy": 0.26888612321095207,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-12262",
+              "tokens": 46484,
+              "accuracy": 0.391489544789605,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-12276",
+              "tokens": 61211,
+              "accuracy": 0.3590367744359674,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-12325",
+              "tokens": 58177,
+              "accuracy": 0.32200010313354077,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-12754",
+              "tokens": 65503,
+              "accuracy": 0.4068821275361434,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13012",
+              "tokens": 51274,
+              "accuracy": 0.3517182197605024,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13023",
+              "tokens": 60122,
+              "accuracy": 0.4937626825454908,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13212",
+              "tokens": 60891,
+              "accuracy": 0.3252697442971868,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13315",
+              "tokens": 51565,
+              "accuracy": 0.21409871036555803,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13343",
+              "tokens": 83661,
+              "accuracy": 0.5923548606877757,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13449",
+              "tokens": 72662,
+              "accuracy": 0.3486278935344472,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13551",
+              "tokens": 80528,
+              "accuracy": 0.3441287502483608,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13786",
+              "tokens": 33220,
+              "accuracy": 0.41387718242022875,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13794",
+              "tokens": 28538,
+              "accuracy": 0.2740556451047726,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13807",
+              "tokens": 51877,
+              "accuracy": 0.5663588873681978,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-13821",
+              "tokens": 36020,
+              "accuracy": 0.3785952248750694,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-14053",
+              "tokens": 62234,
+              "accuracy": 0.6233409390365395,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-14238",
+              "tokens": 33281,
+              "accuracy": 0.3736366094768787,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-14500",
+              "tokens": 63296,
+              "accuracy": 0.35901162790697677,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-14534",
+              "tokens": 50522,
+              "accuracy": 0.3553897312062072,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-14787",
+              "tokens": 65186,
+              "accuracy": 0.5000613628693278,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-14792",
+              "tokens": 59278,
+              "accuracy": 0.3485610175781909,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-15127",
+              "tokens": 35569,
+              "accuracy": 0.21707104501110516,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-15128",
+              "tokens": 83412,
+              "accuracy": 0.4958159497434422,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-15278",
+              "tokens": 47393,
+              "accuracy": 0.16131074209271412,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-15368",
+              "tokens": 69051,
+              "accuracy": 0.6268410305426424,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-15525",
+              "tokens": 3776,
+              "accuracy": 0.8622881355932204,
+              "windows": 1
+            },
+            {
+              "sample_id": "swe_bench/django__django-15554",
               "tokens": 27222,
-              "accuracy": 0.20659760487840717,
+              "accuracy": 0.40904415546249356,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-18189",
-              "tokens": 7039,
-              "accuracy": 0.08978548089217218,
+              "sample_id": "swe_bench/django__django-15561",
+              "tokens": 74795,
+              "accuracy": 0.4146266461661876,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-20154",
-              "tokens": 4751,
-              "accuracy": 0.4582193222479478,
+              "sample_id": "swe_bench/django__django-15731",
+              "tokens": 31638,
+              "accuracy": 0.4017637018774891,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-20428",
-              "tokens": 2160,
-              "accuracy": 0.7027777777777777,
+              "sample_id": "swe_bench/django__django-15741",
+              "tokens": 55605,
+              "accuracy": 0.15788148547792466,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-20438",
-              "tokens": 4750,
-              "accuracy": 0.28610526315789475,
+              "sample_id": "swe_bench/django__django-16100",
+              "tokens": 36180,
+              "accuracy": 0.36826976229961306,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-21930",
-              "tokens": 3085,
-              "accuracy": 0.6119935170178282,
+              "sample_id": "swe_bench/django__django-16256",
+              "tokens": 58278,
+              "accuracy": 0.47493050550808197,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-22714",
-              "tokens": 21207,
-              "accuracy": 0.387136322912246,
+              "sample_id": "swe_bench/django__django-16493",
+              "tokens": 36307,
+              "accuracy": 0.40457762965819266,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-22914",
-              "tokens": 1101,
-              "accuracy": 0.4913714804722979,
+              "sample_id": "swe_bench/django__django-16527",
+              "tokens": 27664,
+              "accuracy": 0.24942163100057838,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-23824",
-              "tokens": 7076,
-              "accuracy": 0.10825325042396834,
+              "sample_id": "swe_bench/django__django-16560",
+              "tokens": 67279,
+              "accuracy": 0.4448787883291963,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-24443",
-              "tokens": 9525,
-              "accuracy": 0.20724409448818898,
+              "sample_id": "swe_bench/django__django-16631",
+              "tokens": 52904,
+              "accuracy": 0.2926810827158627,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-12907",
-              "tokens": 7025,
-              "accuracy": 0.0902491103202847,
+              "sample_id": "swe_bench/django__django-16899",
+              "tokens": 76092,
+              "accuracy": 0.384981338379856,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-13033",
-              "tokens": 1330,
-              "accuracy": 0.5646616541353383,
+              "sample_id": "swe_bench/django__django-7530",
+              "tokens": 24799,
+              "accuracy": 0.25021170208476146,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14096",
-              "tokens": 7059,
-              "accuracy": 0.64598385040374,
+              "sample_id": "swe_bench/django__django-9296",
+              "tokens": 12857,
+              "accuracy": 0.217469082989811,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14365",
-              "tokens": 7129,
-              "accuracy": 0.0958058633749474,
+              "sample_id": "swe_bench/matplotlib__matplotlib-14623",
+              "tokens": 56436,
+              "accuracy": 0.1787334325607768,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14369",
-              "tokens": 26853,
-              "accuracy": 0.17577179458533498,
+              "sample_id": "swe_bench/matplotlib__matplotlib-20676",
+              "tokens": 52871,
+              "accuracy": 0.15840441830114807,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-7336",
-              "tokens": 14505,
-              "accuracy": 0.19855222337125128,
+              "sample_id": "swe_bench/matplotlib__matplotlib-21568",
+              "tokens": 47248,
+              "accuracy": 0.4012656620386048,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-7606",
-              "tokens": 9126,
-              "accuracy": 0.19274600043830814,
+              "sample_id": "swe_bench/matplotlib__matplotlib-22865",
+              "tokens": 37575,
+              "accuracy": 0.36308715901530275,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-7671",
-              "tokens": 7220,
-              "accuracy": 0.2914127423822715,
+              "sample_id": "swe_bench/matplotlib__matplotlib-23299",
+              "tokens": 61102,
+              "accuracy": 0.540015056790285,
               "windows": 1
             },
             {
-              "sample_id": "django__django-10914",
-              "tokens": 1709,
-              "accuracy": 0.5114101813926273,
+              "sample_id": "swe_bench/matplotlib__matplotlib-23314",
+              "tokens": 42165,
+              "accuracy": 0.3365113245582829,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11087",
-              "tokens": 10685,
-              "accuracy": 0.37800655124005617,
+              "sample_id": "swe_bench/matplotlib__matplotlib-23476",
+              "tokens": 73923,
+              "accuracy": 0.31609918428635203,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11141",
-              "tokens": 22312,
-              "accuracy": 0.23355145213338113,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24026",
+              "tokens": 45614,
+              "accuracy": 0.3651510501161924,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11206",
-              "tokens": 49473,
-              "accuracy": 0.16558526873243992,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25311",
+              "tokens": 58987,
+              "accuracy": 0.37435367114788004,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11239",
-              "tokens": 19226,
-              "accuracy": 0.2886715905544575,
+              "sample_id": "swe_bench/matplotlib__matplotlib-26342",
+              "tokens": 55421,
+              "accuracy": 0.26170585157250864,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11276",
-              "tokens": 15639,
-              "accuracy": 0.33812903638340047,
+              "sample_id": "swe_bench/matplotlib__matplotlib-26466",
+              "tokens": 18129,
+              "accuracy": 0.24816592200341994,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11292",
-              "tokens": 7295,
-              "accuracy": 0.06675805346127485,
+              "sample_id": "swe_bench/pallets__flask-5014",
+              "tokens": 24397,
+              "accuracy": 0.23006927081198508,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11299",
-              "tokens": 1709,
-              "accuracy": 0.7068461088355764,
+              "sample_id": "swe_bench/psf__requests-1766",
+              "tokens": 61029,
+              "accuracy": 0.29725212603844076,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11451",
-              "tokens": 6959,
-              "accuracy": 0.13421468601810604,
+              "sample_id": "swe_bench/psf__requests-2317",
+              "tokens": 48841,
+              "accuracy": 0.36655678630658667,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11490",
-              "tokens": 10134,
-              "accuracy": 0.11170317742253799,
+              "sample_id": "swe_bench/psf__requests-5414",
+              "tokens": 52592,
+              "accuracy": 0.4086933373897171,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11603",
-              "tokens": 11549,
-              "accuracy": 0.16036020434669668,
+              "sample_id": "swe_bench/psf__requests-6028",
+              "tokens": 51925,
+              "accuracy": 0.27967260471834376,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11749",
-              "tokens": 39707,
-              "accuracy": 0.21177626111265016,
+              "sample_id": "swe_bench/pydata__xarray-2905",
+              "tokens": 61505,
+              "accuracy": 0.450272335582473,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11790",
-              "tokens": 6903,
-              "accuracy": 0.09561060408518035,
+              "sample_id": "swe_bench/pydata__xarray-3677",
+              "tokens": 32887,
+              "accuracy": 0.2917870283090583,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11951",
-              "tokens": 9637,
-              "accuracy": 0.06360900695237107,
+              "sample_id": "swe_bench/pydata__xarray-3993",
+              "tokens": 41598,
+              "accuracy": 0.34648300399057647,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12155",
-              "tokens": 12807,
-              "accuracy": 0.4139142656359803,
+              "sample_id": "swe_bench/pydata__xarray-4075",
+              "tokens": 33153,
+              "accuracy": 0.3689862154254517,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12262",
-              "tokens": 25194,
-              "accuracy": 0.27443041994125583,
+              "sample_id": "swe_bench/pydata__xarray-4687",
+              "tokens": 58558,
+              "accuracy": 0.4246558967177841,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12276",
-              "tokens": 2846,
-              "accuracy": 0.6106816584680252,
+              "sample_id": "swe_bench/pydata__xarray-6992",
+              "tokens": 18983,
+              "accuracy": 0.2636042775114576,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12325",
-              "tokens": 52342,
-              "accuracy": 0.14963127125444195,
+              "sample_id": "swe_bench/pylint-dev__pylint-6386",
+              "tokens": 65895,
+              "accuracy": 0.2785643827301009,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12754",
-              "tokens": 11161,
-              "accuracy": 0.3080369142549951,
+              "sample_id": "swe_bench/pylint-dev__pylint-6528",
+              "tokens": 59843,
+              "accuracy": 0.15530638504085692,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13012",
-              "tokens": 7717,
-              "accuracy": 0.19152520409485552,
+              "sample_id": "swe_bench/pylint-dev__pylint-7277",
+              "tokens": 69341,
+              "accuracy": 0.6536969469722098,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13023",
-              "tokens": 1124,
-              "accuracy": 0.49377224199288255,
+              "sample_id": "swe_bench/pytest-dev__pytest-5809",
+              "tokens": 21037,
+              "accuracy": 0.3369777059466654,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13212",
-              "tokens": 17636,
-              "accuracy": 0.1961896121569517,
+              "sample_id": "swe_bench/pytest-dev__pytest-5840",
+              "tokens": 61146,
+              "accuracy": 0.34339122755372387,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13315",
-              "tokens": 10708,
-              "accuracy": 0.17015315651849086,
+              "sample_id": "swe_bench/pytest-dev__pytest-7236",
+              "tokens": 84648,
+              "accuracy": 0.43301672809753333,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13343",
-              "tokens": 1281,
-              "accuracy": 0.5862607338017174,
+              "sample_id": "swe_bench/pytest-dev__pytest-7521",
+              "tokens": 32502,
+              "accuracy": 0.24450803027506,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13449",
-              "tokens": 20209,
-              "accuracy": 0.26686129942105,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-10297",
+              "tokens": 54777,
+              "accuracy": 0.33596217390510613,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13551",
-              "tokens": 6555,
-              "accuracy": 0.08558352402745996,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-11578",
+              "tokens": 59682,
+              "accuracy": 0.31625950872960024,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13786",
-              "tokens": 28311,
-              "accuracy": 0.2321005969411183,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13124",
+              "tokens": 54062,
+              "accuracy": 0.44034626909844254,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13794",
-              "tokens": 16848,
-              "accuracy": 0.25997150997151,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13135",
+              "tokens": 25271,
+              "accuracy": 0.3574848640734439,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13807",
-              "tokens": 2223,
-              "accuracy": 0.540710751237067,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13496",
+              "tokens": 54986,
+              "accuracy": 0.42998217728148985,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13821",
-              "tokens": 9282,
-              "accuracy": 0.18735186382245206,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14496",
+              "tokens": 31057,
+              "accuracy": 0.1884277296583701,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14053",
-              "tokens": 2320,
-              "accuracy": 0.475,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14894",
+              "tokens": 80844,
+              "accuracy": 0.6315249121765375,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14238",
-              "tokens": 9363,
-              "accuracy": 0.34080956958239883,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-10323",
+              "tokens": 36928,
+              "accuracy": 0.5746587954939342,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14500",
-              "tokens": 19660,
-              "accuracy": 0.2022380467955239,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-10614",
+              "tokens": 69885,
+              "accuracy": 0.43902124919510627,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14534",
-              "tokens": 8296,
-              "accuracy": 0.3442622950819672,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7440",
+              "tokens": 34668,
+              "accuracy": 0.2995846313603323,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14787",
-              "tokens": 6765,
-              "accuracy": 0.10716925351071692,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7590",
+              "tokens": 50238,
+              "accuracy": 0.2412118316811975,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14792",
-              "tokens": 7255,
-              "accuracy": 0.15465196416264645,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8265",
+              "tokens": 64848,
+              "accuracy": 0.30647051566740685,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15127",
-              "tokens": 9053,
-              "accuracy": 0.1433778857837181,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8269",
+              "tokens": 32019,
+              "accuracy": 0.31471938536493954,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15128",
-              "tokens": 12759,
-              "accuracy": 0.25323301199153536,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8593",
+              "tokens": 55324,
+              "accuracy": 0.2817583688814981,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15278",
-              "tokens": 10344,
-              "accuracy": 0.34880123743232794,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8621",
+              "tokens": 52351,
+              "accuracy": 0.5492349716337797,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15368",
-              "tokens": 14595,
-              "accuracy": 0.30969510106200754,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8721",
+              "tokens": 24846,
+              "accuracy": 0.17503823553087017,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15525",
-              "tokens": 27104,
-              "accuracy": 0.3557039551357733,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9320",
+              "tokens": 37457,
+              "accuracy": 0.20936006620925326,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15554",
-              "tokens": 15520,
-              "accuracy": 0.35792525773195877,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9602",
+              "tokens": 40679,
+              "accuracy": 0.3545318223161828,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15561",
-              "tokens": 861,
-              "accuracy": 0.3530778164924506,
+              "sample_id": "swe_bench/sympy__sympy-13372",
+              "tokens": 78399,
+              "accuracy": 0.4261916606079159,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15731",
-              "tokens": 13339,
-              "accuracy": 0.28967688732288777,
+              "sample_id": "swe_bench/sympy__sympy-14248",
+              "tokens": 69513,
+              "accuracy": 0.3053817271589487,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15741",
-              "tokens": 16930,
-              "accuracy": 0.24760779681039574,
+              "sample_id": "swe_bench/sympy__sympy-14711",
+              "tokens": 23321,
+              "accuracy": 0.35105698726469703,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16100",
-              "tokens": 1100,
-              "accuracy": 0.4309090909090909,
+              "sample_id": "swe_bench/sympy__sympy-15345",
+              "tokens": 90918,
+              "accuracy": 0.22291515431487713,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16256",
-              "tokens": 5969,
-              "accuracy": 0.31831127492042216,
+              "sample_id": "swe_bench/sympy__sympy-16450",
+              "tokens": 60912,
+              "accuracy": 0.30258405568689256,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16493",
-              "tokens": 12490,
-              "accuracy": 0.2345876701361089,
+              "sample_id": "swe_bench/sympy__sympy-17318",
+              "tokens": 53153,
+              "accuracy": 0.3442326867721483,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16527",
-              "tokens": 11127,
-              "accuracy": 0.18172014019951468,
+              "sample_id": "swe_bench/sympy__sympy-17655",
+              "tokens": 97419,
+              "accuracy": 0.43310853119001425,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16560",
-              "tokens": 6489,
-              "accuracy": 0.07551240560949299,
+              "sample_id": "swe_bench/sympy__sympy-19040",
+              "tokens": 56211,
+              "accuracy": 0.15420469303161302,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16631",
-              "tokens": 4071,
-              "accuracy": 0.6556128715303365,
+              "sample_id": "swe_bench/sympy__sympy-19346",
+              "tokens": 57509,
+              "accuracy": 0.1877966926915787,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16899",
-              "tokens": 9511,
-              "accuracy": 0.18210493113237305,
+              "sample_id": "swe_bench/sympy__sympy-19495",
+              "tokens": 67588,
+              "accuracy": 0.31064686038941824,
               "windows": 1
             },
             {
-              "sample_id": "django__django-7530",
-              "tokens": 35959,
-              "accuracy": 0.2151617119497205,
+              "sample_id": "swe_bench/sympy__sympy-19637",
+              "tokens": 55756,
+              "accuracy": 0.37187029198651267,
               "windows": 1
             },
             {
-              "sample_id": "django__django-9296",
-              "tokens": 6629,
-              "accuracy": 0.07587871473827124,
+              "sample_id": "swe_bench/sympy__sympy-20916",
+              "tokens": 70852,
+              "accuracy": 0.410785863490092,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-14623",
-              "tokens": 13649,
-              "accuracy": 0.14184189317898746,
+              "sample_id": "swe_bench/sympy__sympy-21596",
+              "tokens": 85716,
+              "accuracy": 0.28450930981380373,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-20676",
-              "tokens": 10276,
-              "accuracy": 0.12942779291553133,
+              "sample_id": "swe_bench/sympy__sympy-21847",
+              "tokens": 108066,
+              "accuracy": 0.3078118927322192,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-21568",
-              "tokens": 9616,
-              "accuracy": 0.18739600665557404,
+              "sample_id": "swe_bench/sympy__sympy-22080",
+              "tokens": 88550,
+              "accuracy": 0.3214568040654997,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-22865",
-              "tokens": 7995,
-              "accuracy": 0.10469043151969981,
+              "sample_id": "swe_bench/sympy__sympy-24539",
+              "tokens": 30954,
+              "accuracy": 0.3099437875557279,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-23299",
-              "tokens": 7965,
-              "accuracy": 0.09843063402385437,
+              "sample_id": "swe_bench/astropy__astropy-13453",
+              "tokens": 59236,
+              "accuracy": 0.1720068877034236,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-23314",
-              "tokens": 10793,
-              "accuracy": 0.10775502640600389,
+              "sample_id": "swe_bench/astropy__astropy-13977",
+              "tokens": 18796,
+              "accuracy": 0.4421685464992552,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-23476",
-              "tokens": 14751,
-              "accuracy": 0.16832757101213477,
+              "sample_id": "swe_bench/astropy__astropy-14309",
+              "tokens": 22634,
+              "accuracy": 0.36060793496509674,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-24026",
-              "tokens": 8345,
-              "accuracy": 0.13792690233672858,
+              "sample_id": "swe_bench/astropy__astropy-14508",
+              "tokens": 39472,
+              "accuracy": 0.4345865423591407,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-25311",
-              "tokens": 3001,
-              "accuracy": 0.7634121959346885,
+              "sample_id": "swe_bench/astropy__astropy-14539",
+              "tokens": 57645,
+              "accuracy": 0.23592679330384247,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-26342",
-              "tokens": 7875,
-              "accuracy": 0.07720634920634921,
+              "sample_id": "swe_bench/astropy__astropy-14995",
+              "tokens": 64100,
+              "accuracy": 0.47230889235569423,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-26466",
-              "tokens": 8269,
-              "accuracy": 0.11621719675897932,
+              "sample_id": "swe_bench/astropy__astropy-8707",
+              "tokens": 61785,
+              "accuracy": 0.1431577243667557,
               "windows": 1
             },
             {
-              "sample_id": "pallets__flask-5014",
-              "tokens": 7665,
-              "accuracy": 0.1938682322243966,
+              "sample_id": "swe_bench/astropy__astropy-8872",
+              "tokens": 50590,
+              "accuracy": 0.3536667325558411,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-1766",
-              "tokens": 2907,
-              "accuracy": 0.26212590299277605,
+              "sample_id": "swe_bench/django__django-10554",
+              "tokens": 49534,
+              "accuracy": 0.24433722291759197,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-2317",
-              "tokens": 12569,
-              "accuracy": 0.28952183944625665,
+              "sample_id": "swe_bench/django__django-11149",
+              "tokens": 66010,
+              "accuracy": 0.38301772458718375,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-5414",
-              "tokens": 6680,
-              "accuracy": 0.3438622754491018,
+              "sample_id": "swe_bench/django__django-11163",
+              "tokens": 16680,
+              "accuracy": 0.3169664268585132,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-6028",
-              "tokens": 9570,
-              "accuracy": 0.3225705329153605,
+              "sample_id": "swe_bench/django__django-11211",
+              "tokens": 59586,
+              "accuracy": 0.4421340583358507,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-2905",
-              "tokens": 12269,
-              "accuracy": 0.3766403129839433,
+              "sample_id": "swe_bench/django__django-11400",
+              "tokens": 29411,
+              "accuracy": 0.47223827819523306,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-3677",
-              "tokens": 7297,
-              "accuracy": 0.21090859257228997,
+              "sample_id": "swe_bench/django__django-11477",
+              "tokens": 78671,
+              "accuracy": 0.3272362115646172,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-3993",
-              "tokens": 23416,
-              "accuracy": 0.3614195421933721,
+              "sample_id": "swe_bench/django__django-11964",
+              "tokens": 52334,
+              "accuracy": 0.4385676615584515,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-4075",
-              "tokens": 10316,
-              "accuracy": 0.2615354788677782,
+              "sample_id": "swe_bench/django__django-11999",
+              "tokens": 12223,
+              "accuracy": 0.49995909351223106,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-4687",
-              "tokens": 10947,
-              "accuracy": 0.22535854572028866,
+              "sample_id": "swe_bench/django__django-12273",
+              "tokens": 56535,
+              "accuracy": 0.4073052091624657,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-6992",
-              "tokens": 8268,
-              "accuracy": 0.35667634252539915,
+              "sample_id": "swe_bench/django__django-12419",
+              "tokens": 24677,
+              "accuracy": 0.20059164404100985,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-6386",
-              "tokens": 13682,
-              "accuracy": 0.13550650489694488,
+              "sample_id": "swe_bench/django__django-12663",
+              "tokens": 30599,
+              "accuracy": 0.40220268636229944,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-6528",
-              "tokens": 11326,
-              "accuracy": 0.1711107187003355,
+              "sample_id": "swe_bench/django__django-12774",
+              "tokens": 24243,
+              "accuracy": 0.35556655529431175,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-7277",
-              "tokens": 41854,
-              "accuracy": 0.13403736799350122,
+              "sample_id": "swe_bench/django__django-12858",
+              "tokens": 59578,
+              "accuracy": 0.44273053811809726,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-5809",
-              "tokens": 19251,
-              "accuracy": 0.2948937717521168,
+              "sample_id": "swe_bench/django__django-13028",
+              "tokens": 36385,
+              "accuracy": 0.44117081214786313,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-5840",
-              "tokens": 48282,
-              "accuracy": 0.1536390373223976,
+              "sample_id": "swe_bench/django__django-13195",
+              "tokens": 43451,
+              "accuracy": 0.38121101930910684,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7236",
-              "tokens": 114094,
-              "accuracy": 0.10767437376198573,
+              "sample_id": "swe_bench/django__django-13297",
+              "tokens": 51214,
+              "accuracy": 0.26504471433592375,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7521",
-              "tokens": 7015,
-              "accuracy": 0.326015680684248,
+              "sample_id": "swe_bench/django__django-13344",
+              "tokens": 48892,
+              "accuracy": 0.44050151354004746,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-10297",
-              "tokens": 7504,
-              "accuracy": 0.12100213219616204,
+              "sample_id": "swe_bench/django__django-13346",
+              "tokens": 72825,
+              "accuracy": 0.40715413662890493,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-11578",
-              "tokens": 5661,
-              "accuracy": 0.477124183006536,
+              "sample_id": "swe_bench/django__django-13363",
+              "tokens": 31792,
+              "accuracy": 0.29107951685958733,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-13124",
-              "tokens": 15951,
-              "accuracy": 0.24819760516582032,
+              "sample_id": "swe_bench/django__django-13516",
+              "tokens": 63646,
+              "accuracy": 0.3297457813531094,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-13135",
-              "tokens": 30136,
-              "accuracy": 0.32356649853995223,
+              "sample_id": "swe_bench/django__django-13658",
+              "tokens": 19326,
+              "accuracy": 0.23610679913070476,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-13496",
-              "tokens": 16716,
-              "accuracy": 0.13298636037329506,
+              "sample_id": "swe_bench/django__django-13820",
+              "tokens": 38476,
+              "accuracy": 0.3385487056866618,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-14496",
-              "tokens": 1886,
-              "accuracy": 0.634676564156946,
+              "sample_id": "swe_bench/django__django-13964",
+              "tokens": 62762,
+              "accuracy": 0.33306777986679836,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-14894",
-              "tokens": 30748,
-              "accuracy": 0.18856510992584882,
+              "sample_id": "swe_bench/django__django-14007",
+              "tokens": 47625,
+              "accuracy": 0.23084514435695538,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-10323",
-              "tokens": 5851,
-              "accuracy": 0.6443343018287472,
+              "sample_id": "swe_bench/django__django-14155",
+              "tokens": 55974,
+              "accuracy": 0.4111373137528138,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-10614",
-              "tokens": 10229,
-              "accuracy": 0.18603969107439633,
+              "sample_id": "swe_bench/django__django-14170",
+              "tokens": 42480,
+              "accuracy": 0.38008474576271184,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-7440",
-              "tokens": 3533,
-              "accuracy": 0.19332012454005096,
+              "sample_id": "swe_bench/django__django-14311",
+              "tokens": 50170,
+              "accuracy": 0.20944787721746064,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-7590",
-              "tokens": 8947,
-              "accuracy": 0.10808092097909915,
+              "sample_id": "swe_bench/django__django-14376",
+              "tokens": 32052,
+              "accuracy": 0.38006988643454387,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8265",
-              "tokens": 10048,
-              "accuracy": 0.2649283439490446,
+              "sample_id": "swe_bench/django__django-14631",
+              "tokens": 61072,
+              "accuracy": 0.2861867959130207,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8269",
-              "tokens": 20978,
-              "accuracy": 0.25135856611688434,
+              "sample_id": "swe_bench/django__django-14672",
+              "tokens": 39515,
+              "accuracy": 0.29783626470960395,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8593",
-              "tokens": 8232,
-              "accuracy": 0.13083090379008747,
+              "sample_id": "swe_bench/django__django-14725",
+              "tokens": 88882,
+              "accuracy": 0.26196530231092907,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8621",
-              "tokens": 12035,
-              "accuracy": 0.23863730785209805,
+              "sample_id": "swe_bench/django__django-14771",
+              "tokens": 47587,
+              "accuracy": 0.3450101918591212,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8721",
-              "tokens": 1779,
-              "accuracy": 0.5930297920179877,
+              "sample_id": "swe_bench/django__django-14855",
+              "tokens": 58243,
+              "accuracy": 0.5735968270865168,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9320",
-              "tokens": 3038,
-              "accuracy": 0.6698485845951284,
+              "sample_id": "swe_bench/django__django-15037",
+              "tokens": 43857,
+              "accuracy": 0.2586132202385024,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9602",
-              "tokens": 15429,
-              "accuracy": 0.1920409618251345,
+              "sample_id": "swe_bench/django__django-15161",
+              "tokens": 73652,
+              "accuracy": 0.4720713626242329,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13372",
-              "tokens": 23854,
-              "accuracy": 0.246583382241972,
+              "sample_id": "swe_bench/django__django-15375",
+              "tokens": 80080,
+              "accuracy": 0.3400224775224775,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-14248",
-              "tokens": 8895,
-              "accuracy": 0.16245081506464307,
+              "sample_id": "swe_bench/django__django-15382",
+              "tokens": 65935,
+              "accuracy": 0.22820960036399485,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-14711",
-              "tokens": 40862,
-              "accuracy": 0.1588762175126034,
+              "sample_id": "swe_bench/django__django-15467",
+              "tokens": 14046,
+              "accuracy": 0.25046276520005695,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-15345",
-              "tokens": 15250,
-              "accuracy": 0.16098360655737706,
+              "sample_id": "swe_bench/django__django-15499",
+              "tokens": 61403,
+              "accuracy": 0.38027457941794374,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-16450",
-              "tokens": 1269,
-              "accuracy": 0.4862096138691883,
+              "sample_id": "swe_bench/django__django-15569",
+              "tokens": 66317,
+              "accuracy": 0.24595503415413847,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-17318",
-              "tokens": 26226,
-              "accuracy": 0.3256691832532601,
+              "sample_id": "swe_bench/django__django-15987",
+              "tokens": 61226,
+              "accuracy": 0.4649168653839872,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-17655",
-              "tokens": 38146,
-              "accuracy": 0.1923399570072878,
+              "sample_id": "swe_bench/django__django-16502",
+              "tokens": 55271,
+              "accuracy": 0.4003003383329413,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-19040",
-              "tokens": 10122,
-              "accuracy": 0.13475597707962853,
+              "sample_id": "swe_bench/django__django-16612",
+              "tokens": 25759,
+              "accuracy": 0.3488489459994565,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-19346",
-              "tokens": 6645,
-              "accuracy": 0.05417607223476298,
+              "sample_id": "swe_bench/django__django-16642",
+              "tokens": 38196,
+              "accuracy": 0.3556916954654938,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-19495",
-              "tokens": 26076,
-              "accuracy": 0.1257478140819144,
+              "sample_id": "swe_bench/django__django-16938",
+              "tokens": 39800,
+              "accuracy": 0.3792713567839196,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-19637",
-              "tokens": 13243,
-              "accuracy": 0.19602809031186288,
+              "sample_id": "swe_bench/django__django-17029",
+              "tokens": 22614,
+              "accuracy": 0.1926240382064208,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-20916",
-              "tokens": 4042,
-              "accuracy": 0.5853537852548244,
+              "sample_id": "swe_bench/django__django-17084",
+              "tokens": 47127,
+              "accuracy": 0.26307636811169816,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-21596",
-              "tokens": 13975,
-              "accuracy": 0.19627906976744186,
+              "sample_id": "swe_bench/django__django-17087",
+              "tokens": 54306,
+              "accuracy": 0.40227599160313776,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-21847",
-              "tokens": 49454,
-              "accuracy": 0.11254903546730295,
+              "sample_id": "swe_bench/matplotlib__matplotlib-22719",
+              "tokens": 36535,
+              "accuracy": 0.2807992336116053,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-22080",
-              "tokens": 9261,
-              "accuracy": 0.14199330525861137,
+              "sample_id": "swe_bench/matplotlib__matplotlib-22871",
+              "tokens": 46664,
+              "accuracy": 0.40058717641008057,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-24539",
-              "tokens": 14170,
-              "accuracy": 0.2691601976005646,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24177",
+              "tokens": 92105,
+              "accuracy": 0.4884208240594973,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-13453",
-              "tokens": 13511,
-              "accuracy": 0.23936052105691658,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24627",
+              "tokens": 55014,
+              "accuracy": 0.31562874904569743,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-13977",
-              "tokens": 36262,
-              "accuracy": 0.27836302465390766,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24637",
+              "tokens": 14097,
+              "accuracy": 0.6141022912676456,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14309",
-              "tokens": 8428,
-              "accuracy": 0.2562885619364025,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25287",
+              "tokens": 32858,
+              "accuracy": 0.2786536003408607,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14508",
-              "tokens": 48182,
-              "accuracy": 0.21113693910589015,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25479",
+              "tokens": 60402,
+              "accuracy": 0.4106486540180789,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14539",
-              "tokens": 7173,
-              "accuracy": 0.10079464659138436,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25775",
+              "tokens": 71084,
+              "accuracy": 0.32180237465533734,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14995",
-              "tokens": 18586,
-              "accuracy": 0.24588399870870548,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25960",
+              "tokens": 78061,
+              "accuracy": 0.41816015680045093,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-8707",
-              "tokens": 7886,
-              "accuracy": 0.06289627187420746,
+              "sample_id": "swe_bench/mwaskom__seaborn-3069",
+              "tokens": 66753,
+              "accuracy": 0.217533294383773,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-8872",
-              "tokens": 14411,
-              "accuracy": 0.2714593019221428,
+              "sample_id": "swe_bench/psf__requests-1142",
+              "tokens": 62553,
+              "accuracy": 0.43981903345962625,
               "windows": 1
             },
             {
-              "sample_id": "django__django-10554",
-              "tokens": 7443,
-              "accuracy": 0.6950154507591025,
+              "sample_id": "swe_bench/psf__requests-1921",
+              "tokens": 44063,
+              "accuracy": 0.12162131493543335,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11149",
-              "tokens": 13678,
-              "accuracy": 0.19476531656674953,
+              "sample_id": "swe_bench/psf__requests-2931",
+              "tokens": 90242,
+              "accuracy": 0.5051749739589105,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11163",
-              "tokens": 1134,
-              "accuracy": 0.47530864197530864,
+              "sample_id": "swe_bench/pydata__xarray-3151",
+              "tokens": 53404,
+              "accuracy": 0.46665043816942553,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11211",
-              "tokens": 10543,
-              "accuracy": 0.3297922792374087,
+              "sample_id": "swe_bench/pydata__xarray-3305",
+              "tokens": 38470,
+              "accuracy": 0.2540940992981544,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11400",
-              "tokens": 22942,
-              "accuracy": 0.34879260744486096,
+              "sample_id": "swe_bench/pydata__xarray-4695",
+              "tokens": 45591,
+              "accuracy": 0.3787370314316422,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11477",
-              "tokens": 6675,
-              "accuracy": 0.08943820224719101,
+              "sample_id": "swe_bench/pydata__xarray-6744",
+              "tokens": 41687,
+              "accuracy": 0.20246119893491976,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11964",
-              "tokens": 29402,
-              "accuracy": 0.20515611182912727,
+              "sample_id": "swe_bench/pydata__xarray-6938",
+              "tokens": 85783,
+              "accuracy": 0.4617581572106361,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11999",
-              "tokens": 23180,
-              "accuracy": 0.33619499568593614,
+              "sample_id": "swe_bench/pylint-dev__pylint-4551",
+              "tokens": 73178,
+              "accuracy": 0.3830249528546831,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12273",
-              "tokens": 27176,
-              "accuracy": 0.25213423609066826,
+              "sample_id": "swe_bench/pylint-dev__pylint-6903",
+              "tokens": 35931,
+              "accuracy": 0.26074977039325375,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12419",
-              "tokens": 11906,
-              "accuracy": 0.07382832185452713,
+              "sample_id": "swe_bench/pylint-dev__pylint-8898",
+              "tokens": 62689,
+              "accuracy": 0.4722359584616121,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12663",
-              "tokens": 31514,
-              "accuracy": 0.22516976581836645,
+              "sample_id": "swe_bench/pytest-dev__pytest-10081",
+              "tokens": 70207,
+              "accuracy": 0.44921446579400914,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12774",
-              "tokens": 14646,
-              "accuracy": 0.2949610815239656,
+              "sample_id": "swe_bench/pytest-dev__pytest-5787",
+              "tokens": 60317,
+              "accuracy": 0.3743886466501981,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12858",
-              "tokens": 2065,
-              "accuracy": 0.5694915254237288,
+              "sample_id": "swe_bench/pytest-dev__pytest-7205",
+              "tokens": 21575,
+              "accuracy": 0.3484588644264195,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13028",
-              "tokens": 14971,
-              "accuracy": 0.373121367978091,
+              "sample_id": "swe_bench/pytest-dev__pytest-7571",
+              "tokens": 90334,
+              "accuracy": 0.38914472955919144,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13195",
-              "tokens": 8526,
-              "accuracy": 0.17440769411212761,
+              "sample_id": "swe_bench/pytest-dev__pytest-7982",
+              "tokens": 36380,
+              "accuracy": 0.22039582188015394,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13297",
-              "tokens": 38162,
-              "accuracy": 0.21757245427388502,
+              "sample_id": "swe_bench/pytest-dev__pytest-8399",
+              "tokens": 62833,
+              "accuracy": 0.3587764391323031,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13344",
-              "tokens": 13990,
-              "accuracy": 0.22508934953538243,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-11310",
+              "tokens": 34719,
+              "accuracy": 0.29119502289812493,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13346",
-              "tokens": 7699,
-              "accuracy": 0.15287699701259905,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-12585",
+              "tokens": 52355,
+              "accuracy": 0.6363862095310858,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13363",
-              "tokens": 72153,
-              "accuracy": 0.11118040829903122,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-12682",
+              "tokens": 74213,
+              "accuracy": 0.2913640467303572,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13516",
-              "tokens": 29042,
-              "accuracy": 0.20859444941808417,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-12973",
+              "tokens": 53547,
+              "accuracy": 0.5469587465217473,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13658",
-              "tokens": 1485,
-              "accuracy": 0.6430976430976431,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14629",
+              "tokens": 36300,
+              "accuracy": 0.3588980716253444,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13820",
-              "tokens": 58309,
-              "accuracy": 0.16407415664820182,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14710",
+              "tokens": 42466,
+              "accuracy": 0.34952668016766353,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13964",
-              "tokens": 12064,
-              "accuracy": 0.2888759946949602,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-25232",
+              "tokens": 41284,
+              "accuracy": 0.24510706326906306,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14007",
-              "tokens": 11841,
-              "accuracy": 0.3557131998986572,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-26323",
+              "tokens": 23944,
+              "accuracy": 0.20919645840294018,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14155",
-              "tokens": 6606,
-              "accuracy": 0.07417499243112322,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-10435",
+              "tokens": 66884,
+              "accuracy": 0.5591322289336762,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14170",
-              "tokens": 10528,
-              "accuracy": 0.1356382978723404,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7910",
+              "tokens": 61869,
+              "accuracy": 0.3679063828411644,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14311",
-              "tokens": 7639,
-              "accuracy": 0.2047388401623249,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8056",
+              "tokens": 52899,
+              "accuracy": 0.2912342388324921,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14376",
-              "tokens": 12821,
-              "accuracy": 0.2951407846501833,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8459",
+              "tokens": 60221,
+              "accuracy": 0.2740074060543664,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14631",
-              "tokens": 11105,
-              "accuracy": 0.1330031517334534,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8475",
+              "tokens": 70348,
+              "accuracy": 0.588616591800762,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14672",
-              "tokens": 24424,
-              "accuracy": 0.2132328856862103,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8548",
+              "tokens": 89634,
+              "accuracy": 0.20327108017047102,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14725",
-              "tokens": 18100,
-              "accuracy": 0.22751381215469613,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9367",
+              "tokens": 32518,
+              "accuracy": 0.4050987145580909,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14771",
-              "tokens": 5783,
-              "accuracy": 0.2726958326128307,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9461",
+              "tokens": 24055,
+              "accuracy": 0.1567657451673249,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14855",
-              "tokens": 24629,
-              "accuracy": 0.2463762231515693,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9591",
+              "tokens": 63783,
+              "accuracy": 0.3802423843343838,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15037",
-              "tokens": 9913,
-              "accuracy": 0.10793906990820135,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9673",
+              "tokens": 76276,
+              "accuracy": 0.36211914625832503,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15161",
-              "tokens": 11199,
-              "accuracy": 0.15126350567014912,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9698",
+              "tokens": 23833,
+              "accuracy": 0.3237108211303655,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15375",
-              "tokens": 18997,
-              "accuracy": 0.26156761593935884,
+              "sample_id": "swe_bench/sympy__sympy-11618",
+              "tokens": 84450,
+              "accuracy": 0.3766370633510953,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15382",
-              "tokens": 7371,
-              "accuracy": 0.1785375118708452,
+              "sample_id": "swe_bench/sympy__sympy-12419",
+              "tokens": 73722,
+              "accuracy": 0.35076367976994655,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15467",
-              "tokens": 10727,
-              "accuracy": 0.2770578913023212,
+              "sample_id": "swe_bench/sympy__sympy-12481",
+              "tokens": 54637,
+              "accuracy": 0.24543807310064608,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15499",
-              "tokens": 6861,
-              "accuracy": 0.09386386824078123,
+              "sample_id": "swe_bench/sympy__sympy-13031",
+              "tokens": 63256,
+              "accuracy": 0.38864297457948654,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15569",
-              "tokens": 8472,
-              "accuracy": 0.12901322001888574,
+              "sample_id": "swe_bench/sympy__sympy-13615",
+              "tokens": 39453,
+              "accuracy": 0.3236255798038172,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15987",
-              "tokens": 1002,
-              "accuracy": 0.3962075848303393,
+              "sample_id": "swe_bench/sympy__sympy-13798",
+              "tokens": 83853,
+              "accuracy": 0.5750658891154758,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16502",
-              "tokens": 21913,
-              "accuracy": 0.17815908364897548,
+              "sample_id": "swe_bench/sympy__sympy-13877",
+              "tokens": 56231,
+              "accuracy": 0.5751275986555459,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16612",
-              "tokens": 40915,
-              "accuracy": 0.19015031162165466,
+              "sample_id": "swe_bench/sympy__sympy-13974",
+              "tokens": 67023,
+              "accuracy": 0.25992569714874,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16642",
-              "tokens": 6493,
-              "accuracy": 0.09071307561989836,
+              "sample_id": "swe_bench/sympy__sympy-14976",
+              "tokens": 60601,
+              "accuracy": 0.2505734228808105,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16938",
-              "tokens": 20146,
-              "accuracy": 0.35232800555941624,
+              "sample_id": "swe_bench/sympy__sympy-15017",
+              "tokens": 46825,
+              "accuracy": 0.29648691938067273,
               "windows": 1
             },
             {
-              "sample_id": "django__django-17029",
-              "tokens": 8832,
-              "accuracy": 0.07065217391304347,
+              "sample_id": "swe_bench/sympy__sympy-15599",
+              "tokens": 84539,
+              "accuracy": 0.3629685707188398,
               "windows": 1
             },
             {
-              "sample_id": "django__django-17084",
-              "tokens": 9091,
-              "accuracy": 0.5758442415575844,
+              "sample_id": "swe_bench/sympy__sympy-15809",
+              "tokens": 26886,
+              "accuracy": 0.35806739567060925,
               "windows": 1
             },
             {
-              "sample_id": "django__django-17087",
-              "tokens": 11592,
-              "accuracy": 0.3193581780538302,
+              "sample_id": "swe_bench/sympy__sympy-18199",
+              "tokens": 29922,
+              "accuracy": 0.17853084686852483,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-22719",
-              "tokens": 17617,
-              "accuracy": 0.31986149741726744,
+              "sample_id": "swe_bench/sympy__sympy-18698",
+              "tokens": 78603,
+              "accuracy": 0.45346869712351945,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-22871",
-              "tokens": 8402,
-              "accuracy": 0.12854082361342536,
+              "sample_id": "swe_bench/sympy__sympy-20590",
+              "tokens": 81258,
+              "accuracy": 0.43878756553200915,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-24177",
-              "tokens": 14912,
-              "accuracy": 0.13827789699570817,
+              "sample_id": "swe_bench/sympy__sympy-20801",
+              "tokens": 65508,
+              "accuracy": 0.2755388654820785,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-24627",
-              "tokens": 4631,
-              "accuracy": 0.3454977326711293,
+              "sample_id": "swe_bench/sympy__sympy-21379",
+              "tokens": 48985,
+              "accuracy": 0.1805858936409105,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-24637",
-              "tokens": 16062,
-              "accuracy": 0.1250155646868385,
+              "sample_id": "swe_bench/sympy__sympy-22456",
+              "tokens": 82781,
+              "accuracy": 0.2497795387830541,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-25287",
-              "tokens": 11475,
-              "accuracy": 0.14579520697167755,
+              "sample_id": "swe_bench/sympy__sympy-23413",
+              "tokens": 104685,
+              "accuracy": 0.640846348569518,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-25479",
-              "tokens": 7857,
-              "accuracy": 0.8321242204403716,
+              "sample_id": "swe_bench/sympy__sympy-23950",
+              "tokens": 63127,
+              "accuracy": 0.23671329225212667,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-25775",
-              "tokens": 10191,
-              "accuracy": 0.050436659797860856,
+              "sample_id": "swe_bench/sympy__sympy-24066",
+              "tokens": 102336,
+              "accuracy": 0.39155331457160725,
               "windows": 1
             },
             {
-              "sample_id": "matplotlib__matplotlib-25960",
-              "tokens": 9851,
-              "accuracy": 0.10161404933509288,
+              "sample_id": "swe_bench/sympy__sympy-24213",
+              "tokens": 73629,
+              "accuracy": 0.4528107131700824,
               "windows": 1
             },
             {
-              "sample_id": "mwaskom__seaborn-3069",
-              "tokens": 3842,
-              "accuracy": 0.2332118688183238,
+              "sample_id": "swe_bench/sympy__sympy-24661",
+              "tokens": 35449,
+              "accuracy": 0.2514880532596124,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-1142",
-              "tokens": 6371,
-              "accuracy": 0.23559880709464762,
+              "sample_id": "swe_bench/astropy__astropy-13236",
+              "tokens": 56306,
+              "accuracy": 0.3458778815756758,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-1921",
-              "tokens": 21235,
-              "accuracy": 0.331716505768778,
+              "sample_id": "swe_bench/astropy__astropy-13579",
+              "tokens": 55461,
+              "accuracy": 0.4211427850201042,
               "windows": 1
             },
             {
-              "sample_id": "psf__requests-2931",
-              "tokens": 1988,
-              "accuracy": 0.3153923541247485,
+              "sample_id": "swe_bench/astropy__astropy-14598",
+              "tokens": 70669,
+              "accuracy": 0.3346446107911531,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-3151",
-              "tokens": 33230,
-              "accuracy": 0.3081853746614505,
+              "sample_id": "swe_bench/django__django-10097",
+              "tokens": 46634,
+              "accuracy": 0.47776300553244416,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-3305",
-              "tokens": 10771,
-              "accuracy": 0.23377587967691021,
+              "sample_id": "swe_bench/django__django-10973",
+              "tokens": 42827,
+              "accuracy": 0.6165503070492914,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-4695",
-              "tokens": 8759,
-              "accuracy": 0.35335083913688775,
+              "sample_id": "swe_bench/django__django-11095",
+              "tokens": 36636,
+              "accuracy": 0.3182388907085926,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-6744",
-              "tokens": 3169,
-              "accuracy": 0.28210792047964656,
+              "sample_id": "swe_bench/django__django-11099",
+              "tokens": 28433,
+              "accuracy": 0.23293356311328386,
               "windows": 1
             },
             {
-              "sample_id": "pydata__xarray-6938",
-              "tokens": 8806,
-              "accuracy": 0.4398137633431751,
+              "sample_id": "swe_bench/django__django-11138",
+              "tokens": 41888,
+              "accuracy": 0.19327731092436976,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-4551",
-              "tokens": 10896,
-              "accuracy": 0.16501468428781205,
+              "sample_id": "swe_bench/django__django-11179",
+              "tokens": 68246,
+              "accuracy": 0.4193359317762213,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-6903",
-              "tokens": 9275,
-              "accuracy": 0.21595687331536387,
+              "sample_id": "swe_bench/django__django-11265",
+              "tokens": 67873,
+              "accuracy": 0.22720374817674185,
               "windows": 1
             },
             {
-              "sample_id": "pylint-dev__pylint-8898",
-              "tokens": 8068,
-              "accuracy": 0.22979672781358454,
+              "sample_id": "swe_bench/django__django-11433",
+              "tokens": 18012,
+              "accuracy": 0.22690428603153454,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-10081",
-              "tokens": 49114,
-              "accuracy": 0.19145253899091907,
+              "sample_id": "swe_bench/django__django-11728",
+              "tokens": 63660,
+              "accuracy": 0.47230600062833805,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-5787",
-              "tokens": 9984,
-              "accuracy": 0.23247195512820512,
+              "sample_id": "swe_bench/django__django-11734",
+              "tokens": 24529,
+              "accuracy": 0.318398630192833,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7205",
-              "tokens": 9142,
-              "accuracy": 0.29369940931962374,
+              "sample_id": "swe_bench/django__django-11740",
+              "tokens": 32129,
+              "accuracy": 0.4091630614086962,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7571",
-              "tokens": 7578,
-              "accuracy": 0.10860385325943521,
+              "sample_id": "swe_bench/django__django-11880",
+              "tokens": 30569,
+              "accuracy": 0.1295757139585855,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-7982",
-              "tokens": 2751,
-              "accuracy": 0.4976372228280625,
+              "sample_id": "swe_bench/django__django-12050",
+              "tokens": 47342,
+              "accuracy": 0.34666891977525244,
               "windows": 1
             },
             {
-              "sample_id": "pytest-dev__pytest-8399",
-              "tokens": 14241,
-              "accuracy": 0.33944245488378627,
+              "sample_id": "swe_bench/django__django-12304",
+              "tokens": 52892,
+              "accuracy": 0.45095666641458065,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-11310",
-              "tokens": 10162,
-              "accuracy": 0.0688840779374139,
+              "sample_id": "swe_bench/django__django-12406",
+              "tokens": 73859,
+              "accuracy": 0.3619870293396878,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-12585",
-              "tokens": 24670,
-              "accuracy": 0.21994325091203892,
+              "sample_id": "swe_bench/django__django-12708",
+              "tokens": 56500,
+              "accuracy": 0.35812389380530973,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-12682",
-              "tokens": 6879,
-              "accuracy": 0.07210350341619422,
+              "sample_id": "swe_bench/django__django-12713",
+              "tokens": 43706,
+              "accuracy": 0.1767491877545417,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-12973",
-              "tokens": 16811,
-              "accuracy": 0.2836238177383856,
+              "sample_id": "swe_bench/django__django-12741",
+              "tokens": 50338,
+              "accuracy": 0.36054273113751045,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-14629",
-              "tokens": 17157,
-              "accuracy": 0.2067377746692312,
+              "sample_id": "swe_bench/django__django-12965",
+              "tokens": 75856,
+              "accuracy": 0.41678970681290867,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-14710",
-              "tokens": 10811,
-              "accuracy": 0.18619924151327352,
+              "sample_id": "swe_bench/django__django-13089",
+              "tokens": 44468,
+              "accuracy": 0.33118197355401635,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-25232",
-              "tokens": 1943,
-              "accuracy": 0.6927431806484817,
+              "sample_id": "swe_bench/django__django-13109",
+              "tokens": 49980,
+              "accuracy": 0.47086834733893557,
               "windows": 1
             },
             {
-              "sample_id": "scikit-learn__scikit-learn-26323",
-              "tokens": 5242,
-              "accuracy": 0.4269362838611217,
+              "sample_id": "swe_bench/django__django-13158",
+              "tokens": 37562,
+              "accuracy": 0.4407379798732762,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-10435",
-              "tokens": 17863,
-              "accuracy": 0.14331299333818506,
+              "sample_id": "swe_bench/django__django-13279",
+              "tokens": 57254,
+              "accuracy": 0.37441925454990044,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-7910",
-              "tokens": 32895,
-              "accuracy": 0.2631706946344429,
+              "sample_id": "swe_bench/django__django-13512",
+              "tokens": 34709,
+              "accuracy": 0.36572646863925784,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8056",
-              "tokens": 15565,
-              "accuracy": 0.2921940250562159,
+              "sample_id": "swe_bench/django__django-13568",
+              "tokens": 67470,
+              "accuracy": 0.5593597154290796,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8459",
-              "tokens": 7894,
-              "accuracy": 0.14720040537116796,
+              "sample_id": "swe_bench/django__django-13569",
+              "tokens": 63110,
+              "accuracy": 0.49849469180795436,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8475",
-              "tokens": 7093,
-              "accuracy": 0.07725926970252361,
+              "sample_id": "swe_bench/django__django-13590",
+              "tokens": 42354,
+              "accuracy": 0.47202153279501347,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-8548",
-              "tokens": 9290,
-              "accuracy": 0.18482238966630785,
+              "sample_id": "swe_bench/django__django-13741",
+              "tokens": 31799,
+              "accuracy": 0.31431806031636217,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9367",
-              "tokens": 24689,
-              "accuracy": 0.1664303941026368,
+              "sample_id": "swe_bench/django__django-13837",
+              "tokens": 55812,
+              "accuracy": 0.4454955923457321,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9461",
-              "tokens": 29129,
-              "accuracy": 0.26111435339352534,
+              "sample_id": "swe_bench/django__django-14011",
+              "tokens": 52812,
+              "accuracy": 0.3517950465803227,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9591",
-              "tokens": 10086,
-              "accuracy": 0.18372000793178664,
+              "sample_id": "swe_bench/django__django-14017",
+              "tokens": 67399,
+              "accuracy": 0.4409412602560869,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9673",
-              "tokens": 7316,
-              "accuracy": 0.10470202296336796,
+              "sample_id": "swe_bench/django__django-14034",
+              "tokens": 44973,
+              "accuracy": 0.37371311675894425,
               "windows": 1
             },
             {
-              "sample_id": "sphinx-doc__sphinx-9698",
-              "tokens": 2365,
-              "accuracy": 0.6126849894291755,
+              "sample_id": "swe_bench/django__django-14089",
+              "tokens": 35517,
+              "accuracy": 0.09854435903933327,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-11618",
-              "tokens": 8222,
-              "accuracy": 0.04670396497202627,
+              "sample_id": "swe_bench/django__django-14140",
+              "tokens": 58261,
+              "accuracy": 0.4153722043905872,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-12419",
-              "tokens": 46709,
-              "accuracy": 0.1344280545505149,
+              "sample_id": "swe_bench/django__django-14349",
+              "tokens": 25274,
+              "accuracy": 0.26916989791880985,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-12481",
-              "tokens": 13712,
-              "accuracy": 0.09794340723453909,
+              "sample_id": "swe_bench/django__django-14351",
+              "tokens": 78461,
+              "accuracy": 0.34385235977109646,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13031",
-              "tokens": 10874,
-              "accuracy": 0.1799705720066213,
+              "sample_id": "swe_bench/django__django-14493",
+              "tokens": 25396,
+              "accuracy": 0.21188376122223973,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13615",
-              "tokens": 35045,
-              "accuracy": 0.2760450848908546,
+              "sample_id": "swe_bench/django__django-14539",
+              "tokens": 56518,
+              "accuracy": 0.3158462790615379,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13798",
-              "tokens": 20459,
-              "accuracy": 0.3331541131042573,
+              "sample_id": "swe_bench/django__django-14580",
+              "tokens": 40096,
+              "accuracy": 0.3722815243415802,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13877",
-              "tokens": 14537,
-              "accuracy": 0.41893100364586916,
+              "sample_id": "swe_bench/django__django-14752",
+              "tokens": 41274,
+              "accuracy": 0.5561854920773368,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-13974",
-              "tokens": 10510,
-              "accuracy": 0.2429115128449096,
+              "sample_id": "swe_bench/django__django-14915",
+              "tokens": 19420,
+              "accuracy": 0.18213182286302781,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-14976",
-              "tokens": 8126,
-              "accuracy": 0.4409303470342112,
+              "sample_id": "swe_bench/django__django-15098",
+              "tokens": 48150,
+              "accuracy": 0.25277258566978195,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-15017",
-              "tokens": 23540,
-              "accuracy": 0.14362786745964315,
+              "sample_id": "swe_bench/django__django-15104",
+              "tokens": 18573,
+              "accuracy": 0.33543315565605986,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-15599",
-              "tokens": 14348,
-              "accuracy": 0.29753275717870087,
+              "sample_id": "swe_bench/django__django-15252",
+              "tokens": 39974,
+              "accuracy": 0.178991344373843,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-15809",
-              "tokens": 10356,
-              "accuracy": 0.09472769409038238,
+              "sample_id": "swe_bench/django__django-15277",
+              "tokens": 26329,
+              "accuracy": 0.24406547912947701,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-18199",
-              "tokens": 6628,
-              "accuracy": 0.055220277610138806,
+              "sample_id": "swe_bench/django__django-15280",
+              "tokens": 42278,
+              "accuracy": 0.2062065376791712,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-18698",
-              "tokens": 6937,
-              "accuracy": 0.3439527173129595,
+              "sample_id": "swe_bench/django__django-15563",
+              "tokens": 31235,
+              "accuracy": 0.28826636785657117,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-20590",
-              "tokens": 13970,
-              "accuracy": 0.2798138869005011,
+              "sample_id": "swe_bench/django__django-15572",
+              "tokens": 59004,
+              "accuracy": 0.4064131245339299,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-20801",
-              "tokens": 9292,
-              "accuracy": 0.22395609126130003,
+              "sample_id": "swe_bench/django__django-15695",
+              "tokens": 82382,
+              "accuracy": 0.41980044184409215,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-21379",
-              "tokens": 12423,
-              "accuracy": 0.2548498752314256,
+              "sample_id": "swe_bench/django__django-15732",
+              "tokens": 35309,
+              "accuracy": 0.2130618255968733,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-22456",
-              "tokens": 15781,
-              "accuracy": 0.3411697611051264,
+              "sample_id": "swe_bench/django__django-15851",
+              "tokens": 73772,
+              "accuracy": 0.48644472157458113,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-23413",
-              "tokens": 12526,
-              "accuracy": 0.16014689445952418,
+              "sample_id": "swe_bench/django__django-15863",
+              "tokens": 65675,
+              "accuracy": 0.325314046440807,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-23950",
-              "tokens": 8678,
-              "accuracy": 0.13735883844203733,
+              "sample_id": "swe_bench/django__django-15916",
+              "tokens": 43885,
+              "accuracy": 0.36581975618092744,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-24066",
-              "tokens": 47733,
-              "accuracy": 0.1944147654662393,
+              "sample_id": "swe_bench/django__django-16032",
+              "tokens": 38643,
+              "accuracy": 0.2421913412519732,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-24213",
-              "tokens": 12842,
-              "accuracy": 0.26935056844728233,
+              "sample_id": "swe_bench/django__django-16116",
+              "tokens": 49475,
+              "accuracy": 0.5030621526023245,
               "windows": 1
             },
             {
-              "sample_id": "sympy__sympy-24661",
-              "tokens": 9532,
-              "accuracy": 0.10239194292908099,
+              "sample_id": "swe_bench/django__django-16136",
+              "tokens": 50087,
+              "accuracy": 0.3515283406872043,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-13236",
-              "tokens": 1445,
-              "accuracy": 0.6228373702422145,
+              "sample_id": "swe_bench/django__django-16139",
+              "tokens": 31825,
+              "accuracy": 0.3342026708562451,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-13579",
-              "tokens": 8505,
-              "accuracy": 0.21187536743092297,
+              "sample_id": "swe_bench/django__django-16145",
+              "tokens": 30572,
+              "accuracy": 0.28218631427449953,
               "windows": 1
             },
             {
-              "sample_id": "astropy__astropy-14598",
-              "tokens": 18440,
-              "accuracy": 0.3816160520607375,
+              "sample_id": "swe_bench/django__django-16255",
+              "tokens": 32223,
+              "accuracy": 0.5249045712689694,
               "windows": 1
             },
             {
-              "sample_id": "django__django-10097",
-              "tokens": 6908,
-              "accuracy": 0.13578459756803707,
+              "sample_id": "swe_bench/django__django-16263",
+              "tokens": 86949,
+              "accuracy": 0.30803114469401605,
               "windows": 1
             },
             {
-              "sample_id": "django__django-10973",
-              "tokens": 1777,
-              "accuracy": 0.5987619583567811,
+              "sample_id": "swe_bench/django__django-16333",
+              "tokens": 39599,
+              "accuracy": 0.16202429354276623,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11095",
-              "tokens": 8949,
-              "accuracy": 0.13632808134987148,
+              "sample_id": "swe_bench/django__django-16429",
+              "tokens": 77915,
+              "accuracy": 0.41889238272476415,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11099",
-              "tokens": 8874,
-              "accuracy": 0.22120802343926077,
+              "sample_id": "swe_bench/django__django-16454",
+              "tokens": 38462,
+              "accuracy": 0.3370859549685404,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11138",
-              "tokens": 9738,
-              "accuracy": 0.2474840829739166,
+              "sample_id": "swe_bench/django__django-16595",
+              "tokens": 33229,
+              "accuracy": 0.3286887959312649,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11179",
-              "tokens": 19724,
-              "accuracy": 0.26140742242952747,
+              "sample_id": "swe_bench/django__django-16661",
+              "tokens": 62047,
+              "accuracy": 0.4004544941737715,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11265",
-              "tokens": 9741,
-              "accuracy": 0.38989836772405295,
+              "sample_id": "swe_bench/django__django-16662",
+              "tokens": 56111,
+              "accuracy": 0.389353246244052,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11433",
-              "tokens": 31932,
-              "accuracy": 0.22876738068395341,
+              "sample_id": "swe_bench/django__django-16667",
+              "tokens": 16752,
+              "accuracy": 0.3135148042024833,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11728",
-              "tokens": 6427,
-              "accuracy": 0.06488252683989419,
+              "sample_id": "swe_bench/django__django-16901",
+              "tokens": 54230,
+              "accuracy": 0.3095703485155818,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11734",
-              "tokens": 11423,
-              "accuracy": 0.09988619451982841,
+              "sample_id": "swe_bench/django__django-16950",
+              "tokens": 49841,
+              "accuracy": 0.35900162516803436,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11740",
-              "tokens": 15971,
-              "accuracy": 0.19817168618120343,
+              "sample_id": "swe_bench/matplotlib__matplotlib-20826",
+              "tokens": 89340,
+              "accuracy": 0.32537497201701365,
               "windows": 1
             },
             {
-              "sample_id": "django__django-11880",
-              "tokens": 9424,
-              "accuracy": 0.16553480475382004,
+              "sample_id": "swe_bench/matplotlib__matplotlib-20859",
+              "tokens": 33168,
+              "accuracy": 0.35992522913651714,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12050",
-              "tokens": 9198,
-              "accuracy": 0.09926070884974994,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24570",
+              "tokens": 70510,
+              "accuracy": 0.3136576372145795,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12304",
-              "tokens": 7719,
-              "accuracy": 0.15649695556419224,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24870",
+              "tokens": 83007,
+              "accuracy": 0.5161733347789945,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12406",
-              "tokens": 15781,
-              "accuracy": 0.36683353399657814,
+              "sample_id": "swe_bench/matplotlib__matplotlib-24970",
+              "tokens": 20249,
+              "accuracy": 0.27556916390932884,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12708",
-              "tokens": 4321,
-              "accuracy": 0.3325619069659801,
+              "sample_id": "swe_bench/matplotlib__matplotlib-25122",
+              "tokens": 40468,
+              "accuracy": 0.3892211129781556,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12713",
-              "tokens": 14632,
-              "accuracy": 0.26250683433570254,
+              "sample_id": "swe_bench/pydata__xarray-4094",
+              "tokens": 60982,
+              "accuracy": 0.382965465219245,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12741",
-              "tokens": 6570,
-              "accuracy": 0.0867579908675799,
+              "sample_id": "swe_bench/pydata__xarray-4356",
+              "tokens": 27808,
+              "accuracy": 0.3417361910241657,
               "windows": 1
             },
             {
-              "sample_id": "django__django-12965",
-              "tokens": 19426,
-              "accuracy": 0.3659013692988778,
+              "sample_id": "swe_bench/pydata__xarray-4966",
+              "tokens": 60403,
+              "accuracy": 0.3905104051123289,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13089",
-              "tokens": 2883,
-              "accuracy": 0.45265348595213317,
+              "sample_id": "swe_bench/pydata__xarray-6599",
+              "tokens": 93069,
+              "accuracy": 0.1962737323920962,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13109",
-              "tokens": 14048,
-              "accuracy": 0.2264379271070615,
+              "sample_id": "swe_bench/pydata__xarray-6721",
+              "tokens": 64472,
+              "accuracy": 0.2792840302767093,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13158",
-              "tokens": 64295,
-              "accuracy": 0.20382611400575473,
+              "sample_id": "swe_bench/pylint-dev__pylint-4661",
+              "tokens": 61794,
+              "accuracy": 0.36479269832022526,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13279",
-              "tokens": 50440,
-              "accuracy": 0.16181601903251389,
+              "sample_id": "swe_bench/pylint-dev__pylint-4970",
+              "tokens": 74429,
+              "accuracy": 0.46510096870843354,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13512",
-              "tokens": 7275,
-              "accuracy": 0.09580756013745705,
+              "sample_id": "swe_bench/pylint-dev__pylint-7080",
+              "tokens": 86246,
+              "accuracy": 0.38720636319365537,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13568",
-              "tokens": 73338,
-              "accuracy": 0.10195260301617169,
+              "sample_id": "swe_bench/pytest-dev__pytest-10051",
+              "tokens": 53667,
+              "accuracy": 0.4253824510406768,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13569",
-              "tokens": 19316,
-              "accuracy": 0.25621246634914063,
+              "sample_id": "swe_bench/pytest-dev__pytest-5631",
+              "tokens": 43909,
+              "accuracy": 0.42799881573253773,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13590",
-              "tokens": 31992,
-              "accuracy": 0.11971742935733934,
+              "sample_id": "swe_bench/pytest-dev__pytest-6197",
+              "tokens": 56927,
+              "accuracy": 0.33497285997856907,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13741",
-              "tokens": 6682,
-              "accuracy": 0.0839568991319964,
+              "sample_id": "swe_bench/pytest-dev__pytest-6202",
+              "tokens": 54201,
+              "accuracy": 0.36648770317890816,
               "windows": 1
             },
             {
-              "sample_id": "django__django-13837",
-              "tokens": 58793,
-              "accuracy": 0.1583011583011583,
+              "sample_id": "swe_bench/pytest-dev__pytest-7490",
+              "tokens": 41447,
+              "accuracy": 0.3847081815330422,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14011",
-              "tokens": 1966,
-              "accuracy": 0.4084435401831129,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13439",
+              "tokens": 30979,
+              "accuracy": 0.331514897188418,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14017",
-              "tokens": 4604,
-              "accuracy": 0.8088618592528236,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-13779",
+              "tokens": 52935,
+              "accuracy": 0.529082837442146,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14034",
-              "tokens": 13236,
-              "accuracy": 0.4150800846177093,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14053",
+              "tokens": 38566,
+              "accuracy": 0.46688793237566767,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14089",
-              "tokens": 6483,
-              "accuracy": 0.07589079130032392,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-14087",
+              "tokens": 69809,
+              "accuracy": 0.4652695211219184,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14140",
-              "tokens": 1983,
-              "accuracy": 0.6828038325769037,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-25102",
+              "tokens": 87390,
+              "accuracy": 0.42762329786016706,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14349",
-              "tokens": 41857,
-              "accuracy": 0.22560145256468453,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-25931",
+              "tokens": 33549,
+              "accuracy": 0.31202122268920085,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14351",
-              "tokens": 16539,
-              "accuracy": 0.37831791523066693,
+              "sample_id": "swe_bench/scikit-learn__scikit-learn-26194",
+              "tokens": 46327,
+              "accuracy": 0.3247566214086818,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14493",
-              "tokens": 4604,
-              "accuracy": 0.7917028670721112,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-10673",
+              "tokens": 78438,
+              "accuracy": 0.4613835130931436,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14539",
-              "tokens": 6450,
-              "accuracy": 0.07193798449612403,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-11510",
+              "tokens": 83642,
+              "accuracy": 0.4728963917649028,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14580",
-              "tokens": 13857,
-              "accuracy": 0.18878545139640615,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7454",
+              "tokens": 65723,
+              "accuracy": 0.37939534105259953,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14752",
-              "tokens": 17654,
-              "accuracy": 0.1696499376911748,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7757",
+              "tokens": 73320,
+              "accuracy": 0.37450900163666123,
               "windows": 1
             },
             {
-              "sample_id": "django__django-14915",
-              "tokens": 7778,
-              "accuracy": 0.1932373360761121,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-7889",
+              "tokens": 42071,
+              "accuracy": 0.3273513821872549,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15098",
-              "tokens": 10529,
-              "accuracy": 0.25500997245702345,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-8035",
+              "tokens": 66200,
+              "accuracy": 0.29580060422960724,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15104",
-              "tokens": 12221,
-              "accuracy": 0.3660093282055478,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9229",
+              "tokens": 28470,
+              "accuracy": 0.218510713031261,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15252",
-              "tokens": 8752,
-              "accuracy": 0.3508912248628885,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9230",
+              "tokens": 83970,
+              "accuracy": 0.16151006311778016,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15277",
-              "tokens": 12915,
-              "accuracy": 0.2343012001548587,
+              "sample_id": "swe_bench/sphinx-doc__sphinx-9281",
+              "tokens": 51358,
+              "accuracy": 0.25947272090034657,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15280",
-              "tokens": 16110,
-              "accuracy": 0.2739913097454997,
+              "sample_id": "swe_bench/sympy__sympy-12096",
+              "tokens": 68582,
+              "accuracy": 0.3321279636056108,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15563",
-              "tokens": 47527,
-              "accuracy": 0.17579481137037895,
+              "sample_id": "swe_bench/sympy__sympy-13480",
+              "tokens": 58550,
+              "accuracy": 0.5059777967549103,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15572",
-              "tokens": 8775,
-              "accuracy": 0.23658119658119658,
+              "sample_id": "swe_bench/sympy__sympy-13551",
+              "tokens": 79045,
+              "accuracy": 0.3901448541969764,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15695",
-              "tokens": 1209,
-              "accuracy": 0.52191894127378,
+              "sample_id": "swe_bench/sympy__sympy-13647",
+              "tokens": 58465,
+              "accuracy": 0.5167536132728983,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15732",
-              "tokens": 10343,
-              "accuracy": 0.4388475297302523,
+              "sample_id": "swe_bench/sympy__sympy-13757",
+              "tokens": 68136,
+              "accuracy": 0.3474228014559117,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15851",
-              "tokens": 1454,
-              "accuracy": 0.49449793672627235,
+              "sample_id": "swe_bench/sympy__sympy-13852",
+              "tokens": 44229,
+              "accuracy": 0.23663207397861133,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15863",
-              "tokens": 27177,
-              "accuracy": 0.2405342753063252,
+              "sample_id": "swe_bench/sympy__sympy-15875",
+              "tokens": 73696,
+              "accuracy": 0.2526188666956144,
               "windows": 1
             },
             {
-              "sample_id": "django__django-15916",
-              "tokens": 14161,
-              "accuracy": 0.30633429842525245,
+              "sample_id": "swe_bench/sympy__sympy-15976",
+              "tokens": 54898,
+              "accuracy": 0.40513315603482825,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16032",
-              "tokens": 1749,
-              "accuracy": 0.5997712978845054,
+              "sample_id": "swe_bench/sympy__sympy-16886",
+              "tokens": 27524,
+              "accuracy": 0.2589376544106961,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16116",
-              "tokens": 1661,
-              "accuracy": 0.4948826008428657,
+              "sample_id": "swe_bench/sympy__sympy-17630",
+              "tokens": 108046,
+              "accuracy": 0.3097847213223997,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16136",
-              "tokens": 13960,
-              "accuracy": 0.31217765042979945,
+              "sample_id": "swe_bench/sympy__sympy-18211",
+              "tokens": 82100,
+              "accuracy": 0.31689403166869673,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16139",
-              "tokens": 1265,
-              "accuracy": 0.5675889328063242,
+              "sample_id": "swe_bench/sympy__sympy-18763",
+              "tokens": 77051,
+              "accuracy": 0.35864557241307704,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16145",
-              "tokens": 14584,
-              "accuracy": 0.2584339001645639,
+              "sample_id": "swe_bench/sympy__sympy-19783",
+              "tokens": 81455,
+              "accuracy": 0.3901172426493156,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16255",
-              "tokens": 11663,
-              "accuracy": 0.21461030609620166,
+              "sample_id": "swe_bench/sympy__sympy-19954",
+              "tokens": 35720,
+              "accuracy": 0.3814669652855543,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16263",
-              "tokens": 9462,
-              "accuracy": 0.17638976960473474,
+              "sample_id": "swe_bench/sympy__sympy-21612",
+              "tokens": 114006,
+              "accuracy": 0.34484149957019805,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16333",
-              "tokens": 14984,
-              "accuracy": 0.23471703150026696,
+              "sample_id": "swe_bench/sympy__sympy-23262",
+              "tokens": 40604,
+              "accuracy": 0.14067579548812925,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16429",
-              "tokens": 22785,
-              "accuracy": 0.23344305464121132,
+              "sample_id": "swe_bench/sympy__sympy-23534",
+              "tokens": 57485,
+              "accuracy": 0.3294076715664956,
               "windows": 1
             },
             {
-              "sample_id": "django__django-16454",
-              "tokens": 15150,
-              "accuracy": 0.2996699669966997,
-              "windows": 1
-            },
-            {
-              "sample_id": "django__django-16595",
-              "tokens": 1388,
-              "accuracy": 0.5756484149855908,
-              "windows": 1
-            },
-            {
-              "sample_id": "django__django-16661",
-              "tokens": 6627,
-              "accuracy": 0.0988380866153614,
-              "windows": 1
-            },
-            {
-              "sample_id": "django__django-16662",
-              "tokens": 6899,
-              "accuracy": 0.12074213654152775,
-              "windows": 1
-            },
-            {
-              "sample_id": "django__django-16667",
-              "tokens": 17937,
-              "accuracy": 0.25372135808663654,
-              "windows": 1
-            },
-            {
-              "sample_id": "django__django-16901",
-              "tokens": 15546,
-              "accuracy": 0.3451048501222179,
-              "windows": 1
-            },
-            {
-              "sample_id": "django__django-16950",
-              "tokens": 19901,
-              "accuracy": 0.4966082106426813,
-              "windows": 1
-            },
-            {
-              "sample_id": "matplotlib__matplotlib-20826",
-              "tokens": 8558,
-              "accuracy": 0.14068707641972422,
-              "windows": 1
-            },
-            {
-              "sample_id": "matplotlib__matplotlib-20859",
-              "tokens": 6884,
-              "accuracy": 0.515979081929111,
-              "windows": 1
-            },
-            {
-              "sample_id": "matplotlib__matplotlib-24570",
-              "tokens": 7855,
-              "accuracy": 0.08516868236791852,
-              "windows": 1
-            },
-            {
-              "sample_id": "matplotlib__matplotlib-24870",
-              "tokens": 12952,
-              "accuracy": 0.12569487337862878,
-              "windows": 1
-            },
-            {
-              "sample_id": "matplotlib__matplotlib-24970",
-              "tokens": 9163,
-              "accuracy": 0.16926770708283315,
-              "windows": 1
-            },
-            {
-              "sample_id": "matplotlib__matplotlib-25122",
-              "tokens": 17893,
-              "accuracy": 0.40624825350695803,
-              "windows": 1
-            },
-            {
-              "sample_id": "pydata__xarray-4094",
-              "tokens": 3962,
-              "accuracy": 0.21504290762241293,
-              "windows": 1
-            },
-            {
-              "sample_id": "pydata__xarray-4356",
-              "tokens": 8954,
-              "accuracy": 0.3222023676569131,
-              "windows": 1
-            },
-            {
-              "sample_id": "pydata__xarray-4966",
-              "tokens": 12385,
-              "accuracy": 0.5786838918046023,
-              "windows": 1
-            },
-            {
-              "sample_id": "pydata__xarray-6599",
-              "tokens": 30724,
-              "accuracy": 0.3463416221846114,
-              "windows": 1
-            },
-            {
-              "sample_id": "pydata__xarray-6721",
-              "tokens": 8978,
-              "accuracy": 0.7835820895522388,
-              "windows": 1
-            },
-            {
-              "sample_id": "pylint-dev__pylint-4661",
-              "tokens": 10891,
-              "accuracy": 0.3720503167753191,
-              "windows": 1
-            },
-            {
-              "sample_id": "pylint-dev__pylint-4970",
-              "tokens": 5943,
-              "accuracy": 0.07252229513713612,
-              "windows": 1
-            },
-            {
-              "sample_id": "pylint-dev__pylint-7080",
-              "tokens": 8809,
-              "accuracy": 0.7567260756044955,
-              "windows": 1
-            },
-            {
-              "sample_id": "pytest-dev__pytest-10051",
-              "tokens": 37316,
-              "accuracy": 0.1676760638868046,
-              "windows": 1
-            },
-            {
-              "sample_id": "pytest-dev__pytest-5631",
-              "tokens": 3531,
-              "accuracy": 0.5043896913055792,
-              "windows": 1
-            },
-            {
-              "sample_id": "pytest-dev__pytest-6197",
-              "tokens": 12248,
-              "accuracy": 0.3187459177008491,
-              "windows": 1
-            },
-            {
-              "sample_id": "pytest-dev__pytest-6202",
-              "tokens": 18399,
-              "accuracy": 0.36165008967878687,
-              "windows": 1
-            },
-            {
-              "sample_id": "pytest-dev__pytest-7490",
-              "tokens": 23350,
-              "accuracy": 0.3348608137044968,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-13439",
-              "tokens": 12816,
-              "accuracy": 0.1033083645443196,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-13779",
-              "tokens": 9918,
-              "accuracy": 0.17795926598104456,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-14053",
-              "tokens": 22957,
-              "accuracy": 0.1772444134686588,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-14087",
-              "tokens": 14815,
-              "accuracy": 0.3114411069861627,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-25102",
-              "tokens": 3687,
-              "accuracy": 0.3580146460537022,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-25931",
-              "tokens": 5113,
-              "accuracy": 0.7566986113827499,
-              "windows": 1
-            },
-            {
-              "sample_id": "scikit-learn__scikit-learn-26194",
-              "tokens": 54900,
-              "accuracy": 0.13052823315118398,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-10673",
-              "tokens": 9290,
-              "accuracy": 0.4797631862217438,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-11510",
-              "tokens": 8873,
-              "accuracy": 0.23667305308238476,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-7454",
-              "tokens": 13252,
-              "accuracy": 0.21159070329006943,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-7757",
-              "tokens": 8009,
-              "accuracy": 0.5458858783868148,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-7889",
-              "tokens": 9064,
-              "accuracy": 0.37466902030008825,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-8035",
-              "tokens": 8313,
-              "accuracy": 0.07506315409599422,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-9229",
-              "tokens": 16086,
-              "accuracy": 0.3419122218077832,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-9230",
-              "tokens": 11487,
-              "accuracy": 0.12797074954296161,
-              "windows": 1
-            },
-            {
-              "sample_id": "sphinx-doc__sphinx-9281",
-              "tokens": 11532,
-              "accuracy": 0.2642212972597988,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-12096",
-              "tokens": 5680,
-              "accuracy": 0.40035211267605636,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-13480",
-              "tokens": 8079,
-              "accuracy": 0.38049263522713206,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-13551",
-              "tokens": 13017,
-              "accuracy": 0.10155949911653991,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-13647",
-              "tokens": 1592,
-              "accuracy": 0.6608040201005025,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-13757",
-              "tokens": 7575,
-              "accuracy": 0.34046204620462045,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-13852",
-              "tokens": 24511,
-              "accuracy": 0.06495043041899555,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-15875",
-              "tokens": 31767,
-              "accuracy": 0.19501369345547265,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-15976",
-              "tokens": 11300,
-              "accuracy": 0.4768141592920354,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-16886",
-              "tokens": 8686,
-              "accuracy": 0.12122956481694681,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-17630",
-              "tokens": 7503,
-              "accuracy": 0.3506597361055578,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-18211",
-              "tokens": 3712,
-              "accuracy": 0.29229525862068967,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-18763",
-              "tokens": 2169,
-              "accuracy": 0.4582757030889811,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-19783",
-              "tokens": 33042,
-              "accuracy": 0.20104715210943647,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-19954",
-              "tokens": 13565,
-              "accuracy": 0.23110947290821968,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-21612",
-              "tokens": 8914,
-              "accuracy": 0.14460399371774738,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-23262",
-              "tokens": 10650,
-              "accuracy": 0.163943661971831,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-23534",
-              "tokens": 8844,
-              "accuracy": 0.21641791044776118,
-              "windows": 1
-            },
-            {
-              "sample_id": "sympy__sympy-24562",
-              "tokens": 29571,
-              "accuracy": 0.235703899090325,
+              "sample_id": "swe_bench/sympy__sympy-24562",
+              "tokens": 81977,
+              "accuracy": 0.4471742073996365,
               "windows": 1
             }
           ]

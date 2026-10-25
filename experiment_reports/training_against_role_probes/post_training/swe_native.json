@@ -1,5 +1,5 @@
 {
-  "status": "AppWorld complete; other cohorts collecting; DepthBench shards 2/3 replaced after zero-attempt sandbox failures",
+  "status": "complete: all four 500-task cohorts and whole-history probe scores validated; report reviewed",
   "base_export_job": "1504793",
   "scorer_control_job": "1504794",
   "scorer_controls": [
@@ -175,5 +175,13 @@
     "control_output": "experiment_reports/training_against_role_probes/logs/sandbox-runtime-django-14559.json",
     "control_script": "src/experiments/training_against_role_probes/post_training/check_sandbox_runtime.py",
     "attempts_replaced": false
+  },
+  "validation": {
+    "job": "1505356",
+    "status": "COMPLETED",
+    "cohorts": 12,
+    "swe_tasks_per_model": 500,
+    "swe_histories_scored_per_model": 500,
+    "swe_excluded_histories_per_model": 0
   }
 }

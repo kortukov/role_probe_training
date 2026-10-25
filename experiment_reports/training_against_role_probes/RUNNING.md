@@ -189,23 +189,23 @@ message schema as the existing agentic evaluations.
 The main report is regenerated only after all model/benchmark cohorts are ready:
 
 ```bash
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/validate.py
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/compare.py
-.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/refresh_base_reports.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/validate.py --native-swe
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/compare.py --native-swe
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/refresh_base_reports.py --native-swe
 ```
 
 `post_training/comparison.json` in the parent experiment consolidates all four
-models. Baseline task results and histories are reused from `experiment_reports/agentic/`;
-its original five probes are reapplied with whole contexts, without new generation.
-The three trained models use their separately generated cohorts and fresh standard-data
-layer-12 probes. The original base SWE run has 226 API-error attempts and different
-settings; its task score is retained with this limitation, not treated as a controlled
-training comparison.
+models. Base AppWorld/retail histories and task scores are reused from
+`experiment_reports/agentic/`. SWE uses the completed matched native-context
+cohorts for all four models. Original base probes and independently fitted
+standard-data probes for the trained models are reused. See the
+[shared SWE reproduction guide](RUNNING.md#corrected-swe-evaluation).
 
 No probe evaluation chunks or truncates text. Histories above the native 131,072-token
 limit are explicitly unscorable, while task metrics still include them. Current
 retail NPZs and `summary.json` live in `predictions/post_training_whole/tau2_retail/`;
-AppWorld and SWE live in `predictions/post_training/BENCHMARK/`. Pass `--output`
+AppWorld lives in `predictions/post_training/appworld_test/`; current SWE outputs
+live in `predictions/swe_native/`. Pass `--output`
 explicitly for retail. Partial earlier scoring outputs are not report inputs.
 Recorded per-call contexts remain in the source `generations.jsonl` files; whole
 retrospective replay includes past reasoning that the native generation formatter
@@ -221,8 +221,8 @@ Recompute the existing-data SWE failure audit with `uv run python src/experiment
 
 ## Corrected SWE evaluation
 
-The native-context rerun is separate from the published constrained cohort until
-all models finish and their new trajectories are probed. Its settings and job IDs
+The completed native-context rerun supplies all current SWE task and probe results.
+Its settings and job IDs
 are recorded in [post_training/swe_native.json](post_training/swe_native.json).
 The base is exported without updates to BF16 by `post_training/export_base.py`,
 matching trained expert precision. Existing trained model exports and independently
@@ -244,7 +244,7 @@ Completed native cohorts are assembled with `post_training/assemble_swe_native.p
 Whole-history probe extraction uses that new input and a separate prediction
 folder; no old cohort is overwritten or combined with pilot attempts.
 
-After all four native cohorts finish, `validate.py --native-swe` and `compare.py --native-swe` validate and replace the SWE rows and appendix matrices together. The dependent report job updates local reports only; inspect them before committing the new results.
+`validate.py --native-swe` and `compare.py --native-swe` validate and regenerate the current SWE rows and appendix matrices together. All four cohorts contain 500 tasks and 500 whole-history probe scores. Source trajectories live in `ROOT/data/swe_native/evaluation/`, task summaries in `ROOT/post_training/swe_native_task_results.json`, and token predictions/indices in `ROOT/predictions/swe_native/`. These large artifacts remain on cluster storage under `/data/cluster/users/kortukov/role_probe_training/`; tracked summaries record hashes and source paths. The dependent report job updates local reports only; review before committing.
 
 ### Session wake-up
 

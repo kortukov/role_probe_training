@@ -770,359 +770,385 @@
       "task": {
         "benchmark": "swe_bench",
         "samples": 500,
-        "sample_errors": 226,
+        "sample_errors": 7,
         "export_errors": 0,
-        "limited_samples": 271,
+        "limited_samples": 190,
+        "samples_with_model_context_stops": 0,
         "metrics": {
           "swe_bench_scorer": {
-            "successes": 11,
-            "scored": 274,
+            "successes": 181.0,
+            "scored": 493,
             "total": 500,
-            "success_rate": 0.022
+            "success_rate": 0.362
           }
         },
-        "task_source": "experiment_reports/agentic/swe_bench_full/metrics/summary.json",
-        "task_source_sha256": "63e8cd5409a75a8e5b161526fb0b9faa5cae813bda4c452cab71669097f67aef",
-        "input_sha256": "e8a897414033534f40131ade1586d479f29722d10c70871a7449c07042ccc42c"
+        "input_sha256": "0fd2372d7e6fa49f9c47e5651c9329ff91d0a39697e2d9713fa6693521cafcf0",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_native/1504808/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "8649c91ed761d0d7a1c37207160f551d65bae5e153518d2a1504756e0e9fff18"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_native/1504808/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "51005c683475cf5e41ae7b51833c00571e77b9c56643dc858dac8507135fbaf0"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_native/1504808/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "37ec719eb2d29218b19b250593ae0a78009c0c5c67b518b5c135ec9dade99bb7"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_native/1504808/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "653cb229ab81e3a71036a820f5592fb99475dc727218b1e34beb4b1ce3e8b261"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 200,
+          "token_limit": 10000000,
+          "time_limit": 3600,
+          "concurrency": 4
+        }
       },
       "probe": {
-        "accuracy": 0.2264904813429256,
-        "macro_recall": 0.3336599720199084,
+        "accuracy": 0.362168534760062,
+        "macro_recall": 0.43636151439904863,
         "per_role_recall": [
-          0.013888888888888888,
-          0.9453044067681,
-          0.3699880161522201,
-          0.30380671158110184,
-          0.03531183670923115
+          0.009259259259259259,
+          0.9247999131600152,
+          0.42820068281707363,
+          0.7967160868996869,
+          0.022831629859208512
         ],
         "mean_true_role_probability": [
-          0.0518915876156943,
-          0.913922038851751,
-          0.35412103522169597,
-          0.3125608492115067,
-          0.05357419470933717
+          0.034737036539194445,
+          0.8949573850088102,
+          0.4103200286705828,
+          0.7816700367452546,
+          0.03548921524450875
         ],
-        "mean_trajectory_accuracy": 0.2687084483459897,
+        "mean_trajectory_accuracy": 0.3518512370307624,
         "confusion_counts": [
           [
-            1500,
-            17500,
-            11500,
+            1000,
+            24000,
+            18500,
             0,
-            77500
+            64500
           ],
           [
-            2916,
-            221741,
-            4591,
-            1815,
-            3508
+            1291,
+            221509,
+            3581,
+            9700,
+            3440
           ],
           [
-            84776,
-            63953,
-            1246379,
-            1929681,
-            43912
+            6859,
+            32051,
+            963741,
+            1213323,
+            34702
           ],
           [
-            2762,
-            1091,
-            110253,
-            56999,
-            16511
+            21928,
+            13746,
+            1930865,
+            8014681,
+            78425
           ],
           [
-            502223,
-            1883517,
-            570221,
-            291435,
-            118869
+            2871483,
+            2635168,
+            1929353,
+            5858315,
+            310623
           ]
         ],
         "probe_sha256": "45b97daf451f3d559351a027d6a8a94715b1d309884e463702b9178dea8b8dda",
         "layers": {
           "4": {
-            "accuracy": 0.4466934144401364,
-            "macro_recall": 0.3350883923668679,
+            "accuracy": 0.5098845956315979,
+            "macro_recall": 0.33240654123322183,
             "per_role_recall": [
-              0.027777777777777776,
-              0.6935767848540527,
-              0.06593550451642934,
-              0.04161158962988231,
-              0.8465403050561973
+              0.013888888888888888,
+              0.6195615415767303,
+              0.0658055624176914,
+              0.0015618841420348333,
+              0.9612148291407637
             ],
             "mean_true_role_probability": [
-              0.11935919357886261,
-              0.5539056552465997,
-              0.09806281898572482,
-              0.09116703404860271,
-              0.720213748364375
+              0.06648951753164443,
+              0.499677189264071,
+              0.10645263794725672,
+              0.0332311575783925,
+              0.895487742750947
             ],
-            "mean_trajectory_accuracy": 0.5514165045057103,
+            "mean_trajectory_accuracy": 0.5152819679832663,
             "confusion_counts": [
               [
+                1500,
+                6000,
                 3000,
-                18500,
-                2500,
-                14000,
-                70000
+                11500,
+                86000
               ],
               [
-                5264,
-                162693,
-                5655,
-                6825,
-                54134
+                5695,
+                148398,
+                5017,
+                7063,
+                73348
               ],
               [
-                2356,
-                20330,
-                222117,
-                14767,
-                3109131
+                316,
+                9110,
+                148107,
+                8841,
+                2084302
               ],
               [
-                172,
-                3847,
-                8162,
-                7807,
-                167628
+                1006,
+                3795,
+                60822,
+                15712,
+                9978310
               ],
               [
-                45381,
-                440979,
-                24815,
-                5411,
-                2849679
+                62383,
+                431611,
+                27198,
+                6478,
+                13077272
               ]
             ],
             "probe_sha256": "c1200ea547688d3d99f1f6d4ae8d86b3cf2751f8086ceaa55a390f999e56aabf"
           },
           "8": {
-            "accuracy": 0.3761254580598647,
-            "macro_recall": 0.37646920846550275,
+            "accuracy": 0.23896004323075573,
+            "macro_recall": 0.4366148780402185,
             "per_role_recall": [
-              0.0787037037037037,
-              0.9553994313022497,
-              0.71859212200786,
-              0.11236248507589972,
-              0.01728830023780065
+              0.046296296296296294,
+              0.9326196867915548,
+              0.7878455184131345,
+              0.3919907710460956,
+              0.024322117654011315
             ],
             "mean_true_role_probability": [
-              0.11898775147447951,
-              0.9413527430944462,
-              0.6843628446093007,
-              0.1192827487654251,
-              0.026739719297694232
+              0.08676481363618256,
+              0.9174389212216472,
+              0.7408316076387403,
+              0.3920496657208154,
+              0.03570530260038696
             ],
-            "mean_trajectory_accuracy": 0.3469290954217581,
+            "mean_trajectory_accuracy": 0.22728419128640234,
             "confusion_counts": [
               [
-                8500,
-                47500,
-                19000,
+                5000,
+                52500,
+                26000,
                 0,
-                33000
+                24500
               ],
               [
-                2550,
-                224109,
-                4095,
-                1738,
-                2079
+                962,
+                223382,
+                3036,
+                9492,
+                2649
               ],
               [
-                141387,
-                43961,
-                2420722,
-                688011,
-                74620
+                12941,
+                16280,
+                1773185,
+                384634,
+                63636
               ],
               [
-                3559,
-                2787,
-                150290,
-                21081,
-                9899
+                91341,
+                11250,
+                5803300,
+                3943288,
+                210466
               ],
               [
-                519879,
-                2488314,
-                264839,
-                35036,
-                58197
+                5900280,
+                3819369,
+                1069034,
+                2485358,
+                330901
               ]
             ],
             "probe_sha256": "1b645505d42cc66386bb2f9386dbfae164e312917d4a0c7a1f6622897e3d762c"
           },
           "12": {
-            "accuracy": 0.2264904813429256,
-            "macro_recall": 0.3336599720199084,
+            "accuracy": 0.362168534760062,
+            "macro_recall": 0.43636151439904863,
             "per_role_recall": [
-              0.013888888888888888,
-              0.9453044067681,
-              0.3699880161522201,
-              0.30380671158110184,
-              0.03531183670923115
+              0.009259259259259259,
+              0.9247999131600152,
+              0.42820068281707363,
+              0.7967160868996869,
+              0.022831629859208512
             ],
             "mean_true_role_probability": [
-              0.0518915876156943,
-              0.913922038851751,
-              0.35412103522169597,
-              0.3125608492115067,
-              0.05357419470933717
+              0.034737036539194445,
+              0.8949573850088102,
+              0.4103200286705828,
+              0.7816700367452546,
+              0.03548921524450875
             ],
-            "mean_trajectory_accuracy": 0.2687084483459897,
+            "mean_trajectory_accuracy": 0.3518512370307624,
             "confusion_counts": [
               [
-                1500,
-                17500,
-                11500,
+                1000,
+                24000,
+                18500,
                 0,
-                77500
+                64500
               ],
               [
-                2916,
-                221741,
-                4591,
-                1815,
-                3508
+                1291,
+                221509,
+                3581,
+                9700,
+                3440
               ],
               [
-                84776,
-                63953,
-                1246379,
-                1929681,
-                43912
+                6859,
+                32051,
+                963741,
+                1213323,
+                34702
               ],
               [
-                2762,
-                1091,
-                110253,
-                56999,
-                16511
+                21928,
+                13746,
+                1930865,
+                8014681,
+                78425
               ],
               [
-                502223,
-                1883517,
-                570221,
-                291435,
-                118869
+                2871483,
+                2635168,
+                1929353,
+                5858315,
+                310623
               ]
             ],
             "probe_sha256": "45b97daf451f3d559351a027d6a8a94715b1d309884e463702b9178dea8b8dda"
           },
           "16": {
-            "accuracy": 0.20495191223089176,
-            "macro_recall": 0.3400524560726848,
+            "accuracy": 0.29243270629648405,
+            "macro_recall": 0.3826411337257876,
             "per_role_recall": [
-              0.013888888888888888,
-              0.9278299534042997,
-              0.21857416256295825,
-              0.4039847347774177,
-              0.13598454072985935
+              0.032407407407407406,
+              0.9102876156996672,
+              0.34013647455253443,
+              0.5311761001506514,
+              0.09919807081867751
             ],
             "mean_true_role_probability": [
-              0.031519004600507126,
-              0.9125308650437852,
-              0.22201478926684284,
-              0.3956111685982371,
-              0.1430584267135643
+              0.04230189026587685,
+              0.8965266827865804,
+              0.3418560550632536,
+              0.5170514587104748,
+              0.10836659774559014
             ],
-            "mean_trajectory_accuracy": 0.22444239120614043,
+            "mean_trajectory_accuracy": 0.2824642652717805,
             "confusion_counts": [
               [
-                1500,
+                3500,
                 71500,
                 0,
-                0,
-                35000
+                500,
+                32500
               ],
               [
-                3560,
-                217642,
-                2277,
-                3812,
-                7280
+                1893,
+                218033,
+                2120,
+                10722,
+                6753
               ],
               [
-                347535,
-                34470,
-                736311,
-                1524872,
-                725513
+                87144,
+                20297,
+                765537,
+                559933,
+                817765
               ],
               [
-                16681,
-                16619,
-                6210,
-                75794,
-                72312
+                297391,
+                27809,
+                2311755,
+                5343443,
+                2079247
               ],
               [
-                1261008,
-                1359794,
-                101507,
-                186196,
-                457760
+                5246829,
+                1840170,
+                649524,
+                4518835,
+                1349584
               ]
             ],
             "probe_sha256": "5a15de1b4dfe76cff699026c7ef138155c3a1ddb08be3ca74f687fffc8156b59"
           },
           "20": {
-            "accuracy": 0.4030355589207825,
-            "macro_recall": 0.38884005194827337,
+            "accuracy": 0.2981266570977395,
+            "macro_recall": 0.3473419610674649,
             "per_role_recall": [
               0.0,
-              0.8971612006599281,
-              0.5709188794137562,
-              0.25430133890499745,
-              0.22181884076268504
+              0.8801733459696645,
+              0.24012430043240343,
+              0.36890496632833464,
+              0.2475071926069218
             ],
             "mean_true_role_probability": [
-              0.006173393640267814,
-              0.8777231349239871,
-              0.545296146349922,
-              0.2504017228350559,
-              0.22800018095919017
+              0.006525426273402566,
+              0.8619793793382817,
+              0.25187867100133804,
+              0.35867627074596614,
+              0.24902774594186433
             ],
-            "mean_trajectory_accuracy": 0.3448234068829777,
+            "mean_trajectory_accuracy": 0.29194455966409805,
             "confusion_counts": [
               [
                 0,
-                85500,
-                3500,
+                84500,
+                2000,
                 0,
-                19000
+                21500
               ],
               [
-                2727,
-                210448,
-                9263,
-                3888,
-                8245
+                2002,
+                210820,
+                8604,
+                11338,
+                6757
               ],
               [
-                138658,
-                164531,
-                1923255,
-                586272,
-                555985
+                72683,
+                153421,
+                540442,
+                467378,
+                1016752
               ],
               [
-                5589,
-                93346,
-                7563,
-                47711,
-                33407
+                260288,
+                703708,
+                1680458,
+                3711053,
+                3704138
               ],
               [
-                787772,
-                1230448,
-                525942,
-                75402,
-                746701
+                3049340,
+                2086759,
+                2789225,
+                2312297,
+                3367321
               ]
             ],
             "probe_sha256": "a64fcad5d23472342bde4f1ec9c36798822dbbcca642604e00c690bba8448b38"
@@ -1139,10 +1165,10 @@
         "scored_trajectories": 500,
         "excluded_trajectories": [],
         "context_limit": 131072,
-        "input_sha256": "e8a897414033534f40131ade1586d479f29722d10c70871a7449c07042ccc42c",
+        "input_sha256": "0fd2372d7e6fa49f9c47e5651c9329ff91d0a39697e2d9713fa6693521cafcf0",
         "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
         "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
-        "overlength_policy": "error"
+        "overlength_policy": "exclude"
       },
       "task_metric": "swe_bench_scorer"
     }
@@ -1573,21 +1599,162 @@
       "task": {
         "benchmark": "swe_bench",
         "samples": 500,
-        "sample_errors": 6,
+        "sample_errors": 2,
         "export_errors": 0,
-        "limited_samples": 1,
+        "limited_samples": 2,
+        "samples_with_model_context_stops": 0,
         "metrics": {
           "swe_bench_scorer": {
-            "successes": 14,
-            "scored": 494,
+            "successes": 17.0,
+            "scored": 498,
             "total": 500,
-            "success_rate": 0.028
+            "success_rate": 0.034
           }
         },
-        "input_sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20"
+        "input_sha256": "c47ae7e181160f04e6e1f0be699aef3095101801b02d8448fe783ad260229954",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "4c5c8b13bbbfd0297362f616a9fb643f8f4ec84a5952bbfab99e8dc0fc092f1e"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "aad2a7a4937cbb5e3ef4cc60bf766f90a1a4c4041b19e9b4f05905c7ef443c1d"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "a4c123a9988447973d6387bfadfac63c740fd082bb7181d26cf90415374bed4e"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "f3f410fb1ce43bf5f067fe826fd1657901b46d5622ba3ae8d9ff6bf5b7522ac1"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 200,
+          "token_limit": 10000000,
+          "time_limit": 3600,
+          "concurrency": 4
+        }
       },
       "probe": {
-        "trajectories": 500,
+        "accuracy": 0.8758971398772383,
+        "macro_recall": 0.8161278187820338,
+        "per_role_recall": [
+          0.39814814814814814,
+          0.9411071077628562,
+          0.9804924854378658,
+          0.9058919726376127,
+          0.8549993799236862
+        ],
+        "mean_true_role_probability": [
+          0.4095150160501362,
+          0.931274887507646,
+          0.9732542663179194,
+          0.8879395349726743,
+          0.8394167449655736
+        ],
+        "mean_trajectory_accuracy": 0.8729067895156581,
+        "confusion_counts": [
+          [
+            43000,
+            54000,
+            10500,
+            0,
+            500
+          ],
+          [
+            598,
+            229856,
+            3591,
+            3025,
+            7170
+          ],
+          [
+            182,
+            16837,
+            998360,
+            439,
+            2405
+          ],
+          [
+            496,
+            170,
+            30610,
+            1631920,
+            138255
+          ],
+          [
+            128803,
+            606564,
+            130343,
+            679,
+            5108682
+          ]
+        ],
+        "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+        "layers": {
+          "12": {
+            "accuracy": 0.8758971398772383,
+            "macro_recall": 0.8161278187820338,
+            "per_role_recall": [
+              0.39814814814814814,
+              0.9411071077628562,
+              0.9804924854378658,
+              0.9058919726376127,
+              0.8549993799236862
+            ],
+            "mean_true_role_probability": [
+              0.4095150160501362,
+              0.931274887507646,
+              0.9732542663179194,
+              0.8879395349726743,
+              0.8394167449655736
+            ],
+            "mean_trajectory_accuracy": 0.8729067895156581,
+            "confusion_counts": [
+              [
+                43000,
+                54000,
+                10500,
+                0,
+                500
+              ],
+              [
+                598,
+                229856,
+                3591,
+                3025,
+                7170
+              ],
+              [
+                182,
+                16837,
+                998360,
+                439,
+                2405
+              ],
+              [
+                496,
+                170,
+                30610,
+                1631920,
+                138255
+              ],
+              [
+                128803,
+                606564,
+                130343,
+                679,
+                5108682
+              ]
+            ],
+            "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc"
+          }
+        },
         "roles": [
           "system",
           "user",
@@ -1595,57 +1762,14 @@
           "assistant",
           "tool"
         ],
-        "accuracy": 0.8723381953434493,
-        "macro_recall": 0.8146089839442524,
-        "per_role_recall": [
-          0.39814814814814814,
-          0.9473495406640168,
-          0.9793829769968817,
-          0.8983673590879833,
-          0.8497968948242318
-        ],
-        "mean_trajectory_accuracy": 0.8724527180873792,
-        "confusion_counts": [
-          [
-            42656,
-            53568,
-            10416,
-            0,
-            496
-          ],
-          [
-            682,
-            229755,
-            3866,
-            1572,
-            6649
-          ],
-          [
-            181,
-            18182,
-            1013822,
-            933,
-            2046
-          ],
-          [
-            326,
-            52,
-            28123,
-            1448709,
-            135392
-          ],
-          [
-            109580,
-            565441,
-            125342,
-            404,
-            4530461
-          ]
-        ],
-        "input_sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20",
-        "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+        "trajectories": 500,
+        "scored_trajectories": 500,
+        "excluded_trajectories": [],
+        "context_limit": 131072,
+        "input_sha256": "c47ae7e181160f04e6e1f0be699aef3095101801b02d8448fe783ad260229954",
         "model_revision": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
-        "context_policy": "full trajectory, no windows or truncation"
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
       },
       "task_metric": "swe_bench_scorer"
     }
@@ -1941,38 +2065,65 @@
       "task": {
         "benchmark": "swe_bench",
         "samples": 500,
-        "sample_errors": 0,
+        "sample_errors": 2,
         "export_errors": 0,
-        "limited_samples": 2,
+        "limited_samples": 97,
+        "samples_with_model_context_stops": 0,
         "metrics": {
           "swe_bench_scorer": {
-            "successes": 67,
-            "scored": 500,
+            "successes": 106.0,
+            "scored": 498,
             "total": 500,
-            "success_rate": 0.134
+            "success_rate": 0.212
           }
         },
-        "input_sha256": "614b2468b2ed72097157c1960db0d6eda7aeadd3e1499be2ba9631c16ca62d2d"
+        "input_sha256": "b171ecc1dad9b00058f8c5e126720d40f628876b711a551bd9a13a72f8054b44",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504810/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "1849bcabef2d5765707c0d9aa3ec57c3e4f169101a29fab459da5375419df9af"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504810/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "3ce4a9b922e360d2895c09f8063bf57228ef09e28cc80dd745c1e8dc6d0e5034"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504810/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "69b7cbd838511fafeaa377c77dc04550ab9d0fdc94b9dea428118f3c6ec0485c"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_native/1504810/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "1851761157176d2b06b7111203498b51ab1c9ca95114889ff9f89ba58c866367"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 200,
+          "token_limit": 10000000,
+          "time_limit": 3600,
+          "concurrency": 4
+        }
       },
       "probe": {
-        "trajectories": 500,
-        "roles": [
-          "system",
-          "user",
-          "cot",
-          "assistant",
-          "tool"
-        ],
-        "accuracy": 0.7108653329113774,
-        "macro_recall": 0.6244125450876468,
+        "accuracy": 0.6182384269383243,
+        "macro_recall": 0.6062383458292987,
         "per_role_recall": [
           0.18981481481481483,
-          0.8913838229443665,
-          0.9685666815009535,
-          0.2790450948687141,
-          0.7932523113093852
+          0.8745737547111322,
+          0.9398347081604334,
+          0.3316168384752181,
+          0.6953516129848952
         ],
-        "mean_trajectory_accuracy": 0.7168383302183814,
+        "mean_true_role_probability": [
+          0.21226425658943737,
+          0.8570259529803537,
+          0.9262087233085812,
+          0.33723794007168617,
+          0.6705274109314507
+        ],
+        "mean_trajectory_accuracy": 0.6446783590548356,
         "confusion_counts": [
           [
             20500,
@@ -1982,40 +2133,109 @@
             66500
           ],
           [
-            1125,
-            212858,
-            7235,
-            2882,
-            14695
+            1454,
+            214414,
+            7644,
+            7514,
+            14138
           ],
           [
-            295,
-            11333,
-            1869540,
-            48562,
-            483
+            1097,
+            11494,
+            2525568,
+            148545,
+            543
           ],
           [
-            636,
-            1540,
-            2021194,
-            801953,
-            48596
+            3111,
+            1781,
+            4349007,
+            2189019,
+            58131
           ],
           [
-            561926,
-            136143,
-            1125425,
-            75584,
-            7286408
+            1068699,
+            143231,
+            2330827,
+            452235,
+            9118460
           ]
         ],
-        "input_sha256": "614b2468b2ed72097157c1960db0d6eda7aeadd3e1499be2ba9631c16ca62d2d",
         "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b",
-        "model_revision": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
-        "context_policy": "Full history when within model context; otherwise nonoverlapping context-sized segments, all tokens retained",
+        "layers": {
+          "12": {
+            "accuracy": 0.6182384269383243,
+            "macro_recall": 0.6062383458292987,
+            "per_role_recall": [
+              0.18981481481481483,
+              0.8745737547111322,
+              0.9398347081604334,
+              0.3316168384752181,
+              0.6953516129848952
+            ],
+            "mean_true_role_probability": [
+              0.21226425658943737,
+              0.8570259529803537,
+              0.9262087233085812,
+              0.33723794007168617,
+              0.6705274109314507
+            ],
+            "mean_trajectory_accuracy": 0.6446783590548356,
+            "confusion_counts": [
+              [
+                20500,
+                17500,
+                3500,
+                0,
+                66500
+              ],
+              [
+                1454,
+                214414,
+                7644,
+                7514,
+                14138
+              ],
+              [
+                1097,
+                11494,
+                2525568,
+                148545,
+                543
+              ],
+              [
+                3111,
+                1781,
+                4349007,
+                2189019,
+                58131
+              ],
+              [
+                1068699,
+                143231,
+                2330827,
+                452235,
+                9118460
+              ]
+            ],
+            "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 500,
+        "excluded_trajectories": [],
         "context_limit": 131072,
-        "segmented_trajectories": []
+        "input_sha256": "b171ecc1dad9b00058f8c5e126720d40f628876b711a551bd9a13a72f8054b44",
+        "model_revision": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
       },
       "task_metric": "swe_bench_scorer"
     }
@@ -2351,38 +2571,65 @@
       "task": {
         "benchmark": "swe_bench",
         "samples": 500,
-        "sample_errors": 0,
+        "sample_errors": 1,
         "export_errors": 0,
-        "limited_samples": 2,
+        "limited_samples": 12,
+        "samples_with_model_context_stops": 2,
         "metrics": {
           "swe_bench_scorer": {
-            "successes": 38,
-            "scored": 500,
+            "successes": 51.0,
+            "scored": 499,
             "total": 500,
-            "success_rate": 0.076
+            "success_rate": 0.102
           }
         },
-        "input_sha256": "def93c00105a4441b6d7ee4f2b89692be2a0e23860bc0e8e460787bc1d2f9e84"
+        "input_sha256": "33066355ff8c7e480b1f7fbff2cf8d94b497690d2f7cf782e0c095430543c85a",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "d168f1b1e21dd479e41c91876fa6cd806711b7b4b76f363febe799727abd9d06"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "ace756cef815f06776c2b9bbc32414a80c5d95588f0c8e96f4cf93be084f4e45"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "b0aa77a946fd77ddad8c2569a470e5cc41bac38137107adcd356b0e2cc9358f5"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_native/1504811/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "276eacb83f051b715dacd285e6dfca40f8296d3daaf963ffccdfe23e3b425c53"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 200,
+          "token_limit": 10000000,
+          "time_limit": 3600,
+          "concurrency": 4
+        }
       },
       "probe": {
-        "trajectories": 500,
-        "roles": [
-          "system",
-          "user",
-          "cot",
-          "assistant",
-          "tool"
-        ],
-        "accuracy": 0.4858460924777301,
-        "macro_recall": 0.661005441769116,
+        "accuracy": 0.47516974515750593,
+        "macro_recall": 0.64999599407015,
         "per_role_recall": [
           0.6064814814814815,
-          0.9130827929052188,
-          0.9808780804748403,
-          0.4943744914197573,
-          0.31021036256428186
+          0.8935112934705819,
+          0.9746885258271422,
+          0.4844819855401401,
+          0.29081668403140454
         ],
-        "mean_trajectory_accuracy": 0.49963484090336224,
+        "mean_true_role_probability": [
+          0.5617857357869475,
+          0.8729459201435874,
+          0.9662206298687406,
+          0.48947818553272976,
+          0.29398335486320015
+        ],
+        "mean_trajectory_accuracy": 0.4988041654055455,
         "confusion_counts": [
           [
             65500,
@@ -2392,38 +2639,109 @@
             17000
           ],
           [
-            2965,
-            223162,
-            9396,
-            3265,
-            5617
+            2956,
+            223863,
+            10748,
+            6466,
+            6510
           ],
           [
-            491,
-            20529,
-            2276568,
-            19140,
-            4221
+            857,
+            21224,
+            2996829,
+            51305,
+            4438
           ],
           [
-            361,
-            816,
-            1022729,
-            1082033,
-            82752
+            770,
+            883,
+            1794244,
+            1781745,
+            99987
           ],
           [
-            586556,
-            2257477,
-            1865213,
-            337673,
-            2269687
+            641465,
+            2512052,
+            2866024,
+            478171,
+            2664534
           ]
         ],
-        "input_sha256": "def93c00105a4441b6d7ee4f2b89692be2a0e23860bc0e8e460787bc1d2f9e84",
         "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+        "layers": {
+          "12": {
+            "accuracy": 0.47516974515750593,
+            "macro_recall": 0.64999599407015,
+            "per_role_recall": [
+              0.6064814814814815,
+              0.8935112934705819,
+              0.9746885258271422,
+              0.4844819855401401,
+              0.29081668403140454
+            ],
+            "mean_true_role_probability": [
+              0.5617857357869475,
+              0.8729459201435874,
+              0.9662206298687406,
+              0.48947818553272976,
+              0.29398335486320015
+            ],
+            "mean_trajectory_accuracy": 0.4988041654055455,
+            "confusion_counts": [
+              [
+                65500,
+                6000,
+                19500,
+                0,
+                17000
+              ],
+              [
+                2956,
+                223863,
+                10748,
+                6466,
+                6510
+              ],
+              [
+                857,
+                21224,
+                2996829,
+                51305,
+                4438
+              ],
+              [
+                770,
+                883,
+                1794244,
+                1781745,
+                99987
+              ],
+              [
+                641465,
+                2512052,
+                2866024,
+                478171,
+                2664534
+              ]
+            ],
+            "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 500,
+        "excluded_trajectories": [],
+        "context_limit": 131072,
+        "input_sha256": "33066355ff8c7e480b1f7fbff2cf8d94b497690d2f7cf782e0c095430543c85a",
         "model_revision": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
-        "context_policy": "full trajectory, no windows or truncation"
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
       },
       "task_metric": "swe_bench_scorer"
     }

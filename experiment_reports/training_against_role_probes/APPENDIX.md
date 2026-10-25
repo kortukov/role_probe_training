@@ -169,24 +169,39 @@ is made. Weights, exact source/model hashes and fitting diagnostics accompany th
 
 ## SWE-bench failure audit
 
-Inspect supplies the standard SWE-bench task, tools and scorer; its agent and serving configuration still differ from the model-card evaluation. The original base cohort had 226/500 terminal API errors and 271 execution-limit attempts (categories may overlap). Its 774 failed model calls reported malformed Harmony headers on vLLM 0.11.0. The 30-message budget also constrained attempts.
+The current comparison uses four complete 500-task cohorts with matched serving
+and agent budgets, BF16 weights, high reasoning and the native 131,072-token
+context limit. These replace the earlier constrained SWE results. Gold patches
+passed and unchanged patches failed on two repository controls through the pinned
+images and upstream grader; this checks the scoring path, not full harness parity.
 
-An existing repaired base rerun completed two of four shards: **42/250 solved (16.8%)**, versus **8/250 (3.2%)** on the same task IDs originally. It used vLLM 0.32.0, temperature 1 and 200 messages. It had no recorded model-call errors, but one test-scoring timeout. The other two shards failed during server startup with missing Transformers files; no model attempt occurred. This partial cohort is diagnostic only and is not mixed into the main 500-task comparison.
+| Model | Solved / assigned | Evaluation errors | Model-context stops | Whole histories probed |
+|---|---:|---:|---:|---:|
+| Base | 181/500 | 7 | 0 | 500/500 |
+| AppWorld-trained | 17/500 | 2 | 0 | 500/500 |
+| ASTRA-trained | 106/500 | 2 | 0 | 500/500 |
+| DepthBench-trained | 51/500 | 1 | 2 | 500/500 |
 
-The remaining major constraint is **32,768-token serving context**, although the model's native limit is 131,072. In the repaired base subset, 204/250 histories contain a server context-limit response; 18 still passed using an already written patch. Of 249 scored attempts, 120 had empty patches, including 115 with a context-limit response. Inspect converts this HTTP 400 into a `model_length` response and scores the current patch, so these are usually not counted as API errors or execution-limit events. The recorded response text is an infrastructure message, not model-generated prose.
+The seven base and two ASTRA errors concern Python/runtime availability inside
+benchmark sandboxes. Two AppWorld errors and one DepthBench error are scoring/tool
+timeouts. Their cause is not fully established; fresh-image and writable-sandbox
+Python controls passed. All failed attempts remain in task denominators and role
+scoring. Only infrastructure failures before any benchmark model call were retried;
+no attempted task was replaced to improve its score.
 
-| Cohort | Tasks | Context-limit responses | Solved |
-|---|---:|---:|---:|
-| Repaired base (partial, separate cohort) | 250 | 204 | 42 |
-| AppWorld-trained | 500 | 42 | 14 |
-| ASTRA-trained | 500 | 319 | 67 |
-| DepthBench-trained | 500 | 133 | 38 |
+Inspect scores the current patch when generation reaches the context bound, so a
+context stop need not be an evaluation error. Both DepthBench stops are retained.
+All reconstructed SWE histories fit the probe's native limit and were scored whole.
 
-These limits materially constrain the task results. They do not explain every failed patch, nor establish that expanding context alone will recover the model card's 60.7% high-reasoning result. The card describes a 477-task validated subset, whereas ours uses all 500. Inspect recommends checking patches with the original SWE-bench harness before public leaderboard comparisons. Our existing gold-patch and end-to-end checks support a working scoring path, but are not a full scorer-parity audit.
+The base solves 36.2% here. This is not a reproduction of the model card's 60.7%
+high-reasoning result: the card uses a validated 477-task subset and a different
+agent/harness, while this run uses all 500 tasks and Inspect's agent. Correcting
+serving and budgets does not establish equivalence to that evaluation. The trained
+models all solve fewer tasks than the base despite higher overall role accuracy.
 
-The next capability evaluation should use matched base/trained generation settings and the native context allowance, first checking representative patches with the official scorer. No new generation was launched for this audit.
-
-[Audit measurements](post_training/swe_failure_audit.json) · [Inspect implementation and parity guidance](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/swe_bench/README.md) · [Model-card evaluations](https://deploymentsafety.openai.com/gpt-oss/evaluation).
+[Run settings and provenance](post_training/swe_native.json) ·
+[Inspect implementation and parity guidance](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/swe_bench/README.md) ·
+[Model-card evaluations](https://deploymentsafety.openai.com/gpt-oss/evaluation).
 
 <!-- fresh-rollout-confusions -->
 ## Fresh-trajectory confusions
@@ -278,41 +293,41 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 
 | True / predicted | System | User | Reasoning | Assistant | Tool |
 |---|---:|---:|---:|---:|---:|
-| System | 1.39% | 16.20% | 10.65% | 0.00% | 71.76% |
-| User | 1.24% | 94.53% | 1.96% | 0.77% | 1.50% |
-| Reasoning | 2.52% | 1.90% | 37.00% | 57.28% | 1.30% |
-| Assistant | 1.47% | 0.58% | 58.77% | 30.38% | 8.80% |
-| Tool | 14.92% | 55.95% | 16.94% | 8.66% | 3.53% |
+| System | 0.93% | 22.22% | 17.13% | 0.00% | 59.72% |
+| User | 0.54% | 92.48% | 1.50% | 4.05% | 1.44% |
+| Reasoning | 0.30% | 1.42% | 42.82% | 53.91% | 1.54% |
+| Assistant | 0.22% | 0.14% | 19.19% | 79.67% | 0.78% |
+| Tool | 21.11% | 19.37% | 14.18% | 43.06% | 2.28% |
 
 ### SWE-bench Verified — AppWorld-trained
 
 | True / predicted | System | User | Reasoning | Assistant | Tool |
 |---|---:|---:|---:|---:|---:|
 | System | 39.81% | 50.00% | 9.72% | 0.00% | 0.46% |
-| User | 0.28% | 94.73% | 1.59% | 0.65% | 2.74% |
-| Reasoning | 0.02% | 1.76% | 97.94% | 0.09% | 0.20% |
-| Assistant | 0.02% | 0.00% | 1.74% | 89.84% | 8.40% |
-| Tool | 2.06% | 10.61% | 2.35% | 0.01% | 84.98% |
+| User | 0.24% | 94.11% | 1.47% | 1.24% | 2.94% |
+| Reasoning | 0.02% | 1.65% | 98.05% | 0.04% | 0.24% |
+| Assistant | 0.03% | 0.01% | 1.70% | 90.59% | 7.67% |
+| Tool | 2.16% | 10.15% | 2.18% | 0.01% | 85.50% |
 
 ### SWE-bench Verified — ASTRA-trained
 
 | True / predicted | System | User | Reasoning | Assistant | Tool |
 |---|---:|---:|---:|---:|---:|
 | System | 18.98% | 16.20% | 3.24% | 0.00% | 61.57% |
-| User | 0.47% | 89.14% | 3.03% | 1.21% | 6.15% |
-| Reasoning | 0.02% | 0.59% | 96.86% | 2.52% | 0.03% |
-| Assistant | 0.02% | 0.05% | 70.33% | 27.90% | 1.69% |
-| Tool | 6.12% | 1.48% | 12.25% | 0.82% | 79.33% |
+| User | 0.59% | 87.46% | 3.12% | 3.06% | 5.77% |
+| Reasoning | 0.04% | 0.43% | 93.98% | 5.53% | 0.02% |
+| Assistant | 0.05% | 0.03% | 65.88% | 33.16% | 0.88% |
+| Tool | 8.15% | 1.09% | 17.77% | 3.45% | 69.54% |
 
 ### SWE-bench Verified — DepthBench-trained
 
 | True / predicted | System | User | Reasoning | Assistant | Tool |
 |---|---:|---:|---:|---:|---:|
 | System | 60.65% | 5.56% | 18.06% | 0.00% | 15.74% |
-| User | 1.21% | 91.31% | 3.84% | 1.34% | 2.30% |
-| Reasoning | 0.02% | 0.88% | 98.09% | 0.82% | 0.18% |
-| Assistant | 0.02% | 0.04% | 46.73% | 49.44% | 3.78% |
-| Tool | 8.02% | 30.85% | 25.49% | 4.62% | 31.02% |
+| User | 1.18% | 89.35% | 4.29% | 2.58% | 2.60% |
+| Reasoning | 0.03% | 0.69% | 97.47% | 1.67% | 0.14% |
+| Assistant | 0.02% | 0.02% | 48.79% | 48.45% | 2.72% |
+| Tool | 7.00% | 27.42% | 31.28% | 5.22% | 29.08% |
 <!-- /fresh-rollout-confusions -->
 
 <!-- whole-history-coverage -->
@@ -328,8 +343,8 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | τ² retail | AppWorld-trained | 76/114 | 38 | 0 |
 | τ² retail | ASTRA-trained | 103/114 | 11 | 0 |
 | τ² retail | DepthBench-trained | 95/114 | 19 | 0 |
-| SWE-bench Verified | Base | 500/500 | 0 | 226 |
-| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 6 |
-| SWE-bench Verified | ASTRA-trained | 500/500 | 0 | 0 |
-| SWE-bench Verified | DepthBench-trained | 500/500 | 0 | 0 |
+| SWE-bench Verified | Base | 500/500 | 0 | 7 |
+| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 2 |
+| SWE-bench Verified | ASTRA-trained | 500/500 | 0 | 2 |
+| SWE-bench Verified | DepthBench-trained | 500/500 | 0 | 1 |
 <!-- /whole-history-coverage -->

@@ -1,27 +1,33 @@
-# GPT-OSS-20B on full SWE-bench Verified
+# GPT-OSS-20B on SWE-bench Verified
 
 ## Motivation & RQ
 
-How often does GPT-OSS-20B solve software-repair tasks in the Inspect evaluation setup, and what role-probe behavior appears in its tool-using histories?
+How well does unchanged GPT-OSS-20B solve software-repair tasks under the matched
+setup used to evaluate models trained against role probes?
 
 ## Evaluation setup
 
-**Tasks and agent.** We evaluate all 500 SWE-bench Verified tasks. GPT-OSS-20B inspects and edits a repository using Inspect's standard agent tools; the benchmark test suite scores the resulting patch. We retain one model attempt per task, including failed and interrupted attempts. Infrastructure failures before the model starts may be retried.
-
-**Metrics.** Task success divides solved tasks by all 500 tasks, counting evaluation errors as failures. We separately report attempts that could not be scored because the model API failed. This distinction matters because a scored-only success rate would exclude those failures.
+We evaluate all 500 SWE-bench Verified tasks with one attempt per task, using
+Inspect's agent and upstream patch scorer. Generation uses BF16 weights, high
+reasoning, the native 131,072-token context limit and a 200-message budget.
+Task success divides successful patches by all assigned tasks, including errors.
 
 ## Factual observations
 
-| Tasks solved | Task success | Attempts ending in model API errors |
+| Solved / assigned | Task success | Evaluation errors |
 |---|---:|---:|
-| 11 / 500 | 2.20% | 226 / 500 |
+| 181/500 | 36.2% | 7/500 |
 
-All 500 selected histories contain tool replies. Execution limits affected 271 attempts, and malformed model output caused many API failures. The [appendix](APPENDIX.md) gives scored-only results and further diagnostics; the [probe report](../probe_transfer/README.md) evaluates the saved conversational tokens.
+All 500 reconstructed histories were also scored whole by the existing role
+probes. Layer-12 overall role accuracy is 36.2%; this is a separate token-level
+metric and only coincidentally rounds to the same percentage as task success.
+[Role results and percentage confusion matrices](../probe_transfer/README.md).
 
 ## Message
 
-This setup collects agentic traces but fails to reproduce the published 60.7% SWE-bench score. The agent tools, evaluation subset and generation settings differ from the published setup, and the large number of API failures prevents treating this result as a reliable estimate of the model's software-engineering capability. [OpenAI model card](https://deploymentsafety.openai.com/gpt-oss/model-architecture-data-training-and-evaluations).
+This complete native-context run supersedes the earlier constrained SWE cohorts.
+Seven sandbox runtime errors remain counted as task failures. This setup does not
+reproduce the model card's agent/harness or its validated task subset. See the
+[current four-model comparison and limitations](../../training_against_role_probes/README.md).
 
-The histories remain useful for studying role recognition in actual tool interactions, but represent many unsuccessful or interrupted attempts. The repaired setup passes targeted request checks and completes one task through scoring without infrastructure errors ([diagnosis](APPENDIX.md#serving-diagnosis)). That patch did not solve the issue. Two repaired shards completed (42/250 solved), but 204/250 attempts encountered the 32K serving context limit; two other shards failed before inference. This partial result is diagnostic only. See the [current failure audit](../../training_against_role_probes/APPENDIX.md#swe-bench-failure-audit). A complete repaired capability estimate remains unavailable.
-
-See [RUNNING.md](RUNNING.md) for configuration, infrastructure repairs, source artifacts and viewer reproduction.
+[Reproduction instructions](RUNNING.md)

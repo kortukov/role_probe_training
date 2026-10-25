@@ -21,8 +21,8 @@ conversations at each update.
 
 **Evaluation.** Each trained model generates separate attempts on AppWorld normal
 test (app/API use), SWE-bench Verified (software repair), and τ² retail (customer
-service with tools). Base-model trajectories and task scores are reused from the
-existing evaluations. Each trained model gets a fresh layer-12 multinomial linear
+service with tools). Base-model AppWorld/retail trajectories and task scores are reused; SWE is
+regenerated for all four models with matched settings and native 131K context. Each trained model gets a fresh layer-12 multinomial linear
 probe fitted from scratch using the standard 250 C4/Dolma passages, original
 passage split, and all content tokens. The base uses its original standard-data
 probe. All read the post-attention-normalized pre-MLP activations. Message roles
@@ -53,16 +53,18 @@ All values are percentages. Role columns are recall within that true role.
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | ASTRA-trained | 38.6 | 44.2 | 28.2 | 39.4 | 38.0 | 83.5 | 93.0 |
 | τ² retail | DepthBench-trained | 37.7 | 43.2 | 65.5 | 37.6 | 40.6 | 99.6 | 97.7 |
-| SWE-bench Verified | Base | 2.2 | 22.6 | 1.4 | 94.5 | 37.0 | 30.4 | 3.5 |
-| SWE-bench Verified | AppWorld-trained | 2.8 | 87.2 | 39.8 | 94.7 | 97.9 | 89.8 | 85.0 |
-| SWE-bench Verified | ASTRA-trained | 13.4 | 71.1 | 19.0 | 89.1 | 96.9 | 27.9 | 79.3 |
-| SWE-bench Verified | DepthBench-trained | 7.6 | 48.6 | 60.6 | 91.3 | 98.1 | 49.4 | 31.0 |
+| SWE-bench Verified | Base | 36.2 | 36.2 | 0.9 | 92.5 | 42.8 | 79.7 | 2.3 |
+| SWE-bench Verified | AppWorld-trained | 3.4 | 87.6 | 39.8 | 94.1 | 98.0 | 90.6 | 85.5 |
+| SWE-bench Verified | ASTRA-trained | 21.2 | 61.8 | 19.0 | 87.5 | 94.0 | 33.2 | 69.5 |
+| SWE-bench Verified | DepthBench-trained | 10.2 | 47.5 | 60.6 | 89.4 | 97.5 | 48.4 | 29.1 |
 
 **Evaluation sizes:** AppWorld normal test: 168 tasks; SWE-bench Verified: 500; τ² retail: 114, with one attempt per model per task. Task success includes all attempts. Role metrics exclude only histories above the native context limit; [coverage and percentage confusion matrices](APPENDIX.md#whole-history-coverage) are in the appendix.
 
 **Retail role-score coverage:** Base: 113/114, AppWorld-trained: 76/114, ASTRA-trained: 103/114, DepthBench-trained: 95/114. Exclusions differ by model, so role scores describe different eligible subsets.
 
-The base trajectories/task scores are reused from the earlier evaluations; base probe scores were recomputed on whole histories. Base SWE had 226 API-error attempts and older generation settings, so its task score is not a controlled measure of training effects. Base generation also used native MXFP4, versus BF16 with adapters for trained models. SWE attempts also encountered the 32K serving context ceiling (42/500 AppWorld-trained, 319/500 ASTRA-trained, 133/500 DepthBench-trained); these task results do not measure unconstrained capability. [Failure audit](APPENDIX.md#swe-bench-failure-audit).
+Base AppWorld/retail histories and task scores are reused; SWE was regenerated for all four models with matched settings, BF16 weights and the native 131K context allowance. SWE attempts reaching the model context bound: Base: 0/500, AppWorld-trained: 0/500, ASTRA-trained: 0/500, DepthBench-trained: 2/500. All remain in task metrics. AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. [SWE evaluation limitations](APPENDIX.md#swe-bench-failure-audit).
+
+SWE evaluation errors, counted as task failures: Base: 7/500, AppWorld-trained: 2/500, ASTRA-trained: 2/500, DepthBench-trained: 1/500. These are sandbox runtime errors or scoring/tool timeouts; see the appendix.
 <!-- /fresh-rollout-results -->
 
 <!-- kl-iteration-results -->
@@ -98,14 +100,15 @@ used in any individual generation call.
 
 ## Message
 
-On AppWorld, higher role accuracy coexists with poorer task completion. Recovering
+Across all three benchmarks, every trained model has higher overall role accuracy
+but lower task success than the base. This also holds on SWE with matched settings. Recovering
 role labels is therefore insufficient evidence that the trained model remains a
 useful agent. The fresh-trajectory evaluation tests this distinction separately
 from the near-perfect role scores on fixed development histories.
 
-Generation settings differ between the reused base run and trained runs, especially
-for SWE; these results describe observed transfer and behavior, rather than
-isolating every change as a causal effect of training. Probe fits also have
+AppWorld/retail reuse older base generations, so their comparisons do not isolate
+every change as a causal effect of training. SWE uses matched generation settings;
+all models are still bounded by native context and the stated task budgets. Probe fits also have
 optimizer-convergence limitations, recorded with their weights.
 
 [How to reproduce the experiment](RUNNING.md)

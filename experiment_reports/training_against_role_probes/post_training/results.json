@@ -424,21 +424,162 @@
     "task": {
       "benchmark": "swe_bench",
       "samples": 500,
-      "sample_errors": 6,
+      "sample_errors": 2,
       "export_errors": 0,
-      "limited_samples": 1,
+      "limited_samples": 2,
+      "samples_with_model_context_stops": 0,
       "metrics": {
         "swe_bench_scorer": {
-          "successes": 14,
-          "scored": 494,
+          "successes": 17.0,
+          "scored": 498,
           "total": 500,
-          "success_rate": 0.028
+          "success_rate": 0.034
         }
       },
-      "input_sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20"
+      "input_sha256": "c47ae7e181160f04e6e1f0be699aef3095101801b02d8448fe783ad260229954",
+      "sources": [
+        {
+          "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard0/swe_bench/trajectories.jsonl",
+          "sha256": "4c5c8b13bbbfd0297362f616a9fb643f8f4ec84a5952bbfab99e8dc0fc092f1e"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard1/swe_bench/trajectories.jsonl",
+          "sha256": "aad2a7a4937cbb5e3ef4cc60bf766f90a1a4c4041b19e9b4f05905c7ef443c1d"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard2/swe_bench/trajectories.jsonl",
+          "sha256": "a4c123a9988447973d6387bfadfac63c740fd082bb7181d26cf90415374bed4e"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/runs/swe_native/1504809/shard3/swe_bench/trajectories.jsonl",
+          "sha256": "f3f410fb1ce43bf5f067fe826fd1657901b46d5622ba3ae8d9ff6bf5b7522ac1"
+        }
+      ],
+      "settings": {
+        "temperature": 1.0,
+        "reasoning_effort": "high",
+        "max_tokens": 16384,
+        "message_limit": 200,
+        "token_limit": 10000000,
+        "time_limit": 3600,
+        "concurrency": 4
+      }
     },
     "probe": {
-      "trajectories": 500,
+      "accuracy": 0.8758971398772383,
+      "macro_recall": 0.8161278187820338,
+      "per_role_recall": [
+        0.39814814814814814,
+        0.9411071077628562,
+        0.9804924854378658,
+        0.9058919726376127,
+        0.8549993799236862
+      ],
+      "mean_true_role_probability": [
+        0.4095150160501362,
+        0.931274887507646,
+        0.9732542663179194,
+        0.8879395349726743,
+        0.8394167449655736
+      ],
+      "mean_trajectory_accuracy": 0.8729067895156581,
+      "confusion_counts": [
+        [
+          43000,
+          54000,
+          10500,
+          0,
+          500
+        ],
+        [
+          598,
+          229856,
+          3591,
+          3025,
+          7170
+        ],
+        [
+          182,
+          16837,
+          998360,
+          439,
+          2405
+        ],
+        [
+          496,
+          170,
+          30610,
+          1631920,
+          138255
+        ],
+        [
+          128803,
+          606564,
+          130343,
+          679,
+          5108682
+        ]
+      ],
+      "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+      "layers": {
+        "12": {
+          "accuracy": 0.8758971398772383,
+          "macro_recall": 0.8161278187820338,
+          "per_role_recall": [
+            0.39814814814814814,
+            0.9411071077628562,
+            0.9804924854378658,
+            0.9058919726376127,
+            0.8549993799236862
+          ],
+          "mean_true_role_probability": [
+            0.4095150160501362,
+            0.931274887507646,
+            0.9732542663179194,
+            0.8879395349726743,
+            0.8394167449655736
+          ],
+          "mean_trajectory_accuracy": 0.8729067895156581,
+          "confusion_counts": [
+            [
+              43000,
+              54000,
+              10500,
+              0,
+              500
+            ],
+            [
+              598,
+              229856,
+              3591,
+              3025,
+              7170
+            ],
+            [
+              182,
+              16837,
+              998360,
+              439,
+              2405
+            ],
+            [
+              496,
+              170,
+              30610,
+              1631920,
+              138255
+            ],
+            [
+              128803,
+              606564,
+              130343,
+              679,
+              5108682
+            ]
+          ],
+          "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc"
+        }
+      },
       "roles": [
         "system",
         "user",
@@ -446,57 +587,14 @@
         "assistant",
         "tool"
       ],
-      "accuracy": 0.8723381953434493,
-      "macro_recall": 0.8146089839442524,
-      "per_role_recall": [
-        0.39814814814814814,
-        0.9473495406640168,
-        0.9793829769968817,
-        0.8983673590879833,
-        0.8497968948242318
-      ],
-      "mean_trajectory_accuracy": 0.8724527180873792,
-      "confusion_counts": [
-        [
-          42656,
-          53568,
-          10416,
-          0,
-          496
-        ],
-        [
-          682,
-          229755,
-          3866,
-          1572,
-          6649
-        ],
-        [
-          181,
-          18182,
-          1013822,
-          933,
-          2046
-        ],
-        [
-          326,
-          52,
-          28123,
-          1448709,
-          135392
-        ],
-        [
-          109580,
-          565441,
-          125342,
-          404,
-          4530461
-        ]
-      ],
-      "input_sha256": "c5062416ee07a184c8d0a14f96f8bc8690e19cd5142fac134b5feb44bb101a20",
-      "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+      "trajectories": 500,
+      "scored_trajectories": 500,
+      "excluded_trajectories": [],
+      "context_limit": 131072,
+      "input_sha256": "c47ae7e181160f04e6e1f0be699aef3095101801b02d8448fe783ad260229954",
       "model_revision": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
-      "context_policy": "full trajectory, no windows or truncation"
+      "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+      "overlength_policy": "exclude"
     },
     "task_metric": "swe_bench_scorer"
   }
