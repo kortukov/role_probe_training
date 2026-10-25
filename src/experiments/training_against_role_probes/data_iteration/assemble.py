@@ -14,6 +14,7 @@ def main():
     args = parser.parse_args()
     rows = []
     timings = []
+    audited_errors = []
     for shard, expected in enumerate([90] * 300):
         root = (args.original_runs if shard < 30 else args.runs) / f'shard{shard}' / 'train'
         manifest = json.loads((root / 'manifest.json').read_text())
@@ -26,13 +27,23 @@ def main():
         assert manifest['settings']['max_tokens'] == 8192
         assert set(manifest['sample_ids']) == set(Path('.cache/appworld/data/datasets/train.txt').read_text().splitlines())
         assert summary['samples'] == expected
-        assert summary['sample_errors'] == summary['export_errors'] == 0
+        assert summary['export_errors'] == 0
         batch = [json.loads(line) for line in (root / 'trajectories.jsonl').open()]
         assert len(batch) == expected
         assert {r['sample_id'] for r in batch} == set(manifest['sample_ids'])
         assert len({r['sample_id'] for r in batch}) == expected
+        assert summary['sample_errors'] == sum(bool(r['error']) for r in batch)
         for row in batch:
-            assert row['messages'] and not row['error'] and not row['export_errors']
+            assert row['messages'] and not row['export_errors']
+            if row['error']:
+                # Audited model-caused failure: preserve the original attempt,
+                # rather than selecting a replacement trajectory for this task.
+                assert (shard, row['sample_id']) == (184, '6104387_1')
+                assert 'debug_request() missing 1 required positional argument' in str(row['error'])
+                assert 'requester.request = debug_request' in json.dumps(row['messages'])
+                audited_errors.append({'shard': shard, 'sample_id': row['sample_id'],
+                    'seed': seed, 'classification': 'model-caused requester monkey-patch',
+                    'policy': 'original saved history retained; missing task scores count as unsuccessful'})
             row['trajectory_id'] = f"appworld_train/{row['sample_id']}/seed{seed}"
             row['generation_seed'] = seed
         rows.extend(batch)
@@ -56,12 +67,14 @@ def main():
               'limited_attempts': sum(bool(r['limit']) or bool(r['limit_events']) for r in rows),
               'reasoning_bearing': sum(any(m.get('thinking') for m in r['messages']) for r in rows),
               'original_runs': str(args.original_runs), 'additional_runs': str(args.runs),
+              'audited_errors': audited_errors,
               'collection_shards': [{k: t[k] for k in ('started_utc', 'completed_utc', 'wall_seconds', 'tasks')}
                                     for t in timings]}
     scorer_names = sorted({name for row in rows for name in row['scores']})
     result['task_metrics'] = {}
     for name in scorer_names:
-        values = [row['scores'][name]['value'] for row in rows]
+        assert all(name in row['scores'] or row['error'] for row in rows)
+        values = [row['scores'].get(name, {'value': 0})['value'] for row in rows]
         assert all(value in ('C', 'I', 0, 1) for value in values)
         successes = sum(value in ('C', 1) for value in values)
         result['task_metrics'][name] = {'successes': successes, 'attempts': len(rows),
