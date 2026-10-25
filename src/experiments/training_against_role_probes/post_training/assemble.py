@@ -17,6 +17,8 @@ for benchmark,shards,expected in [('appworld_test',[0,1],168),('tau2_retail',[2]
         manifest=json.loads((directory/'manifest.json').read_text());manifests.append(manifest)
         selected.update(map(str,manifest['full_selection']))
         rows.extend(json.loads(line) for line in (directory/'trajectories.jsonl').read_text().splitlines())
+    startup_failures=[r['sample_id'] for r in rows if r.get('error') and r.get('generation_records',0)==0]
+    assert not startup_failures, f'Infrastructure failures before any model attempt: {startup_failures}'
     ids=[str(r['sample_id']) for r in rows]
     assert len(ids)==len(set(ids))==len(selected)==expected
     assert set(ids)==selected

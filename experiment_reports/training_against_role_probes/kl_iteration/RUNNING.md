@@ -105,3 +105,28 @@ Automatic publication job **1504908** waits for both validated reports and the
 corrected baseline refresh, then revalidates and pushes Markdown reports and
 aggregate metrics to GitHub `kortukov/role_probe_training`, branch `main`.
 It excludes weights, raw trajectories and task text. User approval: 2026-10-25.
+
+## Evaluation infrastructure repair — 2026-10-25
+
+Both trainings completed all 169 updates (about five hours each); exports and
+fresh probes also completed. Retail completed 114 attempts per model with zero
+evaluation errors: fixed-800 58 successes, same-batch 62. Role scoring remains
+pending complete cohort assembly. These counts are not final three-benchmark
+results.
+
+Fixed-800 AppWorld shard 0 and all four SWE shards failed container account
+lookup before any model generation. AppWorld shard 1 for both models failed
+shared compilation-cache startup; same-batch SWE shard 0 failed a transient
+Python import before server startup. Whole-shard replacements are 1505884
+(fixed-800 AppWorld 0/1), 1505885 (same-batch AppWorld 1), 1505886
+(fixed-800 SWE 0–3), and 1505887 (same-batch SWE 0). Original failed artifacts
+remain unchanged. Per-model `post_training/*shard_sources.json` records explicit
+source jobs; genuine completed attempts are retained. New servers use job-local
+compile caches and exclude node 0702-02 as well as 0701-03/05.
+
+Assembly jobs 1504838 and 1504857 now depend on the replacement cohorts; the
+existing scoring, reporting and automatic publication chain remains attached.
+Baseline publication 1504825 was superseded by the other agent’s successful
+1505356. After verifying that completion, the obsolete dependency of refresh
+1504865 was cleared. Publication 1504908 still requires both validated reports
+and that baseline refresh.

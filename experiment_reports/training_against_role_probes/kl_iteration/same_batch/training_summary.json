@@ -1,0 +1,108 @@
+{
+  "completed_updates": 169,
+  "fixed_dev_metrics": {
+    "tokens": 99712,
+    "accuracy": 0.9992177486419678,
+    "macro_recall": 0.9985170889531251,
+    "per_role_recall": [
+      1.0,
+      1.0,
+      0.9934387617765814,
+      0.9995766859803689,
+      0.9995699970086749
+    ],
+    "confusion_counts": [
+      [
+        1952,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        531,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        5905,
+        30,
+        4
+      ],
+      [
+        0,
+        0,
+        8,
+        37781,
+        8
+      ],
+      [
+        0,
+        0,
+        0,
+        23,
+        53465
+      ]
+    ]
+  },
+  "standard_probe": {
+    "tokens": 56510,
+    "accuracy": 0.911537766456604,
+    "macro_recall": 0.9115377809237304,
+    "per_role_recall": [
+      0.8861263493187047,
+      0.9087772075738807,
+      0.9175367191647495,
+      0.9262077508405592,
+      0.9190408777207574
+    ],
+    "confusion_counts": [
+      [
+        10015,
+        496,
+        281,
+        40,
+        470
+      ],
+      [
+        779,
+        10271,
+        81,
+        4,
+        167
+      ],
+      [
+        383,
+        115,
+        10370,
+        66,
+        368
+      ],
+      [
+        112,
+        12,
+        81,
+        10468,
+        629
+      ],
+      [
+        373,
+        93,
+        187,
+        262,
+        10387
+      ]
+    ],
+    "extraction_seconds": 30.82823585299775,
+    "seconds": 31.83435852918774,
+    "steps": 2000,
+    "batch_passage_roles": 32,
+    "training_examples": 1125,
+    "training_tokens": 642530
+  },
+  "interpretation": "Fixed base-model development histories, not fresh benchmark role accuracy or task success"
+}

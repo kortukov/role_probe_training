@@ -1,0 +1,10 @@
+{
+  "benchmark": "tau2_retail",
+  "metric": "retail_scorer",
+  "successes": 62,
+  "total": 114,
+  "success_rate": 0.543859649122807,
+  "evaluation_errors": 0,
+  "status": "Task cohort complete; role scoring pending",
+  "source_sha256": "ed8775c033b1d95956b35c1ef6dff754ca46fbef078ed52b8de5f9d1131e322f"
+}

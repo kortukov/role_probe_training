@@ -9,8 +9,11 @@ p.add_argument('--root',type=Path,required=True)
 p.add_argument('--collection-id',required=True)
 a=p.parse_args()
 rows=[]; manifests=[]; sources=[]
+source_map=a.root/'post_training/swe_native_shard_sources.json'
+source_jobs=json.loads(source_map.read_text())['shard_jobs'] if source_map.exists() else {}
 for shard in range(4):
-    folder=a.root/f'runs/swe_native/{a.collection_id}/shard{shard}/swe_bench'
+    collection=source_jobs.get(str(shard),a.collection_id)
+    folder=a.root/f'runs/swe_native/{collection}/shard{shard}/swe_bench'
     manifest=json.loads((folder/'manifest.json').read_text())
     manifests.append(manifest)
     source=folder/'trajectories.jsonl'
