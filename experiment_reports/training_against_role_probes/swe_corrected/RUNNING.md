@@ -60,3 +60,10 @@ it only after the previous watcher has exited; maintain `watch_jobs` and `ready_
 as the pipeline advances. Thread UUID and local watcher PID are recorded in the
 manifest and ignored `logs/watcher.json`. After the final reviewed report is pushed,
 do not rearm. The watcher depends on the running Codex daemon.
+
+Startup-only replacements are recorded under `infrastructure_repairs` in the
+manifest. Canonical shard paths under the original collection ID are symlinks
+to replacement shards; failed startup logs remain in suffixed sibling folders.
+The assembly and audit read those canonical paths. The collection script retries
+server startup at most three times before any benchmark call; it never retries
+a completed or failed model task.
