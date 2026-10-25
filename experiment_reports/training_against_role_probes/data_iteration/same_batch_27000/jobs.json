@@ -12,5 +12,6 @@
   "evaluation_collection": "1505950",
   "evaluation_assembly": "1505951",
   "role_scoring": "1505952",
-  "current_concurrency": 8
+  "current_concurrency": 8,
+  "finalize": 1505959
 }

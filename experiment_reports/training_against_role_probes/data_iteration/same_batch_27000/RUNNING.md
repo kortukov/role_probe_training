@@ -31,8 +31,10 @@ corpus; the objective and effective batch size are unchanged.
 Export 1505948, fresh probe fit 1505949, evaluation collection 1505950
 (indices 0–2 only), assembly 1505951 and role scoring 1505952 (indices 0–1
 only) depend on successful upstream stages. These jobs do not run SWE.
-Before publication, validate every cohort with the existing KL iteration
-validator and update the design-iteration comparison and detailed appendix.
+Report job 1505959 follows role scoring. It validates every saved prediction,
+checks all 1,688 training updates and final adapter provenance, and updates only
+the design-iteration block plus the new model report and appendix. Publication
+requires reviewing these validated results and preserving concurrent SWE edits.
 
 ```bash
 sbatch src/experiments/training_against_role_probes/data_iteration/collect.sbatch
