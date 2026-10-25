@@ -33,22 +33,15 @@ idx=${SLURM_ARRAY_TASK_ID:-0}
 run="$root/runs/post_training/${SLURM_ARRAY_JOB_ID:-$SLURM_JOB_ID}/shard$idx"
 mkdir -p "$run"
 port=$((18000+SLURM_JOB_ID%10000))
-uv run --project "$project/server_current" --frozen --no-sync vllm serve "$model" \
+source src/experiments/training_against_role_probes/kl_iteration/serve_retry.sh
+start_server uv run --project "$project/server_current" --frozen --no-sync vllm serve "$model" \
  --served-model-name "$served" --host 127.0.0.1 --port "$port" \
  --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
  --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice \
  --worker-cls role_probe_training.post_training.vllm_worker.RoleWorker \
- --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 \
- > "$run/server.log" 2>&1 &
-server_pid=$!
+ --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16
 trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$job_scratch"' EXIT
-ready=0
-for ((i=0;i<180;i++)); do
- if curl --silent --fail "http://127.0.0.1:$port/health" >/dev/null; then ready=1; break; fi
- if ! kill -0 "$server_pid" 2>/dev/null; then tail -60 "$run/server.log"; exit 1; fi
- sleep 5
-done
-[[ "$ready" == 1 ]]
+
 uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/smoke.json"
 if [[ "$mode" == smoke ]]; then exit 0; fi

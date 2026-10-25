@@ -1,6 +1,6 @@
 {
   "shard_jobs": {
-    "0": "1505884",
+    "0": "1505894",
     "1": "1505884"
   },
   "reason": "Replace infrastructure failures before any model generation; original artifacts retained"

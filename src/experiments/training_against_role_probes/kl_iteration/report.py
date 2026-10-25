@@ -16,6 +16,7 @@ def main():
     # The canonical comparison follows the other agent's corrected SWE publication.
     if 'models' in comparison:
         comparison = comparison['models']
+    complete = all((ROOT/'kl_iteration'/v/'post_training/results.json').exists() for v,_ in VARIANTS)
     table = ['### AppWorld training: KL-data iteration\n',
         'This comparison asks whether changing the KL data preserves task performance '
         'while retaining role recovery. Both new runs keep the original AppWorld role-training '
@@ -23,7 +24,7 @@ def main():
         'without selecting by outcome, scoring model-authored content over complete histories. '
         'Unlike the original KL run, these histories are not capped at 2,048 tokens. '
         'Same-batch KL scores the exact AppWorld trajectories used for each role-loss update, across the full 2,700-trajectory training corpus. Both variants score the same model-authored roles.\n',
-        'All values are percentages; **pending** means no completed evaluation is available. '
+        ('All values are percentages. ' if complete else 'All values are percentages; **pending** means no completed evaluation is available. ') +
         'Base and original AppWorld rows repeat the published comparison above.\n',
         '| Benchmark | Model | Task success | Overall role | System | User | Reasoning | Assistant | Tool |',
         '|---|---|---:|---:|---:|---:|---:|---:|---:|']
@@ -52,10 +53,10 @@ def main():
                 coverage.append(f"{label}, {name}: {probe['scored_trajectories']}/{expected}")
             table.append('| '+label+' | '+name+' | '+' | '.join(cells)+' |')
     table += ['\nThe coverage and generation-setting limitations of the original rows also apply here. '
-              'New results will use fresh trajectories and independently fitted standard-data probes. '
+              'The new models are evaluated on fresh trajectories with independently fitted standard-data probes. '
               '[Run details](kl_iteration/RUNNING.md).']
     if coverage:
-        table.append('\n**New-model role-score coverage:** '+ '; '.join(coverage)+'. Over-limit attempts remain in task denominators. Detailed confusion matrices are in each variant’s appendix.')
+        table.append('\n**New-model role-score coverage:** '+ '; '.join(coverage)+'. Over-limit attempts remain in task denominators. Detailed confusion matrices: [fixed-800](kl_iteration/agentic800/APPENDIX.md), [same-batch](kl_iteration/same_batch/APPENDIX.md).')
     start, end = '<!-- kl-iteration-results -->', '<!-- /kl-iteration-results -->'
     path = ROOT/'README.md'; text = path.read_text()
     block = start+'\n'+'\n'.join(table)+'\n'+end
@@ -65,6 +66,29 @@ def main():
     else:
         marker = '<!-- /fresh-rollout-results -->'
         text = text.replace(marker, marker+'\n\n'+block, 1)
+    if complete:
+        conclusions=[]; recovered=[]
+        for variant,name in VARIANTS:
+            results=json.loads((ROOT/'kl_iteration'/variant/'post_training/results.json').read_text())
+            task_gains=role_gains=base_matches=0
+            for key,_,_,metric in BENCHMARKS:
+                task=results[key]['task']['metrics'][metric]['success_rate']
+                old=comparison['AppWorld-trained'][key]['task']['metrics'][metric]['success_rate']
+                base=comparison['Base'][key]['task']['metrics'][metric]['success_rate']
+                task_gains+=task>old
+                base_matches+=task>=base
+                role_gains+=results[key]['probe']['accuracy']>comparison['Base'][key]['probe']['accuracy']
+            conclusions.append(f'{name} has higher observed task success than the original AppWorld-trained model on {task_gains}/3 benchmarks, and higher overall role accuracy than base on {role_gains}/3. It matches or exceeds base task success on {base_matches}/3 benchmarks.')
+            if base_matches==3: recovered.append(name)
+        if not recovered:
+            conclusions.append('The tested variants therefore do not fully retain base task performance across all three benchmarks. Changing KL data and retaining full KL histories are coupled in this comparison; their separate contributions are not isolated.')
+        message_start,message_end='<!-- kl-iteration-message -->','<!-- /kl-iteration-message -->'
+        message=message_start+'\n'+'\n\n'.join(conclusions)+'\n'+message_end
+        if message_start in text:
+            left,rest=text.split(message_start,1);_,right=rest.split(message_end,1)
+            text=left+message+right
+        else:
+            text=text.replace('[How to reproduce the experiment](RUNNING.md)',message+'\n\n[How to reproduce the experiment](RUNNING.md)')
     path.write_text(text)
 
 

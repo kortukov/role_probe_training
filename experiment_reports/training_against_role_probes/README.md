@@ -84,12 +84,12 @@ All values are percentages; **pending** means no completed evaluation is availab
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
 | τ² retail | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
-| SWE-bench Verified | Base | 2.2 | 22.6 | 1.4 | 94.5 | 37.0 | 30.4 | 3.5 |
-| SWE-bench Verified | AppWorld-trained | 2.8 | 87.2 | 39.8 | 94.7 | 97.9 | 89.8 | 85.0 |
+| SWE-bench Verified | Base | 36.2 | 36.2 | 0.9 | 92.5 | 42.8 | 79.7 | 2.3 |
+| SWE-bench Verified | AppWorld-trained | 3.4 | 87.6 | 39.8 | 94.1 | 98.0 | 90.6 | 85.5 |
 | SWE-bench Verified | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
 | SWE-bench Verified | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
 
-The coverage and generation-setting limitations of the original rows also apply here. New results will use fresh trajectories and independently fitted standard-data probes. [Run details](kl_iteration/RUNNING.md).
+The coverage and generation-setting limitations of the original rows also apply here. The new models are evaluated on fresh trajectories with independently fitted standard-data probes. [Run details](kl_iteration/RUNNING.md).
 <!-- /kl-iteration-results -->
 
 Retail traces reveal repeated reasoning without useful action, particularly after

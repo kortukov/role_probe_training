@@ -11,5 +11,11 @@
   "preparation": "1504826",
   "pilot": "1504827",
   "collection_repair": "1505884",
-  "swe_collection_repair": "1505886"
+  "swe_collection_repair": "1505886",
+  "startup_retries": {
+    "appworld_0": "1505894",
+    "swe_1": "1505895"
+  },
+  "appworld_assembly": "1505896",
+  "retail_scoring_released_independently": true
 }

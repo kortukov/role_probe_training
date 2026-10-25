@@ -26,9 +26,11 @@ for benchmark,shards,expected in [('appworld_test',[0,1],168),('tau2_retail',[2]
     for row in rows:row['trajectory_id']=f"{benchmark}/{row['sample_id']}"
     output=a.root/f'data/post_training/{benchmark}';output.mkdir(parents=True,exist_ok=True)
     target=output/'trajectories.jsonl'
-    if target.exists():raise FileExistsError(target)
-    with target.open('w') as f:
-        for row in rows:f.write(json.dumps(row,ensure_ascii=False)+'\n')
+    serialized=''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in rows)
+    if target.exists():
+        if target.read_text()!=serialized: raise ValueError(f'Existing cohort differs: {target}')
+    else:
+        target.write_text(serialized)
     names=sorted({k for r in rows for k in r['scores']}); task_metrics={}
     for name in names:
         values=[r['scores'][name]['value'] for r in rows if name in r['scores'] and not r.get('error')]
@@ -42,5 +44,8 @@ for benchmark,shards,expected in [('appworld_test',[0,1],168),('tau2_retail',[2]
     (output/'manifest.json').write_text(json.dumps(result,indent=2)+'\n')
     results[benchmark]={k:v for k,v in result.items() if k!='source_manifests'}
 small=a.root/'post_training';small.mkdir(exist_ok=True)
-(small/'task_results.json').write_text(json.dumps(results,indent=2)+'\n')
+task_file=small/'task_results.json'
+existing=json.loads(task_file.read_text()) if task_file.exists() else {}
+existing.update(results)
+task_file.write_text(json.dumps(existing,indent=2)+'\n')
 print(json.dumps(results))

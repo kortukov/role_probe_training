@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 from report import BENCHMARKS, ROOT, main as refresh_table
+from validate import validate
 
 
 def digest(path):
@@ -14,6 +15,7 @@ def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--root', type=Path, required=True)
     args = parser.parse_args(); root = args.root
+    validate(root)
     tasks = json.loads((root/'post_training/task_results.json').read_text())
     export = json.loads((root/'data/post_training/model/export.json').read_text())
     probe = root/'post_training/probes/layer_12.npz'
