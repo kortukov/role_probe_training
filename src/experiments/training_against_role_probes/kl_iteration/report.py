@@ -2,6 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
+from validate import validate
 
 ROOT = Path('experiment_reports/training_against_role_probes')
 BENCHMARKS = [('appworld_test', 'AppWorld test_normal', 168, 'appworld_success'),
@@ -39,9 +40,19 @@ def main():
             root = ROOT/'kl_iteration'/variant
             result_path = root/'post_training/results.json'
             cells = ['pending']*7
+            row = None
             if result_path.exists():
-                results = json.loads(result_path.read_text())
-                row = results[key]
+                row = json.loads(result_path.read_text())[key]
+            else:
+                task_path=root/'post_training/task_results.json'
+                tasks=json.loads(task_path.read_text()) if task_path.exists() else {}
+                if key in tasks:
+                    cells[0]=f"{100*tasks[key]['metrics'][metric]['success_rate']:.1f}"
+                    summary_path=root/f'predictions/post_training/{key}/summary.json'
+                    if summary_path.exists():
+                        validate(root,[key])
+                        row={'task':tasks[key],'probe':json.loads(summary_path.read_text())}
+            if row is not None:
                 task, probe = row['task'], row['probe']
                 assert task['samples'] == probe['trajectories'] == expected
                 assert task['input_sha256'] == probe['input_sha256']
@@ -56,7 +67,15 @@ def main():
               'The new models are evaluated on fresh trajectories with independently fitted standard-data probes. '
               '[Run details](kl_iteration/RUNNING.md).']
     if coverage:
-        table.append('\n**New-model role-score coverage:** '+ '; '.join(coverage)+'. Over-limit attempts remain in task denominators. Detailed confusion matrices: [fixed-800](kl_iteration/agentic800/APPENDIX.md), [same-batch](kl_iteration/same_batch/APPENDIX.md).')
+        matrix_links=(' Detailed confusion matrices: [fixed-800](kl_iteration/agentic800/APPENDIX.md), [same-batch](kl_iteration/same_batch/APPENDIX.md).' if complete else '')
+        table.append('\n**New-model role-score coverage:** '+ '; '.join(coverage)+'. Over-limit attempts remain in task denominators.'+matrix_links)
+    retail_summaries=[ROOT/'kl_iteration'/v/'predictions/post_training/tau2_retail/summary.json' for v,_ in VARIANTS]
+    if all(p.exists() for p in retail_summaries):
+        recalls=[json.loads(p.read_text())['per_role_recall'] for p in retail_summaries]
+        old=comparison['AppWorld-trained']['tau2_retail']['probe']['per_role_recall']
+        lower=[name for i,name in enumerate(['system','user','reasoning','assistant','tool']) if all(r[i]<old[i] for r in recalls)]
+        if lower:
+            table.append('\nOn retail, both new variants have lower recall for '+', '.join(lower)+' than the original AppWorld-trained model. Overall accuracy does not establish uniform improvement across roles; each model is scored on its own eligible histories.')
     start, end = '<!-- kl-iteration-results -->', '<!-- /kl-iteration-results -->'
     path = ROOT/'README.md'; text = path.read_text()
     block = start+'\n'+'\n'.join(table)+'\n'+end

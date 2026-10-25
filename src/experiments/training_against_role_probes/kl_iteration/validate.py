@@ -1,17 +1,27 @@
 """Validate every saved prediction against its confusion counts and cohort coverage."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import numpy as np
 
 
-def validate(root):
+def validate(root, benchmarks=None):
     checks=[]
     for benchmark,expected in [('appworld_test',168),('tau2_retail',114),('swe_bench',500)]:
+        if benchmarks is not None and benchmark not in benchmarks: continue
         folder=root/'predictions/post_training'/benchmark
         summary=json.loads((folder/'summary.json').read_text())
         rows=[json.loads(line) for line in (folder/'index.jsonl').open()]
         sources=[json.loads(line) for line in (root/'data/post_training'/benchmark/'trajectories.jsonl').open()]
+        input_file=root/'data/post_training'/benchmark/'trajectories.jsonl'
+        assert summary['input_sha256']==hashlib.sha256(input_file.read_bytes()).hexdigest()
+        probe_file=root/'post_training/probes/layer_12.npz'
+        assert summary['probe_sha256']==hashlib.sha256(probe_file.read_bytes()).hexdigest()
+        metadata=json.loads(probe_file.with_suffix('.json').read_text())
+        export=json.loads((root/'data/post_training/model/export.json').read_text())
+        assert metadata['model_revision']==summary['model_revision']==export['adapter_sha256']
+        assert metadata['layer']==12 and metadata['activation']=='post_attention_layernorm_output_pre_mlp'
         expected_ids={str(row['trajectory_id']) for row in sources}
         scored_ids={str(row['trajectory_id']) for row in rows}
         excluded_ids={str(row['trajectory_id']) for row in summary['excluded_trajectories']}
@@ -39,11 +49,14 @@ def validate(root):
         assert abs(counts.trace()/counts.sum()-summary['accuracy'])<1e-12
         checks.append(dict(benchmark=benchmark,histories=len(rows),unscorable=len(excluded_ids),
                            all_saved_predictions_match=True,exact_cohort_coverage=True))
-    (root/'validation.json').write_text(json.dumps(checks,indent=2)+'\n')
+    output='validation.json' if benchmarks is None else 'validation_'+'_'.join(benchmarks)+'.json'
+    (root/output).write_text(json.dumps(checks,indent=2)+'\n')
     print(f'PASS: all saved predictions and complete cohort coverage: {root}',flush=True)
 
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__)
     parser.add_argument('--root',type=Path,required=True)
-    validate(parser.parse_args().root)
+    parser.add_argument('--benchmarks',nargs='+',choices=['appworld_test','tau2_retail','swe_bench'])
+    args=parser.parse_args()
+    validate(args.root,args.benchmarks)

@@ -82,14 +82,18 @@ All values are percentages; **pending** means no completed evaluation is availab
 | AppWorld test_normal | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
 | τ² retail | Base | 64.0 | 19.9 | 6.6 | 29.9 | 20.0 | 95.0 | 0.7 |
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
-| τ² retail | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
-| τ² retail | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
+| τ² retail | AppWorld + agentic KL (800) | 50.9 | 72.1 | 19.5 | 43.9 | 91.7 | 73.4 | 37.4 |
+| τ² retail | AppWorld + same-batch KL | 54.4 | 78.8 | 19.4 | 43.9 | 93.0 | 77.1 | 40.2 |
 | SWE-bench Verified | Base | 36.2 | 36.2 | 0.9 | 92.5 | 42.8 | 79.7 | 2.3 |
 | SWE-bench Verified | AppWorld-trained | 3.4 | 87.6 | 39.8 | 94.1 | 98.0 | 90.6 | 85.5 |
 | SWE-bench Verified | AppWorld + agentic KL (800) | pending | pending | pending | pending | pending | pending | pending |
 | SWE-bench Verified | AppWorld + same-batch KL | pending | pending | pending | pending | pending | pending | pending |
 
 The coverage and generation-setting limitations of the original rows also apply here. The new models are evaluated on fresh trajectories with independently fitted standard-data probes. [Run details](kl_iteration/RUNNING.md).
+
+**New-model role-score coverage:** τ² retail, AppWorld + agentic KL (800): 114/114; τ² retail, AppWorld + same-batch KL: 114/114. Over-limit attempts remain in task denominators.
+
+On retail, both new variants have lower recall for system, assistant, tool than the original AppWorld-trained model. Overall accuracy does not establish uniform improvement across roles; each model is scored on its own eligible histories.
 <!-- /kl-iteration-results -->
 
 Retail traces reveal repeated reasoning without useful action, particularly after
