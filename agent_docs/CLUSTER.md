@@ -177,3 +177,10 @@ its Slurm local directory with permission denied. The same pipeline ran on other
 nodes. This is a live observation, not a diagnosis of the node's account service.
 
 GPU-only whole-history probe scoring was verified on `0701-05` on 2026-10-24 using a unique `/tmp` scratch directory. This does not resolve its Apptainer account lookup failure: exclude it from benchmark generation, but it can run container-free scoring.
+
+On 2026-10-25, `vca-gpu-0702-02` also failed Apptainer account lookup
+(`lookup userid 11850603: connection refused`) for every sample in SWE shards
+`1504811_2` and `1504811_3`. Exclude this node from container-based evaluations.
+Both jobs exited zero despite 250 image-preparation errors and no model calls;
+check sample-level results, not only Slurm completion. Current SWE assembly rejects
+errors occurring before any model attempt.

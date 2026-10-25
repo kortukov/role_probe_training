@@ -17,6 +17,8 @@ for shard in range(4):
     shard_rows=[json.loads(line) for line in source.open()]
     assert {str(r['sample_id']) for r in shard_rows}==set(map(str,manifest['sample_ids']))
     assert not any(r['export_errors'] for r in shard_rows)
+    startup_failures = [r['sample_id'] for r in shard_rows if r.get('error') and r.get('generation_records', 0) == 0]
+    assert not startup_failures, f'Infrastructure failures before any model attempt must be repaired before assembly: {startup_failures}'
     rows.extend(shard_rows)
     sources.append({'path':str(source),'sha256':hashlib.sha256(source.read_bytes()).hexdigest()})
 expected=set(map(str,manifests[0]['full_selection']))

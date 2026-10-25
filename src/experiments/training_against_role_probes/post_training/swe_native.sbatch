@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
 #SBATCH --time=12:00:00
-#SBATCH --exclude=vca-gpu-0701-03,vca-gpu-0701-05
+#SBATCH --exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02
 #SBATCH --output=experiment_reports/training_against_role_probes/logs/%x-%A_%a.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"

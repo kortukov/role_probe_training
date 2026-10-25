@@ -1,5 +1,5 @@
 {
-  "status": "full evaluation running; two zero-attempt startup failures replaced",
+  "status": "AppWorld complete; other cohorts collecting; DepthBench shards 2/3 replaced after zero-attempt sandbox failures",
   "base_export_job": "1504793",
   "scorer_control_job": "1504794",
   "scorer_controls": [
@@ -76,8 +76,8 @@
   "full_jobs": {
     "base_model": {
       "collection": "1504808",
-      "assembly": "1504812",
-      "scoring": "1504813"
+      "assembly": "1505349",
+      "scoring": "1505350"
     },
     "appworld_trained": {
       "collection": "1504809_0,1504809_2,1504809_3,1504903_1",
@@ -86,16 +86,16 @@
     },
     "astra_sft_1k": {
       "collection": "1504810_0,1504810_2,1504810_3,1504897_1",
-      "assembly": "1504898",
-      "scoring": "1504899"
+      "assembly": "1505351",
+      "scoring": "1505352"
     },
     "depthbench": {
-      "collection": "1504811",
-      "assembly": "1504818",
-      "scoring": "1504819"
+      "collection": "1504811_0,1504811_1,1505345_2,1505345_3",
+      "assembly": "1505354",
+      "scoring": "1505355"
     }
   },
-  "report_job": "1504906",
+  "report_job": "1505356",
   "report_publication": "dependent job updates local reports after validation; review and git push afterward",
   "infrastructure_repairs": [
     {
@@ -130,6 +130,39 @@
         "1504900"
       ],
       "replacement_script_sha256": "d82176daebb0e4dba3fa11a7516714f81752b98a18a8f2597ceb131ca01621b9"
+    },
+    {
+      "model": "depthbench",
+      "failed_jobs": [
+        "1504811_2",
+        "1504811_3"
+      ],
+      "replacement_jobs": [
+        "1505345_2",
+        "1505345_3"
+      ],
+      "reason": "All 250 samples failed image preparation on vca-gpu-0702-02: account lookup connection refused. No benchmark model calls occurred. Node now excluded, including remaining pending original shards.",
+      "prior_model_attempts": 0,
+      "assembly_collection_id": "1504811",
+      "canonical_shards": [
+        "depthbench/runs/swe_native/1504811/shard2",
+        "depthbench/runs/swe_native/1504811/shard3"
+      ],
+      "replacement_shards": [
+        "depthbench/runs/swe_native/1505345/shard2",
+        "depthbench/runs/swe_native/1505345/shard3"
+      ],
+      "superseded_cohort": "experiment_reports/training_against_role_probes/depthbench/data/swe_native/evaluation_pre_repair_1504818",
+      "superseded_probe_output": "experiment_reports/training_against_role_probes/depthbench/predictions/swe_native_pre_repair_1504819",
+      "superseded_pending_or_scoring_jobs": [
+        "1504906",
+        "1504819",
+        "1504812",
+        "1504813",
+        "1504898",
+        "1504899"
+      ],
+      "replacement_script_sha256": "6b9fcea980cf24113e910e188c5231dc6d125df66bdbe97ddc3a8920a9315a8b"
     }
   ],
   "runtime_error_audit": {
