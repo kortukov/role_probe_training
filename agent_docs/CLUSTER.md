@@ -184,3 +184,16 @@ On 2026-10-25, `vca-gpu-0702-02` also failed Apptainer account lookup
 Both jobs exited zero despite 250 image-preparation errors and no model calls;
 check sample-level results, not only Slurm completion. Current SWE assembly rejects
 errors occurring before any model attempt.
+
+### SWE agent environment (verified 2026-10-25)
+
+The original `apptainer_mirror` provider launches tools in base Conda, while SWE
+dependencies live in `/opt/miniconda3/envs/testbed`. Both Inspect `python` and
+`bash_session` reproduced missing dependencies on fresh Django/SymPy images;
+the scorer activates `testbed` separately, masking this distinction in gold-patch
+controls. New evaluations can opt into
+`role_probe_training.trajectories.swe_testbed.sandbox_config`, which activates
+`testbed` for each command. This provider passed direct/Python/shell controls on
+both images; its task-success impact is not yet measured. Do not change the
+original provider while concurrent jobs use it, or merge corrected generations
+into old cohorts. [Evidence](../experiment_reports/training_against_role_probes/swe_gap/README.md).

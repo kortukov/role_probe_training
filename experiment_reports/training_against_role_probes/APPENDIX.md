@@ -169,6 +169,12 @@ is made. Weights, exact source/model hashes and fitting diagnostics accompany th
 
 ## SWE-bench failure audit
 
+**Follow-up finding:** the agent tools used base Conda instead of the repository’s
+`testbed` environment, and 190/500 base attempts hit the message cap. The
+[diagnostic report](swe_gap/README.md) reproduces the environment bug and checks
+saved patches with official SWE-bench scripts. Current scores retain this limitation;
+the tested environment fix has not yet been evaluated with new model generations.
+
 The current comparison uses four complete 500-task cohorts with matched serving
 and agent budgets, BF16 weights, high reasoning and the native 131,072-token
 context limit. These replace the earlier constrained SWE results. Gold patches

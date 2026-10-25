@@ -1,0 +1,51 @@
+{
+  "versions": {
+    "inspect-ai": "0.3.283",
+    "inspect-evals": "0.25.0",
+    "swebench": "4.1.0"
+  },
+  "inputs": {
+    "original_env": {
+      "path": "experiment_reports/training_against_role_probes/swe_gap/data/environment-1505908/results.json",
+      "sha256": "0d64294a557590f79fc1598b74cded794f9365479d01ad9e84c79a14bd73aed8"
+    },
+    "fixed_env": {
+      "path": "experiment_reports/training_against_role_probes/swe_gap/data/environment-fixed-1505909/results.json",
+      "sha256": "41abc0c39cae4fb111fdd52de637ada4f92defabad929264da30c8c81c61d340"
+    },
+    "regrade": {
+      "path": "experiment_reports/training_against_role_probes/swe_gap/data/regrade-1505905/results.json",
+      "sha256": "24d023c8d5e8a0cf0432f493d21513a03cfd246c258b43897c4858eea0448c73"
+    },
+    "inspect_regrade": {
+      "path": "experiment_reports/training_against_role_probes/swe_gap/data/inspect-regrade-1505912/results.json",
+      "sha256": "337a5234d100888013d7e4b40fee5727eb25f972662cc37f0db53041fbae013e"
+    },
+    "selected_patches": {
+      "path": "experiment_reports/training_against_role_probes/swe_gap/data/selected_patches.json",
+      "sha256": "6077a85605d6392d27ec02604ef4b9c3d15fa4996dd74e6f6f6c0c1e96e71ad5"
+    },
+    "attempt_audit": {
+      "path": "experiment_reports/training_against_role_probes/swe_gap/data/attempt_audit.json",
+      "sha256": "9fd114eed287fdce97d0e0b231dd308555cbd5ad2cfe1b0d6f16a4bee204f759"
+    }
+  },
+  "jobs": {
+    "audit": "1505910",
+    "original_env": "1505908",
+    "fixed_env": "1505909",
+    "regrade": "1505905",
+    "inspect_regrade": "1505912"
+  },
+  "public_revisions": {
+    "HarmonyAgent": "175dda4a212193b79e5d860186c5043fd9cdc8e1",
+    "SWE-bench_HEAD_inspected": "02e7a74ffd0b707aab73d203fe87bdc7c76afc8e"
+  },
+  "source_sha256": {
+    "src/experiments/training_against_role_probes/swe_gap/audit.py": "17a7a359b59ad5e5ff93e9b6ed472d7df4c66cc5fa66f2c9283e0add74f23ba5",
+    "src/experiments/training_against_role_probes/swe_gap/summarize.py": "7dd2adb8aebf7c206c0b3450b3334d4e6a6cb0579d10fc1c787dbfb9e187ee97",
+    "src/experiments/training_against_role_probes/swe_gap/tool_environment.py": "16485991e9406dbabc58a69add4325f5a28f43164bd7802a6436abe30865df2c",
+    "src/experiments/training_against_role_probes/swe_gap/regrade.py": "5c6d67f7bec016e14897e25c26761a387498fefe04c3c5e4b0062082c432a91c",
+    "src/role_probe_training/trajectories/swe_testbed.py": "af8829d0fdefad21edef5549214dc9102cc038ae4b77112c095ce7cdbb404db5"
+  }
+}

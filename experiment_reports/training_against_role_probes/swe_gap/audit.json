@@ -1,0 +1,273 @@
+{
+  "samples": 500,
+  "successes": 181,
+  "evaluation_errors": 7,
+  "empty_patches": 58,
+  "attempts_with_tool_errors": 303,
+  "tool_error_calls": 736,
+  "attempts_missing_apply_patch": 5,
+  "missing_apply_patch_calls": 10,
+  "tool_functions": {
+    "bash_session": 24623,
+    "python": 5092,
+    "text_editor": 6557,
+    "submit": 311
+  },
+  "model_stops": {
+    "tool_calls": 36582,
+    "stop": 315,
+    "max_tokens": 1
+  },
+  "reasoning_efforts": {
+    "high": 500
+  },
+  "tool_error_types": {
+    "unknown": 699,
+    "parsing": 35,
+    "timeout": 2
+  },
+  "sample_limits": {
+    "message": 190
+  },
+  "attempts_with_import_errors": 383,
+  "import_error_messages": {
+    "ModuleNotFoundError: No module named 'numpy'": 131,
+    "ModuleNotFoundError: No module named 'pytz'": 61,
+    "ImportError: Failed to import test module: admin_scripts.complex_app.models": 3,
+    "ImportError: Failed to import test module: auth_tests.models": 3,
+    "ImportError: Failed to import test module: fixtures_model_package.models": 3,
+    "ImportError: Failed to import test module: foreign_object.models": 3,
+    "ImportError: Failed to import test module: i18n.project_dir": 3,
+    "ImportError: Failed to import test module: import_error_package": 3,
+    "ImportError: Oops": 3,
+    "ImportError: Failed to import test module: model_package.models": 3,
+    "ImportError: Failed to import test module: postgres_tests": 3,
+    "ImportError: Failed to import test module: serializers.models": 3,
+    "ModuleNotFoundError: No module named 'memoryview'": 1,
+    "ModuleNotFoundError: No module named 'asgiref'": 221,
+    "ModuleNotFoundError: No module named 'sqlparse'": 24,
+    "ImportError: Failed to import test module: test_http": 1,
+    "ImportError: Failed to import test module: forms_tests.field_tests": 2,
+    "ImportError: Failed to import test module: i18n.commands": 2,
+    "ImportError: Failed to import test module: i18n.exclude": 2,
+    "ModuleNotFoundError: No module named 'django'": 6,
+    "ModuleNotFoundError: No module named 'django.db.migrations.writing'": 1,
+    "ImportError: cannot import name 'Local' from 'asgiref.local' (/testbed/asgiref/local.py)": 3,
+    "ImportError: Failed to import test module: test_base": 1,
+    "ModuleNotFoundError: No module named 'asgiref.local'; 'asgiref' is not a package": 3,
+    "ImportError: Failed to import test module: tests": 4,
+    "ImportError: cannot import name 'settings' from 'django.conf' (unknown location)": 5,
+    "ImportError: attempted relative import with no known parent package": 1,
+    "ModuleNotFoundError: No module named 'asgiref.local'": 9,
+    "ModuleNotFoundError: No module named 'matplotlib'": 37,
+    "ModuleNotFoundError: No module named 'cbook'": 1,
+    "ImportError: cannot import name 'MutableMapping' from 'collections' (/opt/miniconda3/lib/python3.11/collections/__init__.py)": 3,
+    "ModuleNotFoundError: No module named 'pandas'": 7,
+    "ModuleNotFoundError: No module named 'astroid'": 7,
+    "ModuleNotFoundError: No module named 'attr'": 10,
+    "ModuleNotFoundError: No module named '_pytest'": 2,
+    "ModuleNotFoundError: No module named 'youtube_dl'": 2,
+    "ModuleNotFoundError: No module named 'py'": 6,
+    "ModuleNotFoundError: No module named 'sklearn.__check_build._check_build'": 30,
+    "ImportError: No module named 'sklearn.__check_build._check_build'": 30,
+    "ModuleNotFoundError: No module named 'sphinx.autodoc'": 1,
+    "ModuleNotFoundError: No module named 'docutils'": 51,
+    "ImportError: cannot import name 'Element' from 'docutils.nodes' (unknown location)": 2,
+    "ModuleNotFoundError: No module named 'docutils.parsers'; 'docutils' is not a package": 1,
+    "ModuleNotFoundError: No module named 'sphinx_gallery'": 1,
+    "ModuleNotFoundError: No module named 'mpmath'": 125,
+    "ImportError: SymPy now depends on mpmath as an external library. See http://docs.sympy.org/latest/install.html#mpmath for more information.": 35,
+    "ImportError: SymPy now depends on mpmath as an external library. See https://docs.sympy.org/latest/install.html#mpmath for more information.": 79,
+    "ModuleNotFoundError: No module named 'mpmath.libmp'": 6,
+    "ImportError: cannot import name 'make_mpc' from 'mpmath' (/testbed/mpmath/__init__.py)": 8,
+    "ModuleNotFoundError: No module named 'mpmath.libmp'; 'mpmath' is not a package": 10,
+    "ImportError: cannot import name 'prec_to_dps' from 'mpmath.libmp' (/testbed/mpmath/libmp/__init__.py)": 3,
+    "ImportError: cannot import name 'mpf_log' from 'mpmath.libmp.libmpf' (/testbed/mpmath/libmp/libmpf.py)": 1,
+    "ModuleNotFoundError: No module named 'erfa'": 13,
+    "ImportError: Numpy version 1.10.0 or later must be installed to use Astropy": 3,
+    "ImportError: Numpy version 1.13.0 or later must be installed to use Astropy": 3,
+    "ImportError: Failed to import test module: test_numberformat": 1,
+    "ImportError: Failed to import test module: absolute_url_overrides.tests": 1,
+    "ImportError: Failed to import test module: admin_autodiscover.tests": 1,
+    "ImportError: Failed to import test module: admin_changelist.test_date_hierarchy": 1,
+    "ImportError: Failed to import test module: admin_changelist.tests": 1,
+    "ImportError: Failed to import test module: admin_checks.tests": 1,
+    "ImportError: Failed to import test module: admin_custom_urls.tests": 1,
+    "ImportError: Failed to import test module: admin_default_site.tests": 1,
+    "ImportError: Failed to import test module: admin_docs.test_middleware": 1,
+    "ImportError: Failed to import test module: admin_docs.test_utils": 1,
+    "ImportError: Failed to import test module: admin_docs.test_views": 1,
+    "ImportError: Failed to import test module: admin_docs.tests": 1,
+    "ImportError: Failed to import test module: admin_filters.tests": 1,
+    "ImportError: Failed to import test module: view_tests.tests.test_i18n": 1,
+    "ImportError: Failed to import test module: view_tests.tests.test_json": 1,
+    "ImportError: Failed to import test module: view_tests.tests.test_specials": 1,
+    "ImportError: Failed to import test module: view_tests.tests.test_static": 1,
+    "ImportError: Failed to import test module: wsgi.tests": 1,
+    "ImportError: Failed to import test module: test_decimalfield": 1,
+    "ModuleNotFoundError: No module named 'j'": 1,
+    "ModuleNotFoundError: No module named 'django.contrib.staticfiles.utils'": 1,
+    "ModuleNotFoundError: No module named 'django.core.exceptions'": 2,
+    "ModuleNotFoundError: No module named 'django.core.files.base'": 1,
+    "ModuleNotFoundError: No module named 'app'": 1,
+    "ModuleNotFoundError: No module named 'werkzeug'": 1,
+    "ImportError: cannot import name 'Mapping' from 'collections' (/opt/miniconda3/lib/python3.11/collections/__init__.py)": 9,
+    "ImportError: cannot import name 'InvalidProxyURL' from 'urllib3.exceptions' (/opt/miniconda3/lib/python3.11/site-packages/urllib3/exceptions.py)": 1,
+    "ModuleNotFoundError: No module named 'text_editor'": 1,
+    "ModuleNotFoundError: No module named 'tomlkit'": 6,
+    "ModuleNotFoundError: No module named 'pytest'": 10,
+    "ModuleNotFoundError: No module named 'torch'": 1,
+    "ModuleNotFoundError: No module named 'sphinx.quickstart'": 1,
+    "ImportError: cannot import name 'nodes' from 'docutils' (unknown location)": 1,
+    "ImportError: cannot import name 'phi_fixed' from 'mpmath.libmp' (/testbed/mpmath/libmp/__init__.py)": 2,
+    "ImportError: cannot import name 'fhalf' from 'mpmath.libmp' (unknown location)": 1,
+    "ImportError: cannot import name 'fnone' from 'mpmath.libmp' (unknown location)": 1,
+    "ImportError: cannot import name 'bitcount' from 'mpmath.libmp' (unknown location)": 2,
+    "ModuleNotFoundError: No module named 'pyerfa'": 1,
+    "ModuleNotFoundError: No module named 'open'": 2,
+    "ModuleNotFoundError: No module named 'asgiref.sync'; 'asgiref' is not a package": 1,
+    "ModuleNotFoundError: No module named 'modules'": 1,
+    "ImportError: Failed to import test module: django.conf": 2,
+    "ImportError: Failed to import test module: django.contrib.admin": 2,
+    "ImportError: Failed to import test module: django.contrib.auth": 2,
+    "ImportError: Failed to import test module: django.contrib.contenttypes.management": 2,
+    "ImportError: Failed to import test module: django.contrib.gis.admin": 2,
+    "ImportError: Failed to import test module: django.contrib.gis.db.models": 1,
+    "ImportError: Failed to import test module: django.contrib.gis.forms": 2,
+    "ImportError: Failed to import test module: django.contrib.gis.gdal": 2,
+    "ImportError: Failed to import test module: django.contrib.gis.geos": 2,
+    "ImportError: Failed to import test module: django.contrib.gis.sitemaps": 2,
+    "ImportError: Failed to import test module: django.contrib.gis.utils": 2,
+    "ImportError: Failed to import test module: django.contrib.messages": 1,
+    "ImportError: Failed to import test module: django.contrib.postgres.aggregates": 1,
+    "ImportError: Failed to import test module: django.contrib.postgres.fields": 1,
+    "ImportError: Failed to import test module: django.forms": 1,
+    "ImportError: Failed to import test module: django.http": 2,
+    "ImportError: Failed to import test module: django.template": 2,
+    "ImportError: Failed to import test module: django.test": 2,
+    "ImportError: Failed to import test module: django.urls": 2,
+    "ImportError: Failed to import test module: django.views": 2,
+    "ImportError: cannot import name 'ThreadSensitiveContext' from 'asgiref.sync' (/testbed/asgiref/sync.py)": 2,
+    "ImportError: cannot import name 'Apps' from 'django.apps' (/testbed/django/apps/__init__.py)": 1,
+    "ImportError: cannot import name 'markcoroutinefunction' from 'asgiref.sync' (/testbed/asgiref/sync.py)": 1,
+    "ModuleNotFoundError: No module named 'real_requests'": 1,
+    "ModuleNotFoundError: No module named 'pygments'": 1,
+    "ImportError: cannot import name 'FileFinder' from 'pip._vendor.distlib' (/opt/miniconda3/lib/python3.11/site-packages/pip/_vendor/distlib/__init__.py)": 1,
+    "ImportError: cannot import name 'prec_to_dps' from 'mpmath.libmp' (unknown location)": 1,
+    "ImportError: cannot import name 'phi_fixed' from 'mpmath.libmp' (unknown location)": 1,
+    "ImportError: cannot import name 'inf' from 'mpmath' (/testbed/mpmath/__init__.py)": 1,
+    "ImportError: cannot import name 'fnone' from 'mpmath.libmp' (/testbed/mpmath/libmp/__init__.py)": 1,
+    "ImportError: cannot import name 'MPZ' from 'mpmath.libmp.backend' (/testbed/mpmath/libmp/backend/__init__.py)": 1,
+    "ImportError: cannot import name '_infs_nan' from 'mpmath.libmp.libmpc' (/testbed/mpmath/libmp/libmpc/__init__.py)": 1,
+    "ImportError: cannot import name 'dps_to_prec' from 'mpmath.libmp.libmpf' (/testbed/mpmath/libmp/libmpf/__init__.py)": 1,
+    "ImportError: cannot import name 'from_rational' from 'mpmath.libmp' (unknown location)": 1,
+    "ImportError: Failed to import test module: django.apps": 1,
+    "ImportError: Fa": 1,
+    "ImportError: Failed to import test module: django.utils.translation": 1,
+    "ImportError: cannot import name 'sync_to_async' from '<unknown module name>' (unknown location)": 1,
+    "ImportError: cannot import name 'Local' from '<unknown module name>' (unknown location)": 1,
+    "ImportError: cannot import name 'tzinfo' from 'pytz' (/testbed/pytz/__init__.py)": 1,
+    "ImportError: Failed to import test module: utils_tests.test_html": 1,
+    "ModuleNotFoundError: No module named 'scriptcontext'": 1,
+    "ImportError: Failed to import test module: test_floatformat": 2,
+    "ImportError: cannot import name 'async_to_sync' from 'asgiref.sync' (/testbed/asgiref/sync.py)": 3,
+    "ImportError: cannot import name 'iscoroutinefunction' from 'asgiref.sync' (unknown location)": 1,
+    "ModuleNotFoundError: No module named 'scipy'": 2,
+    "ModuleNotFoundError: No module named 'graphviz'": 1,
+    "ModuleNotFoundError: No module named 'toml'": 1,
+    "ModuleNotFoundError: No module named 'atomicwrites'": 2,
+    "ModuleNotFoundError: No module named 'sklearn.utils'": 1,
+    "ImportError: cannot import name 'bitcount' from 'mpmath.libmp' (/testbed/mpmath/libmp/__init__.py)": 1,
+    "ImportError: cannot import name 'Rational' from partially initialized module 'sympy' (most likely due to a circular import) (/testbed/sympy/__init__.py)": 1,
+    "ImportError: cannot import name 'prec_to_dps' from 'libmp' (unknown location)": 1
+  },
+  "message_limited_successes": 32,
+  "selection_rule": "lowest SHA256(instance_id) in each repository x original score stratum; diagnostic, not a representative success estimate",
+  "regrade_selection": [
+    {
+      "id": "astropy__astropy-13453",
+      "original_score": 0.0
+    },
+    {
+      "id": "astropy__astropy-7671",
+      "original_score": 1.0
+    },
+    {
+      "id": "django__django-13809",
+      "original_score": 0.0
+    },
+    {
+      "id": "django__django-16100",
+      "original_score": 1.0
+    },
+    {
+      "id": "matplotlib__matplotlib-24026",
+      "original_score": 0.0
+    },
+    {
+      "id": "mwaskom__seaborn-3187",
+      "original_score": 0.0
+    },
+    {
+      "id": "pallets__flask-5014",
+      "original_score": 1.0
+    },
+    {
+      "id": "psf__requests-2931",
+      "original_score": 0.0
+    },
+    {
+      "id": "psf__requests-1142",
+      "original_score": 1.0
+    },
+    {
+      "id": "pydata__xarray-4356",
+      "original_score": 0.0
+    },
+    {
+      "id": "pydata__xarray-4629",
+      "original_score": 1.0
+    },
+    {
+      "id": "pylint-dev__pylint-7080",
+      "original_score": 0.0
+    },
+    {
+      "id": "pylint-dev__pylint-6903",
+      "original_score": 1.0
+    },
+    {
+      "id": "pytest-dev__pytest-5809",
+      "original_score": 0.0
+    },
+    {
+      "id": "pytest-dev__pytest-5631",
+      "original_score": 1.0
+    },
+    {
+      "id": "scikit-learn__scikit-learn-25747",
+      "original_score": 0.0
+    },
+    {
+      "id": "scikit-learn__scikit-learn-11578",
+      "original_score": 1.0
+    },
+    {
+      "id": "sphinx-doc__sphinx-9230",
+      "original_score": 0.0
+    },
+    {
+      "id": "sphinx-doc__sphinx-8595",
+      "original_score": 1.0
+    },
+    {
+      "id": "sympy__sympy-13798",
+      "original_score": 0.0
+    },
+    {
+      "id": "sympy__sympy-14711",
+      "original_score": 1.0
+    }
+  ],
+  "slurm_job_id": "1505910"
+}

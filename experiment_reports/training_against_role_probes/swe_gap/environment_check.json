@@ -1,0 +1,98 @@
+[
+  {
+    "variant": "original",
+    "id": "django__django-14155",
+    "tool": "direct",
+    "python": "/opt/miniconda3/bin/python",
+    "required_module": "asgiref",
+    "module_available": false
+  },
+  {
+    "variant": "original",
+    "id": "django__django-14155",
+    "tool": "python_tool",
+    "python": "/opt/miniconda3/bin/python3",
+    "required_module": "asgiref",
+    "module_available": false
+  },
+  {
+    "variant": "original",
+    "id": "django__django-14155",
+    "tool": "bash_session",
+    "python": "/opt/miniconda3/bin/python",
+    "required_module": "asgiref",
+    "module_available": false
+  },
+  {
+    "variant": "original",
+    "id": "sympy__sympy-13878",
+    "tool": "direct",
+    "python": "/opt/miniconda3/bin/python",
+    "required_module": "mpmath",
+    "module_available": false
+  },
+  {
+    "variant": "original",
+    "id": "sympy__sympy-13878",
+    "tool": "python_tool",
+    "python": "/opt/miniconda3/bin/python3",
+    "required_module": "mpmath",
+    "module_available": false
+  },
+  {
+    "variant": "original",
+    "id": "sympy__sympy-13878",
+    "tool": "bash_session",
+    "python": "/opt/miniconda3/bin/python",
+    "required_module": "mpmath",
+    "module_available": false
+  },
+  {
+    "variant": "fixed",
+    "id": "django__django-14155",
+    "tool": "direct",
+    "python": "/opt/miniconda3/envs/testbed/bin/python",
+    "required_module": "asgiref",
+    "module_available": true
+  },
+  {
+    "variant": "fixed",
+    "id": "django__django-14155",
+    "tool": "python_tool",
+    "python": "/opt/miniconda3/envs/testbed/bin/python3",
+    "required_module": "asgiref",
+    "module_available": true
+  },
+  {
+    "variant": "fixed",
+    "id": "django__django-14155",
+    "tool": "bash_session",
+    "python": "/opt/miniconda3/envs/testbed/bin/python",
+    "required_module": "asgiref",
+    "module_available": true
+  },
+  {
+    "variant": "fixed",
+    "id": "sympy__sympy-13878",
+    "tool": "direct",
+    "python": "/opt/miniconda3/envs/testbed/bin/python",
+    "required_module": "mpmath",
+    "module_available": true
+  },
+  {
+    "variant": "fixed",
+    "id": "sympy__sympy-13878",
+    "tool": "python_tool",
+    "python": "/opt/miniconda3/envs/testbed/bin/python3",
+    "required_module": "mpmath",
+    "module_available": true
+  },
+  {
+    "variant": "fixed",
+    "id": "sympy__sympy-13878",
+    "tool": "bash_session",
+    "python": "/opt/miniconda3/envs/testbed/bin/python",
+    "required_module": "mpmath",
+    "module_available": true
+  }
+]

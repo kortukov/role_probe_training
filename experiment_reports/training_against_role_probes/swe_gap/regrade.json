@@ -1,0 +1,152 @@
+{
+  "regrade": {
+    "samples": 21,
+    "errors": 0,
+    "disagreements": [
+      "psf__requests-1142"
+    ],
+    "results": [
+      {
+        "id": "astropy__astropy-13453",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "astropy__astropy-7671",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "django__django-13809",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "django__django-16100",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "matplotlib__matplotlib-24026",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "mwaskom__seaborn-3187",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "pallets__flask-5014",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "psf__requests-1142",
+        "original_score": 1.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "psf__requests-2931",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "pydata__xarray-4356",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "pydata__xarray-4629",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "pylint-dev__pylint-6903",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "pylint-dev__pylint-7080",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "pytest-dev__pytest-5631",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "pytest-dev__pytest-5809",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "scikit-learn__scikit-learn-11578",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "scikit-learn__scikit-learn-25747",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "sphinx-doc__sphinx-8595",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      },
+      {
+        "id": "sphinx-doc__sphinx-9230",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "sympy__sympy-13798",
+        "original_score": 0.0,
+        "official_score": 0.0,
+        "error": null
+      },
+      {
+        "id": "sympy__sympy-14711",
+        "original_score": 1.0,
+        "official_score": 1.0,
+        "error": null
+      }
+    ]
+  },
+  "inspect_regrade": {
+    "samples": 1,
+    "errors": 0,
+    "disagreements": [
+      "psf__requests-1142"
+    ],
+    "results": [
+      {
+        "id": "psf__requests-1142",
+        "original_score": 1.0,
+        "official_score": 0.0,
+        "error": null
+      }
+    ]
+  }
+}
