@@ -1,5 +1,7 @@
 # Training GPT-OSS-20B to preserve conversational roles
 
+> **SWE update:** A new [six-model matched Inspect evaluation](swe_standard/README.md) is queued. It uses one stock Inspect agent/scorer protocol for baseline and trained models; matching the model-card score is not the objective. Existing SWE rows below belong to the previous protocol until replaced by validated results.
+
 ## Motivation & RQ
 
 Does training against continually updated role probes improve role recovery on

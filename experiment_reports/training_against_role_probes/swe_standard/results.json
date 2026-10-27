@@ -1,0 +1,41 @@
+{
+  "protocol": "swe_inspect_standard_v1",
+  "models": [
+    {
+      "model": "Base",
+      "root": "experiment_reports/training_against_role_probes/base_model",
+      "task": null,
+      "probe": null
+    },
+    {
+      "model": "AppWorld-trained",
+      "root": "experiment_reports/training_against_role_probes",
+      "task": null,
+      "probe": null
+    },
+    {
+      "model": "ASTRA-trained",
+      "root": "experiment_reports/training_against_role_probes/astra_sft_1k",
+      "task": null,
+      "probe": null
+    },
+    {
+      "model": "DepthBench-trained",
+      "root": "experiment_reports/training_against_role_probes/depthbench",
+      "task": null,
+      "probe": null
+    },
+    {
+      "model": "AppWorld + agentic KL (800)",
+      "root": "experiment_reports/training_against_role_probes/kl_iteration/agentic800",
+      "task": null,
+      "probe": null
+    },
+    {
+      "model": "AppWorld + same-batch KL",
+      "root": "experiment_reports/training_against_role_probes/kl_iteration/same_batch",
+      "task": null,
+      "probe": null
+    }
+  ]
+}

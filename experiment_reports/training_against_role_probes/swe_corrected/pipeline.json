@@ -1,5 +1,5 @@
 {
-  "status": "base shards 1/2 running; shards 0/3 restarted after zero-attempt server import failures",
+  "status": "Superseded at user request by ../swe_standard/pipeline.json; investigation stopped",
   "created_utc": "2026-10-25T11:36:40.815412+00:00",
   "thread": "01a15f19-6651-7571-83ab-5f091f1eb7e3",
   "controls_job": "1505926",
@@ -105,12 +105,7 @@
     "src/role_probe_training/trajectories/swe_testbed.py": "af8829d0fdefad21edef5549214dc9102cc038ae4b77112c095ce7cdbb404db5"
   },
   "base_collection": "1505929",
-  "watch_jobs": [
-    "1505929_1",
-    "1505929_2",
-    "1505940",
-    "1505941"
-  ],
+  "watch_jobs": [],
   "ready_job": "1505941",
   "base_review": "1505941",
   "infrastructure_repairs": [
@@ -125,5 +120,7 @@
       "script_sha256": "ac2cadb1645ad0d71c9804d269e14101abae04f2b931fa7a885bb89ed4d0782c",
       "superseded_review": "1505930"
     }
-  ]
+  ],
+  "superseded_by": "experiment_reports/training_against_role_probes/swe_standard/pipeline.json",
+  "ready_jobs": []
 }

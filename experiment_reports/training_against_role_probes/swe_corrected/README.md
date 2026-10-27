@@ -1,5 +1,7 @@
 # Corrected SWE-bench evaluation
 
+> **Superseded:** The model-card investigation has stopped. The active comparison uses a [matched stock Inspect protocol for all six models](../swe_standard/README.md). Earlier attempts remain separate diagnostic artifacts.
+
 ## Motivation & RQ
 
 How well do the base and five reported trained models complete SWE-bench Verified
