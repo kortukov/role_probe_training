@@ -1,6 +1,6 @@
 # Training GPT-OSS-20B to preserve conversational roles
 
-> **SWE update:** A new [seven-model matched Inspect evaluation](swe_generous/README.md) is queued. It includes the 27,000-trajectory model and restores the 2,000-message budget, with high reasoning and one stock Inspect agent/scorer protocol; matching the model-card score is not the objective. Existing SWE rows below belong to the previous protocol until replaced by validated results.
+> **SWE update:** A new [seven-model matched Inspect evaluation](swe_generous/README.md) is queued. It includes the 27,000-trajectory model and restores the 2,000-message budget, with high reasoning and one stock Inspect agent/scorer protocol; matching the model-card score is not the objective. SWE task success and whole-history probe accuracy are pending for all seven models. Superseded SWE scores have been removed from the table.
 
 ## Motivation & RQ
 
@@ -24,7 +24,7 @@ conversations at each update.
 **Evaluation.** Each trained model generates separate attempts on AppWorld normal
 test (app/API use), SWE-bench Verified (software repair), and τ² retail (customer
 service with tools). Base-model AppWorld/retail trajectories and task scores are reused; SWE is
-regenerated for all four models with matched settings and native 131K context. Each trained model gets a fresh layer-12 multinomial linear
+being evaluated for the baseline and all six trained models, including the 27,000-trajectory model, with matched settings and native 131K context; these results are pending. Each trained model gets a fresh layer-12 multinomial linear
 probe fitted from scratch using the standard 250 C4/Dolma passages, original
 passage split, and all content tokens. The base uses its original standard-data
 probe. All read the post-attention-normalized pre-MLP activations. Message roles
@@ -55,18 +55,14 @@ All values are percentages. Role columns are recall within that true role.
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | ASTRA-trained | 38.6 | 44.2 | 28.2 | 39.4 | 38.0 | 83.5 | 93.0 |
 | τ² retail | DepthBench-trained | 37.7 | 43.2 | 65.5 | 37.6 | 40.6 | 99.6 | 97.7 |
-| SWE-bench Verified | Base | 36.2 | 36.2 | 0.9 | 92.5 | 42.8 | 79.7 | 2.3 |
-| SWE-bench Verified | AppWorld-trained | 3.4 | 87.6 | 39.8 | 94.1 | 98.0 | 90.6 | 85.5 |
-| SWE-bench Verified | ASTRA-trained | 21.2 | 61.8 | 19.0 | 87.5 | 94.0 | 33.2 | 69.5 |
-| SWE-bench Verified | DepthBench-trained | 10.2 | 47.5 | 60.6 | 89.4 | 97.5 | 48.4 | 29.1 |
+| SWE-bench Verified | All seven models | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
 
 **Evaluation sizes:** AppWorld normal test: 168 tasks; SWE-bench Verified: 500; τ² retail: 114, with one attempt per model per task. Task success includes all attempts. Role metrics exclude only histories above the native context limit; [coverage and percentage confusion matrices](APPENDIX.md#whole-history-coverage) are in the appendix.
 
 **Retail role-score coverage:** Base: 113/114, AppWorld-trained: 76/114, ASTRA-trained: 103/114, DepthBench-trained: 95/114. Exclusions differ by model, so role scores describe different eligible subsets.
 
-Base AppWorld/retail histories and task scores are reused; SWE was regenerated for all four models with matched settings, BF16 weights and the native 131K context allowance. SWE attempts reaching the model context bound: Base: 0/500, AppWorld-trained: 0/500, ASTRA-trained: 0/500, DepthBench-trained: 2/500. All remain in task metrics. AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. [SWE evaluation limitations](APPENDIX.md#swe-bench-failure-audit).
+AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. The pending SWE comparison uses BF16 for all seven models; no SWE utility or role-accuracy conclusion is available yet.
 
-SWE evaluation errors, counted as task failures: Base: 7/500, AppWorld-trained: 2/500, ASTRA-trained: 2/500, DepthBench-trained: 1/500. These are sandbox runtime errors or scoring/tool timeouts; see the appendix.
 <!-- /fresh-rollout-results -->
 
 <!-- kl-iteration-results -->
