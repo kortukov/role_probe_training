@@ -3,7 +3,7 @@
   "array": "30-299",
   "initial_concurrency": 1,
   "target_concurrency": 8,
-  "status": "first shard initialized AppWorld workers and served requests successfully; expanded collection to eight GPUs; remaining stages queued",
+  "status": "All training, evaluation, scoring and report-validation stages completed successfully on 2026-10-28",
   "prepare": 1505945,
   "pilot": 1505946,
   "training": 1505947,

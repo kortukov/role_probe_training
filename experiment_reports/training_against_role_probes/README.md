@@ -70,30 +70,33 @@ SWE evaluation errors, counted as task failures: Base: 7/500, AppWorld-trained: 
 <!-- /fresh-rollout-results -->
 
 <!-- kl-iteration-results -->
-### AppWorld training: KL-data iteration
+<a id="appworld-training-kl-data-iteration"></a>
+### AppWorld training: design iterations
 
-This comparison asks whether changing the KL data preserves task performance while retaining role recovery. Both new runs keep the original AppWorld role-training data and optimizer settings. Agentic KL reuses 800 base-model training rollouts without selecting by outcome, scoring model-authored content over complete histories. Unlike the original KL run, these histories are not capped at 2,048 tokens. Same-batch KL scores the exact AppWorld trajectories used for each role-loss update, across the full 2,700-trajectory training corpus. Both variants score the same model-authored roles.
+We vary KL data and then the number of training trajectories per task. The original AppWorld model uses 2,700 trajectories and ordinary non-tool KL data capped at 2,048 tokens. Agentic KL instead samples from 800 saved base-model training rollouts. Same-batch KL scores the exact trajectories used for each role-loss update. Both agentic variants retain complete histories and score model-authored reasoning, answers and tool-call arguments.
 
-All values are percentages. Base and original AppWorld rows repeat the published comparison above.
+The data-size iteration expands the same 90 training tasks from 30 to 300 trajectories each (2,700 to 27,000), retaining the original attempts and adding 270 seeds per task without outcome filtering. It starts from the base model and keeps same-batch KL and optimizer settings fixed. All runs train for one epoch; the larger corpus therefore also uses ten times as many updates. Evaluation tasks do not enter training or KL.
+
+All values are percentages. Base and original AppWorld rows repeat the comparison above. Task success includes every assigned attempt; role accuracy uses whole histories within native context.
 
 | Benchmark | Model | Task success | Overall role | System | User | Reasoning | Assistant | Tool |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
 | AppWorld test_normal | Base | 26.8 | 26.5 | 1.2 | 49.9 | 73.1 | 35.4 | 13.3 |
 | AppWorld test_normal | AppWorld-trained | 0.6 | 99.0 | 100.0 | 99.6 | 99.9 | 91.0 | 100.0 |
 | AppWorld test_normal | AppWorld + agentic KL (800) | 36.9 | 99.4 | 100.0 | 99.9 | 96.4 | 99.5 | 99.7 |
-| AppWorld test_normal | AppWorld + same-batch KL | 36.9 | 99.3 | 100.0 | 99.9 | 96.2 | 99.5 | 99.5 |
+| AppWorld test_normal | AppWorld + same-batch KL (2,700) | 36.9 | 99.3 | 100.0 | 99.9 | 96.2 | 99.5 | 99.5 |
+| AppWorld test_normal | AppWorld + same-batch KL (27,000) | 29.8 | 99.8 | 100.0 | 100.0 | 99.8 | 99.4 | 100.0 |
 | τ² retail | Base | 64.0 | 19.9 | 6.6 | 29.9 | 20.0 | 95.0 | 0.7 |
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | AppWorld + agentic KL (800) | 50.9 | 72.1 | 19.5 | 43.9 | 91.7 | 73.4 | 37.4 |
-| τ² retail | AppWorld + same-batch KL | 54.4 | 78.8 | 19.4 | 43.9 | 93.0 | 77.1 | 40.2 |
+| τ² retail | AppWorld + same-batch KL (2,700) | 54.4 | 78.8 | 19.4 | 43.9 | 93.0 | 77.1 | 40.2 |
+| τ² retail | AppWorld + same-batch KL (27,000) | 54.4 | 77.9 | 78.5 | 30.2 | 73.5 | 91.8 | 93.7 |
 
-The coverage and generation-setting limitations of the original rows also apply here. The new models are evaluated on fresh trajectories with independently fitted standard-data probes. [Run details](kl_iteration/RUNNING.md).
+The original coverage and generation-precision limitations also apply here. New models use fresh trajectories and independently fitted standard-data probes. This design comparison covers AppWorld and retail; SWE is managed by a separate evaluation effort.
 
-**Scope:** SWE-bench evaluation is paused at the user’s request pending environment fixes by another agent. The KL-data comparison reports only AppWorld and retail; the older SWE rows above are historical and are not results for the new variants.
+**27,000-trajectory model role-score coverage:** AppWorld test_normal: 168/168; τ² retail: 114/114.
 
-**New-model role-score coverage:** AppWorld test_normal, AppWorld + agentic KL (800): 168/168; AppWorld test_normal, AppWorld + same-batch KL: 168/168; τ² retail, AppWorld + agentic KL (800): 114/114; τ² retail, AppWorld + same-batch KL: 114/114. Over-limit attempts remain in task denominators. Detailed confusion matrices: [fixed-800](kl_iteration/agentic800/APPENDIX.md), [same-batch](kl_iteration/same_batch/APPENDIX.md).
-
-On retail, both new variants have lower recall for system, assistant, tool than the original AppWorld-trained model. Overall accuracy does not establish uniform improvement across roles; each model is scored on its own eligible histories.
+[KL setup and earlier coverage](kl_iteration/RUNNING.md); [larger-data reproduction](data_iteration/same_batch_27000/RUNNING.md). Detailed confusions: [fixed 800](kl_iteration/agentic800/APPENDIX.md), [same batch, 2,700](kl_iteration/same_batch/APPENDIX.md), [same batch, 27,000](data_iteration/same_batch_27000/APPENDIX.md).
 <!-- /kl-iteration-results -->
 
 Retail traces reveal repeated reasoning without useful action, particularly after
@@ -116,11 +119,9 @@ all models are still bounded by native context and the stated task budgets. Prob
 optimizer-convergence limitations, recorded with their weights.
 
 <!-- kl-iteration-message -->
-AppWorld + agentic KL (800) has higher observed task success than the original AppWorld-trained model on 2/2 benchmarks, and higher overall role accuracy than base on 2/2. It matches or exceeds base task success on 1/2 benchmarks.
+Relative to the 2,700-trajectory same-batch KL model, AppWorld test_normal task success changes by -7.1 percentage points and overall role accuracy by +0.5 points. τ² retail: task success changes by +0.0 percentage points and overall role accuracy by -0.8 points.
 
-AppWorld + same-batch KL has higher observed task success than the original AppWorld-trained model on 2/2 benchmarks, and higher overall role accuracy than base on 2/2. It matches or exceeds base task success on 1/2 benchmarks.
-
-The tested variants therefore do not fully retain base task performance across both evaluated benchmarks. Changing KL data and retaining full KL histories are coupled in this comparison; their separate contributions are not isolated.
+The data-size comparison holds the same-batch KL objective and optimizer settings fixed, but one epoch on ten times more data also increases updates from 169 to 1,688. It does not isolate data diversity from training compute. Each model is evaluated on its own histories, and overall role accuracy need not imply uniform improvement across roles.
 <!-- /kl-iteration-message -->
 
 [How to reproduce the experiment](RUNNING.md)
