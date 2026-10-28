@@ -1,6 +1,6 @@
 # Training GPT-OSS-20B to preserve conversational roles
 
-> **SWE update:** A new [six-model matched Inspect evaluation](swe_standard/README.md) is queued. It uses one stock Inspect agent/scorer protocol for baseline and trained models; matching the model-card score is not the objective. Existing SWE rows below belong to the previous protocol until replaced by validated results.
+> **SWE update:** A new [seven-model matched Inspect evaluation](swe_generous/README.md) is queued. It includes the 27,000-trajectory model and restores the 2,000-message budget, with high reasoning and one stock Inspect agent/scorer protocol; matching the model-card score is not the objective. Existing SWE rows below belong to the previous protocol until replaced by validated results.
 
 ## Motivation & RQ
 
@@ -107,8 +107,8 @@ used in any individual generation call.
 
 ## Message
 
-Across all three benchmarks, every trained model has higher overall role accuracy
-but lower task success than the base. This also holds on SWE with matched settings. Recovering
+In the original AppWorld and retail comparisons, the three trained models have higher overall role accuracy
+but lower task success than the base. The replacement seven-model SWE comparison is pending. Recovering
 role labels is therefore insufficient evidence that the trained model remains a
 useful agent. The fresh-trajectory evaluation tests this distinction separately
 from the near-perfect role scores on fixed development histories.

@@ -1,0 +1,134 @@
+{
+  "thread": "01a17f07-4145-7531-a7dd-6dd84f3d5bbd",
+  "models": [
+    {
+      "label": "Base",
+      "root": "experiment_reports/training_against_role_probes/base_model",
+      "collection_job": "1691740",
+      "assembly_job": "1691741",
+      "score_job": "1691742"
+    },
+    {
+      "label": "AppWorld-trained",
+      "root": "experiment_reports/training_against_role_probes",
+      "collection_job": "1691743",
+      "assembly_job": "1691744",
+      "score_job": "1691745"
+    },
+    {
+      "label": "ASTRA-trained",
+      "root": "experiment_reports/training_against_role_probes/astra_sft_1k",
+      "collection_job": "1691746",
+      "assembly_job": "1691747",
+      "score_job": "1691748"
+    },
+    {
+      "label": "DepthBench-trained",
+      "root": "experiment_reports/training_against_role_probes/depthbench",
+      "collection_job": "1691749",
+      "assembly_job": "1691750",
+      "score_job": "1691751"
+    },
+    {
+      "label": "AppWorld + agentic KL (800)",
+      "root": "experiment_reports/training_against_role_probes/kl_iteration/agentic800",
+      "collection_job": "1691752",
+      "assembly_job": "1691753",
+      "score_job": "1691754"
+    },
+    {
+      "label": "AppWorld + same-batch KL",
+      "root": "experiment_reports/training_against_role_probes/kl_iteration/same_batch",
+      "collection_job": "1691755",
+      "assembly_job": "1691756",
+      "score_job": "1691757"
+    },
+    {
+      "label": "AppWorld + same-batch KL (27,000)",
+      "root": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000",
+      "adapter_sha256": "43969311ed93e3b15b1859906a774faa5933303e313976214cc1a9545048fa2f",
+      "probe_metadata": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/post_training/probes/layer_12.json",
+      "collection_job": "1691764",
+      "assembly_job": "1691765",
+      "score_job": "1691766"
+    }
+  ],
+  "settings": {
+    "reasoning_effort": "high",
+    "temperature": 1,
+    "seed": 123,
+    "max_output_tokens": 16384,
+    "context_limit": 131072,
+    "message_limit": 2000,
+    "tool_timeout_seconds": 210,
+    "time_limit_seconds": 7200,
+    "cumulative_token_limit": null,
+    "samples": 500,
+    "shards": 4,
+    "concurrency_per_shard": 4,
+    "precision": "BF16",
+    "agent": "inspect_evals.swe_bench default",
+    "scorer": "inspect_evals.swe_bench default (same sandbox)",
+    "provider": "apptainer_repository_snapshot",
+    "network": "isolated, localhost working",
+    "dataset_revision": "c104f840cc67f8b6eec6f759ebc8b2693d585d4a"
+  },
+  "versions": {
+    "inspect-evals": "0.25.0",
+    "inspect-ai": "0.3.283",
+    "swebench": "4.1.0"
+  },
+  "protocol": "swe_inspect_generous_v1",
+  "created_utc": "2026-10-28T22:12:23.790700+00:00",
+  "status": "Seven-model evaluation submitted:baseline plus six trained models including27k;all task/probe results required",
+  "policy": "All500 attempts; high reasoning; stock Inspect agent/scorer with general environment fixes; no score target, no outcome-selected regeneration; whole-history probes; separate from30-message and historical diagnostic cohorts",
+  "watch_jobs": [
+    "1691740",
+    "1691741",
+    "1691742",
+    "1691743",
+    "1691744",
+    "1691745",
+    "1691746",
+    "1691747",
+    "1691748",
+    "1691749",
+    "1691750",
+    "1691751",
+    "1691752",
+    "1691753",
+    "1691754",
+    "1691755",
+    "1691756",
+    "1691757",
+    "1691764",
+    "1691765",
+    "1691766",
+    "1691767",
+    "1691768"
+  ],
+  "source_sha256": {
+    "src/experiments/training_against_role_probes/swe_generous/assemble.py": "dc35dc95fb5dbc513c348ba11836dec829a8316f4d17665f7c3ad3245b0b86ab",
+    "src/experiments/training_against_role_probes/swe_generous/assemble.sbatch": "f2e1276a340a55cbe22cba415287442feccbba71c35b1f261f9853bf60648db7",
+    "src/experiments/training_against_role_probes/swe_generous/report.sbatch": "be0e481caf6b2efa57fc9d028517fb0dcc60cb5aeb982998be6c8a66181cdeef",
+    "src/experiments/training_against_role_probes/swe_generous/score.sbatch": "8369594bf3b283907d40ed4c593f60c87be811356c44eb2a1861e9a74ba5ae1f",
+    "src/experiments/training_against_role_probes/swe_generous/report.py": "0c24fc82dda1fdd49523febfb7a7f7124353c6212eee6d20fed9e8e7d31ec7a9",
+    "src/experiments/training_against_role_probes/swe_generous/collect.sbatch": "fd89bafc5fb4c1ad555fc82d1f124a2e40bc1e58919d1634532eae65d63914e4",
+    "src/experiments/training_against_role_probes/swe_generous/run.py": "2ba94e65c21b9be306b8fd74b1c4cbfa647c620a189e2385d0f2488988584964",
+    "src/experiments/training_against_role_probes/swe_generous/watch.sh": "c860a2d66f9b373b186d27906096cdc8aad6830b338ec53193e6e6913a96fdb4"
+  },
+  "historical_reference": {
+    "baseline_successes": 247,
+    "samples": 500,
+    "note": "Diagnostic saved-patch regrading, not matched current protocol; no trained v2 attempts exist"
+  },
+  "gate_job": "1615441",
+  "gate_note": "Unchanged sandbox and scorer already passed gold/marker controls; only message budget restored",
+  "task_report_job": "1691767",
+  "ready_job": "1691767",
+  "final_report_job": "1691768",
+  "superseded_report_jobs": [
+    "1691758",
+    "1691759"
+  ]
+}

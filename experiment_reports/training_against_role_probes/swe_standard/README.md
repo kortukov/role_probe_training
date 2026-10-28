@@ -1,3 +1,5 @@
+> **Superseded:** The 30-message budget was rejected for the intended comparison. See the [seven-model evaluation with restored budget](../swe_generous/README.md). Saved attempts are retained separately.
+
 # Matched SWE-bench utility comparison
 
 ## Motivation and research question
