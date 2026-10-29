@@ -18,9 +18,25 @@
     {
       "label": "ASTRA-trained",
       "root": "experiment_reports/training_against_role_probes/astra_sft_1k",
-      "collection_job": "1691746",
-      "assembly_job": "1691747",
-      "score_job": "1691748"
+      "collection_job": "1726408",
+      "assembly_job": "1726410",
+      "score_job": "1691748",
+      "collection_jobs": [
+        "1726408",
+        "1726409"
+      ],
+      "shard_jobs": {
+        "0": "1726408",
+        "1": "1726408",
+        "2": "1726409",
+        "3": "1726409"
+      },
+      "shard_concurrency": {
+        "0": 8,
+        "1": 8,
+        "2": 16,
+        "3": 16
+      }
     },
     {
       "label": "DepthBench-trained",
@@ -80,7 +96,7 @@
   },
   "protocol": "swe_inspect_generous_v1",
   "created_utc": "2026-10-28T22:12:23.790700+00:00",
-  "status": "Seven-model evaluation submitted:baseline plus six trained models including27k;all task/probe results required",
+  "status": "Accelerated seven-model production: all models eligible independently, four shards/model; ASTRA disjoint concurrency8/16 experiment",
   "policy": "All500 attempts; high reasoning; stock Inspect agent/scorer with general environment fixes; no score target, no outcome-selected regeneration; whole-history probes; separate from30-message and historical diagnostic cohorts",
   "watch_jobs": [
     "1691740",
@@ -89,8 +105,6 @@
     "1691743",
     "1691744",
     "1691745",
-    "1691746",
-    "1691747",
     "1691748",
     "1691749",
     "1691750",
@@ -104,8 +118,12 @@
     "1691764",
     "1691765",
     "1691766",
-    "1691767",
-    "1691768"
+    "1726408",
+    "1726409",
+    "1726410",
+    "1726411",
+    "1726412",
+    "1726413"
   ],
   "source_sha256": {
     "src/experiments/training_against_role_probes/swe_generous/assemble.py": "dc35dc95fb5dbc513c348ba11836dec829a8316f4d17665f7c3ad3245b0b86ab",
@@ -115,7 +133,7 @@
     "src/experiments/training_against_role_probes/swe_generous/report.py": "0c24fc82dda1fdd49523febfb7a7f7124353c6212eee6d20fed9e8e7d31ec7a9",
     "src/experiments/training_against_role_probes/swe_generous/collect.sbatch": "fd89bafc5fb4c1ad555fc82d1f124a2e40bc1e58919d1634532eae65d63914e4",
     "src/experiments/training_against_role_probes/swe_generous/run.py": "2ba94e65c21b9be306b8fd74b1c4cbfa647c620a189e2385d0f2488988584964",
-    "src/experiments/training_against_role_probes/swe_generous/watch.sh": "c860a2d66f9b373b186d27906096cdc8aad6830b338ec53193e6e6913a96fdb4"
+    "src/experiments/training_against_role_probes/swe_generous/watch.sh": "b35845c746b9898fb2dc9d9d90facbe227b311063c60a67adef2486418014e6d"
   },
   "historical_reference": {
     "baseline_successes": 247,
@@ -124,11 +142,50 @@
   },
   "gate_job": "1615441",
   "gate_note": "Unchanged sandbox and scorer already passed gold/marker controls; only message budget restored",
-  "task_report_job": "1691767",
-  "ready_job": "1691767",
-  "final_report_job": "1691768",
+  "task_report_job": "1726411",
+  "ready_job": "1726411",
+  "final_report_job": "1726412",
   "superseded_report_jobs": [
     "1691758",
     "1691759"
-  ]
+  ],
+  "publication": {
+    "commit": "4f3ead63ad4c7c9fa56c08512f6e9c651c076c11",
+    "worktree": "/tmp/swe-generous-publication",
+    "status": "Protocol and pending seven-model report published; measured task/probe results still pending"
+  },
+  "last_progress_check": {
+    "utc": "2026-10-29T22:57:05.735405+00:00",
+    "state": "Acceleration authorized/applied. Baseline92 saved; all other models pending scheduler; no collection duplicates. ASTRA8/16 disjoint variants and meeting snapshot scheduled."
+  },
+  "superseded_jobs": [
+    "1691746",
+    "1691747",
+    "1691767",
+    "1691768"
+  ],
+  "meeting_deadline": {
+    "local": "2026-10-30T15:00:00",
+    "timezone": "Europe/London",
+    "utc": "2026-10-30T15:00:00Z",
+    "snapshot_target_utc": "2026-10-30T14:00:00Z"
+  },
+  "acceleration": {
+    "authorized_utc": "2026-10-29T22:55:25.493028+00:00",
+    "array_concurrency": 4,
+    "trained_wait_for_baseline": false,
+    "policy": "ASTRA disjoint shards 0/1 concurrency8 and 2/3 concurrency16; no duplicated attempts. Do not restart other models; consider migration of unstarted shards only after throughput and error validation.",
+    "source_sha256": {
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/assemble.sbatch": "c6a9c4f9864755a51770008646e22150a6b3c3a7d691c93e7c90985a6d6ad721",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/run.py": "2ba94e65c21b9be306b8fd74b1c4cbfa647c620a189e2385d0f2488988584964",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/snapshot.sbatch": "ef802defd01cace33fb39ae8da148aac6e0ad0aa5367cc0ac61f95fba46bd0cb",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/collect.sbatch": "a313e930e68e408e727a706e5e283e5818c83cd2512ef67b187ac268f3d556a1",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/snapshot.py": "9f8784961a1cead620a6bdc8b432fbebfe335b6d9ab16e7098edcc7ee9673475",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/watch.sh": "91d371bc76e77f191e5461ab6852a9b578762c172efd67a6c52c3a14096b4497",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/report.sbatch": "5a245a7f7be5a7a8a2f0ba8742994363282ef4232e3483e29d539219fe4cc473",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/report.py": "cee587e9a1dad89ce6e72d216169f187947c497be58c7f9bfdf4b02c657a213e",
+      "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/assemble.py": "36d336545da7fd96bf110da4f78f107652567d8c949bab19d553e3e6d3827d5d"
+    }
+  },
+  "meeting_snapshot_job": "1726413"
 }

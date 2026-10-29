@@ -31,3 +31,11 @@ Only this matched cohort enters the comparison. Earlier baseline diagnostics and
 Collection is in progress. No conclusion about the matched utility change is available yet.
 
 [Role breakdowns and coverage](APPENDIX.md). [Reproduction and configuration](RUNNING.md).
+
+## Execution update
+
+ASTRA is being collected with concurrency8/16 on disjoint shards; other models retain4. Per-attempt budgets and scorer remain unchanged, but batching and contention can affect sampling and timing. This variation will be disclosed in the final comparison.
+
+[Provisional meeting snapshot](MEETING_SNAPSHOT.md) records saved progress and shared-task comparisons; full500-task results remain pending.
+
+[Reproduction and configuration](RUNNING.md).

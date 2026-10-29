@@ -48,3 +48,21 @@ Large artifacts stay on cluster storage beneath each model root:
 `post_training/swe_inspect_generous_task_results.json`. Source hashes and model
 revisions are recorded in per-shard manifests. All task results are required for
 the task report; all seven probe results are required for the final report.
+
+
+## Meeting acceleration (29 October 2026)
+All four collection shards per model may run concurrently; trained collections no longer wait for baseline assembly.
+ASTRA uses disjoint shards0–1 at concurrency8 (job1726408), shards2–3 at16 (job1726409).
+All other models retain concurrency4 per GPU. No task is duplicated or regenerated;500 tasks/model remain required.
+Per-attempt high reasoning,2000-message budget,131072 context and stock scorer stay fixed. Scheduling differences
+can affect numerical sampling and wall-clock contention and are disclosed in the comparison.
+Isolated scripts live in `src/experiments/training_against_role_probes/swe_generous/accelerated_v1/`.
+ASTRA assembly uses its `post_training/swe_inspect_generous_shard_sources.json` map; pipeline.json is authoritative.
+
+Generate a provisional meeting snapshot from saved attempts only:
+```bash
+.tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/training_against_role_probes/swe_generous/accelerated_v1/snapshot.py
+```
+Snapshot target:30October2026 14:00UTC; meeting15:00Europe/London. CPU snapshot job1726413 has a begin time,
+not a guaranteed start time. Production monitoring refreshes/publishes the snapshot if full results remain pending.
+[Provisional snapshot](MEETING_SNAPSHOT.md); its shared-task subsets are completion-biased and not final scores.

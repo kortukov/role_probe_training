@@ -1,5 +1,7 @@
 # Training GPT-OSS-20B to preserve conversational roles
 
+SWE execution progress for the 30 October meeting is available in the [provisional snapshot](swe_generous/MEETING_SNAPSHOT.md). Full task scores and probe metrics remain pending; snapshot subsets are completion-biased.
+
 > **SWE update:** A new [seven-model matched Inspect evaluation](swe_generous/README.md) is queued. It includes the 27,000-trajectory model and restores the 2,000-message budget, with high reasoning and one stock Inspect agent/scorer protocol; matching the model-card score is not the objective. SWE task success and whole-history probe accuracy are pending for all seven models. Superseded SWE scores have been removed from the table.
 
 ## Motivation & RQ
