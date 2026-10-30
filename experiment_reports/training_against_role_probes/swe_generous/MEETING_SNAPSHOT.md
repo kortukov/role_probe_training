@@ -1,6 +1,6 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T05:05:04.564437+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T05:35:53.693656+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
 **Provisional saved-log snapshot; final validated 500-task scores and whole-history probe metrics remain pending.**
 
@@ -10,8 +10,8 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 
 | Model | Saved / assigned | Successes among saved | Saved errors | Final score |
 |---|---:|---:|---:|---|
-| Base | 260/500 | 132 | 2 | Pending validation |
-| AppWorld-trained | 0/500 | 0 | 0 | Pending validation |
+| Base | 277/500 | 140 | 2 | Pending validation |
+| AppWorld-trained | 64/500 | 4 | 0 | Pending validation |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 0/500 | 0 | 0 | Pending validation |
 | AppWorld + agentic KL (800) | 0/500 | 0 | 0 | Pending validation |
@@ -22,7 +22,7 @@ All-seven shared completed task count: 0.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
-| AppWorld-trained | 0 | 0 | 0 |
+| AppWorld-trained | 64 | 37 | 4 |
 | ASTRA-trained | 0 | 0 | 0 |
 | DepthBench-trained | 0 | 0 | 0 |
 | AppWorld + agentic KL (800) | 0 | 0 | 0 |
