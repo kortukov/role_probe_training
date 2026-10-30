@@ -1,6 +1,6 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T02:31:31.305938+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T03:02:18.700138+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
 **Provisional saved-log snapshot; final validated 500-task scores and whole-history probe metrics remain pending.**
 
@@ -10,7 +10,7 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 
 | Model | Saved / assigned | Successes among saved | Saved errors | Final score |
 |---|---:|---:|---:|---|
-| Base | 199/500 | 106 | 0 | Pending validation |
+| Base | 209/500 | 108 | 1 | Pending validation |
 | AppWorld-trained | 0/500 | 0 | 0 | Pending validation |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 0/500 | 0 | 0 | Pending validation |

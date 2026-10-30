@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-30T02:31:31.305938+00:00",
+  "updated_utc": "2026-10-30T03:02:18.700138+00:00",
   "common_ids": [],
   "models": [
     {
@@ -719,6 +719,41 @@
           "seconds": 445.779,
           "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
         },
+        "sphinx-doc__sphinx-8120": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 3624.688,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
+        "sphinx-doc__sphinx-7985": {
+          "success": false,
+          "error": true,
+          "scored": false,
+          "seconds": 4399.433,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
+        "sphinx-doc__sphinx-9658": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2142.997,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
+        "sympy__sympy-13091": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 225.13,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
+        "sympy__sympy-12489": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 893.164,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
         "astropy__astropy-12907": {
           "success": true,
           "error": false,
@@ -1397,6 +1432,41 @@
           "scored": true,
           "seconds": 357.425,
           "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "scikit-learn__scikit-learn-13496": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1740.035,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "sphinx-doc__sphinx-7440": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 631.565,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "sphinx-doc__sphinx-7590": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 625.422,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "sphinx-doc__sphinx-8269": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 79.671,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "sphinx-doc__sphinx-8593": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 393.993,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
         }
       },
       "shards": [
@@ -1404,17 +1474,17 @@
           "shard": 0,
           "job": "1691740",
           "concurrency": 4,
-          "saved": 102,
-          "errors": 0,
-          "median_seconds": 430.3045
+          "saved": 107,
+          "errors": 1,
+          "median_seconds": 434.924
         },
         {
           "shard": 1,
           "job": "1691740",
           "concurrency": 4,
-          "saved": 97,
+          "saved": 102,
           "errors": 0,
-          "median_seconds": 488.857
+          "median_seconds": 494.8605
         },
         {
           "shard": 2,
