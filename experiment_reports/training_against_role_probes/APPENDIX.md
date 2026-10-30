@@ -167,48 +167,6 @@ is made. Weights, exact source/model hashes and fitting diagnostics accompany th
 [ASTRA](astra_sft_1k/post_training/probes/layer_12.json), and
 [DepthBench](depthbench/post_training/probes/layer_12.json) artifacts.
 
-## SWE-bench failure audit
-
-**Follow-up finding:** the agent tools used base Conda instead of the repository’s
-`testbed` environment, and 190/500 base attempts hit the message cap. The
-[diagnostic report](swe_gap/README.md) reproduces the environment bug and checks
-saved patches with official SWE-bench scripts. Current scores retain this limitation;
-the tested environment fix has not yet been evaluated with new model generations.
-
-The current comparison uses four complete 500-task cohorts with matched serving
-and agent budgets, BF16 weights, high reasoning and the native 131,072-token
-context limit. These replace the earlier constrained SWE results. Gold patches
-passed and unchanged patches failed on two repository controls through the pinned
-images and upstream grader; this checks the scoring path, not full harness parity.
-
-| Model | Solved / assigned | Evaluation errors | Model-context stops | Whole histories probed |
-|---|---:|---:|---:|---:|
-| Base | 181/500 | 7 | 0 | 500/500 |
-| AppWorld-trained | 17/500 | 2 | 0 | 500/500 |
-| ASTRA-trained | 106/500 | 2 | 0 | 500/500 |
-| DepthBench-trained | 51/500 | 1 | 2 | 500/500 |
-
-The seven base and two ASTRA errors concern Python/runtime availability inside
-benchmark sandboxes. Two AppWorld errors and one DepthBench error are scoring/tool
-timeouts. Their cause is not fully established; fresh-image and writable-sandbox
-Python controls passed. All failed attempts remain in task denominators and role
-scoring. Only infrastructure failures before any benchmark model call were retried;
-no attempted task was replaced to improve its score.
-
-Inspect scores the current patch when generation reaches the context bound, so a
-context stop need not be an evaluation error. Both DepthBench stops are retained.
-All reconstructed SWE histories fit the probe's native limit and were scored whole.
-
-The base solves 36.2% here. This is not a reproduction of the model card's 60.7%
-high-reasoning result: the card uses a validated 477-task subset and a different
-agent/harness, while this run uses all 500 tasks and Inspect's agent. Correcting
-serving and budgets does not establish equivalence to that evaluation. The trained
-models all solve fewer tasks than the base despite higher overall role accuracy.
-
-[Run settings and provenance](post_training/swe_native.json) ·
-[Inspect implementation and parity guidance](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/swe_bench/README.md) ·
-[Model-card evaluations](https://deploymentsafety.openai.com/gpt-oss/evaluation).
-
 <!-- fresh-rollout-confusions -->
 ## Fresh-trajectory confusions
 
@@ -295,45 +253,6 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | Assistant | 0.05% | 0.00% | 0.28% | 99.63% | 0.03% |
 | Tool | 1.26% | 0.16% | 0.43% | 0.49% | 97.67% |
 
-### SWE-bench Verified — Base
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 0.93% | 22.22% | 17.13% | 0.00% | 59.72% |
-| User | 0.54% | 92.48% | 1.50% | 4.05% | 1.44% |
-| Reasoning | 0.30% | 1.42% | 42.82% | 53.91% | 1.54% |
-| Assistant | 0.22% | 0.14% | 19.19% | 79.67% | 0.78% |
-| Tool | 21.11% | 19.37% | 14.18% | 43.06% | 2.28% |
-
-### SWE-bench Verified — AppWorld-trained
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 39.81% | 50.00% | 9.72% | 0.00% | 0.46% |
-| User | 0.24% | 94.11% | 1.47% | 1.24% | 2.94% |
-| Reasoning | 0.02% | 1.65% | 98.05% | 0.04% | 0.24% |
-| Assistant | 0.03% | 0.01% | 1.70% | 90.59% | 7.67% |
-| Tool | 2.16% | 10.15% | 2.18% | 0.01% | 85.50% |
-
-### SWE-bench Verified — ASTRA-trained
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 18.98% | 16.20% | 3.24% | 0.00% | 61.57% |
-| User | 0.59% | 87.46% | 3.12% | 3.06% | 5.77% |
-| Reasoning | 0.04% | 0.43% | 93.98% | 5.53% | 0.02% |
-| Assistant | 0.05% | 0.03% | 65.88% | 33.16% | 0.88% |
-| Tool | 8.15% | 1.09% | 17.77% | 3.45% | 69.54% |
-
-### SWE-bench Verified — DepthBench-trained
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 60.65% | 5.56% | 18.06% | 0.00% | 15.74% |
-| User | 1.18% | 89.35% | 4.29% | 2.58% | 2.60% |
-| Reasoning | 0.03% | 0.69% | 97.47% | 1.67% | 0.14% |
-| Assistant | 0.02% | 0.02% | 48.79% | 48.45% | 2.72% |
-| Tool | 7.00% | 27.42% | 31.28% | 5.22% | 29.08% |
 <!-- /fresh-rollout-confusions -->
 
 <!-- whole-history-coverage -->
@@ -349,8 +268,40 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | τ² retail | AppWorld-trained | 76/114 | 38 | 0 |
 | τ² retail | ASTRA-trained | 103/114 | 11 | 0 |
 | τ² retail | DepthBench-trained | 95/114 | 19 | 0 |
-| SWE-bench Verified | Base | 500/500 | 0 | 7 |
-| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 2 |
-| SWE-bench Verified | ASTRA-trained | 500/500 | 0 | 2 |
-| SWE-bench Verified | DepthBench-trained | 500/500 | 0 | 1 |
+| SWE-bench Verified | Base | Pending | Pending | 2 |
+| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 0 |
+| SWE-bench Verified | DepthBench-trained | 498/500 | 2 | 0 |
+| SWE-bench Verified | AppWorld + agentic KL (800) | Pending | Pending | 0 |
 <!-- /whole-history-coverage -->
+
+## SWE-bench whole-history results
+
+Task scores use all 500 attempts per model. Role metrics use complete conversations within native context, with no chunking or truncation. Base and agentic-KL role metrics are pending. Rows below are true roles, columns are predicted roles; entries are row-normalized percentages.
+
+### AppWorld-trained
+
+Coverage: 500/500 histories; 0 excluded above native context. Token-weighted accuracy: 87.55%. Mean per-conversation accuracy: 87.08%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 39.8 | 50.0 | 9.7 | 0.0 | 0.5 |
+| user | 0.2 | 93.8 | 1.5 | 1.5 | 3.0 |
+| cot | 0.0 | 1.7 | 98.0 | 0.1 | 0.2 |
+| assistant | 0.0 | 0.0 | 1.6 | 90.6 | 7.8 |
+| tool | 2.2 | 10.1 | 2.2 | 0.0 | 85.5 |
+
+[Validated metrics and provenance](swe_generous/appworld_role_results.json).
+
+### DepthBench-trained
+
+Coverage: 498/500 histories; 2 excluded above native context. Token-weighted accuracy: 48.36%. Mean per-conversation accuracy: 50.22%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 60.6 | 5.6 | 18.1 | 0.0 | 15.7 |
+| user | 1.2 | 89.2 | 4.4 | 2.7 | 2.6 |
+| cot | 0.0 | 0.7 | 97.3 | 1.8 | 0.2 |
+| assistant | 0.0 | 0.0 | 47.8 | 49.6 | 2.6 |
+| tool | 7.1 | 28.3 | 30.1 | 4.8 | 29.7 |
+
+[Validated metrics and provenance](swe_generous/depthbench_role_results.json).
