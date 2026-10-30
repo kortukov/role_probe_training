@@ -1,8 +1,8 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T15:43:31.293714+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T16:15:13.905974+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**Provisional saved-log snapshot; the complete seven-model comparison remains pending; four complete task scores are validated.**
+**Provisional saved-log snapshot; the complete seven-model comparison remains pending; five complete task scores are validated.**
 
 Completed tasks are selected by finish time and can be systematically easier or shorter. Shared-task subsets reduce task mismatch but remain completion-biased; do not interpret these as final benchmark scores.
 
@@ -15,7 +15,7 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
 | AppWorld + agentic KL (800) | 500/500 | 241 | 0 | 48.2% (validated) |
-| AppWorld + same-batch KL | 495/500 | 240 | 0 | Pending validation |
+| AppWorld + same-batch KL | 500/500 | 243 | 0 | 48.6% (validated) |
 | AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
@@ -26,7 +26,7 @@ All-seven shared completed task count: 0.
 | ASTRA-trained | 0 | 0 | 0 |
 | DepthBench-trained | 500 | 254 | 71 |
 | AppWorld + agentic KL (800) | 500 | 254 | 241 |
-| AppWorld + same-batch KL | 495 | 251 | 240 |
+| AppWorld + same-batch KL | 500 | 254 | 243 |
 | AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
@@ -44,3 +44,5 @@ DepthBench layer-12 role accuracy is 48.36% of scored content tokens (token-weig
 Baseline task evaluation is complete and validated: 254/500 successes (50.8%). Two scorer timeouts remain in the denominator as failures. All original attempts are retained. Whole-history role scoring is pending. [Validated task provenance](base_task_results.json).
 
 Agentic-KL task collection is complete: 241/500 successes (48.2%), 2.6 percentage points below the matched baseline. All four completed shard exports passed expected-ID, hash, and settings validation, with zero sample/export errors. Two attempts recorded limit events and eight recorded model context stops; all remain in the denominator. The assembled output has also passed hash validation; role scoring remains queued. [Validated task provenance](agentickl_task_results.json).
+
+Same-batch KL (2,700 training trajectories) task evaluation is complete and validated: 243/500 successes (48.6%), 2.2 percentage points below baseline, with zero sample/export errors. Thirteen attempts recorded model context stops; all remain in the denominator. Role scoring is queued. [Validated task provenance](samebatch_task_results.json).

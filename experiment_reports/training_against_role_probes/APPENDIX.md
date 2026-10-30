@@ -272,11 +272,12 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 0 |
 | SWE-bench Verified | DepthBench-trained | 498/500 | 2 | 0 |
 | SWE-bench Verified | AppWorld + agentic KL (800) | Pending | Pending | 0 |
+| SWE-bench Verified | AppWorld + same-batch KL (2,700) | Pending | Pending | 0 |
 <!-- /whole-history-coverage -->
 
 ## SWE-bench whole-history results
 
-Task scores use all 500 attempts per model. Role metrics use complete conversations within native context, with no chunking or truncation. Base and agentic-KL role metrics are pending. Rows below are true roles, columns are predicted roles; entries are row-normalized percentages.
+Task scores use all 500 attempts per model. Role metrics use complete conversations within native context, with no chunking or truncation. Base, agentic-KL, and same-batch KL role metrics are pending. Rows below are true roles, columns are predicted roles; entries are row-normalized percentages.
 
 ### AppWorld-trained
 
