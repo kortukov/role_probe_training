@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-30T01:30:06.286150+00:00",
+  "updated_utc": "2026-10-30T02:00:51.720119+00:00",
   "common_ids": [],
   "models": [
     {
@@ -663,6 +663,27 @@
           "seconds": 187.213,
           "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
         },
+        "sphinx-doc__sphinx-7462": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 434.924,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
+        "sphinx-doc__sphinx-10449": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1533.881,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
+        "scikit-learn__scikit-learn-25747": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2419.307,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/logs/2026-10-29T20-33-32-00-00_swe-bench_J5beuUi7jts9uy9MTWCnvw.eval"
+        },
         "astropy__astropy-12907": {
           "success": true,
           "error": false,
@@ -1250,6 +1271,48 @@
           "scored": true,
           "seconds": 1082.231,
           "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "pytest-dev__pytest-5809": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 355.94,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "pydata__xarray-6992": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1050.48,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "pylint-dev__pylint-7277": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1438.447,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "pytest-dev__pytest-7521": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 239.778,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "scikit-learn__scikit-learn-10297": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 61.961,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
+        },
+        "scikit-learn__scikit-learn-11578": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 75.842,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/logs/2026-10-29T20-33-45-00-00_swe-bench_YRC4jDKWd8ynRKVFzeyGaf.eval"
         }
       },
       "shards": [
@@ -1257,17 +1320,17 @@
           "shard": 0,
           "job": "1691740",
           "concurrency": 4,
-          "saved": 94,
+          "saved": 97,
           "errors": 0,
-          "median_seconds": 399.96000000000004
+          "median_seconds": 427.458
         },
         {
           "shard": 1,
           "job": "1691740",
           "concurrency": 4,
-          "saved": 84,
+          "saved": 90,
           "errors": 0,
-          "median_seconds": 550.9235
+          "median_seconds": 518.53
         },
         {
           "shard": 2,
