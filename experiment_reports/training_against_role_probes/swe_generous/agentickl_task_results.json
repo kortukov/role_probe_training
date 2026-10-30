@@ -1,0 +1,44 @@
+{
+  "protocol": "swe_inspect_generous_v1",
+  "samples": 500,
+  "sample_errors": 0,
+  "export_errors": 0,
+  "limited_samples": 2,
+  "samples_with_model_context_stops": 8,
+  "metrics": {
+    "swe_bench_scorer": {
+      "successes": 241.0,
+      "total": 500,
+      "scored": 500,
+      "success_rate": 0.482
+    }
+  },
+  "sources": [
+    {
+      "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/trajectories.jsonl",
+      "sha256": "9695a1c1501da494e92f97fcadd943b6177ea289ab940eb4ab069d29e65d54bf"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/trajectories.jsonl",
+      "sha256": "e3081e4028fc118dad79afb7b48f291cdf62f828a06dffef23b1ca07ad0389a8"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/trajectories.jsonl",
+      "sha256": "735f2d0284d5fc98428ed5f0ea60cdadb9adba38d50e58e29c9c15b146418489"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/trajectories.jsonl",
+      "sha256": "297fcc642ab4fd24332c5c987536f9c6f326af5eaebcaf6bd77c597699a81a97"
+    }
+  ],
+  "settings": {
+    "temperature": 1.0,
+    "reasoning_effort": "high",
+    "max_tokens": 16384,
+    "message_limit": 2000,
+    "token_limit": null,
+    "time_limit": 7200,
+    "concurrency": 4
+  },
+  "validation": "All four completed shard exports: exact expected IDs, source hashes and matched settings verified. Official assembly1691753 is queued; no attempts regenerated."
+}

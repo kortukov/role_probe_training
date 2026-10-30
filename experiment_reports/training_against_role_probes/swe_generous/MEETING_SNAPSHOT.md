@@ -1,8 +1,8 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T13:08:34.535956+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T13:39:57.833084+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**Provisional saved-log snapshot; the complete seven-model comparison remains pending; baseline, AppWorld, and DepthBench task scores are validated.**
+**Provisional saved-log snapshot; the complete seven-model comparison remains pending; four complete task scores are validated.**
 
 Completed tasks are selected by finish time and can be systematically easier or shorter. Shared-task subsets reduce task mismatch but remain completion-biased; do not interpret these as final benchmark scores.
 
@@ -14,8 +14,8 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 | AppWorld-trained | 500/500 | 22 | 0 | 4.4% (validated) |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
-| AppWorld + agentic KL (800) | 497/500 | 240 | 0 | Pending validation |
-| AppWorld + same-batch KL | 388/500 | 199 | 0 | Pending validation |
+| AppWorld + agentic KL (800) | 500/500 | 241 | 0 | 48.2% (validated) |
+| AppWorld + same-batch KL | 414/500 | 209 | 0 | Pending validation |
 | AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
@@ -25,8 +25,8 @@ All-seven shared completed task count: 0.
 | AppWorld-trained | 500 | 254 | 22 |
 | ASTRA-trained | 0 | 0 | 0 |
 | DepthBench-trained | 500 | 254 | 71 |
-| AppWorld + agentic KL (800) | 497 | 252 | 240 |
-| AppWorld + same-batch KL | 388 | 205 | 199 |
+| AppWorld + agentic KL (800) | 500 | 254 | 241 |
+| AppWorld + same-batch KL | 414 | 218 | 209 |
 | AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
@@ -42,3 +42,5 @@ DepthBench task evaluation is complete and validated: 71/500 successes (14.2%), 
 DepthBench layer-12 role accuracy is 48.36% of scored content tokens (token-weighted); mean per-conversation accuracy is 50.22%. Coverage is 498/500 whole conversations, with two histories excluded because they exceed the native context limit. No histories were chunked or truncated; both excluded histories remain in the 500-task success denominator. [Role metrics and confusion counts](depthbench_role_results.json).
 
 Baseline task evaluation is complete and validated: 254/500 successes (50.8%). Two scorer timeouts remain in the denominator as failures. All original attempts are retained. Whole-history role scoring is pending. [Validated task provenance](base_task_results.json).
+
+Agentic-KL task collection is complete: 241/500 successes (48.2%), 2.6 percentage points below the matched baseline. All four completed shard exports passed expected-ID, hash, and settings validation, with zero sample/export errors. Two attempts recorded limit events and eight recorded model context stops; all remain in the denominator. The CPU assembly job is queued, and role scoring remains pending. [Validated task provenance](agentickl_task_results.json).
