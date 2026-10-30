@@ -66,3 +66,6 @@ Generate a provisional meeting snapshot from saved attempts only:
 Snapshot target:30October2026 14:00UTC; meeting15:00Europe/London. CPU snapshot job1726413 has a begin time,
 not a guaranteed start time. Production monitoring refreshes/publishes the snapshot if full results remain pending.
 [Provisional snapshot](MEETING_SNAPSHOT.md); its shared-task subsets are completion-biased and not final scores.
+
+## Saved-output recovery
+Baseline shard1691740_1 was marked Slurm OUT_OF_MEMORY after all125 attempts and exports were saved. CPU integrity job1737601 verified all expected IDs,trajectory hash,and13129 generation records without model or scoring calls. [Validation evidence](oom_saved_validation.json). Replacement assembly1737602 waits for this validation and remaining baseline shards; original outputs remain unchanged. The recovered shard retains its one scoring timeout in the denominator.

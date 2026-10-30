@@ -5,7 +5,7 @@
       "label": "Base",
       "root": "experiment_reports/training_against_role_probes/base_model",
       "collection_job": "1691740",
-      "assembly_job": "1691741",
+      "assembly_job": "1737602",
       "score_job": "1691742"
     },
     {
@@ -99,8 +99,6 @@
   "status": "Accelerated seven-model production: all models eligible independently, four shards/model; ASTRA disjoint concurrency8/16 experiment",
   "policy": "All500 attempts; high reasoning; stock Inspect agent/scorer with general environment fixes; no score target, no outcome-selected regeneration; whole-history probes; separate from30-message and historical diagnostic cohorts",
   "watch_jobs": [
-    "1691740",
-    "1691741",
     "1691742",
     "1691743",
     "1691744",
@@ -123,7 +121,12 @@
     "1726410",
     "1726411",
     "1726412",
-    "1726413"
+    "1726413",
+    "1691740_0",
+    "1691740_2",
+    "1691740_3",
+    "1737601",
+    "1737602"
   ],
   "source_sha256": {
     "src/experiments/training_against_role_probes/swe_generous/assemble.py": "dc35dc95fb5dbc513c348ba11836dec829a8316f4d17665f7c3ad3245b0b86ab",
@@ -150,19 +153,20 @@
     "1691759"
   ],
   "publication": {
-    "commit": "4f3ead63ad4c7c9fa56c08512f6e9c651c076c11",
+    "commit": "60dbc33c805ed0fb7c134dcfe8321beee89cdc5e",
     "worktree": "/tmp/swe-generous-publication",
-    "status": "Protocol and pending seven-model report published; measured task/probe results still pending"
+    "status": "Acceleration configuration and provisional meeting snapshot published; final validated task/probe metrics pending"
   },
   "last_progress_check": {
-    "utc": "2026-10-29T22:57:05.735405+00:00",
-    "state": "Acceleration authorized/applied. Baseline92 saved; all other models pending scheduler; no collection duplicates. ASTRA8/16 disjoint variants and meeting snapshot scheduled."
+    "utc": "2026-10-30T06:15:45.295220+00:00",
+    "state": "Recovered OOM-marked baseline shard1 using complete validated saved exports (125 attempts,13129 generation records). Baseline299,AppWorld330,DepthBench72,agenticKL18 saved;2 known baseline scorer timeouts,0 trained sample errors. ASTRA/same-batch/27k queued."
   },
   "superseded_jobs": [
     "1691746",
     "1691747",
     "1691767",
-    "1691768"
+    "1691768",
+    "1691741"
   ],
   "meeting_deadline": {
     "local": "2026-10-30T15:00:00",
@@ -187,5 +191,15 @@
       "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/assemble.py": "36d336545da7fd96bf110da4f78f107652567d8c949bab19d553e3e6d3827d5d"
     }
   },
-  "meeting_snapshot_job": "1726413"
+  "meeting_snapshot_job": "1726413",
+  "recovery": [
+    {
+      "failed_job": "1691740_1",
+      "validation_job": "1737601",
+      "reason": "Slurm OOM with complete125-attempt saved export; header success, IDs/hash/summary validated; streaming generation integrity check pending",
+      "new_model_calls": 0,
+      "replacement_assembly_job": "1737602",
+      "status": "Validated complete original exports in1737601; no model/scorer reruns; baseline assembly replaced1737602 and probe/task-report dependencies updated"
+    }
+  ]
 }

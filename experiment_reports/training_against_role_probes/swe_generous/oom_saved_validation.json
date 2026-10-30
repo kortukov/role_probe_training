@@ -1,0 +1,14 @@
+{
+  "validated_utc": "2026-10-30T06:14:46.094357+00:00",
+  "failed_job": "1691740_1",
+  "samples": 125,
+  "successes": 58,
+  "sample_errors": 1,
+  "generation_records": 13129,
+  "trajectory_sha256": "bfba5543fed94a7675af5c0e0b8910dd96c730c5236ac3c81764dd494e1ad811",
+  "generations_sha256": "562255b7f5e52c23f8da709154148edb921d22d8014d258f568402c23b70df63",
+  "source_folder": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench",
+  "new_model_calls": 0,
+  "new_scoring_calls": 0,
+  "original_outputs_unchanged": true
+}
