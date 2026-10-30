@@ -1,6 +1,6 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T11:28:02.171743+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T11:59:16.592839+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
 **Provisional saved-log snapshot; the complete seven-model comparison remains pending; validated AppWorld and DepthBench results are available below.**
 
@@ -10,23 +10,23 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 
 | Model | Saved / assigned | Successes among saved | Saved errors | Final score |
 |---|---:|---:|---:|---|
-| Base | 471/500 | 243 | 2 | Pending validation |
+| Base | 495/500 | 252 | 2 | Pending validation |
 | AppWorld-trained | 500/500 | 22 | 0 | 4.4% (validated) |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
-| AppWorld + agentic KL (800) | 405/500 | 205 | 0 | Pending validation |
-| AppWorld + same-batch KL | 266/500 | 133 | 0 | Pending validation |
+| AppWorld + agentic KL (800) | 444/500 | 220 | 0 | Pending validation |
+| AppWorld + same-batch KL | 305/500 | 153 | 0 | Pending validation |
 | AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
-| AppWorld-trained | 471 | 243 | 21 |
+| AppWorld-trained | 495 | 252 | 22 |
 | ASTRA-trained | 0 | 0 | 0 |
-| DepthBench-trained | 471 | 243 | 70 |
-| AppWorld + agentic KL (800) | 405 | 214 | 205 |
-| AppWorld + same-batch KL | 266 | 149 | 133 |
+| DepthBench-trained | 495 | 252 | 70 |
+| AppWorld + agentic KL (800) | 444 | 229 | 220 |
+| AppWorld + same-batch KL | 305 | 166 | 153 |
 | AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.

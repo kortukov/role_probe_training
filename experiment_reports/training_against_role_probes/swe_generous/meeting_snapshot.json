@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-30T11:28:02.171743+00:00",
+  "updated_utc": "2026-10-30T11:59:16.592839+00:00",
   "common_ids": [],
   "models": [
     {
@@ -2525,6 +2525,97 @@
           "seconds": 315.584,
           "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
         },
+        "sympy__sympy-15809": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 266.041,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-13974": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 700.436,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-18199": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 219.173,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-15599": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 599.438,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-20801": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 172.229,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-20590": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 239.394,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-22456": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 263.976,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-18698": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 981.734,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-15017": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1692.917,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-21379": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 916.353,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-23950": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 375.522,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-23413": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1005.731,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
+        "sympy__sympy-24213": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 408.446,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/logs/2026-10-30T04-44-07-00-00_swe-bench_MozMKUYZe3SQCCjs7wUTYw.eval"
+        },
         "astropy__astropy-13236": {
           "success": false,
           "error": false,
@@ -3301,6 +3392,83 @@
           "scored": true,
           "seconds": 207.18,
           "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-15875": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 345.749,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-16886": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 189.462,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-17630": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 395.19,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-18211": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 254.401,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sphinx-doc__sphinx-8035": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 3884.799,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-18763": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 433.205,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sphinx-doc__sphinx-9281": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 3556.865,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-15976": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1709.197,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-19783": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 340.438,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-19954": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 178.293,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
+        },
+        "sympy__sympy-23534": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 89.797,
+          "source": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/logs/2026-10-30T04-48-36-00-00_swe-bench_2cW5p4Ek2uoccszuMHAD7d.eval"
         }
       },
       "shards": [
@@ -3324,17 +3492,17 @@
           "shard": 2,
           "job": "1691740",
           "concurrency": 4,
-          "saved": 110,
+          "saved": 123,
           "errors": 0,
-          "median_seconds": 513.4295
+          "median_seconds": 509.492
         },
         {
           "shard": 3,
           "job": "1691740",
           "concurrency": 4,
-          "saved": 111,
+          "saved": 122,
           "errors": 0,
-          "median_seconds": 432.902
+          "median_seconds": 428.475
         }
       ]
     },
@@ -11178,6 +11346,62 @@
           "seconds": 1001.572,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
         },
+        "sphinx-doc__sphinx-7748": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2820.984,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sphinx-doc__sphinx-9258": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2036.503,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sympy__sympy-13091": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 305.261,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sphinx-doc__sphinx-8638": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2969.445,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sympy__sympy-14531": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 213.445,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sympy__sympy-15349": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 63.212,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sympy__sympy-16597": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 174.058,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
+        "sympy__sympy-16766": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 279.804,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/logs/2026-10-30T05-43-58-00-00_swe-bench_8BdVXTDDgZmSzKsMz9n3Ec.eval"
+        },
         "astropy__astropy-12907": {
           "success": true,
           "error": false,
@@ -11976,6 +12200,83 @@
           "seconds": 194.108,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
         },
+        "sympy__sympy-19346": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 708.99,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sphinx-doc__sphinx-9602": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2300.626,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-19495": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 346.608,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-19637": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 153.712,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-17318": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1620.818,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-21847": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 85.365,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-20916": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 284.255,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-19040": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1540.988,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-24539": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 336.905,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-21596": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 796.629,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
+        "sympy__sympy-22080": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 613.322,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/logs/2026-10-30T05-58-43-00-00_swe-bench_5HKeX3pMZFRUj2cmQcUEn8.eval"
+        },
         "astropy__astropy-14309": {
           "success": true,
           "error": false,
@@ -12611,6 +12912,97 @@
           "error": false,
           "scored": true,
           "seconds": 87.998,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-7910": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 899.808,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "scikit-learn__scikit-learn-26323": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1383.04,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "scikit-learn__scikit-learn-12682": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1982.066,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-8475": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 370.233,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-9461": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 263.964,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-8548": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 567.735,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-9591": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 259.034,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-9367": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 603.077,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-9698": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 101.707,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sympy__sympy-11618": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 85.012,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sphinx-doc__sphinx-9673": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 476.528,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sympy__sympy-12481": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 287.616,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
+        },
+        "sympy__sympy-12419": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 405.402,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/logs/2026-10-30T06-18-38-00-00_swe-bench_EF39ZE5ARrpLb564dA9w36.eval"
         },
         "django__django-10097": {
@@ -13291,6 +13683,55 @@
           "scored": true,
           "seconds": 171.971,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "sphinx-doc__sphinx-10673": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 408.634,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "sphinx-doc__sphinx-7454": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 285.57,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "sphinx-doc__sphinx-7757": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 126.769,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "sphinx-doc__sphinx-11510": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1174.77,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "sphinx-doc__sphinx-7889": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 838.532,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "scikit-learn__scikit-learn-25102": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1908.177,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
+        },
+        "sphinx-doc__sphinx-9281": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 45.435,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/logs/2026-10-30T06-28-59-00-00_swe-bench_5WAgMpm3UXKkNhiGUhowKX.eval"
         }
       },
       "shards": [
@@ -13298,33 +13739,33 @@
           "shard": 0,
           "job": "1691752",
           "concurrency": 4,
-          "saved": 103,
+          "saved": 111,
           "errors": 0,
-          "median_seconds": 524.047
+          "median_seconds": 487.111
         },
         {
           "shard": 1,
           "job": "1691752",
           "concurrency": 4,
-          "saved": 114,
+          "saved": 125,
           "errors": 0,
-          "median_seconds": 322.24850000000004
+          "median_seconds": 330.779
         },
         {
           "shard": 2,
           "job": "1691752",
           "concurrency": 4,
-          "saved": 91,
+          "saved": 104,
           "errors": 0,
-          "median_seconds": 473.534
+          "median_seconds": 465.9305
         },
         {
           "shard": 3,
           "job": "1691752",
           "concurrency": 4,
-          "saved": 97,
+          "saved": 104,
           "errors": 0,
-          "median_seconds": 396.882
+          "median_seconds": 402.75800000000004
         }
       ]
     },
@@ -13784,6 +14225,83 @@
           "error": false,
           "scored": true,
           "seconds": 728.536,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "matplotlib__matplotlib-24149": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 639.742,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "matplotlib__matplotlib-20488": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1240.094,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "matplotlib__matplotlib-26113": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 408.896,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "matplotlib__matplotlib-26291": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 177.788,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "psf__requests-1724": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 234.052,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "matplotlib__matplotlib-25332": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1118.96,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "pydata__xarray-4629": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 117.408,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "pydata__xarray-6461": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 180.008,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "pydata__xarray-7229": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 449.749,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "mwaskom__seaborn-3187": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1353.617,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
+        },
+        "pydata__xarray-7233": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 115.891,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/logs/2026-10-30T07-33-44-00-00_swe-bench_RCujoeBPsMWKDgspxRtyuL.eval"
         },
         "astropy__astropy-14365": {
@@ -14388,6 +14906,90 @@
           "seconds": 677.072,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
         },
+        "pylint-dev__pylint-7277": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1154.645,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "pytest-dev__pytest-7521": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 134.739,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "pytest-dev__pytest-5840": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 905.915,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "scikit-learn__scikit-learn-11578": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 77.251,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "pytest-dev__pytest-5809": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1397.555,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "scikit-learn__scikit-learn-13124": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 118.31,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "scikit-learn__scikit-learn-13135": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 296.064,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "scikit-learn__scikit-learn-14496": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 96.402,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "scikit-learn__scikit-learn-10297": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 842.303,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "scikit-learn__scikit-learn-14894": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 150.957,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "sphinx-doc__sphinx-10323": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 223.834,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
+        "sphinx-doc__sphinx-7440": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 153.349,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/logs/2026-10-30T07-38-45-00-00_swe-bench_4z7qZ5mmpXeuYxKFQmoTxG.eval"
+        },
         "astropy__astropy-14309": {
           "success": true,
           "error": false,
@@ -14743,6 +15345,69 @@
           "error": false,
           "scored": true,
           "seconds": 29.452,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "django__django-16502": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1313.589,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "django__django-17084": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 711.476,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "django__django-16938": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1048.438,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "matplotlib__matplotlib-22719": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 171.402,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "matplotlib__matplotlib-24177": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 605.844,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "matplotlib__matplotlib-22871": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 893.299,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "django__django-16642": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 2451.501,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "matplotlib__matplotlib-24627": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 587.401,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
+        },
+        "matplotlib__matplotlib-24637": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 563.468,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/logs/2026-10-30T08-28-55-00-00_swe-bench_LLibXMnJJA49NVPqTrhi9q.eval"
         },
         "astropy__astropy-14598": {
@@ -15192,6 +15857,55 @@
           "scored": true,
           "seconds": 936.036,
           "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "django__django-16595": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 424.613,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "django__django-16429": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 943.099,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "django__django-16667": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 48.744,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "django__django-16901": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 226.483,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "django__django-16661": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1056.956,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "matplotlib__matplotlib-20826": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 439.94,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
+        },
+        "matplotlib__matplotlib-20859": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 442.752,
+          "source": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/logs/2026-10-30T08-28-44-00-00_swe-bench_Y64v8ZzshEn4sQJmjU2dFE.eval"
         }
       },
       "shards": [
@@ -15199,33 +15913,33 @@
           "shard": 0,
           "job": "1691755",
           "concurrency": 4,
-          "saved": 65,
+          "saved": 76,
           "errors": 0,
-          "median_seconds": 457.937
+          "median_seconds": 451.3705
         },
         {
           "shard": 1,
           "job": "1691755",
           "concurrency": 4,
-          "saved": 86,
+          "saved": 98,
           "errors": 0,
-          "median_seconds": 371.6155
+          "median_seconds": 352.738
         },
         {
           "shard": 2,
           "job": "1691755",
           "concurrency": 4,
-          "saved": 51,
+          "saved": 60,
           "errors": 0,
-          "median_seconds": 492.861
+          "median_seconds": 578.134
         },
         {
           "shard": 3,
           "job": "1691755",
           "concurrency": 4,
-          "saved": 64,
+          "saved": 71,
           "errors": 0,
-          "median_seconds": 419.1005
+          "median_seconds": 424.613
         }
       ]
     },
