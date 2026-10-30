@@ -1,6 +1,6 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T07:49:23.948790+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T08:20:59.320094+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
 **Provisional saved-log snapshot; the complete seven-model comparison remains pending; validated AppWorld results are available below.**
 
@@ -10,23 +10,23 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 
 | Model | Saved / assigned | Successes among saved | Saved errors | Final score |
 |---|---:|---:|---:|---|
-| Base | 362/500 | 189 | 2 | Pending validation |
+| Base | 378/500 | 197 | 2 | Pending validation |
 | AppWorld-trained | 500/500 | 22 | 0 | 4.4% (validated) |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
-| DepthBench-trained | 244/500 | 38 | 0 | Pending validation |
-| AppWorld + agentic KL (800) | 145/500 | 73 | 0 | Pending validation |
-| AppWorld + same-batch KL | 9/500 | 4 | 0 | Pending validation |
+| DepthBench-trained | 312/500 | 49 | 0 | Pending validation |
+| AppWorld + agentic KL (800) | 196/500 | 101 | 0 | Pending validation |
+| AppWorld + same-batch KL | 34/500 | 15 | 0 | Pending validation |
 | AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
-| AppWorld-trained | 362 | 189 | 16 |
+| AppWorld-trained | 378 | 197 | 18 |
 | ASTRA-trained | 0 | 0 | 0 |
-| DepthBench-trained | 234 | 133 | 37 |
-| AppWorld + agentic KL (800) | 145 | 80 | 73 |
-| AppWorld + same-batch KL | 9 | 4 | 4 |
+| DepthBench-trained | 293 | 159 | 46 |
+| AppWorld + agentic KL (800) | 196 | 110 | 101 |
+| AppWorld + same-batch KL | 34 | 18 | 15 |
 | AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
