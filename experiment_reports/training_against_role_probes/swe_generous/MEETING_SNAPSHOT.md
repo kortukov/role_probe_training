@@ -1,8 +1,8 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T10:56:44.201475+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T11:28:02.171743+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**Provisional saved-log snapshot; the complete seven-model comparison remains pending; validated AppWorld and DepthBench task results are available below.**
+**Provisional saved-log snapshot; the complete seven-model comparison remains pending; validated AppWorld and DepthBench results are available below.**
 
 Completed tasks are selected by finish time and can be systematically easier or shorter. Shared-task subsets reduce task mismatch but remain completion-biased; do not interpret these as final benchmark scores.
 
@@ -10,31 +10,33 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 
 | Model | Saved / assigned | Successes among saved | Saved errors | Final score |
 |---|---:|---:|---:|---|
-| Base | 451/500 | 233 | 2 | Pending validation |
+| Base | 471/500 | 243 | 2 | Pending validation |
 | AppWorld-trained | 500/500 | 22 | 0 | 4.4% (validated) |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
-| AppWorld + agentic KL (800) | 370/500 | 189 | 0 | Pending validation |
-| AppWorld + same-batch KL | 222/500 | 108 | 0 | Pending validation |
+| AppWorld + agentic KL (800) | 405/500 | 205 | 0 | Pending validation |
+| AppWorld + same-batch KL | 266/500 | 133 | 0 | Pending validation |
 | AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
-| AppWorld-trained | 451 | 233 | 20 |
+| AppWorld-trained | 471 | 243 | 21 |
 | ASTRA-trained | 0 | 0 | 0 |
-| DepthBench-trained | 451 | 233 | 67 |
-| AppWorld + agentic KL (800) | 370 | 196 | 189 |
-| AppWorld + same-batch KL | 222 | 122 | 108 |
+| DepthBench-trained | 471 | 243 | 70 |
+| AppWorld + agentic KL (800) | 405 | 214 | 205 |
+| AppWorld + same-batch KL | 266 | 149 | 133 |
 | AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
-Whole-history role metrics are available for AppWorld; the remaining models are pending. No attempt is regenerated to improve the score.
+Whole-history role metrics are available for AppWorld and DepthBench; the remaining models are pending. No attempt is regenerated to improve the score.
 
 AppWorld collection and assembly are complete: 22/500 successes (4.4%), with zero sample or export errors and no message-limit or context-limit stops. [Validated task provenance](appworld_task_results.json).
 
 Its layer-12 role probe correctly classifies 87.55% of scored content tokens (token-weighted accuracy); the mean per-conversation accuracy is 87.08%. Coverage is 500/500 whole conversations, replayed without chunking or truncation, with no exclusions. Roles are system, user, reasoning, assistant, and tool. These role metrics do not measure task success. [Role metrics and confusion counts](appworld_role_results.json).
 
-DepthBench task evaluation is complete and validated: 71/500 successes (14.2%), with zero sample or export errors. Two attempts encountered model context-limit stops and remain in the denominator. Its whole-history probe scoring is running. [Validated task provenance](depthbench_task_results.json).
+DepthBench task evaluation is complete and validated: 71/500 successes (14.2%), with zero sample or export errors. Two attempts encountered model context-limit stops and remain in the denominator. Its whole-history probe scoring is complete. [Validated task provenance](depthbench_task_results.json).
+
+DepthBench layer-12 role accuracy is 48.36% of scored content tokens (token-weighted); mean per-conversation accuracy is 50.22%. Coverage is 498/500 whole conversations, with two histories excluded because they exceed the native context limit. No histories were chunked or truncated; both excluded histories remain in the 500-task success denominator. [Role metrics and confusion counts](depthbench_role_results.json).
