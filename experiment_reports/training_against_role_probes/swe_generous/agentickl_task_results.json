@@ -1,5 +1,6 @@
 {
   "protocol": "swe_inspect_generous_v1",
+  "benchmark": "swe_bench",
   "samples": 500,
   "sample_errors": 0,
   "export_errors": 0,
@@ -8,11 +9,12 @@
   "metrics": {
     "swe_bench_scorer": {
       "successes": 241.0,
-      "total": 500,
       "scored": 500,
+      "total": 500,
       "success_rate": 0.482
     }
   },
+  "input_sha256": "e15c7871acfd1f64fc0695ebb5ff79d8dfae8343b2a69fc0e17cf279136918d0",
   "sources": [
     {
       "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/trajectories.jsonl",
@@ -39,6 +41,5 @@
     "token_limit": null,
     "time_limit": 7200,
     "concurrency": 4
-  },
-  "validation": "All four completed shard exports: exact expected IDs, source hashes and matched settings verified. Official assembly1691753 is queued; no attempts regenerated."
+  }
 }
