@@ -1,8 +1,8 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T11:59:16.592839+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-10-30T12:05:53.059883+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**Provisional saved-log snapshot; the complete seven-model comparison remains pending; validated AppWorld and DepthBench results are available below.**
+**Provisional saved-log snapshot; the complete seven-model comparison remains pending; baseline, AppWorld, and DepthBench task scores are validated.**
 
 Completed tasks are selected by finish time and can be systematically easier or shorter. Shared-task subsets reduce task mismatch but remain completion-biased; do not interpret these as final benchmark scores.
 
@@ -10,23 +10,23 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 
 | Model | Saved / assigned | Successes among saved | Saved errors | Final score |
 |---|---:|---:|---:|---|
-| Base | 495/500 | 252 | 2 | Pending validation |
+| Base | 500/500 | 254 | 2 | 50.8% (validated) |
 | AppWorld-trained | 500/500 | 22 | 0 | 4.4% (validated) |
 | ASTRA-trained | 0/500 | 0 | 0 | Pending validation |
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
-| AppWorld + agentic KL (800) | 444/500 | 220 | 0 | Pending validation |
-| AppWorld + same-batch KL | 305/500 | 153 | 0 | Pending validation |
+| AppWorld + agentic KL (800) | 451/500 | 222 | 0 | Pending validation |
+| AppWorld + same-batch KL | 309/500 | 157 | 0 | Pending validation |
 | AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
-| AppWorld-trained | 495 | 252 | 22 |
+| AppWorld-trained | 500 | 254 | 22 |
 | ASTRA-trained | 0 | 0 | 0 |
-| DepthBench-trained | 495 | 252 | 70 |
-| AppWorld + agentic KL (800) | 444 | 229 | 220 |
-| AppWorld + same-batch KL | 305 | 166 | 153 |
+| DepthBench-trained | 500 | 254 | 71 |
+| AppWorld + agentic KL (800) | 451 | 230 | 222 |
+| AppWorld + same-batch KL | 309 | 169 | 157 |
 | AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
@@ -40,3 +40,5 @@ Its layer-12 role probe correctly classifies 87.55% of scored content tokens (to
 DepthBench task evaluation is complete and validated: 71/500 successes (14.2%), with zero sample or export errors. Two attempts encountered model context-limit stops and remain in the denominator. Its whole-history probe scoring is complete. [Validated task provenance](depthbench_task_results.json).
 
 DepthBench layer-12 role accuracy is 48.36% of scored content tokens (token-weighted); mean per-conversation accuracy is 50.22%. Coverage is 498/500 whole conversations, with two histories excluded because they exceed the native context limit. No histories were chunked or truncated; both excluded histories remain in the 500-task success denominator. [Role metrics and confusion counts](depthbench_role_results.json).
+
+Baseline task evaluation is complete and validated: 254/500 successes (50.8%). Two scorer timeouts remain in the denominator as failures. All original attempts are retained. Whole-history role scoring is pending. [Validated task provenance](base_task_results.json).
