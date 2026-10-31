@@ -2,7 +2,7 @@
 
 Validated SWE-bench results are included below as they become available. [Execution progress and partial comparisons](swe_generous/MEETING_SNAPSHOT.md) are reported separately; partial subsets are completion-biased.
 
-> **SWE update:** Five of seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, and same-batch KL (2,700) **48.6%**. Role metrics are available for AppWorld and DepthBench; other entries remain pending.
+> **SWE update:** Five of seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, and same-batch KL (2,700) **48.6%**. Whole-history role metrics are now available for all five completed models; ASTRA and the 27,000-trajectory model remain pending.
 
 ## Motivation & RQ
 
@@ -57,21 +57,21 @@ All values are percentages. Role columns are recall within that true role.
 | τ² retail | AppWorld-trained | 23.7 | 53.6 | 49.9 | 32.1 | 52.3 | 95.9 | 99.7 |
 | τ² retail | ASTRA-trained | 38.6 | 44.2 | 28.2 | 39.4 | 38.0 | 83.5 | 93.0 |
 | τ² retail | DepthBench-trained | 37.7 | 43.2 | 65.5 | 37.6 | 40.6 | 99.6 | 97.7 |
-| SWE-bench Verified | Base | 50.8 | Pending | Pending | Pending | Pending | Pending | Pending |
+| SWE-bench Verified | Base | 50.8 | 41.2 | 0.9 | 83.1 | 44.9 | 84.6 | 1.9 |
 | SWE-bench Verified | AppWorld-trained | 4.4 | 87.5 | 39.8 | 93.8 | 98.0 | 90.6 | 85.5 |
 | SWE-bench Verified | ASTRA-trained | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
 | SWE-bench Verified | DepthBench-trained | 14.2 | 48.4 | 60.6 | 89.2 | 97.3 | 49.6 | 29.7 |
-| SWE-bench Verified | AppWorld + agentic KL (800) | 48.2 | Pending | Pending | Pending | Pending | Pending | Pending |
-| SWE-bench Verified | AppWorld + same-batch KL (2,700) | 48.6 | Pending | Pending | Pending | Pending | Pending | Pending |
+| SWE-bench Verified | AppWorld + agentic KL (800) | 48.2 | 94.3 | 36.6 | 79.0 | 96.5 | 93.9 | 94.8 |
+| SWE-bench Verified | AppWorld + same-batch KL (2,700) | 48.6 | 93.9 | 38.0 | 66.6 | 93.0 | 93.7 | 95.4 |
 | SWE-bench Verified | AppWorld + same-batch KL (27,000) | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
 
 **Evaluation sizes:** AppWorld normal test: 168 tasks; SWE-bench Verified: 500; τ² retail: 114, with one attempt per model per task. Task success includes all attempts. Role metrics exclude only histories above the native context limit; [coverage and percentage confusion matrices](APPENDIX.md#whole-history-coverage) are in the appendix.
 
 **Retail role-score coverage:** Base: 113/114, AppWorld-trained: 76/114, ASTRA-trained: 103/114, DepthBench-trained: 95/114. Exclusions differ by model, so role scores describe different eligible subsets.
 
-AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. SWE uses BF16 for all seven models. Among completed evaluations, task success is 46.4 percentage points below baseline for AppWorld-trained, 36.6 points below for DepthBench-trained, 2.6 points below for agentic KL, and 2.2 points below for same-batch KL (2,700). These are descriptive single-attempt comparisons; the remaining two task evaluations and baseline role metrics are pending.
+AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. SWE uses BF16 for all seven models. Among completed evaluations, task success is 46.4 percentage points below baseline for AppWorld-trained, 36.6 points below for DepthBench-trained, 2.6 points below for agentic KL, and 2.2 points below for same-batch KL (2,700). These are descriptive single-attempt comparisons; the remaining two task evaluations are pending.
 
-**SWE role-score coverage:** AppWorld-trained: 500/500; DepthBench-trained: 498/500. Two over-context DepthBench histories are excluded only from role scoring. The baseline’s two scorer timeouts remain failures in its 500-task denominator. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
+**SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; DepthBench-trained: 498/500; agentic KL: 493/500; same-batch KL (2,700): 485/500. Histories above native context are excluded only from role scoring, so role metrics describe different eligible subsets. The baseline’s two scorer timeouts remain failures in its 500-task denominator. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
 
 <!-- /fresh-rollout-results -->
 
@@ -114,7 +114,7 @@ used in any individual generation call.
 ## Message
 
 In the original AppWorld and retail comparisons, the three trained models have higher overall role accuracy
-but lower task success than the base. Completed SWE evaluations likewise show lower task success for AppWorld-trained and DepthBench-trained than for baseline; agentic KL is closer to baseline at 48.2% versus 50.8%. The remaining two SWE models and baseline role metrics are pending. Recovering
+but lower task success than the base. Completed SWE evaluations likewise show lower task success for AppWorld-trained and DepthBench-trained than for baseline; agentic KL is closer to baseline at 48.2% versus 50.8%. The remaining two SWE models are pending. Recovering
 role labels is therefore insufficient evidence that the trained model remains a
 useful agent. The fresh-trajectory evaluation tests this distinction separately
 from the near-perfect role scores on fixed development histories.

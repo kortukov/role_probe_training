@@ -268,20 +268,34 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | τ² retail | AppWorld-trained | 76/114 | 38 | 0 |
 | τ² retail | ASTRA-trained | 103/114 | 11 | 0 |
 | τ² retail | DepthBench-trained | 95/114 | 19 | 0 |
-| SWE-bench Verified | Base | Pending | Pending | 2 |
+| SWE-bench Verified | Base | 481/500 | 19 | 2 |
 | SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 0 |
 | SWE-bench Verified | DepthBench-trained | 498/500 | 2 | 0 |
-| SWE-bench Verified | AppWorld + agentic KL (800) | Pending | Pending | 0 |
-| SWE-bench Verified | AppWorld + same-batch KL (2,700) | Pending | Pending | 0 |
+| SWE-bench Verified | AppWorld + agentic KL (800) | 493/500 | 7 | 0 |
+| SWE-bench Verified | AppWorld + same-batch KL (2,700) | 485/500 | 15 | 0 |
 <!-- /whole-history-coverage -->
 
 ## SWE-bench whole-history results
 
-Task scores use all 500 attempts per model. Role metrics use complete conversations within native context, with no chunking or truncation. Base, agentic-KL, and same-batch KL role metrics are pending. Rows below are true roles, columns are predicted roles; entries are row-normalized percentages.
+Task scores retain all 500 attempts. Layer-12 role metrics replay whole histories without chunking or truncation; over-context histories are excluded only from role scoring. Coverage differs by model. Rows below are true roles and columns predicted roles; values are row-normalized percentages.
+
+### Base
+
+Coverage: 481/500 histories; 19 above native context. Token-weighted accuracy: 41.17%; mean per-conversation accuracy: 38.75%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 0.9 | 22.2 | 17.1 | 0.0 | 59.7 |
+| user | 0.5 | 83.1 | 1.4 | 13.7 | 1.3 |
+| cot | 0.3 | 1.5 | 44.9 | 51.8 | 1.5 |
+| assistant | 0.2 | 0.1 | 14.6 | 84.6 | 0.5 |
+| tool | 18.9 | 17.3 | 13.1 | 48.8 | 1.9 |
+
+[Metrics and provenance](swe_generous/base_role_results.json).
 
 ### AppWorld-trained
 
-Coverage: 500/500 histories; 0 excluded above native context. Token-weighted accuracy: 87.55%. Mean per-conversation accuracy: 87.08%.
+Coverage: 500/500 histories; 0 above native context. Token-weighted accuracy: 87.55%; mean per-conversation accuracy: 87.08%.
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -291,11 +305,11 @@ Coverage: 500/500 histories; 0 excluded above native context. Token-weighted acc
 | assistant | 0.0 | 0.0 | 1.6 | 90.6 | 7.8 |
 | tool | 2.2 | 10.1 | 2.2 | 0.0 | 85.5 |
 
-[Validated metrics and provenance](swe_generous/appworld_role_results.json).
+[Metrics and provenance](swe_generous/appworld_role_results.json).
 
 ### DepthBench-trained
 
-Coverage: 498/500 histories; 2 excluded above native context. Token-weighted accuracy: 48.36%. Mean per-conversation accuracy: 50.22%.
+Coverage: 498/500 histories; 2 above native context. Token-weighted accuracy: 48.36%; mean per-conversation accuracy: 50.22%.
 
 | True / predicted | system | user | cot | assistant | tool |
 |---|---:|---:|---:|---:|---:|
@@ -305,4 +319,32 @@ Coverage: 498/500 histories; 2 excluded above native context. Token-weighted acc
 | assistant | 0.0 | 0.0 | 47.8 | 49.6 | 2.6 |
 | tool | 7.1 | 28.3 | 30.1 | 4.8 | 29.7 |
 
-[Validated metrics and provenance](swe_generous/depthbench_role_results.json).
+[Metrics and provenance](swe_generous/depthbench_role_results.json).
+
+### AppWorld + agentic KL (800)
+
+Coverage: 493/500 histories; 7 above native context. Token-weighted accuracy: 94.29%; mean per-conversation accuracy: 94.05%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 36.6 | 54.2 | 6.0 | 0.5 | 2.8 |
+| user | 0.6 | 79.0 | 1.3 | 14.1 | 5.1 |
+| cot | 0.0 | 0.7 | 96.5 | 1.6 | 1.2 |
+| assistant | 0.0 | 0.0 | 2.9 | 93.9 | 3.2 |
+| tool | 0.1 | 1.9 | 1.8 | 1.5 | 94.8 |
+
+[Metrics and provenance](swe_generous/agentickl_role_results.json).
+
+### AppWorld + same-batch KL (2,700)
+
+Coverage: 485/500 histories; 15 above native context. Token-weighted accuracy: 93.92%; mean per-conversation accuracy: 93.70%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 38.0 | 53.2 | 5.1 | 0.5 | 3.2 |
+| user | 0.6 | 66.6 | 1.8 | 26.7 | 4.3 |
+| cot | 0.0 | 1.1 | 93.0 | 2.6 | 3.3 |
+| assistant | 0.0 | 0.0 | 2.0 | 93.7 | 4.3 |
+| tool | 0.1 | 2.1 | 0.8 | 1.5 | 95.4 |
+
+[Metrics and provenance](swe_generous/samebatch_role_results.json).

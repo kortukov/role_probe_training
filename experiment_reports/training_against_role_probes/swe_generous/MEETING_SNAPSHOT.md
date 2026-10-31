@@ -31,7 +31,7 @@ All-seven shared completed task count: 0.
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
-Whole-history role metrics are available for AppWorld and DepthBench; the remaining models are pending. No attempt is regenerated to improve the score.
+Whole-history role metrics are available for all five completed models; ASTRA and 27k remain pending. No attempt is regenerated to improve the score.
 
 AppWorld collection and assembly are complete: 22/500 successes (4.4%), with zero sample or export errors and no message-limit or context-limit stops. [Validated task provenance](appworld_task_results.json).
 
@@ -41,8 +41,10 @@ DepthBench task evaluation is complete and validated: 71/500 successes (14.2%), 
 
 DepthBench layer-12 role accuracy is 48.36% of scored content tokens (token-weighted); mean per-conversation accuracy is 50.22%. Coverage is 498/500 whole conversations, with two histories excluded because they exceed the native context limit. No histories were chunked or truncated; both excluded histories remain in the 500-task success denominator. [Role metrics and confusion counts](depthbench_role_results.json).
 
-Baseline task evaluation is complete and validated: 254/500 successes (50.8%). Two scorer timeouts remain in the denominator as failures. All original attempts are retained. Whole-history role scoring is pending. [Validated task provenance](base_task_results.json).
+Baseline task evaluation is complete and validated: 254/500 successes (50.8%). Two scorer timeouts remain in the denominator as failures. All original attempts are retained. Whole-history role scoring is complete. [Validated task provenance](base_task_results.json).
 
-Agentic-KL task collection is complete: 241/500 successes (48.2%), 2.6 percentage points below the matched baseline. All four completed shard exports passed expected-ID, hash, and settings validation, with zero sample/export errors. Two attempts recorded limit events and eight recorded model context stops; all remain in the denominator. The assembled output has also passed hash validation; role scoring remains queued. [Validated task provenance](agentickl_task_results.json).
+Agentic-KL task collection is complete: 241/500 successes (48.2%), 2.6 percentage points below the matched baseline. All four completed shard exports passed expected-ID, hash, and settings validation, with zero sample/export errors. Two attempts recorded limit events and eight recorded model context stops; all remain in the denominator. The assembled output has also passed hash validation; role scoring is complete. [Validated task provenance](agentickl_task_results.json).
 
-Same-batch KL (2,700 training trajectories) task evaluation is complete and validated: 243/500 successes (48.6%), 2.2 percentage points below baseline, with zero sample/export errors. Thirteen attempts recorded model context stops; all remain in the denominator. Role scoring is queued. [Validated task provenance](samebatch_task_results.json).
+Same-batch KL (2,700 training trajectories) task evaluation is complete and validated: 243/500 successes (48.6%), 2.2 percentage points below baseline, with zero sample/export errors. Thirteen attempts recorded model context stops; all remain in the denominator. Role scoring is complete. [Validated task provenance](samebatch_task_results.json).
+
+Newly validated layer-12 token-weighted role accuracy: baseline 41.17% (481/500 histories), agentic KL 94.29% (493/500), and same-batch KL 93.92% (485/500). Over-context exclusions affect only role metrics; all 500 attempts remain in each task denominator. These metrics describe each model’s own eligible histories.
