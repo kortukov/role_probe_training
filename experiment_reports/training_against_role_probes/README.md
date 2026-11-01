@@ -2,7 +2,7 @@
 
 Validated SWE-bench results are included below as they become available. [Execution progress and partial comparisons](swe_generous/MEETING_SNAPSHOT.md) are reported separately; partial subsets are completion-biased.
 
-> **SWE update:** Six of seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, same-batch KL (2,700) **48.6%**, and ASTRA-trained **26.6%**. Whole-history role metrics are now available for all six completed models; the 27,000-trajectory model’s task and role results remain pending.
+> **SWE update:** All seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, same-batch KL (2,700) **48.6%**, ASTRA-trained **26.6%**, and same-batch KL (27,000) **51.4%**. Whole-history role metrics are now available for six models; only the 27,000-trajectory model’s role results remain pending.
 
 ## Motivation & RQ
 
@@ -26,7 +26,7 @@ conversations at each update.
 **Evaluation.** Each trained model generates separate attempts on AppWorld normal
 test (app/API use), SWE-bench Verified (software repair), and τ² retail (customer
 service with tools). Base-model AppWorld/retail trajectories and task scores are reused; SWE is
-being evaluated for the baseline and all six trained models, including the 27,000-trajectory model, with shared per-attempt settings and native 131K context. SWE uses high reasoning, a 2,000-message budget, and the stock Inspect agent/scorer with general sandbox fixes. ASTRA uses a separate concurrency-8/16 scheduling trial; other models use concurrency 4. Each trained model gets a fresh layer-12 multinomial linear
+evaluated for the baseline and all six trained models, including the 27,000-trajectory model, with shared per-attempt settings and native 131K context. SWE uses high reasoning, a 2,000-message budget, and the stock Inspect agent/scorer with general sandbox fixes. ASTRA uses a separate concurrency-8/16 scheduling trial; other models use concurrency 4. Each trained model gets a fresh layer-12 multinomial linear
 probe fitted from scratch using the standard 250 C4/Dolma passages, original
 passage split, and all content tokens. The base uses its original standard-data
 probe. All read the post-attention-normalized pre-MLP activations. Message roles
@@ -110,10 +110,10 @@ All values are percentages. Base and original AppWorld rows repeat the compariso
 | AppWorld-trained | 4.4 | 87.5 | 39.8 | 93.8 | 98.0 | 90.6 | 85.5 |
 | AppWorld + agentic KL (800) | 48.2 | 94.3 | 36.6 | 79.0 | 96.5 | 93.9 | 94.8 |
 | AppWorld + same-batch KL (2,700) | 48.6 | 93.9 | 38.0 | 66.6 | 93.0 | 93.7 | 95.4 |
-| AppWorld + same-batch KL (27,000) | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
+| AppWorld + same-batch KL (27,000) | 51.4 | Pending | Pending | Pending | Pending | Pending | Pending |
 
 
-The original coverage and generation-precision limitations also apply here. New models use fresh trajectories and independently fitted standard-data probes. On SWE, agentic KL and same-batch KL (2,700) score 48.2% and 48.6%, respectively: 2.6 and 2.2 percentage points below the 50.8% baseline. The 27,000-trajectory SWE result remains pending.
+The original coverage and generation-precision limitations also apply here. New models use fresh trajectories and independently fitted standard-data probes. On SWE, agentic KL and same-batch KL (2,700) score 48.2% and 48.6%, respectively: 2.6 and 2.2 percentage points below the 50.8% baseline. The 27,000-trajectory model scores 51.4% (257/500), 0.6 percentage points above baseline (254/500); this three-task difference is descriptive, not evidence of a reliable improvement.
 
 **SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; agentic KL: 493/500; same-batch KL (2,700): 485/500. Over-context histories are excluded only from role scoring; each task-success denominator remains 500. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
 
@@ -131,7 +131,7 @@ used in any individual generation call.
 ## Message
 
 In the original AppWorld and retail comparisons, the three trained models have higher overall role accuracy
-but lower task success than the base. Completed SWE evaluations likewise show lower task success for AppWorld-trained and DepthBench-trained than for baseline; agentic KL is closer to baseline at 48.2% versus 50.8%. ASTRA scores 26.6%; only the 27,000-trajectory SWE task result remains pending. Recovering
+but lower task success than the base. Completed SWE evaluations likewise show lower task success for AppWorld-trained and DepthBench-trained than for baseline; agentic KL is closer to baseline at 48.2% versus 50.8%. ASTRA scores 26.6%; the 27,000-trajectory model scores 51.4%, close to the 50.8% baseline. Recovering
 role labels is therefore insufficient evidence that the trained model remains a
 useful agent. The fresh-trajectory evaluation tests this distinction separately
 from the near-perfect role scores on fixed development histories.

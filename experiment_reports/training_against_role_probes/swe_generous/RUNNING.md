@@ -73,3 +73,7 @@ Baseline shard1691740_1 was marked Slurm OUT_OF_MEMORY after all125 attempts and
 ## ASTRA saved-output recovery
 
 Collection job `1726408_1` ended with Slurm OOM after saving all 125 attempts. CPU validation `1816790` checked expected IDs, trajectory hash, all 9,760 sequential generation records and summary consistency; replacement assembly `1816791` retained all original outputs. No model or scorer calls were repeated. [Integrity evidence](astra_oom_saved_validation.json) and [validated 500-task result](astra_task_results.json). ASTRA uses concurrency 8/8/16/16 across shards; one scorer timeout and four model context stops remain in the 500-task denominator. Role scoring job `1691748` follows the recovered assembly.
+
+## Seven-model task completion
+
+All seven task evaluations are complete. The 27,000-trajectory model assembled in job `1691765`: 257/500 successes, one scorer timeout on `sphinx-doc__sphinx-7590`, zero export errors, and 12 model context stops retained in the denominator. All shard IDs, source hashes, assembled hash and per-attempt settings were checked against the baseline. [Validated result](samebatch27000_task_results.json). Whole-history role job `1691766` follows assembly; task report `1726411` is complete.

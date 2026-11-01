@@ -1,10 +1,10 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-11-01T09:02:32.904438+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-11-01T09:34:19.459570+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**Six complete task scores and six whole-history role results are validated; the 27k model remains pending.**
+**All seven 500-task scores are validated. Six whole-history role results are validated; only 27k role scoring remains pending.**
 
-Completed tasks are selected by finish time and can be systematically easier or shorter. Shared-task subsets reduce task mismatch but remain completion-biased; do not interpret these as final benchmark scores.
+All models now cover the same 500 tasks. Earlier partial snapshots were completion-biased; the complete scores below retain every attempt, including errors.
 
 ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4. Per-attempt budgets, reasoning effort and scorer are unchanged. Batching and contention can affect sampling and timing.
 
@@ -16,9 +16,9 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
 | AppWorld + agentic KL (800) | 500/500 | 241 | 0 | 48.2% (validated) |
 | AppWorld + same-batch KL | 500/500 | 243 | 0 | 48.6% (validated) |
-| AppWorld + same-batch KL (27,000) | 495/500 | 256 | 1 | Pending validation |
+| AppWorld + same-batch KL (27,000) | 500/500 | 257 | 1 | 51.4% (validated) |
 
-All-seven shared completed task count: 495.
+All-seven shared completed task count: 500.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
@@ -27,7 +27,7 @@ All-seven shared completed task count: 495.
 | DepthBench-trained | 500 | 254 | 71 |
 | AppWorld + agentic KL (800) | 500 | 254 | 241 |
 | AppWorld + same-batch KL | 500 | 254 | 243 |
-| AppWorld + same-batch KL (27,000) | 495 | 254 | 256 |
+| AppWorld + same-batch KL (27,000) | 500 | 254 | 257 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
@@ -52,3 +52,5 @@ Newly validated layer-12 token-weighted role accuracy: baseline 41.17% (481/500 
 ASTRA task evaluation is validated: 133/500 (26.6%). One scorer timeout and four model context stops remain in the denominator. All original attempts survived the final shard’s Slurm OOM and passed saved-output integrity validation; no model or scorer reruns. [Task result](astra_task_results.json), [recovery evidence](astra_oom_saved_validation.json).
 
 ASTRA layer-12 token-weighted role accuracy is 60.34%; mean per-conversation accuracy is 63.39%. Coverage is 498/500 whole histories, with two over-context exclusions affecting only role metrics. [Role metrics and provenance](astra_role_results.json).
+
+The 27,000-trajectory model is validated at 257/500 (51.4%), with one scorer timeout and 12 model context stops retained. This is three more successes than baseline, a descriptive difference. [Task provenance](samebatch27000_task_results.json).

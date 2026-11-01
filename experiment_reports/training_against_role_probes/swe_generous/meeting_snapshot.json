@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-11-01T09:02:32.904438+00:00",
+  "updated_utc": "2026-11-01T09:34:19.459570+00:00",
   "common_ids": [
     "astropy__astropy-12907",
     "astropy__astropy-13033",
@@ -462,11 +462,13 @@
     "sympy__sympy-16886",
     "sympy__sympy-17139",
     "sympy__sympy-17318",
+    "sympy__sympy-17630",
     "sympy__sympy-17655",
     "sympy__sympy-18189",
     "sympy__sympy-18199",
     "sympy__sympy-18211",
     "sympy__sympy-18698",
+    "sympy__sympy-18763",
     "sympy__sympy-19040",
     "sympy__sympy-19346",
     "sympy__sympy-19495",
@@ -474,12 +476,14 @@
     "sympy__sympy-19783",
     "sympy__sympy-19954",
     "sympy__sympy-20154",
+    "sympy__sympy-20428",
     "sympy__sympy-20438",
     "sympy__sympy-20590",
     "sympy__sympy-20801",
     "sympy__sympy-20916",
     "sympy__sympy-21379",
     "sympy__sympy-21596",
+    "sympy__sympy-21612",
     "sympy__sympy-21847",
     "sympy__sympy-21930",
     "sympy__sympy-22080",
@@ -495,6 +499,7 @@
     "sympy__sympy-24213",
     "sympy__sympy-24443",
     "sympy__sympy-24539",
+    "sympy__sympy-24562",
     "sympy__sympy-24661"
   ],
   "models": [
@@ -22603,6 +22608,13 @@
           "seconds": 369.536,
           "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/logs/2026-10-31T23-58-36-00-00_swe-bench_iYXkfcdoohduEbRsJSUBjy.eval"
         },
+        "sympy__sympy-20428": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 4153.466,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/logs/2026-10-31T23-58-36-00-00_swe-bench_iYXkfcdoohduEbRsJSUBjy.eval"
+        },
         "astropy__astropy-14365": {
           "success": false,
           "error": false,
@@ -25199,6 +25211,34 @@
           "scored": true,
           "seconds": 315.21,
           "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
+        },
+        "sympy__sympy-21612": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 735.725,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
+        },
+        "sympy__sympy-24562": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 240.859,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
+        },
+        "sympy__sympy-17630": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1928.825,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
+        },
+        "sympy__sympy-18763": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 2959.102,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
         }
       },
       "shards": [
@@ -25206,9 +25246,9 @@
           "shard": 0,
           "job": "1691764",
           "concurrency": 4,
-          "saved": 124,
+          "saved": 125,
           "errors": 0,
-          "median_seconds": 521.7049999999999
+          "median_seconds": 523.625
         },
         {
           "shard": 1,
@@ -25230,9 +25270,9 @@
           "shard": 3,
           "job": "1691764",
           "concurrency": 4,
-          "saved": 121,
+          "saved": 125,
           "errors": 0,
-          "median_seconds": 602.85
+          "median_seconds": 607.552
         }
       ]
     }
@@ -25513,6 +25553,51 @@
         "message_limit": 2000,
         "token_limit": null,
         "time_limit": 7200
+      }
+    },
+    "AppWorld + same-batch KL (27,000)": {
+      "protocol": "swe_inspect_generous_v1",
+      "benchmark": "swe_bench",
+      "samples": 500,
+      "sample_errors": 1,
+      "export_errors": 0,
+      "limited_samples": 0,
+      "samples_with_model_context_stops": 12,
+      "metrics": {
+        "swe_bench_scorer": {
+          "successes": 257.0,
+          "scored": 499,
+          "total": 500,
+          "success_rate": 0.514
+        }
+      },
+      "input_sha256": "0827164a0d0f2af083cd55d0b5d5879075cdc295da1bebce2d3e2c23b6f4a71d",
+      "sources": [
+        {
+          "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/trajectories.jsonl",
+          "sha256": "cde59705dc527ca0aafe1e5130dda477407b4a4e41f565f469bf6efcc8c48fab"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/trajectories.jsonl",
+          "sha256": "fe3d8c324d0b40194e128f0087a93011e7437c0ccbe4d437a584e7844c0ab9f4"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard2/swe_bench/trajectories.jsonl",
+          "sha256": "5f42f9fe46befaa914fa1a59452085af22a2f665b5ba05b5bd7447d63295201f"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/trajectories.jsonl",
+          "sha256": "8bf9632a7bd2674cdc011e722797628c3989de0a86ba4a728dd18a90f27956a8"
+        }
+      ],
+      "settings": {
+        "temperature": 1.0,
+        "reasoning_effort": "high",
+        "max_tokens": 16384,
+        "message_limit": 2000,
+        "token_limit": null,
+        "time_limit": 7200,
+        "concurrency": 4
       }
     }
   },
