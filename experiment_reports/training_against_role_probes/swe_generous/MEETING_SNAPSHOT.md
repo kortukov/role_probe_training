@@ -1,6 +1,6 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-10-30T16:15:13.905974+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-11-01T00:29:14.050087+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
 **Provisional saved-log snapshot; the complete seven-model comparison remains pending; five complete task scores are validated.**
 
@@ -16,7 +16,7 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
 | AppWorld + agentic KL (800) | 500/500 | 241 | 0 | 48.2% (validated) |
 | AppWorld + same-batch KL | 500/500 | 243 | 0 | 48.6% (validated) |
-| AppWorld + same-batch KL (27,000) | 0/500 | 0 | 0 | Pending validation |
+| AppWorld + same-batch KL (27,000) | 25/500 | 13 | 0 | Pending validation |
 
 All-seven shared completed task count: 0.
 
@@ -27,7 +27,7 @@ All-seven shared completed task count: 0.
 | DepthBench-trained | 500 | 254 | 71 |
 | AppWorld + agentic KL (800) | 500 | 254 | 241 |
 | AppWorld + same-batch KL | 500 | 254 | 243 |
-| AppWorld + same-batch KL (27,000) | 0 | 0 | 0 |
+| AppWorld + same-batch KL (27,000) | 25 | 15 | 13 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
