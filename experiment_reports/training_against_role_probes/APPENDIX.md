@@ -270,6 +270,7 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | τ² retail | DepthBench-trained | 95/114 | 19 | 0 |
 | SWE-bench Verified | Base | 481/500 | 19 | 2 |
 | SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 0 |
+| SWE-bench Verified | ASTRA-trained | 498/500 | 2 | 1 |
 | SWE-bench Verified | DepthBench-trained | 498/500 | 2 | 0 |
 | SWE-bench Verified | AppWorld + agentic KL (800) | 493/500 | 7 | 0 |
 | SWE-bench Verified | AppWorld + same-batch KL (2,700) | 485/500 | 15 | 0 |
@@ -306,6 +307,20 @@ Coverage: 500/500 histories; 0 above native context. Token-weighted accuracy: 87
 | tool | 2.2 | 10.1 | 2.2 | 0.0 | 85.5 |
 
 [Metrics and provenance](swe_generous/appworld_role_results.json).
+
+### ASTRA-trained
+
+Coverage: 498/500 histories; 2 above native context. Token-weighted accuracy: 60.34%; mean per-conversation accuracy: 63.39%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 19.0 | 16.2 | 3.2 | 0.0 | 61.6 |
+| user | 0.7 | 84.8 | 3.6 | 5.4 | 5.6 |
+| cot | 0.1 | 0.4 | 94.7 | 4.8 | 0.0 |
+| assistant | 0.0 | 0.0 | 62.3 | 36.9 | 0.7 |
+| tool | 8.1 | 1.0 | 20.0 | 4.6 | 66.2 |
+
+[Metrics and provenance](swe_generous/astra_role_results.json).
 
 ### DepthBench-trained
 

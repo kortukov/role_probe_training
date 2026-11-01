@@ -1,8 +1,8 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-11-01T07:27:31.738663+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-11-01T07:59:03.194410+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**Six complete task scores are validated; the 27k task result and two whole-history probe results remain pending.**
+**Six complete task scores and six whole-history role results are validated; the 27k model remains pending.**
 
 Completed tasks are selected by finish time and can be systematically easier or shorter. Shared-task subsets reduce task mismatch but remain completion-biased; do not interpret these as final benchmark scores.
 
@@ -16,9 +16,9 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
 | AppWorld + agentic KL (800) | 500/500 | 241 | 0 | 48.2% (validated) |
 | AppWorld + same-batch KL | 500/500 | 243 | 0 | 48.6% (validated) |
-| AppWorld + same-batch KL (27,000) | 445/500 | 224 | 1 | Pending validation |
+| AppWorld + same-batch KL (27,000) | 468/500 | 237 | 1 | Pending validation |
 
-All-seven shared completed task count: 445.
+All-seven shared completed task count: 468.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
@@ -27,11 +27,11 @@ All-seven shared completed task count: 445.
 | DepthBench-trained | 500 | 254 | 71 |
 | AppWorld + agentic KL (800) | 500 | 254 | 241 |
 | AppWorld + same-batch KL | 500 | 254 | 243 |
-| AppWorld + same-batch KL (27,000) | 445 | 225 | 224 |
+| AppWorld + same-batch KL (27,000) | 468 | 238 | 237 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
-Whole-history role metrics are available for five models; ASTRA and 27k role metrics remain pending. No attempt is regenerated to improve the score.
+Whole-history role metrics are available for six models; only 27k remains pending. No attempt is regenerated to improve the score.
 
 AppWorld collection and assembly are complete: 22/500 successes (4.4%), with zero sample or export errors and no message-limit or context-limit stops. [Validated task provenance](appworld_task_results.json).
 
@@ -50,3 +50,5 @@ Same-batch KL (2,700 training trajectories) task evaluation is complete and vali
 Newly validated layer-12 token-weighted role accuracy: baseline 41.17% (481/500 histories), agentic KL 94.29% (493/500), and same-batch KL 93.92% (485/500). Over-context exclusions affect only role metrics; all 500 attempts remain in each task denominator. These metrics describe each model’s own eligible histories.
 
 ASTRA task evaluation is validated: 133/500 (26.6%). One scorer timeout and four model context stops remain in the denominator. All original attempts survived the final shard’s Slurm OOM and passed saved-output integrity validation; no model or scorer reruns. [Task result](astra_task_results.json), [recovery evidence](astra_oom_saved_validation.json).
+
+ASTRA layer-12 token-weighted role accuracy is 60.34%; mean per-conversation accuracy is 63.39%. Coverage is 498/500 whole histories, with two over-context exclusions affecting only role metrics. [Role metrics and provenance](astra_role_results.json).
