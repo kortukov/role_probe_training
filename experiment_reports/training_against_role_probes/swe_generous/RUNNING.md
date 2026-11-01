@@ -77,3 +77,7 @@ Collection job `1726408_1` ended with Slurm OOM after saving all 125 attempts. C
 ## Seven-model task completion
 
 All seven task evaluations are complete. The 27,000-trajectory model assembled in job `1691765`: 257/500 successes, one scorer timeout on `sphinx-doc__sphinx-7590`, zero export errors, and 12 model context stops retained in the denominator. All shard IDs, source hashes, assembled hash and per-attempt settings were checked against the baseline. [Validated result](samebatch27000_task_results.json). Whole-history role job `1691766` follows assembly; task report `1726411` is complete.
+
+## Final role validation
+
+Whole-history role job `1691766` and final report job `1726412` completed successfully. The 27k summary matches the validated trajectory input, model revision and layer-12 probe hash. Confusion counts reproduce the reported accuracy; all 15 exclusions exceed 131,072 tokens. All seven task and role results are published. The continuation watcher is retired after completion.

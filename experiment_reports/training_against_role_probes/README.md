@@ -1,8 +1,8 @@
 # Training GPT-OSS-20B to preserve conversational roles
 
-Validated SWE-bench results are included below as they become available. [Execution progress and partial comparisons](swe_generous/MEETING_SNAPSHOT.md) are reported separately; partial subsets are completion-biased.
+Validated SWE-bench task and whole-history role results for all seven models are included below. [Complete results and provenance](swe_generous/MEETING_SNAPSHOT.md).
 
-> **SWE update:** All seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, same-batch KL (2,700) **48.6%**, ASTRA-trained **26.6%**, and same-batch KL (27,000) **51.4%**. Whole-history role metrics are now available for six models; only the 27,000-trajectory model’s role results remain pending.
+> **SWE update:** All seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, same-batch KL (2,700) **48.6%**, ASTRA-trained **26.6%**, and same-batch KL (27,000) **51.4%**. Whole-history role metrics are available for all seven models.
 
 ## Motivation & RQ
 
@@ -110,12 +110,12 @@ All values are percentages. Base and original AppWorld rows repeat the compariso
 | AppWorld-trained | 4.4 | 87.5 | 39.8 | 93.8 | 98.0 | 90.6 | 85.5 |
 | AppWorld + agentic KL (800) | 48.2 | 94.3 | 36.6 | 79.0 | 96.5 | 93.9 | 94.8 |
 | AppWorld + same-batch KL (2,700) | 48.6 | 93.9 | 38.0 | 66.6 | 93.0 | 93.7 | 95.4 |
-| AppWorld + same-batch KL (27,000) | 51.4 | Pending | Pending | Pending | Pending | Pending | Pending |
+| AppWorld + same-batch KL (27,000) | 51.4 | 97.7 | 82.4 | 58.9 | 98.0 | 95.8 | 99.8 |
 
 
 The original coverage and generation-precision limitations also apply here. New models use fresh trajectories and independently fitted standard-data probes. On SWE, agentic KL and same-batch KL (2,700) score 48.2% and 48.6%, respectively: 2.6 and 2.2 percentage points below the 50.8% baseline. The 27,000-trajectory model scores 51.4% (257/500), 0.6 percentage points above baseline (254/500); this three-task difference is descriptive, not evidence of a reliable improvement.
 
-**SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; agentic KL: 493/500; same-batch KL (2,700): 485/500. Over-context histories are excluded only from role scoring; each task-success denominator remains 500. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
+**SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; agentic KL: 493/500; same-batch KL (2,700): 485/500; same-batch KL (27,000): 485/500. Over-context histories are excluded only from role scoring; each task-success denominator remains 500. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
 
 **27,000-trajectory model role-score coverage:** AppWorld test_normal: 168/168; τ² retail: 114/114.
 

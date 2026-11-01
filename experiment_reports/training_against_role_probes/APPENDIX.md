@@ -274,6 +274,7 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | SWE-bench Verified | DepthBench-trained | 498/500 | 2 | 0 |
 | SWE-bench Verified | AppWorld + agentic KL (800) | 493/500 | 7 | 0 |
 | SWE-bench Verified | AppWorld + same-batch KL (2,700) | 485/500 | 15 | 0 |
+| SWE-bench Verified | AppWorld + same-batch KL (27,000) | 485/500 | 15 | 1 |
 <!-- /whole-history-coverage -->
 
 ## SWE-bench whole-history results
@@ -363,3 +364,17 @@ Coverage: 485/500 histories; 15 above native context. Token-weighted accuracy: 9
 | tool | 0.1 | 2.1 | 0.8 | 1.5 | 95.4 |
 
 [Metrics and provenance](swe_generous/samebatch_role_results.json).
+
+### AppWorld + same-batch KL (27,000)
+
+Coverage: 485/500 histories; 15 above native context. Token-weighted accuracy: 97.66%; mean per-conversation accuracy: 97.78%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 82.4 | 15.3 | 0.9 | 0.0 | 1.4 |
+| user | 11.7 | 58.9 | 0.5 | 22.2 | 6.7 |
+| cot | 0.2 | 0.9 | 98.0 | 0.9 | 0.1 |
+| assistant | 1.4 | 0.8 | 1.1 | 95.8 | 1.0 |
+| tool | 0.1 | 0.0 | 0.0 | 0.0 | 99.8 |
+
+[Metrics and provenance](swe_generous/samebatch27000_role_results.json).

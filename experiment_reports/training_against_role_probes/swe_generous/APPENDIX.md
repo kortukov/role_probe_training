@@ -76,4 +76,12 @@ Coverage: 485/500 histories; 15 above native context.
 
 ## AppWorld + same-batch KL (27,000)
 
-Pending.
+Coverage: 485/500 histories; 15 above native context.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 82.4 | 15.3 | 0.9 | 0.0 | 1.4 |
+| user | 11.7 | 58.9 | 0.5 | 22.2 | 6.7 |
+| cot | 0.2 | 0.9 | 98.0 | 0.9 | 0.1 |
+| assistant | 1.4 | 0.8 | 1.1 | 95.8 | 1.0 |
+| tool | 0.1 | 0.0 | 0.0 | 0.0 | 99.8 |

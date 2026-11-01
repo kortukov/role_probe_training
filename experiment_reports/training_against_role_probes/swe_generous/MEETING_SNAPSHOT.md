@@ -2,7 +2,7 @@
 
 Updated: 2026-11-01T09:34:19.459570+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
-**All seven 500-task scores are validated. Six whole-history role results are validated; only 27k role scoring remains pending.**
+**All seven 500-task scores and all seven whole-history role results are validated.**
 
 All models now cover the same 500 tasks. Earlier partial snapshots were completion-biased; the complete scores below retain every attempt, including errors.
 
@@ -31,7 +31,7 @@ All-seven shared completed task count: 500.
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
-Whole-history role metrics are available for six models; only 27k remains pending. No attempt is regenerated to improve the score.
+Whole-history role metrics are available for all seven models. No attempt is regenerated to improve the score.
 
 AppWorld collection and assembly are complete: 22/500 successes (4.4%), with zero sample or export errors and no message-limit or context-limit stops. [Validated task provenance](appworld_task_results.json).
 
@@ -54,3 +54,5 @@ ASTRA task evaluation is validated: 133/500 (26.6%). One scorer timeout and four
 ASTRA layer-12 token-weighted role accuracy is 60.34%; mean per-conversation accuracy is 63.39%. Coverage is 498/500 whole histories, with two over-context exclusions affecting only role metrics. [Role metrics and provenance](astra_role_results.json).
 
 The 27,000-trajectory model is validated at 257/500 (51.4%), with one scorer timeout and 12 model context stops retained. This is three more successes than baseline, a descriptive difference. [Task provenance](samebatch27000_task_results.json).
+
+The 27,000-trajectory model’s layer-12 token-weighted role accuracy is 97.66%; mean per-conversation accuracy is 97.78%. Coverage is 485/500 whole histories; 15 over-context exclusions affect only role metrics. [Role metrics and provenance](samebatch27000_role_results.json).
