@@ -2,7 +2,7 @@
 
 Validated SWE-bench results are included below as they become available. [Execution progress and partial comparisons](swe_generous/MEETING_SNAPSHOT.md) are reported separately; partial subsets are completion-biased.
 
-> **SWE update:** Five of seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, and same-batch KL (2,700) **48.6%**. Whole-history role metrics are now available for all five completed models; ASTRA and the 27,000-trajectory model remain pending.
+> **SWE update:** Six of seven models have validated results on all 500 tasks under the same Inspect protocol: baseline **50.8%**, AppWorld-trained **4.4%**, DepthBench-trained **14.2%**, AppWorld + agentic KL **48.2%**, same-batch KL (2,700) **48.6%**, and ASTRA-trained **26.6%**. Whole-history role metrics are now available for five models; ASTRA role metrics and the 27,000-trajectory model’s task and role results remain pending.
 
 ## Motivation & RQ
 
@@ -59,16 +59,16 @@ All values are percentages. Role columns are recall within that true role.
 | τ² retail | DepthBench-trained | 37.7 | 43.2 | 65.5 | 37.6 | 40.6 | 99.6 | 97.7 |
 | SWE-bench Verified | Base | 50.8 | 41.2 | 0.9 | 83.1 | 44.9 | 84.6 | 1.9 |
 | SWE-bench Verified | AppWorld-trained | 4.4 | 87.5 | 39.8 | 93.8 | 98.0 | 90.6 | 85.5 |
-| SWE-bench Verified | ASTRA-trained | Pending | Pending | Pending | Pending | Pending | Pending | Pending |
+| SWE-bench Verified | ASTRA-trained | 26.6 | Pending | Pending | Pending | Pending | Pending | Pending |
 | SWE-bench Verified | DepthBench-trained | 14.2 | 48.4 | 60.6 | 89.2 | 97.3 | 49.6 | 29.7 |
 
 **Evaluation sizes:** AppWorld normal test: 168 tasks; SWE-bench Verified: 500; τ² retail: 114, with one attempt per model per task. Task success includes all attempts. Role metrics exclude only histories above the native context limit; [coverage and percentage confusion matrices](APPENDIX.md#whole-history-coverage) are in the appendix.
 
 **Retail role-score coverage:** Base: 113/114, AppWorld-trained: 76/114, ASTRA-trained: 103/114, DepthBench-trained: 95/114. Exclusions differ by model, so role scores describe different eligible subsets.
 
-AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. SWE uses BF16 for all seven models. In this dataset comparison, SWE task success is 46.4 percentage points below baseline for AppWorld-trained and 36.6 points below for DepthBench-trained; ASTRA remains pending. These are descriptive single-attempt comparisons.
+AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for trained models. SWE uses BF16 for all seven models. In this dataset comparison, SWE task success is 46.4 percentage points below baseline for AppWorld-trained and 36.6 points below for DepthBench-trained, and 24.2 points below for ASTRA-trained. These are descriptive single-attempt comparisons.
 
-**SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; DepthBench-trained: 498/500. Histories above native context are excluded only from role scoring, so role metrics describe different eligible subsets. The baseline’s two scorer timeouts remain failures in its 500-task denominator. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
+**SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; DepthBench-trained: 498/500. Histories above native context are excluded only from role scoring, so role metrics describe different eligible subsets. ASTRA’s scorer timeout and the baseline’s two scorer timeouts remain failures in its 500-task denominator. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
 
 <!-- /fresh-rollout-results -->
 
@@ -131,7 +131,7 @@ used in any individual generation call.
 ## Message
 
 In the original AppWorld and retail comparisons, the three trained models have higher overall role accuracy
-but lower task success than the base. Completed SWE evaluations likewise show lower task success for AppWorld-trained and DepthBench-trained than for baseline; agentic KL is closer to baseline at 48.2% versus 50.8%. The remaining two SWE models are pending. Recovering
+but lower task success than the base. Completed SWE evaluations likewise show lower task success for AppWorld-trained and DepthBench-trained than for baseline; agentic KL is closer to baseline at 48.2% versus 50.8%. ASTRA scores 26.6%; only the 27,000-trajectory SWE task result remains pending. Recovering
 role labels is therefore insufficient evidence that the trained model remains a
 useful agent. The fresh-trajectory evaluation tests this distinction separately
 from the near-perfect role scores on fixed development histories.

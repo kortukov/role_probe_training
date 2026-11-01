@@ -69,3 +69,7 @@ not a guaranteed start time. Production monitoring refreshes/publishes the snaps
 
 ## Saved-output recovery
 Baseline shard1691740_1 was marked Slurm OUT_OF_MEMORY after all125 attempts and exports were saved. CPU integrity job1737601 verified all expected IDs,trajectory hash,and13129 generation records without model or scoring calls. [Validation evidence](oom_saved_validation.json). Replacement assembly1737602 waits for this validation and remaining baseline shards; original outputs remain unchanged. The recovered shard retains its one scoring timeout in the denominator.
+
+## ASTRA saved-output recovery
+
+Collection job `1726408_1` ended with Slurm OOM after saving all 125 attempts. CPU validation `1816790` checked expected IDs, trajectory hash, all 9,760 sequential generation records and summary consistency; replacement assembly `1816791` retained all original outputs. No model or scorer calls were repeated. [Integrity evidence](astra_oom_saved_validation.json) and [validated 500-task result](astra_task_results.json). ASTRA uses concurrency 8/8/16/16 across shards; one scorer timeout and four model context stops remain in the 500-task denominator. Role scoring job `1691748` follows the recovered assembly.

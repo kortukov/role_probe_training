@@ -1,0 +1,52 @@
+{
+  "protocol": "swe_inspect_generous_v1",
+  "benchmark": "swe_bench",
+  "samples": 500,
+  "sample_errors": 1,
+  "export_errors": 0,
+  "limited_samples": 0,
+  "samples_with_model_context_stops": 4,
+  "metrics": {
+    "swe_bench_scorer": {
+      "successes": 133.0,
+      "scored": 499,
+      "total": 500,
+      "success_rate": 0.266
+    }
+  },
+  "input_sha256": "de395680b88c8cf90211951dcc5429d0b12322542988b70bde9a1932533688f4",
+  "scheduling": {
+    "concurrency_by_shard": {
+      "0": 8,
+      "1": 8,
+      "2": 16,
+      "3": 16
+    }
+  },
+  "sources": [
+    {
+      "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard0/swe_bench/trajectories.jsonl",
+      "sha256": "142a48b2cf192fd4510c55673e94e42a1b642a6ee628b324b7fc325fe8f57466"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench/trajectories.jsonl",
+      "sha256": "78812eae81d64d3fa483b8fe05abf0d9f89549b3ee5d475dccad0b0e2d3bb024"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726409/shard2/swe_bench/trajectories.jsonl",
+      "sha256": "e49d1a3b38cde239ec9138ffc32dc00f1c1dcb027adacfda95b471d9ffd32b1a"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726409/shard3/swe_bench/trajectories.jsonl",
+      "sha256": "f2c52b715d7f6b7402afd3032c1ed71ea15a8a3076d5b78ad1245d4f54bdf4d4"
+    }
+  ],
+  "settings": {
+    "temperature": 1.0,
+    "reasoning_effort": "high",
+    "max_tokens": 16384,
+    "message_limit": 2000,
+    "token_limit": null,
+    "time_limit": 7200
+  }
+}

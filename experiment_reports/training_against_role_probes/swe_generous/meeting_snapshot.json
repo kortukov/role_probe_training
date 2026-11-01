@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-11-01T06:14:54.401323+00:00",
+  "updated_utc": "2026-11-01T06:24:01.775153+00:00",
   "common_ids": [
     "astropy__astropy-12907",
     "astropy__astropy-13033",
@@ -274,6 +274,7 @@
     "matplotlib__matplotlib-24570",
     "matplotlib__matplotlib-24627",
     "matplotlib__matplotlib-24637",
+    "matplotlib__matplotlib-24870",
     "matplotlib__matplotlib-24970",
     "matplotlib__matplotlib-25122",
     "matplotlib__matplotlib-25287",
@@ -371,9 +372,11 @@
     "sphinx-doc__sphinx-10614",
     "sphinx-doc__sphinx-11445",
     "sphinx-doc__sphinx-7440",
+    "sphinx-doc__sphinx-7462",
     "sphinx-doc__sphinx-7590",
     "sphinx-doc__sphinx-7910",
     "sphinx-doc__sphinx-8056",
+    "sphinx-doc__sphinx-8120",
     "sphinx-doc__sphinx-8265",
     "sphinx-doc__sphinx-8269",
     "sphinx-doc__sphinx-8459",
@@ -389,6 +392,7 @@
     "sphinx-doc__sphinx-9673",
     "sphinx-doc__sphinx-9698",
     "sympy__sympy-11618",
+    "sympy__sympy-12419",
     "sympy__sympy-12481",
     "sympy__sympy-13031",
     "sympy__sympy-13372",
@@ -399,9 +403,15 @@
     "sympy__sympy-16450",
     "sympy__sympy-17318",
     "sympy__sympy-17655",
+    "sympy__sympy-19040",
     "sympy__sympy-19346",
     "sympy__sympy-19495",
-    "sympy__sympy-19637"
+    "sympy__sympy-19637",
+    "sympy__sympy-20916",
+    "sympy__sympy-21596",
+    "sympy__sympy-21847",
+    "sympy__sympy-22080",
+    "sympy__sympy-24539"
   ],
   "models": [
     {
@@ -9221,6 +9231,20 @@
           "seconds": 718.325,
           "source": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench/logs/2026-11-01T02-54-44-00-00_swe-bench_fjbkRuM2aAXgXZUkJwBBYN.eval"
         },
+        "sympy__sympy-21847": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1110.04,
+          "source": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench/logs/2026-11-01T02-54-44-00-00_swe-bench_fjbkRuM2aAXgXZUkJwBBYN.eval"
+        },
+        "sympy__sympy-21596": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1508.699,
+          "source": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench/logs/2026-11-01T02-54-44-00-00_swe-bench_fjbkRuM2aAXgXZUkJwBBYN.eval"
+        },
         "django__django-11163": {
           "success": true,
           "error": false,
@@ -10985,9 +11009,9 @@
           "shard": 1,
           "job": "1726408",
           "concurrency": 8,
-          "saved": 123,
+          "saved": 125,
           "errors": 0,
-          "median_seconds": 540.257
+          "median_seconds": 541.952
         },
         {
           "shard": 2,
@@ -22306,6 +22330,20 @@
           "seconds": 2459.087,
           "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/logs/2026-10-31T23-58-36-00-00_swe-bench_iYXkfcdoohduEbRsJSUBjy.eval"
         },
+        "sphinx-doc__sphinx-8120": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 195.403,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/logs/2026-10-31T23-58-36-00-00_swe-bench_iYXkfcdoohduEbRsJSUBjy.eval"
+        },
+        "sphinx-doc__sphinx-7462": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1499.443,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/logs/2026-10-31T23-58-36-00-00_swe-bench_iYXkfcdoohduEbRsJSUBjy.eval"
+        },
         "astropy__astropy-14365": {
           "success": false,
           "error": false,
@@ -23146,6 +23184,41 @@
           "seconds": 339.291,
           "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_YK9AVmwLpYDJsphJazREzz.eval"
         },
+        "sympy__sympy-22080": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 401.757,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_YK9AVmwLpYDJsphJazREzz.eval"
+        },
+        "sympy__sympy-19040": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1254.781,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_YK9AVmwLpYDJsphJazREzz.eval"
+        },
+        "sympy__sympy-21847": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 704.616,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_YK9AVmwLpYDJsphJazREzz.eval"
+        },
+        "sympy__sympy-24539": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 242.453,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_YK9AVmwLpYDJsphJazREzz.eval"
+        },
+        "sympy__sympy-20916": {
+          "success": true,
+          "error": false,
+          "scored": true,
+          "seconds": 1157.408,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_YK9AVmwLpYDJsphJazREzz.eval"
+        },
         "astropy__astropy-14508": {
           "success": true,
           "error": false,
@@ -23881,6 +23954,13 @@
           "seconds": 453.446,
           "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard2/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_U2KsCpSo3uXSt9xWkNUZkq.eval"
         },
+        "sympy__sympy-12419": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 945.844,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard2/swe_bench/logs/2026-11-01T00-04-39-00-00_swe-bench_U2KsCpSo3uXSt9xWkNUZkq.eval"
+        },
         "astropy__astropy-13236": {
           "success": false,
           "error": false,
@@ -24440,6 +24520,13 @@
           "scored": true,
           "seconds": 291.529,
           "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
+        },
+        "matplotlib__matplotlib-24870": {
+          "success": false,
+          "error": false,
+          "scored": true,
+          "seconds": 1914.35,
+          "source": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/logs/2026-11-01T00-31-58-00-00_swe-bench_QtUEpGdHyqUd6tKCuxvZgN.eval"
         }
       },
       "shards": [
@@ -24447,7 +24534,7 @@
           "shard": 0,
           "job": "1691764",
           "concurrency": 4,
-          "saved": 97,
+          "saved": 99,
           "errors": 0,
           "median_seconds": 523.625
         },
@@ -24455,25 +24542,25 @@
           "shard": 1,
           "job": "1691764",
           "concurrency": 4,
-          "saved": 120,
+          "saved": 125,
           "errors": 1,
-          "median_seconds": 453.8395
+          "median_seconds": 455.534
         },
         {
           "shard": 2,
           "job": "1691764",
           "concurrency": 4,
-          "saved": 105,
+          "saved": 106,
           "errors": 0,
-          "median_seconds": 457.537
+          "median_seconds": 469.192
         },
         {
           "shard": 3,
           "job": "1691764",
           "concurrency": 4,
-          "saved": 80,
+          "saved": 81,
           "errors": 0,
-          "median_seconds": 629.13
+          "median_seconds": 655.41
         }
       ]
     }
@@ -24702,6 +24789,58 @@
         "token_limit": null,
         "time_limit": 7200,
         "concurrency": 4
+      }
+    },
+    "ASTRA-trained": {
+      "protocol": "swe_inspect_generous_v1",
+      "benchmark": "swe_bench",
+      "samples": 500,
+      "sample_errors": 1,
+      "export_errors": 0,
+      "limited_samples": 0,
+      "samples_with_model_context_stops": 4,
+      "metrics": {
+        "swe_bench_scorer": {
+          "successes": 133.0,
+          "scored": 499,
+          "total": 500,
+          "success_rate": 0.266
+        }
+      },
+      "input_sha256": "de395680b88c8cf90211951dcc5429d0b12322542988b70bde9a1932533688f4",
+      "scheduling": {
+        "concurrency_by_shard": {
+          "0": 8,
+          "1": 8,
+          "2": 16,
+          "3": 16
+        }
+      },
+      "sources": [
+        {
+          "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard0/swe_bench/trajectories.jsonl",
+          "sha256": "142a48b2cf192fd4510c55673e94e42a1b642a6ee628b324b7fc325fe8f57466"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench/trajectories.jsonl",
+          "sha256": "78812eae81d64d3fa483b8fe05abf0d9f89549b3ee5d475dccad0b0e2d3bb024"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726409/shard2/swe_bench/trajectories.jsonl",
+          "sha256": "e49d1a3b38cde239ec9138ffc32dc00f1c1dcb027adacfda95b471d9ffd32b1a"
+        },
+        {
+          "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726409/shard3/swe_bench/trajectories.jsonl",
+          "sha256": "f2c52b715d7f6b7402afd3032c1ed71ea15a8a3076d5b78ad1245d4f54bdf4d4"
+        }
+      ],
+      "settings": {
+        "temperature": 1.0,
+        "reasoning_effort": "high",
+        "max_tokens": 16384,
+        "message_limit": 2000,
+        "token_limit": null,
+        "time_limit": 7200
       }
     }
   },
