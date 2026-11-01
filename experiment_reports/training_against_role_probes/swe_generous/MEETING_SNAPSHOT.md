@@ -1,6 +1,6 @@
 # SWE-bench meeting snapshot
 
-Updated: 2026-11-01T02:03:14.779862+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
+Updated: 2026-11-01T02:34:32.200442+00:00. Meeting: 30 October 2026, 15:00 Europe/London.
 
 **Provisional saved-log snapshot; the complete seven-model comparison remains pending; five complete task scores are validated.**
 
@@ -12,22 +12,22 @@ ASTRA shards 0–1 use concurrency 8 and shards 2–3 use 16; other models use 4
 |---|---:|---:|---:|---|
 | Base | 500/500 | 254 | 2 | 50.8% (validated) |
 | AppWorld-trained | 500/500 | 22 | 0 | 4.4% (validated) |
-| ASTRA-trained | 46/500 | 12 | 0 | Pending validation |
+| ASTRA-trained | 66/500 | 16 | 0 | Pending validation |
 | DepthBench-trained | 500/500 | 71 | 0 | 14.2% (validated) |
 | AppWorld + agentic KL (800) | 500/500 | 241 | 0 | 48.2% (validated) |
 | AppWorld + same-batch KL | 500/500 | 243 | 0 | 48.6% (validated) |
-| AppWorld + same-batch KL (27,000) | 128/500 | 61 | 0 | Pending validation |
+| AppWorld + same-batch KL (27,000) | 167/500 | 82 | 0 | Pending validation |
 
-All-seven shared completed task count: 36.
+All-seven shared completed task count: 43.
 
 | Trained model vs baseline | Shared completed tasks | Base successes | Trained successes |
 |---|---:|---:|---:|
 | AppWorld-trained | 500 | 254 | 22 |
-| ASTRA-trained | 46 | 29 | 12 |
+| ASTRA-trained | 66 | 40 | 16 |
 | DepthBench-trained | 500 | 254 | 71 |
 | AppWorld + agentic KL (800) | 500 | 254 | 241 |
 | AppWorld + same-batch KL | 500 | 254 | 243 |
-| AppWorld + same-batch KL (27,000) | 128 | 70 | 61 |
+| AppWorld + same-batch KL (27,000) | 167 | 93 | 82 |
 
 Each row above uses its own shared task IDs; rows with different subsets are not comparable to each other. Errors are retained in subset denominators. The final evaluation denominator remains 500 per model.
 
