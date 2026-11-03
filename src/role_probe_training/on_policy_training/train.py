@@ -48,9 +48,6 @@ def main():
     source_paths = [Path(__file__).resolve().relative_to(Path.cwd().resolve())]
     source_paths += list(Path('src/role_probe_training/on_policy').glob('*.py'))
     source_paths += list(Path('src/role_probe_training/training').glob('*.py'))
-    source_paths += list(Path('src/role_probe_training/on_policy_variants').glob('*.py'))
-    source_paths += list(Path('src/role_probe_training/on_policy_repaired').glob('*.py'))
-    source_paths += list(Path('src/role_probe_training/on_policy_harmony').glob('*.py'))
     source_paths += list(Path('src/role_probe_training/on_policy_recovery').glob('*.py'))
     source_paths += [Path('src/role_probe_training/trajectories')/name for name in
                      ('appworld.py', 'replay.py', 'inspect_export.py')]

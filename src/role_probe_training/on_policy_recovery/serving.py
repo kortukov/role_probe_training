@@ -1,10 +1,11 @@
-"""Local serial HF serving: sample with the very same adapters used to train.
+"""Serve the colocated vLLM policy to concurrent episodes at synchronous barriers.
 
-No export, quantization change, or asynchronous stale policy is involved. Inspect
-runs in its existing separate environment and sends OpenAI-compatible requests.
+Each episode uses its own route, /episodes/<id>/v1, so generation indices, seeds,
+tool-call IDs and retained raw completions are per episode. vLLM batches the
+generations. Inspect runs in its existing separate environment.
 """
 from contextlib import contextmanager
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
 import re
@@ -12,8 +13,12 @@ import threading
 import time
 import traceback
 
-import torch
 
+ROUTE = re.compile(r'/episodes/([^/]+)/v1/(chat/completions|models)')
+
+
+class Server(ThreadingHTTPServer):
+    request_queue_size = 128
 
 
 def template_messages(messages, raw_completions=None):
@@ -49,9 +54,16 @@ def serve(runtime, output, policy_step, generation, *, sampler=None):
     """Serve only while collecting; stop and join before any optimizer update."""
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    state = {'episode': None, 'request': 0, 'errors': []}
-    raw_completions = {}
+    state = {'episodes': {}, 'errors': []}
+    # Fast tokenizers may raise when one instance is used from several threads.
+    tokenizer_lock = threading.Lock()
+    state_lock = threading.Lock()
     chat_template = mixed_channel_template(runtime.tokenizer.chat_template)
+
+    def append(name, row):
+        with state_lock:
+            with (output/name).open('a') as stream:
+                stream.write(json.dumps(row)+'\n')
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -66,7 +78,7 @@ def serve(runtime, output, policy_step, generation, *, sampler=None):
             self.wfile.write(encoded)
 
         def do_GET(self):
-            if self.path == '/v1/models':
+            if self.path == '/v1/models' or (ROUTE.fullmatch(self.path) and self.path.endswith('/models')):
                 return self.reply(200, {'object': 'list', 'data': [{
                     'id': 'on-policy-role-model', 'object': 'model', 'created': 0,
                     'owned_by': 'local', 'max_model_len': generation['context_limit']}]})
@@ -76,12 +88,16 @@ def serve(runtime, output, policy_step, generation, *, sampler=None):
             try:
                 body = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
                 if self.path == '/episode':
-                    state['episode'] = body['id']
-                    state['request'] = 0
-                    raw_completions.clear()
+                    with state_lock:
+                        if body['id'] in state['episodes']:
+                            raise ValueError(f"Episode {body['id']} is already registered")
+                        state['episodes'][body['id']] = dict(seed=int(body['seed']), request=0, raw={},
+                                                             lock=threading.Lock())
                     return self.reply(200, {'ok': True})
-                if self.path != '/v1/chat/completions' or state['episode'] is None:
-                    raise ValueError('Unknown route or no active episode')
+                route = ROUTE.fullmatch(self.path)
+                if route is None or route[2] != 'chat/completions' or route[1] not in state['episodes']:
+                    raise ValueError('Unknown route or unregistered episode')
+                episode_id, episode = route[1], state['episodes'][route[1]]
                 if state['errors']:
                     return self.reply(409, {'error': {'message': 'Serving stopped after an earlier failure',
                         'type': 'on_policy_generation_error'}})
@@ -89,94 +105,79 @@ def serve(runtime, output, policy_step, generation, *, sampler=None):
                     raise ValueError('Streaming is not supported')
                 if body.get('temperature', 1) != 1 or body.get('top_p', 1) != 1:
                     raise ValueError('On-policy distribution must use temperature=1, top_p=1')
+                if int(body['seed']) != episode['seed']:
+                    raise ValueError(f'Request seed does not match episode route {episode_id}')
+                # An episode's agent loop is sequential; the lock keeps its indices exact.
+                with episode['lock']:
+                    return self.reply(200, self.complete(episode_id, episode, body))
+            except Exception:
+                with state_lock:
+                    state['errors'].append(traceback.format_exc())
+                    (output/'server_errors.json').write_text(json.dumps(state['errors'], indent=2))
+                self.reply(500, {'error': {'message': state['errors'][-1].splitlines()[-1],
+                                           'type': 'on_policy_generation_error'}})
+
+        def complete(self, episode_id, episode, body):
+            with tokenizer_lock:
                 prompt = runtime.tokenizer.apply_chat_template(
-                    template_messages(body['messages'], raw_completions), tools=body.get('tools'),
+                    template_messages(body['messages'], episode['raw']), tools=body.get('tools'),
                     chat_template=chat_template,
                     tokenize=True, add_generation_prompt=True, reasoning_effort='high')
-                maximum = generation['context_limit']
-                budget = min(generation['max_tokens'], maximum - len(prompt))
-                if budget <= 0:
-                    with (output/'episode_stops.jsonl').open('a') as stream:
-                        stream.write(json.dumps(dict(episode_id=state['episode'], policy_step=policy_step,
-                            reason='serving_context_limit', prompt_tokens=len(prompt), context_limit=maximum,
-                            generated_tokens=0))+'\n')
-                    # This is an episode boundary, not a model generation or a
-                    # server error. Inspect evaluates the unchanged world state.
-                    return self.reply(200, {'id': f"{state['episode']}_context_limit",
-                        'object':'chat.completion', 'created':int(time.time()), 'model':body['model'],
-                        'choices':[{'index':0,'message':{'role':'assistant','content':''},'finish_reason':'stop'}],
-                        'usage':{'prompt_tokens':len(prompt),'completion_tokens':0,'total_tokens':len(prompt)}})
-                ids = torch.tensor([prompt], device=runtime.device)
                 stops = [runtime.tokenizer.convert_tokens_to_ids(x) for x in ('<|return|>', '<|call|>')]
-                seed = int(body['seed']) + state['request'] * 1000003
-                # Record the exact failing input even if CUDA crashes before a
-                # completion exists. These are diagnostics, not sampled data.
-                with (output/'inputs.jsonl').open('a') as stream:
-                    stream.write(json.dumps(dict(episode_id=state['episode'],
-                        generation_index=state['request'], policy_step=policy_step,
-                        seed=seed, prompt_ids=prompt))+'\n')
-                started = time.perf_counter()
-                if sampler is not None:
-                    completion = sampler(prompt, budget, stops, seed)
-                else:
-                    with torch.random.fork_rng(devices=[runtime.device]), torch.no_grad():
-                        torch.manual_seed(seed)
-                        sampled = runtime.model.generate(
-                            input_ids=ids, attention_mask=torch.ones_like(ids),
-                            do_sample=True, temperature=1., top_p=1., top_k=0,
-                            repetition_penalty=1., max_new_tokens=budget,
-                            eos_token_id=stops, pad_token_id=runtime.pad_id, use_cache=True)
-                    completion = sampled[0, len(prompt):].tolist()
-                runtime.hidden = None
-                row = dict(episode_id=state['episode'], policy_step=policy_step,
-                           generation_index=state['request'], seed=seed,
-                           prompt_ids=prompt, completion_ids=completion,
-                           seconds=time.perf_counter()-started)
-                # Persist raw samples before parsing; malformed outputs are auditable.
-                with (output/'requests.jsonl').open('a') as stream:
-                    stream.write(json.dumps(row)+'\n')
-                state['request'] += 1
-                parsed = sampler.__self__.parse_completion(completion, body.get('tools') or [])
-                message = parsed['message']
-                with (output/'parser_events.jsonl').open('a') as audit:
-                    audit.write(json.dumps(dict(episode_id=state['episode'], generation_index=state['request']-1,
-                        policy_step=policy_step, invalid=parsed['invalid'], issues=parsed['issues']))+'\n')
-                for index, call in enumerate(message.get('tool_calls', [])):
-                    call['id'] = f"{state['episode']}_{state['request']}_{index}"
-                if message.get('tool_calls'):
-                    key = tuple(call['id'] for call in message['tool_calls'])
-                    raw_completions[key] = 'assistant' + runtime.tokenizer.decode(completion, skip_special_tokens=False)
-                capped = completion[-1] not in stops
-                reason = 'stop' if parsed['invalid'] else ('length' if capped else ('tool_calls' if message.get('tool_calls') else 'stop'))
-                return self.reply(200, {'id': f"{state['episode']}_{state['request']}",
+            maximum = generation['context_limit']
+            budget = min(generation['max_tokens'], maximum - len(prompt))
+            if budget <= 0:
+                append('episode_stops.jsonl', dict(episode_id=episode_id, policy_step=policy_step,
+                    reason='serving_context_limit', prompt_tokens=len(prompt), context_limit=maximum,
+                    generated_tokens=0))
+                # This is an episode boundary, not a model generation or a
+                # server error. Inspect evaluates the unchanged world state.
+                return {'id': f'{episode_id}_context_limit',
                     'object': 'chat.completion', 'created': int(time.time()), 'model': body['model'],
-                    'choices': [{'index': 0, 'message': message, 'finish_reason': reason}],
-                    'usage': {'prompt_tokens': len(prompt), 'completion_tokens': len(completion),
-                              'total_tokens': len(prompt)+len(completion)}})
-            except Exception as error:
-                state['errors'].append(traceback.format_exc())
-                (output/'server_errors.json').write_text(json.dumps(state['errors'], indent=2))
-                self.reply(500, {'error': {'message': str(error), 'type': 'on_policy_generation_error'}})
+                    'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': ''}, 'finish_reason': 'stop'}],
+                    'usage': {'prompt_tokens': len(prompt), 'completion_tokens': 0, 'total_tokens': len(prompt)}}
+            index = episode['request']
+            seed = int(body['seed']) + index * 1000003
+            # Record the exact failing input even if generation fails before a
+            # completion exists. These are diagnostics, not sampled data.
+            append('inputs.jsonl', dict(episode_id=episode_id, generation_index=index,
+                policy_step=policy_step, seed=seed, prompt_ids=prompt))
+            started = time.perf_counter()
+            completion = sampler(prompt, budget, stops, seed)
+            # Persist raw samples before parsing; malformed outputs are auditable.
+            append('requests.jsonl', dict(episode_id=episode_id, policy_step=policy_step,
+                generation_index=index, seed=seed, prompt_ids=prompt, completion_ids=completion,
+                seconds=time.perf_counter()-started))
+            episode['request'] += 1
+            parsed = sampler.__self__.parse_completion(completion, body.get('tools') or [])
+            message = parsed['message']
+            append('parser_events.jsonl', dict(episode_id=episode_id, generation_index=index,
+                policy_step=policy_step, invalid=parsed['invalid'], issues=parsed['issues']))
+            for position, call in enumerate(message.get('tool_calls', [])):
+                call['id'] = f"{episode_id}_{episode['request']}_{position}"
+            if message.get('tool_calls'):
+                key = tuple(call['id'] for call in message['tool_calls'])
+                with tokenizer_lock:
+                    episode['raw'][key] = 'assistant' + runtime.tokenizer.decode(completion, skip_special_tokens=False)
+            capped = completion[-1] not in stops
+            reason = 'stop' if parsed['invalid'] else ('length' if capped else ('tool_calls' if message.get('tool_calls') else 'stop'))
+            return {'id': f"{episode_id}_{episode['request']}",
+                'object': 'chat.completion', 'created': int(time.time()), 'model': body['model'],
+                'choices': [{'index': 0, 'message': message, 'finish_reason': reason}],
+                'usage': {'prompt_tokens': len(prompt), 'completion_tokens': len(completion),
+                          'total_tokens': len(prompt)+len(completion)}}
 
-    runtime.model.gradient_checkpointing_disable()
-    server = HTTPServer(('127.0.0.1', 0), Handler)
-    def serve_on_device():
-        # CUDA current-device state is thread-local. The HTTP worker must bind
-        # its rank's GPU explicitly before library code allocates on 'cuda'.
-        if runtime.device != 'cpu':
-            torch.cuda.set_device(runtime.device)
-        server.serve_forever()
-
-    thread = threading.Thread(target=serve_on_device, daemon=True)
+    server = Server(('127.0.0.1', 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
         yield f'http://127.0.0.1:{server.server_port}', state
     finally:
         server.shutdown()
         thread.join()
+        # Joins any remaining request threads, so no retained write is cut short.
         server.server_close()
         runtime.hidden = None
-        runtime.model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant': False})
 
 
 def mixed_channel_template(template):
