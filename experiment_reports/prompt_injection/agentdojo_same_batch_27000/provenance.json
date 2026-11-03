@@ -10,6 +10,8 @@
     "src/experiments/agentdojo_robustness/driver/uv.lock": "6c728798a47fd9fc5a8288e4bd07258a0009944dfcb4d7e652a6f4b710873c8a",
     "experiment_reports/prompt_injection/agentdojo_same_batch_27000/data/historical_base.tar.gz": "6e4d70511d5dcbcbc8d26bf9a57451e09fcb8040be2d54129b391a502464f4b0",
     "experiment_reports/training_against_role_probes/base_model/data/swe_native/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
-    "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/data/post_training/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146"
+    "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/data/post_training/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
+    "src/role_probe_training/post_training/vllm_worker.py": "22f083ae5a45b7993f27553f11378e8f63f716fa736fe8d4a6bb86d428cbae03",
+    "src/experiments/agentic_eval/server_current/uv.lock": "92a17d3bf49da4c5a352f319c8fab14f1b06f7989153424a3b093fd67781452e"
   }
 }

@@ -11,7 +11,7 @@ ber-gpu1 with a 24-hour budget. No existing user jobs are changed.
 .tools/bin/uv sync --locked --project src/experiments/agentdojo_robustness/driver
 .tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_robustness/check_driver.py
 sbatch --export=ALL --partition=ber-testing --time=01:00:00 src/experiments/agentdojo_robustness/evaluate.sbatch trained smoke
-# Production submission uses afterok on the successful smoke-test job:
+# For a still-live smoke job, production can use afterok:
 sbatch --export=ALL --dependency=afterok:SMOKE_JOB src/experiments/agentdojo_robustness/evaluate.sbatch base full
 sbatch --export=ALL --dependency=afterok:SMOKE_JOB src/experiments/agentdojo_robustness/evaluate.sbatch trained full
 .tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
@@ -61,3 +61,9 @@ code. It leaves the shared working branch, staging area and unrelated edits
 untouched. A CPU finalizer runs after both production jobs terminate, saves
 coverage-aware tables even on failure, and pushes the branch. GitHub push access
 was verified with the initial report publication. No pull request is merged.
+
+Live submission: smoke 1964347 completed successfully. Slurm had already purged
+its live job record, so production was submitted after checking its successful
+accounting record rather than referencing it as a dependency. Base: 1964385;
+trained: 1964386; final report: 1964387 (afterany on both production jobs).
+Validation evidence is retained in [validation.json](validation.json).

@@ -40,7 +40,8 @@ base: clean utility **66.32% (63/95)**, attacked utility **53.64% (494/921)**,
 ASR **23.78% (219/921)** and ASR+ **24.00% (221/921)**, including two skips.
 [Machine-readable metrics](metrics.json) retain counts and coverage.
 
-The fresh base and trained evaluations are pending. The historical base used a
+At submission on 2026-11-03, the fresh base and trained evaluations were pending;
+[RESULTS.md](RESULTS.md) records their latest automatically saved state. The historical base used a
 different serving version and an `ipython` tool header; the current export uses
 function-name tool headers. Its results provide historical context; the fresh,
 matched base is the primary comparison. All runs use the historical 12,288-token
@@ -48,8 +49,8 @@ budget, below GPT-OSS's native context, so results describe this budgeted protoc
 
 ## Message
 
-The historical baseline is verified from saved trajectories. Whether the trained
-model improves robustness remains unanswered until both new runs finish; reduced
+The historical baseline is verified from saved trajectories. At submission, whether the trained
+model improves robustness remained unanswered pending both new runs; reduced
 attack success must be assessed together with clean and attacked utility.
 
 [Reproduction, job records, model sharing and saved artifacts](RUNNING.md)
