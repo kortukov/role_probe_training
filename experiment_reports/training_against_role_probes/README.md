@@ -70,6 +70,9 @@ AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for
 
 **SWE role-score coverage:** Base: 481/500; AppWorld-trained: 500/500; ASTRA-trained: 498/500; DepthBench-trained: 498/500. Histories above native context are excluded only from role scoring, so role metrics describe different eligible subsets. ASTRA’s scorer timeout and the baseline’s two scorer timeouts remain failures in its 500-task denominator. [SWE coverage and confusion matrices](APPENDIX.md#swe-bench-whole-history-results).
 
+
+[Training times and GPU-hours](APPENDIX.md#training-time), including the contributing jobs for resumed runs.
+
 <!-- /fresh-rollout-results -->
 
 <!-- kl-iteration-results -->
@@ -143,6 +146,9 @@ SWE 434/500, 415/500, pending. Over-context exclusions affect role metrics only.
 The 270/batch-16 SWE run has one evaluation error, retained in its 500-task
 success denominator. These role scores therefore describe different eligible
 subsets.
+
+
+[Training times and GPU-hours](APPENDIX.md#training-time), including the contributing jobs for resumed runs.
 
 <!-- /kl-iteration-results -->
 

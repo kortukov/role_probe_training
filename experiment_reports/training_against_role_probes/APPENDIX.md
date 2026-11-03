@@ -378,3 +378,57 @@ Coverage: 485/500 histories; 15 above native context. Token-weighted accuracy: 9
 | tool | 0.1 | 0.0 | 0.0 | 0.0 | 99.8 |
 
 [Metrics and provenance](swe_generous/samebatch27000_role_results.json).
+
+## Training time
+
+Times below sum Slurm allocation elapsed time for the training jobs that supplied
+the final model or its reused on-policy episodes. They include model loading,
+updates, probe refitting, in-job validation and checkpointing; on-policy jobs also
+include episode generation. Queue waits, separate off-policy data collection,
+post-training evaluation, and debugging attempts whose work was not reused are
+excluded. These are recorded execution costs, not an end-to-end experiment budget
+or a controlled throughput comparison. GPU-hours sum elapsed hours × allocated
+GPUs; hardware was NVIDIA B200 throughout. Time is rounded to the nearest minute.
+
+| Model | Training allocation time (h:mm) | GPUs per contributing job | GPU-hours |
+|---|---:|---|---:|
+| Base | 0:00 | — | 0.0 |
+| AppWorld-trained | 3:38 | 2 | 7.2 |
+| ASTRA-trained | 1:07 | 2 | 2.2 |
+| DepthBench-trained | 13:37 | 2 | 27.2 |
+| AppWorld + agentic KL (800) | 5:06 | 2 | 10.2 |
+| AppWorld + same-batch KL (2,700) | 5:11 | 2 | 10.4 |
+| AppWorld + same-batch KL (27,000) | 60:58 | 2 | 121.9 |
+| AppWorld on-policy (270, batch 64) | 9:55 | 2 → 1 | 10.3 |
+| AppWorld on-policy (270, batch 16) | 10:46 | 2 → 1 | 11.9 |
+| AppWorld on-policy (2,700, batch 16) | 56:47 | 2 | 113.6 |
+
+The agentic-KL and both same-batch-KL totals include their two-update pilot jobs,
+whose checkpoints were resumed for the remaining updates.
+
+Base means no additional role-probe training; its original pretraining cost is
+not included. The two short on-policy runs used earlier two-GPU work followed by
+one-GPU completion. Their final allocations alone took 9h32m (batch 64) and
+9h36m (batch 16); the table additionally includes the earlier jobs supplying the
+41 cached episodes or the first three updates and cached fourth batch. The
+2,700-episode total includes the two initial updates, the failed attempt supplying
+the cached third batch, and seven completed continuation segments. Each contributing
+job is counted in full, including any unsuccessful work within that allocation.
+
+### Timing provenance
+
+Recorded from `sacct -X --format=JobID,State,ElapsedRaw,AllocTRES` on 2026-11-03.
+The job lists below define the scope of each total; failed jobs are included only
+where their checkpoints or saved episodes were reused.
+
+| Model | Contributing training jobs |
+|---|---|
+| AppWorld-trained | 1501541 |
+| ASTRA-trained | 1503671 |
+| DepthBench-trained | 1503688 |
+| AppWorld + agentic KL (800) | 1504827, 1504830 |
+| AppWorld + same-batch KL (2,700) | 1504851, 1504852 |
+| AppWorld + same-batch KL (27,000) | 1505946, 1505947 |
+| AppWorld on-policy (270, batch 64) | 1787803, 1816749 |
+| AppWorld on-policy (270, batch 16) | 1787804, 1816751 |
+| AppWorld on-policy (2,700, batch 16) | 1758049, 1758050, 1815838, 1816553, 1816554, 1816555, 1816556, 1816557, 1816558, 1816559 |
