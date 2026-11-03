@@ -1,0 +1,15 @@
+{
+  "repository_head": "d96fe7a58b04e739b09ed2a093eb9f4e6894fef8",
+  "sha256": {
+    "src/experiments/agentdojo_robustness/check_driver.py": "fee803b75d32ca28693b1affdf735e9fb4480b7d18c532d90bc47372d751e35f",
+    "src/experiments/agentdojo_robustness/run.py": "3bacfecfb0bc6c0b3117e0987a054c7a0e74136ba1986d1a853a103e8c3cef18",
+    "src/experiments/agentdojo_robustness/publish.py": "30b1d9bdffe60439280eeaeb973d4c2445dd144dcc96c5e0c6668a909da09251",
+    "src/experiments/agentdojo_robustness/summarize.py": "316ac56ac9b6c84391edbbc3346dcf35f56eef20cae6344ea3e5cd10313b2f8d",
+    "src/experiments/agentdojo_robustness/evaluate.sbatch": "d00e8431e603b2c07aeaebd7ef038c3c9c3b898dc13c6cccfd512f49cda68b82",
+    "src/experiments/agentdojo_robustness/finalize.sbatch": "bc6c27c170812b1132902733bce57815be3fbcfac732c451a3c33bca60229f1b",
+    "src/experiments/agentdojo_robustness/driver/uv.lock": "6c728798a47fd9fc5a8288e4bd07258a0009944dfcb4d7e652a6f4b710873c8a",
+    "experiment_reports/prompt_injection/agentdojo_same_batch_27000/data/historical_base.tar.gz": "6e4d70511d5dcbcbc8d26bf9a57451e09fcb8040be2d54129b391a502464f4b0",
+    "experiment_reports/training_against_role_probes/base_model/data/swe_native/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
+    "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/data/post_training/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146"
+  }
+}
