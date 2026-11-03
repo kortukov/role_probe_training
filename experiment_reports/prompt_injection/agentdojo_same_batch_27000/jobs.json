@@ -1,0 +1,22 @@
+{
+  "smoke": {
+    "id": "1964347",
+    "state": "COMPLETED",
+    "exit_code": "0:0"
+  },
+  "replaced_smoke": {
+    "id": "1964288",
+    "state": "CANCELLED",
+    "reason": "Attack pipeline naming corrected before production"
+  },
+  "submission_note": "Smoke success verified through sacct before submission. Completed smoke job purged from live scheduler.",
+  "base": {
+    "id": "1964385"
+  },
+  "trained": {
+    "id": "1964386"
+  },
+  "report": {
+    "id": "1964387"
+  }
+}
