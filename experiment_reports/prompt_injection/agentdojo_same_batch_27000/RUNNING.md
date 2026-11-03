@@ -53,3 +53,11 @@ Outputs: `runs/{base,trained}/vllm_parsed/` contains full trajectory JSON;
 contain scheduler/server/suite logs. These stay on cluster storage and are
 ignored in Git. The small baseline archive, metrics, report and manifests are
 versioned. `jobs.json` records submitted IDs; `provenance.json` records hashes.
+
+GitHub publication uses a dedicated branch, `agentdojo-same-batch-27000`.
+The [publisher](../../../src/experiments/agentdojo_robustness/publish.py) creates
+commits with a temporary Git index containing only this experiment's report and
+code. It leaves the shared working branch, staging area and unrelated edits
+untouched. A CPU finalizer runs after both production jobs terminate, saves
+coverage-aware tables even on failure, and pushes the branch. GitHub push access
+was verified with the initial report publication. No pull request is merged.
