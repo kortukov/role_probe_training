@@ -1,0 +1,25 @@
+{
+  "name": "appworld270_batch16-on-policy",
+  "wandb_id": "appworld270_batch16-on-policy-v1-repaired-harmony-recovery-single-gpu",
+  "model": ".cache/models/gpt-oss-20b",
+  "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
+  "trajectories": "experiment_reports/training_against_role_probes/data/train2700/trajectories.jsonl",
+  "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
+  "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
+  "output": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_single_gpu",
+  "image": ".cache/appworld/appworld.sif",
+  "appworld_data": ".cache/appworld/data",
+  "seed": 123,
+  "learning_rate": 5e-05,
+  "kl_coefficient": 16,
+  "refit_steps": 2000,
+  "eval_interval": 5,
+  "generation": {
+    "max_tokens": 8192,
+    "context_limit": 32768,
+    "max_steps": 50
+  },
+  "serving_backend": "colocated_vllm",
+  "episodes_per_task": 3,
+  "batch_size": 16
+}
