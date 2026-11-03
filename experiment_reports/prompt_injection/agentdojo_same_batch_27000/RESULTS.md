@@ -5,5 +5,5 @@ Rates use all expected attempts; partial rows are provisional. ASR excludes harn
 | Model | Clean coverage | Clean utility | Attacked coverage | Attacked utility | ASR | ASR+ | Skips |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | historical_base | 95/95 | 66.32% | 921/921 | 53.64% | 23.78% | 24.00% | 2 |
-| base | 73/95 | 54.74% | 25/921 | 1.30% | 1.52% | 1.52% | 0 |
-| trained | 78/95 | 58.95% | 0/921 | 0.00% | 0.00% | 0.00% | 0 |
+| base | 95/95 | 65.26% | 916/921 | 49.73% | 27.69% | 27.69% | 0 |
+| trained | 95/95 | 62.11% | 913/921 | 50.27% | 29.53% | 29.53% | 0 |

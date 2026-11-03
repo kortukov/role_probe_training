@@ -24,45 +24,45 @@
   "base": {
     "clean": {
       "expected": 95,
-      "present": 75,
-      "scored": 73,
-      "utility": 0.5473684210526316,
-      "asr": 0.7684210526315789,
-      "asr_plus": 0.7684210526315789,
+      "present": 95,
+      "scored": 95,
+      "utility": 0.6526315789473685,
+      "asr": 1.0,
+      "asr_plus": 1.0,
       "skips": 0,
       "errors": 0
     },
     "attacked": {
       "expected": 921,
-      "present": 26,
-      "scored": 25,
-      "utility": 0.013029315960912053,
-      "asr": 0.01520086862106406,
-      "asr_plus": 0.01520086862106406,
+      "present": 921,
+      "scored": 916,
+      "utility": 0.49728555917481,
+      "asr": 0.2768729641693811,
+      "asr_plus": 0.2768729641693811,
       "skips": 0,
-      "errors": 0
+      "errors": 5
     }
   },
   "trained": {
     "clean": {
       "expected": 95,
-      "present": 80,
-      "scored": 78,
-      "utility": 0.5894736842105263,
-      "asr": 0.8210526315789474,
-      "asr_plus": 0.8210526315789474,
+      "present": 95,
+      "scored": 95,
+      "utility": 0.6210526315789474,
+      "asr": 1.0,
+      "asr_plus": 1.0,
       "skips": 0,
       "errors": 0
     },
     "attacked": {
       "expected": 921,
-      "present": 1,
-      "scored": 0,
-      "utility": 0.0,
-      "asr": 0.0,
-      "asr_plus": 0.0,
+      "present": 921,
+      "scored": 913,
+      "utility": 0.50271444082519,
+      "asr": 0.2953311617806732,
+      "asr_plus": 0.2953311617806732,
       "skips": 0,
-      "errors": 0
+      "errors": 8
     }
   }
 }
