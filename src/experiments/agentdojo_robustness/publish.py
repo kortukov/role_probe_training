@@ -19,7 +19,7 @@ with tempfile.TemporaryDirectory() as d:
     else:
         parent = git('rev-parse', 'HEAD')
     git('read-tree', parent, env=env)
-    git('add', '--', str(ROOT), 'src/experiments/agentdojo_robustness', env=env)
+    git('add', '--', str(ROOT), 'src/experiments/agentdojo_robustness', 'src/experiments/adapter_release', env=env)
     tree = git('write-tree', env=env)
     commit = git('commit-tree', tree, '-p', parent, '-m', 'Save AgentDojo clean and attacked evaluation results', env=env)
     git('push', 'origin', f'{commit}:refs/heads/{BRANCH}')

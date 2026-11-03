@@ -1,10 +1,10 @@
 {
   "repository_head": "d96fe7a58b04e739b09ed2a093eb9f4e6894fef8",
   "sha256": {
-    "src/experiments/agentdojo_robustness/check_driver.py": "fee803b75d32ca28693b1affdf735e9fb4480b7d18c532d90bc47372d751e35f",
-    "src/experiments/agentdojo_robustness/run.py": "3bacfecfb0bc6c0b3117e0987a054c7a0e74136ba1986d1a853a103e8c3cef18",
-    "src/experiments/agentdojo_robustness/publish.py": "30b1d9bdffe60439280eeaeb973d4c2445dd144dcc96c5e0c6668a909da09251",
-    "src/experiments/agentdojo_robustness/summarize.py": "316ac56ac9b6c84391edbbc3346dcf35f56eef20cae6344ea3e5cd10313b2f8d",
+    "src/experiments/agentdojo_robustness/check_driver.py": "e1cda4596ced1ce556a5bf4281e2d8ba52454bf29522d15b98274b5d9dac8020",
+    "src/experiments/agentdojo_robustness/run.py": "a549cc7561f86822f1f14d7d42ace559ea8c228a0f90d78709a3ab9d616b025f",
+    "src/experiments/agentdojo_robustness/publish.py": "04fd83bb512b3da083c04b28d902a5c7193a9a2aafb58d45cc118e7b517d51d3",
+    "src/experiments/agentdojo_robustness/summarize.py": "5e52679064e7d9833dd51448610c52435ec97f08dbbb216b9796df0e78d95f6f",
     "src/experiments/agentdojo_robustness/evaluate.sbatch": "d00e8431e603b2c07aeaebd7ef038c3c9c3b898dc13c6cccfd512f49cda68b82",
     "src/experiments/agentdojo_robustness/finalize.sbatch": "bc6c27c170812b1132902733bce57815be3fbcfac732c451a3c33bca60229f1b",
     "src/experiments/agentdojo_robustness/driver/uv.lock": "6c728798a47fd9fc5a8288e4bd07258a0009944dfcb4d7e652a6f4b710873c8a",
@@ -12,6 +12,13 @@
     "experiment_reports/training_against_role_probes/base_model/data/swe_native/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
     "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/data/post_training/model/chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
     "src/role_probe_training/post_training/vllm_worker.py": "22f083ae5a45b7993f27553f11378e8f63f716fa736fe8d4a6bb86d428cbae03",
-    "src/experiments/agentic_eval/server_current/uv.lock": "92a17d3bf49da4c5a352f319c8fab14f1b06f7989153424a3b093fd67781452e"
+    "src/experiments/agentic_eval/server_current/uv.lock": "92a17d3bf49da4c5a352f319c8fab14f1b06f7989153424a3b093fd67781452e",
+    "src/experiments/adapter_release/role_worker.py": "22f083ae5a45b7993f27553f11378e8f63f716fa736fe8d4a6bb86d428cbae03",
+    "src/experiments/adapter_release/check.sbatch": "b73c454a5405c1334a7b2705667c91577791234eb1f4479299b822ee9f65d648",
+    "src/experiments/adapter_release/verify_export.py": "bede80d322740b989f27a465c783b76286e17469b2a7eeb0f5b8ab4de5008391",
+    "src/experiments/adapter_release/prepare_vllm.py": "b466f9cf218e5df9f4004180edbf025ad5d81b010b0336cfd6a40af0b313c813",
+    "src/experiments/adapter_release/serve.sh": "f9ce8309c663108954c85ab589b9436bf9f790d9d182c02d9df5a3cac243d8ce",
+    "src/experiments/adapter_release/requirements-prepare.txt": "7d69748f77eebea7aebad37882ba3af55b8e6524db0307e32483ba71b5aaf40a",
+    "src/experiments/adapter_release/README_HUB.md": "9d9ecfb10941497341c49bea540db1653e4787ba2ff267932dc2bfd1a98ba234"
   }
 }

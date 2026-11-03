@@ -11,12 +11,35 @@
   },
   "submission_note": "Smoke success verified through sacct before submission. Completed smoke job purged from live scheduler.",
   "base": {
-    "id": "1964385"
+    "id": "1964613"
   },
   "trained": {
-    "id": "1964386"
+    "id": "1964614"
   },
   "report": {
-    "id": "1964387"
+    "id": "1964615"
+  },
+  "previous_production": {
+    "base": {
+      "id": "1964385"
+    },
+    "trained": {
+      "id": "1964386"
+    },
+    "report": {
+      "id": "1964387"
+    }
+  },
+  "recovery_reason": "Malformed tool-call JSON aborted suites. Driver now returns stock invalid-tool feedback and isolates remaining per-attempt failures; completed trajectories reused.",
+  "adapter_validation": {
+    "id": "1964572",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "tensors_exactly_equal": 603
+  },
+  "recovery_smoke": {
+    "id": "1964575",
+    "state": "COMPLETED",
+    "exit_code": "0:0"
   }
 }

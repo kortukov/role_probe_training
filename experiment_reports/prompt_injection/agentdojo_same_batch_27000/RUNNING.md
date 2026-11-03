@@ -38,8 +38,11 @@ The fresh base export is `experiment_reports/training_against_role_probes/base_m
 
 Hugging Face sharing destination:
 https://huggingface.co/kortukov/gpt-oss-20b-role-perception-appworld-27000
-The model card there documents the required loader, and the upload includes the
-original complete training adapter as well as the exact evaluation export.
+The Hub now contains only the original complete adapter, portable base-model
+metadata and loading helpers. Transformers/PEFT resolves the pinned public base.
+The supplied vLLM launcher reconstructs the exact evaluation export locally;
+603 model and attention tensors match exactly (check job 1964572).
+See [adapter validation](adapter_validation.json) and [Hub manifest](huggingface.json).
 
 Historical project: `/data/cluster/users/kortukov/prompt_injection_interp`,
 revision `2316d05167498feb7203ad5d1f6ff0016d66140e`.
@@ -67,3 +70,11 @@ its live job record, so production was submitted after checking its successful
 accounting record rather than referencing it as a dependency. Base: 1964385;
 trained: 1964386; final report: 1964387 (afterany on both production jobs).
 Validation evidence is retained in [validation.json](validation.json).
+
+Recovery: original full suites stopped on malformed model tool-call JSON.
+The driver now retains invalid calls and returns the stock invalid-tool error
+feedback, allowing model correction. Any other per-attempt exception is logged
+in `runs/<model>/<suite>.failures.jsonl`; the remaining attempts continue.
+Such errors receive no utility/attack credit and remain outside scored coverage.
+Completed trajectories are reused. CPU integration exercises malformed tool
+arguments and recovery; GPU smoke 1964575 passed. Current IDs are in jobs.json.

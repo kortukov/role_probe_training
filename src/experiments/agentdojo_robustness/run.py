@@ -29,18 +29,52 @@ def main():
     original = client.chat.completions.create
     def create(**kwargs):
         kwargs.update(max_tokens=8192, temperature=1.0, reasoning_effort='medium', seed=123)
-        return original(**kwargs)
+        completion = original(**kwargs)
+        for choice in completion.choices:
+            for call in choice.message.tool_calls or []:
+                try:
+                    args = json.loads(call.function.arguments)
+                    if not isinstance(args, dict):
+                        raise ValueError('Tool arguments must be a JSON object')
+                except (json.JSONDecodeError, ValueError) as error:
+                    # Use the stock executor's invalid-tool error response. Keep
+                    # the raw output in both the transcript and a diagnostic log.
+                    invalid = {'function': call.function.name, 'arguments': call.function.arguments,
+                               'error': str(error)}
+                    a.output.mkdir(parents=True, exist_ok=True)
+                    with (a.output / f'{a.suite}.invalid_calls.jsonl').open('a') as log:
+                        log.write(json.dumps(invalid)+'\n')
+                    call.function.name = '__invalid_tool_call__'
+                    call.function.arguments = json.dumps(invalid)
+        return completion
     client.chat.completions.create = create
     llm = OpenAILLM(client, 'role-agentdojo', reasoning_effort='medium', temperature=1.0)
     config = PipelineConfig(llm=llm, model_id=None, defense=None, system_message_name=None, system_message=None)
     pipeline = AgentPipeline.from_config(config)
     pipeline.name = 'vllm_parsed'
     a.output.mkdir(parents=True, exist_ok=True)
+    def attempt(user, injection=None):
+        try:
+            if injection is None:
+                benchmark_suite_without_injections(pipeline, suite, a.output, False,
+                    user_tasks=[user], benchmark_version='v1.2.2')
+            else:
+                benchmark_suite_with_injections(pipeline, suite, attack, a.output, False,
+                    user_tasks=[user], injection_tasks=[injection], benchmark_version='v1.2.2')
+        except Exception as error:
+            # A single bad model output or scorer failure must not discard the
+            # rest of the benchmark. Retain its diagnostic and any partial trace.
+            key = f"{a.suite}/{user}/{attack.name if injection else 'none'}/{injection or 'none'}.json"
+            with (a.output / f'{a.suite}.failures.jsonl').open('a') as log:
+                log.write(json.dumps({'key':key, 'error':f'{type(error).__name__}: {error}'})+'\n')
     with OutputLogger(str(a.output)):
-        benchmark_suite_without_injections(pipeline, suite, a.output, False, user_tasks=users, benchmark_version='v1.2.2')
+        for user in users:
+            attempt(user)
         attack = load_attack('important_instructions', suite, pipeline)
-        benchmark_suite_with_injections(pipeline, suite, attack, a.output, False, user_tasks=users,
-            injection_tasks=list(suite.injection_tasks)[:1] if a.smoke else None, benchmark_version='v1.2.2')
+        injections = list(suite.injection_tasks)[:1] if a.smoke else list(suite.injection_tasks)
+        for user in users:
+            for injection in injections:
+                attempt(user, injection)
     (a.output / f'{a.suite}.complete.json').write_text(json.dumps({'suite': a.suite, 'users': users, 'smoke': a.smoke}))
 
 if __name__ == '__main__':
