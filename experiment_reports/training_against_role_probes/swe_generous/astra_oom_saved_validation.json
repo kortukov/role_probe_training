@@ -1,0 +1,14 @@
+{
+  "validated_utc": "2026-11-01T06:22:44.656983+00:00",
+  "failed_job": "1726408_1",
+  "samples": 125,
+  "successes": 40,
+  "sample_errors": 0,
+  "generation_records": 9760,
+  "trajectory_sha256": "78812eae81d64d3fa483b8fe05abf0d9f89549b3ee5d475dccad0b0e2d3bb024",
+  "generations_sha256": "638a69e62fada6d9a31f9419b1b201793dab30858cdad1b4a64527d9f3fe75a0",
+  "source_folder": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench",
+  "new_model_calls": 0,
+  "new_scoring_calls": 0,
+  "original_outputs_unchanged": true
+}

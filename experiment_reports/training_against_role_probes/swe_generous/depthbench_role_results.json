@@ -1,0 +1,142 @@
+{
+  "accuracy": 0.4835854020165495,
+  "macro_recall": 0.6528207282457454,
+  "per_role_recall": [
+    0.6064814814814815,
+    0.8919826184491364,
+    0.9732060612169,
+    0.4957767392184352,
+    0.29665674086277377
+  ],
+  "mean_true_role_probability": [
+    0.5617857357869475,
+    0.8713633894578433,
+    0.9646103540571883,
+    0.5003116248145153,
+    0.29958497652725474
+  ],
+  "mean_trajectory_accuracy": 0.5021584077776555,
+  "confusion_counts": [
+    [
+      65238,
+      5976,
+      19422,
+      0,
+      16932
+    ],
+    [
+      2956,
+      221077,
+      10823,
+      6655,
+      6338
+    ],
+    [
+      674,
+      20533,
+      2771250,
+      50651,
+      4439
+    ],
+    [
+      532,
+      1249,
+      1670441,
+      1734231,
+      91555
+    ],
+    [
+      587278,
+      2351206,
+      2501370,
+      397127,
+      2461927
+    ]
+  ],
+  "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+  "layers": {
+    "12": {
+      "accuracy": 0.4835854020165495,
+      "macro_recall": 0.6528207282457454,
+      "per_role_recall": [
+        0.6064814814814815,
+        0.8919826184491364,
+        0.9732060612169,
+        0.4957767392184352,
+        0.29665674086277377
+      ],
+      "mean_true_role_probability": [
+        0.5617857357869475,
+        0.8713633894578433,
+        0.9646103540571883,
+        0.5003116248145153,
+        0.29958497652725474
+      ],
+      "mean_trajectory_accuracy": 0.5021584077776555,
+      "confusion_counts": [
+        [
+          65238,
+          5976,
+          19422,
+          0,
+          16932
+        ],
+        [
+          2956,
+          221077,
+          10823,
+          6655,
+          6338
+        ],
+        [
+          674,
+          20533,
+          2771250,
+          50651,
+          4439
+        ],
+        [
+          532,
+          1249,
+          1670441,
+          1734231,
+          91555
+        ],
+        [
+          587278,
+          2351206,
+          2501370,
+          397127,
+          2461927
+        ]
+      ],
+      "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303"
+    }
+  },
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "trajectories": 500,
+  "scored_trajectories": 498,
+  "excluded_trajectories": [
+    {
+      "trajectory_id": "swe_bench/psf__requests-1724",
+      "tokens": 131231,
+      "reason": "exceeds_native_context"
+    },
+    {
+      "trajectory_id": "swe_bench/sympy__sympy-17318",
+      "tokens": 143235,
+      "reason": "exceeds_native_context"
+    }
+  ],
+  "context_limit": 131072,
+  "input_sha256": "85497af84b81f6faa0f15916a7e1e0ce38cc1920bedde4109cac2f7c22e507bd",
+  "model_revision": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
+  "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+  "overlength_policy": "exclude"
+}

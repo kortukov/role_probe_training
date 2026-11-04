@@ -1,0 +1,15 @@
+{
+  "shard_jobs": {
+    "0": "1726408",
+    "1": "1726408",
+    "2": "1726409",
+    "3": "1726409"
+  },
+  "shard_concurrency": {
+    "0": 8,
+    "1": 8,
+    "2": 16,
+    "3": 16
+  },
+  "reason": "User-authorized disjoint batching comparison; old collection cancelled before any attempt"
+}

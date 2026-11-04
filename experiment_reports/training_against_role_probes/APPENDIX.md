@@ -167,48 +167,6 @@ is made. Weights, exact source/model hashes and fitting diagnostics accompany th
 [ASTRA](astra_sft_1k/post_training/probes/layer_12.json), and
 [DepthBench](depthbench/post_training/probes/layer_12.json) artifacts.
 
-## SWE-bench failure audit
-
-**Follow-up finding:** the agent tools used base Conda instead of the repository’s
-`testbed` environment, and 190/500 base attempts hit the message cap. The
-[diagnostic report](swe_gap/README.md) reproduces the environment bug and checks
-saved patches with official SWE-bench scripts. Current scores retain this limitation;
-the tested environment fix has not yet been evaluated with new model generations.
-
-The current comparison uses four complete 500-task cohorts with matched serving
-and agent budgets, BF16 weights, high reasoning and the native 131,072-token
-context limit. These replace the earlier constrained SWE results. Gold patches
-passed and unchanged patches failed on two repository controls through the pinned
-images and upstream grader; this checks the scoring path, not full harness parity.
-
-| Model | Solved / assigned | Evaluation errors | Model-context stops | Whole histories probed |
-|---|---:|---:|---:|---:|
-| Base | 181/500 | 7 | 0 | 500/500 |
-| AppWorld-trained | 17/500 | 2 | 0 | 500/500 |
-| ASTRA-trained | 106/500 | 2 | 0 | 500/500 |
-| DepthBench-trained | 51/500 | 1 | 2 | 500/500 |
-
-The seven base and two ASTRA errors concern Python/runtime availability inside
-benchmark sandboxes. Two AppWorld errors and one DepthBench error are scoring/tool
-timeouts. Their cause is not fully established; fresh-image and writable-sandbox
-Python controls passed. All failed attempts remain in task denominators and role
-scoring. Only infrastructure failures before any benchmark model call were retried;
-no attempted task was replaced to improve its score.
-
-Inspect scores the current patch when generation reaches the context bound, so a
-context stop need not be an evaluation error. Both DepthBench stops are retained.
-All reconstructed SWE histories fit the probe's native limit and were scored whole.
-
-The base solves 36.2% here. This is not a reproduction of the model card's 60.7%
-high-reasoning result: the card uses a validated 477-task subset and a different
-agent/harness, while this run uses all 500 tasks and Inspect's agent. Correcting
-serving and budgets does not establish equivalence to that evaluation. The trained
-models all solve fewer tasks than the base despite higher overall role accuracy.
-
-[Run settings and provenance](post_training/swe_native.json) ·
-[Inspect implementation and parity guidance](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/swe_bench/README.md) ·
-[Model-card evaluations](https://deploymentsafety.openai.com/gpt-oss/evaluation).
-
 <!-- fresh-rollout-confusions -->
 ## Fresh-trajectory confusions
 
@@ -295,45 +253,6 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | Assistant | 0.05% | 0.00% | 0.28% | 99.63% | 0.03% |
 | Tool | 1.26% | 0.16% | 0.43% | 0.49% | 97.67% |
 
-### SWE-bench Verified — Base
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 0.93% | 22.22% | 17.13% | 0.00% | 59.72% |
-| User | 0.54% | 92.48% | 1.50% | 4.05% | 1.44% |
-| Reasoning | 0.30% | 1.42% | 42.82% | 53.91% | 1.54% |
-| Assistant | 0.22% | 0.14% | 19.19% | 79.67% | 0.78% |
-| Tool | 21.11% | 19.37% | 14.18% | 43.06% | 2.28% |
-
-### SWE-bench Verified — AppWorld-trained
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 39.81% | 50.00% | 9.72% | 0.00% | 0.46% |
-| User | 0.24% | 94.11% | 1.47% | 1.24% | 2.94% |
-| Reasoning | 0.02% | 1.65% | 98.05% | 0.04% | 0.24% |
-| Assistant | 0.03% | 0.01% | 1.70% | 90.59% | 7.67% |
-| Tool | 2.16% | 10.15% | 2.18% | 0.01% | 85.50% |
-
-### SWE-bench Verified — ASTRA-trained
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 18.98% | 16.20% | 3.24% | 0.00% | 61.57% |
-| User | 0.59% | 87.46% | 3.12% | 3.06% | 5.77% |
-| Reasoning | 0.04% | 0.43% | 93.98% | 5.53% | 0.02% |
-| Assistant | 0.05% | 0.03% | 65.88% | 33.16% | 0.88% |
-| Tool | 8.15% | 1.09% | 17.77% | 3.45% | 69.54% |
-
-### SWE-bench Verified — DepthBench-trained
-
-| True / predicted | System | User | Reasoning | Assistant | Tool |
-|---|---:|---:|---:|---:|---:|
-| System | 60.65% | 5.56% | 18.06% | 0.00% | 15.74% |
-| User | 1.18% | 89.35% | 4.29% | 2.58% | 2.60% |
-| Reasoning | 0.03% | 0.69% | 97.47% | 1.67% | 0.14% |
-| Assistant | 0.02% | 0.02% | 48.79% | 48.45% | 2.72% |
-| Tool | 7.00% | 27.42% | 31.28% | 5.22% | 29.08% |
 <!-- /fresh-rollout-confusions -->
 
 <!-- whole-history-coverage -->
@@ -349,8 +268,167 @@ Rows are true roles; columns are predicted roles. Each row sums to 100% (up to r
 | τ² retail | AppWorld-trained | 76/114 | 38 | 0 |
 | τ² retail | ASTRA-trained | 103/114 | 11 | 0 |
 | τ² retail | DepthBench-trained | 95/114 | 19 | 0 |
-| SWE-bench Verified | Base | 500/500 | 0 | 7 |
-| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 2 |
-| SWE-bench Verified | ASTRA-trained | 500/500 | 0 | 2 |
-| SWE-bench Verified | DepthBench-trained | 500/500 | 0 | 1 |
+| SWE-bench Verified | Base | 481/500 | 19 | 2 |
+| SWE-bench Verified | AppWorld-trained | 500/500 | 0 | 0 |
+| SWE-bench Verified | ASTRA-trained | 498/500 | 2 | 1 |
+| SWE-bench Verified | DepthBench-trained | 498/500 | 2 | 0 |
+| SWE-bench Verified | AppWorld + agentic KL (800) | 493/500 | 7 | 0 |
+| SWE-bench Verified | AppWorld + same-batch KL (2,700) | 485/500 | 15 | 0 |
+| SWE-bench Verified | AppWorld + same-batch KL (27,000) | 485/500 | 15 | 1 |
 <!-- /whole-history-coverage -->
+
+## SWE-bench whole-history results
+
+Task scores retain all 500 attempts. Layer-12 role metrics replay whole histories without chunking or truncation; over-context histories are excluded only from role scoring. Coverage differs by model. Rows below are true roles and columns predicted roles; values are row-normalized percentages.
+
+### Base
+
+Coverage: 481/500 histories; 19 above native context. Token-weighted accuracy: 41.17%; mean per-conversation accuracy: 38.75%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 0.9 | 22.2 | 17.1 | 0.0 | 59.7 |
+| user | 0.5 | 83.1 | 1.4 | 13.7 | 1.3 |
+| cot | 0.3 | 1.5 | 44.9 | 51.8 | 1.5 |
+| assistant | 0.2 | 0.1 | 14.6 | 84.6 | 0.5 |
+| tool | 18.9 | 17.3 | 13.1 | 48.8 | 1.9 |
+
+[Metrics and provenance](swe_generous/base_role_results.json).
+
+### AppWorld-trained
+
+Coverage: 500/500 histories; 0 above native context. Token-weighted accuracy: 87.55%; mean per-conversation accuracy: 87.08%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 39.8 | 50.0 | 9.7 | 0.0 | 0.5 |
+| user | 0.2 | 93.8 | 1.5 | 1.5 | 3.0 |
+| cot | 0.0 | 1.7 | 98.0 | 0.1 | 0.2 |
+| assistant | 0.0 | 0.0 | 1.6 | 90.6 | 7.8 |
+| tool | 2.2 | 10.1 | 2.2 | 0.0 | 85.5 |
+
+[Metrics and provenance](swe_generous/appworld_role_results.json).
+
+### ASTRA-trained
+
+Coverage: 498/500 histories; 2 above native context. Token-weighted accuracy: 60.34%; mean per-conversation accuracy: 63.39%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 19.0 | 16.2 | 3.2 | 0.0 | 61.6 |
+| user | 0.7 | 84.8 | 3.6 | 5.4 | 5.6 |
+| cot | 0.1 | 0.4 | 94.7 | 4.8 | 0.0 |
+| assistant | 0.0 | 0.0 | 62.3 | 36.9 | 0.7 |
+| tool | 8.1 | 1.0 | 20.0 | 4.6 | 66.2 |
+
+[Metrics and provenance](swe_generous/astra_role_results.json).
+
+### DepthBench-trained
+
+Coverage: 498/500 histories; 2 above native context. Token-weighted accuracy: 48.36%; mean per-conversation accuracy: 50.22%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 60.6 | 5.6 | 18.1 | 0.0 | 15.7 |
+| user | 1.2 | 89.2 | 4.4 | 2.7 | 2.6 |
+| cot | 0.0 | 0.7 | 97.3 | 1.8 | 0.2 |
+| assistant | 0.0 | 0.0 | 47.8 | 49.6 | 2.6 |
+| tool | 7.1 | 28.3 | 30.1 | 4.8 | 29.7 |
+
+[Metrics and provenance](swe_generous/depthbench_role_results.json).
+
+### AppWorld + agentic KL (800)
+
+Coverage: 493/500 histories; 7 above native context. Token-weighted accuracy: 94.29%; mean per-conversation accuracy: 94.05%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 36.6 | 54.2 | 6.0 | 0.5 | 2.8 |
+| user | 0.6 | 79.0 | 1.3 | 14.1 | 5.1 |
+| cot | 0.0 | 0.7 | 96.5 | 1.6 | 1.2 |
+| assistant | 0.0 | 0.0 | 2.9 | 93.9 | 3.2 |
+| tool | 0.1 | 1.9 | 1.8 | 1.5 | 94.8 |
+
+[Metrics and provenance](swe_generous/agentickl_role_results.json).
+
+### AppWorld + same-batch KL (2,700)
+
+Coverage: 485/500 histories; 15 above native context. Token-weighted accuracy: 93.92%; mean per-conversation accuracy: 93.70%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 38.0 | 53.2 | 5.1 | 0.5 | 3.2 |
+| user | 0.6 | 66.6 | 1.8 | 26.7 | 4.3 |
+| cot | 0.0 | 1.1 | 93.0 | 2.6 | 3.3 |
+| assistant | 0.0 | 0.0 | 2.0 | 93.7 | 4.3 |
+| tool | 0.1 | 2.1 | 0.8 | 1.5 | 95.4 |
+
+[Metrics and provenance](swe_generous/samebatch_role_results.json).
+
+### AppWorld + same-batch KL (27,000)
+
+Coverage: 485/500 histories; 15 above native context. Token-weighted accuracy: 97.66%; mean per-conversation accuracy: 97.78%.
+
+| True / predicted | system | user | cot | assistant | tool |
+|---|---:|---:|---:|---:|---:|
+| system | 82.4 | 15.3 | 0.9 | 0.0 | 1.4 |
+| user | 11.7 | 58.9 | 0.5 | 22.2 | 6.7 |
+| cot | 0.2 | 0.9 | 98.0 | 0.9 | 0.1 |
+| assistant | 1.4 | 0.8 | 1.1 | 95.8 | 1.0 |
+| tool | 0.1 | 0.0 | 0.0 | 0.0 | 99.8 |
+
+[Metrics and provenance](swe_generous/samebatch27000_role_results.json).
+
+## Training time
+
+Times below sum Slurm allocation elapsed time for the training jobs that supplied
+the final model or its reused on-policy episodes. They include model loading,
+updates, probe refitting, in-job validation and checkpointing; on-policy jobs also
+include episode generation. Queue waits, separate off-policy data collection,
+post-training evaluation, and debugging attempts whose work was not reused are
+excluded. These are recorded execution costs, not an end-to-end experiment budget
+or a controlled throughput comparison. GPU-hours sum elapsed hours × allocated
+GPUs; hardware was NVIDIA B200 throughout. Time is rounded to the nearest minute.
+
+| Model | Training allocation time (h:mm) | GPUs per contributing job | GPU-hours |
+|---|---:|---|---:|
+| Base | 0:00 | — | 0.0 |
+| AppWorld-trained | 3:38 | 2 | 7.2 |
+| ASTRA-trained | 1:07 | 2 | 2.2 |
+| DepthBench-trained | 13:37 | 2 | 27.2 |
+| AppWorld + agentic KL (800) | 5:06 | 2 | 10.2 |
+| AppWorld + same-batch KL (2,700) | 5:11 | 2 | 10.4 |
+| AppWorld + same-batch KL (27,000) | 60:58 | 2 | 121.9 |
+| AppWorld on-policy (270, batch 64) | 9:55 | 2 → 1 | 10.3 |
+| AppWorld on-policy (270, batch 16) | 10:46 | 2 → 1 | 11.9 |
+| AppWorld on-policy (2,700, batch 16) | 56:47 | 2 | 113.6 |
+
+The agentic-KL and both same-batch-KL totals include their two-update pilot jobs,
+whose checkpoints were resumed for the remaining updates.
+
+Base means no additional role-probe training; its original pretraining cost is
+not included. The two short on-policy runs used earlier two-GPU work followed by
+one-GPU completion. Their final allocations alone took 9h32m (batch 64) and
+9h36m (batch 16); the table additionally includes the earlier jobs supplying the
+41 cached episodes or the first three updates and cached fourth batch. The
+2,700-episode total includes the two initial updates, the failed attempt supplying
+the cached third batch, and seven completed continuation segments. Each contributing
+job is counted in full, including any unsuccessful work within that allocation.
+
+### Timing provenance
+
+Recorded from `sacct -X --format=JobID,State,ElapsedRaw,AllocTRES` on 2026-11-03.
+The job lists below define the scope of each total; failed jobs are included only
+where their checkpoints or saved episodes were reused.
+
+| Model | Contributing training jobs |
+|---|---|
+| AppWorld-trained | 1501541 |
+| ASTRA-trained | 1503671 |
+| DepthBench-trained | 1503688 |
+| AppWorld + agentic KL (800) | 1504827, 1504830 |
+| AppWorld + same-batch KL (2,700) | 1504851, 1504852 |
+| AppWorld + same-batch KL (27,000) | 1505946, 1505947 |
+| AppWorld on-policy (270, batch 64) | 1787803, 1816749 |
+| AppWorld on-policy (270, batch 16) | 1787804, 1816751 |
+| AppWorld on-policy (2,700, batch 16) | 1758049, 1758050, 1815838, 1816553, 1816554, 1816555, 1816556, 1816557, 1816558, 1816559 |
