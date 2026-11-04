@@ -1,0 +1,68 @@
+{
+  "historical_base": {
+    "clean": {
+      "expected": 95,
+      "present": 95,
+      "scored": 95,
+      "utility": 0.6631578947368421,
+      "asr": 1.0,
+      "asr_plus": 1.0,
+      "skips": 0,
+      "errors": 0
+    },
+    "attacked": {
+      "expected": 921,
+      "present": 921,
+      "scored": 921,
+      "utility": 0.5363735070575462,
+      "asr": 0.23778501628664495,
+      "asr_plus": 0.23995656894679696,
+      "skips": 2,
+      "errors": 2
+    }
+  },
+  "base": {
+    "clean": {
+      "expected": 95,
+      "present": 95,
+      "scored": 95,
+      "utility": 0.6526315789473685,
+      "asr": 1.0,
+      "asr_plus": 1.0,
+      "skips": 0,
+      "errors": 0
+    },
+    "attacked": {
+      "expected": 921,
+      "present": 921,
+      "scored": 916,
+      "utility": 0.49728555917481,
+      "asr": 0.2768729641693811,
+      "asr_plus": 0.2768729641693811,
+      "skips": 0,
+      "errors": 5
+    }
+  },
+  "trained": {
+    "clean": {
+      "expected": 95,
+      "present": 95,
+      "scored": 95,
+      "utility": 0.6210526315789474,
+      "asr": 1.0,
+      "asr_plus": 1.0,
+      "skips": 0,
+      "errors": 0
+    },
+    "attacked": {
+      "expected": 921,
+      "present": 921,
+      "scored": 913,
+      "utility": 0.50271444082519,
+      "asr": 0.2953311617806732,
+      "asr_plus": 0.2953311617806732,
+      "skips": 0,
+      "errors": 8
+    }
+  }
+}

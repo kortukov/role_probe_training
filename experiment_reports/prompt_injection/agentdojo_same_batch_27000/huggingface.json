@@ -1,0 +1,11 @@
+{
+  "repo_id": "kortukov/gpt-oss-20b-role-perception-appworld-27000",
+  "url": "https://huggingface.co/kortukov/gpt-oss-20b-role-perception-appworld-27000",
+  "revision": "6407ec21472d07cc2ff6887c7edcb9870f591294",
+  "public": true,
+  "verified_files": 10,
+  "total_bytes": 2958610792,
+  "verification": "Remote listing contains only complete adapter, metadata and helper files; no full base-model weights. Reconstruction tested: 603 tensors exactly equal evaluated export.",
+  "representation": "Complete adapter only, plus loading helpers",
+  "previous_full_export_revision": "19e3bb17d275beeb42be26937f20e3451e3480b9"
+}
