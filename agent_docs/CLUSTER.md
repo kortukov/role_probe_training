@@ -41,6 +41,41 @@ or code used by queued/running jobs; Slurm copies the submission script, not the
 Python source it invokes. Use a separate checkout/environment for concurrent
 experiments that need different revisions.
 
+## Passing environment variables to Slurm (verified 2026-10-30)
+
+Use inherited environment variables with plain `--export=ALL` when submitting
+jobs on this cluster:
+
+```bash
+env RUN_CONFIG=/data/cluster/users/kortukov/config.json \
+    sbatch --export=ALL src/experiments/<experiment>/job.sbatch
+```
+
+Avoid `sbatch --export=ALL,RUN_CONFIG=...` and explicit variable lists in
+`--export`. The [Slurm sbatch documentation](https://slurm.schedmd.com/sbatch.html#OPT_get-user-env)
+states that `--export=NONE` and `[ALL,]<environment_variables>` implicitly enable
+`--get-user-env`. This retrieves the user's login environment on the execution
+node; failure or timeout aborts, requeues and holds the job before its script runs.
+Plain `--export=ALL` passes the submitting process's environment without requesting
+that additional retrieval step. In Python submission code, put extra variables in
+`subprocess`'s `env` argument and pass `--export=ALL` separately.
+
+**Live evidence:** HF benchmark 1691976 repeatedly entered
+`user_env_retrieval_failed_requeued_held`; training pilot 1691926 encountered the
+same failure before executing its script. Simply releasing the benchmark's hold
+did not resolve it. Resubmission using `env VARIABLE=value sbatch --export=ALL`
+allowed benchmark jobs 1726276 and 1726415 to execute; 1726415 completed
+successfully. Training was resubmitted as 1758049–1758052 with the same pattern.
+See the [HF job records](../experiment_reports/training_against_role_probes/on_policy/appworld2700/hf_generation_jobs.json)
+and [training resubmission](../experiment_reports/training_against_role_probes/on_policy/appworld2700/colocated_resubmission.json).
+
+**Diagnosis limits:** the submission syntax and documented retrieval behavior
+are established; the cluster-side reason retrieval fails is not. This failure
+occurs before Python/CUDA startup and is distinct from application errors.
+Inspect `scontrol show job <id>` for the full reason. If replacing a held job,
+first check for existing run artifacts, preserve them, and update/rebuild its
+downstream dependencies; they otherwise continue pointing to the old job ID.
+
 ## Access and resources
 
 Primary login/submit host: `hpc-ber1-headnode-01.fe.hhi.de`.
@@ -197,3 +232,100 @@ controls. New evaluations can opt into
 both images; its task-success impact is not yet measured. Do not change the
 original provider while concurrent jobs use it, or merge corrected generations
 into old cohorts. [Evidence](../experiment_reports/training_against_role_probes/swe_gap/README.md).
+
+
+### SWE localhost and Requests controls (verified 2026-10-27)
+
+Pinned Apptainer images launched with the original isolated provider have empty
+`/etc/hosts`. Numeric 127.0.0.1 socket connections work, but localhost resolution
+fails (diagnostic1610624). The opt-in `swe_localhost` provider supplies image-local
+hosts entries while retaining network isolation; Matplotlib gold controls now pass
+(1610625). This is not an external-network enablement.
+
+Requests additionally lacks HTTP fixtures in some images and expects timeout
+behavior for 10.255.255.1; network-none instead returns ENETUNREACH. A CPU job
+testing a separate user+network namespace failed at `/proc/self/uid_map` with
+Operation not permitted (1610635). No host networking was modified. Broader
+Requests gold validation1610636 and saved-patch regrade1610633 are separate from
+model generation; consult the corrected-SWE pipeline before submitting runs.
+
+### Future training/SWE CPU requests (2026-11-01)
+
+User requested smaller requests for future submissions only, without updating or
+restarting queued jobs. `on_policy_recovery/train.sbatch` now requests 8 CPU cores
+(previously 16); standard `swe_generous/collect.sbatch` requests 4 (previously 16).
+Accelerated SWE concurrency 8/16 retains 16 cores. GPU counts, RAM (256 GiB) and
+time limits are unchanged. Slurm retains the already-submitted scripts and
+requests; historical submission hashes describe those original scripts. These
+smaller CPU allocations have not yet been benchmarked.
+
+Live inspection found unallocated GPUs stranded on nodes with no available CPU
+cores, plus one eligible node with one GPU and four CPU cores. Training job
+1787804 averaged about 1.6 CPU cores and reported 117.85 GiB peak RSS, but averages
+do not establish peak requirements. Do not reduce SWE RAM from ordinary low RSS
+readings: shard 1691740_1 hit OUT_OF_MEMORY at reported 254.58 GiB.
+
+Live priority configuration: GPU and CPU jobs use separate account associations;
+usage half-life is four days, age weight 8000 (saturates at seven days), fair-share
+weight 100000. GPU billing weights are CPU=1, RAM=0.0625/GiB, GPU=48.
+User-specific priority is dynamic: inspect `sprio -l` and `sshare -l` rather than
+inferring fair share from a cumulative GPU-days email. Nice penalties intentionally
+favor training but also lower evaluations relative to other users.
+
+### Pipeline allocation policy (user preference, 2026-11-01)
+
+Minimize scheduler handoffs: normally one allocation for a short training run,
+and only two or three long allocations for work exceeding the 72-hour GPU limit.
+Each afterok boundary may wait for resources again; it does not reserve a slot.
+Do not use Nice penalties to order the user's jobs: they penalize those jobs
+against other users too. Do not change or restart existing queued jobs merely
+to adopt these defaults.
+
+Future on-policy recovery defaults now use endpoints 58, 114, 169 (three
+48-hour segments from the original step-2 checkpoint), instead of seven
+24-hour segments. Check actual progress and timing before a later recovery;
+do not blindly rerun the historical restart script or reuse its old job IDs.
+Per-update checkpoints remain enabled. Short runs remain one 12-hour job.
+
+For new evaluations use `on_policy_compact/submit.py` under
+`src/experiments/training_against_role_probes/`. It defaults to a dry run and
+requires an explicit root, checkpoint and final training job ID. It refuses
+submission if either evaluation manifest already exists. The four job groups
+replace the previous twelve: export+probe fit (8h); AppWorld/retail collection
++assembly+scoring+results (60h); four parallelizable SWE collection shards
+(72h each, max two concurrent); SWE assembly+scoring+results (30h). These are
+one-GPU allocations; their dependency depth is at most three. SWE collection
+remains separate because it can already occupy the partition's full limit.
+Subordinate sbatch scripts execute with bash inside the allocation, not sbatch;
+their resource directives do not create new jobs. Each child's cleanup runs
+before the next stage. A failed group stops; completed artifacts remain, but
+manual recovery must select unfinished work rather than blindly regenerating
+completed episodes. Compact orchestration is CPU-mock checked, not GPU-run.
+
+### Configurable on-policy GPU count (2026-11-01)
+
+Use the common `role_probe_training.on_policy_training.train` module and
+`src/experiments/training_against_role_probes/on_policy_execution/train.sbatch`
+for new training. Set `sbatch --gpus=1` or `--gpus=2`; the launcher derives
+torchrun ranks from `SLURM_GPUS_ON_NODE`. Effective episode batch size is
+independent of GPU count. Do not create per-GPU-count copies of the trainer.
+Historical `on_policy_recovery/train.py` remains frozen for the existing 2700
+jobs and checkpoint source verification. Changing checkpoint world size requires
+an explicit migration plus redistribution of audited recovery data, not simply
+weakening provenance guards.
+
+User authorized replacement of only the two 270 runs: 1816749 (batch64) and
+1816751 (batch16), each one GPU/eight cores/256 GiB/24h. Evaluations reconnected.
+User clarified that the other pending jobs should be raised slightly: lowered
+existing positive Nice values by 100 for 50 pending groups, never below zero.
+This is a partial removal of old penalties, not a new penalty. New jobs use
+normal Nice=0. Recorded in on_policy/priority_adjustment_20261101.json.
+
+Priority clarification (2026-11-01): user wants the two 270 runs ahead, without
+penalizing other jobs against other users. Negative Nice is denied by Slurm for
+this account (attempt Nice=-1 was rejected). Both 270 jobs 1816749/1816751 started
+before the correction, so their allocations already satisfy the immediate ordering.
+Reset all 50 remaining positively-niced pending groups to Nice=0; verified all
+user jobs now have Nice=0. The earlier 100-point adjustment is superseded by
+on_policy/priority_reset_20261101.json. Do not claim user-only queue ordering is
+available through Nice; it changes priority against everyone.

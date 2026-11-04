@@ -1,85 +1,45 @@
-# Current handoff — 2026-10-24
+# Current handoff — 2026-11-04
 
-## Active AppWorld training
+## Published experiments
 
-User requested2700AppWorld training trajectories, baseline probes, and a complete
-training implementation/start. All prerequisites completed and production is RUNNING.
-Report root: `experiment_reports/training_against_role_probes/` (moved outofagentic).
+- The [training comparison](../experiment_reports/training_against_role_probes/README.md)
+  contains all seven fixed-data models, three on-policy variants and validated
+  task/whole-history role results. The [seven-model SWE cohort](../experiment_reports/training_against_role_probes/swe_generous/README.md)
+  is complete. Keep newer validated seven-model measurements; do not replace them
+  with the earlier native-context, corrected-environment or 30-message cohorts.
+- [AgentDojo robustness](../experiment_reports/prompt_injection/agentdojo_same_batch_27000/README.md)
+  is complete: 95 clean tasks and 921 attacked pairs per model. Base/trained
+  recorded attack success: 27.69%/29.53%. Five/eight context-limit errors have no
+  final verdict; all attempts remain in denominators. No measured robustness gain.
+- The complete adapter is shared at
+  https://huggingface.co/kortukov/gpt-oss-20b-role-perception-appworld-27000.
+  The current Hub revision contains adapter weights and helpers only. Its vLLM
+  launcher reconstructs the evaluation model locally; all 603 tensors match.
 
-- Collection1501202 and assembly1501282 COMPLETED:2700attempts=30×90tasks,
-  1032solved(38.2%), allreasoning, zeroerrors/limits. Canonicaldata/train2700/trajectories.jsonl.
-- Baseline1501329 COMPLETED:all2700,fivelayers4/8/12/16/20,fullhistory,
-  pertokenpredictionsunderpredictions/train2700. Layer12accuracy26.12%,macro33.73%.
-  Report/appendix+baseline_probe_results.json pusheda61a58e.
-- Production **1501541 RUNNING**,twoB200s,vca-gpu-0702-03,livewalltime12h.
-  Oneepoch169updates,effective16,microbatch2/GPU,fulltrajectories.
-  Outputs:runs/training/appworld2700; config:src/experiments/training_against_role_probes/train_config.json.
-- Finalreportpublisher **1503673** afterany1501541 updates/pushes numericresults,
-  README andAPPENDIX. Reproduce via report_training.py --run RUN_DIRECTORY.
-- Latestdev10updates:accuracy29.2%→89.8%,macro35.4%→63.4%; reasonrecall77.4%→13.2%,
-  user41.1%→27.7%; system87.3%,assistant89.8%,tool99.0%. Do notpresentoverallgainasuniform.
-  Checkpointstep00010 COMPLETE, optimizer/adapter/probe saved. Continueagreedobjective.
-  Reporterautomaticallyflagsperroledeclines; productionstillrunning169updatesplanned.
-- Warmupdates73–83s includingrefit32s; initial122s. Memorypeak<79GiB sofar, noOOMretry.
-- W&B:https://forge.coreweave.com/wandb/kortukov/training_against_role_probes/runs/appworld2700-l12-epoch1
+## Training and implementation
 
-Training code stable at03c1937; do notedit sharedtraining/*.py whilejobsrun/queued.
-Pilot1501447+resume1501491 passed fullupdates,KL,all2000refitsteps,dev,W&B,
-checkpointsave/restore(optimizer+probe+adapter) andcoordinatedinjectedOOMretry.
-Production retries wholeupdateatmicrobatch1, samebatch/objective; failurethere stops.
-Attentioncompilelimit64/fail-explicit preventsquadratic eagerfallback.
-Checkpointinitial,every10updates,final;keeplast2. ResumeCLI inRUNNING.md.
+- Current shared trainer: `src/role_probe_training/on_policy_training/train.py`;
+  recovered collection/runtime: `on_policy_recovery/`; concurrent collection is
+  configured with `collection_concurrency`. Each episode uses a fresh process
+  because Inspect caches base URLs per process. Episode seed/route validation
+  must remain enabled. Recovery preserves whole episodes and original failures.
+- The old trainer variants were removed at d96fe7a; historical training code is
+  recoverable from Git. Do not remove modules still imported by queued jobs or
+  referenced by checkpoint source hashes.
+- Optional KL request batching is off unless `kl_batch_tokens` is set. The saved
+  96-request check shows faster execution but changed BF16 losses/gradients;
+  it is not numerically identical to sequential replay. Keep per-request replay
+  for exact comparison. Validation code and measurements accompany the variant.
+- At the 2026-11-04 publication check there were no running user GPU jobs. Jobs
+  1798695/1798700/1798701 and CPU bash jobs 1963763/1963766/1963838 remained pending.
+  Recheck Slurm and saved artifacts before interpreting or changing this state;
+  this publication does not restart, cancel or edit any queued jobs.
 
-Modelgoal: IMPROVE role recoverability, layer12 postattentionnorm/preMLP, fiveclassCE.
-Probe refit ONLY standard250C4/Dolma passages/originalsplit/allcontenttokens; neverAppWorld.
-WarmSGD2000steps,lr1e-3,wd1e-4,32passageroleexamples/minibatch,50warmup+cosine.
-ModelLoRA64alpha128dropout0,AdamW5e-5wd1e-4,clip1,globaltokenmean.
-KL800fixedordinaryDolci+GPTOSSbaseanswers,data/kl/anchors.jsonl (job1501243complete),
-16sampled/update,coefficient16,unshifted2048completionmask upstreamprotocol.
-SamefrozenmodelwithLoRAdisabled actsasteacher; nosecondfullmodel.
-Dev8disjointAppWorldtasks(job1501280) runs/dev/1501280/dev/trajectories.jsonl.
-Fulltrainingcorpus fixed/offpolicy. Validationfixedbase-modeltrajectories; taskbehaviornotyettested.
+## Standing workflow
 
-## Concurrent data/training agent
-
-EXPLICIT READY atAGENT_COMMUNICATION.md; AppWorldproductionstarted, allrequirementsmet.
-Secondagent owns ASTRA/DepthBench adapters/configs/subreports and replay.py optionalending.
-Preserve theirfiles/notes; stageonlyyourownfiles. ASTRAtraining **1503671** submittedtwoGPUs12h,
-1000histories63updates afterpublishedbaseline. DepthBench1501281 collecting,baseline1501448
-queued; owntrainingafterbaseline,12980histories(groups1/2/3),812updates,24h planned.
-The user removedaggregatefourGPUcap; use reasonable resources,trainingtwoGPUs/run.
-Allruns distinctoutput/W&B. Shareddev/KL allowed; explicitlycross-domainforotherdatasets.
-
-## SWE rerun incomplete
-
-Array **1492729** finished: shards0/1 completed; shards2/3 failed during startup
-(exit1 after15seconds). No SWE job is running. Investigate failed shards and
-finish the cohort before reporting a new full-evaluation result.
-All500tasks, modernvLLM0.32,temperature1,highreasoning,8192tokens/call,
-200messages,2Mcumulative tokens,1800s/task,8tasks/GPU. Prior500task/probe results
-still describe oldcohort; finalize complete newcohort separately.
-Submission metadata: `experiment_reports/agentic/swe_bench_full/metrics/rerun_submission.json`.
-
-## AppWorld and probe reports complete
-
-All675tasks collected without evaluation errors. Train38/90,normaltest45/168,
-challengetest105/417. Canonical JSONL under `experiment_reports/agentic/appworld/data/`.
-Normaltest168trajectories scored at layers4,8,12,16,20; predictions under
-`experiment_reports/agentic/appworld_probe_transfer/predictions/`.
-Both combined reports include AppWorld: layer12 `probe_transfer` and five-layer
-`probe_layer_comparison`, per-role tables and appendix confusion matrices.
-No majority-baseline rows in layer tables. Local standalone viewers updated and
-browser-validated; five-layer viewer1.746GB. Reports already pushed before viewers.
-
-## Standing preferences
-
-Use uv. User explicitly allows more than four experiment GPUs; request reasonable resources per job. Two GPUs remain preferred for training. No subagents
-unless requested. Push code/reports, never trajectory data. Brief paper-style
-reports per `agent_docs/REPORT_WRITING.md`; remove superseded material. Publish
-report tables first, then build/validate large viewers. Timed waits, no busy polling.
-
-Pilot completed two updates with a checkpoint restart. Dev accuracy29.2%→39.2%→54.7%,
-KL secondstep0.00150, refit47–51s. Keep pilot measurements out of main report.
-All data/scoring/report prerequisites completed. Production running; wait fordevstep5,
-run report_training.py andpush initialresults. Finalpublisher1501542 handlescompletion.
-Automatic final-report publisher: report_training.sbatch RUN_DIRECTORY (afterany training).
+Use uv and cluster storage; details in [CLUSTER.md](CLUSTER.md). Publish small
+reports/provenance and code, retain large trajectories/checkpoints on cluster
+storage with recorded paths. Keep all assigned attempts in task denominators;
+replay role histories whole and report over-context coverage. Follow
+[REPORT_WRITING.md](REPORT_WRITING.md). Do not launch training just to validate
+publication. Superseded SWE investigations are stopped; do not rearm their watchers.

@@ -38,3 +38,12 @@ and the [experiment report template](experiment_reports/_template/README.md).
 - [Layers 4, 8, 12, 16 and 20](experiment_reports/agentic/probe_layer_comparison/README.md): the same trajectories, scored together in each forward pass.
 - Task performance: [retail](experiment_reports/agentic/tau2_retail_full/README.md) and [SWE](experiment_reports/agentic/swe_bench_full/README.md). The SWE run has substantial model API/harness failures and does not reproduce the published score.
 - [Operational notes](agent_docs/AGENTIC_EVALS.md): Slurm execution, trace schema, sandboxing, provenance and reproducibility.
+
+## Training and prompt injection robustness
+
+- [Training comparison](experiment_reports/training_against_role_probes/README.md):
+  fixed-data and on-policy role training, task utility and whole-history role recovery.
+- [AgentDojo robustness](experiment_reports/prompt_injection/agentdojo_same_batch_27000/README.md):
+  matched base/trained clean and attacked evaluations, coverage and reproduction.
+- [Shared adapter](https://huggingface.co/kortukov/gpt-oss-20b-role-perception-appworld-27000):
+  complete PEFT weights and a vLLM launcher preserving evaluation precision.

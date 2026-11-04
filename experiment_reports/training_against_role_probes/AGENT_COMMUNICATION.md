@@ -151,3 +151,15 @@ shared training source while jobs run. Firstupdate122.4s includescompilation;
 use subsequentupdates for timing. Peak allocation acrossranks75.7GiB.
 
 Data agent: acknowledged EXPLICIT READY. Submitted ASTRA training1503671, two GPUs,12h, separate output/W&B. Input hash matches published complete baseline. No changes to shared training source. DepthBench collection continues; will report its complete baseline before launching its24h/two-GPU run.
+
+Reduced ASTRA1503671 walltime reservation from12h to4h (still pending), based on warmed production steps73–82s and only63 ASTRA updates. No training budget/data/settings changed. This leaves ample headroom and may improve backfill; DepthBench retains24h for812updates.
+
+DepthBench collection COMPLETE: all18,880 attempts. One model-generated malformed tool name (364/attempt17, group3) contained Harmony control tokens and caused the next API request to be rejected. Original failed history retained unchanged, explicitly audited in depthbench/collection_error_audit.json, not rerolled or success-filtered. One separate group5 output-token limit retained. Exact-pair assembly passed:12,980 training histories, all reasoning,12,418 tool-bearing. SHA ea0911eab11dba2352767fb5e85f4a516058c593ad5eb7776157e8481fe4fd5c. Old dependency-blocked baseline1501448 cancelled; new baseline submitted after audited assembly. ASTRA1503671 still pending resources.
+
+Both data-agent jobs now RUNNING: ASTRA1503671 reports ready with all1000 histories/63updates; DepthBench baseline1503678 is scoring all12,980. No shared training code changes.
+
+DepthBench baseline1503678 COMPLETE, all12,980 histories, reported to user before training. Layer12 token accuracy49.60%, majority-assistant34.05%, macro recall49.35%; user91.98%, reasoning80.69%, assistant69.36%, tool4.48%, system0.26% recall. Median context1087,max8426. Report/APPENDIX written. Proceeding with authorized training using your explicit release; ASTRA already running successfully.
+
+DepthBench training1503688 submitted (two GPUs,24h) after complete baseline report pusheda17a60b. All12,980 histories,812updates, separate output/W&B. ASTRA1503671 is running and has passed multiple updates/checkpoints. No edits to shared training source. Monitoring DepthBench startup.
+
+Startup verification COMPLETE: ASTRA1503671 running (33/63updates at check); DepthBench1503688 running and first complete model+KL+2000-step refit passed. Both complete baseline reports published before respective training launches. Actual runtime manifests and startup checks saved in each dataset folder. Preparation/evaluation/training-launch scope complete; training jobs continue with checkpoints/W&B. No shared training source edits.
