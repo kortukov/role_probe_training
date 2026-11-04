@@ -32,12 +32,18 @@ Training dependencies are locked for the [GPT-OSS role-probe reproduction](exper
 See [working conventions](AGENTS.md), the [cluster guide](agent_docs/CLUSTER.md)
 and the [experiment report template](experiment_reports/_template/README.md).
 
-## Agentic probe evaluations
+## Training initial probes
+- [C4/Dolma vs Toucan probes](experiment_reports/role_probes/training_data/README.md): the same recipe fitted on neutral text, Toucan tool-use text, or both; scored on both held-out sets, clean chat and the [hx2 AppWorld cohort](experiment_reports/agentic/appworld_hx2/README.md).
+
+
+## Evaluations of trained probes
 
 - [Layer-12 transfer results](experiment_reports/agentic/probe_transfer/README.md): full τ² retail 114 and SWE-bench Verified 500; per-token predictions and an offline viewer.
 - [Layers 4, 8, 12, 16 and 20](experiment_reports/agentic/probe_layer_comparison/README.md): the same trajectories, scored together in each forward pass.
 - Task performance: [retail](experiment_reports/agentic/tau2_retail_full/README.md) and [SWE](experiment_reports/agentic/swe_bench_full/README.md). The SWE run has substantial model API/harness failures and does not reproduce the published score.
 - [Operational notes](agent_docs/AGENTIC_EVALS.md): Slurm execution, trace schema, sandboxing, provenance and reproducibility.
+- [HX2 cluster notes](agent_docs/HX2.md): information about the hx2 cluster.
+- [No Robots chat evaluation](experiment_reports/role_probes/norobots/README.md): the three probe sets on 500 human multi-turn conversations as given, and on first turns answered by GPT-OSS-20B with its own medium reasoning.
 
 ## Training and prompt injection robustness
 
