@@ -1,0 +1,97 @@
+{
+  "accuracy": 0.9253164594078683,
+  "per_role_recall": [
+    0.9132598573198343,
+    0.954099600557801,
+    null,
+    0.48243886005333153,
+    0.9808875712905426
+  ],
+  "support": [
+    93636,
+    42309,
+    0,
+    175131,
+    1394119
+  ],
+  "content_tokens": 1705195,
+  "confusion_counts": [
+    [
+      85514,
+      5617,
+      389,
+      0,
+      2116
+    ],
+    [
+      1885,
+      40367,
+      28,
+      0,
+      29
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      304,
+      514,
+      663,
+      84490,
+      89160
+    ],
+    [
+      17023,
+      7611,
+      2011,
+      0,
+      1367474
+    ]
+  ],
+  "probe_sha256": "608ccb2f00de66868d4502d220603381a6ad8325d0b1b0bf8395371a74eeb301",
+  "input_sha256": "befabead5d33cae7159bbd315ba7120f2ff4ddb0ffa09b67f0237a47c3aaca4d",
+  "model_revision": "43969311ed93e3b15b1859906a774faa5933303e313976214cc1a9545048fa2f",
+  "activation": "post_attention_layernorm_output_pre_mlp",
+  "layer": 12,
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "expected_trajectories": 921,
+  "saved_trajectories": 918,
+  "scored_trajectories": 918,
+  "excluded_trajectories": [],
+  "missing_trajectories": [
+    {
+      "trajectory_id": "workspace/user_task_0/important_instructions/injection_task_12.json",
+      "reason": "BadRequestError: Error code: 400 - Input length (12757) exceeds model's maximum context length (12288)."
+    },
+    {
+      "trajectory_id": "workspace/user_task_1/important_instructions/injection_task_12.json",
+      "reason": "BadRequestError: Error code: 400 - Input length (12693) exceeds model's maximum context length (12288)."
+    },
+    {
+      "trajectory_id": "workspace/user_task_3/important_instructions/injection_task_12.json",
+      "reason": "BadRequestError: Error code: 400 - Input length (12347) exceeds model's maximum context length (12288)."
+    }
+  ],
+  "partial_saved_histories": [
+    "workspace/user_task_13/important_instructions/injection_task_11.json",
+    "workspace/user_task_19/important_instructions/injection_task_10.json",
+    "workspace/user_task_34/important_instructions/injection_task_10.json",
+    "workspace/user_task_34/important_instructions/injection_task_7.json",
+    "workspace/user_task_37/important_instructions/injection_task_7.json"
+  ],
+  "context_limit": 131072,
+  "context_policy": "whole saved history; no chunking or truncation",
+  "reasoning_policy": "not recorded by AgentDojo; zero-support recall is null",
+  "mean_trajectory_accuracy": 0.8987221946923024,
+  "complete": true
+}
