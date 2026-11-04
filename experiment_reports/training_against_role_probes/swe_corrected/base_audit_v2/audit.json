@@ -1,0 +1,268 @@
+{
+  "slurm_job_id": "1516502",
+  "samples": 500,
+  "successes": 228,
+  "evaluation_errors": 0,
+  "empty_patches": 8,
+  "attempts_with_tool_errors": 297,
+  "tool_error_calls": 874,
+  "attempts_missing_apply_patch": 6,
+  "missing_apply_patch_calls": 7,
+  "tool_functions": {
+    "bash_session": 29211,
+    "text_editor": 7102,
+    "python": 9899,
+    "submit": 482
+  },
+  "model_stops": {
+    "tool_calls": 46688,
+    "stop": 2512,
+    "model_length": 20,
+    "max_tokens": 18
+  },
+  "reasoning_efforts": {
+    "high": 500
+  },
+  "tool_error_types": {
+    "unknown": 818,
+    "parsing": 53,
+    "timeout": 3
+  },
+  "sample_limits": {},
+  "attempts_with_import_errors": 113,
+  "import_error_messages": {
+    "ModuleNotFoundError: No module named 'astropy.models'": 1,
+    "ImportError: attempted relative import with no known parent package": 12,
+    "ImportError: cannot import name 'format'": 1,
+    "ImportError: cannot import name 'get_resolver'": 1,
+    "ModuleNotFoundError: No module named 'django.urls.path'": 1,
+    "ModuleNotFoundError: No module named 'custom_migration_operations'": 2,
+    "ImportError: cannot import name 'serialization'": 2,
+    "ImportError: Failed to import test module: admin_changelist.test_date_hierarchy": 1,
+    "ImportError: Failed to import test module: admin_changelist.tests": 1,
+    "ModuleNotFoundError: No module named 'testapp'": 9,
+    "ModuleNotFoundError: No module named 'myapp'": 7,
+    "ImportError: cannot import name 'Ranking' from 'tests.ordering.models' (/testbed/tests/ordering/models.py)": 1,
+    "ImportError: Failed to import test module: admin_scripts.complex_app.models": 1,
+    "ImportError: Failed to import test module: auth_tests.models": 1,
+    "ImportError: Failed to import test module: fixtures_model_package.models": 1,
+    "ImportError: Failed to import test module: foreign_object.models": 1,
+    "ImportError: Failed to import test module: i18n.commands": 1,
+    "ImportError: Failed to import test module: i18n.exclude": 1,
+    "ImportError: Failed to import test module: i18n.project_dir": 1,
+    "ImportError: Failed to import test module: import_error_package": 1,
+    "ImportError: Oops": 1,
+    "ImportError: Failed to import test module: model_package.models": 1,
+    "ImportError: Failed to import test module: postgres_tests": 1,
+    "ImportError: Failed to import test module: serializers.models": 1,
+    "ModuleNotFoundError: No module named 'datetime'": 1,
+    "ModuleNotFoundError: No module named 'open'": 2,
+    "ModuleNotFoundError: No module named 'django.db.migrations.models'": 1,
+    "ModuleNotFoundError: No module named 'tests.test_settings'": 1,
+    "ModuleNotFoundError: No module named 'psycopg2'": 4,
+    "ModuleNotFoundError: No module named 'django.utils.formats.numberformat'; 'django.utils.formats' is not a package": 1,
+    "ModuleNotFoundError: No module named 'matplotlib.axes.axes'": 1,
+    "ModuleNotFoundError: No module named 'matplotlib.axes_grid1'": 1,
+    "ImportError: cannot import name 'DataArray' from partially initialized module 'xarray.core.dataarray' (most likely due to a circular import) (/testbed/xarray/core/dataarray.py)": 2,
+    "ImportError: cannot import name 'edit_file' from 'xarray.util' (/testbed/xarray/util/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'youtube_dl'": 3,
+    "ModuleNotFoundError: No module named 'environ'": 1,
+    "ModuleNotFoundError: No module named 'requests'": 1,
+    "ModuleNotFoundError: No module named 'sklearn'": 1,
+    "ModuleNotFoundError: No module named 'nodes'": 1,
+    "ImportError: cannot import name 'Atom' from 'sympy.core.basic' (/testbed/sympy/core/basic.py)": 2,
+    "ImportError: cannot import name 'preorder_traversal' from 'sympy.core.basic' (/testbed/sympy/core/basic.py)": 1,
+    "ImportError: cannot import name '_aresame' from 'sympy.core.basic' (/testbed/sympy/core/basic.py)": 1,
+    "ImportError: cannot import name 'betainc' from 'sympy' (/testbed/sympy/__init__.py)": 1,
+    "ImportError: cannot import name 'betainc' from 'sympy.functions.special.beta_functions' (/testbed/sympy/functions/special/beta_functions.py)": 1,
+    "ImportError: cannot import name 'finalsimplify' from 'sympy' (/testbed/sympy/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'numpy'": 8,
+    "ImportError: cannot import name 'GT' from 'sympy' (/testbed/sympy/__init__.py)": 1,
+    "ImportError: cannot import name 'fu' from 'simplify' (unknown location)": 4,
+    "ImportError: cannot import name 'nT' from 'sympy.combinatorics.partitions' (/testbed/sympy/combinatorics/partitions.py)": 1,
+    "ImportError: cannot import name 'Poly' from 'sympy.polys.polyclasses' (/testbed/sympy/polys/polyclasses.py)": 2,
+    "ModuleNotFoundError: No module named 'sympy.basic'": 1,
+    "ImportError: cannot import name 'DiscreteGroup' from 'sympy.combinatorics' (/testbed/sympy/combinatorics/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'settings'": 1,
+    "ModuleNotFoundError: No module named 'pytest'": 3,
+    "ImportError: Failed to import test module: tests": 2,
+    "ModuleNotFoundError: No module named 'test_sqlite'": 1,
+    "ModuleNotFoundError: No module named 'staticfiles_tests'": 2,
+    "ImportError: Failed to import test module: test_checks": 1,
+    "ImportError: Failed to import test module: test_finders": 1,
+    "ImportError: Failed to import test module: test_handlers": 1,
+    "ImportError: Failed to import test module: test_management": 1,
+    "ModuleNotFoundError: No module named 'admin_scripts'": 1,
+    "ImportError: Failed to import test module: test_storage": 1,
+    "ImportError: Failed to import test module: test_templatetags": 1,
+    "ImportError: Failed to import test module: test_views": 1,
+    "ModuleNotFoundError: No module named 'zoneinfo'": 1,
+    "ModuleNotFoundError: No module named 'pymodule'": 1,
+    "ImportError: cannot import name 'ManyToOneRel' from 'django.db.models.fields.related_descriptors' (/testbed/django/db/models/fields/related_descriptors.py)": 1,
+    "ModuleNotFoundError: No module named 'django.db.models.sql.datastructures'": 1,
+    "ModuleNotFoundError: No module named 'django.db.models.sql.query.query'; 'django.db.models.sql.query' is not a package": 1,
+    "ModuleNotFoundError: No module named 'repr'": 3,
+    "ImportError: cannot import name 'SongAdmin' from 'tests.admin_checks.tests' (/testbed/tests/admin_checks/tests.py)": 1,
+    "ImportError: cannot import name '_api' from '<unknown module name>' (unknown location)": 1,
+    "ImportError: cannot import name '_macosx' from 'matplotlib.backends' (/testbed/lib/matplotlib/backends/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'unquote'": 1,
+    "ImportError: cannot import name '_make_run_options' from 'pylint.lint.base_options' (/testbed/pylint/lint/base_options.py)": 1,
+    "ModuleNotFoundError: No module named 'sklearn.util'": 1,
+    "ImportError: cannot import name '_PLS'": 1,
+    "ImportError: cannot import name 'Optics'": 1,
+    "ImportError: cannot import name 'extract_options' from 'sphinx.util.docutils' (/testbed/sphinx/util/docutils.py)": 1,
+    "ModuleNotFoundError: No module named '__future__'": 1,
+    "ImportError: cannot import name 'default_settings' from 'docutils.utils' (/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/docutils/utils/__init__.py)": 1,
+    "ImportError: cannot import name 'ast_parse' from 'sphinx.util.inspect' (/testbed/sphinx/util/inspect.py)": 1,
+    "ImportError: cannot import name 'evalf' from 'sympy.core.core' (/testbed/sympy/core/core.py)": 3,
+    "ImportError: cannot import name 'tests' from 'simplify' (unknown location)": 3,
+    "ImportError: cannot import name 'sqrtdenest' from 'simplify' (unknown location)": 2,
+    "ImportError: cannot import name 'solveset_real' from 'sympy' (/testbed/sympy/__init__.py)": 1,
+    "ImportError: cannot import name 'inspect' from 'sympy' (/testbed/sympy/__init__.py)": 2,
+    "ImportError: cannot import name 'Table' from 'astropy.io' (/testbed/astropy/io/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'tests.settings'": 1,
+    "ModuleNotFoundError: No module named 'django.conrib'": 1,
+    "ImportError: cannot import name 'DatabaseFeatures'": 1,
+    "ModuleNotFoundError: No module named 'demo'": 1,
+    "ModuleNotFoundError: No module named 'sqlite3.base'": 1,
+    "ModuleNotFoundError: No module named 'tests.db_functions.test_date_functions'": 1,
+    "ModuleNotFoundError: No module named 'MySQLdb'": 1,
+    "ModuleNotFoundError: No module named 'myurls'": 6,
+    "ModuleNotFoundError: No module named 'tests'": 1,
+    "ModuleNotFoundError: No module named 'psycopg'": 1,
+    "ModuleNotFoundError: No module named 'matplotlib.unit'": 1,
+    "ModuleNotFoundError: No module named 'matplotlib.colormaps'": 1,
+    "ModuleNotFoundError: No module named 'xarray.core.array'": 1,
+    "ImportError: Real xarray package not found in site-packages.": 3,
+    "ModuleNotFoundError: No module named 'xarray.fromnumeric'": 1,
+    "ImportError: cannot import name 'Docstring' from 'sphinx.ext.napoleon' (/testbed/sphinx/ext/napoleon/__init__.py)": 1,
+    "ImportError: cannot import name 'Config' from 'sphinx.ext.napoleon.docstring' (/testbed/sphinx/ext/napoleon/docstring.py)": 2,
+    "ModuleNotFoundError: No module named 'demo_module'": 1,
+    "ImportError: (ModuleNotFoundError(\"No module named 'demo_module'\"), 'Traceback (most recent call last):\\n  File \"/testbed/sphinx/ext/autodoc/importer.py\", line 70, in import_module\\n    return importlib.import_mo": 1,
+    "ImportError: autodoc: failed to import class 'Demo.foo' from module 'demo_module'; the following exception was raised:": 1,
+    "ModuleNotFoundError: No module named 'sympy.matrices.testing'": 1,
+    "ImportError: cannot import name 'DenseMatrix' from 'sympy.matrices' (/testbed/sympy/matrices/__init__.py)": 1,
+    "ImportError: can't import 'numpy' with 'import numpy; from numpy import *' command": 1,
+    "ModuleNotFoundError: No module named 'sympy.tensor.array.test'": 1,
+    "ImportError: cannot import name 'TestResidue' from 'sympy.ntheory.tests.test_residue' (/testbed/sympy/ntheory/tests/test_residue.py)": 1,
+    "ImportError: cannot import name 'Real' from 'sympy.codegen.ast' (/testbed/sympy/codegen/ast.py)": 1,
+    "ImportError: cannot import name 'log' from 'sympy.functions.elementary' (/testbed/sympy/functions/elementary/__init__.py)": 1,
+    "ImportError: cannot import name 'units' from 'sympy.physics.units' (/testbed/sympy/physics/units/__init__.py)": 5,
+    "ImportError: cannot import name 'meter' from 'sympy' (/testbed/sympy/__init__.py)": 1,
+    "ImportError: cannot import name 'length' from 'sympy.physics.units.definitions' (/testbed/sympy/physics/units/definitions/__init__.py)": 1,
+    "ImportError: cannot import name 'acceleration' from 'sympy.physics.units.definitions' (/testbed/sympy/physics/units/definitions/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'sympy.parse_expr'": 1,
+    "ModuleNotFoundError: No module named 'functions'": 1,
+    "ImportError: Failed to import test module: expressions.test_deprecation": 1,
+    "ImportError: Failed to import test module: expressions.test_queryset_values": 1,
+    "ImportError: Failed to import test module: expressions.tests": 1,
+    "ImportError: Failed to import test module: test_writer": 1,
+    "ImportError: cannot import name 'AutoField' from partially initialized module 'django.db.models' (most likely due to a circular import) (/testbed/django/db/models/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'template_tests'": 1,
+    "ModuleNotFoundError: No module named 'django.db.migrations.operations.indexes'": 1,
+    "ImportError: Failed to import test module: tests/migrations/test_operations": 1,
+    "ModuleNotFoundError: No module named 'tests/migrations/test_operations'": 1,
+    "ModuleNotFoundError: No module named 'core'": 2,
+    "ImportError: cannot import name 'FieldDoesNotExist' from 'django.db.models' (/testbed/django/db/models/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'bs4'": 1,
+    "ModuleNotFoundError: No module named 'scipy'": 1,
+    "ModuleNotFoundError: No module named 'path'": 1,
+    "ImportError: cannot import name 'FunctionalTestReporter' from 'pylint.testutils' (/testbed/pylint/testutils/__init__.py)": 1,
+    "ImportError: cannot import name 'PyTestConfig' from '_pytest.config' (/testbed/src/_pytest/config/__init__.py)": 1,
+    "ModuleNotFoundError: No module named 'bytes'": 1,
+    "ImportError: cannot import name '_check_multi_class'": 1,
+    "ImportError: cannot import name 'FileInput' from 'docutils.utils' (/opt/miniconda3/envs/testbed/lib/python3.9/site-packages/docutils/utils/__init__.py)": 1,
+    "ImportError: cannot import name 'add' from 'sympy.core.core' (/testbed/sympy/core/core.py)": 1,
+    "ImportError: cannot import name 'Eq' from partially initialized module 'sympy.core.relational' (most likely due to a circular import) (/testbed/sympy/core/relational.py)": 1,
+    "ImportError: cannot import name 'tests' from 'sympy.core.core' (/testbed/sympy/core/core.py)": 4,
+    "ImportError: LaTeX parsing requires the antlr4 python package, provided by pip (antlr4-python2-runtime or antlr4-python3-runtime) or conda (antlr-python-runtime)": 1
+  },
+  "message_limited_successes": 0,
+  "selection_rule": "lowest SHA256(instance_id) in each repository x original score stratum; diagnostic, not a representative success estimate",
+  "regrade_selection": [
+    {
+      "id": "astropy__astropy-14369",
+      "original_score": 0.0
+    },
+    {
+      "id": "astropy__astropy-13453",
+      "original_score": 1.0
+    },
+    {
+      "id": "django__django-16100",
+      "original_score": 0.0
+    },
+    {
+      "id": "django__django-11880",
+      "original_score": 1.0
+    },
+    {
+      "id": "matplotlib__matplotlib-24026",
+      "original_score": 0.0
+    },
+    {
+      "id": "mwaskom__seaborn-3187",
+      "original_score": 0.0
+    },
+    {
+      "id": "mwaskom__seaborn-3069",
+      "original_score": 1.0
+    },
+    {
+      "id": "pallets__flask-5014",
+      "original_score": 1.0
+    },
+    {
+      "id": "psf__requests-2931",
+      "original_score": 0.0
+    },
+    {
+      "id": "pydata__xarray-3677",
+      "original_score": 0.0
+    },
+    {
+      "id": "pydata__xarray-4356",
+      "original_score": 1.0
+    },
+    {
+      "id": "pylint-dev__pylint-7080",
+      "original_score": 0.0
+    },
+    {
+      "id": "pylint-dev__pylint-6386",
+      "original_score": 1.0
+    },
+    {
+      "id": "pytest-dev__pytest-5262",
+      "original_score": 0.0
+    },
+    {
+      "id": "pytest-dev__pytest-5631",
+      "original_score": 1.0
+    },
+    {
+      "id": "scikit-learn__scikit-learn-25747",
+      "original_score": 0.0
+    },
+    {
+      "id": "scikit-learn__scikit-learn-11578",
+      "original_score": 1.0
+    },
+    {
+      "id": "sphinx-doc__sphinx-9230",
+      "original_score": 0.0
+    },
+    {
+      "id": "sphinx-doc__sphinx-8056",
+      "original_score": 1.0
+    },
+    {
+      "id": "sympy__sympy-13798",
+      "original_score": 0.0
+    },
+    {
+      "id": "sympy__sympy-17318",
+      "original_score": 1.0
+    }
+  ]
+}

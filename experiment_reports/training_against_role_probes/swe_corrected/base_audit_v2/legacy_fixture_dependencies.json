@@ -1,0 +1,21 @@
+{
+  "py39": {
+    "itsdangerous": "1.1.0",
+    "pytest-httpbin": "0.0.7",
+    "MarkupSafe": "2.0.1",
+    "click": "7.1.2",
+    "blinker": "1.9.0",
+    "six": "1.17.0",
+    "cffi": "2.0.0",
+    "decorator": "5.3.1",
+    "Werkzeug": "1.0.1",
+    "brotlipy": "0.7.0",
+    "pycparser": "2.23",
+    "Flask": "1.1.4",
+    "Jinja2": "2.11.3",
+    "httpbin": "0.7.0",
+    "raven": "6.10.0"
+  },
+  "py311_service": "Existing http_fixture/py311 unchanged; local HTTP service retained",
+  "purpose": "Requests5414 declares pytest-httpbin==0.0.7; diagnostic only"
+}

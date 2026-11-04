@@ -1,0 +1,30 @@
+[
+  {
+    "control": "gold",
+    "sample_id": "psf__requests-1724",
+    "scores": {},
+    "error": "RuntimeError('Unexpected image trust bundle: requests/cacert.pem')"
+  },
+  {
+    "control": "gold",
+    "sample_id": "psf__requests-1766",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null
+  },
+  {
+    "control": "unchanged",
+    "sample_id": "psf__requests-1724",
+    "scores": {},
+    "error": "RuntimeError('Unexpected image trust bundle: requests/cacert.pem')"
+  },
+  {
+    "control": "unchanged",
+    "sample_id": "psf__requests-1766",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null
+  }
+]

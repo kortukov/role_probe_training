@@ -1,0 +1,345 @@
+{
+  "protocol": "saved v2 patches, localhost repair, official fresh-image grading; no model calls",
+  "samples": 42,
+  "original_successes": 0,
+  "successes": 15,
+  "errors": 0,
+  "results": [
+    {
+      "id": "matplotlib__matplotlib-13989",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "bfc11691de51d3615c901cc028885d51bd8146b014a8bfcc3a5416bf4ee4a7bc",
+      "reexported_patch_sha256": "bfc11691de51d3615c901cc028885d51bd8146b014a8bfcc3a5416bf4ee4a7bc"
+    },
+    {
+      "id": "matplotlib__matplotlib-14623",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "89a1fffc303dbdeb0c71e1a97ba13da66462c3bed875374bfd3f94ac964e7fbf",
+      "reexported_patch_sha256": "61d2d005c149f93160d3b39bbb73b635168869b8a811690fc9bff9379f95e881"
+    },
+    {
+      "id": "matplotlib__matplotlib-20488",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "31691f5e78e0f1d049ec3d0a50052e27fa030f5ed0965be73ecfaf66938ea835",
+      "reexported_patch_sha256": "31691f5e78e0f1d049ec3d0a50052e27fa030f5ed0965be73ecfaf66938ea835"
+    },
+    {
+      "id": "matplotlib__matplotlib-20676",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "3f65caab5606423b1716e8974c67510690bb84c766016f42923f34c45a01fc94",
+      "reexported_patch_sha256": "3f65caab5606423b1716e8974c67510690bb84c766016f42923f34c45a01fc94"
+    },
+    {
+      "id": "matplotlib__matplotlib-20826",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "84dc9b75c5579a8cb61f3f6ec6b2c831997bf512619e8ed132cf251ed3c08f7d",
+      "reexported_patch_sha256": "84dc9b75c5579a8cb61f3f6ec6b2c831997bf512619e8ed132cf251ed3c08f7d"
+    },
+    {
+      "id": "matplotlib__matplotlib-20859",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "a4d57adbc70e35346ce2cc2ab9ea8b114f536e74475c4c8f5e50923f28ef4cfa",
+      "reexported_patch_sha256": "a4d57adbc70e35346ce2cc2ab9ea8b114f536e74475c4c8f5e50923f28ef4cfa"
+    },
+    {
+      "id": "matplotlib__matplotlib-21568",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "879a14ebcb0fb71054cac5008bc80eb3160d43c2e0f9b232f88f0cfa24fb4c82",
+      "reexported_patch_sha256": "879a14ebcb0fb71054cac5008bc80eb3160d43c2e0f9b232f88f0cfa24fb4c82"
+    },
+    {
+      "id": "matplotlib__matplotlib-22719",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "084d19971fcff8dc9ee488192612a216022b1588241d71d52a128824658720ad",
+      "reexported_patch_sha256": "084d19971fcff8dc9ee488192612a216022b1588241d71d52a128824658720ad"
+    },
+    {
+      "id": "matplotlib__matplotlib-22865",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "3c8cc750a6ea44673fb3e2ed6af0a3e9f951deb4a3649eb2b844d018cccbace6",
+      "reexported_patch_sha256": "3c8cc750a6ea44673fb3e2ed6af0a3e9f951deb4a3649eb2b844d018cccbace6"
+    },
+    {
+      "id": "matplotlib__matplotlib-22871",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "2d10b90931140efffb3982caa1cefdb24d012df692635ca7c392964632196dff",
+      "reexported_patch_sha256": "2d10b90931140efffb3982caa1cefdb24d012df692635ca7c392964632196dff"
+    },
+    {
+      "id": "matplotlib__matplotlib-23299",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "2004f248fa6c540793f472d55d8e0d2907731fc34e6270442521ce71d1bbe06b",
+      "reexported_patch_sha256": "2004f248fa6c540793f472d55d8e0d2907731fc34e6270442521ce71d1bbe06b"
+    },
+    {
+      "id": "matplotlib__matplotlib-23314",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "a1dc498391d2c707892a5b216d2ac84e70a3fda7e5ab26c436e3cd3bc41624a1",
+      "reexported_patch_sha256": "a1dc498391d2c707892a5b216d2ac84e70a3fda7e5ab26c436e3cd3bc41624a1"
+    },
+    {
+      "id": "matplotlib__matplotlib-23412",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "e5b2047ec777d9cfcdb75d957bf2ef8739cc36fc3ed9be4ba35478ccda1550c5",
+      "reexported_patch_sha256": "866661842f13b86af51fe98d93fd183fe080d3f74af6b1618277093362974eac"
+    },
+    {
+      "id": "matplotlib__matplotlib-23476",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "8f0bc1dcbd3da8bc819c8d50532562455bc33eab09a81767dd7f897da193b062",
+      "reexported_patch_sha256": "8f0bc1dcbd3da8bc819c8d50532562455bc33eab09a81767dd7f897da193b062"
+    },
+    {
+      "id": "matplotlib__matplotlib-24026",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "057d0c8762664e34c4d9eca9bb8d30e7f601f7e276f3c390a4ed667c38b181a5",
+      "reexported_patch_sha256": "057d0c8762664e34c4d9eca9bb8d30e7f601f7e276f3c390a4ed667c38b181a5"
+    },
+    {
+      "id": "matplotlib__matplotlib-24149",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "6dfd3a71001df4c80fca002d44c150acbe01d716d16cd287477b1d89537510b6",
+      "reexported_patch_sha256": "6dfd3a71001df4c80fca002d44c150acbe01d716d16cd287477b1d89537510b6"
+    },
+    {
+      "id": "matplotlib__matplotlib-24177",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reexported_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "matplotlib__matplotlib-24570",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "f6d808e5156efabb4ef9beb458235eaf232d9b723e810cbeb490d12c2eb0f92e",
+      "reexported_patch_sha256": "1823bd9cdcbe13251854275743605b8f0b8634f92ae86674c5f2e2d34ed50d0a"
+    },
+    {
+      "id": "matplotlib__matplotlib-24627",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "99a666f382b6a38f8c1cf8355e157984656f1ccfae7710d31ca0edcd33af6868",
+      "reexported_patch_sha256": "99a666f382b6a38f8c1cf8355e157984656f1ccfae7710d31ca0edcd33af6868"
+    },
+    {
+      "id": "matplotlib__matplotlib-24637",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "fa1eb8e0a093b815b68c54a70e699ca85e9c353a6167a46abb35c2ebaf154f86",
+      "reexported_patch_sha256": "691aea6b01c2518d4e5f5e327cd5a4013db80f6a8001a2d33c3b4def8ae25233"
+    },
+    {
+      "id": "matplotlib__matplotlib-24870",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "40cb8303198ad42df4918ef924082294b62abe44f38d3b208a606660587b1723",
+      "reexported_patch_sha256": "40cb8303198ad42df4918ef924082294b62abe44f38d3b208a606660587b1723"
+    },
+    {
+      "id": "matplotlib__matplotlib-24970",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "1219512f3a738a7731cad46bc7643b04e7539c3c754de38fee5845b291ccd4c6",
+      "reexported_patch_sha256": "1219512f3a738a7731cad46bc7643b04e7539c3c754de38fee5845b291ccd4c6"
+    },
+    {
+      "id": "matplotlib__matplotlib-25122",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "355471a1e25d1a80b4639fc6c3bb0bad8fd64204555ed6cec7168f93b49cd1bf",
+      "reexported_patch_sha256": "355471a1e25d1a80b4639fc6c3bb0bad8fd64204555ed6cec7168f93b49cd1bf"
+    },
+    {
+      "id": "matplotlib__matplotlib-25287",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "16df233f182a68e1a4fd1826ac3f0cae497348d8dcbfac5d120ebfb7fecfa188",
+      "reexported_patch_sha256": "16df233f182a68e1a4fd1826ac3f0cae497348d8dcbfac5d120ebfb7fecfa188"
+    },
+    {
+      "id": "matplotlib__matplotlib-25311",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "ffdcc96c4a8dca1d082910562e085d54823cef5d2e280515ae515fa530d3a32e",
+      "reexported_patch_sha256": "ffdcc96c4a8dca1d082910562e085d54823cef5d2e280515ae515fa530d3a32e"
+    },
+    {
+      "id": "matplotlib__matplotlib-25332",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "3ebb2d92b64c3b84a6ffb8bb84076e5ca5cc658d17a7ec9ea5e45ee0f4a0650a",
+      "reexported_patch_sha256": "3ebb2d92b64c3b84a6ffb8bb84076e5ca5cc658d17a7ec9ea5e45ee0f4a0650a"
+    },
+    {
+      "id": "matplotlib__matplotlib-25479",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "1055b82f7ff45b7aa0674ead2c22bd97b251fb121aee599446b23ccc392bdfe3",
+      "reexported_patch_sha256": "1055b82f7ff45b7aa0674ead2c22bd97b251fb121aee599446b23ccc392bdfe3"
+    },
+    {
+      "id": "matplotlib__matplotlib-25775",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "123f229dba698904b6e9ec3f431874a57dd0c7c1c032fa08d004d956816fd2d1",
+      "reexported_patch_sha256": "123f229dba698904b6e9ec3f431874a57dd0c7c1c032fa08d004d956816fd2d1"
+    },
+    {
+      "id": "matplotlib__matplotlib-25960",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "494a2f541b8eb57f79ac8ad9fa2d553e40787bd546f15c58e3ed8b4294ab504d",
+      "reexported_patch_sha256": "494a2f541b8eb57f79ac8ad9fa2d553e40787bd546f15c58e3ed8b4294ab504d"
+    },
+    {
+      "id": "matplotlib__matplotlib-26113",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "4088d065232e92a7251a2c34eeb51dd6167a7091aa0bb6ec39800f9990f7a763",
+      "reexported_patch_sha256": "4088d065232e92a7251a2c34eeb51dd6167a7091aa0bb6ec39800f9990f7a763"
+    },
+    {
+      "id": "matplotlib__matplotlib-26208",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "c99ced1dae944be5c68ae0d25c83e9890edf16a57969d5c2e63c02764a37b884",
+      "reexported_patch_sha256": "c99ced1dae944be5c68ae0d25c83e9890edf16a57969d5c2e63c02764a37b884"
+    },
+    {
+      "id": "matplotlib__matplotlib-26291",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "64a992f510a5e1e95079c79c924d32967cbd92c430a205f904c97ee757aaa2fc",
+      "reexported_patch_sha256": "490a8e680295cbeb6deb3ba042a7339408e0200d6bd36f2481eed9ffb12bd403"
+    },
+    {
+      "id": "matplotlib__matplotlib-26342",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "1dbe534cf3b71ee0af41a19a034e65cb4a0f01b39816e89b6ea7fcd110e46176",
+      "reexported_patch_sha256": "1dbe534cf3b71ee0af41a19a034e65cb4a0f01b39816e89b6ea7fcd110e46176"
+    },
+    {
+      "id": "matplotlib__matplotlib-26466",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "57e797e279804e433c588d5a40036e237f201e1c40899e08e7ea71bd89e55e99",
+      "reexported_patch_sha256": "57e797e279804e433c588d5a40036e237f201e1c40899e08e7ea71bd89e55e99"
+    },
+    {
+      "id": "psf__requests-1142",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "0e9fc01cd787cc9b61f14509404f1b25045b6802fbbffe81309853726dfcd80c",
+      "reexported_patch_sha256": "173fa64ba41c146c4795b59dca9b5cb2ecad28c8b157050b4111063e1fc94410"
+    },
+    {
+      "id": "psf__requests-1724",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "e2fc67ad7279347ccc4627b14cd7e1c362206b6157835283c7114e702ac023d1",
+      "reexported_patch_sha256": "e2fc67ad7279347ccc4627b14cd7e1c362206b6157835283c7114e702ac023d1"
+    },
+    {
+      "id": "psf__requests-1766",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "2ce0776b97b64403490040eb326c0c17760adf00ade5dbcc3e5e21067c0f030c",
+      "reexported_patch_sha256": "2ce0776b97b64403490040eb326c0c17760adf00ade5dbcc3e5e21067c0f030c"
+    },
+    {
+      "id": "psf__requests-1921",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "ddf3b4722b7b7ca44ecc6c027d896066334bee8b7606e364af9a4aab349528b0",
+      "reexported_patch_sha256": "ddf3b4722b7b7ca44ecc6c027d896066334bee8b7606e364af9a4aab349528b0"
+    },
+    {
+      "id": "psf__requests-2317",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "cc075c4fbac26addc490964d00869a4301ce6e554ee4c82a3c0b7ecbb64cf7c7",
+      "reexported_patch_sha256": "cc075c4fbac26addc490964d00869a4301ce6e554ee4c82a3c0b7ecbb64cf7c7"
+    },
+    {
+      "id": "psf__requests-2931",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "85cf08f1dfe16278854d997dbffa98e5eecd52b0d764c7cda959d02dffdab11e",
+      "reexported_patch_sha256": "85cf08f1dfe16278854d997dbffa98e5eecd52b0d764c7cda959d02dffdab11e"
+    },
+    {
+      "id": "psf__requests-5414",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "9cb58ac7f8eb4528a5b72fa710515c18b2a331a8c5e8826c1792799fa0c318da",
+      "reexported_patch_sha256": "9cb58ac7f8eb4528a5b72fa710515c18b2a331a8c5e8826c1792799fa0c318da"
+    },
+    {
+      "id": "psf__requests-6028",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "4c49136ea96d7e4e2f21991d6b81271c5dce30c924fbaae7ffb39a6e8b1637a9",
+      "reexported_patch_sha256": "4c49136ea96d7e4e2f21991d6b81271c5dce30c924fbaae7ffb39a6e8b1637a9"
+    }
+  ]
+}

@@ -1,0 +1,604 @@
+{
+  "status": "Combined repaired gold survey1615435 running all492;Django isolated867 tests pass but full suite remains invalid;provisional247/500;trained held",
+  "created_utc": "2026-10-25T11:36:40.815412+00:00",
+  "thread": "01a17f07-4145-7531-a7dd-6dd84f3d5bbd",
+  "controls_job": "1505926",
+  "models": [
+    {
+      "root": "experiment_reports/training_against_role_probes/base_model",
+      "label": "Base",
+      "status": "original task outcomes retained; grading acceptance revoked; whole-history probe scoring queued",
+      "collection_job": "1516499",
+      "assembly_job": "1516502",
+      "score_job": "1602031"
+    },
+    {
+      "root": "experiment_reports/training_against_role_probes",
+      "label": "AppWorld-trained",
+      "status": "collection held pending grading and agent environment diagnosis",
+      "collection_job": "1602032",
+      "assembly_job": "1602033",
+      "score_job": "1602034"
+    },
+    {
+      "root": "experiment_reports/training_against_role_probes/astra_sft_1k",
+      "label": "ASTRA-trained",
+      "status": "collection held pending grading and agent environment diagnosis",
+      "collection_job": "1602035",
+      "assembly_job": "1602036",
+      "score_job": "1602037"
+    },
+    {
+      "root": "experiment_reports/training_against_role_probes/depthbench",
+      "label": "DepthBench-trained",
+      "status": "collection held pending grading and agent environment diagnosis",
+      "collection_job": "1602038",
+      "assembly_job": "1602039",
+      "score_job": "1602040"
+    },
+    {
+      "root": "experiment_reports/training_against_role_probes/kl_iteration/agentic800",
+      "label": "AppWorld + agentic KL (800)",
+      "status": "collection held pending grading and agent environment diagnosis",
+      "collection_job": "1602041",
+      "assembly_job": "1602042",
+      "score_job": "1602043"
+    },
+    {
+      "root": "experiment_reports/training_against_role_probes/kl_iteration/same_batch",
+      "label": "AppWorld + same-batch KL",
+      "status": "collection held pending grading and agent environment diagnosis",
+      "collection_job": "1602044",
+      "assembly_job": "1602045",
+      "score_job": "1602046"
+    }
+  ],
+  "settings": {
+    "context_limit": 131072,
+    "reasoning_effort": "high",
+    "temperature": 1,
+    "max_output_tokens": 16384,
+    "message_limit": 2000,
+    "cumulative_token_limit": null,
+    "time_limit_seconds": 7200,
+    "concurrency_per_shard": 4,
+    "shards": 4,
+    "weight_precision": "BF16",
+    "sandbox": "apptainer_testbed_python",
+    "scorer": "fresh image; official SWE-bench 4.1.0 evaluation script and grader"
+  },
+  "review_policy": "Review full 500-task baseline and failures before trained-model collection. If still far from 60.7%, investigate residual limits, tool failures, scoring discrepancies and agent/harness differences. Never replace failed model attempts to improve results.",
+  "probe_policy": "Reuse independently fitted model-specific layer-12 probes. Whole histories only, no chunks/truncation; above-native histories unscorable, all task outcomes retained.",
+  "controls": [
+    {
+      "control": "gold",
+      "sample_id": "django__django-14155",
+      "scores": {
+        "swe_bench_scorer": 1.0
+      },
+      "error": null
+    },
+    {
+      "control": "gold",
+      "sample_id": "sympy__sympy-13878",
+      "scores": {
+        "swe_bench_scorer": 1.0
+      },
+      "error": null
+    },
+    {
+      "control": "unchanged",
+      "sample_id": "django__django-14155",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null
+    },
+    {
+      "control": "unchanged",
+      "sample_id": "sympy__sympy-13878",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null
+    }
+  ],
+  "failed_pre_generation_controls": [
+    {
+      "job": "1505925",
+      "reason": "Sandbox proxy API mismatch in new scorer; fixed and all four controls rerun successfully",
+      "model_attempts": 0
+    }
+  ],
+  "source_sha256": {
+    "src/experiments/training_against_role_probes/swe_corrected/residual_environment.py": "2a9feab9feac9b761cead6254284dd84409c46b7e066b2612f0bd464aa78e8fa",
+    "src/experiments/training_against_role_probes/swe_corrected/audit.py": "14cc6d05d0ec40e4b4e251f449abed617f63ee79ceabec5f4fe9c9a9669188c0",
+    "src/experiments/training_against_role_probes/swe_corrected/controls.py": "52889986061705b71e5b059f3b731e45cfa0a35870acb96a7d099cbb6f7927cf",
+    "src/experiments/training_against_role_probes/swe_corrected/run.py": "7cc148d0e3365a682d482809cfd1d443366b3138ab018179e7d888760e83e984",
+    "src/experiments/training_against_role_probes/swe_corrected/timeout_diagnostic.py": "264855288ef07069b0b99da06c7b5315db4f67930eac0aaf31244356d5400a3e",
+    "src/experiments/training_against_role_probes/swe_corrected/assemble.py": "02f3744ce95f543f24ad84069d908eaab47e697ba94bb48115b561f29b1c480c",
+    "src/experiments/training_against_role_probes/swe_corrected/repository_python_control.py": "dbf9bab5e47a4861a37f191efffbca005e8cb22e969d428fc984d46bc59ddd1e",
+    "src/experiments/training_against_role_probes/swe_corrected/repository_python_control.sbatch": "eaaa879de3e4ea1df2baa1fe977cf576e2643c5df6bfe6345a6f1dc87090e526",
+    "src/experiments/training_against_role_probes/swe_corrected/collect_v2.sbatch": "50ef92b658cd5071aca2f7e917606aac4a17d3985ea7fcee14a6eab25b4726ad",
+    "src/experiments/training_against_role_probes/swe_corrected/timeout_diagnostic.sbatch": "176a62376daf8ddfd176a54ce788b8be5f6e2bf256783ea5197871dad176c10c",
+    "src/experiments/training_against_role_probes/swe_corrected/controls.sbatch": "0bae4cad873427a2520a76e0d415939d77c481a7d513ff4a43d7b62b0b57423f",
+    "src/experiments/training_against_role_probes/swe_corrected/score.sbatch": "f41dbf4b14467a85d5f81ffd148f7e4c59f4863aa642537d386820c451914880",
+    "src/experiments/training_against_role_probes/swe_corrected/finish_base_v2.sbatch": "74a60359cb670cd1473e1957667b7bff614dd75ace3f4deaef6d35fc92eadffa",
+    "src/experiments/training_against_role_probes/swe_corrected/finish_base.sbatch": "719b842728de9c2b32bfc44f0ffcba470ed795de4f767080f0cc0f61cb1f046c",
+    "src/experiments/training_against_role_probes/swe_corrected/collect.sbatch": "ac2cadb1645ad0d71c9804d269e14101abae04f2b931fa7a885bb89ed4d0782c",
+    "src/experiments/training_against_role_probes/swe_corrected/residual_environment.sbatch": "479a4417b36b56cf625b56dff26ef9f512191ca8fef67ff6207c2c52c04dd1d6",
+    "src/role_probe_training/trajectories/swe_testbed_python.py": "ff8f7a59e93334ad63940a08426d7b2d5525387907189edcccf34a9ade79f7ec",
+    "src/role_probe_training/trajectories/swe_scoring.py": "ac10e0cb4c3f9bc45b55943929ed4a5d4889223c1b7a72d01d976ed28b4a8676",
+    "src/role_probe_training/trajectories/swe_testbed.py": "af8829d0fdefad21edef5549214dc9102cc038ae4b77112c095ce7cdbb404db5",
+    "src/experiments/training_against_role_probes/swe_corrected/assemble_v2.sbatch": "09880ec9818dc05faa95d1200ad5a5b4b59cdc42831147f9a9dbf8c2f958e20f",
+    "src/experiments/training_against_role_probes/swe_corrected/score_v2.sbatch": "c463a9e0a04f3f5f6d61a2b3d159314ea83754c31286b6a898e99951089476bc",
+    "src/experiments/training_against_role_probes/swe_corrected/watch.sh": "50c64e51574ec1338ae79e22792475f968ec2f9e3c97215e35729d7b6db14d9e",
+    "src/role_probe_training/trajectories/swe_localhost.py": "ce74c262d8b1dd375e57accd6353cfdb8be848cca3434759aa3c4fc5d5e70488",
+    "src/role_probe_training/trajectories/swe_scoring_localhost.py": "cd3d84414d1471ad74d35ee2fd9aeff7664692ba71fe7eb0bb73fab6de13cae2",
+    "src/experiments/training_against_role_probes/swe_corrected/regrade_saved.py": "ed903d8769718911e09e3dfc489e4c87e2a17a67bc8f2904f49c4e1423650f9d",
+    "src/experiments/training_against_role_probes/swe_corrected/regrade_saved.sbatch": "c02a0a4c559ba65c24f680e0d1391f03d739111ecbee4aa1088d7a4fd4403a61",
+    "src/experiments/training_against_role_probes/swe_corrected/network_diagnostic.py": "602cd874f270e43c5e40c441e68c5fd2781bb0dc2ba7d5fdc564d2aba380ab63",
+    "src/experiments/training_against_role_probes/swe_corrected/network_diagnostic.sbatch": "294f1ae1370c9a8960f041d9bb1e8d4b5225f12562fe82f83f851456867f9f4b",
+    "src/experiments/training_against_role_probes/swe_corrected/localhost_controls.py": "6740aef3658c3a709b6f9d52e20410532458c88dea2f55d684e465765da05c25",
+    "src/experiments/training_against_role_probes/swe_corrected/localhost_controls.sbatch": "6a6c43de46235458152f24b616f7b5417ef9e6569e490ee4e14d8b9c5c168407",
+    "src/experiments/training_against_role_probes/swe_corrected/requests_localhost_controls.py": "fb26c63d5686c1cdf5f8641cf514c687423794698a478aec3f0097b313ee43fe",
+    "src/experiments/training_against_role_probes/swe_corrected/requests_localhost_controls.sbatch": "8a9c01d89ae83110f6bd38241e1b6f94d048c8d3601b550f0058a3605bc5b63a",
+    "src/experiments/training_against_role_probes/swe_corrected/network_namespace_control.sbatch": "5c312fd3202ba5bcd727a3d3fcce218262f4d360110ca250e2c6bf20e2707b5c",
+    "src/role_probe_training/trajectories/swe_http_fixture.py": "5c12d2953a0f8c2cfb89857afb98cc644db47973128cab444156dc466506e967",
+    "src/role_probe_training/trajectories/swe_scoring_http_fixture.py": "117971be35cf6f1383f2a92ca5be9ff9e3ada8dea1d16ac6a3e2220c27b61d37",
+    "src/role_probe_training/trajectories/swe_snapshot.py": "0f6fb116cb8f88c742fd3a2811e3dd45e5aabe0a284cb3ebb0d331d76f6853aa",
+    "src/role_probe_training/trajectories/swe_scoring_snapshot.py": "d3d4730a859fa8390f7d1de324606d9b212f6d41bf20bff99fb99b7c313d618c",
+    "src/experiments/training_against_role_probes/swe_corrected/gold_survey.py": "89c02e98ed4e795a21348c7583b98018d3c03abc01a20f8633a27b7dd9a483ca",
+    "src/experiments/training_against_role_probes/swe_corrected/gold_survey.sbatch": "6e334960fea9f19f330f76115827d45b8af4bd1b625e86bae7b51e5f6bda3bd8",
+    "src/role_probe_training/trajectories/swe_scoring_diagnostic.py": "13068735fa8c5e71b2a2f02b6a2702b4a41d4e20a030b7b115b0537c0de1275c",
+    "src/experiments/training_against_role_probes/swe_corrected/parser_controls.py": "49a53b22af02c11cef6964f0bc836a860a136235a555690b9a30988c739c013b",
+    "src/experiments/training_against_role_probes/swe_corrected/residual_gold_diagnostic.py": "befc4f63d1bb67159fc01e1f063df8d00d0ae21f75c7fabc7a54fbbe98ca03a4",
+    "src/role_probe_training/trajectories/swe_appdirs.py": "a20872a648db1aedcdf246bd31deb6220c821443f6550cf2a270ff9324e65d8c",
+    "src/role_probe_training/trajectories/swe_scoring_appdirs.py": "55c107f034372e5761e003aec3d34ae64bb3e80fc2c1103cee4b461ac89f0e62",
+    "src/role_probe_training/trajectories/swe_test_identity.py": "f81410b3a309eed1002839dde20b7f2a9c31ecb828a5f44fd6e1dc0eb18512d1",
+    "src/role_probe_training/trajectories/swe_scoring_identity.py": "4b82c84e69950b653ba4aed54120cd273875dfb0fbd2b4d9b813af2cb351fea3",
+    "src/role_probe_training/trajectories/swe_scoring_summary.py": "96b55670ebb36f9aca9b0a49b6bd8554d18664c2e446d4d16abc57b2476ce618",
+    "src/role_probe_training/trajectories/swe_scoring_repairs.py": "73e5a17683511a8b65c1d7ddbb777dc3ef3646d51d651b7caef7912073bfb5f3",
+    "src/role_probe_training/trajectories/swe_legacy_http_fixture.py": "ea90d0e0297007949b8efc02d96f8e76ef7f95b24a00c7b7ee823af2286d6c24",
+    "src/role_probe_training/trajectories/swe_scoring_legacy_http_fixture.py": "0d4fc0b758b0665b66b56ddcd1920b23ff4c9241e8be9ba54ba75b7db9bbd94c",
+    "src/role_probe_training/trajectories/swe_dual_http_server.py": "8ccf004e0969491c706dc230ee7c06d1a14481583ca51553017d44cbc30e599b",
+    "src/role_probe_training/trajectories/swe_dual_http_fixture.py": "a221b45033078c43a15f32380c0d3e70fa971ba9fd2e1293c98c262bb4b11f81",
+    "src/role_probe_training/trajectories/swe_scoring_dual_http_fixture.py": "0cd82b430d6ac1e2a77a425298a5ac42c0d7b11396edea4566fb1cda9c6295e1"
+  },
+  "base_collection": "1516499",
+  "watch_jobs": [
+    "1615435"
+  ],
+  "ready_job": "1615435_3",
+  "base_review": "1516502",
+  "infrastructure_repairs": [
+    {
+      "failed_jobs": [
+        "1505929_0",
+        "1505929_3"
+      ],
+      "replacement_collection": "1505940",
+      "reason": "Server imports failed reading Transformers/Torch files; files now verified present. Add bounded pre-generation startup retries only. No environment changes.",
+      "prior_benchmark_model_attempts": 0,
+      "script_sha256": "ac2cadb1645ad0d71c9804d269e14101abae04f2b931fa7a885bb89ed4d0782c",
+      "superseded_review": "1505930"
+    },
+    {
+      "job": "1516499_1",
+      "state": "OUT_OF_MEMORY",
+      "recovery_utc": "2026-10-27T20:28:02.899282+00:00",
+      "action": "Released review job 1516502 dependency after finding all 125 saved attempts; full audit passed. No regenerated attempts.",
+      "future_collection_mem": "256G"
+    }
+  ],
+  "baseline_review": {
+    "samples": 500,
+    "successes": 226,
+    "success_rate": 0.452,
+    "evaluation_errors": 1,
+    "export_errors": 0,
+    "cumulative_token_limited": 67,
+    "cumulative_token_limited_successes": 8,
+    "native_context_stops": 3,
+    "message_limited": 0,
+    "validation": "not yet accepted for trained-model collection",
+    "residual_environment_job": "1516255",
+    "timeout_diagnostic_job": "1516309",
+    "findings": [
+      "Fresh Requests image psf__requests-1724: Inspect python tool invokes python3 and falls back to base Conda; testbed python is a legacy interpreter. This is a remaining tool/environment mismatch.",
+      "SymPy23413 and pytest5631 controls use testbed correctly; numpy is absent in their pinned testbed images.",
+      "67 attempts hit the 10-million cumulative input+output token budget; 59 of these failed. Investigate a separately labeled protocol without this binding budget before final comparison.",
+      "Timeout diagnostic replays saved editor actions and gold patch, without new model calls or replacing original result."
+    ],
+    "repository_python_control_job": "1516433",
+    "repository_python_control_result": "20/20 direct, Python-tool and shell checks passed across Requests, pytest, SymPy and Django",
+    "timeout_gold_result": "25 tests passed in 4.02 seconds; saved model edits reproduced test-phase timeout",
+    "timeout_diagnostic_result": {
+      "job": "1516309",
+      "gold": "25 tests passed in 4.02 seconds",
+      "saved_model_edits": "Reproduced 1800-second timeout during tests, after first test passed",
+      "interpretation": "Saved model edits reproduce the hang; gold succeeds in the same evaluation setup. Retain original timeout as an unsuccessful task.",
+      "results": "data/timeout-diagnostic-1516309/results.json"
+    }
+  },
+  "cohorts": [
+    {
+      "name": "swe_corrected",
+      "base_collection": "1505929",
+      "base_review": "1505941",
+      "settings": {
+        "context_limit": 131072,
+        "reasoning_effort": "high",
+        "temperature": 1,
+        "max_output_tokens": 16384,
+        "message_limit": 2000,
+        "cumulative_token_limit": 10000000,
+        "time_limit_seconds": 7200,
+        "concurrency_per_shard": 4,
+        "shards": 4,
+        "weight_precision": "BF16",
+        "sandbox": "apptainer_testbed",
+        "scorer": "fresh image; official SWE-bench 4.1.0 evaluation script and grader"
+      },
+      "source_sha256": {
+        "src/experiments/training_against_role_probes/swe_corrected/audit.py": "f8d52e9a63ed7f44109d500791d0424365366dba36ecd48b787144ead1b3bf76",
+        "src/experiments/training_against_role_probes/swe_corrected/controls.py": "52889986061705b71e5b059f3b731e45cfa0a35870acb96a7d099cbb6f7927cf",
+        "src/experiments/training_against_role_probes/swe_corrected/run.py": "0ebe670f29891c9d04558c531ea43fb041b7b7c1aeddb9009fd2da1d8466c6e5",
+        "src/experiments/training_against_role_probes/swe_corrected/assemble.py": "086396fef8541ec60c97d6ec264358d68a4ccc50a6c6e8088baa0f172ba1ae6d",
+        "src/experiments/training_against_role_probes/swe_corrected/controls.sbatch": "0bae4cad873427a2520a76e0d415939d77c481a7d513ff4a43d7b62b0b57423f",
+        "src/experiments/training_against_role_probes/swe_corrected/score.sbatch": "f41dbf4b14467a85d5f81ffd148f7e4c59f4863aa642537d386820c451914880",
+        "src/experiments/training_against_role_probes/swe_corrected/finish_base.sbatch": "719b842728de9c2b32bfc44f0ffcba470ed795de4f767080f0cc0f61cb1f046c",
+        "src/experiments/training_against_role_probes/swe_corrected/collect.sbatch": "ee14791965d050a7ae430b7454f44ebd2bfbd4f9f047c24834e652ad51cad50c",
+        "src/role_probe_training/trajectories/swe_scoring.py": "ac10e0cb4c3f9bc45b55943929ed4a5d4889223c1b7a72d01d976ed28b4a8676",
+        "src/role_probe_training/trajectories/swe_testbed.py": "af8829d0fdefad21edef5549214dc9102cc038ae4b77112c095ce7cdbb404db5"
+      },
+      "result": "226/500; not accepted as final comparison due remaining interpreter mismatch and binding budget"
+    }
+  ],
+  "active_cohort": "swe_corrected_v2",
+  "baseline_review_v2": {
+    "review_job": "1516502",
+    "samples": 500,
+    "successes": 228,
+    "evaluation_errors": 0,
+    "export_errors": 0,
+    "task_budget_stops": 0,
+    "native_context_stops": 20,
+    "validation": "REVOKED: pytest initialization failures were incorrectly reported as ordinary task failures",
+    "raw_log_scores_match_exports": true,
+    "audit": "base_audit_v2/audit.json",
+    "review_notes": [
+      "20/20 repository interpreter controls previously passed.",
+      "Residual import errors include optional dependencies and model path changes; inspected requests/sklearn/numpy cases.",
+      "No task-level limit events; native-context stops retained.",
+      "Existing fresh-image gold/no-op controls passed. Remaining model-card gap is unresolved; agent interface and inference implementation differ."
+    ],
+    "grading_audit": "base_audit_v2/grading_audit.json",
+    "grading_controls_job": "1610621",
+    "requests_grading_controls_job": "1610623",
+    "gold_controls_result": "Matplotlib20859, Requests1724, Requests2931 all score zero with gold patches; Requests retries use base file helper, zero sample errors"
+  },
+  "ready_jobs": [
+    "1615435_0",
+    "1615435_1",
+    "1615435_2",
+    "1615435_3"
+  ],
+  "collection_resources": {
+    "mem": "256G",
+    "array": "0-3%2",
+    "gpus_per_shard": 1
+  },
+  "network_repair": {
+    "diagnostic_job": "1610624",
+    "gold_job": "1610625",
+    "saved_patch_regrade_job": "1610633",
+    "root_cause": "Empty image /etc/hosts; numeric loopback succeeds, localhost resolution fails",
+    "fix": "Opt-in image hosts file with IPv4/IPv6 localhost; no external networking enabled",
+    "gold_results": {
+      "django__django-14155": {
+        "swe_bench_scorer": 1.0
+      },
+      "matplotlib__matplotlib-20859": {
+        "swe_bench_scorer": 1.0
+      },
+      "matplotlib__matplotlib-24570": {
+        "swe_bench_scorer": 1.0
+      },
+      "psf__requests-1724": {
+        "swe_bench_scorer": 0.0
+      },
+      "psf__requests-2931": {
+        "swe_bench_scorer": 0.0
+      },
+      "sympy__sympy-13878": {
+        "swe_bench_scorer": 1.0
+      }
+    },
+    "remaining_requests_problems": [
+      "Older test suite uses external httpbin.org via HTTPBIN_URL",
+      "Missing pytest-httpbin fixture in newer images",
+      "TARPIT 10.255.255.1 yields ENETUNREACH rather than a timeout in isolated network"
+    ],
+    "regrade_scope": "all 34 Matplotlib + 8 Requests saved v2 patches; no model generation",
+    "requests_gold_job": "1610636",
+    "namespace_control": {
+      "job": "1610635",
+      "state": "FAILED",
+      "reason": "unshare: write failed /proc/self/uid_map: Operation not permitted",
+      "scope": "new user+network namespace only; host interfaces/routes unchanged"
+    },
+    "regrade_result": {
+      "samples": 42,
+      "original_successes": 0,
+      "successes": 15,
+      "errors": 0,
+      "all_successful_reexported_patch_hashes_match": true,
+      "provisional_total_unchanged_other_tasks": 243,
+      "provisional_rate": 0.486
+    },
+    "requests_gold_passes": [
+      "psf__requests-6028"
+    ],
+    "fixture_control": {
+      "startup_failed_job": "1610648",
+      "job": "1610652",
+      "gold_passes": [
+        "psf__requests-6028"
+      ],
+      "result": "Local HTTP restores many tests but no additional full gold verdicts; TLS, timeout and compatibility failures remain",
+      "dependency_project": "src/experiments/training_against_role_probes/swe_corrected/http_fixture",
+      "target_path": "data/http_fixture/{py311,py39}"
+    }
+  },
+  "gold_survey": {
+    "job": "1610674",
+    "samples": 492,
+    "shards": 4,
+    "excluded_repo": "psf/requests; separately tested all 8",
+    "model_calls": 0,
+    "gold_passes": 483,
+    "errors": 0,
+    "result": "base_audit_v2/gold_survey.json"
+  },
+  "snapshot_control_job": "1610678",
+  "pending_user_question": "Proceed with explicitly reported evaluation errors and gold-valid subset, or keep collection held until all environments pass? No answer received; collection remains held.",
+  "snapshot_control_result": {
+    "job": "1610678",
+    "results": [
+      {
+        "id": "psf__requests-1142",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null,
+        "exported_patch_bytes": 800
+      },
+      {
+        "id": "psf__requests-6028",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null,
+        "exported_patch_bytes": 486
+      }
+    ],
+    "interpretation": "Initial image untracked build files contaminated exported patches. Snapshot before solver excludes those files; Requests1142 gold changes from 0 to 1. Requests6028 remains 1.",
+    "scope": "No original model attempts changed; snapshot provider still diagnostic. Full492 gold survey uses localhost-only provider and can expose this defect in additional tasks."
+  },
+  "residual_gold_controls": {
+    "parser_source_path_job": "1615409",
+    "image_inspection_job": "1615410",
+    "scope": "gold/no-op controls and image inspection only; no model generation",
+    "findings": {
+      "external_HTTP": [
+        "sphinx-doc__sphinx-8475",
+        "sphinx-doc__sphinx-7985",
+        "sphinx-doc__sphinx-8269",
+        "sphinx-doc__sphinx-10435",
+        "matplotlib__matplotlib-20488"
+      ],
+      "missing_appdirs": [
+        "pylint-dev__pylint-4661"
+      ],
+      "installed_package_shadowing_source": [
+        "django__django-10097"
+      ],
+      "test_output_or_name_mismatch": [
+        "sphinx-doc__sphinx-9711",
+        "astropy__astropy-7606"
+      ]
+    },
+    "appdirs_job": "1615411",
+    "image_inspection_result": "data/residual-gold-1615410/results.json",
+    "appdirs_result": [
+      {
+        "control": "gold",
+        "sample_id": "pylint-dev__pylint-4661",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "pylint-dev__pylint-4661",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      }
+    ],
+    "parser_source_path_result": [
+      {
+        "control": "gold",
+        "sample_id": "astropy__astropy-7606",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      },
+      {
+        "control": "gold",
+        "sample_id": "django__django-10097",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      },
+      {
+        "control": "gold",
+        "sample_id": "sphinx-doc__sphinx-9711",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "astropy__astropy-7606",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "django__django-10097",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "sphinx-doc__sphinx-9711",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      }
+    ],
+    "summary_control_job": "1615414",
+    "identity_diagnostic_job": "1615416",
+    "summary_control_result": [
+      {
+        "control": "gold",
+        "sample_id": "sphinx-doc__sphinx-9711",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "sphinx-doc__sphinx-9711",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      }
+    ],
+    "identity_control_job": "1615419",
+    "identity_evidence": "data/identity-1615416/results.json",
+    "identity_control_result": [
+      {
+        "control": "gold",
+        "sample_id": "astropy__astropy-7606",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "astropy__astropy-7606",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      }
+    ],
+    "repairs_regrade_job": "1615421",
+    "repairs_regrade_result": "base_audit_v2/repairs_regrade.json",
+    "legacy_fixture_job": "1615422",
+    "legacy_fixture_result": "base_audit_v2/legacy_fixture_controls.json",
+    "dual_http_control_job": "1615424",
+    "dual_http_result": [
+      {
+        "control": "gold",
+        "sample_id": "psf__requests-1724",
+        "scores": {},
+        "error": "RuntimeError('Unexpected image trust bundle: requests/cacert.pem')"
+      },
+      {
+        "control": "gold",
+        "sample_id": "psf__requests-1766",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "psf__requests-1724",
+        "scores": {},
+        "error": "RuntimeError('Unexpected image trust bundle: requests/cacert.pem')"
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "psf__requests-1766",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      }
+    ],
+    "dual_http_v2_control_job": "1615425",
+    "dual_http_v3_control_job": "1615428",
+    "dual_http_v2_finding": "1724 gold still0: Python2 hostname matcher ignores IP SAN and matches DNS localhost; new image-local cert includes DNS-form loopback as well as IP SAN, verification retained",
+    "dual_http_v3_result": [
+      {
+        "control": "gold",
+        "sample_id": "psf__requests-1724",
+        "scores": {
+          "swe_bench_scorer": 1.0
+        },
+        "error": null
+      },
+      {
+        "control": "unchanged",
+        "sample_id": "psf__requests-1724",
+        "scores": {
+          "swe_bench_scorer": 0.0
+        },
+        "error": null
+      }
+    ],
+    "dual_http_saved_regrade_job": "1615429",
+    "dual_http_saved_regrade_result": "base_audit_v2/dual_http_regrade.json",
+    "django_environment_job": "1615431",
+    "django_isolation_job": "1615432",
+    "django_isolation_result": {
+      "job": "1615432",
+      "tests": 867,
+      "passed": 867,
+      "interpretation": "Isolated modules pass; full-suite interference suspected. Diagnostic subset never replaces benchmark result."
+    }
+  },
+  "provisional_saved_patch_total": {
+    "successes": 247,
+    "samples": 500,
+    "rate": 0.494,
+    "scope": "228 original +15 localhost +2 identity/summary +2 local HTTP/TLS; remaining outcomes retained; diagnostic protocols, not validated corrected-agent comparison"
+  },
+  "combined_gold_survey": {
+    "job": "1615435",
+    "samples": 492,
+    "shards": 4,
+    "protocol": "snapshot + appdirs + source path + verbose summary + Astropy identity",
+    "model_calls": 0,
+    "failed_wrapper_job": "1615433",
+    "failed_wrapper_reason": "Missing --array; exited at unset SLURM_ARRAY_JOB_ID before Python/evaluation; recovered with --array=0-3"
+  }
+}

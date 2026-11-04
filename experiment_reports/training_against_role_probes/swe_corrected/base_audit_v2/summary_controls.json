@@ -1,0 +1,18 @@
+[
+  {
+    "control": "gold",
+    "sample_id": "sphinx-doc__sphinx-9711",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null
+  },
+  {
+    "control": "unchanged",
+    "sample_id": "sphinx-doc__sphinx-9711",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null
+  }
+]

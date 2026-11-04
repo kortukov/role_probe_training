@@ -1,0 +1,6 @@
+{
+  "job": "1615432",
+  "tests": 867,
+  "passed": 867,
+  "interpretation": "Isolated modules pass; full-suite interference suspected. Diagnostic subset never replaces benchmark result."
+}

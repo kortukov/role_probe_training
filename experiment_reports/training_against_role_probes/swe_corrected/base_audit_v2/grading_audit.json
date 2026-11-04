@@ -1,0 +1,175 @@
+{
+  "samples": 500,
+  "successes": 228,
+  "pytest_internal_error_ids": [
+    "matplotlib__matplotlib-13989",
+    "matplotlib__matplotlib-23412",
+    "matplotlib__matplotlib-24149",
+    "matplotlib__matplotlib-20488",
+    "matplotlib__matplotlib-26113",
+    "matplotlib__matplotlib-25332",
+    "matplotlib__matplotlib-26208",
+    "matplotlib__matplotlib-26291",
+    "matplotlib__matplotlib-14623",
+    "matplotlib__matplotlib-21568",
+    "matplotlib__matplotlib-22865",
+    "matplotlib__matplotlib-20676",
+    "matplotlib__matplotlib-23299",
+    "matplotlib__matplotlib-23314",
+    "matplotlib__matplotlib-25311",
+    "matplotlib__matplotlib-23476",
+    "matplotlib__matplotlib-24026",
+    "matplotlib__matplotlib-26466",
+    "matplotlib__matplotlib-26342",
+    "matplotlib__matplotlib-22719",
+    "matplotlib__matplotlib-22871",
+    "matplotlib__matplotlib-24637",
+    "matplotlib__matplotlib-24627",
+    "matplotlib__matplotlib-25287",
+    "matplotlib__matplotlib-25479",
+    "matplotlib__matplotlib-25960",
+    "matplotlib__matplotlib-25775",
+    "matplotlib__matplotlib-20859",
+    "matplotlib__matplotlib-20826",
+    "matplotlib__matplotlib-24570",
+    "matplotlib__matplotlib-24970",
+    "matplotlib__matplotlib-25122",
+    "matplotlib__matplotlib-24870"
+  ],
+  "localhost_resolution_error_ids": [
+    "matplotlib__matplotlib-13989",
+    "matplotlib__matplotlib-23412",
+    "matplotlib__matplotlib-24149",
+    "matplotlib__matplotlib-20488",
+    "matplotlib__matplotlib-26113",
+    "matplotlib__matplotlib-25332",
+    "matplotlib__matplotlib-26208",
+    "matplotlib__matplotlib-26291",
+    "matplotlib__matplotlib-14623",
+    "matplotlib__matplotlib-21568",
+    "matplotlib__matplotlib-22865",
+    "matplotlib__matplotlib-20676",
+    "matplotlib__matplotlib-23299",
+    "matplotlib__matplotlib-23314",
+    "matplotlib__matplotlib-25311",
+    "matplotlib__matplotlib-23476",
+    "matplotlib__matplotlib-24026",
+    "matplotlib__matplotlib-26466",
+    "matplotlib__matplotlib-26342",
+    "matplotlib__matplotlib-22719",
+    "matplotlib__matplotlib-22871",
+    "matplotlib__matplotlib-24637",
+    "matplotlib__matplotlib-24627",
+    "matplotlib__matplotlib-25287",
+    "matplotlib__matplotlib-25479",
+    "matplotlib__matplotlib-25960",
+    "matplotlib__matplotlib-25775",
+    "matplotlib__matplotlib-20859",
+    "matplotlib__matplotlib-20826",
+    "matplotlib__matplotlib-24570",
+    "matplotlib__matplotlib-24970",
+    "matplotlib__matplotlib-25122",
+    "matplotlib__matplotlib-24870"
+  ],
+  "agent_localhost_resolution_error_ids": [
+    "matplotlib__matplotlib-23412",
+    "matplotlib__matplotlib-20488",
+    "matplotlib__matplotlib-14623",
+    "matplotlib__matplotlib-20676",
+    "matplotlib__matplotlib-23299",
+    "matplotlib__matplotlib-23314",
+    "matplotlib__matplotlib-24026",
+    "matplotlib__matplotlib-22871",
+    "matplotlib__matplotlib-24177",
+    "matplotlib__matplotlib-25960",
+    "matplotlib__matplotlib-20859",
+    "matplotlib__matplotlib-24970",
+    "matplotlib__matplotlib-24870"
+  ],
+  "by_repo": {
+    "astropy/astropy": {
+      "samples": 22,
+      "successes": 12
+    },
+    "django/django": {
+      "samples": 231,
+      "successes": 116
+    },
+    "matplotlib/matplotlib": {
+      "samples": 34,
+      "successes": 0
+    },
+    "mwaskom/seaborn": {
+      "samples": 2,
+      "successes": 1
+    },
+    "pallets/flask": {
+      "samples": 1,
+      "successes": 1
+    },
+    "psf/requests": {
+      "samples": 8,
+      "successes": 0
+    },
+    "pydata/xarray": {
+      "samples": 22,
+      "successes": 9
+    },
+    "pylint-dev/pylint": {
+      "samples": 10,
+      "successes": 3
+    },
+    "pytest-dev/pytest": {
+      "samples": 19,
+      "successes": 10
+    },
+    "scikit-learn/scikit-learn": {
+      "samples": 32,
+      "successes": 24
+    },
+    "sphinx-doc/sphinx": {
+      "samples": 44,
+      "successes": 16
+    },
+    "sympy/sympy": {
+      "samples": 75,
+      "successes": 36
+    }
+  },
+  "gold_controls": [
+    {
+      "job": "1610621",
+      "id": "matplotlib__matplotlib-20859",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null,
+      "test_output_tail": "stall: matplotlib\n    Found existing installation: matplotlib 3.5.0.dev1716+g64619e53e9\n    Uninstalling matplotlib-3.5.0.dev1716+g64619e53e9:\n      Successfully uninstalled matplotlib-3.5.0.dev1716+g64619e53e9\n  DEPRECATION: Legacy editable install of matplotlib==3.5.0.dev1717+g20bad9f2d5.d20261027 from file:///testbed (setup.py develop) is deprecated. pip 25.0 will enforce this behaviour change. A possible replacement is to add a pyproject.toml or enable --use-pep517, and use setuptools >= 64. If the resulting installation is not behaving as expected, try using --config-settings editable_mode=compat. Please consult the setuptools documentation for more information. Discussion can be found at https://github.com/pypa/pip/issues/11457\n  Running setup.py develop for matplotlib\nSuccessfully installed matplotlib\n+ git checkout 64619e53e9d0ed417daba287ac0d3a06943a54d5 lib/matplotlib/tests/test_legend.py\nUpdated 0 paths from 61c04b19ab\n+ git apply -v -\nChecking patch lib/matplotlib/tests/test_legend.py...\nApplied patch lib/matplotlib/tests/test_legend.py cleanly.\n+ : '>>>>> Start Test Output'\n+ pytest -rA lib/matplotlib/tests/test_legend.py\nINTERNALERROR> Traceback (most recent call last):\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/_pytest/main.py\", line 279, in wrap_session\nINTERNALERROR>     config._do_configure()\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/_pytest/config/__init__.py\", line 1118, in _do_configure\nINTERNALERROR>     self.hook.pytest_configure.call_historic(kwargs=dict(config=self))\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/pluggy/_hooks.py\", line 535, in call_historic\nINTERNALERROR>     res = self._hookexec(self.name, self._hookimpls.copy(), kwargs, False)\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/pluggy/_manager.py\", line 120, in _hookexec\nINTERNALERROR>     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/pluggy/_callers.py\", line 139, in _multicall\nINTERNALERROR>     raise exception.with_traceback(exception.__traceback__)\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/pluggy/_callers.py\", line 103, in _multicall\nINTERNALERROR>     res = hook_impl.function(*args)\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/pytest_rerunfailures.py\", line 330, in pytest_configure\nINTERNALERROR>     config.failures_db = ServerStatusDB()\nINTERNALERROR>   File \"/opt/miniconda3/envs/testbed/lib/python3.8/site-packages/pytest_rerunfailures.py\", line 419, in __init__\nINTERNALERROR>     self.sock.bind((\"localhost\", 0))\nINTERNALERROR> socket.gaierror: [Errno -3] Temporary failure in name resolution\n+ : '>>>>> End Test Output'\n+ git checkout 64619e53e9d0ed417daba287ac0d3a06943a54d5 lib/matplotlib/tests/test_legend.py\nUpdated 1 path from 61c04b19ab\n"
+    },
+    {
+      "job": "1610621",
+      "id": "psf__requests-1724",
+      "scores": {},
+      "error": "RuntimeError('Traceback (most recent call last):\\n  File \"<string>\", line 1, in <module>\\nImportError: No module named pathlib\\n')",
+      "test_output_tail": ""
+    },
+    {
+      "job": "1610623",
+      "id": "psf__requests-1724",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null,
+      "test_output_tail": "00_OK_GET_WITH_PARAMS\nFAILED test_requests.py::RequestsTestCase::test_HTTP_200_OK_HEAD - Connection...\nFAILED test_requests.py::RequestsTestCase::test_HTTP_200_OK_PUT - ConnectionE...\nFAILED test_requests.py::RequestsTestCase::test_HTTP_302_ALLOW_REDIRECT_GET\nFAILED test_requests.py::RequestsTestCase::test_POSTBIN_GET_POST_FILES - Conn...\nFAILED test_requests.py::RequestsTestCase::test_POSTBIN_GET_POST_FILES_WITH_DATA\nFAILED test_requests.py::RequestsTestCase::test_basicauth_with_netrc - Connec...\nFAILED test_requests.py::RequestsTestCase::test_cookie_persists_via_api - Con...\nFAILED test_requests.py::RequestsTestCase::test_cookie_quote_wrapped - Connec...\nFAILED test_requests.py::RequestsTestCase::test_cookie_removed_on_expire - Co...\nFAILED test_requests.py::RequestsTestCase::test_cookie_sent_on_redirect - Con...\nFAILED test_requests.py::RequestsTestCase::test_custom_content_type - Connect...\nFAILED test_requests.py::RequestsTestCase::test_decompress_gzip - ConnectionE...\nFAILED test_requests.py::RequestsTestCase::test_different_encodings_dont_break_post\nFAILED test_requests.py::RequestsTestCase::test_fixes_1329 - ConnectionError:...\nFAILED test_requests.py::RequestsTestCase::test_generic_cookiejar_works - Con...\nFAILED test_requests.py::RequestsTestCase::test_header_remove_is_case_insensitive\nFAILED test_requests.py::RequestsTestCase::test_mixed_case_scheme_acceptable\nFAILED test_requests.py::RequestsTestCase::test_params_are_merged_case_sensitive\nFAILED test_requests.py::RequestsTestCase::test_prepared_from_session - Conne...\nFAILED test_requests.py::RequestsTestCase::test_prepared_request_hook - Conne...\nFAILED test_requests.py::RequestsTestCase::test_request_cookie_overrides_session_cookie\nFAILED test_requests.py::RequestsTestCase::test_request_ok_set - ConnectionEr...\nFAILED test_requests.py::RequestsTestCase::test_requests_in_history_are_not_overridden\nFAILED test_requests.py::RequestsTestCase::test_session_pickling - Connection...\nFAILED test_requests.py::RequestsTestCase::test_set_cookie_on_301 - Connectio...\nFAILED test_requests.py::RequestsTestCase::test_status_raising - ConnectionEr...\nFAILED test_requests.py::RequestsTestCase::test_time_elapsed_blank - Connecti...\nFAILED test_requests.py::RequestsTestCase::test_unicode_get - ConnectionError...\nFAILED test_requests.py::RequestsTestCase::test_unicode_header_name - Connect...\nFAILED test_requests.py::RequestsTestCase::test_unicode_method_name - Connect...\nFAILED test_requests.py::RequestsTestCase::test_unicode_multipart_post - Conn...\nFAILED test_requests.py::RequestsTestCase::test_uppercase_scheme_redirect - C...\nFAILED test_requests.py::RequestsTestCase::test_urlencoded_get_query_multivalued_param\nFAILED test_requests.py::RequestsTestCase::test_user_agent_transfers - Connec...\n=============== 43 failed, 45 passed, 2 warnings in 1.62 seconds ===============\n+ : '>>>>> End Test Output'\n+ git checkout 1ba83c47ce7b177efe90d5f51f7760680f72eda0 test_requests.py\nUpdated 1 path from c8e845a\n"
+    },
+    {
+      "job": "1610623",
+      "id": "psf__requests-2931",
+      "scores": {
+        "swe_bench_scorer": 0.0
+      },
+      "error": null,
+      "test_output_tail": "estRequests::test_unicode_method_name_with_request_object\nERROR test_requests.py::TestRequests::test_custom_content_type\nERROR test_requests.py::TestRequests::test_hook_receives_request_arguments\nERROR test_requests.py::TestRequests::test_session_hooks_are_used_with_no_request_hooks\nERROR test_requests.py::TestRequests::test_session_hooks_are_overridden_by_request_hooks\nERROR test_requests.py::TestRequests::test_prepared_request_hook\nERROR test_requests.py::TestRequests::test_prepared_from_session\nERROR test_requests.py::TestRequests::test_time_elapsed_blank\nERROR test_requests.py::TestRequests::test_request_and_response_are_pickleable\nERROR test_requests.py::TestRequests::test_cannot_send_unprepared_requests\nERROR test_requests.py::TestRequests::test_session_pickling\nERROR test_requests.py::TestRequests::test_fixes_1329\nERROR test_requests.py::TestRequests::test_uppercase_scheme_redirect\nERROR test_requests.py::TestRequests::test_header_remove_is_case_insensitive\nERROR test_requests.py::TestRequests::test_params_are_merged_case_sensitive\nERROR test_requests.py::TestRequests::test_header_keys_are_native\nERROR test_requests.py::TestRequests::test_can_send_nonstring_objects_with_files\nERROR test_requests.py::TestRequests::test_can_send_bytes_bytearray_objects_with_files\nERROR test_requests.py::TestRequests::test_can_send_file_object_with_non_string_filename\nERROR test_requests.py::TestRequests::test_autoset_header_values_are_native\nERROR test_requests.py::TestRequests::test_auth_is_stripped_on_redirect_off_host\nERROR test_requests.py::TestRequests::test_auth_is_retained_for_redirect_on_host\nERROR test_requests.py::TestRequests::test_manual_redirect_with_partial_body_read\nERROR test_requests.py::TestRequests::test_redirect_with_wrong_gzipped_header\nERROR test_requests.py::TestRequests::test_requests_history_is_saved\nERROR test_requests.py::TestRequests::test_json_param_post_content_type_works\nERROR test_requests.py::TestRequests::test_json_param_post_should_not_override_data_param\nERROR test_requests.py::TestRequests::test_response_iter_lines\nERROR test_requests.py::TestRequests::test_unconsumed_session_response_closes_connection\nERROR test_requests.py::TestTimeout::test_stream_timeout\nERROR test_requests.py::TestTimeout::test_invalid_timeout\nERROR test_requests.py::TestTimeout::test_none_timeout\nERROR test_requests.py::TestTimeout::test_read_timeout\nERROR test_requests.py::TestTimeout::test_encoded_methods\nERROR test_requests.py::TestRedirects::test_requests_are_updated_each_time\nERROR test_requests.py::test_urllib3_retries\nERROR test_requests.py::test_urllib3_pool_connection_closed\nFAILED test_requests.py::TestTimeout::test_connect_timeout - requests.excepti...\nFAILED test_requests.py::TestTimeout::test_total_timeout_connect - requests.e...\n======= 2 failed, 84 passed, 1 xfailed, 28 warnings, 81 errors in 0.61s ========\n+ : '>>>>> End Test Output'\n+ git checkout 5f7a3a74aab1625c2bb65f643197ee885e3da576 test_requests.py\nUpdated 1 path from bf39b3a\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "control": "gold",
+    "sample_id": "psf__requests-1724",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null
+  },
+  {
+    "control": "unchanged",
+    "sample_id": "psf__requests-1724",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null
+  }
+]

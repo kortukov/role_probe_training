@@ -12,6 +12,7 @@ import inspect_ai._util.zipfile  # register Inspect's Zstandard support
 parser=argparse.ArgumentParser(__doc__)
 parser.add_argument('--root',type=Path,required=True)
 parser.add_argument('--collection-id',required=True)
+parser.add_argument('--cohort', choices=['swe_corrected', 'swe_corrected_v2'], default='swe_corrected')
 parser.add_argument('--output',type=Path,required=True)
 a=parser.parse_args()
 OUT=a.output
@@ -29,7 +30,7 @@ def resolve(value, attachments):
 def main():
     rows=[]; candidates=collections.defaultdict(list)
     (OUT/'data').mkdir(exist_ok=True)
-    for path in sorted((a.root/f'runs/swe_corrected/{a.collection_id}').glob('shard[0-3]/swe_bench/logs/*.eval')):
+    for path in sorted((a.root/f'runs/{a.cohort}/{a.collection_id}').glob('shard[0-3]/swe_bench/logs/*.eval')):
         with zipfile.ZipFile(path) as archive:
             for name in sorted(set(archive.namelist())):
                 if not (name.startswith('samples/') and name.endswith('.json')): continue

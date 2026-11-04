@@ -38,12 +38,15 @@ def main():
     parser.add_argument("--message-limit", type=int, default=30)
     parser.add_argument("--max-tokens", type=int, default=16384)
     parser.add_argument("--token-limit", type=int, default=500000)
+    parser.add_argument("--repository-python", action="store_true")
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--prepare-only", action="store_true")
     parser.add_argument('--model-id', default='openai/gpt-oss-20b')
     parser.add_argument('--model-revision', default='6cee5e81ee83917806bbde320786a8fb61efebee')
     args = parser.parse_args()
+    if args.token_limit == 0:
+        args.token_limit = None
     if not 0 <= args.shard_index < args.shard_count:
         parser.error("require 0 <= shard-index < shard-count")
     if args.samples < 1:
@@ -54,6 +57,8 @@ def main():
     else:
         from inspect_evals.swe_bench import swe_bench
         from role_probe_training.trajectories.swe_testbed import sandbox_config
+        if args.repository_python:
+            from role_probe_training.trajectories.swe_testbed_python import sandbox_config
         from role_probe_training.trajectories.swe_scoring import fresh_swe_scorer
         task = swe_bench(sandbox_type="apptainer_testbed", sandbox_config=sandbox_config, scorer=fresh_swe_scorer())
     ordered = sorted(task.dataset, key=lambda sample: str(sample.id))
@@ -79,7 +84,7 @@ def main():
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
                 "sandbox_provider": "apptainer_testbed: activated repository env; fresh-image official SWE scoring; digest-pinned official images",
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path("src/experiments/agentic_eval/swe/uv.lock"), Path(__file__).with_name("collect.sbatch"), Path("src/experiments/agentic_eval") / os.environ.get("SWE_SERVER_PROJECT", "server") / "uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("src/role_probe_training/trajectories/swe_testbed.py"), Path("src/role_probe_training/trajectories/swe_scoring.py"), Path("experiment_reports/agentic/swe_bench_full/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path("src/experiments/agentic_eval/swe/uv.lock"), Path(__file__).with_name("collect_v2.sbatch" if args.repository_python else "collect.sbatch"), Path("src/experiments/agentic_eval") / os.environ.get("SWE_SERVER_PROJECT", "server") / "uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("src/role_probe_training/trajectories/swe_testbed.py"), Path("src/role_probe_training/trajectories/swe_testbed_python.py"), Path("src/role_probe_training/trajectories/swe_scoring.py"), Path("experiment_reports/agentic/swe_bench_full/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:

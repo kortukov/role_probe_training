@@ -7,13 +7,14 @@ from pathlib import Path
 p=argparse.ArgumentParser(__doc__)
 p.add_argument('--root',type=Path,required=True)
 p.add_argument('--collection-id',required=True)
+p.add_argument('--cohort', choices=['swe_corrected', 'swe_corrected_v2'], default='swe_corrected')
 a=p.parse_args()
 rows=[]; manifests=[]; sources=[]
-source_map=a.root/'post_training/swe_corrected_shard_sources.json'
+source_map=a.root/f'post_training/{a.cohort}_shard_sources.json'
 source_jobs=json.loads(source_map.read_text())['shard_jobs'] if source_map.exists() else {}
 for shard in range(4):
     collection=source_jobs.get(str(shard),a.collection_id)
-    folder=a.root/f'runs/swe_corrected/{collection}/shard{shard}/swe_bench'
+    folder=a.root/f'runs/{a.cohort}/{collection}/shard{shard}/swe_bench'
     manifest=json.loads((folder/'manifest.json').read_text())
     manifests.append(manifest)
     source=folder/'trajectories.jsonl'
@@ -29,7 +30,7 @@ assert len(rows)==len({str(r['sample_id']) for r in rows})==len(expected)==500
 assert {str(r['sample_id']) for r in rows}==expected
 settings=['temperature','reasoning_effort','max_tokens','message_limit','token_limit','time_limit','concurrency']
 assert all({k:m['settings'][k] for k in settings}=={k:manifests[0]['settings'][k] for k in settings} for m in manifests)
-output=a.root/'data/swe_corrected/evaluation'
+output=a.root/f'data/{a.cohort}/evaluation'
 output.mkdir(parents=True,exist_ok=False)
 for r in rows:r['trajectory_id']=f"swe_bench/{r['sample_id']}"
 target=output/'trajectories.jsonl'
@@ -43,6 +44,6 @@ result={'benchmark':'swe_bench','samples':500,'sample_errors':sum(bool(r['error'
         'metrics':{'swe_bench_scorer':{'successes':sum(values),'scored':len(values),'total':500,'success_rate':sum(values)/500}},
         'input_sha256':hashlib.sha256(target.read_bytes()).hexdigest(),
         'sources':sources,'settings':{k:manifests[0]['settings'][k] for k in settings}}
-(a.root/'post_training/swe_corrected_task_results.json').write_text(json.dumps(result,indent=2)+'\n')
+(a.root/f'post_training/{a.cohort}_task_results.json').write_text(json.dumps(result,indent=2)+'\n')
 (output/'manifest.json').write_text(json.dumps(manifests,indent=2)+'\n')
 print(json.dumps(result))

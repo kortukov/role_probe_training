@@ -1,0 +1,18 @@
+[
+  {
+    "id": "psf__requests-1142",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null,
+    "exported_patch_bytes": 800
+  },
+  {
+    "id": "psf__requests-6028",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null,
+    "exported_patch_bytes": 486
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "control": "gold",
+    "sample_id": "astropy__astropy-7606",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null
+  },
+  {
+    "control": "unchanged",
+    "sample_id": "astropy__astropy-7606",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null
+  }
+]

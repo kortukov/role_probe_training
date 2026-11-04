@@ -1,0 +1,114 @@
+[
+  {
+    "sample_id": "psf__requests-1142",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": []
+    }
+  },
+  {
+    "sample_id": "psf__requests-1724",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": [
+        "test_requests.py::RequestsTestCase::test_mixed_case_scheme_acceptable"
+      ]
+    }
+  },
+  {
+    "sample_id": "psf__requests-1766",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": [
+        "test_requests.py::RequestsTestCase::test_mixed_case_scheme_acceptable"
+      ]
+    }
+  },
+  {
+    "sample_id": "psf__requests-1921",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": [
+        "test_requests.py::RequestsTestCase::test_mixed_case_scheme_acceptable",
+        "test_requests.py::RequestsTestCase::test_pyopenssl_redirect"
+      ]
+    }
+  },
+  {
+    "sample_id": "psf__requests-2317",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [
+        "test_requests.py::RequestsTestCase::test_requests_history_is_saved"
+      ],
+      "PASS_TO_PASS": [
+        "test_requests.py::RequestsTestCase::test_auth_is_stripped_on_redirect_off_host",
+        "test_requests.py::RequestsTestCase::test_mixed_case_scheme_acceptable",
+        "test_requests.py::RequestsTestCase::test_pyopenssl_redirect",
+        "test_requests.py::TestTimeout::test_stream_timeout",
+        "test_requests.py::TestTimeout::test_connect_timeout",
+        "test_requests.py::TestTimeout::test_total_timeout_connect"
+      ]
+    }
+  },
+  {
+    "sample_id": "psf__requests-2931",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": [
+        "test_requests.py::TestTimeout::test_connect_timeout",
+        "test_requests.py::TestTimeout::test_total_timeout_connect"
+      ]
+    }
+  },
+  {
+    "sample_id": "psf__requests-5414",
+    "scores": {
+      "swe_bench_scorer": 0.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": [
+        "tests/test_requests.py::TestTimeout::test_connect_timeout[timeout0]",
+        "tests/test_requests.py::TestTimeout::test_connect_timeout[timeout1]",
+        "tests/test_requests.py::TestTimeout::test_total_timeout_connect[timeout0]",
+        "tests/test_requests.py::TestTimeout::test_total_timeout_connect[timeout1]"
+      ]
+    }
+  },
+  {
+    "sample_id": "psf__requests-6028",
+    "scores": {
+      "swe_bench_scorer": 1.0
+    },
+    "error": null,
+    "required_failures": {
+      "FAIL_TO_PASS": [],
+      "PASS_TO_PASS": []
+    }
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "protocol": "saved v2 patches; snapshot, appdirs, verbose summaries and verified identity mapping; no model calls",
+  "samples": 4,
+  "original_successes": 0,
+  "successes": 2,
+  "errors": 0,
+  "results": [
+    {
+      "id": "astropy__astropy-7606",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "9f6bec4bb0e38d9c031c42b08c0ad00d6367bef01614781c95a6c0aaa77fa93b",
+      "reexported_patch_sha256": "9f6bec4bb0e38d9c031c42b08c0ad00d6367bef01614781c95a6c0aaa77fa93b"
+    },
+    {
+      "id": "psf__requests-1142",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "0e9fc01cd787cc9b61f14509404f1b25045b6802fbbffe81309853726dfcd80c",
+      "reexported_patch_sha256": "a7f7fc1189d47b16ae89e5eeca15742697c89435de03f6f36c579f6da9f366aa"
+    },
+    {
+      "id": "pylint-dev__pylint-4661",
+      "original_score": 0.0,
+      "score": 0.0,
+      "error": null,
+      "patch_sha256": "b8bd72b3d5b736bb090d48eec497fde599f1feca8da14d936b2913fd0bf7483e",
+      "reexported_patch_sha256": "b8bd72b3d5b736bb090d48eec497fde599f1feca8da14d936b2913fd0bf7483e"
+    },
+    {
+      "id": "sphinx-doc__sphinx-9711",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "d41dd7cd268196feffa3500da2042afa20221ee77162a49e4e44c1520dbb8ff2",
+      "reexported_patch_sha256": "d41dd7cd268196feffa3500da2042afa20221ee77162a49e4e44c1520dbb8ff2"
+    }
+  ]
+}

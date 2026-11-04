@@ -1,0 +1,25 @@
+{
+  "protocol": "saved v2 patches; snapshot and local dual HTTP/TLS v3 fixture; no model calls",
+  "samples": 2,
+  "original_successes": 0,
+  "successes": 2,
+  "errors": 0,
+  "results": [
+    {
+      "id": "psf__requests-1724",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "e2fc67ad7279347ccc4627b14cd7e1c362206b6157835283c7114e702ac023d1",
+      "reexported_patch_sha256": "e2fc67ad7279347ccc4627b14cd7e1c362206b6157835283c7114e702ac023d1"
+    },
+    {
+      "id": "psf__requests-1766",
+      "original_score": 0.0,
+      "score": 1.0,
+      "error": null,
+      "patch_sha256": "2ce0776b97b64403490040eb326c0c17760adf00ade5dbcc3e5e21067c0f030c",
+      "reexported_patch_sha256": "2ce0776b97b64403490040eb326c0c17760adf00ade5dbcc3e5e21067c0f030c"
+    }
+  ]
+}
