@@ -1,0 +1,57 @@
+# Off-policy training with one rollout per task per epoch
+
+## Motivation & RQ
+
+How do task competence and role perception change over ten training epochs when
+we refresh AppWorld rollouts at the start of each epoch?
+The [paired experiment](../on_policy_epochs/README.md)
+changes only the rollout refresh schedule.
+
+## Evaluation setup
+
+**Training.** Start from GPT-OSS-20B and train for ten epochs over the same 90
+AppWorld training tasks, using one full rollout per task per epoch. Each epoch
+has six updates (five batches of 16 tasks and one of 10), so each run generates
+900 rollouts and performs 60 updates. Task order and rollout seeds match across
+runs. All 90 histories are generated with the epoch-start policy before any update. That fixed pool is consumed once, then replaced next epoch; later batches therefore use an older policy.
+No attempts are selected by success. The loss encourages correct five-role
+classification at layer 12, with exact KL(current ‖ base) on generated assistant
+tokens and the same optimizer settings as the earlier batch-16 experiments.
+The training probe is refitted after each update on the original 250 standard
+C4/Dolma passages, using all content tokens and up to 1,024 tokens per passage.
+
+**Evaluation.** Evaluate the initial checkpoint (epoch 0) and every epoch-end
+checkpoint on all 114 τ² retail tasks, one fresh attempt per task, with matched
+BF16 generation settings and a GPT-4.1 customer simulator. Retail tasks never
+enter training. Fit a fresh layer-12 linear probe for each checkpoint on the
+same standard 250 passages and original passage split. Probes read
+post-attention-layernorm outputs / pre-MLP inputs. Roles come from message and
+reasoning-channel metadata; headers and synthetic tool schemas are excluded.
+Each checkpoint is evaluated on its own conversations.
+
+**Metrics and baseline.** Task success is successes divided by all 114 assigned
+tasks, with evaluation errors retained as failures. Overall role accuracy is
+content-token-weighted argmax accuracy. Per-role accuracy is recall among
+content tokens with that true role. These measure role recovery separately
+from task competence. Replay every scored conversation whole, without chunking
+or truncation; histories above native context are excluded only from role
+metrics. Coverage is reported with the appendix matrices. Epoch 0 provides a
+matched untrained baseline; the older 64.0% retail result used different base
+precision and is not substituted for this baseline.
+
+## Factual observations
+
+<!-- epoch-results -->
+| Epoch | Task success | Overall role | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|---:|---:|
+
+No checkpoint evaluations have completed yet. Epochs 0–10 will appear only after validation.
+<!-- /epoch-results -->
+
+## Message
+
+<!-- epoch-message -->
+Results are pending. No conclusion about change across epochs is supported yet.
+<!-- /epoch-message -->
+
+[Reproduction and execution status](RUNNING.md)

@@ -79,6 +79,8 @@ AppWorld/retail base generation used native MXFP4, versus BF16 with adapters for
 <a id="appworld-training-kl-data-iteration"></a>
 ### AppWorld training: design iterations
 
+The matched ten-epoch comparison uses one rollout per training task per epoch: [on-policy, refreshed before each batch](on_policy_epochs/README.md) and [off-policy, refreshed once per epoch](off_policy_epochs/README.md). Each report tracks τ² retail task success and role perception at epochs 0–10, with checkpoint confusion matrices in its appendix.
+
 We vary KL data and then the number of training trajectories per task. The original AppWorld model uses 2,700 trajectories and ordinary non-tool KL data capped at 2,048 tokens. Agentic KL instead samples from 800 saved base-model training rollouts. Same-batch KL scores the exact trajectories used for each role-loss update. Both agentic variants retain complete histories and score model-authored reasoning, answers and tool-call arguments.
 
 The data-size iteration expands the same 90 training tasks from 30 to 300 trajectories each (2,700 to 27,000), retaining the original attempts and adding 270 seeds per task without outcome filtering. It starts from the base model and keeps same-batch KL and optimizer settings fixed. All runs train for one epoch; the larger corpus therefore also uses ten times as many updates. Evaluation tasks do not enter training or KL.

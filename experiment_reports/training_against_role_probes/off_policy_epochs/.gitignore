@@ -1,0 +1,8 @@
+runs/
+checkpoints/*/data/
+checkpoints/*/runs/
+checkpoints/*/predictions/
+logs/
+wandb/
+.report.lock
+checkpoints/*/post_training/results/*.md
