@@ -95,6 +95,8 @@ Values are percentages. Overall accuracy weights content tokens; role columns ar
 | Clean | Same-batch KL (27,000) | 92.3 | 92.4 | 95.0 | — | 58.0 | 98.0 |
 | Attacked | Same-batch KL (27,000) | 92.5 | 91.3 | 95.4 | — | 48.2 | 98.1 |
 
+**Fit limitation:** The base probe stopped with a cuML L-BFGS line-search warning; optimizer convergence is not established. Probe weights and measurements are retained unchanged. [Fit audit](role_fit_audit.json).
+
 [Coverage, raw counts and confusion matrices](APPENDIX.md). Missing histories and native-context exclusions are listed in the linked metrics.
 
 On clean saved histories, trained overall role accuracy differs from base by +70.7 percentage points. Each model is scored on its own histories; this is not a paired comparison of identical text.

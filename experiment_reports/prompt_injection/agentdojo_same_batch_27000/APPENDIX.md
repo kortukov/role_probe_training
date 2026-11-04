@@ -17,6 +17,16 @@ The expected denominators retain 95 clean and 921 attacked attempts per model. A
 
 Two independent five-class multinomial linear probes are fitted from scratch on the original 250 C4/Dolma passages with their original train/test split, up to 1,024 passage tokens and every content token. Fits use the post-attention-layernorm/pre-MLP site at zero-based layer 12, C=0.005 and cuML max_iter=5,000. The role order, exact model/data hashes, token counts, stopping diagnostics and fit test accuracy are saved with each probe. Iteration count alone does not establish convergence; inspect job logs for cuML line-search warnings.
 
+### Observed fit diagnostics
+
+The base fit stopped at 390 iterations with `L-BFGS line search failed (code 1)`;
+this does not establish convergence despite stopping below the 5,000-iteration
+ceiling. The trained fit stopped at 560 iterations with no cuML warning found in
+its log. Both use 642,530 training content tokens and 56,510 held-out content
+tokens. The Python warning arrays do not capture the base's C++ log warning.
+[Audited log diagnostics](role_fit_audit.json) retain the exact message. No probe
+weights or reported predictions were changed after this audit.
+
 ## Base: clean
 
 Overall token accuracy: **21.6%**. Scored content tokens: 105,113.

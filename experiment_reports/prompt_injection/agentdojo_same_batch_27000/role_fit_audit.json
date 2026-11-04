@@ -1,0 +1,14 @@
+{
+  "base": {
+    "job": "1981648",
+    "cuml_log_warnings": [
+      "[2026-11-04 15:32:56.035] [CUML] [warning] L-BFGS line search failed (code 1); stopping at the last valid step"
+    ],
+    "probe_and_scores_unchanged": true
+  },
+  "trained": {
+    "job": "1981649",
+    "cuml_log_warnings": [],
+    "probe_and_scores_unchanged": true
+  }
+}
