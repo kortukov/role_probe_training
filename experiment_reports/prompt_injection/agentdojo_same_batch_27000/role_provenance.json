@@ -1,0 +1,14 @@
+{
+  "source_sha256": {
+    "src/experiments/agentdojo_roles/assemble.py": "6bcc3ba37f5d73bed6cada40678718db55423f490adef61a5082404a1be244ce",
+    "src/experiments/agentdojo_roles/report.py": "617beb091bb6cf1eb71be8041255b19133811c473bbb113b2ff0a051395bc81e",
+    "src/experiments/agentdojo_roles/publish.py": "d2cf0962918b3dce9ca8dded960d0e149fc9a49d72e8a1317852a83093a550ba",
+    "src/experiments/agentdojo_roles/check.py": "ca078fb443b01320b1d2f3c251fb71e8a4db82544c5edf7790d94814a375654b",
+    "src/role_probe_training/post_training/agentdojo.py": "121c5e6d238f49ba4ba189d0a9dee7a3b6ad74f269620e2b65f15c6987c0b3f2",
+    "src/experiments/agentdojo_roles/evaluate.sbatch": "bf6ff0cc2769931d6196566ff3c6295d4ebee3af193b59e65d02542e12b3a5d1",
+    "src/experiments/agentdojo_roles/finalize.sbatch": "b5b74c17e693494ab7878cb4e43c38d6c7b0628453a983a9edd77a68abbf6b55",
+    "src/experiments/training_against_role_probes/runtime/uv.lock": "1b34e00e92a16ec3b1edc0b32e8cc31de8a109afff6663efc4afa3bd8352e973"
+  },
+  "input_manifest_sha256": "cb9ac503e884c64c9bcb1cdfa5222977a05b653306680b7644cb0a77fe94692d",
+  "documents_sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29"
+}

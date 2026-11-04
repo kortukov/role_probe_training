@@ -78,3 +78,56 @@ in `runs/<model>/<suite>.failures.jsonl`; the remaining attempts continue.
 Such errors receive no utility/attack credit and remain outside scored coverage.
 Completed trajectories are reused. CPU integration exercises malformed tool
 arguments and recovery; GPU smoke 1964575 passed. Current IDs are in jobs.json.
+
+## Fresh AgentDojo role probes
+
+The implementation is [agentdojo.py](../../../src/role_probe_training/post_training/agentdojo.py)
+with [normalization](../../../src/experiments/agentdojo_roles/assemble.py),
+[GPU job](../../../src/experiments/agentdojo_roles/evaluate.sbatch),
+[CPU report job](../../../src/experiments/agentdojo_roles/finalize.sbatch) and
+[automatic main-branch publisher](../../../src/experiments/agentdojo_roles/publish.py).
+No model generations or task outcomes are changed. Both models receive new
+independent layer-12 probes from the standard 250 C4/Dolma passages and original
+train/test split; fitting uses every content token, no scaling, multinomial L2
+logistic regression, C=0.005 and cuML max_iter=5000. Feature extraction uses BF16
+models and FP32 attention adapters for trained; feature caches match the existing
+FP16 standard-data workflow. The probe site is post-attention-layernorm/pre-MLP,
+never decoder-block output. Stopping limitations are recorded with the probe.
+
+```bash
+.tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_roles/assemble.py
+.tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_roles/check.py
+sbatch --export=ALL src/experiments/agentdojo_roles/evaluate.sbatch base
+sbatch --export=ALL src/experiments/agentdojo_roles/evaluate.sbatch trained
+```
+
+Each model job extracts training features, fits in the existing CUDA-13 cuML
+interpreter, checks scoring on one whole clean and attacked history, then scores
+both complete subsets with the PEFT/CUDA-12 runtime. It uses one GPU, four CPUs,
+192 GiB RAM and a 24-hour allocation. Full inference contexts are never chunked
+or truncated. The normalization is the same metadata-labelled retrospective Harmony
+replay used by the other agentic role reports, not exact serving-prompt recovery.
+Tool schemas are recovered from the pinned AgentDojo suites as unscored context.
+Tool errors use the driver-visible error text. Ground-truth roles are metadata;
+injected tool text is never relabelled from its content.
+
+`role_inputs.json` records all expected attempt IDs, saved/missing histories,
+partial task-error histories, source hashes and normalized input hashes. Clean
+inputs have 95 histories per model; attacked inputs have 921 base and 918 trained
+histories, with three trained histories unavailable. Reasoning text is absent
+from all saved AgentDojo messages and is not reconstructed. Zero-support role
+recall is null and rendered as a dash. The five-class probe can still predict
+reasoning; those predictions appear in confusion-matrix columns.
+
+Normalized histories: `data/role_perception/{base,trained}/{clean,attacked}/`.
+Fresh probes and held-out fit metrics: `role_perception/<model>/post_training/`.
+Scoring summaries: `role_perception/<model>/{clean,attacked}.json`.
+Per-history confusion counts and token predictions:
+`predictions/role_perception/<model>/<subset>/`. Only small summary/probe artifacts
+are published; histories, features and predictions remain on cluster storage.
+The input hash and probe hash guard incremental scoring against stale reuse.
+
+The afterany CPU report job saves whatever completed summaries exist, includes
+pending states for failures, and automatically pushes the report, appendix,
+probe weights and code to `main`. It retries a racing GitHub update against a fresh
+parent without touching the shared working branch or index. See `role_jobs.json`.

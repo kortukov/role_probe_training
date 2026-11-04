@@ -1,0 +1,22 @@
+{
+  "protocol": "fresh-standard-layer12-whole-saved-agentdojo-histories",
+  "standard_passages": 250,
+  "layer": 12,
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "reasoning_recorded": false,
+  "base": {
+    "id": "1981648"
+  },
+  "trained": {
+    "id": "1981649"
+  },
+  "report": {
+    "id": "1981650"
+  }
+}

@@ -33,6 +33,19 @@ are reported through scored coverage and error counts. Partial rows cannot
 support model comparisons. Skips can occur after actions have already executed;
 ASR and ASR+ expose this ambiguity rather than resolving it.
 
+**Role-perception extension.** Fresh five-class linear probes are fitted separately
+for base and trained models on the original 250 C4/Dolma passages and original
+passage split, retaining every content token. They read zero-based layer-12
+post-attention-layernorm outputs (pre-MLP inputs). Evaluation replays each saved
+AgentDojo history whole, without chunking or truncation, and reports overall
+content-token argmax accuracy and per-role recall separately for clean and attacked
+histories. Headers and synthetic tool schemas are unscored. Reasoning-channel text
+was not retained by the AgentDojo driver: reasoning accuracy is unavailable, and
+the measured roles describe the saved transcript rather than unrecorded thoughts.
+Available partial error histories are included; three trained attacked attempts
+have no saved history. Native-context exclusions and missing histories retain
+their task outcomes and are disclosed in the role appendix.
+
 ## Factual observations
 
 Both evaluations finished on 2026-11-04. Each attempted all 95 clean tasks and
@@ -69,6 +82,21 @@ version and an `ipython` tool header; current exports use function-name tool
 headers. The fresh, matched base is therefore the primary comparison. All runs
 use the historical 12,288-token budget, below GPT-OSS's native context, so results
 describe this budgeted protocol.
+
+<!-- agentdojo-role-results -->
+### Role perception
+
+Values are percentages. Overall accuracy weights content tokens; role columns are recall within the true role. Reasoning was not saved and has no scored support. Each model uses its own freshly fitted standard-data layer-12 probe.
+
+| Subset | Model | Overall role | System | User | Reasoning | Assistant | Tool |
+|---|---|---:|---:|---:|---:|---:|---:|
+| Clean | Base | Pending | — | — | — | — | — |
+| Attacked | Base | Pending | — | — | — | — | — |
+| Clean | Same-batch KL (27,000) | Pending | — | — | — | — | — |
+| Attacked | Same-batch KL (27,000) | Pending | — | — | — | — | — |
+
+[Coverage, raw counts and confusion matrices](APPENDIX.md). Missing histories and native-context exclusions are listed in the linked metrics.
+<!-- /agentdojo-role-results -->
 
 ## Message
 

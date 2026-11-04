@@ -5,3 +5,6 @@ data/hf_upload/
 .summary.lock
 data/hf_adapter/
 data/adapter_reconstructed/
+data/role_perception/
+role_perception/*/data/
+predictions/
