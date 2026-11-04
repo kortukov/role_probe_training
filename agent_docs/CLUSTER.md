@@ -329,3 +329,28 @@ Reset all 50 remaining positively-niced pending groups to Nice=0; verified all
 user jobs now have Nice=0. The earlier 100-point adjustment is superseded by
 on_policy/priority_reset_20261101.json. Do not claim user-only queue ordering is
 available through Nice; it changes priority against everyone.
+
+
+### One-rollout epoch comparisons (2026-11-04)
+
+The paired [on-policy](../experiment_reports/training_against_role_probes/on_policy_epochs/README.md)
+and [off-policy](../experiment_reports/training_against_role_probes/off_policy_epochs/README.md)
+experiments use ten epochs, 90 AppWorld tasks once per epoch and batch size 16.
+Batch-refresh generation uses the current policy before every update;
+epoch-refresh generation collects all 90 episodes before any epoch update and
+consumes that saved pool once. Retail evaluation includes matched BF16 epoch 0
+and every epoch end, with fresh standard-data probes and whole-history replay.
+
+Submission uses `epoch_refresh/submit.py` from the frozen Git worktree
+`.cache/epoch_refresh_source_20261104` (source commit `591c718`). `PYTHONPATH`
+points to its frozen `src`; prepared environments, model/data cache and report
+storage are shared links. Do not edit the snapshot while jobs are queued or active.
+Epoch checkpoints are hard-linked before rolling recovery checkpoints are pruned.
+Each successful retail evaluation schedules scoped GitHub publication of small
+results, probe weights, tables and appendix matrices. Explicit `!checkpoints/`
+rules in each report override the parent ignore so these small results stay in Git.
+
+Initial training jobs: on-policy `2020749`, off-policy `2020781`; exact dependency
+DAGs and commands are in each report's `jobs.json`. At submission both were pending
+scheduler Priority, with no start estimate. CPU schedule/report checks and training
+imports passed; production GPU execution and the measurements are still pending.
