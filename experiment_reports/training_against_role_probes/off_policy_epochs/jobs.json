@@ -1,0 +1,572 @@
+{
+  "mode": "off_policy",
+  "source_snapshot": "/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+  "config": {
+    "name": "off_policy-one-rollout-10-epochs",
+    "wandb_id": "epoch-refresh-off_policy-20261104",
+    "model": ".cache/models/gpt-oss-20b",
+    "probe": "experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz",
+    "trajectories": "experiment_reports/training_against_role_probes/data/train2700/trajectories.jsonl",
+    "validation": "experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl",
+    "probe_documents": "experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl",
+    "output": "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training",
+    "image": ".cache/appworld/appworld.sif",
+    "appworld_data": ".cache/appworld/data",
+    "seed": 123,
+    "learning_rate": 5e-05,
+    "kl_coefficient": 16,
+    "refit_steps": 2000,
+    "eval_interval": 6,
+    "generation": {
+      "max_tokens": 8192,
+      "context_limit": 32768,
+      "max_steps": 50
+    },
+    "serving_backend": "colocated_vllm",
+    "batch_size": 16,
+    "epochs": 10,
+    "refresh": "epoch",
+    "collection_concurrency": 8,
+    "wandb_mode": "offline"
+  },
+  "jobs": {
+    "train_epoch001": {
+      "job_id": "2020781",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "6"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch000": {
+      "job_id": "2020782",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020781",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch000",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch000"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch000": {
+      "job_id": "2020783",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020782",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "evaluate_epoch001": {
+      "job_id": "2020784",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020781",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch001",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch001"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch001": {
+      "job_id": "2020785",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020784",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch002": {
+      "job_id": "2020786",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020781",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "12",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00006"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch002": {
+      "job_id": "2020787",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020786",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch002",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch002"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch002": {
+      "job_id": "2020788",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020787",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch003": {
+      "job_id": "2020789",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020786",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "18",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00012"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch003": {
+      "job_id": "2020790",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020789",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch003",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch003"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch003": {
+      "job_id": "2020791",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020790",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch004": {
+      "job_id": "2020792",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020789",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "24",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00018"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch004": {
+      "job_id": "2020793",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020792",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch004",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch004"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch004": {
+      "job_id": "2020794",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020793",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch005": {
+      "job_id": "2020795",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020792",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "30",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00024"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch005": {
+      "job_id": "2020796",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020795",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch005",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch005"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch005": {
+      "job_id": "2020797",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020796",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch006": {
+      "job_id": "2020798",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020795",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "36",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00030"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch006": {
+      "job_id": "2020799",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020798",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch006",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch006"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch006": {
+      "job_id": "2020800",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020799",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch007": {
+      "job_id": "2020801",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020798",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "42",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00036"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch007": {
+      "job_id": "2020802",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020801",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch007",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch007"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch007": {
+      "job_id": "2020803",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020802",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch008": {
+      "job_id": "2020804",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020801",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "48",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00042"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch008": {
+      "job_id": "2020805",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020804",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch008",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch008"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch008": {
+      "job_id": "2020806",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020805",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch009": {
+      "job_id": "2020807",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020804",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "54",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00048"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch009": {
+      "job_id": "2020808",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020807",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch009",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch009"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch009": {
+      "job_id": "2020809",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020808",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    },
+    "train_epoch010": {
+      "job_id": "2020810",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020807",
+        "src/experiments/training_against_role_probes/epoch_refresh/train.sbatch",
+        "--stop-after",
+        "60",
+        "--resume",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/checkpoints/step00054"
+      ],
+      "script_sha256": "1d2671dc6e159732eb75a1b2bb2adf0b8afd4c95b493462c04d3a4f124517632"
+    },
+    "evaluate_epoch010": {
+      "job_id": "2020811",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020810",
+        "src/experiments/training_against_role_probes/epoch_refresh/evaluate.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/checkpoints/epoch010",
+        "experiment_reports/training_against_role_probes/off_policy_epochs/runs/training/epochs/epoch010"
+      ],
+      "script_sha256": "3e2aa4cd971ef4932479c15bb812bd4ca3cc382582aa0124a3fd2848cb069fb6"
+    },
+    "publish_epoch010": {
+      "job_id": "2020812",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--chdir=/data/cluster/users/kortukov/role_probe_training/.cache/epoch_refresh_source_20261104",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/off_policy_epochs/logs/%x-%j.out",
+        "--dependency=afterok:2020811",
+        "src/experiments/training_against_role_probes/epoch_refresh/publish.sbatch",
+        "experiment_reports/training_against_role_probes/off_policy_epochs"
+      ],
+      "script_sha256": "e5f746a8d76abf78a53e4c72c8e46e011a92806be8b514fe74bd55f25088a454"
+    }
+  },
+  "source_revision": "591c718a401b573d0595cf4cf36046e794b0d49c",
+  "submodules": "-ec333c40fd43fe991e1ebf66765051b6d7e35784 submodules/prompt-injection-as-role-confusion\n-9c3f80cc6d6d6fa2a434ca49ffdd150c4223c427 submodules/training_against_probes",
+  "plan": {
+    "tasks_per_epoch": 90,
+    "updates_per_epoch": 6,
+    "epochs": 10,
+    "evaluated_epochs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  }
+}
