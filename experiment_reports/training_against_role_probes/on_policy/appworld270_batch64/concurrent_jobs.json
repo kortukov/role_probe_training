@@ -1,0 +1,32 @@
+{
+  "failed_attempts": [
+    {
+      "training_job": "1816756",
+      "world_size": 1,
+      "collection_concurrency": 8,
+      "sequential_reference_job": "1816749",
+      "sequential_reference_run": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_single_gpu",
+      "source_sha256": {
+        "src/experiments/training_against_role_probes/on_policy_concurrent/train.sbatch": "7641a21b9c3e40829531d5d8822403868387979da5bfcc7925ee706c12b59841",
+        "src/experiments/training_against_role_probes/on_policy_concurrent/appworld270_batch64.json": "0d2d4d91101c230d69827008fa46cdd10c32105b8deab59cffc84badf7d4f0f1",
+        "src/role_probe_training/on_policy_concurrent/__init__.py": "b4d83e390805ef539e1ecb4d51b3d634fbb05a919cd751fbce246b12d44cb8d5",
+        "src/role_probe_training/on_policy_concurrent/collect.py": "e4c2c607f533496e8934881c2d850c19e1681c935eea414c685620717ff0c05f",
+        "src/role_probe_training/on_policy_concurrent/collection.py": "7105637c95d0006a56f2e1ac30255d92e3a5ce9c5ef684dd5c7cde0cb7429158",
+        "src/role_probe_training/on_policy_concurrent/episode.py": "f7713c3ecfd533f6cdef29ba916155a2b255566c5422cae9c15075a064dd711f",
+        "src/role_probe_training/on_policy_concurrent/serving.py": "02ac736ed0af2b8fa5daf4d8ae97c8fedfa97644283ab9051758c37fdf45371e",
+        "src/role_probe_training/on_policy_concurrent/train.py": "5af15a724a25c2b16919076e7e5617a0c82702fe168f75937cdbe850cca9c8f2"
+      },
+      "outcome": "FAILED at step 1 request validation; no update. Inspect vLLM provider reused the first episode base_url per worker process, so later episodes were served under that episode route (wrong generation indices/seeds/tool IDs). Collection itself completed: 64 episodes, 1198 requests, 303097 tokens, 593 s.",
+      "output": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_concurrent"
+    }
+  ],
+  "training_job": "1964052",
+  "git_commit": "043ff56",
+  "world_size": 1,
+  "collection_concurrency": 8,
+  "config": "src/experiments/training_against_role_probes/on_policy_concurrent/appworld270_batch64.json",
+  "launcher": "src/experiments/training_against_role_probes/on_policy_execution/train.sbatch",
+  "output": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_concurrent_v2",
+  "sequential_reference_job": "1816749",
+  "sequential_reference_run": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_single_gpu"
+}

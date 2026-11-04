@@ -19,7 +19,7 @@ from role_probe_training.training.refit import refit_probe, summarize_counts
 from role_probe_training.training.train_same_batch import evaluate, save_checkpoint, sync_gradients
 from role_probe_training.on_policy_recovery.data import schedule
 from role_probe_training.on_policy.data import sha256
-from role_probe_training.on_policy.objective import reverse_kl_sum
+from role_probe_training.on_policy.objective import kl_batches, reverse_kl_sums
 
 
 
@@ -174,14 +174,16 @@ def main():
                 counts += confusion
                 runtime.hidden = None
                 del loss, confusion
-            for request_index, request in enumerate(requests):
-                loss = reverse_kl_sum(runtime, request)
+            done = 0
+            for batch in kl_batches(requests, config.get('kl_batch_tokens')):
+                loss = reverse_kl_sums(runtime, batch)
                 (config['kl_coefficient']*loss/denominators[1]).backward()
                 totals[1] += loss.detach().double()
                 runtime.hidden = None
                 del loss
-                if (request_index+1)%32==0:
-                    log('kl_progress',step=step,requests_done=request_index+1,
+                done += len(batch)
+                if done//32 > (done-len(batch))//32:
+                    log('kl_progress',step=step,requests_done=done,
                         requests_total=len(requests),seconds=time.perf_counter()-started)
             sync_gradients(parameters)
             grad_norm = torch.nn.utils.clip_grad_norm_(parameters, 1.)

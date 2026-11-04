@@ -1,0 +1,152 @@
+{
+  "timestamp": "2026-10-30T12:18:40.154028+00:00",
+  "favored_jobs": [
+    "1758049",
+    "1758050",
+    "1758051",
+    "1758052"
+  ],
+  "changes": [
+    {
+      "job_id": "1691756",
+      "name": "role-swe-generous-assemble",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691753",
+      "name": "role-swe-generous-assemble",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691765",
+      "name": "role-swe-generous-assemble",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726412",
+      "name": "role-swe-generous-report",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726411",
+      "name": "role-swe-generous-report",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726410",
+      "name": "role-swe-generous-assemble",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726413",
+      "name": "role-swe-meeting-snapshot",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691757",
+      "name": "role-swe-generous-probes",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691754",
+      "name": "role-swe-generous-probes",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691748",
+      "name": "role-swe-generous-probes",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691742",
+      "name": "role-swe-generous-probes",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691766",
+      "name": "role-swe-generous-probes",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691764_0",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691764_1",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691764_2",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1691764_3",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726409_2",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726409_3",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726408_0",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    },
+    {
+      "job_id": "1726408_1",
+      "name": "role-swe-generous",
+      "nice": 5000,
+      "returncode": 0,
+      "detail": ""
+    }
+  ],
+  "reason": "User requested on-policy training ahead of all other currently pending jobs; running jobs excluded."
+}

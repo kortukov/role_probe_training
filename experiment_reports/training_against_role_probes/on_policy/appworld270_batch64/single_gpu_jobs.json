@@ -1,0 +1,31 @@
+{
+  "training_job": "1816749",
+  "old_training_job": "1816549",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--hold",
+    "--export=ALL",
+    "--gpus=1",
+    "--job-name=role-onpolicy-1gpu-appworld270_batch64",
+    "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/logs/%x-%j.out",
+    "src/experiments/training_against_role_probes/on_policy_execution/train.sbatch",
+    "--resume",
+    "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/checkpoints/step00000",
+    "--migration",
+    "src/experiments/training_against_role_probes/on_policy_single_gpu/appworld270_batch64_migration.json",
+    "--stop-after",
+    "5"
+  ],
+  "world_size": 1,
+  "resume_step": 0,
+  "final_step": 5,
+  "checkpoint": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_single_gpu/checkpoints/step00005",
+  "source_sha256": {
+    "src/role_probe_training/on_policy_training/train.py": "bce1f5d0e3eff72c160bac862592c7061f6b4361321405f30a1097021e1a4dae",
+    "src/experiments/training_against_role_probes/on_policy_execution/train.sbatch": "2d0b01e836bb9e8bf8e83d26fc06d13f43e1cbb9b58429580430613898cc2b5b",
+    "src/experiments/training_against_role_probes/on_policy_single_gpu/appworld270_batch64.json": "f6a245e17b5ccb30fe10b2e7da4ab294b094fa5f73a1c5dc43a89ab28b247e5e",
+    "src/experiments/training_against_role_probes/on_policy_single_gpu/appworld270_batch64_migration.json": "bb980cc1d855d3ee57a367e4f1fdd68157044cdaf00e07220271a4fae9ecfbb9"
+  },
+  "export_job": "1816750"
+}

@@ -1,0 +1,37 @@
+{
+  "upstream_revision": "ec333c40fd43fe991e1ebf66765051b6d7e35784",
+  "observed": {
+    "passages": 250,
+    "role_sequences": 1250,
+    "fitting_sequences": 1125,
+    "heldout_sequences": 125,
+    "max_content_tokens": 1024,
+    "max_total_tokens": 1035,
+    "content_tokens": 699040
+  },
+  "upstream": {
+    "configured_passages": 250,
+    "content_token_limit": 1024,
+    "roles": 5,
+    "solver": "cuml LogisticRegression",
+    "penalty": "l2",
+    "C": 0.005,
+    "max_iter": 5000,
+    "linesearch_max_iter": 100,
+    "fit_intercept": true,
+    "feature_scaling": false,
+    "split": "rendered prompt IDs; 10% held out; seed 123",
+    "sampling_note": "Notebook int(250*.25)+int(250*.75) yields 249 passages; our cached corpus uses 62+188=250. It also deduplicates/excludes embedded special tokens."
+  },
+  "current_refit": {
+    "solver": "warm-start SGD",
+    "steps": 2000,
+    "split": "source-stratified underlying passage groups"
+  },
+  "pipeline_hold": {
+    "job_id": "1691926",
+    "reason": "User requested upstream probe-refitting alignment; prevent original SGD pipeline starting",
+    "status": "Released following user instruction to continue existing checks and training"
+  },
+  "decision": "Retain 1250 sequences, 1024-content-token limit, passage-grouped split and current iterative SGD refitting."
+}

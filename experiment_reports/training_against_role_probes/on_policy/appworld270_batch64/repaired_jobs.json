@@ -1,0 +1,35 @@
+{
+  "training": "1787803",
+  "replaces": "1766203",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--export=ALL",
+    "--nice=0",
+    "--job-name=role-onpolicy-270-b64-fixed",
+    "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/logs/%x-%j.out",
+    "src/experiments/training_against_role_probes/on_policy_repaired/train.sbatch"
+  ],
+  "environment": {
+    "VARIANT_CONFIG": "src/experiments/training_against_role_probes/on_policy_repaired/batch64.json",
+    "VARIANT_REPORT": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64"
+  },
+  "source_sha256": {
+    "src/role_probe_training/on_policy_repaired/data.py": "a6464e1d2655581f95f39e1a7c76be82d4e3a1168003e67816cd8b18abd3e40f",
+    "src/role_probe_training/on_policy_repaired/collection.py": "51fe2d7da6a83b38a3a33d574bc926d62d52cbc2fd3db7733488355aed6a1ba8",
+    "src/role_probe_training/on_policy_repaired/train.py": "12a325afe8b42a5c47ef9a63ea6f34982f6f65306211f4256a7d941252d523b7",
+    "src/role_probe_training/on_policy_repaired/__init__.py": "1c10846b2b9762f3b6d8daa625effd904f2d66ba7f8b1883373fd5f6aee2766c",
+    "src/role_probe_training/on_policy_repaired/serving.py": "bb10cc3858da7be24a4a49d09fa49e53dd433c1fc8c0330c044429f7d9924316",
+    "src/experiments/training_against_role_probes/on_policy_repaired/train.sbatch": "f65e965784e6436810bb8c598ebbef58ce2de517e4e53482fba8f57eabdaf8a0",
+    "src/experiments/training_against_role_probes/on_policy_repaired/check_formatting.py": "4f43b9e901ea24874003b3e11f21fcd4a60defca77ce4612786513a1f2b388d8",
+    "src/experiments/training_against_role_probes/on_policy_repaired/batch64.json": "e1c8ac1563042dfb416a58b79d4b77b51e6d20ef179dee6b69792dadb711e450",
+    "src/experiments/training_against_role_probes/on_policy_repaired/batch16.json": "d9a7a2fc8fa5f561c8064d57c184d92befcf7c5db40f6a18ce5411e1d0d24eb2"
+  },
+  "validation": {
+    "prefixes": 2844,
+    "mixed_prefixes": 2,
+    "ordinary_prompts_unchanged": true,
+    "raw_mixed_text_preserved": true
+  },
+  "restart": "From base model, same task order and seeds; prior failed artifacts retained; no completed batch-64 update to resume."
+}

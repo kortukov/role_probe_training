@@ -1,0 +1,35 @@
+{
+  "training": "1766203",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--export=ALL",
+    "--nice=0",
+    "--job-name=role-onpolicy-270-b64",
+    "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/logs/%x-%j.out",
+    "src/experiments/training_against_role_probes/on_policy_variants/train.sbatch"
+  ],
+  "environment": {
+    "VARIANT_CONFIG": "src/experiments/training_against_role_probes/on_policy_variants/batch64.json",
+    "VARIANT_REPORT": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64"
+  },
+  "episodes": 270,
+  "episodes_per_task": 3,
+  "batch_size": 64,
+  "updates": 5,
+  "source_sha256": {
+    "src/role_probe_training/on_policy_variants/train.py": "7b9fa577105c94902af7ec367950ac44139b37bc595f2d057532bcd4e8cf26d6",
+    "src/role_probe_training/on_policy_variants/data.py": "a6464e1d2655581f95f39e1a7c76be82d4e3a1168003e67816cd8b18abd3e40f",
+    "src/role_probe_training/on_policy_variants/__init__.py": "d4e18fe2684127da616738ca7e409e500997df9ffaeb865811bff288f66ee5c8",
+    "src/role_probe_training/on_policy/train.py": "4d3ea7d0580d88f9f33279bd8639e278379c4aa2fc07c23ed65cf34573abe016",
+    "src/role_probe_training/on_policy/vllm_worker.py": "9577fdd22af505ce851c6c9080d7d3de9c4e82888ca58f77ca6a0e0ee1f11994",
+    "src/role_probe_training/on_policy/data.py": "90e853fe2efe3764fed9c82d715e4e776fa3d97915a493b3a67d9d43caffbb8f",
+    "src/role_probe_training/on_policy/__init__.py": "5466862b563fa7d9c8005af3f4a4299d2e7c395e6b2c6754383a4b4a8ba16593",
+    "src/role_probe_training/on_policy/colocated.py": "8002553e352a11303490aaba4e007457ef552556ba00b7f2859abde9c76cd40e",
+    "src/role_probe_training/on_policy/collect.py": "c84a9fa236a57807c035f99e36e1742d74137cad5ebf91581d5424de8c691ba9",
+    "src/role_probe_training/on_policy/serving.py": "69eb13a87a8e758aec35621b27a42498af7f30893c72e1fc018883dfd8ca8380",
+    "src/role_probe_training/on_policy/objective.py": "488ec952ca1a65d2ce9d19625a42ebe536cfcec5cff63ee3365a8ad694ef65a6",
+    "src/experiments/training_against_role_probes/on_policy_variants/batch64.json": "b3a2ccc9d8e3230f4a1c2dfabd465db06729f69f979df6378c1a8afa362c23b3",
+    "src/experiments/training_against_role_probes/on_policy_variants/train.sbatch": "dd91f98d90427db924b745975060419e1e0d487a0ec7261f8590ffbfb03f1b30"
+  }
+}

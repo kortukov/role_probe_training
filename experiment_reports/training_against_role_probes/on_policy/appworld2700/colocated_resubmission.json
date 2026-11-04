@@ -1,0 +1,52 @@
+{
+  "pilot": {
+    "job_id": "1758049",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--export=ALL",
+      "--time=06:00:00",
+      "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch",
+      "--stop-after",
+      "1"
+    ]
+  },
+  "resume_pilot": {
+    "job_id": "1758050",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--export=ALL",
+      "--time=06:00:00",
+      "--dependency=afterok:1758049",
+      "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch",
+      "--stop-after",
+      "2",
+      "--resume",
+      "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00001"
+    ]
+  },
+  "gate": {
+    "job_id": "1758051",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--export=ALL",
+      "--dependency=afterok:1758050",
+      "src/experiments/training_against_role_probes/on_policy/colocated_gate.sbatch"
+    ]
+  },
+  "training": {
+    "job_id": "1758052",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--export=ALL",
+      "--dependency=afterok:1758051",
+      "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch",
+      "--resume",
+      "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00002"
+    ]
+  },
+  "reason": "Original pilot held before execution by Slurm user environment retrieval failure. Inherit COLOCATION_CHECK_DIR through environment and export ALL, as in successful HF benchmark. Training source/config unchanged."
+}

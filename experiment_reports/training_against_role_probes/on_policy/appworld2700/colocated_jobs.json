@@ -1,0 +1,89 @@
+{
+  "colocation_check": {
+    "job_id": "1691925",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "src/experiments/training_against_role_probes/on_policy/colocation_check.sbatch"
+    ]
+  },
+  "pilot": {
+    "job_id": "1691926",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:1691925",
+      "--time=06:00:00",
+      "--export=ALL,COLOCATION_CHECK_DIR=experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocation/1691925",
+      "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch",
+      "--stop-after",
+      "1"
+    ]
+  },
+  "resume_pilot": {
+    "job_id": "1691927",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:1691926",
+      "--time=06:00:00",
+      "--export=ALL,COLOCATION_CHECK_DIR=experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocation/1691925",
+      "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch",
+      "--stop-after",
+      "2",
+      "--resume",
+      "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00001"
+    ]
+  },
+  "gate": {
+    "job_id": "1691928",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:1691927",
+      "src/experiments/training_against_role_probes/on_policy/colocated_gate.sbatch"
+    ]
+  },
+  "training": {
+    "job_id": "1691929",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:1691928",
+      "--export=ALL,COLOCATION_CHECK_DIR=experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocation/1691925",
+      "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch",
+      "--resume",
+      "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00002"
+    ]
+  },
+  "source_sha256": {
+    "src/role_probe_training/on_policy/train.py": "4d3ea7d0580d88f9f33279bd8639e278379c4aa2fc07c23ed65cf34573abe016",
+    "src/role_probe_training/on_policy/vllm_worker.py": "9577fdd22af505ce851c6c9080d7d3de9c4e82888ca58f77ca6a0e0ee1f11994",
+    "src/role_probe_training/on_policy/data.py": "90e853fe2efe3764fed9c82d715e4e776fa3d97915a493b3a67d9d43caffbb8f",
+    "src/role_probe_training/on_policy/__init__.py": "5466862b563fa7d9c8005af3f4a4299d2e7c395e6b2c6754383a4b4a8ba16593",
+    "src/role_probe_training/on_policy/colocated.py": "8002553e352a11303490aaba4e007457ef552556ba00b7f2859abde9c76cd40e",
+    "src/role_probe_training/on_policy/collect.py": "c84a9fa236a57807c035f99e36e1742d74137cad5ebf91581d5424de8c691ba9",
+    "src/role_probe_training/on_policy/serving.py": "69eb13a87a8e758aec35621b27a42498af7f30893c72e1fc018883dfd8ca8380",
+    "src/role_probe_training/on_policy/objective.py": "488ec952ca1a65d2ce9d19625a42ebe536cfcec5cff63ee3365a8ad694ef65a6",
+    "src/experiments/training_against_role_probes/on_policy/benchmark_summary.py": "5a270b4bcb31e9c2ec9cce3600e0062cb1d9b6ecc35b5674b3f2c9e764504ed5",
+    "src/experiments/training_against_role_probes/on_policy/benchmark_hf.py": "65647646dac110f685c143dc4451cc6be75f2c5e0fead528be5e91b69fdd3e01",
+    "src/experiments/training_against_role_probes/on_policy/benchmark_client.py": "5c76a784a17be5fa5bc61cb5e8b1986dcc8ccdd7b7e69888e3f597070bfe3b63",
+    "src/experiments/training_against_role_probes/on_policy/checks.py": "6a13b4d1d7e61b003078e8375e48526468f07ebbdba9f9b37d54ede94e578705",
+    "src/experiments/training_against_role_probes/on_policy/generation_diagnostic.py": "a942b74fd3a1911e8343c21946c22d5b800eaaa5d62c3c8dbc8bf1db75d48bec",
+    "src/experiments/training_against_role_probes/on_policy/submit_colocated.py": "ccac8b92db70b5ebc6d729227757571204769c506dcb4df4d8ea68776fd8eee8",
+    "src/experiments/training_against_role_probes/on_policy/submit.py": "ac0087605c3e1cff3c633f0487616c12b5b7d46e536463e880a5095c1af67f6b",
+    "src/experiments/training_against_role_probes/on_policy/gate.py": "888c57120e85dfe4b09fcdc16aa0a3a00d065e361238e891761855193afbda10",
+    "src/experiments/training_against_role_probes/on_policy/colocation_check.py": "7bd75fb66f13018edb9703dae0ff4939c4b71ddec472c1d3e16d9678ab364a06",
+    "src/experiments/training_against_role_probes/on_policy/serving_check.py": "104a1d95d5e76060a91f696475cf0c3622a8dfdfe4e37e4464dde9495746f644",
+    "src/experiments/training_against_role_probes/on_policy/gate.sbatch": "ef4e55d65a2d43829c44a55d72e6bd89cc74f359b0d734f462bdc6174238f4b2",
+    "src/experiments/training_against_role_probes/on_policy/colocation_check.sbatch": "a65202df4250abe0e04b5c2bfc4df2d8735cace065adde25520e90986518c1e9",
+    "src/experiments/training_against_role_probes/on_policy/benchmark.sbatch": "4cdcc4d492fd99c662d88ed652cf90bc3a631d2833c9c065aee3636049066e01",
+    "src/experiments/training_against_role_probes/on_policy/benchmark_summary.sbatch": "9d843ab613900891342bc645c798f3bcf61bfd55e5a25b2d5d77f45780bdffba",
+    "src/experiments/training_against_role_probes/on_policy/train.sbatch": "bbdaa5a3a70132154e4e184be1b18c47c84b7251378ab7a24ce407e31d22c3bb",
+    "src/experiments/training_against_role_probes/on_policy/colocated_train.sbatch": "c0bed9dc763889e38aaa236055886f79e90ad42fec330c2fe102fd2f40bfe662",
+    "src/experiments/training_against_role_probes/on_policy/generation_diagnostic.sbatch": "796e3b5968f8c01e693f3b04a2d6d494ab423a93fbd58c5a9152907842f8f0e1",
+    "src/experiments/training_against_role_probes/on_policy/colocated_gate.sbatch": "7e2f2ffece8597578fe0553192558b350238aa3777b404c436980862199c8ca1",
+    "src/experiments/training_against_role_probes/on_policy/colocated_config.json": "0986efa948b8f5f25603aed6ad9fa51e1b40ac868a12fef749fb6e1d5219ef80",
+    "src/experiments/training_against_role_probes/on_policy/config.json": "9a460c2129c9e5945f6b1672c891448083eadb1cd90052feef4df7c0f6c814f0"
+  }
+}

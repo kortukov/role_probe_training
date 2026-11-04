@@ -1,0 +1,383 @@
+{
+  "official": {
+    "versions": {
+      "openai-harmony": "0.0.8"
+    },
+    "results": [
+      {
+        "batch": 64,
+        "case": "ordinary_control",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode1233",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 64,
+        "case": "ordinary_control",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode1233",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 64,
+        "case": "failure",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode0490",
+        "generation_index": 24,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.TOOL",
+            "channel": "functions.python",
+            "recipient": "<|constrain|>json",
+            "content_type": null
+          }
+        ]
+      },
+      {
+        "batch": 64,
+        "case": "failure",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode0490",
+        "generation_index": 24,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.TOOL",
+            "channel": "functions.python",
+            "recipient": "<|constrain|>json",
+            "content_type": null
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "ordinary_control",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode1112",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "ordinary_control",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode1112",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "failure",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode0825",
+        "generation_index": 35,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "functions.python",
+            "recipient": "assistant<|channel|>commentary",
+            "content_type": "<|constrain|>json"
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "failure",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode0825",
+        "generation_index": 35,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "functions.python",
+            "recipient": "assistant<|channel|>commentary",
+            "content_type": "<|constrain|>json"
+          }
+        ]
+      }
+    ]
+  },
+  "installed": {
+    "versions": {
+      "oss-harmony": "0.0.11",
+      "vllm": "0.32.0"
+    },
+    "results": [
+      {
+        "batch": 64,
+        "case": "ordinary_control",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode1233",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 64,
+        "case": "ordinary_control",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode1233",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 64,
+        "case": "failure",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode0490",
+        "generation_index": 24,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "functions.python",
+            "recipient": "<|constrain|>json",
+            "content_type": null
+          }
+        ]
+      },
+      {
+        "batch": 64,
+        "case": "failure",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/rollouts/step00001/rank0/requests.jsonl",
+        "episode": "episode0490",
+        "generation_index": 24,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "functions.python",
+            "recipient": "<|constrain|>json",
+            "content_type": null
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "ordinary_control",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode1112",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "ordinary_control",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode1112",
+        "generation_index": 0,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "commentary",
+            "recipient": "functions.python",
+            "content_type": "code"
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "failure",
+        "strict": true,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode0825",
+        "generation_index": 35,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "functions.python",
+            "recipient": "assistant",
+            "content_type": "<|constrain|>json"
+          }
+        ]
+      },
+      {
+        "batch": 16,
+        "case": "failure",
+        "strict": false,
+        "source": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_repaired/rollouts/step00004/rank1/requests.jsonl",
+        "episode": "episode0825",
+        "generation_index": 35,
+        "messages": [
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "analysis",
+            "recipient": null,
+            "content_type": null
+          },
+          {
+            "role": "Role.ASSISTANT",
+            "channel": "functions.python",
+            "recipient": "assistant",
+            "content_type": "<|constrain|>json"
+          }
+        ]
+      }
+    ]
+  },
+  "vllm_0_32_saved_output_test": {
+    "batch64": {
+      "reasoning_characters": 234,
+      "content": null,
+      "tool_calls": []
+    },
+    "batch16": {
+      "reasoning_characters": 2504,
+      "content": null,
+      "tool_calls": []
+    },
+    "ordinary_controls": "Both returned python tool calls successfully"
+  },
+  "decision": "Do not deploy heuristic reinterpretation of malformed channels as tool recipients. Prefer installed vLLM HarmonyParser, preserve raw tokens, and separate invalid model outputs from infrastructure failures. No training resubmitted in this audit."
+}

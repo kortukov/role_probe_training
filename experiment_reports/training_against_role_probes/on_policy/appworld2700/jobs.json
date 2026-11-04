@@ -1,0 +1,101 @@
+{
+  "pilot": {
+    "job_id": "1610626",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--time=06:00:00",
+      "src/experiments/training_against_role_probes/on_policy/train.sbatch",
+      "--stop-after",
+      "1"
+    ],
+    "status": "FAILED: 2026-10-28 before first model update; saved raw outputs retained"
+  },
+  "resume_pilot": {
+    "job_id": "1610627",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--time=06:00:00",
+      "--dependency=afterok:1610626",
+      "src/experiments/training_against_role_probes/on_policy/train.sbatch",
+      "--stop-after",
+      "2",
+      "--resume",
+      "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1/checkpoints/step00001"
+    ],
+    "status": "CANCELLED after failed prerequisite; source under repair"
+  },
+  "gate": {
+    "job_id": "1610628",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:1610627",
+      "src/experiments/training_against_role_probes/on_policy/gate.sbatch"
+    ],
+    "status": "CANCELLED after failed prerequisite; source under repair"
+  },
+  "training": {
+    "job_id": "1610629",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--dependency=afterok:1610628",
+      "src/experiments/training_against_role_probes/on_policy/train.sbatch",
+      "--resume",
+      "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1/checkpoints/step00002"
+    ],
+    "status": "CANCELLED after failed prerequisite; source under repair"
+  },
+  "generation_diagnostics": {
+    "job_id": "1691770",
+    "array": "0-2%1",
+    "status": "COMPLETED: all three modes passed; CUDA_LAUNCH_BLOCKING enabled, not proof asynchronous generation is fixed",
+    "modes": [
+      "flex-thread",
+      "flex-main",
+      "eager-thread"
+    ],
+    "purpose": "Replay failed input with CUDA_LAUNCH_BLOCKING; diagnostic samples excluded from training"
+  },
+  "serving_benchmark": {
+    "job_id": "1691825",
+    "array": "0-1%1",
+    "partition": "ber-testing",
+    "gpu_per_job": 1,
+    "time_limit": "00:55:00",
+    "purpose": "Matched HF and vLLM fixed-snapshot serving diagnostic; not training",
+    "summary_job": "1691826",
+    "status": "HF FAILED with illegal CUDA memory access; vLLM COMPLETED; no paired speed ratio"
+  },
+  "colocation_check": {
+    "job_id": "1691899",
+    "partition": "ber-testing",
+    "gpus": 2,
+    "status": "CANCELLED while pending; replaced by complete conditional pipeline 1691925\u20131691929",
+    "superseded_job": "1691895 cancelled while pending to add full-vocabulary probability checks",
+    "source_sha256": {
+      "src/role_probe_training/on_policy/train.py": "07d28156c91551fbc0cfae4bafa6d1a4c3ec88a3b37df36202cb798e2b39a4ac",
+      "src/role_probe_training/on_policy/vllm_worker.py": "9577fdd22af505ce851c6c9080d7d3de9c4e82888ca58f77ca6a0e0ee1f11994",
+      "src/role_probe_training/on_policy/data.py": "90e853fe2efe3764fed9c82d715e4e776fa3d97915a493b3a67d9d43caffbb8f",
+      "src/role_probe_training/on_policy/__init__.py": "5466862b563fa7d9c8005af3f4a4299d2e7c395e6b2c6754383a4b4a8ba16593",
+      "src/role_probe_training/on_policy/colocated.py": "8002553e352a11303490aaba4e007457ef552556ba00b7f2859abde9c76cd40e",
+      "src/role_probe_training/on_policy/collect.py": "c84a9fa236a57807c035f99e36e1742d74137cad5ebf91581d5424de8c691ba9",
+      "src/role_probe_training/on_policy/serving.py": "69eb13a87a8e758aec35621b27a42498af7f30893c72e1fc018883dfd8ca8380",
+      "src/role_probe_training/on_policy/objective.py": "488ec952ca1a65d2ce9d19625a42ebe536cfcec5cff63ee3365a8ad694ef65a6",
+      "src/experiments/training_against_role_probes/on_policy/colocation_check.py": "7bd75fb66f13018edb9703dae0ff4939c4b71ddec472c1d3e16d9678ab364a06",
+      "src/experiments/training_against_role_probes/on_policy/colocation_check.sbatch": "a65202df4250abe0e04b5c2bfc4df2d8735cace065adde25520e90986518c1e9"
+    },
+    "scope": "Two diagnostic episodes per rank across one update; full 2000-step standard-data probe refit; NOT production batch/resume validation"
+  },
+  "colocated_pipeline": {
+    "manifest": "colocated_jobs.json",
+    "check": "1691925",
+    "pilot": "1691926",
+    "resume_pilot": "1691927",
+    "gate": "1691928",
+    "training": "1691929",
+    "status": "Colocation diagnostic passed; pilot hold released after probe-recipe clarification; pilot waits for resources/priority, downstream checks remain dependent."
+  }
+}

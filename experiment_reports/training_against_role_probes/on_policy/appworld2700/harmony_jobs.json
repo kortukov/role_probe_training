@@ -1,0 +1,161 @@
+{
+  "parser": "vLLM 0.32 HarmonyParser with installed oss-harmony 0.0.11",
+  "resume_step": 2,
+  "jobs": [
+    {
+      "job_id": "1815838",
+      "from_step": 2,
+      "to_step": 26,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to26",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00002",
+        "--stop-after",
+        "26",
+        "--migration",
+        "src/experiments/training_against_role_probes/on_policy_harmony/appworld2700_migration.json"
+      ]
+    },
+    {
+      "job_id": "1815839",
+      "from_step": 26,
+      "to_step": 50,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to50",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "--dependency=afterok:1815838",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/checkpoints/step00026",
+        "--stop-after",
+        "50"
+      ]
+    },
+    {
+      "job_id": "1815840",
+      "from_step": 50,
+      "to_step": 74,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to74",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "--dependency=afterok:1815839",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/checkpoints/step00050",
+        "--stop-after",
+        "74"
+      ]
+    },
+    {
+      "job_id": "1815841",
+      "from_step": 74,
+      "to_step": 98,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to98",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "--dependency=afterok:1815840",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/checkpoints/step00074",
+        "--stop-after",
+        "98"
+      ]
+    },
+    {
+      "job_id": "1815842",
+      "from_step": 98,
+      "to_step": 122,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to122",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "--dependency=afterok:1815841",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/checkpoints/step00098",
+        "--stop-after",
+        "122"
+      ]
+    },
+    {
+      "job_id": "1815843",
+      "from_step": 122,
+      "to_step": 146,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to146",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "--dependency=afterok:1815842",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/checkpoints/step00122",
+        "--stop-after",
+        "146"
+      ]
+    },
+    {
+      "job_id": "1815844",
+      "from_step": 146,
+      "to_step": 169,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-harmony-appworld2700-to169",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld2700/logs/%x-%j.out",
+        "--time=24:00:00",
+        "--dependency=afterok:1815843",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/checkpoints/step00146",
+        "--stop-after",
+        "169"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "src/role_probe_training/on_policy_harmony/parser.py": "ee6108232adf78ce03bcd5ce1ddc2c80d04b0ac987a986c4488e493117f8fd36",
+    "src/role_probe_training/on_policy_harmony/data.py": "a6464e1d2655581f95f39e1a7c76be82d4e3a1168003e67816cd8b18abd3e40f",
+    "src/role_probe_training/on_policy_harmony/collection.py": "9f08949581dbdadccf53783c4be1c2badea4243adf94ff4dfa3fffc6f10656a9",
+    "src/role_probe_training/on_policy_harmony/colocated.py": "c51b55aa513464d810eb470293210c6eb14b685cc84d48bc52baffcaee9772d4",
+    "src/role_probe_training/on_policy_harmony/train.py": "d69d36149e5a1f751fe720b76e2c36060c71b21ac17dc992f8145d42f6c49361",
+    "src/role_probe_training/on_policy_harmony/__init__.py": "1c10846b2b9762f3b6d8daa625effd904f2d66ba7f8b1883373fd5f6aee2766c",
+    "src/role_probe_training/on_policy_harmony/worker.py": "3c44b2f9484025d50ef767e7907e5bb573d5a2e3ac0a45ff8db139c37b29feb4",
+    "src/role_probe_training/on_policy_harmony/serving.py": "86e1037f2fde7d9e08ad414ad5f45464854996509014b4f70c17ffb86ae549d5",
+    "src/role_probe_training/on_policy_harmony/collect.py": "f159efda886b7060b177a4e4ce6b7887fc9e356f64795938e9d3f2f520f222ed"
+  },
+  "config_sha256": "503e80a68a6de10dc7e10206a14eb4d95cdbe6f767a4f5d8376c172ab1d8f269",
+  "migration": "src/experiments/training_against_role_probes/on_policy_harmony/appworld2700_migration.json",
+  "recovery": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_harmony/recovery.json"
+}

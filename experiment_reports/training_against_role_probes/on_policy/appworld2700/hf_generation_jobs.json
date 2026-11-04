@@ -1,0 +1,89 @@
+{
+  "diagnostic_array": "1691943",
+  "benchmark": "1691945",
+  "benchmark_dependency": "afterok:1691943_2",
+  "status": "Benchmark 1726415 COMPLETED; no sample errors, all four HF attempts time-limited; comparison.json available",
+  "hypothesis": "Specialized FlexAttention decoding kernel; compare default vs FORCE_USE_FLEX_ATTENTION with trained adapters and ordinary asynchronous CUDA",
+  "modes": [
+    "original-trained",
+    "synchronous-trained",
+    "regular-trained",
+    "regular-base"
+  ],
+  "source_sha256": {
+    "src/role_probe_training/generation/__init__.py": "76c5ca585bddc8b4232c4ee09760969f15d337abc96f92fb54d3eb1ccf9332e9",
+    "src/role_probe_training/generation/masks.py": "aacdfaf5b5c5d8e2e6c9f9df318261dbc22419c03215f873fd084871de35b784",
+    "src/role_probe_training/generation/hf.py": "c72d52812ae3a5c01bde2ed95c4da00d0790038958066c3e2ecc81f036dca3d1",
+    "src/experiments/training_against_role_probes/hf_generation/metrics.py": "767e01f126e690bea3168c117210e4a089c9dbbefb0235e36320d2031417c448",
+    "src/experiments/training_against_role_probes/hf_generation/mask_benchmark.sbatch": "bd75978dfb1a0b0834a46de19338662394374f3a1ba0b7cc6c0f1af92bb81602",
+    "src/experiments/training_against_role_probes/hf_generation/benchmark.sbatch": "2e086276e04f6f538f14bcdbd414669f5884b81448a97e8db60950f5ddc21552",
+    "src/experiments/training_against_role_probes/hf_generation/mask_diagnostic.sbatch": "1a4e14b161aba2fd0a462c4867e7fb5f3b9fa9456e69337403eb3bb0f16b4e27",
+    "src/experiments/training_against_role_probes/hf_generation/diagnostic.sbatch": "b64069c2bceef2d4cb9f08e5061c90f17e307f65f74dae76126a5b92b338d8b0",
+    "src/experiments/training_against_role_probes/hf_generation/benchmark.py": "e90b8e60d4be14cb9a0957c06a3514d51e2d9ad1ff7d92ab2c5dafc10768e7ad",
+    "src/experiments/training_against_role_probes/hf_generation/mask_benchmark.py": "94e6189c662a52db576eae02441482d138b092ee93d0172b12eea02656fb82fa",
+    "src/experiments/training_against_role_probes/hf_generation/check_masks.py": "4907ef1a452f978849c8e95f93874b464b06352dd1c01c878353b7c3785fe76b",
+    "src/experiments/training_against_role_probes/hf_generation/mask_diagnostic.py": "669028b23dfd17d0998730b6ed42c39abd356318bef493cfa10f37e4c1c9ffad",
+    "src/experiments/training_against_role_probes/hf_generation/diagnostic.py": "363ef3ca8dcc1cb484e364e2a6bd657dfe0f0d65ae9692d4a7cbe41150635971"
+  },
+  "paired_vllm_run": "runs/serving_benchmark/1691825/1",
+  "metric_scope": "Same checkpoint and fixed step169 probe; whole-history role CE/accuracy, task success, limits/errors, and serving timing; two tasks per concurrency",
+  "mask_diagnostic_array": "1691975",
+  "mask_benchmark": "1726276",
+  "mask_benchmark_dependency": "afterok:1691975_0",
+  "superseded_benchmark": "1691945 cancelled after prerequisite failure",
+  "localized_failure": "transformers.masking_utils.create_sliding_window_causal_mask -> compiled torch.create_block_mask; synchronous traceback points to generated Triton mask kernel",
+  "cpu_mask_checks": "32 causal/window/padding/offset cases passed",
+  "validated_fix": "Build Q_LEN=1 masks with ordinary torch operations; retain compiled prefill/training masks and FlexAttention",
+  "repair_result": {
+    "generation_tokens": [
+      16,
+      128,
+      185
+    ],
+    "generation_seconds": [
+      24.819145906018093,
+      24.05313492199639,
+      34.91277395497309
+    ],
+    "reverse_kl": 0.007953150197863579,
+    "backward_passed": true,
+    "cuda_launch_blocking": false
+  },
+  "base_control_passed": true,
+  "superseded_mask_benchmark": {
+    "job_id": "1691976",
+    "reason": "Twice held before execution with user_env_retrieval_failed_requeued_held; cancelled and resubmitted using inherited HF_DIAGNOSTIC_JOB and --export=ALL"
+  },
+  "disconnect_benchmark": "1726415",
+  "previous_benchmark": {
+    "job_id": "1726276",
+    "status": "Failed after completed microbenchmark; episode timeout caused BrokenPipeError, incorrectly marked fatal",
+    "cuda_error_recurred": false,
+    "short_generation_hf_tokens_per_second": [
+      4.5962183743984815,
+      5.345887987554504
+    ],
+    "short_generation_vllm_tokens_per_second": [
+      275.9137445223735,
+      378.15100230033374
+    ],
+    "short_generation_vllm_speed_ratios": [
+      60.03059951616921,
+      70.73679867230445
+    ]
+  },
+  "disconnect_checks": [
+    "Active generation stops on client close",
+    "Cancelled raw token record retained",
+    "Late response write failure does not poison server",
+    "Subsequent request succeeds",
+    "Real model errors still return 500 then 409"
+  ],
+  "vllm_pipeline_source_hashes_verified_unchanged": true,
+  "disconnect_repair_source_sha256": {
+    "src/role_probe_training/generation/serving.py": "e347ffae0fe3f02008d3eefded9dbfc9fa80a617ce60917134eeda9458bb8f64",
+    "src/experiments/training_against_role_probes/hf_generation/check_disconnects.py": "8d2b287798c002e851d49216a1edbe64b2d01726702cbeac42273fb3066cfb2f",
+    "src/experiments/training_against_role_probes/hf_generation/disconnect_benchmark.py": "d671564362da4a44863c9eac6ed4e36e6bc1ef3553e7c0c58e44afb2ff25593a",
+    "src/experiments/training_against_role_probes/hf_generation/disconnect_benchmark.sbatch": "a0691ac58cfbf862ec28fc7f68c09ae6121e5b00ec73b5660853a53995301485"
+  }
+}

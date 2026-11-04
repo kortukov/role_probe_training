@@ -1,0 +1,460 @@
+{
+  "adapter_sha256": "bf5def61b31ae13c7dcee646b39c38f3b47bfa3c00036e8742d0dfe4301cfcea",
+  "probe_sha256": "0cd7aacdbef5a0a4422ee298aefe5e5094cdc05b9143f48cceaee23986dbfe49",
+  "definitions": {
+    "probe_ce": "Content-token-weighted ground-truth role cross entropy, nats",
+    "probe_accuracy": "Content-token-weighted argmax role accuracy on full histories",
+    "task_success": "Successful tasks / all assigned attempts, including errors and limits"
+  },
+  "limitations": [
+    "Two tasks at each concurrency; diagnostic, not a utility estimate",
+    "Five-minute task cap may penalize a slower backend",
+    "Both trajectory sets are scored by the same HF checkpoint and fixed refitted probe",
+    "HF server serializes concurrent requests; vLLM batches requests",
+    "Sampled tokens need not match; HF derives per-call seeds from the requested seed"
+  ],
+  "backends": {
+    "hf": {
+      "conditions": [
+        {
+          "concurrency": 1,
+          "attempts": 2,
+          "successes": 0,
+          "task_success": 0.0,
+          "errors": 0,
+          "limited": 2,
+          "role_scored_attempts": 2,
+          "role_coverage": 1.0,
+          "unscorable": [],
+          "probe_ce": 0.011870705188149902,
+          "tokens": 10423,
+          "accuracy": 0.9958745241165161,
+          "macro_recall": 0.9961574504989024,
+          "per_role_recall": [
+            1.0,
+            1.0,
+            0.9810623556581987,
+            1.0,
+            0.9997248968363136
+          ],
+          "confusion_counts": [
+            [
+              488,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              111,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2124,
+              41,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              389,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              2,
+              7268
+            ]
+          ]
+        },
+        {
+          "concurrency": 2,
+          "attempts": 2,
+          "successes": 0,
+          "task_success": 0.0,
+          "errors": 0,
+          "limited": 2,
+          "role_scored_attempts": 2,
+          "role_coverage": 1.0,
+          "unscorable": [],
+          "probe_ce": 0.0030245532774541804,
+          "tokens": 7897,
+          "accuracy": 0.9996200799942017,
+          "macro_recall": 0.9983327374770878,
+          "per_role_recall": [
+            1.0,
+            1.0,
+            0.998286203941731,
+            0.9933774834437086,
+            1.0
+          ],
+          "confusion_counts": [
+            [
+              488,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              111,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1165,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              150,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              5980
+            ]
+          ]
+        }
+      ],
+      "micro": [
+        {
+          "concurrency": 1,
+          "wall_seconds": 109.8409595140256,
+          "output_tokens": 512,
+          "output_tokens_per_second": 4.6612848455190585,
+          "requests": [
+            {
+              "index": 0,
+              "seconds": 23.86432045401307,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 1,
+              "seconds": 38.2266406849958,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 2,
+              "seconds": 23.901965148979798,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 3,
+              "seconds": 23.847218091017567,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            }
+          ]
+        },
+        {
+          "concurrency": 4,
+          "wall_seconds": 95.5048992279917,
+          "output_tokens": 512,
+          "output_tokens_per_second": 5.360981521772414,
+          "requests": [
+            {
+              "index": 0,
+              "seconds": 23.896307607996278,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 1,
+              "seconds": 47.77582101500593,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 2,
+              "seconds": 71.63761868997244,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 3,
+              "seconds": 95.50340954901185,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            }
+          ]
+        }
+      ],
+      "episodes": [
+        {
+          "concurrency": 1,
+          "wall_seconds": 602.2065920679597,
+          "attempts": 2,
+          "sample_errors": 0,
+          "limited_samples": 2,
+          "generation_calls": 23,
+          "generated_tokens": 2887
+        },
+        {
+          "concurrency": 2,
+          "wall_seconds": 300.3625499290065,
+          "attempts": 2,
+          "sample_errors": 0,
+          "limited_samples": 2,
+          "generation_calls": 11,
+          "generated_tokens": 1444
+        }
+      ]
+    },
+    "vllm": {
+      "conditions": [
+        {
+          "concurrency": 1,
+          "attempts": 2,
+          "successes": 2,
+          "task_success": 1.0,
+          "errors": 0,
+          "limited": 0,
+          "role_scored_attempts": 2,
+          "role_coverage": 1.0,
+          "unscorable": [],
+          "probe_ce": 0.0036372664041281096,
+          "tokens": 21792,
+          "accuracy": 0.9991281032562256,
+          "macro_recall": 0.998069482642453,
+          "per_role_recall": [
+            1.0,
+            1.0,
+            0.9910096818810512,
+            0.9995738030970308,
+            0.9997639282341831
+          ],
+          "confusion_counts": [
+            [
+              488,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              111,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1433,
+              13,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              7036,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              3,
+              12705
+            ]
+          ]
+        },
+        {
+          "concurrency": 2,
+          "attempts": 2,
+          "successes": 1,
+          "task_success": 0.5,
+          "errors": 0,
+          "limited": 0,
+          "role_scored_attempts": 2,
+          "role_coverage": 1.0,
+          "unscorable": [],
+          "probe_ce": 0.001749289225059508,
+          "tokens": 18329,
+          "accuracy": 0.9996726512908936,
+          "macro_recall": 0.9998965962947006,
+          "per_role_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.9994829814735028
+          ],
+          "confusion_counts": [
+            [
+              488,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              111,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              900,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              5225,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              6,
+              11599
+            ]
+          ]
+        }
+      ],
+      "micro": [
+        {
+          "concurrency": 1,
+          "wall_seconds": 1.8556523919687606,
+          "output_tokens": 512,
+          "output_tokens_per_second": 275.9137445223735,
+          "requests": [
+            {
+              "index": 0,
+              "seconds": 0.4767508959630504,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 1,
+              "seconds": 0.46032443502917886,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 2,
+              "seconds": 0.4588757089804858,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 3,
+              "seconds": 0.4590090479468927,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            }
+          ]
+        },
+        {
+          "concurrency": 4,
+          "wall_seconds": 1.3539564800448716,
+          "output_tokens": 512,
+          "output_tokens_per_second": 378.15100230033374,
+          "requests": [
+            {
+              "index": 0,
+              "seconds": 1.3486066489713266,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 1,
+              "seconds": 1.3530427489895374,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 2,
+              "seconds": 1.3528740699985065,
+              "prompt_tokens": 434,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            },
+            {
+              "index": 3,
+              "seconds": 1.3528269809903577,
+              "prompt_tokens": 433,
+              "completion_tokens": 128,
+              "finish_reason": "length"
+            }
+          ]
+        }
+      ],
+      "episodes": [
+        {
+          "concurrency": 1,
+          "wall_seconds": 61.3615049670334,
+          "attempts": 2,
+          "sample_errors": 0,
+          "limited_samples": 0,
+          "generation_calls": 50,
+          "generated_tokens": 9364
+        },
+        {
+          "concurrency": 2,
+          "wall_seconds": 29.170900709053967,
+          "attempts": 2,
+          "sample_errors": 0,
+          "limited_samples": 0,
+          "generation_calls": 41,
+          "generated_tokens": 6858
+        }
+      ]
+    }
+  },
+  "micro_speed_ratios": [
+    {
+      "concurrency": 1,
+      "vllm_over_hf_tokens_per_second": 59.192637580947725
+    },
+    {
+      "concurrency": 4,
+      "vllm_over_hf_tokens_per_second": 70.53764329620591
+    }
+  ]
+}

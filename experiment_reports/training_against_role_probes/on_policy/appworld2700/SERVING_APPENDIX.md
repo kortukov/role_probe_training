@@ -1,0 +1,171 @@
+# Serving benchmark appendix
+
+Confusion counts use ground-truth roles as rows and predicted roles as columns. Role order matches the recorded scoring implementation; these raw counts supplement the aggregate metrics in [SERVING.md](SERVING.md).
+
+## hf, concurrency 1
+
+```json
+[
+  [
+    488,
+    0,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    111,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    0,
+    2124,
+    41,
+    0
+  ],
+  [
+    0,
+    0,
+    0,
+    389,
+    0
+  ],
+  [
+    0,
+    0,
+    0,
+    2,
+    7268
+  ]
+]
+```
+
+## hf, concurrency 2
+
+```json
+[
+  [
+    488,
+    0,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    111,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    0,
+    1165,
+    2,
+    0
+  ],
+  [
+    0,
+    0,
+    1,
+    150,
+    0
+  ],
+  [
+    0,
+    0,
+    0,
+    0,
+    5980
+  ]
+]
+```
+
+## vllm, concurrency 1
+
+```json
+[
+  [
+    488,
+    0,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    111,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    0,
+    1433,
+    13,
+    0
+  ],
+  [
+    0,
+    0,
+    3,
+    7036,
+    0
+  ],
+  [
+    0,
+    0,
+    0,
+    3,
+    12705
+  ]
+]
+```
+
+## vllm, concurrency 2
+
+```json
+[
+  [
+    488,
+    0,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    111,
+    0,
+    0,
+    0
+  ],
+  [
+    0,
+    0,
+    900,
+    0,
+    0
+  ],
+  [
+    0,
+    0,
+    0,
+    5225,
+    0
+  ],
+  [
+    0,
+    0,
+    0,
+    6,
+    11599
+  ]
+]
+```

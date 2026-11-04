@@ -1,0 +1,50 @@
+{
+  "requests": 96,
+  "tokens": 878815,
+  "max_length": 26152,
+  "single": {
+    "seconds": 451.37681669695303,
+    "passes": 96,
+    "peak_gib": 60.44463062286377,
+    "kl_total": 401.33929881453514
+  },
+  "single_repeat": {
+    "seconds": 417.8700148849748,
+    "passes": 96,
+    "peak_gib": 60.45118188858032,
+    "speedup": 1.0801847479322044,
+    "kl_total_relative_error": 0.0,
+    "max_pass_relative_error": 0.0,
+    "worst_pass_expected_kl": 2.1093831062316895,
+    "pass_absolute_error_sum": 0.0,
+    "gradient_cosine": 1.0000000001664564,
+    "gradient_relative_difference": 0.0,
+    "gradient_norm_ratio": 1.0
+  },
+  "budget_32768": {
+    "seconds": 285.5246297637932,
+    "passes": 35,
+    "peak_gib": 63.516319274902344,
+    "speedup": 1.5808682321744532,
+    "kl_total_relative_error": 0.002423029057778979,
+    "max_pass_relative_error": 0.059621888520355076,
+    "worst_pass_expected_kl": 12.120817422866821,
+    "pass_absolute_error_sum": 5.60378423333168,
+    "gradient_cosine": 0.9978501220760566,
+    "gradient_relative_difference": 0.06579380482871605,
+    "gradient_norm_ratio": 0.9920457658636346
+  },
+  "budget_65536": {
+    "seconds": 250.78901249635965,
+    "passes": 16,
+    "peak_gib": 79.16324281692505,
+    "speedup": 1.799826923053517,
+    "kl_total_relative_error": 0.0025282027614869328,
+    "max_pass_relative_error": 0.03523515301012225,
+    "worst_pass_expected_kl": 9.477197170257568,
+    "pass_absolute_error_sum": 4.037985771894455,
+    "gradient_cosine": 0.9977870336216739,
+    "gradient_relative_difference": 0.06656272900321598,
+    "gradient_norm_ratio": 0.9946949429677234
+  }
+}

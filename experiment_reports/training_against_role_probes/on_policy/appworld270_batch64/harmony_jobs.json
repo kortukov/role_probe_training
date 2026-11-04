@@ -1,0 +1,40 @@
+{
+  "parser": "vLLM 0.32 HarmonyParser with installed oss-harmony 0.0.11",
+  "resume_step": 0,
+  "jobs": [
+    {
+      "job_id": "1815834",
+      "from_step": 0,
+      "to_step": 5,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=0",
+        "--job-name=role-harmony-appworld270_batch64-to5",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/logs/%x-%j.out",
+        "src/experiments/training_against_role_probes/on_policy_harmony/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/checkpoints/step00000",
+        "--stop-after",
+        "5",
+        "--migration",
+        "src/experiments/training_against_role_probes/on_policy_harmony/appworld270_batch64_migration.json"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "src/role_probe_training/on_policy_harmony/parser.py": "ee6108232adf78ce03bcd5ce1ddc2c80d04b0ac987a986c4488e493117f8fd36",
+    "src/role_probe_training/on_policy_harmony/data.py": "a6464e1d2655581f95f39e1a7c76be82d4e3a1168003e67816cd8b18abd3e40f",
+    "src/role_probe_training/on_policy_harmony/collection.py": "9f08949581dbdadccf53783c4be1c2badea4243adf94ff4dfa3fffc6f10656a9",
+    "src/role_probe_training/on_policy_harmony/colocated.py": "c51b55aa513464d810eb470293210c6eb14b685cc84d48bc52baffcaee9772d4",
+    "src/role_probe_training/on_policy_harmony/train.py": "d69d36149e5a1f751fe720b76e2c36060c71b21ac17dc992f8145d42f6c49361",
+    "src/role_probe_training/on_policy_harmony/__init__.py": "1c10846b2b9762f3b6d8daa625effd904f2d66ba7f8b1883373fd5f6aee2766c",
+    "src/role_probe_training/on_policy_harmony/worker.py": "3c44b2f9484025d50ef767e7907e5bb573d5a2e3ac0a45ff8db139c37b29feb4",
+    "src/role_probe_training/on_policy_harmony/serving.py": "86e1037f2fde7d9e08ad414ad5f45464854996509014b4f70c17ffb86ae549d5",
+    "src/role_probe_training/on_policy_harmony/collect.py": "f159efda886b7060b177a4e4ce6b7887fc9e356f64795938e9d3f2f520f222ed"
+  },
+  "config_sha256": "dc0097392d721bfa9cd598ae9eb350ad85ae902a8b522dc1f818638640a763a2",
+  "migration": "src/experiments/training_against_role_probes/on_policy_harmony/appworld270_batch64_migration.json",
+  "recovery": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_harmony/recovery.json"
+}

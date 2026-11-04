@@ -1,0 +1,42 @@
+{
+  "recovery_strategy": "Reuse audited episode trajectories and exact tokens; never re-execute saved tools",
+  "parser": "vLLM 0.32 HarmonyParser with installed oss-harmony 0.0.11",
+  "resume_step": 0,
+  "jobs": [
+    {
+      "job_id": "1816549",
+      "from_step": 0,
+      "to_step": 5,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=0",
+        "--job-name=role-recovery-appworld270_batch64-to5",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/logs/%x-%j.out",
+        "src/experiments/training_against_role_probes/on_policy_recovery/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_repaired/checkpoints/step00000",
+        "--stop-after",
+        "5",
+        "--migration",
+        "src/experiments/training_against_role_probes/on_policy_recovery/appworld270_batch64_migration.json"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "src/role_probe_training/on_policy_recovery/parser.py": "ee6108232adf78ce03bcd5ce1ddc2c80d04b0ac987a986c4488e493117f8fd36",
+    "src/role_probe_training/on_policy_recovery/data.py": "a6464e1d2655581f95f39e1a7c76be82d4e3a1168003e67816cd8b18abd3e40f",
+    "src/role_probe_training/on_policy_recovery/worker.py": "3c44b2f9484025d50ef767e7907e5bb573d5a2e3ac0a45ff8db139c37b29feb4",
+    "src/role_probe_training/on_policy_recovery/colocated.py": "91a82d460697a1ce212f1a6d83581fe569f25d04e95fa04b7acd52197eb58047",
+    "src/role_probe_training/on_policy_recovery/serving.py": "032d3180c1c6dcdb9e853ead615c82a47126a5b7ecd1dc1335a135213a1a38e6",
+    "src/role_probe_training/on_policy_recovery/collect.py": "e8683a7f244a8f7d52c805540d339b674ed3a95f6521883b22efeee5c5421d9b",
+    "src/role_probe_training/on_policy_recovery/collection.py": "fc1756e663c5950e46274be60a1f2c5e0d0bfe89b546d6bdcfd44895c351374d",
+    "src/role_probe_training/on_policy_recovery/__init__.py": "1c10846b2b9762f3b6d8daa625effd904f2d66ba7f8b1883373fd5f6aee2766c",
+    "src/role_probe_training/on_policy_recovery/train.py": "f660b55945b4512680028841f388bd11b8ad0d8a65d851a91dbf3f83704b5c7c",
+    "src/role_probe_training/on_policy_recovery/recovery.py": "d69450dfa1d76ec8cb7df67ba921de4bd725c355327420525cd73684f2df7ede"
+  },
+  "config_sha256": "8fde2d49fb9e62908646b7c730f3ad6a44d634cfb5f9ec700caa867df46909a8",
+  "migration": "src/experiments/training_against_role_probes/on_policy_recovery/appworld270_batch64_migration.json",
+  "recovery": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_recovery/recovery.json"
+}

@@ -1,0 +1,219 @@
+{
+  "training_job": "1815836",
+  "checkpoint": "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_harmony/checkpoints/step00017",
+  "jobs": {
+    "export": {
+      "job_id": "1815837",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1815836",
+        "src/experiments/training_against_role_probes/post_training/export.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/runs/epoch1_harmony/checkpoints/step00017",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/data/post_training/model"
+      ],
+      "script_sha256": "27119c44a7e5dc0e456f2c9474defc0c03ff68c09f600c9d6afd6a0512670cc0"
+    },
+    "probe_fit": {
+      "job_id": "1798679",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1815837",
+        "src/experiments/training_against_role_probes/post_training/probes.sbatch",
+        "fit",
+        "--root",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16"
+      ],
+      "script_sha256": "01fa107502364b81c7df313d1ce83be5f9f2a78ff03f168037e5b8422493bc7d"
+    },
+    "appworld_retail_collection": {
+      "job_id": "1798680",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1815837",
+        "--array=0-2%2",
+        "src/experiments/training_against_role_probes/kl_iteration/collect.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "appworld270_batch16"
+      ],
+      "script_sha256": "cc4d0805fe0481112fe5ef265dd238439634c834344f763bd0a54e3f00cf9db6"
+    },
+    "appworld_retail_assembly": {
+      "job_id": "1798681",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798680",
+        "src/experiments/training_against_role_probes/kl_iteration/assemble_benchmark.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "1798680",
+        "--benchmarks",
+        "appworld_test",
+        "tau2_retail"
+      ],
+      "script_sha256": "4f4607d3d37a6b6fda908e5d8826c1a3efdf98a08eec1af7ae65c463a7934a23"
+    },
+    "swe_collection": {
+      "job_id": "1798682",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1815837",
+        "--array=0-3%2",
+        "--time=3-00:00:00",
+        "src/experiments/training_against_role_probes/swe_generous/collect.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16"
+      ],
+      "script_sha256": "fd89bafc5fb4c1ad555fc82d1f124a2e40bc1e58919d1634532eae65d63914e4"
+    },
+    "swe_assembly": {
+      "job_id": "1798683",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798682",
+        "src/experiments/training_against_role_probes/swe_generous/assemble.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "1798682"
+      ],
+      "script_sha256": "f2e1276a340a55cbe22cba415287442feccbba71c35b1f261f9853bf60648db7"
+    },
+    "appworld_test_probes": {
+      "job_id": "1798684",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798679:1798681",
+        "--array=0",
+        "--time=12:00:00",
+        "src/experiments/training_against_role_probes/post_training/whole_score.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "--overlength",
+        "exclude"
+      ],
+      "script_sha256": "e4a7d7acf426bd8045a89690dbc213b0fdf47e945163efc56b8e94d9690b266e"
+    },
+    "appworld_test_results": {
+      "job_id": "1798685",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798684",
+        "src/experiments/training_against_role_probes/on_policy_evaluation/results.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "appworld_test"
+      ],
+      "script_sha256": "94079523ae2bc2e5925537a4aa25342174df707b713fd7968014796bb96f15f0"
+    },
+    "tau2_retail_probes": {
+      "job_id": "1798686",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798679:1798681",
+        "--array=1",
+        "--time=12:00:00",
+        "src/experiments/training_against_role_probes/post_training/whole_score.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "--overlength",
+        "exclude"
+      ],
+      "script_sha256": "e4a7d7acf426bd8045a89690dbc213b0fdf47e945163efc56b8e94d9690b266e"
+    },
+    "tau2_retail_results": {
+      "job_id": "1798687",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798686",
+        "src/experiments/training_against_role_probes/on_policy_evaluation/results.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "tau2_retail"
+      ],
+      "script_sha256": "94079523ae2bc2e5925537a4aa25342174df707b713fd7968014796bb96f15f0"
+    },
+    "swe_bench_probes": {
+      "job_id": "1798688",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798679:1798683",
+        "--time=24:00:00",
+        "src/experiments/training_against_role_probes/swe_generous/score.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16"
+      ],
+      "script_sha256": "8369594bf3b283907d40ed4c593f60c87be811356c44eb2a1861e9a74ba5ae1f"
+    },
+    "swe_bench_results": {
+      "job_id": "1798689",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=3000",
+        "--exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02",
+        "--output=experiment_reports/training_against_role_probes/on_policy/appworld270_batch16/logs/%x-%A_%a.out",
+        "--dependency=afterok:1798688",
+        "src/experiments/training_against_role_probes/on_policy_evaluation/results.sbatch",
+        "experiment_reports/training_against_role_probes/on_policy/appworld270_batch16",
+        "swe_bench"
+      ],
+      "script_sha256": "94079523ae2bc2e5925537a4aa25342174df707b713fd7968014796bb96f15f0"
+    }
+  },
+  "protocol": {
+    "appworld_tasks": 168,
+    "retail_tasks": 114,
+    "swe_tasks": 500,
+    "swe": "swe_inspect_generous_v1",
+    "probe": "fresh layer 12; 250 passages x 5 roles",
+    "scoring": "whole histories; explicit native-context exclusions"
+  },
+  "parser_training_manifest": "harmony_jobs.json"
+}

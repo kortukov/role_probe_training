@@ -1,0 +1,135 @@
+{
+  "replaces": "1758052",
+  "segments": [
+    {
+      "job_id": "1798633",
+      "start_step": 2,
+      "stop_after": 26,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to26",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00002",
+        "--stop-after",
+        "26"
+      ]
+    },
+    {
+      "job_id": "1798634",
+      "start_step": 26,
+      "stop_after": 50,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to50",
+        "--dependency=afterok:1798633",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00026",
+        "--stop-after",
+        "50"
+      ]
+    },
+    {
+      "job_id": "1798635",
+      "start_step": 50,
+      "stop_after": 74,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to74",
+        "--dependency=afterok:1798634",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00050",
+        "--stop-after",
+        "74"
+      ]
+    },
+    {
+      "job_id": "1798636",
+      "start_step": 74,
+      "stop_after": 98,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to98",
+        "--dependency=afterok:1798635",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00074",
+        "--stop-after",
+        "98"
+      ]
+    },
+    {
+      "job_id": "1798637",
+      "start_step": 98,
+      "stop_after": 122,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to122",
+        "--dependency=afterok:1798636",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00098",
+        "--stop-after",
+        "122"
+      ]
+    },
+    {
+      "job_id": "1798638",
+      "start_step": 122,
+      "stop_after": 146,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to146",
+        "--dependency=afterok:1798637",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00122",
+        "--stop-after",
+        "146"
+      ]
+    },
+    {
+      "job_id": "1798639",
+      "start_step": 146,
+      "stop_after": 169,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--export=ALL",
+        "--nice=1000",
+        "--job-name=role-onpolicy-2700-to169",
+        "--dependency=afterok:1798638",
+        "src/experiments/training_against_role_probes/on_policy_segmented/train.sbatch",
+        "--resume",
+        "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocated_epoch1/checkpoints/step00146",
+        "--stop-after",
+        "169"
+      ]
+    }
+  ],
+  "environment": {
+    "COLOCATION_CHECK_DIR": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocation/1691925"
+  },
+  "walltime_per_segment_hours": 24,
+  "reason": "Two-update correctness/resume checks passed; remaining-runtime gate required segmented continuation. Explicit checkpoint-specific migration applies mixed-channel serving fix."
+}

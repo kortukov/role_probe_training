@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 
 from role_probe_training.on_policy.data import schedule, validate_requests
-from role_probe_training.on_policy.objective import reverse_kl_sum
+from role_probe_training.on_policy.objective import reverse_kl_sum, reverse_kl_sums
 from role_probe_training.on_policy.serving import parse_completion, template_messages
 
 
@@ -39,7 +39,7 @@ def main():
     torch.manual_seed(1)
     backbone = Backbone()
     head = torch.nn.Linear(7, 11, bias=False).requires_grad_(False)
-    runtime = SimpleNamespace(model=backbone, device='cpu', hidden=None,
+    runtime = SimpleNamespace(model=backbone, device='cpu', hidden=None, pad_id=0,
         base=SimpleNamespace(model=backbone, lm_head=head,
                              config=SimpleNamespace(max_position_embeddings=128)))
     request = dict(prompt_ids=[1, 2, 3], completion_ids=[4, 5])
@@ -60,6 +60,24 @@ def main():
     torch.testing.assert_close(actual, expected)
     torch.testing.assert_close(gradient, backbone.adapter.grad)
     assert head.weight.grad is None and backbone.embedding.weight.grad is None
+    # Compare unequal-length batched replay to separate explicit causal passes.
+    requests = [request, dict(prompt_ids=[2], completion_ids=[3, 4])]
+    backbone.adapter.grad = None
+    batched = reverse_kl_sums(runtime, requests, chunk_size=2)
+    batched.backward()
+    batched_gradient = backbone.adapter.grad.clone()
+    backbone.adapter.grad = None
+    separate = torch.tensor(0.)
+    for item in requests:
+        sequence = torch.tensor([item['prompt_ids'] + item['completion_ids']])
+        start = len(item['prompt_ids']) - 1
+        with backbone.disable_adapter(), torch.no_grad():
+            log_p = head(backbone(sequence).last_hidden_state[:, start:-1]).log_softmax(-1)
+        log_q = head(backbone(sequence).last_hidden_state[:, start:-1]).log_softmax(-1)
+        separate = separate + (log_q.exp() * (log_q - log_p)).sum()
+    separate.backward()
+    torch.testing.assert_close(batched, separate)
+    torch.testing.assert_close(batched_gradient, backbone.adapter.grad)
     # Numerical check independently covers the weighting derivative through q.
     original = backbone.adapter.detach().clone()
     epsilon = .001

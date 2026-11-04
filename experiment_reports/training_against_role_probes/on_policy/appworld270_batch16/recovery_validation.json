@@ -1,0 +1,13 @@
+{
+  "cause": "Re-executing AppWorld tools changed Python set order and object addresses in generation context.",
+  "tests": [
+    "Exact same-policy cached trajectories and generation tokens staged without tool execution",
+    "Real collector successfully assembled all cached batch-16/full-run episodes",
+    "Changed-cache hash rejected",
+    "Original task schedules and checkpoint provenance verified",
+    "Real HTTP context limit produces explicit stop, zero generation, no truncation",
+    "Inspect tool loop terminates normally on context limit; next episode remains usable",
+    "All training/evaluation Slurm dependencies and final checkpoint paths verified"
+  ],
+  "gpu_validation": "Replacement jobs submitted; successful new optimizer updates not yet verified"
+}
