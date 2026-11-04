@@ -1,0 +1,34 @@
+{
+  "appworld_test": {
+    "benchmark": "appworld_test",
+    "samples": 168,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 0,
+    "metrics": {
+      "appworld_success": {
+        "successes": 50,
+        "scored": 168,
+        "total": 168,
+        "success_rate": 0.2976190476190476
+      }
+    },
+    "input_sha256": "bf9faa302967defa13c2c12f8a13d2e5b206f31ce5699e43625487da9006bed0"
+  },
+  "tau2_retail": {
+    "benchmark": "tau2_retail",
+    "samples": 114,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 0,
+    "metrics": {
+      "retail_scorer": {
+        "successes": 62,
+        "scored": 114,
+        "total": 114,
+        "success_rate": 0.543859649122807
+      }
+    },
+    "input_sha256": "deb5f97dd01070872ee008135e738ed6513297225a89b06f2261d7755a07f8b8"
+  }
+}

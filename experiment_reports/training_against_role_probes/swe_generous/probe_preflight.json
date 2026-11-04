@@ -1,0 +1,47 @@
+{
+  "checked_utc": "2026-10-28T22:17:17.857431+00:00",
+  "models": [
+    {
+      "model": "AppWorld-trained",
+      "adapter_sha256": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
+      "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+      "metadata": "experiment_reports/training_against_role_probes/post_training/probes/layer_12.json",
+      "validated": true
+    },
+    {
+      "model": "ASTRA-trained",
+      "adapter_sha256": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
+      "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b",
+      "metadata": "experiment_reports/training_against_role_probes/astra_sft_1k/post_training/probes/layer_12.json",
+      "validated": true
+    },
+    {
+      "model": "DepthBench-trained",
+      "adapter_sha256": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
+      "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+      "metadata": "experiment_reports/training_against_role_probes/depthbench/post_training/probes/layer_12.json",
+      "validated": true
+    },
+    {
+      "model": "AppWorld + agentic KL (800)",
+      "adapter_sha256": "b7b11ef147d19b090ceab6fa3de267504554ca152f995febaa0f6df1ca4ae038",
+      "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50",
+      "metadata": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/post_training/probes/layer_12.json",
+      "validated": true
+    },
+    {
+      "model": "AppWorld + same-batch KL",
+      "adapter_sha256": "bf5def61b31ae13c7dcee646b39c38f3b47bfa3c00036e8742d0dfe4301cfcea",
+      "probe_sha256": "3a97907fa11bbe8dc7bfb9771d20c906b5d785ed842d1ff595f9b492c32f044b",
+      "metadata": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/post_training/probes/layer_12.json",
+      "validated": true
+    },
+    {
+      "model": "AppWorld + same-batch KL (27,000)",
+      "adapter_sha256": "43969311ed93e3b15b1859906a774faa5933303e313976214cc1a9545048fa2f",
+      "probe_sha256": "61c659410527a3da47dcee2de55bd4013e337d45907e1644aec3a8195e6c7ff7",
+      "metadata": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/post_training/probes/layer_12.json",
+      "validated": true
+    }
+  ]
+}

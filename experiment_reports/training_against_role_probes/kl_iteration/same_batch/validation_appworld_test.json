@@ -1,0 +1,9 @@
+[
+  {
+    "benchmark": "appworld_test",
+    "histories": 168,
+    "unscorable": 0,
+    "all_saved_predictions_match": true,
+    "exact_cohort_coverage": true
+  }
+]

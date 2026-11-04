@@ -4,44 +4,1803 @@
     {
       "model": "Base",
       "root": "experiment_reports/training_against_role_probes/base_model",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 2,
+        "export_errors": 0,
+        "limited_samples": 1,
+        "samples_with_model_context_stops": 21,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 254.0,
+            "scored": 498,
+            "total": 500,
+            "success_rate": 0.508
+          }
+        },
+        "input_sha256": "8db2231594fb1a20797acb88582493974d64cc19d75d4dc47f9f5700009cdf9b",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "1db6ca4d6589f2286654a3c36853056b07f529937514329c5ae40f6489fd60ae"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "bfba5543fed94a7675af5c0e0b8910dd96c730c5236ac3c81764dd494e1ad811"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "71ced8e53809aea1e152cdd4500b9ca449901198fb423c770ac4c79851a11c5c"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/base_model/runs/swe_inspect_generous/1691740/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "642d9aa647f00272282c706ba874b0038c0124d05eff0b53d42565636047c864"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200,
+          "concurrency": 4
+        }
+      },
+      "probe": {
+        "accuracy": 0.41169128183058823,
+        "macro_recall": 0.4308905855952222,
+        "per_role_recall": [
+          0.009259259259259259,
+          0.8311975686747555,
+          0.44873208952402555,
+          0.8458635036148229,
+          0.019400506903247856
+        ],
+        "mean_true_role_probability": [
+          0.034737036539194445,
+          0.8040776139886288,
+          0.4293771111071102,
+          0.8320192009205748,
+          0.030590588101718972
+        ],
+        "mean_trajectory_accuracy": 0.3875497908744723,
+        "confusion_counts": [
+          [
+            962,
+            23088,
+            17797,
+            0,
+            62049
+          ],
+          [
+            1269,
+            212233,
+            3453,
+            35077,
+            3302
+          ],
+          [
+            6607,
+            32362,
+            949553,
+            1095147,
+            32411
+          ],
+          [
+            21450,
+            12509,
+            1824823,
+            10552752,
+            64181
+          ],
+          [
+            2673551,
+            2451657,
+            1856946,
+            6916773,
+            274981
+          ]
+        ],
+        "probe_sha256": "45b97daf451f3d559351a027d6a8a94715b1d309884e463702b9178dea8b8dda",
+        "layers": {
+          "4": {
+            "accuracy": 0.4803018774326451,
+            "macro_recall": 0.3212716478672963,
+            "per_role_recall": [
+              0.013888888888888888,
+              0.5578027211417202,
+              0.0678249404559374,
+              0.0015058054788843766,
+              0.9653358833710505
+            ],
+            "mean_true_role_probability": [
+              0.06648951753164443,
+              0.4501115313229214,
+              0.10881816869213705,
+              0.032972657566760974,
+              0.9037443420353183
+            ],
+            "mean_trajectory_accuracy": 0.49124783079529183,
+            "confusion_counts": [
+              [
+                1443,
+                5772,
+                2886,
+                11063,
+                82732
+              ],
+              [
+                5474,
+                142426,
+                4726,
+                7511,
+                95197
+              ],
+              [
+                247,
+                8621,
+                143523,
+                8502,
+                1955187
+              ],
+              [
+                1425,
+                3491,
+                64048,
+                18786,
+                12387965
+              ],
+              [
+                62241,
+                396310,
+                26659,
+                6116,
+                13682582
+              ]
+            ],
+            "probe_sha256": "c1200ea547688d3d99f1f6d4ae8d86b3cf2751f8086ceaa55a390f999e56aabf"
+          },
+          "8": {
+            "accuracy": 0.28695187041288645,
+            "macro_recall": 0.4396714702864017,
+            "per_role_recall": [
+              0.046296296296296294,
+              0.8385017271495375,
+              0.7998142792332993,
+              0.4921113539384316,
+              0.021633694814443553
+            ],
+            "mean_true_role_probability": [
+              0.08676481363618271,
+              0.8246951551050139,
+              0.7528075044911565,
+              0.4840736352407212,
+              0.03198779513882429
+            ],
+            "mean_trajectory_accuracy": 0.25947243077682997,
+            "confusion_counts": [
+              [
+                4810,
+                50505,
+                25012,
+                0,
+                23569
+              ],
+              [
+                927,
+                214098,
+                2821,
+                34904,
+                2584
+              ],
+              [
+                11403,
+                16077,
+                1692471,
+                336131,
+                59998
+              ],
+              [
+                101972,
+                10615,
+                6033636,
+                6139441,
+                190051
+              ],
+              [
+                5793735,
+                3514515,
+                1084587,
+                3474437,
+                306634
+              ]
+            ],
+            "probe_sha256": "1b645505d42cc66386bb2f9386dbfae164e312917d4a0c7a1f6622897e3d762c"
+          },
+          "12": {
+            "accuracy": 0.41169128183058823,
+            "macro_recall": 0.4308905855952222,
+            "per_role_recall": [
+              0.009259259259259259,
+              0.8311975686747555,
+              0.44873208952402555,
+              0.8458635036148229,
+              0.019400506903247856
+            ],
+            "mean_true_role_probability": [
+              0.034737036539194445,
+              0.8040776139886288,
+              0.4293771111071102,
+              0.8320192009205748,
+              0.030590588101718972
+            ],
+            "mean_trajectory_accuracy": 0.3875497908744723,
+            "confusion_counts": [
+              [
+                962,
+                23088,
+                17797,
+                0,
+                62049
+              ],
+              [
+                1269,
+                212233,
+                3453,
+                35077,
+                3302
+              ],
+              [
+                6607,
+                32362,
+                949553,
+                1095147,
+                32411
+              ],
+              [
+                21450,
+                12509,
+                1824823,
+                10552752,
+                64181
+              ],
+              [
+                2673551,
+                2451657,
+                1856946,
+                6916773,
+                274981
+              ]
+            ],
+            "probe_sha256": "45b97daf451f3d559351a027d6a8a94715b1d309884e463702b9178dea8b8dda"
+          },
+          "16": {
+            "accuracy": 0.3357265062206323,
+            "macro_recall": 0.3769487932064408,
+            "per_role_recall": [
+              0.032407407407407406,
+              0.8187902903647771,
+              0.3356735095081471,
+              0.6102464668357686,
+              0.08762629191610387
+            ],
+            "mean_true_role_probability": [
+              0.04230189026587684,
+              0.8063864167080963,
+              0.3385964025890477,
+              0.5936147650803149,
+              0.09627874136004395
+            ],
+            "mean_trajectory_accuracy": 0.31296582175498217,
+            "confusion_counts": [
+              [
+                3367,
+                68783,
+                0,
+                481,
+                31265
+              ],
+              [
+                1879,
+                209065,
+                2014,
+                35987,
+                6389
+              ],
+              [
+                85301,
+                19449,
+                710312,
+                501692,
+                799326
+              ],
+              [
+                312740,
+                26953,
+                2435110,
+                7613261,
+                2087651
+              ],
+              [
+                4961216,
+                1704582,
+                590165,
+                5675938,
+                1242007
+              ]
+            ],
+            "probe_sha256": "5a15de1b4dfe76cff699026c7ef138155c3a1ddb08be3ca74f687fffc8156b59"
+          },
+          "20": {
+            "accuracy": 0.31758538294319855,
+            "macro_recall": 0.33727945280117,
+            "per_role_recall": [
+              0.0,
+              0.7917472800332114,
+              0.24103483800234396,
+              0.42800609023210295,
+              0.22560905573819162
+            ],
+            "mean_true_role_probability": [
+              0.006525426273402574,
+              0.7753120917121317,
+              0.25241006051473275,
+              0.41464322008337606,
+              0.22847243715464874
+            ],
+            "mean_trajectory_accuracy": 0.3034484197584244,
+            "confusion_counts": [
+              [
+                0,
+                81289,
+                1924,
+                0,
+                20683
+              ],
+              [
+                1991,
+                202160,
+                8196,
+                36560,
+                6427
+              ],
+              [
+                66384,
+                145065,
+                510049,
+                417894,
+                976688
+              ],
+              [
+                281592,
+                778127,
+                1895722,
+                5339682,
+                4180592
+              ],
+              [
+                2929856,
+                2047365,
+                2743541,
+                3255384,
+                3197762
+              ]
+            ],
+            "probe_sha256": "a64fcad5d23472342bde4f1ec9c36798822dbbcca642604e00c690bba8448b38"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 481,
+        "excluded_trajectories": [
+          {
+            "trajectory_id": "swe_bench/mwaskom__seaborn-3187",
+            "tokens": 132671,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pydata__xarray-7393",
+            "tokens": 135905,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-8638",
+            "tokens": 133233,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-13878",
+            "tokens": 138518,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-15128",
+            "tokens": 134059,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pylint-dev__pylint-6528",
+            "tokens": 131282,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/scikit-learn__scikit-learn-13496",
+            "tokens": 131298,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-10323",
+            "tokens": 131867,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-8721",
+            "tokens": 131679,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-14248",
+            "tokens": 133132,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-17084",
+            "tokens": 140995,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/matplotlib__matplotlib-25775",
+            "tokens": 136205,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-8548",
+            "tokens": 170677,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/astropy__astropy-14598",
+            "tokens": 131276,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-15280",
+            "tokens": 132349,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-16032",
+            "tokens": 153950,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pylint-dev__pylint-4661",
+            "tokens": 133889,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-11510",
+            "tokens": 131343,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-13551",
+            "tokens": 131651,
+            "reason": "exceeds_native_context"
+          }
+        ],
+        "context_limit": 131072,
+        "input_sha256": "8db2231594fb1a20797acb88582493974d64cc19d75d4dc47f9f5700009cdf9b",
+        "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     },
     {
       "model": "AppWorld-trained",
       "root": "experiment_reports/training_against_role_probes",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 0,
+        "export_errors": 0,
+        "limited_samples": 0,
+        "samples_with_model_context_stops": 0,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 22.0,
+            "scored": 500,
+            "total": 500,
+            "success_rate": 0.044
+          }
+        },
+        "input_sha256": "f97f4f13b0e2e52996ac26a1fb4cc91c27fa5641993aea0aedabb920e71e75e4",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_inspect_generous/1691743/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "dfd132c1482fd39ac2e54f206d16e87d0282153e9b42009dd2a4edccd6f2275e"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_inspect_generous/1691743/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "25177a90962e9167eedbbf7371c422e09d84a274a27f07e6c133a1d58f088a96"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_inspect_generous/1691743/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "e8d627576f301d7363027a5bade53eeac6e38d857f4984ea5ce1941842d9d7d2"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/runs/swe_inspect_generous/1691743/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "98a64fdcf6456c7752ae0301afa0c1337cf08ef1ab0e06a913408de8dbdf9bcb"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200,
+          "concurrency": 4
+        }
+      },
+      "probe": {
+        "accuracy": 0.8754939384413379,
+        "macro_recall": 0.8154494764365074,
+        "per_role_recall": [
+          0.39814814814814814,
+          0.9379015863425945,
+          0.9800122799281551,
+          0.9063499487626598,
+          0.8548354190009791
+        ],
+        "mean_true_role_probability": [
+          0.4095150160501362,
+          0.928243129131507,
+          0.9730551732252049,
+          0.888688624152374,
+          0.8396749401743824
+        ],
+        "mean_trajectory_accuracy": 0.8707855679215649,
+        "confusion_counts": [
+          [
+            43000,
+            54000,
+            10500,
+            0,
+            500
+          ],
+          [
+            600,
+            229754,
+            3660,
+            3611,
+            7341
+          ],
+          [
+            120,
+            16262,
+            940115,
+            620,
+            2172
+          ],
+          [
+            260,
+            134,
+            31088,
+            1796343,
+            154128
+          ],
+          [
+            132306,
+            610374,
+            136229,
+            523,
+            5178740
+          ]
+        ],
+        "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc",
+        "layers": {
+          "12": {
+            "accuracy": 0.8754939384413379,
+            "macro_recall": 0.8154494764365074,
+            "per_role_recall": [
+              0.39814814814814814,
+              0.9379015863425945,
+              0.9800122799281551,
+              0.9063499487626598,
+              0.8548354190009791
+            ],
+            "mean_true_role_probability": [
+              0.4095150160501362,
+              0.928243129131507,
+              0.9730551732252049,
+              0.888688624152374,
+              0.8396749401743824
+            ],
+            "mean_trajectory_accuracy": 0.8707855679215649,
+            "confusion_counts": [
+              [
+                43000,
+                54000,
+                10500,
+                0,
+                500
+              ],
+              [
+                600,
+                229754,
+                3660,
+                3611,
+                7341
+              ],
+              [
+                120,
+                16262,
+                940115,
+                620,
+                2172
+              ],
+              [
+                260,
+                134,
+                31088,
+                1796343,
+                154128
+              ],
+              [
+                132306,
+                610374,
+                136229,
+                523,
+                5178740
+              ]
+            ],
+            "probe_sha256": "f14633dc83da193515153e6c17386d7f3b19c2cea9cbb9250b36468db32698fc"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 500,
+        "excluded_trajectories": [],
+        "context_limit": 131072,
+        "input_sha256": "f97f4f13b0e2e52996ac26a1fb4cc91c27fa5641993aea0aedabb920e71e75e4",
+        "model_revision": "a3813ea83eb41797ea0c51a4765533ba66524efb8d456ad66e9ff7ef50098d28",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     },
     {
       "model": "ASTRA-trained",
       "root": "experiment_reports/training_against_role_probes/astra_sft_1k",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 1,
+        "export_errors": 0,
+        "limited_samples": 0,
+        "samples_with_model_context_stops": 4,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 133.0,
+            "scored": 499,
+            "total": 500,
+            "success_rate": 0.266
+          }
+        },
+        "input_sha256": "de395680b88c8cf90211951dcc5429d0b12322542988b70bde9a1932533688f4",
+        "scheduling": {
+          "concurrency_by_shard": {
+            "0": 8,
+            "1": 8,
+            "2": 16,
+            "3": 16
+          }
+        },
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "142a48b2cf192fd4510c55673e94e42a1b642a6ee628b324b7fc325fe8f57466"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726408/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "78812eae81d64d3fa483b8fe05abf0d9f89549b3ee5d475dccad0b0e2d3bb024"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726409/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "e49d1a3b38cde239ec9138ffc32dc00f1c1dcb027adacfda95b471d9ffd32b1a"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/astra_sft_1k/runs/swe_inspect_generous/1726409/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "f2c52b715d7f6b7402afd3032c1ed71ea15a8a3076d5b78ad1245d4f54bdf4d4"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200
+        }
+      },
+      "probe": {
+        "accuracy": 0.6034136125367487,
+        "macro_recall": 0.6031281782330149,
+        "per_role_recall": [
+          0.18981481481481483,
+          0.8479507435495153,
+          0.946730928226729,
+          0.36921650260525046,
+          0.661927901968765
+        ],
+        "mean_true_role_probability": [
+          0.21226425658943737,
+          0.8308568786714597,
+          0.9329526473570178,
+          0.3742947250192538,
+          0.6390903274145543
+        ],
+        "mean_trajectory_accuracy": 0.6339087716956445,
+        "confusion_counts": [
+          [
+            20418,
+            17430,
+            3486,
+            0,
+            66234
+          ],
+          [
+            1669,
+            214568,
+            8989,
+            13623,
+            14194
+          ],
+          [
+            1744,
+            11704,
+            2758506,
+            140959,
+            804
+          ],
+          [
+            2635,
+            1772,
+            4849531,
+            2873447,
+            55168
+          ],
+          [
+            1118935,
+            142475,
+            2757511,
+            631662,
+            9105604
+          ]
+        ],
+        "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b",
+        "layers": {
+          "12": {
+            "accuracy": 0.6034136125367487,
+            "macro_recall": 0.6031281782330149,
+            "per_role_recall": [
+              0.18981481481481483,
+              0.8479507435495153,
+              0.946730928226729,
+              0.36921650260525046,
+              0.661927901968765
+            ],
+            "mean_true_role_probability": [
+              0.21226425658943737,
+              0.8308568786714597,
+              0.9329526473570178,
+              0.3742947250192538,
+              0.6390903274145543
+            ],
+            "mean_trajectory_accuracy": 0.6339087716956445,
+            "confusion_counts": [
+              [
+                20418,
+                17430,
+                3486,
+                0,
+                66234
+              ],
+              [
+                1669,
+                214568,
+                8989,
+                13623,
+                14194
+              ],
+              [
+                1744,
+                11704,
+                2758506,
+                140959,
+                804
+              ],
+              [
+                2635,
+                1772,
+                4849531,
+                2873447,
+                55168
+              ],
+              [
+                1118935,
+                142475,
+                2757511,
+                631662,
+                9105604
+              ]
+            ],
+            "probe_sha256": "4ec112236da990642c024f598829cbb3b323681dee6c53bfe3b62bac24f02f2b"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 498,
+        "excluded_trajectories": [
+          {
+            "trajectory_id": "swe_bench/matplotlib__matplotlib-26342",
+            "tokens": 135853,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-14155",
+            "tokens": 144434,
+            "reason": "exceeds_native_context"
+          }
+        ],
+        "context_limit": 131072,
+        "input_sha256": "de395680b88c8cf90211951dcc5429d0b12322542988b70bde9a1932533688f4",
+        "model_revision": "a75ce8608997973a50bab5d51d6cb454e7f460d5341dbb2e7eb02e2f49acb175",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     },
     {
       "model": "DepthBench-trained",
       "root": "experiment_reports/training_against_role_probes/depthbench",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 0,
+        "export_errors": 0,
+        "limited_samples": 0,
+        "samples_with_model_context_stops": 2,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 71.0,
+            "scored": 500,
+            "total": 500,
+            "success_rate": 0.142
+          }
+        },
+        "input_sha256": "85497af84b81f6faa0f15916a7e1e0ce38cc1920bedde4109cac2f7c22e507bd",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_inspect_generous/1691749/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "d2d0a378e7e9a1b304b55528a8d9a9c44f4648d8ce2ffb4679c9ee8f29de7e06"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_inspect_generous/1691749/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "413a05c788a3c7358a3f3fe8f3c45674acb403ae3435801825d8df1b6a130c72"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_inspect_generous/1691749/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "1de595f8620e6a102f5ec4117c8e7e0d66f27d18e7af1192a2aeb30bc68c9c00"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/depthbench/runs/swe_inspect_generous/1691749/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "04a6faf3b2e09a55e6e43d8c86b1a402cbae0e148ae8e0befcdac0b466f511b0"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200,
+          "concurrency": 4
+        }
+      },
+      "probe": {
+        "accuracy": 0.4835854020165495,
+        "macro_recall": 0.6528207282457454,
+        "per_role_recall": [
+          0.6064814814814815,
+          0.8919826184491364,
+          0.9732060612169,
+          0.4957767392184352,
+          0.29665674086277377
+        ],
+        "mean_true_role_probability": [
+          0.5617857357869475,
+          0.8713633894578433,
+          0.9646103540571883,
+          0.5003116248145153,
+          0.29958497652725474
+        ],
+        "mean_trajectory_accuracy": 0.5021584077776555,
+        "confusion_counts": [
+          [
+            65238,
+            5976,
+            19422,
+            0,
+            16932
+          ],
+          [
+            2956,
+            221077,
+            10823,
+            6655,
+            6338
+          ],
+          [
+            674,
+            20533,
+            2771250,
+            50651,
+            4439
+          ],
+          [
+            532,
+            1249,
+            1670441,
+            1734231,
+            91555
+          ],
+          [
+            587278,
+            2351206,
+            2501370,
+            397127,
+            2461927
+          ]
+        ],
+        "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303",
+        "layers": {
+          "12": {
+            "accuracy": 0.4835854020165495,
+            "macro_recall": 0.6528207282457454,
+            "per_role_recall": [
+              0.6064814814814815,
+              0.8919826184491364,
+              0.9732060612169,
+              0.4957767392184352,
+              0.29665674086277377
+            ],
+            "mean_true_role_probability": [
+              0.5617857357869475,
+              0.8713633894578433,
+              0.9646103540571883,
+              0.5003116248145153,
+              0.29958497652725474
+            ],
+            "mean_trajectory_accuracy": 0.5021584077776555,
+            "confusion_counts": [
+              [
+                65238,
+                5976,
+                19422,
+                0,
+                16932
+              ],
+              [
+                2956,
+                221077,
+                10823,
+                6655,
+                6338
+              ],
+              [
+                674,
+                20533,
+                2771250,
+                50651,
+                4439
+              ],
+              [
+                532,
+                1249,
+                1670441,
+                1734231,
+                91555
+              ],
+              [
+                587278,
+                2351206,
+                2501370,
+                397127,
+                2461927
+              ]
+            ],
+            "probe_sha256": "0bbcf4fd5bf69dea8b0f79583e572be76585c9894a25b6c1d075281ddfe1d303"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 498,
+        "excluded_trajectories": [
+          {
+            "trajectory_id": "swe_bench/psf__requests-1724",
+            "tokens": 131231,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-17318",
+            "tokens": 143235,
+            "reason": "exceeds_native_context"
+          }
+        ],
+        "context_limit": 131072,
+        "input_sha256": "85497af84b81f6faa0f15916a7e1e0ce38cc1920bedde4109cac2f7c22e507bd",
+        "model_revision": "7172e4d8fe350702fa6b37c072ce9ef420813b90edffc321e3439d950e69ceba",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     },
     {
       "model": "AppWorld + agentic KL (800)",
       "root": "experiment_reports/training_against_role_probes/kl_iteration/agentic800",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 0,
+        "export_errors": 0,
+        "limited_samples": 2,
+        "samples_with_model_context_stops": 8,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 241.0,
+            "scored": 500,
+            "total": 500,
+            "success_rate": 0.482
+          }
+        },
+        "input_sha256": "e15c7871acfd1f64fc0695ebb5ff79d8dfae8343b2a69fc0e17cf279136918d0",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "9695a1c1501da494e92f97fcadd943b6177ea289ab940eb4ab069d29e65d54bf"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "e3081e4028fc118dad79afb7b48f291cdf62f828a06dffef23b1ca07ad0389a8"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "735f2d0284d5fc98428ed5f0ea60cdadb9adba38d50e58e29c9c15b146418489"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/agentic800/runs/swe_inspect_generous/1691752/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "297fcc642ab4fd24332c5c987536f9c6f326af5eaebcaf6bd77c597699a81a97"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200,
+          "concurrency": 4
+        }
+      },
+      "probe": {
+        "accuracy": 0.9429182662722534,
+        "macro_recall": 0.8015633185303217,
+        "per_role_recall": [
+          0.36574074074074076,
+          0.7897702210311327,
+          0.9648183365822829,
+          0.9390061982652443,
+          0.9484810960322084
+        ],
+        "mean_true_role_probability": [
+          0.3656027671933299,
+          0.780277522242372,
+          0.95307843693191,
+          0.9235165176547602,
+          0.9302720105043447
+        ],
+        "mean_trajectory_accuracy": 0.9404735161161026,
+        "confusion_counts": [
+          [
+            38947,
+            57681,
+            6409,
+            493,
+            2958
+          ],
+          [
+            1511,
+            213065,
+            3389,
+            38034,
+            13782
+          ],
+          [
+            279,
+            22753,
+            3039418,
+            49122,
+            38677
+          ],
+          [
+            343,
+            2566,
+            256004,
+            8318439,
+            281417
+          ],
+          [
+            8616,
+            228899,
+            217944,
+            178423,
+            11669990
+          ]
+        ],
+        "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50",
+        "layers": {
+          "12": {
+            "accuracy": 0.9429182662722534,
+            "macro_recall": 0.8015633185303217,
+            "per_role_recall": [
+              0.36574074074074076,
+              0.7897702210311327,
+              0.9648183365822829,
+              0.9390061982652443,
+              0.9484810960322084
+            ],
+            "mean_true_role_probability": [
+              0.3656027671933299,
+              0.780277522242372,
+              0.95307843693191,
+              0.9235165176547602,
+              0.9302720105043447
+            ],
+            "mean_trajectory_accuracy": 0.9404735161161026,
+            "confusion_counts": [
+              [
+                38947,
+                57681,
+                6409,
+                493,
+                2958
+              ],
+              [
+                1511,
+                213065,
+                3389,
+                38034,
+                13782
+              ],
+              [
+                279,
+                22753,
+                3039418,
+                49122,
+                38677
+              ],
+              [
+                343,
+                2566,
+                256004,
+                8318439,
+                281417
+              ],
+              [
+                8616,
+                228899,
+                217944,
+                178423,
+                11669990
+              ]
+            ],
+            "probe_sha256": "156c226f9f44c136793c745ce5727b49f8d2b30883ef2ed230eb00f0f55f2d50"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 493,
+        "excluded_trajectories": [
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-20428",
+            "tokens": 132984,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-19040",
+            "tokens": 131987,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/matplotlib__matplotlib-25775",
+            "tokens": 142284,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pylint-dev__pylint-4551",
+            "tokens": 136251,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-21379",
+            "tokens": 144768,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/astropy__astropy-14598",
+            "tokens": 134945,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-15695",
+            "tokens": 136511,
+            "reason": "exceeds_native_context"
+          }
+        ],
+        "context_limit": 131072,
+        "input_sha256": "e15c7871acfd1f64fc0695ebb5ff79d8dfae8343b2a69fc0e17cf279136918d0",
+        "model_revision": "b7b11ef147d19b090ceab6fa3de267504554ca152f995febaa0f6df1ca4ae038",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     },
     {
       "model": "AppWorld + same-batch KL",
       "root": "experiment_reports/training_against_role_probes/kl_iteration/same_batch",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 0,
+        "export_errors": 0,
+        "limited_samples": 0,
+        "samples_with_model_context_stops": 13,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 243.0,
+            "scored": 500,
+            "total": 500,
+            "success_rate": 0.486
+          }
+        },
+        "input_sha256": "406226cfd7455c6fad2f0daf00f759b891bb530c51f66d026c8cdd1e8cf8123c",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "4d3c8b1bbe755742e7ff210afa4f066c86361a3e0e1b9bb8cd28323715bce872"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "78f2582fbe892b05b9cb956bd6555d2acac64d60a4fada6b13dfa9c708068c81"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "dc8f51d1c045a08f120d0371442560751ec5865874b74c40249543e68fd7bcd5"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/swe_inspect_generous/1691755/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "5c6926607ff53da506e543b9fe0757046d309eab93db3bb72ccc5e0a40a7fa90"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200,
+          "concurrency": 4
+        }
+      },
+      "probe": {
+        "accuracy": 0.9391784141599847,
+        "macro_recall": 0.7732907241345865,
+        "per_role_recall": [
+          0.37962962962962965,
+          0.6656940617063813,
+          0.9299482504566878,
+          0.9367111865513412,
+          0.9544704923288924
+        ],
+        "mean_true_role_probability": [
+          0.3763963571672893,
+          0.6579660754182972,
+          0.9136566681867709,
+          0.9193851192774632,
+          0.937124595584357
+        ],
+        "mean_trajectory_accuracy": 0.9369827303654249,
+        "confusion_counts": [
+          [
+            39770,
+            55775,
+            5335,
+            485,
+            3395
+          ],
+          [
+            1938,
+            209440,
+            5753,
+            83970,
+            13518
+          ],
+          [
+            269,
+            35139,
+            2948546,
+            82185,
+            104517
+          ],
+          [
+            343,
+            2870,
+            185154,
+            8860486,
+            410291
+          ],
+          [
+            17761,
+            264646,
+            107450,
+            197466,
+            12312509
+          ]
+        ],
+        "probe_sha256": "3a97907fa11bbe8dc7bfb9771d20c906b5d785ed842d1ff595f9b492c32f044b",
+        "layers": {
+          "12": {
+            "accuracy": 0.9391784141599847,
+            "macro_recall": 0.7732907241345865,
+            "per_role_recall": [
+              0.37962962962962965,
+              0.6656940617063813,
+              0.9299482504566878,
+              0.9367111865513412,
+              0.9544704923288924
+            ],
+            "mean_true_role_probability": [
+              0.3763963571672893,
+              0.6579660754182972,
+              0.9136566681867709,
+              0.9193851192774632,
+              0.937124595584357
+            ],
+            "mean_trajectory_accuracy": 0.9369827303654249,
+            "confusion_counts": [
+              [
+                39770,
+                55775,
+                5335,
+                485,
+                3395
+              ],
+              [
+                1938,
+                209440,
+                5753,
+                83970,
+                13518
+              ],
+              [
+                269,
+                35139,
+                2948546,
+                82185,
+                104517
+              ],
+              [
+                343,
+                2870,
+                185154,
+                8860486,
+                410291
+              ],
+              [
+                17761,
+                264646,
+                107450,
+                197466,
+                12312509
+              ]
+            ],
+            "probe_sha256": "3a97907fa11bbe8dc7bfb9771d20c906b5d785ed842d1ff595f9b492c32f044b"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 485,
+        "excluded_trajectories": [
+          {
+            "trajectory_id": "swe_bench/matplotlib__matplotlib-20488",
+            "tokens": 152904,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pydata__xarray-3095",
+            "tokens": 132007,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-15128",
+            "tokens": 131881,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pallets__flask-5014",
+            "tokens": 132967,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-14248",
+            "tokens": 131748,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pydata__xarray-6938",
+            "tokens": 132261,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pytest-dev__pytest-5787",
+            "tokens": 136190,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/scikit-learn__scikit-learn-12973",
+            "tokens": 134866,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-8548",
+            "tokens": 132586,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-13877",
+            "tokens": 131197,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/astropy__astropy-13579",
+            "tokens": 142557,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-11728",
+            "tokens": 134341,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-16454",
+            "tokens": 140530,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pylint-dev__pylint-4970",
+            "tokens": 132214,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-11510",
+            "tokens": 131859,
+            "reason": "exceeds_native_context"
+          }
+        ],
+        "context_limit": 131072,
+        "input_sha256": "406226cfd7455c6fad2f0daf00f759b891bb530c51f66d026c8cdd1e8cf8123c",
+        "model_revision": "bf5def61b31ae13c7dcee646b39c38f3b47bfa3c00036e8742d0dfe4301cfcea",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     },
     {
       "model": "AppWorld + same-batch KL (27,000)",
       "root": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000",
-      "task": null,
-      "probe": null
+      "task": {
+        "protocol": "swe_inspect_generous_v1",
+        "benchmark": "swe_bench",
+        "samples": 500,
+        "sample_errors": 1,
+        "export_errors": 0,
+        "limited_samples": 0,
+        "samples_with_model_context_stops": 12,
+        "metrics": {
+          "swe_bench_scorer": {
+            "successes": 257.0,
+            "scored": 499,
+            "total": 500,
+            "success_rate": 0.514
+          }
+        },
+        "input_sha256": "0827164a0d0f2af083cd55d0b5d5879075cdc295da1bebce2d3e2c23b6f4a71d",
+        "sources": [
+          {
+            "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard0/swe_bench/trajectories.jsonl",
+            "sha256": "cde59705dc527ca0aafe1e5130dda477407b4a4e41f565f469bf6efcc8c48fab"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard1/swe_bench/trajectories.jsonl",
+            "sha256": "fe3d8c324d0b40194e128f0087a93011e7437c0ccbe4d437a584e7844c0ab9f4"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard2/swe_bench/trajectories.jsonl",
+            "sha256": "5f42f9fe46befaa914fa1a59452085af22a2f665b5ba05b5bd7447d63295201f"
+          },
+          {
+            "path": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/swe_inspect_generous/1691764/shard3/swe_bench/trajectories.jsonl",
+            "sha256": "8bf9632a7bd2674cdc011e722797628c3989de0a86ba4a728dd18a90f27956a8"
+          }
+        ],
+        "settings": {
+          "temperature": 1.0,
+          "reasoning_effort": "high",
+          "max_tokens": 16384,
+          "message_limit": 2000,
+          "token_limit": null,
+          "time_limit": 7200,
+          "concurrency": 4
+        }
+      },
+      "probe": {
+        "accuracy": 0.9766447922780551,
+        "macro_recall": 0.8696925912866416,
+        "per_role_recall": [
+          0.8240740740740741,
+          0.5889748516201063,
+          0.9800851795062964,
+          0.9575147217113775,
+          0.997814129521354
+        ],
+        "mean_true_role_probability": [
+          0.7742553517282768,
+          0.5651189686931241,
+          0.9677978492568817,
+          0.9381879417450547,
+          0.9950950057716987
+        ],
+        "mean_trajectory_accuracy": 0.9778107415186211,
+        "confusion_counts": [
+          [
+            86330,
+            16005,
+            970,
+            0,
+            1455
+          ],
+          [
+            34129,
+            171973,
+            1358,
+            64900,
+            19627
+          ],
+          [
+            6998,
+            42978,
+            4553660,
+            39774,
+            2778
+          ],
+          [
+            121634,
+            73722,
+            99744,
+            8622647,
+            87490
+          ],
+          [
+            13203,
+            6740,
+            6361,
+            3172,
+            13455312
+          ]
+        ],
+        "probe_sha256": "61c659410527a3da47dcee2de55bd4013e337d45907e1644aec3a8195e6c7ff7",
+        "layers": {
+          "12": {
+            "accuracy": 0.9766447922780551,
+            "macro_recall": 0.8696925912866416,
+            "per_role_recall": [
+              0.8240740740740741,
+              0.5889748516201063,
+              0.9800851795062964,
+              0.9575147217113775,
+              0.997814129521354
+            ],
+            "mean_true_role_probability": [
+              0.7742553517282768,
+              0.5651189686931241,
+              0.9677978492568817,
+              0.9381879417450547,
+              0.9950950057716987
+            ],
+            "mean_trajectory_accuracy": 0.9778107415186211,
+            "confusion_counts": [
+              [
+                86330,
+                16005,
+                970,
+                0,
+                1455
+              ],
+              [
+                34129,
+                171973,
+                1358,
+                64900,
+                19627
+              ],
+              [
+                6998,
+                42978,
+                4553660,
+                39774,
+                2778
+              ],
+              [
+                121634,
+                73722,
+                99744,
+                8622647,
+                87490
+              ],
+              [
+                13203,
+                6740,
+                6361,
+                3172,
+                13455312
+              ]
+            ],
+            "probe_sha256": "61c659410527a3da47dcee2de55bd4013e337d45907e1644aec3a8195e6c7ff7"
+          }
+        },
+        "roles": [
+          "system",
+          "user",
+          "cot",
+          "assistant",
+          "tool"
+        ],
+        "trajectories": 500,
+        "scored_trajectories": 485,
+        "excluded_trajectories": [
+          {
+            "trajectory_id": "swe_bench/astropy__astropy-13398",
+            "tokens": 131278,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/matplotlib__matplotlib-26208",
+            "tokens": 144313,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pylint-dev__pylint-4604",
+            "tokens": 138510,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-7462",
+            "tokens": 163390,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sphinx-doc__sphinx-8595",
+            "tokens": 133325,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-20428",
+            "tokens": 137484,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pallets__flask-5014",
+            "tokens": 140999,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/pylint-dev__pylint-6386",
+            "tokens": 141755,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-19040",
+            "tokens": 141165,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-11477",
+            "tokens": 131269,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/astropy__astropy-14598",
+            "tokens": 134816,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-15695",
+            "tokens": 136094,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/django__django-16950",
+            "tokens": 134711,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/matplotlib__matplotlib-24870",
+            "tokens": 136950,
+            "reason": "exceeds_native_context"
+          },
+          {
+            "trajectory_id": "swe_bench/sympy__sympy-18763",
+            "tokens": 133683,
+            "reason": "exceeds_native_context"
+          }
+        ],
+        "context_limit": 131072,
+        "input_sha256": "0827164a0d0f2af083cd55d0b5d5879075cdc295da1bebce2d3e2c23b6f4a71d",
+        "model_revision": "43969311ed93e3b15b1859906a774faa5933303e313976214cc1a9545048fa2f",
+        "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+        "overlength_policy": "exclude"
+      }
     }
   ]
 }

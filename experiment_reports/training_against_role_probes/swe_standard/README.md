@@ -1,4 +1,4 @@
-> **Superseded:** The 30-message budget was rejected for the intended comparison. See the [seven-model evaluation with restored budget](../swe_generous/README.md). Saved attempts are retained separately.
+> **Superseded:** This 30-message cohort was stopped because its budget was inadequate for the intended comparison. See the [completed seven-model comparison](../swe_generous/README.md). Saved attempts and diagnostic measurements remain separate.
 
 # Matched SWE-bench utility comparison
 
@@ -18,7 +18,7 @@ Residual test-environment and offline-network limitations can depress scores. Th
 
 | Model | Task success | Change from base | Evaluation errors | Role accuracy | Role coverage |
 |---|---:|---:|---:|---:|---:|
-| Base | Pending | — | — | Pending | — |
+| Base | 2.8% | +0.0 | 1 | 16.6% | 500/500 |
 | AppWorld-trained | Pending | — | — | Pending | — |
 | ASTRA-trained | Pending | — | — | Pending | — |
 | DepthBench-trained | Pending | — | — | Pending | — |
@@ -29,6 +29,8 @@ Only this matched cohort enters the comparison. Earlier baseline diagnostics and
 
 ## Interpretation
 
-Collection is in progress. No conclusion about the matched utility change is available yet.
+This cohort was stopped; its base-only measurements do not support a trained-model comparison.
 
 [Role breakdowns and coverage](APPENDIX.md). [Reproduction and configuration](RUNNING.md).
+
+This30-message cohort was stopped at user request because its budget was inadequate for the intended comparison. See [restored-budget evaluation](../swe_generous/README.md). All original attempts are retained.

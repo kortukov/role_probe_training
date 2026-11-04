@@ -19,7 +19,7 @@
       "label": "ASTRA-trained",
       "root": "experiment_reports/training_against_role_probes/astra_sft_1k",
       "collection_job": "1726408",
-      "assembly_job": "1726410",
+      "assembly_job": "1816791",
       "score_job": "1691748",
       "collection_jobs": [
         "1726408",
@@ -96,38 +96,9 @@
   },
   "protocol": "swe_inspect_generous_v1",
   "created_utc": "2026-10-28T22:12:23.790700+00:00",
-  "status": "Accelerated seven-model production: all models eligible independently, four shards/model; ASTRA disjoint concurrency8/16 experiment",
+  "status": "complete",
   "policy": "All500 attempts; high reasoning; stock Inspect agent/scorer with general environment fixes; no score target, no outcome-selected regeneration; whole-history probes; separate from30-message and historical diagnostic cohorts",
-  "watch_jobs": [
-    "1691742",
-    "1691743",
-    "1691744",
-    "1691745",
-    "1691748",
-    "1691749",
-    "1691750",
-    "1691751",
-    "1691752",
-    "1691753",
-    "1691754",
-    "1691755",
-    "1691756",
-    "1691757",
-    "1691764",
-    "1691765",
-    "1691766",
-    "1726408",
-    "1726409",
-    "1726410",
-    "1726411",
-    "1726412",
-    "1726413",
-    "1691740_0",
-    "1691740_2",
-    "1691740_3",
-    "1737601",
-    "1737602"
-  ],
+  "watch_jobs": [],
   "source_sha256": {
     "src/experiments/training_against_role_probes/swe_generous/assemble.py": "dc35dc95fb5dbc513c348ba11836dec829a8316f4d17665f7c3ad3245b0b86ab",
     "src/experiments/training_against_role_probes/swe_generous/assemble.sbatch": "f2e1276a340a55cbe22cba415287442feccbba71c35b1f261f9853bf60648db7",
@@ -146,27 +117,28 @@
   "gate_job": "1615441",
   "gate_note": "Unchanged sandbox and scorer already passed gold/marker controls; only message budget restored",
   "task_report_job": "1726411",
-  "ready_job": "1726411",
+  "ready_job": null,
   "final_report_job": "1726412",
   "superseded_report_jobs": [
     "1691758",
     "1691759"
   ],
   "publication": {
-    "commit": "60dbc33c805ed0fb7c134dcfe8321beee89cdc5e",
-    "worktree": "/tmp/swe-generous-publication",
-    "status": "Acceleration configuration and provisional meeting snapshot published; final validated task/probe metrics pending"
+    "commit": "4d1a282847ddd0c2bf02efc9e8119dad624d1c54",
+    "worktree": "/tmp/swe-publication-oct31",
+    "status": "All seven task and role results validated and published."
   },
   "last_progress_check": {
-    "utc": "2026-10-30T06:15:45.295220+00:00",
-    "state": "Recovered OOM-marked baseline shard1 using complete validated saved exports (125 attempts,13129 generation records). Baseline299,AppWorld330,DepthBench72,agenticKL18 saved;2 known baseline scorer timeouts,0 trained sample errors. ASTRA/same-batch/27k queued."
+    "utc": "2026-11-01T11:05:48.717370+00:00",
+    "state": "COMPLETE: all seven task and whole-history role results validated and published 4d1a282847ddd0c2bf02efc9e8119dad624d1c54. 27k role accuracy97.6645%,mean conversation97.7811%,coverage485/500;15 overcontext exclusions. Input/probe/model hashes and confusion accuracy verified. Final jobs1691766/1726412 completed. Watcher retired; DO NOT rearm stale alarms. Original attempts retained; authored tables preserved."
   },
   "superseded_jobs": [
     "1691746",
     "1691747",
     "1691767",
     "1691768",
-    "1691741"
+    "1691741",
+    "1726410"
   ],
   "meeting_deadline": {
     "local": "2026-10-30T15:00:00",
@@ -191,7 +163,6 @@
       "src/experiments/training_against_role_probes/swe_generous/accelerated_v1/assemble.py": "36d336545da7fd96bf110da4f78f107652567d8c949bab19d553e3e6d3827d5d"
     }
   },
-  "meeting_snapshot_job": "1726413",
   "recovery": [
     {
       "failed_job": "1691740_1",
@@ -200,6 +171,34 @@
       "new_model_calls": 0,
       "replacement_assembly_job": "1737602",
       "status": "Validated complete original exports in1737601; no model/scorer reruns; baseline assembly replaced1737602 and probe/task-report dependencies updated"
+    },
+    {
+      "failed_job": "1726408_1",
+      "validation_job": "1816790",
+      "replacement_assembly_job": "1816791",
+      "new_model_calls": 0,
+      "status": "Validation and replacement assembly completed; all500 validated and published; probe running; no new model/scorer calls."
     }
-  ]
+  ],
+  "validated_task_results": {
+    "AppWorld-trained": "experiment_reports/training_against_role_probes/swe_generous/appworld_task_results.json",
+    "DepthBench-trained": "experiment_reports/training_against_role_probes/swe_generous/depthbench_task_results.json",
+    "Base": "experiment_reports/training_against_role_probes/swe_generous/base_task_results.json",
+    "AppWorld + agentic KL (800)": "experiment_reports/training_against_role_probes/swe_generous/agentickl_task_results.json",
+    "AppWorld + same-batch KL": "experiment_reports/training_against_role_probes/swe_generous/samebatch_task_results.json",
+    "ASTRA-trained": "experiment_reports/training_against_role_probes/swe_generous/astra_task_results.json",
+    "AppWorld + same-batch KL (27,000)": "experiment_reports/training_against_role_probes/swe_generous/samebatch27000_task_results.json"
+  },
+  "validated_role_results": {
+    "AppWorld-trained": "experiment_reports/training_against_role_probes/swe_generous/appworld_role_results.json",
+    "DepthBench-trained": "experiment_reports/training_against_role_probes/swe_generous/depthbench_role_results.json",
+    "Base": "experiment_reports/training_against_role_probes/swe_generous/base_role_results.json",
+    "AppWorld + agentic KL (800)": "experiment_reports/training_against_role_probes/swe_generous/agentickl_role_results.json",
+    "AppWorld + same-batch KL": "experiment_reports/training_against_role_probes/swe_generous/samebatch_role_results.json",
+    "ASTRA-trained": "experiment_reports/training_against_role_probes/swe_generous/astra_role_results.json",
+    "AppWorld + same-batch KL (27,000)": "experiment_reports/training_against_role_probes/swe_generous/samebatch27000_role_results.json"
+  },
+  "completed_meeting_snapshot_job": "1726413",
+  "completed_task_report_job": "1726411",
+  "completed_final_report_job": "1726412"
 }

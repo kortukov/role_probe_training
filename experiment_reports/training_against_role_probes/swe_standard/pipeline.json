@@ -1,6 +1,6 @@
 {
   "protocol": "swe_inspect_standard_v1",
-  "status": "stock Inspect gold/negative gate passed; all six collections queued; assembly/probes/report jobs chained",
+  "status": "STOPPED at user request:30-message budget invalid for intended comparison;attempts retained;replacement generous-budget cohort being prepared",
   "created_utc": "2026-10-27T22:53:37.787433+00:00",
   "thread": "01a17f07-4145-7531-a7dd-6dd84f3d5bbd",
   "gate_job": "1615441",
@@ -89,27 +89,79 @@
   "task_report_job": "1615460",
   "final_report_job": "1615461",
   "gate_result": "controls.json",
-  "watch_jobs": [
-    "1615442",
-    "1615443",
-    "1615444",
-    "1615445",
-    "1615446",
-    "1615447",
-    "1615448",
-    "1615449",
-    "1615450",
-    "1615451",
-    "1615452",
-    "1615453",
-    "1615454",
-    "1615455",
-    "1615456",
-    "1615457",
-    "1615458",
-    "1615459",
-    "1615460",
-    "1615461"
+  "watch_jobs": [],
+  "ready_job": "1615460",
+  "publication": {
+    "commit": "254e3be",
+    "worktree": "/tmp/swe-standard-publication",
+    "status": "Protocol and pending report pushed; measured results to follow after validation"
+  },
+  "last_progress_check": {
+    "utc": "2026-10-28T21:53:09.988420+00:00",
+    "state": "No new completions or failures;AppWorld250 attempts/10 successes/zero errors;18 collection shards pending (AppWorld2/3 JobArrayTaskLimit,other16 Priority);baseline task/probes complete;downstream dependencies intact"
+  },
+  "completed_shards": [
+    {
+      "model": "Base",
+      "job": "1615442_0",
+      "samples": 125,
+      "successes": 1,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 125,
+      "validation": "Unique IDs match shard manifest; partial baseline only"
+    },
+    {
+      "model": "Base",
+      "job": "1615442_1",
+      "samples": 125,
+      "successes": 5,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 124,
+      "validation": "Unique IDs match shard manifest; partial baseline only"
+    },
+    {
+      "model": "Base",
+      "job": "1615442_2",
+      "samples": 125,
+      "successes": 5,
+      "sample_errors": 1,
+      "export_errors": 0,
+      "limited_samples": 125,
+      "validation": "Unique IDs match shard manifest; no overlap with completed shards; partial baseline only",
+      "error_note": "sphinx-doc__sphinx-8475: SandboxTimeoutError during scoring; original attempt retained and counted as failure"
+    },
+    {
+      "model": "Base",
+      "job": "1615442_3",
+      "samples": 125,
+      "successes": 3,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 123,
+      "validation": "Assembly and report validation passed:500 unique baseline attempts and matching task/probe input hashes"
+    },
+    {
+      "model": "AppWorld-trained",
+      "job": "1615445_0",
+      "samples": 125,
+      "successes": 5,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 81,
+      "validation": "125 unique IDs match assigned manifest and baseline shard0;partial trained-model result only"
+    },
+    {
+      "model": "AppWorld-trained",
+      "job": "1615445_1",
+      "samples": 125,
+      "successes": 5,
+      "sample_errors": 0,
+      "export_errors": 0,
+      "limited_samples": 88,
+      "validation": "125 unique IDs match manifest and baseline shard1; no overlap with shard0;partial trained-model result only"
+    }
   ],
-  "ready_job": "1615460"
+  "superseded_by": "experiment_reports/training_against_role_probes/swe_generous/pipeline.json"
 }

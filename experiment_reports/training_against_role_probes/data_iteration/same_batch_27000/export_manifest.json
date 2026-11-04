@@ -1,0 +1,17 @@
+{
+  "checkpoint": "experiment_reports/training_against_role_probes/data_iteration/same_batch_27000/runs/training/epoch1/checkpoints/step01688",
+  "adapter_sha256": "43969311ed93e3b15b1859906a774faa5933303e313976214cc1a9545048fa2f",
+  "base_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "dtype": "bfloat16",
+  "expert_merge_relative_rms": [
+    0.0,
+    0.0
+  ],
+  "expert_merge_next_token_kl": [
+    -8.42846930027008e-08,
+    3.824867533808174e-08
+  ],
+  "attention_adapter": "attention_adapter",
+  "attention_dtype": "float32",
+  "note": "Expert deltas merged exactly; separate FP32 attention adapters used for both probing and generation."
+}
