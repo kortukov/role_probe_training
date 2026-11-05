@@ -1,0 +1,72 @@
+{
+  "n_tokens": 56510,
+  "accuracy": 0.7280658290568041,
+  "balanced_accuracy": 0.7280658290568041,
+  "nll": 0.6943620443344116,
+  "uniform_accuracy": 0.2,
+  "majority_accuracy": 0.2,
+  "confusion_counts": [
+    [
+      8239,
+      1460,
+      569,
+      215,
+      819
+    ],
+    [
+      2130,
+      8436,
+      242,
+      30,
+      464
+    ],
+    [
+      1134,
+      305,
+      6939,
+      969,
+      1955
+    ],
+    [
+      261,
+      27,
+      820,
+      9975,
+      219
+    ],
+    [
+      1319,
+      373,
+      1701,
+      355,
+      7554
+    ]
+  ],
+  "by_role": {
+    "system": {
+      "n_tokens": 11302,
+      "accuracy": 0.7289860201734206,
+      "mean_probability": 0.6355104446411133
+    },
+    "user": {
+      "n_tokens": 11302,
+      "accuracy": 0.7464165634400991,
+      "mean_probability": 0.6793709993362427
+    },
+    "cot": {
+      "n_tokens": 11302,
+      "accuracy": 0.6139621305963546,
+      "mean_probability": 0.5367284417152405
+    },
+    "assistant": {
+      "n_tokens": 11302,
+      "accuracy": 0.8825871527163334,
+      "mean_probability": 0.8325880765914917
+    },
+    "tool": {
+      "n_tokens": 11302,
+      "accuracy": 0.6683772783578128,
+      "mean_probability": 0.5653570890426636
+    }
+  }
+}
