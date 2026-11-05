@@ -1,0 +1,45 @@
+{
+  "protocol": "swe_inspect_generous_v1",
+  "benchmark": "swe_bench",
+  "samples": 500,
+  "sample_errors": 0,
+  "export_errors": 0,
+  "limited_samples": 0,
+  "samples_with_model_context_stops": 26,
+  "metrics": {
+    "swe_bench_scorer": {
+      "successes": 237.0,
+      "scored": 500,
+      "total": 500,
+      "success_rate": 0.474
+    }
+  },
+  "input_sha256": "0d9f9d01eae2c4a57c14f8f3704c1d0ac5ac62c43d75f066ce01c14316f23432",
+  "sources": [
+    {
+      "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard0/swe_bench/trajectories.jsonl",
+      "sha256": "d8ca018b42113a285bc993ca72de0187bb2375468d7ba21f96691478aaaa93e8"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard1/swe_bench/trajectories.jsonl",
+      "sha256": "44e06a367318071d085ab57b2bbf4899647e9bc5cb983536420ed858a35feff2"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard2/swe_bench/trajectories.jsonl",
+      "sha256": "fb7ead1158780586bdafa51c0be0268ad438db09dc92d88ac51c93eaf650f224"
+    },
+    {
+      "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard3/swe_bench/trajectories.jsonl",
+      "sha256": "be574434716ab119b7dcd98fc8b2664fc99eea6057510e350ca279e3e9b57e01"
+    }
+  ],
+  "settings": {
+    "temperature": 1.0,
+    "reasoning_effort": "high",
+    "max_tokens": 16384,
+    "message_limit": 2000,
+    "token_limit": null,
+    "time_limit": 7200,
+    "concurrency": 4
+  }
+}

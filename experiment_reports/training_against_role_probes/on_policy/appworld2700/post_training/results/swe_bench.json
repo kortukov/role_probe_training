@@ -1,0 +1,310 @@
+{
+  "benchmark": "swe_bench",
+  "task": {
+    "protocol": "swe_inspect_generous_v1",
+    "benchmark": "swe_bench",
+    "samples": 500,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 0,
+    "samples_with_model_context_stops": 26,
+    "metrics": {
+      "swe_bench_scorer": {
+        "successes": 237.0,
+        "scored": 500,
+        "total": 500,
+        "success_rate": 0.474
+      }
+    },
+    "input_sha256": "0d9f9d01eae2c4a57c14f8f3704c1d0ac5ac62c43d75f066ce01c14316f23432",
+    "sources": [
+      {
+        "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard0/swe_bench/trajectories.jsonl",
+        "sha256": "d8ca018b42113a285bc993ca72de0187bb2375468d7ba21f96691478aaaa93e8"
+      },
+      {
+        "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard1/swe_bench/trajectories.jsonl",
+        "sha256": "44e06a367318071d085ab57b2bbf4899647e9bc5cb983536420ed858a35feff2"
+      },
+      {
+        "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard2/swe_bench/trajectories.jsonl",
+        "sha256": "fb7ead1158780586bdafa51c0be0268ad438db09dc92d88ac51c93eaf650f224"
+      },
+      {
+        "path": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/swe_inspect_generous/1798694/shard3/swe_bench/trajectories.jsonl",
+        "sha256": "be574434716ab119b7dcd98fc8b2664fc99eea6057510e350ca279e3e9b57e01"
+      }
+    ],
+    "settings": {
+      "temperature": 1.0,
+      "reasoning_effort": "high",
+      "max_tokens": 16384,
+      "message_limit": 2000,
+      "token_limit": null,
+      "time_limit": 7200,
+      "concurrency": 4
+    }
+  },
+  "probe": {
+    "accuracy": 0.3871299079001825,
+    "macro_recall": 0.5927821705978704,
+    "per_role_recall": [
+      0.6574074074074074,
+      0.6464222345627175,
+      0.9911535875927567,
+      0.18256534288497214,
+      0.4863622805414981
+    ],
+    "mean_true_role_probability": [
+      0.5937712632004588,
+      0.6315352800783105,
+      0.9865121073184909,
+      0.1857979957580317,
+      0.4749928563587967
+    ],
+    "mean_trajectory_accuracy": 0.4152774060422883,
+    "confusion_counts": [
+      [
+        67450,
+        1425,
+        20425,
+        0,
+        13300
+      ],
+      [
+        1151,
+        190904,
+        12013,
+        68643,
+        22613
+      ],
+      [
+        212,
+        7839,
+        1620325,
+        6364,
+        47
+      ],
+      [
+        1585,
+        3234,
+        9468738,
+        2115942,
+        554
+      ],
+      [
+        1330464,
+        933452,
+        3303091,
+        1054058,
+        6269470
+      ]
+    ],
+    "probe_sha256": "788232ae8e4240dcc7b5db873022e66f93c77f9f44c8ca3ea7c58b01b1c08660",
+    "layers": {
+      "12": {
+        "accuracy": 0.3871299079001825,
+        "macro_recall": 0.5927821705978704,
+        "per_role_recall": [
+          0.6574074074074074,
+          0.6464222345627175,
+          0.9911535875927567,
+          0.18256534288497214,
+          0.4863622805414981
+        ],
+        "mean_true_role_probability": [
+          0.5937712632004588,
+          0.6315352800783105,
+          0.9865121073184909,
+          0.1857979957580317,
+          0.4749928563587967
+        ],
+        "mean_trajectory_accuracy": 0.4152774060422883,
+        "confusion_counts": [
+          [
+            67450,
+            1425,
+            20425,
+            0,
+            13300
+          ],
+          [
+            1151,
+            190904,
+            12013,
+            68643,
+            22613
+          ],
+          [
+            212,
+            7839,
+            1620325,
+            6364,
+            47
+          ],
+          [
+            1585,
+            3234,
+            9468738,
+            2115942,
+            554
+          ],
+          [
+            1330464,
+            933452,
+            3303091,
+            1054058,
+            6269470
+          ]
+        ],
+        "probe_sha256": "788232ae8e4240dcc7b5db873022e66f93c77f9f44c8ca3ea7c58b01b1c08660"
+      }
+    },
+    "roles": [
+      "system",
+      "user",
+      "cot",
+      "assistant",
+      "tool"
+    ],
+    "trajectories": 500,
+    "scored_trajectories": 475,
+    "excluded_trajectories": [
+      {
+        "trajectory_id": "swe_bench/django__django-16819",
+        "tokens": 131095,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/matplotlib__matplotlib-24149",
+        "tokens": 135249,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/pydata__xarray-7393",
+        "tokens": 131464,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/pytest-dev__pytest-10356",
+        "tokens": 133958,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/sphinx-doc__sphinx-11445",
+        "tokens": 131900,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/sympy__sympy-21930",
+        "tokens": 134793,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/astropy__astropy-13033",
+        "tokens": 149745,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-11299",
+        "tokens": 139820,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-13449",
+        "tokens": 150709,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/matplotlib__matplotlib-14623",
+        "tokens": 132219,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/pylint-dev__pylint-6528",
+        "tokens": 133724,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/pytest-dev__pytest-7236",
+        "tokens": 131420,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/sympy__sympy-19040",
+        "tokens": 132949,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/astropy__astropy-8707",
+        "tokens": 131277,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-13964",
+        "tokens": 131405,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/mwaskom__seaborn-3069",
+        "tokens": 134531,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/pydata__xarray-3305",
+        "tokens": 133886,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/sympy__sympy-13031",
+        "tokens": 132005,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/sympy__sympy-13615",
+        "tokens": 131198,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-11734",
+        "tokens": 131676,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-12713",
+        "tokens": 134780,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-15280",
+        "tokens": 162583,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-16116",
+        "tokens": 131154,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/django__django-16901",
+        "tokens": 134960,
+        "reason": "exceeds_native_context"
+      },
+      {
+        "trajectory_id": "swe_bench/sphinx-doc__sphinx-10673",
+        "tokens": 134499,
+        "reason": "exceeds_native_context"
+      }
+    ],
+    "context_limit": 131072,
+    "input_sha256": "0d9f9d01eae2c4a57c14f8f3704c1d0ac5ac62c43d75f066ce01c14316f23432",
+    "model_revision": "c1148303925c1b0a64aef992be2cc487ff5b5377e4f3d1a45418a13ee8476e37",
+    "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+    "overlength_policy": "exclude"
+  },
+  "checkpoint": "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/epoch1_recovery/checkpoints/step00169",
+  "source_sha256": {
+    "experiment_reports/training_against_role_probes/on_policy/appworld2700/post_training/swe_inspect_generous_task_results.json": "bdac3d2e53fd342b42f2127ead65e4aefc580f622e3e75112e086ef258245cde",
+    "experiment_reports/training_against_role_probes/on_policy/appworld2700/predictions/swe_inspect_generous/summary.json": "882b3b04e35cbbee82345c39bbd04fd520ef1697d2f4c2c59763904b300f0045"
+  }
+}

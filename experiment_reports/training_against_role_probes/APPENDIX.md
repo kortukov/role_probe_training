@@ -432,3 +432,19 @@ where their checkpoints or saved episodes were reused.
 | AppWorld on-policy (270, batch 64) | 1787803, 1816749 |
 | AppWorld on-policy (270, batch 16) | 1787804, 1816751 |
 | AppWorld on-policy (2,700, batch 16) | 1758049, 1758050, 1815838, 1816553, 1816554, 1816555, 1816556, 1816557, 1816558, 1816559 |
+
+## On-policy 2,700-episode SWE evaluation
+
+Task success is 237/500 (47.4%). Whole-history role coverage is 475/500;
+25 histories exceed native context and remain in the task denominator.
+Rows are true roles, columns are predictions, and values are row percentages.
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 65.7 | 1.4 | 19.9 | 0.0 | 13.0 |
+| User | 0.4 | 64.6 | 4.1 | 23.2 | 7.7 |
+| Reasoning | 0.0 | 0.5 | 99.1 | 0.4 | 0.0 |
+| Assistant | 0.0 | 0.0 | 81.7 | 18.3 | 0.0 |
+| Tool | 10.3 | 7.2 | 25.6 | 8.2 | 48.6 |
+
+[Counts, exclusions and provenance](on_policy/appworld2700/post_training/results/swe_bench.json).

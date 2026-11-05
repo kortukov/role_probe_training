@@ -29,7 +29,7 @@ measure task competence. Models are evaluated on their own conversations.
 |---|---:|---:|---:|
 | AppWorld normal test | 26.2% (44/168) | 68.2% | 168/168 |
 | τ² retail | 52.6% (60/114) | 52.5% | 113/114 |
-| SWE-bench Verified | Pending | — | — |
+| SWE-bench Verified | 47.4% (237/500) | 38.7% | 475/500 |
 
 [Saved results and provenance](post_training/results/) support these values.
 The [parent appendix](../../APPENDIX.md) supplies the comparison's role confusion
@@ -38,7 +38,8 @@ matrices, context coverage and training-time measurements.
 ## Message
 
 The 2,700-episode run does not improve AppWorld task success or role accuracy
-over 270 episodes at batch 16. Its SWE evaluation is still incomplete. Episode
+over 270 episodes at batch 16. SWE task success is 47.4%, compared with 44.0%
+for 270 episodes at batch 16. Episode
 count also changes the number of updates, so data and optimization effort are
 not isolated.
 

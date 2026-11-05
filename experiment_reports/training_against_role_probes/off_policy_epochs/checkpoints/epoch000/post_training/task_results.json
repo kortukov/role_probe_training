@@ -1,0 +1,18 @@
+{
+  "tau2_retail": {
+    "benchmark": "tau2_retail",
+    "samples": 114,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 2,
+    "metrics": {
+      "retail_scorer": {
+        "successes": 60,
+        "scored": 114,
+        "total": 114,
+        "success_rate": 0.5263157894736842
+      }
+    },
+    "input_sha256": "3d8d252b0e164ae2c60949cbc9f4da68d23b4b245e9f2cc80d221fff3affb3fd"
+  }
+}

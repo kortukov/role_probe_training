@@ -132,7 +132,7 @@ All values are percentages. Base and original AppWorld rows repeat the compariso
 | AppWorld + same-batch KL (27,000) | 51.4 | 97.7 | 82.4 | 58.9 | 98.0 | 95.8 | 99.8 |
 | AppWorld on-policy (270, batch 64) | 48.4 | 36.4 | 6.9 | 69.4 | 57.2 | 72.2 | 4.0 |
 | AppWorld on-policy (270, batch 16) | 44.0 | 46.0 | 34.7 | 73.7 | 89.7 | 54.7 | 9.6 |
-| AppWorld on-policy (2,700, batch 16) | Pending | — | — | — | — | — | — |
+| AppWorld on-policy (2,700, batch 16) | 47.4 | 38.7 | 65.7 | 64.6 | 99.1 | 18.3 | 48.6 |
 
 
 The original coverage and generation-precision limitations also apply here. New models use fresh trajectories and independently fitted standard-data probes. On SWE, agentic KL and same-batch KL (2,700) score 48.2% and 48.6%, respectively: 2.6 and 2.2 percentage points below the 50.8% baseline. The 27,000-trajectory model scores 51.4% (257/500), 0.6 percentage points above baseline (254/500); this three-task difference is descriptive, not evidence of a reliable improvement.
@@ -144,7 +144,7 @@ The original coverage and generation-precision limitations also apply here. New 
 [KL setup and earlier coverage](kl_iteration/RUNNING.md); [larger-data reproduction](data_iteration/same_batch_27000/RUNNING.md). Detailed confusions: [fixed 800](kl_iteration/agentic800/APPENDIX.md), [same batch, 2,700](kl_iteration/same_batch/APPENDIX.md), [same batch, 27,000](data_iteration/same_batch_27000/APPENDIX.md).
 **On-policy role-score coverage**, ordered as 270/batch 64, 270/batch 16,
 2,700/batch 16: AppWorld 168/168 for all three; retail 112/114, 113/114, 113/114;
-SWE 434/500, 415/500, pending. Over-context exclusions affect role metrics only.
+SWE 434/500, 415/500, 475/500. Over-context exclusions affect role metrics only.
 The 270/batch-16 SWE run has one evaluation error, retained in its 500-task
 success denominator. These role scores therefore describe different eligible
 subsets.
@@ -184,6 +184,7 @@ accuracy over batch 64, but has lower retail and SWE task success. The
 2,700-episode run does not improve AppWorld task success or role accuracy over
 270/batch 16. These results do not establish a consistent utility advantage over
 the earlier same-batch KL models; changing batch size or episode count also
-changes the number of optimizer updates. Its SWE evaluation remains pending.
+changes the number of optimizer updates. The 2,700-episode model solves 237/500
+SWE tasks (47.4%), compared with 220/500 (44.0%) for 270 episodes at batch 16.
 
 [How to reproduce the experiment](RUNNING.md)
