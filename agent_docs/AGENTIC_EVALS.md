@@ -2,13 +2,16 @@
 
 ## Current experiments
 
-`experiment_reports/agentic/` contains five current experiments:
+`experiment_reports/eval_role_probes/agentic_eval/` mirrors the code layout in
+`src/experiments/eval_role_probes/agentic_eval/`, one folder per benchmark:
 
-- `tau2_retail_full`: 114 tasks; 73 solved (64.04%).
-- `swe_bench_full`: 500 tasks; 11 solved (2.20% counting errors as failures).
-- `appworld`: separate train, normal-test and challenge-test trajectory collections.
-- `probe_transfer`: layer-12 role recognition on those 614 histories.
-- `probe_layer_comparison`: layers 4, 8, 12, 16 and 20 on the same histories.
+- `tau2_retail/base_trajectories`: 114 tasks; 73 solved (64.04%).
+- `swe_bench/base_trajectories`: 500 tasks; 11 solved (2.20% counting errors as failures).
+- `appworld/base_trajectories`: separate train, normal-test and challenge-test collections
+  (coauthor's cluster); `appworld/base_trajectories_hx2`: the normal-test cohort regenerated on hx2;
+  `appworld/probe_transfer`: probe scores on the former.
+- `probe_scoring/probe_transfer`: layer-12 role recognition on the 614 retail and SWE histories.
+- `probe_scoring/probe_layer_comparison`: layers 4, 8, 12, 16 and 20 on the same histories.
 
 SWE has 226 model API retry failures and substantial execution-limit effects.
 Its score is not a matched reproduction of the model's published capability.
@@ -19,7 +22,7 @@ stale-material removal follow [REPORT_WRITING.md](REPORT_WRITING.md).
 
 Use Inspect for execution, logs, scores and concurrency. Clients and the vLLM
 server use separate locked uv projects because their dependency requirements
-differ. Retail uses `src/experiments/agentic_eval`; SWE uses its `swe/` project
+differ. Retail uses `src/experiments/eval_role_probes/agentic_eval`; SWE uses the `swe_bench/env/` project
 with swebench 4.1.0. New AppWorld and repaired SWE runs use `server_current/`
 (vLLM 0.32.0, compiled Triton kernels). `server/` (vLLM 0.11.0) remains for
 retail and reproduction of the recorded SWE cohort. After
@@ -42,7 +45,7 @@ separate model grader.
 SWE uses a validated Apptainer provider with writable per-task environments,
 isolated networking, no host-workspace mount and no API credentials inside.
 Gold-patch scoring and Inspect Python/bash-session/editor tools passed validation.
-Use official task images pinned by OCI digest in `swe_bench_full/image_manifest.json`;
+Use official task images pinned by OCI digest in `swe_bench/base_trajectories/image_manifest.json`;
 `apptainer_mirror.py` retrieves them through mirror.gcr.io. This cache is a runtime
 source, not a separate experiment. Verified missing blobs can be seeded into the
 Apptainer cache with `repair_image_layers.py`. For new SWE runs, prepare selected
@@ -94,10 +97,10 @@ probe's model revision, activation site and class order.
 Canonical per-token predictions are under `probe_transfer/predictions/retail/`
 and `predictions/swe/`. SWE selection metadata validates messages, tools, scores,
 errors and source logs against the current canonical dataset. Raw artifacts
-needed by the selected result belong under `swe_bench_full/runs/`; superseded
+needed by the selected result belong under `swe_bench/base_trajectories/runs/`; superseded
 experiments and excluded predictions do not need separate folders.
 
-`agentic_probes/report.py` refreshes metrics, appendix and offline viewer, leaving
+`probe_scoring/report.py` refreshes metrics, appendix and offline viewer, leaving
 README/RUNNING prose intact. Compressed trajectories occupy separate inert HTML
 blocks to avoid JavaScript source-size limits; decode only the selected history.
 `viewer_check.py` validates all datasets/layers and the longest histories offline.
@@ -107,7 +110,7 @@ results and compact provenance.
 
 ## AppWorld
 
-The [AppWorld experiment](../experiment_reports/agentic/appworld/README.md) collects
+The [AppWorld experiment](../experiment_reports/eval_role_probes/agentic_eval/appworld/base_trajectories/README.md) collects
 training and both test splits separately. Each world needs its own process;
 threads or async worlds in one process are unsafe because AppWorld changes global
 time and database state. Our Inspect adapter uses one network-isolated Apptainer

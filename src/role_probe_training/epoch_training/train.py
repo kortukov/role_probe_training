@@ -55,10 +55,10 @@ def main():
     source_paths += [Path('src/role_probe_training/trajectories')/name for name in
                      ('appworld.py', 'replay.py', 'inspect_export.py')]
     source_paths += [Path('src/role_probe_training/probes/harmony.py'),
-                     Path('src/experiments/agentic_eval/appworld_worker.py'),
-                     Path('src/experiments/agentic_eval/swe/uv.lock'),
+                     Path('src/experiments/eval_role_probes/agentic_eval/appworld/appworld_worker.py'),
+                     Path('src/experiments/eval_role_probes/agentic_eval/swe_bench/env/uv.lock'),
                      Path('src/experiments/training_against_role_probes/runtime/uv.lock'),
-                     Path('src/experiments/agentic_eval/server_current/uv.lock'),
+                     Path('src/experiments/eval_role_probes/agentic_eval/server_current/uv.lock'),
                      Path('src/role_probe_training/post_training/vllm_worker.py')]
     manifest = dict(config=config, world_size=world, updates=len(batches), updates_per_epoch=updates_per_epoch,
         data_sha256={key: sha256(config[key]) for key in

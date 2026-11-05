@@ -1,0 +1,182 @@
+{
+ "version1_first_user_turn_accuracy": {
+  "12": {
+   "c4_dolma": {
+    "with_system": {
+     "accuracy": 0.7644376899696048,
+     "tokens": 658
+    },
+    "without_system": {
+     "accuracy": 0.5100221688527619,
+     "tokens": 43304
+    }
+   },
+   "toucan": {
+    "with_system": {
+     "accuracy": 0.6778115501519757,
+     "tokens": 658
+    },
+    "without_system": {
+     "accuracy": 0.5267411786440052,
+     "tokens": 43304
+    }
+   },
+   "combined": {
+    "with_system": {
+     "accuracy": 0.668693009118541,
+     "tokens": 658
+    },
+    "without_system": {
+     "accuracy": 0.49332625161647886,
+     "tokens": 43304
+    }
+   }
+  },
+  "16": {
+   "c4_dolma": {
+    "with_system": {
+     "accuracy": 0.6702127659574468,
+     "tokens": 658
+    },
+    "without_system": {
+     "accuracy": 0.6479770921854794,
+     "tokens": 43304
+    }
+   },
+   "toucan": {
+    "with_system": {
+     "accuracy": 0.4817629179331307,
+     "tokens": 658
+    },
+    "without_system": {
+     "accuracy": 0.5772445963421393,
+     "tokens": 43304
+    }
+   },
+   "combined": {
+    "with_system": {
+     "accuracy": 0.43617021276595747,
+     "tokens": 658
+    },
+    "without_system": {
+     "accuracy": 0.5758590430445224,
+     "tokens": 43304
+    }
+   }
+  }
+ },
+ "version1_later_user_turns_predicted_as": {
+  "12": {
+   "c4_dolma": {
+    "system": 0.004252303330970942,
+    "user": 0.4011339475549256,
+    "cot": 0.07228915662650602,
+    "assistant": 0.5109851169383416,
+    "tool": 0.011339475549255847
+   },
+   "toucan": {
+    "system": 0.0,
+    "user": 0.09780297661233169,
+    "cot": 0.014174344436569808,
+    "assistant": 0.884479092841956,
+    "tool": 0.003543586109142452
+   },
+   "combined": {
+    "system": 0.0,
+    "user": 0.16229624379872432,
+    "cot": 0.014174344436569808,
+    "assistant": 0.8143160878809355,
+    "tool": 0.009213323883770375
+   }
+  },
+  "16": {
+   "c4_dolma": {
+    "system": 0.0007087172218284905,
+    "user": 0.011339475549255847,
+    "cot": 0.019844082211197732,
+    "assistant": 0.9567682494684621,
+    "tool": 0.011339475549255847
+   },
+   "toucan": {
+    "system": 0.0,
+    "user": 0.0007087172218284905,
+    "cot": 0.012048192771084338,
+    "assistant": 0.9865343727852587,
+    "tool": 0.0007087172218284905
+   },
+   "combined": {
+    "system": 0.0,
+    "user": 0.001417434443656981,
+    "cot": 0.012048192771084338,
+    "assistant": 0.9844082211197732,
+    "tool": 0.002126151665485471
+   }
+  }
+ },
+ "version2_system_turn_split": {
+  "12": {
+   "c4_dolma": {
+    "preamble": {
+     "accuracy": 0.0703116575002696,
+     "tokens": 27819
+    },
+    "sample_instruction": {
+     "accuracy": 0.0033149171270718232,
+     "tokens": 905
+    }
+   },
+   "toucan": {
+    "preamble": {
+     "accuracy": 0.31007584744239547,
+     "tokens": 27819
+    },
+    "sample_instruction": {
+     "accuracy": 0.04751381215469613,
+     "tokens": 905
+    }
+   },
+   "combined": {
+    "preamble": {
+     "accuracy": 0.12221862755670584,
+     "tokens": 27819
+    },
+    "sample_instruction": {
+     "accuracy": 0.023204419889502764,
+     "tokens": 905
+    }
+   }
+  },
+  "16": {
+   "c4_dolma": {
+    "preamble": {
+     "accuracy": 0.11912721521262447,
+     "tokens": 27819
+    },
+    "sample_instruction": {
+     "accuracy": 0.0,
+     "tokens": 905
+    }
+   },
+   "toucan": {
+    "preamble": {
+     "accuracy": 0.22204248894640355,
+     "tokens": 27819
+    },
+    "sample_instruction": {
+     "accuracy": 0.0,
+     "tokens": 905
+    }
+   },
+   "combined": {
+    "preamble": {
+     "accuracy": 0.1054674862504044,
+     "tokens": 27819
+    },
+    "sample_instruction": {
+     "accuracy": 0.0,
+     "tokens": 905
+    }
+   }
+  }
+ }
+}

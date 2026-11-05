@@ -16,7 +16,7 @@ if a.stage=='reference':
     from role_probe_training.training.model import RoleModel
     from role_probe_training.training.data import trajectory_examples,collate
     export=json.loads((a.root/'data/post_training/model/export.json').read_text())
-    runtime=RoleModel('.cache/models/gpt-oss-20b','experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
+    runtime=RoleModel('.cache/models/gpt-oss-20b','experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
     set_peft_model_state_dict(runtime.model,load_file(Path(export['checkpoint'])/'adapter/adapter_model.safetensors'))
     runtime.model.gradient_checkpointing_disable()
     examples=trajectory_examples(runtime.tokenizer,'experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl')[:2]

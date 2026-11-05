@@ -1,0 +1,72 @@
+{
+ "12": {
+  "c4_dolma": {
+   "train": 0.7373928065615614,
+   "train_neutral": 0.7373928065615614,
+   "train_toucan": null,
+   "heldout_neutral": 0.689046186515661,
+   "heldout_toucan": 0.5523044460074779,
+   "appworld_accuracy": 0.2711398936226683,
+   "appworld_macro_recall": 0.35226456128598105,
+   "norobots_v2_accuracy": 0.7876254968301949,
+   "norobots_v2_macro_recall": 0.61181301529283
+  },
+  "toucan": {
+   "train": 0.7369693000273588,
+   "train_neutral": null,
+   "train_toucan": 0.7369693000273588,
+   "heldout_neutral": 0.5245974163864803,
+   "heldout_toucan": 0.7192166734535224,
+   "appworld_accuracy": 0.525262386801567,
+   "appworld_macro_recall": 0.45938663286458736,
+   "norobots_v2_accuracy": 0.8611571778258207,
+   "norobots_v2_macro_recall": 0.7186617430387521
+  },
+  "combined": {
+   "train": 0.6939260677658056,
+   "train_neutral": 0.6571755404416915,
+   "train_toucan": 0.7135028478100465,
+   "heldout_neutral": 0.6416917359759334,
+   "heldout_toucan": 0.7093917743308777,
+   "appworld_accuracy": 0.3810491225462614,
+   "appworld_macro_recall": 0.4032522236634275,
+   "norobots_v2_accuracy": 0.8638502533082759,
+   "norobots_v2_macro_recall": 0.6817306484602155
+  }
+ },
+ "16": {
+  "c4_dolma": {
+   "train": 0.872682987564783,
+   "train_neutral": 0.872682987564783,
+   "train_toucan": null,
+   "heldout_neutral": 0.8419217837550876,
+   "heldout_toucan": 0.6304001776922222,
+   "appworld_accuracy": 0.3260747613941588,
+   "appworld_macro_recall": 0.30720624718871437,
+   "norobots_v2_accuracy": 0.7020155834536663,
+   "norobots_v2_macro_recall": 0.5828660524263163
+  },
+  "toucan": {
+   "train": 0.8366584037340717,
+   "train_neutral": null,
+   "train_toucan": 0.8366584037340717,
+   "heldout_neutral": 0.6526278534772607,
+   "heldout_toucan": 0.8184281642172287,
+   "appworld_accuracy": 0.4729863153312879,
+   "appworld_macro_recall": 0.45508222577959223,
+   "norobots_v2_accuracy": 0.8415389838106856,
+   "norobots_v2_macro_recall": 0.6913123031108959
+  },
+  "combined": {
+   "train": 0.8047405772642693,
+   "train_neutral": 0.7902136865204737,
+   "train_toucan": 0.8124789626841542,
+   "heldout_neutral": 0.7892408423287913,
+   "heldout_toucan": 0.8110687446784881,
+   "appworld_accuracy": 0.4105290202031998,
+   "appworld_macro_recall": 0.40892431938989393,
+   "norobots_v2_accuracy": 0.8042972258723664,
+   "norobots_v2_macro_recall": 0.6522196557564236
+  }
+ }
+}

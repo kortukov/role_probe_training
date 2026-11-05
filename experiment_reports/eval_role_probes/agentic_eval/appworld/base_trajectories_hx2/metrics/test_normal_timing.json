@@ -1,0 +1,10 @@
+{
+  "split": "test_normal",
+  "started_utc": "2026-10-30T01:16:38.510885+00:00",
+  "completed_utc": "2026-10-30T01:38:22.763142+00:00",
+  "wall_seconds": 1304.2522452389821,
+  "tasks": 168,
+  "concurrency": 8,
+  "trajectories_per_hour": 463.71398033451777,
+  "samples": 168
+}

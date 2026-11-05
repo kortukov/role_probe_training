@@ -1,0 +1,1280 @@
+{
+ "n_conversations": 489,
+ "input": "experiment_reports/role_probes/norobots/artifacts/generated.jsonl",
+ "messages_key": "messages",
+ "roles": [
+  "system",
+  "user",
+  "cot",
+  "assistant",
+  "tool"
+ ],
+ "arms": {
+  "c4_dolma": {
+   "4": {
+    "accuracy": 0.5215324216725981,
+    "macro_recall": 0.5317458664768427,
+    "per_role_recall": {
+     "system": 0.2933490861074432,
+     "user": 0.7101777059773828,
+     "cot": 0.8137578305710823,
+     "assistant": 0.3096988432514624,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      8442,
+      3574,
+      3730,
+      5122,
+      7910
+     ],
+     [
+      3862,
+      30772,
+      2455,
+      5434,
+      807
+     ],
+     [
+      985,
+      6810,
+      183290,
+      20806,
+      13348
+     ],
+     [
+      408,
+      375,
+      177011,
+      98579,
+      41933
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.5572118943400295,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.3096988432514624,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.8137578305710823,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.2933490861074432,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.7101777059773828,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.2628671855385388,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.2982456140350877,
+      "tokens": 24795
+     }
+    }
+   },
+   "8": {
+    "accuracy": 0.8871832022259292,
+    "macro_recall": 0.7212590406521167,
+    "per_role_recall": {
+     "system": 0.1713809159774828,
+     "user": 0.8941841680129241,
+     "cot": 0.8233698427004205,
+     "assistant": 0.996101235917639,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      4932,
+      13477,
+      1,
+      0,
+      10368
+     ],
+     [
+      456,
+      38745,
+      679,
+      2430,
+      1020
+     ],
+     [
+      21,
+      5003,
+      185455,
+      30122,
+      4638
+     ],
+     [
+      0,
+      34,
+      1190,
+      317065,
+      17
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.8609618296532277,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.996101235917639,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.8233698427004205,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.1713809159774828,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8941841680129241,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.146121014310821,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.17543859649122806,
+      "tokens": 24795
+     }
+    }
+   },
+   "12": {
+    "accuracy": 0.7876254968301949,
+    "macro_recall": 0.61181301529283,
+    "per_role_recall": {
+     "system": 0.0680728334144138,
+     "user": 0.8018924532656359,
+     "cot": 0.578731924755482,
+     "assistant": 0.9985548497357888,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      1959,
+      8183,
+      1572,
+      0,
+      17064
+     ],
+     [
+      620,
+      34746,
+      1369,
+      2928,
+      3667
+     ],
+     [
+      2,
+      4558,
+      130353,
+      78298,
+      12028
+     ],
+     [
+      0,
+      16,
+      345,
+      317846,
+      99
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.7615760615394742,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9985548497357888,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.578731924755482,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.0680728334144138,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8018924532656359,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.05498368064273161,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.07017543859649122,
+      "tokens": 24795
+     }
+    }
+   },
+   "16": {
+    "accuracy": 0.7020155834536663,
+    "macro_recall": 0.5828660524263163,
+    "per_role_recall": {
+     "system": 0.11515741191187713,
+     "user": 0.8813754904223402,
+     "cot": 0.36772051021359536,
+     "assistant": 0.9672107971574523,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      3314,
+      19113,
+      482,
+      0,
+      5869
+     ],
+     [
+      103,
+      38190,
+      509,
+      3002,
+      1526
+     ],
+     [
+      514,
+      3545,
+      82825,
+      35868,
+      102487
+     ],
+     [
+      85,
+      452,
+      88,
+      307869,
+      9812
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.685282927733659,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9672107971574523,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.36772051021359536,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.11515741191187713,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8813754904223402,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.09063519959829275,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.11909659205484976,
+      "tokens": 24795
+     }
+    }
+   },
+   "20": {
+    "accuracy": 0.6981042892668435,
+    "macro_recall": 0.580838513932374,
+    "per_role_recall": {
+     "system": 0.050976440336368056,
+     "user": 0.9645280406185092,
+     "cot": 0.3198380387055528,
+     "assistant": 0.9880115360690657,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      1467,
+      17125,
+      1893,
+      0,
+      8293
+     ],
+     [
+      22,
+      41793,
+      120,
+      778,
+      617
+     ],
+     [
+      715,
+      25314,
+      72040,
+      50598,
+      76572
+     ],
+     [
+      48,
+      2500,
+      130,
+      314490,
+      1138
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.6722464301265101,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9880115360690657,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.3198380387055528,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.050976440336368056,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.9645280406185092,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.040672859653527495,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.05263157894736842,
+      "tokens": 24795
+     }
+    }
+   }
+  },
+  "toucan": {
+   "4": {
+    "accuracy": 0.47735818716062456,
+    "macro_recall": 0.5362629216490283,
+    "per_role_recall": {
+     "system": 0.44798109667106817,
+     "user": 0.6740826217401339,
+     "cot": 0.7933661577257934,
+     "assistant": 0.22962181045911795,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      12892,
+      3053,
+      5791,
+      5085,
+      1957
+     ],
+     [
+      6152,
+      29208,
+      3343,
+      3944,
+      683
+     ],
+     [
+      3282,
+      9881,
+      178697,
+      19741,
+      13638
+     ],
+     [
+      3683,
+      3147,
+      184902,
+      73090,
+      53484
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.519023451909093,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.22962181045911795,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.7933661577257934,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.44798109667106817,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.6740826217401339,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.37961335676625657,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.45896350070578745,
+      "tokens": 24795
+     }
+    }
+   },
+   "8": {
+    "accuracy": 0.8740280645103654,
+    "macro_recall": 0.7715161594742506,
+    "per_role_recall": {
+     "system": 0.4349850580304399,
+     "user": 0.8439879990768521,
+     "cot": 0.9261939539777747,
+     "assistant": 0.8808976268119357,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      12518,
+      15754,
+      499,
+      7,
+      0
+     ],
+     [
+      556,
+      36570,
+      1957,
+      3457,
+      790
+     ],
+     [
+      36,
+      2135,
+      208615,
+      14262,
+      191
+     ],
+     [
+      10,
+      54,
+      37717,
+      280395,
+      130
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.870287275045067,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.8808976268119357,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.9261939539777747,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.4349850580304399,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8439879990768521,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.35626412252071304,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.4476305706795725,
+      "tokens": 24795
+     }
+    }
+   },
+   "12": {
+    "accuracy": 0.8611571778258207,
+    "macro_recall": 0.7186617430387521,
+    "per_role_recall": {
+     "system": 0.301237056084509,
+     "user": 0.7946226632817909,
+     "cot": 0.8501902423647769,
+     "assistant": 0.9285970104239317,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      8669,
+      12896,
+      2611,
+      3,
+      4599
+     ],
+     [
+      988,
+      34431,
+      2525,
+      3877,
+      1509
+     ],
+     [
+      5,
+      2500,
+      191496,
+      30970,
+      268
+     ],
+     [
+      4,
+      14,
+      22703,
+      295578,
+      7
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.8473910955195454,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9285970104239317,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.8501902423647769,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.301237056084509,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.7946226632817909,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.2500627667587246,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.3094575519257915,
+      "tokens": 24795
+     }
+    }
+   },
+   "16": {
+    "accuracy": 0.8415389838106856,
+    "macro_recall": 0.6913123031108959,
+    "per_role_recall": {
+     "system": 0.214643130168879,
+     "user": 0.7992384029540733,
+     "cot": 0.8615603869667331,
+     "assistant": 0.8898072923538984,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      6177,
+      13057,
+      506,
+      307,
+      8731
+     ],
+     [
+      617,
+      34631,
+      4116,
+      3059,
+      907
+     ],
+     [
+      129,
+      316,
+      194057,
+      27179,
+      3558
+     ],
+     [
+      476,
+      109,
+      34204,
+      283231,
+      286
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.8335500389943843,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.8898072923538984,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.8615603869667331,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.214643130168879,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.7992384029540733,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.1732362540798393,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.22129461584996976,
+      "tokens": 24795
+     }
+    }
+   },
+   "20": {
+    "accuracy": 0.8362031858855556,
+    "macro_recall": 0.6761942429820402,
+    "per_role_recall": {
+     "system": 0.22430328723330323,
+     "user": 0.767712900992384,
+     "cot": 0.7531244589080932,
+     "assistant": 0.9596363247943802,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      6455,
+      7883,
+      2780,
+      494,
+      11166
+     ],
+     [
+      484,
+      33265,
+      3772,
+      4680,
+      1129
+     ],
+     [
+      171,
+      136,
+      169633,
+      54744,
+      555
+     ],
+     [
+      422,
+      30,
+      12251,
+      305458,
+      145
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.8251184946501683,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9596363247943802,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.7531244589080932,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.22430328723330323,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.767712900992384,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.1802661310569922,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.23137729380923575,
+      "tokens": 24795
+     }
+    }
+   }
+  },
+  "combined": {
+   "4": {
+    "accuracy": 0.48034850800694545,
+    "macro_recall": 0.5548775698691492,
+    "per_role_recall": {
+     "system": 0.5092431718673988,
+     "user": 0.6749365335795061,
+     "cot": 0.8351395628643352,
+     "assistant": 0.20019101116535662,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      14655,
+      3165,
+      4404,
+      3617,
+      2937
+     ],
+     [
+      5253,
+      29245,
+      3178,
+      4764,
+      890
+     ],
+     [
+      2008,
+      8132,
+      188106,
+      14599,
+      12394
+     ],
+     [
+      2005,
+      1790,
+      193383,
+      63722,
+      57406
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.5265602186130038,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.20019101116535662,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.8351395628643352,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.5092431718673988,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.6749365335795061,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.4270650263620387,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.5224440411373261,
+      "tokens": 24795
+     }
+    }
+   },
+   "8": {
+    "accuracy": 0.8810498771223401,
+    "macro_recall": 0.7667082302363892,
+    "per_role_recall": {
+     "system": 0.35860726944193483,
+     "user": 0.8891530117701362,
+     "cot": 0.9181314070831428,
+     "assistant": 0.9009412326503428,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      10320,
+      17467,
+      6,
+      3,
+      982
+     ],
+     [
+      840,
+      38527,
+      1074,
+      1823,
+      1066
+     ],
+     [
+      36,
+      3230,
+      206799,
+      14476,
+      698
+     ],
+     [
+      7,
+      58,
+      31450,
+      286775,
+      16
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.874898165835174,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9009412326503428,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.9181314070831428,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.35860726944193483,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8891530117701362,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.29751443635450664,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.3684210526315789,
+      "tokens": 24795
+     }
+    }
+   },
+   "12": {
+    "accuracy": 0.8638502533082759,
+    "macro_recall": 0.6817306484602155,
+    "per_role_recall": {
+     "system": 0.11887552991868788,
+     "user": 0.8142626355873529,
+     "cot": 0.8364226443910691,
+     "assistant": 0.9573617839437523,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      3421,
+      16115,
+      1290,
+      7,
+      7945
+     ],
+     [
+      918,
+      35282,
+      1952,
+      2747,
+      2431
+     ],
+     [
+      2,
+      2823,
+      188395,
+      33424,
+      595
+     ],
+     [
+      4,
+      3,
+      13556,
+      304734,
+      9
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.842961970351108,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9573617839437523,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.8364226443910691,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.11887552991868788,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8142626355873529,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.10042681395932714,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.12183908045977011,
+      "tokens": 24795
+     }
+    }
+   },
+   "16": {
+    "accuracy": 0.8042972258723664,
+    "macro_recall": 0.6522196557564236,
+    "per_role_recall": {
+     "system": 0.10195288067273611,
+     "user": 0.8427186706669744,
+     "cot": 0.7952130847677356,
+     "assistant": 0.8689939869182485,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      2934,
+      16203,
+      972,
+      0,
+      8669
+     ],
+     [
+      328,
+      36515,
+      2248,
+      2035,
+      2204
+     ],
+     [
+      393,
+      440,
+      179113,
+      24304,
+      20989
+     ],
+     [
+      2108,
+      181,
+      36167,
+      276606,
+      3244
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.7985890566336054,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.8689939869182485,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.7952130847677356,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.10195288067273611,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8427186706669744,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.08134571930705499,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.10526315789473684,
+      "tokens": 24795
+     }
+    }
+   },
+   "20": {
+    "accuracy": 0.8441703362121195,
+    "macro_recall": 0.7112740539627738,
+    "per_role_recall": {
+     "system": 0.26648828966571686,
+     "user": 0.8723747980613893,
+     "cot": 0.739867429707999,
+     "assistant": 0.9663656984159896,
+     "tool": null
+    },
+    "role_support": {
+     "system": 28778,
+     "user": 43330,
+     "cot": 225239,
+     "assistant": 318306,
+     "tool": 0
+    },
+    "confusion_counts": [
+     [
+      7669,
+      9414,
+      1546,
+      1,
+      10148
+     ],
+     [
+      294,
+      37800,
+      1121,
+      1532,
+      2583
+     ],
+     [
+      387,
+      414,
+      166647,
+      52452,
+      5339
+     ],
+     [
+      1301,
+      152,
+      8758,
+      307600,
+      495
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ],
+    "mean_conversation_accuracy": 0.8359624918102878,
+    "per_turn": {
+     "assistant 1": {
+      "accuracy": 0.9663656984159896,
+      "tokens": 318306
+     },
+     "reasoning 1": {
+      "accuracy": 0.739867429707999,
+      "tokens": 225239
+     },
+     "system": {
+      "accuracy": 0.26648828966571686,
+      "tokens": 28778
+     },
+     "user 1": {
+      "accuracy": 0.8723747980613893,
+      "tokens": 43330
+     }
+    },
+    "system_turn_by_source": {
+     "with_sample_system": {
+      "accuracy": 0.2026110971629425,
+      "tokens": 3983
+     },
+     "without_sample_system": {
+      "accuracy": 0.27674934462593265,
+      "tokens": 24795
+     }
+    }
+   }
+  }
+ }
+}

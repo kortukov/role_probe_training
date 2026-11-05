@@ -5,7 +5,7 @@ from pathlib import Path
 from inspect_ai.util import SandboxEnvironmentSpec
 from .apptainer import ApptainerSandbox  # register the validated provider
 
-MANIFEST=Path('experiment_reports/agentic/swe_bench_full/image_manifest.json')
+MANIFEST=Path('experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json')
 IMAGES=json.loads(MANIFEST.read_text())
 
 def sandbox_config(kind,sample):

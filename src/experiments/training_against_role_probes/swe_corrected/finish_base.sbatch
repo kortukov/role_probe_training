@@ -10,4 +10,4 @@ set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/assemble.py --root "${1:?root}" --collection-id "${2:?collection id}"
 
-.tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/audit.py --root "$1" --collection-id "$2" --output experiment_reports/training_against_role_probes/swe_corrected/base_audit
+.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/audit.py --root "$1" --collection-id "$2" --output experiment_reports/training_against_role_probes/swe_corrected/base_audit

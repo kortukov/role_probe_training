@@ -1,0 +1,66 @@
+{
+  "benchmark": "appworld_test_normal",
+  "samples": 168,
+  "metrics": {
+    "appworld_success": {
+      "successes": 53,
+      "scored": 168,
+      "observed_samples": 168,
+      "success_rate_scored": 0.31547619047619047,
+      "wilson_95_scored": [
+        0.24999851872138207,
+        0.3892037993601169
+      ],
+      "success_rate_observed_errors_as_failures": 0.31547619047619047
+    }
+  },
+  "sample_errors": 0,
+  "limited_samples": 0,
+  "export_errors": 0,
+  "agent_model_errors": 0,
+  "generation_token_caps": 1,
+  "samples_with_generation_caps": 1,
+  "model_context_stops": 0,
+  "samples_with_model_context_stops": 0,
+  "model_retries": 0,
+  "samples_with_limit_events": 0,
+  "simulator_stop_missing": 0,
+  "all_model_errors": 0,
+  "generation_records": 4547,
+  "provenance": {
+    "benchmark": "appworld_test_normal",
+    "settings": {
+      "output": "/hx2-weka/home/xy2222/role_probe_training/experiment_reports/agentic/appworld_hx2/runs/1584591/test_normal",
+      "base_url": "http://127.0.0.1:22591/v1",
+      "split": "test_normal",
+      "samples": null,
+      "concurrency": 8,
+      "shard_index": 0,
+      "shard_count": 1,
+      "seed": 123,
+      "max_steps": 50,
+      "max_tokens": 8192,
+      "image": ".cache/appworld/appworld.sif",
+      "data": ".cache/appworld/data",
+      "model_id": "openai/gpt-oss-20b",
+      "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee"
+    },
+    "model": "openai/gpt-oss-20b",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "git_revision": "3cfc4c1bcb90f20f9d9799fe2606b6e27f69ad8c",
+    "container_sha256": "99645e03e107680cf90043ac432889629b42b66f51fb5b55ffd8f79a97fbc954",
+    "data_source": "https://s3.us-west-2.amazonaws.com/appworld.dev/data-0.1.0.bundle",
+    "source_sha256": {
+      "/hx2-weka/home/xy2222/role_probe_training/src/experiments/agentic_eval/appworld_run.py": "7db0c393e8a5b5d873b1f385eff4cb18904bbb9f509471b28b2eacf3292dcc7f",
+      "/hx2-weka/home/xy2222/role_probe_training/src/experiments/agentic_eval/appworld_worker.py": "7b62aee104e0d2313e90a34cfa6aadc1e37d5a645fb3ac964a55ef6d78075490",
+      "/hx2-weka/home/xy2222/role_probe_training/src/experiments/agentic_eval/appworld_job.sbatch": "e8687a6a015dc93c5d1a61fb4a94b7eebfb67513a80a5bc4e98ecc33b0af850c",
+      "/hx2-weka/home/xy2222/role_probe_training/src/experiments/agentic_eval/appworld_parallel_job.sbatch": "f00dbcb11762308374c3dbf5a17d32c1fc58981a7112fd5fafb35ed53aa2b970",
+      "src/role_probe_training/trajectories/appworld.py": "f103ac73423bbf4dd5e84e9c2db7d153bb05d9ae68273f7e1518a198f2270508",
+      "/hx2-weka/home/xy2222/role_probe_training/src/experiments/agentic_eval/server_current/uv.lock": "92a17d3bf49da4c5a352f319c8fab14f1b06f7989153424a3b093fd67781452e",
+      "/hx2-weka/home/xy2222/role_probe_training/src/experiments/agentic_eval/swe/uv.lock": "e75ac5dd9f3b3d0b8d6f997f84da37d1ed4984fa721ac208927a40397e0cd4eb"
+    }
+  },
+  "expected_samples": 168,
+  "missing_sample_ids": [],
+  "trajectory_sha256": "b506007ca64c56afe9180f684baaf689965da1c245f53ea1797c01073e80d5d0"
+}

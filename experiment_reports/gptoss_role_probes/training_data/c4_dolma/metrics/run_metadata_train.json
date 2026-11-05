@@ -1,0 +1,35 @@
+{
+  "stage": "train",
+  "generation_max_new_tokens": 4000,
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "precision": "MXFP4 checkpoint dequantized to BF16",
+  "attention": "eager",
+  "git_commit": "3cfc4c1bcb90f20f9d9799fe2606b6e27f69ad8c",
+  "git_dirty": true,
+  "upstream_commit": "ec333c40fd43fe991e1ebf66765051b6d7e35784",
+  "slurm_job_id": "1584571",
+  "gpu": "NVIDIA H200",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "4.57.6",
+    "scikit-learn": "1.9.1",
+    "cuml-cu13": "26.10.0",
+    "numpy": "2.4.6",
+    "datasets": "4.8.5"
+  },
+  "input_sha256": "fe4de99d20bcc103b12ddb74e1a6ce37f511855b37d22ceeee93e32bbcab2b60",
+  "source_sha256": {
+    "src/role_probe_training/probes/harmony.py": "20b3d8b58142f3e2636d0306c706a2d058d4a690e0cad8b452118abfd17237c1",
+    "src/role_probe_training/probes/__init__.py": "51cf860236e198445304124eb4d74308bd998868a1d13d1ed66116b72341c8a2",
+    "src/role_probe_training/probes/model.py": "98a665088e9c2281f29b53aa4af28012e9a56c6d332bad6630f4d53fa7007955",
+    "src/role_probe_training/probes/linear.py": "d88d0d6c19980366bedb31b84edc3dd026dc220d913081eca6ca1282c4abbc57",
+    "src/role_probe_training/probes/evaluation.py": "aeb72fd1b711a0f453d23399913214f78befb9a529fd2d19cc0f2df7ad195b90",
+    "src/role_probe_training/probes/audit.py": "4e0896c889f41e5ef8b1549eaddd6542909d6231a0b04927839e71ca795bf387",
+    "src/experiments/gptoss_role_probes/plot.py": "d661acb6f265e6cdae6b0fc597a18b7e3fb9a020ba83195a22ac9d3fe7bb09fe",
+    "src/experiments/gptoss_role_probes/run.py": "8e01a367268be779384ddbd7a0db94a20f62cc7b2233e1fa4b46657fe15344a6",
+    "src/experiments/gptoss_role_probes/prepare.py": "9ec5e9421e5ea24aad13c6148982b033ba052515531ee33a9032d50bd6af948f",
+    "src/experiments/gptoss_role_probes/checks.py": "160047bafe60f55dcea7b98c71d4391773a1a615c362c814f7e4ee5921597677",
+    "src/experiments/gptoss_role_probes/smoke.py": "2a97c9293a39c60e6e25329c52d94459a434c6cea621e05350af5edf7d44107b"
+  }
+}

@@ -2,7 +2,7 @@
 
 Code: [`src/experiments/training_against_role_probes/swe_gap/`](../../../src/experiments/training_against_role_probes/swe_gap/).
 Run from `/data/cluster/users/kortukov/role_probe_training` with the existing locked
-`src/experiments/agentic_eval/swe` uv environment. All diagnostics use CPU Slurm
+`src/experiments/eval_role_probes/agentic_eval/swe_bench/env` uv environment. All diagnostics use CPU Slurm
 allocations; they do not call a model or modify benchmark results.
 
 ```bash
@@ -48,7 +48,7 @@ Summarize the completed diagnostic runs (substitute new job-specific directories
 when reproducing):
 
 ```bash
-.tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/training_against_role_probes/swe_gap/summarize.py --original-env environment-1505908 --fixed-env environment-fixed-1505909 --regrade regrade-1505905 --inspect-regrade inspect-regrade-1505912
+.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_gap/summarize.py --original-env environment-1505908 --fixed-env environment-fixed-1505909 --regrade regrade-1505905 --inspect-regrade inspect-regrade-1505912
 ```
 
 The last input is produced by `inspect_regrade.sbatch`, a one-patch fresh-image

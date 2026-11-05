@@ -25,7 +25,7 @@ The pinned GPT-OSS model is staged at `.cache/models/gpt-oss-20b`. The job creat
 
 ## Probe predictions and standalone viewer
 
-See [probe reproduction](../../probe_scoring/probe_transfer/RUNNING.md) and [layer-comparison reproduction](../../probe_scoring/probe_layer_comparison/RUNNING.md). The shared `agentic_probes/report.py` script accepts repeated `--dataset NAME=PREDICTION_DIRECTORY`, optional benchmark summary paths, and layer choices. It embeds all data in a standalone `viewer.html`, which stays local and can be downloaded and opened without a server.
+See [probe reproduction](../../probe_scoring/probe_transfer/RUNNING.md) and [layer-comparison reproduction](../../probe_scoring/probe_layer_comparison/RUNNING.md). The shared `probe_scoring/report.py` script accepts repeated `--dataset NAME=PREDICTION_DIRECTORY`, optional benchmark summary paths, and layer choices. It embeds all data in a standalone `viewer.html`, which stays local and can be downloaded and opened without a server.
 
 ## Recorded execution settings
 

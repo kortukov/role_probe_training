@@ -36,7 +36,7 @@ def main():
     probes = {}
     for layer in [4, 8, 12, 16, 20]:
         folder = 'gptoss20b_baseline' if layer in [12, 16] else 'gptoss20b_layers'
-        path = Path(f'experiment_reports/role_probes/{folder}/probes/layer_{layer}.npz')
+        path = Path(f'experiment_reports/gptoss_role_probes/{folder}/probes/layer_{layer}.npz')
         probe = RoleProbe.load(path)
         assert probe.metadata['roles'] == list(ROLES)
         assert probe.metadata['model_revision'] == manifest['model_revision']

@@ -15,4 +15,4 @@ export SWE_IMAGE_CACHE="$PWD/.cache/swe-images" HF_HOME="$PWD/.cache/huggingface
 export INSPECT_EVALS_CACHE_DIR="$PWD/.cache/inspect-evals"
 export SWE_GRADING_ARTIFACTS="$PWD/experiment_reports/training_against_role_probes/swe_corrected/data/saved-dual-regrade-$SLURM_JOB_ID/test_outputs"
 export SWE_HTTP_FIXTURE="$PWD/experiment_reports/training_against_role_probes/swe_corrected/data/http_fixture_legacy"
-.tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/regrade_dual_http.py --sample-id psf__requests-1724 --sample-id psf__requests-1766 --output "experiment_reports/training_against_role_probes/swe_corrected/data/saved-dual-regrade-$SLURM_JOB_ID"
+.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/regrade_dual_http.py --sample-id psf__requests-1724 --sample-id psf__requests-1766 --output "experiment_reports/training_against_role_probes/swe_corrected/data/saved-dual-regrade-$SLURM_JOB_ID"

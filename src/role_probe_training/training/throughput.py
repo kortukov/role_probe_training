@@ -50,7 +50,7 @@ def main():
     p.add_argument('--data', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--model', default='.cache/models/gpt-oss-20b')
-    p.add_argument('--probe', default='experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz')
+    p.add_argument('--probe', default='experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz')
     p.add_argument('--context', type=int, required=True, help='0 means full trajectory')
     p.add_argument('--updates', type=int, default=3, help='First update is warmup')
     p.add_argument('--batch-size', type=int, default=16)

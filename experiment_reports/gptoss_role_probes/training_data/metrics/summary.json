@@ -1,0 +1,7931 @@
+{
+ "arms": {
+  "c4_dolma": {
+   "synthetic": {
+    "4": {
+     "n_tokens": 191575,
+     "accuracy": 0.4243664361216234,
+     "balanced_accuracy": 0.4243664361216234,
+     "nll": 1.4989696741104126,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       10978,
+       6477,
+       4056,
+       8163,
+       8641
+      ],
+      [
+       5829,
+       14674,
+       3554,
+       7299,
+       6959
+      ],
+      [
+       1653,
+       1841,
+       15353,
+       10659,
+       8809
+      ],
+      [
+       2076,
+       2059,
+       7435,
+       18177,
+       8568
+      ],
+      [
+       2174,
+       1924,
+       4259,
+       7842,
+       22116
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.2865196398277437,
+       "mean_probability": 0.25747770071029663
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.382983165861934,
+       "mean_probability": 0.3134438097476959
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.40070468484927574,
+       "mean_probability": 0.3570828437805176
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.4744095001957458,
+       "mean_probability": 0.3854837715625763
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.5772151898734177,
+       "mean_probability": 0.447955846786499
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.46717395151300656,
+       "balanced_accuracy": 0.46717395151300656,
+       "nll": 1.275480031967163,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         4961,
+         2985,
+         527,
+         715,
+         2114
+        ],
+        [
+         2930,
+         5951,
+         391,
+         514,
+         1516
+        ],
+        [
+         1172,
+         986,
+         3884,
+         1889,
+         3371
+        ],
+        [
+         1436,
+         1082,
+         1727,
+         4130,
+         2927
+        ],
+        [
+         1068,
+         976,
+         913,
+         871,
+         7474
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.4389488586090957,
+         "mean_probability": 0.3480216860771179
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.5265439745177845,
+         "mean_probability": 0.4051913022994995
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.3436559900902495,
+         "mean_probability": 0.29496705532073975
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.3654220491948328,
+         "mean_probability": 0.29636552929878235
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.6612988851530702,
+         "mean_probability": 0.4543609023094177
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.40645615074223523,
+       "balanced_accuracy": 0.4064561507422352,
+       "nll": 1.5924758911132812,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         6017,
+         3492,
+         3529,
+         7448,
+         6527
+        ],
+        [
+         2899,
+         8723,
+         3163,
+         6785,
+         5443
+        ],
+        [
+         481,
+         855,
+         11469,
+         8770,
+         5438
+        ],
+        [
+         640,
+         977,
+         5708,
+         14047,
+         5641
+        ],
+        [
+         1106,
+         948,
+         3346,
+         6971,
+         14642
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.2227446044497094,
+         "mean_probability": 0.21959488093852997
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.3229185947506756,
+         "mean_probability": 0.27505746483802795
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.4245733535705031,
+         "mean_probability": 0.3830714821815491
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.5200088846111132,
+         "mean_probability": 0.42277008295059204
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.5420353163291748,
+         "mean_probability": 0.4452759921550751
+        }
+       }
+      }
+     }
+    },
+    "8": {
+     "n_tokens": 191575,
+     "accuracy": 0.6645125929792509,
+     "balanced_accuracy": 0.664512592979251,
+     "nll": 1.1816083192825317,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       15988,
+       8930,
+       3636,
+       1193,
+       8568
+      ],
+      [
+       4006,
+       29384,
+       1022,
+       408,
+       3495
+      ],
+      [
+       1377,
+       1276,
+       25850,
+       4291,
+       5521
+      ],
+      [
+       740,
+       1108,
+       5058,
+       29259,
+       2150
+      ],
+      [
+       4054,
+       2539,
+       3797,
+       1102,
+       26823
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.41727782852668666,
+       "mean_probability": 0.39101308584213257
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.7669059115229022,
+       "mean_probability": 0.7103933095932007
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.6746704945843665,
+       "mean_probability": 0.6223900318145752
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.7636434816651442,
+       "mean_probability": 0.7385190725326538
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.7000652485971551,
+       "mean_probability": 0.635399580001831
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.7752079278003893,
+       "balanced_accuracy": 0.7752079278003893,
+       "nll": 0.5756877660751343,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         7799,
+         1611,
+         384,
+         158,
+         1350
+        ],
+        [
+         1355,
+         9448,
+         72,
+         25,
+         402
+        ],
+        [
+         725,
+         87,
+         7783,
+         864,
+         1843
+        ],
+        [
+         121,
+         18,
+         764,
+         10163,
+         236
+        ],
+        [
+         1327,
+         218,
+         966,
+         177,
+         8614
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.6900548575473368,
+         "mean_probability": 0.5989027619361877
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.835958237480092,
+         "mean_probability": 0.7544305920600891
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.6886391789063883,
+         "mean_probability": 0.6188195943832397
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.8992213767474784,
+         "mean_probability": 0.8553215265274048
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.7621659883206512,
+         "mean_probability": 0.67850261926651
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.6181986450968052,
+       "balanced_accuracy": 0.6181986450968052,
+       "nll": 1.4351203441619873,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         8189,
+         7319,
+         3252,
+         1035,
+         7218
+        ],
+        [
+         2651,
+         19936,
+         950,
+         383,
+         3093
+        ],
+        [
+         652,
+         1189,
+         18067,
+         3427,
+         3678
+        ],
+        [
+         619,
+         1090,
+         4294,
+         19096,
+         1914
+        ],
+        [
+         2727,
+         2321,
+         2831,
+         925,
+         18209
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.3031503350238774,
+         "mean_probability": 0.3040338456630707
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.7380150298004664,
+         "mean_probability": 0.6919683814048767
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.6688261207566727,
+         "mean_probability": 0.623883843421936
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7069188909043794,
+         "mean_probability": 0.6896499991416931
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.6740828489986302,
+         "mean_probability": 0.6173656582832336
+        }
+       }
+      }
+     }
+    },
+    "12": {
+     "n_tokens": 191575,
+     "accuracy": 0.5926399582408978,
+     "balanced_accuracy": 0.5926399582408978,
+     "nll": 1.3248581886291504,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       18413,
+       7586,
+       4354,
+       1481,
+       6481
+      ],
+      [
+       5049,
+       27808,
+       1332,
+       317,
+       3809
+      ],
+      [
+       4200,
+       2268,
+       19236,
+       7243,
+       5368
+      ],
+      [
+       2102,
+       949,
+       3721,
+       29515,
+       2028
+      ],
+      [
+       9469,
+       3834,
+       5339,
+       1110,
+       18563
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.480568967767193,
+       "mean_probability": 0.4320465922355652
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.7257731958762886,
+       "mean_probability": 0.6614111661911011
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.502048805950672,
+       "mean_probability": 0.45277270674705505
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.7703249380138327,
+       "mean_probability": 0.7333622574806213
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.4844838835965027,
+       "mean_probability": 0.43164342641830444
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.689046186515661,
+       "balanced_accuracy": 0.689046186515661,
+       "nll": 0.7906502485275269,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         7224,
+         1605,
+         665,
+         440,
+         1368
+        ],
+        [
+         1883,
+         8446,
+         229,
+         81,
+         663
+        ],
+        [
+         1321,
+         357,
+         6303,
+         1468,
+         1853
+        ],
+        [
+         293,
+         27,
+         863,
+         9961,
+         158
+        ],
+        [
+         2046,
+         648,
+         1218,
+         386,
+         7004
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.6391789063882498,
+         "mean_probability": 0.5414026379585266
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.7473013625906919,
+         "mean_probability": 0.6690487861633301
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.5576889046186516,
+         "mean_probability": 0.4835716784000397
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.8813484339055034,
+         "mean_probability": 0.8199683427810669
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.6197133250752079,
+         "mean_probability": 0.510571300983429
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.5523044460074779,
+       "balanced_accuracy": 0.5523044460074779,
+       "nll": 1.5483661890029907,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         11189,
+         5981,
+         3689,
+         1041,
+         5113
+        ],
+        [
+         3166,
+         19362,
+         1103,
+         236,
+         3146
+        ],
+        [
+         2879,
+         1911,
+         12933,
+         5775,
+         3515
+        ],
+        [
+         1809,
+         922,
+         2858,
+         19554,
+         1870
+        ],
+        [
+         7423,
+         3186,
+         4121,
+         724,
+         11559
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.4142079739384741,
+         "mean_probability": 0.386292964220047
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.716766001554807,
+         "mean_probability": 0.6582157015800476
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.47876948136082625,
+         "mean_probability": 0.4398867189884186
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7238736904453411,
+         "mean_probability": 0.697127103805542
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.427905082737941,
+         "mean_probability": 0.39862072467803955
+        }
+       }
+      }
+     }
+    },
+    "16": {
+     "n_tokens": 191575,
+     "accuracy": 0.692793944930184,
+     "balanced_accuracy": 0.692793944930184,
+     "nll": 1.218222975730896,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       22749,
+       5666,
+       2534,
+       1184,
+       6182
+      ],
+      [
+       1583,
+       34901,
+       471,
+       59,
+       1301
+      ],
+      [
+       2243,
+       1207,
+       21398,
+       7806,
+       5661
+      ],
+      [
+       1215,
+       371,
+       2550,
+       32199,
+       1980
+      ],
+      [
+       8905,
+       2484,
+       4551,
+       900,
+       21475
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.5937361346731045,
+       "mean_probability": 0.5561225414276123
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.9108965157249119,
+       "mean_probability": 0.8896682858467102
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.5584757927704554,
+       "mean_probability": 0.5233726501464844
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.8403758319196137,
+       "mean_probability": 0.8229997158050537
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.5604854495628344,
+       "mean_probability": 0.5192350149154663
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.8419217837550876,
+       "balanced_accuracy": 0.8419217837550876,
+       "nll": 0.40284228324890137,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         9255,
+         632,
+         186,
+         105,
+         1124
+        ],
+        [
+         552,
+         10637,
+         9,
+         0,
+         104
+        ],
+        [
+         354,
+         41,
+         8559,
+         772,
+         1576
+        ],
+        [
+         17,
+         20,
+         575,
+         10631,
+         59
+        ],
+        [
+         962,
+         243,
+         1387,
+         215,
+         8495
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.8188816138736507,
+         "mean_probability": 0.7432597875595093
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.9411608564855778,
+         "mean_probability": 0.9188811779022217
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.7572995929923907,
+         "mean_probability": 0.6925218105316162
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.9406299769952221,
+         "mean_probability": 0.9133656620979309
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.7516368784285967,
+         "mean_probability": 0.6691268682479858
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.6304001776922222,
+       "balanced_accuracy": 0.6304001776922223,
+       "nll": 1.5593711137771606,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         13494,
+         5034,
+         2348,
+         1079,
+         5058
+        ],
+        [
+         1031,
+         24264,
+         462,
+         59,
+         1197
+        ],
+        [
+         1889,
+         1166,
+         12839,
+         7034,
+         4085
+        ],
+        [
+         1198,
+         351,
+         1975,
+         21568,
+         1921
+        ],
+        [
+         7943,
+         2241,
+         3164,
+         685,
+         12980
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.49953725983785585,
+         "mean_probability": 0.4778260290622711
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.898234183541258,
+         "mean_probability": 0.8774458169937134
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.47528967534150224,
+         "mean_probability": 0.45260217785835266
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.798430385370007,
+         "mean_probability": 0.7851914167404175
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.4805093843704883,
+         "mean_probability": 0.4565216600894928
+        }
+       }
+      }
+     }
+    },
+    "20": {
+     "n_tokens": 191575,
+     "accuracy": 0.5950045674018009,
+     "balanced_accuracy": 0.5950045674018007,
+     "nll": 1.8387566804885864,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       14380,
+       12850,
+       4474,
+       2089,
+       4522
+      ],
+      [
+       899,
+       36325,
+       498,
+       107,
+       486
+      ],
+      [
+       2019,
+       4710,
+       18456,
+       7760,
+       5370
+      ],
+      [
+       1071,
+       1871,
+       3318,
+       30450,
+       1605
+      ],
+      [
+       4718,
+       10164,
+       6956,
+       2100,
+       14377
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.375309930836487,
+       "mean_probability": 0.3456208109855652
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.9480621166644917,
+       "mean_probability": 0.9210941791534424
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.48169124363826177,
+       "mean_probability": 0.44402384757995605
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.7947279133498629,
+       "mean_probability": 0.7634363174438477
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.3752316325199008,
+       "mean_probability": 0.3448093831539154
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.7702884445230933,
+       "balanced_accuracy": 0.7702884445230933,
+       "nll": 0.5814492702484131,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         7702,
+         772,
+         692,
+         235,
+         1901
+        ],
+        [
+         501,
+         10619,
+         74,
+         3,
+         105
+        ],
+        [
+         442,
+         57,
+         7723,
+         1188,
+         1892
+        ],
+        [
+         48,
+         10,
+         1058,
+         10022,
+         164
+        ],
+        [
+         1217,
+         244,
+         2007,
+         371,
+         7463
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.6814723057865865,
+         "mean_probability": 0.5825992822647095
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.9395682180145107,
+         "mean_probability": 0.8907618522644043
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.6833303840028313,
+         "mean_probability": 0.5957332849502563
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.8867457087241196,
+         "mean_probability": 0.8290175795555115
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.6603256060874182,
+         "mean_probability": 0.5497013926506042
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.5216673453522378,
+       "balanced_accuracy": 0.5216673453522378,
+       "nll": 2.364802837371826,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         6678,
+         12078,
+         3782,
+         1854,
+         2621
+        ],
+        [
+         398,
+         25706,
+         424,
+         104,
+         381
+        ],
+        [
+         1577,
+         4653,
+         10733,
+         6572,
+         3478
+        ],
+        [
+         1023,
+         1861,
+         2260,
+         20428,
+         1441
+        ],
+        [
+         3501,
+         9920,
+         4949,
+         1729,
+         6914
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.2472143042238922,
+         "mean_probability": 0.24647116661071777
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.9516158886462074,
+         "mean_probability": 0.9337849020957947
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.3973272128234554,
+         "mean_probability": 0.38054990768432617
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7562284825824603,
+         "mean_probability": 0.7359976172447205
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.2559508384851738,
+         "mean_probability": 0.2590843737125397
+        }
+       }
+      }
+     }
+    }
+   },
+   "conversations": {
+    "4": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.4820785457039959,
+      "balanced_accuracy": 0.5337632054660439,
+      "nll": 1.0522569417953491,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        136,
+        56,
+        56,
+        80,
+        128
+       ],
+       [
+        3,
+        260,
+        51,
+        71,
+        1
+       ],
+       [
+        15,
+        191,
+        2068,
+        381,
+        10
+       ],
+       [
+        7,
+        7,
+        3292,
+        3158,
+        1691
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.2982456140350877,
+        "mean_probability": 0.298475444316864
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.6735751295336787,
+        "mean_probability": 0.5158381462097168
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.775984990619137,
+        "mean_probability": 0.583368182182312
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.38724708767627225,
+        "mean_probability": 0.38155534863471985
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.2984754145145416,
+        0.15890902280807495,
+        0.1384577453136444,
+        0.15327346324920654,
+        0.25088438391685486
+       ],
+       "accuracy": 0.2982456140350877
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.09185382723808289,
+        0.530745804309845,
+        0.15637952089309692,
+        0.20199628174304962,
+        0.019024580717086792
+       ],
+       "accuracy": 0.6826705354650656
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.035709526389837265,
+        0.09003745019435883,
+        0.6037827730178833,
+        0.23033316433429718,
+        0.04013698920607567
+       ],
+       "accuracy": 0.7966578173555859
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.014075801707804203,
+        0.007778726518154144,
+        0.4279788136482239,
+        0.4164327383041382,
+        0.13373404741287231
+       ],
+       "accuracy": 0.4501180250416527
+      }
+     }
+    },
+    "8": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.918967587034814,
+      "balanced_accuracy": 0.7542737320510989,
+      "nll": 0.26055485010147095,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        80,
+        208,
+        0,
+        0,
+        168
+       ],
+       [
+        0,
+        380,
+        2,
+        0,
+        4
+       ],
+       [
+        0,
+        39,
+        2373,
+        204,
+        49
+       ],
+       [
+        0,
+        0,
+        271,
+        7884,
+        0
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.17543859649122806,
+        "mean_probability": 0.18975421786308289
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9844559585492227,
+        "mean_probability": 0.9613563418388367
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.8904315196998124,
+        "mean_probability": 0.8363512754440308
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.9667688534641324,
+        "mean_probability": 0.9523661136627197
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.1897541880607605,
+        0.4393422603607178,
+        0.01575116440653801,
+        9.617093610359007e-07,
+        0.35515138506889343
+       ],
+       "accuracy": 0.17543859649122806
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.004986530635505915,
+        0.9742896556854248,
+        0.009541839361190796,
+        0.0002818006032612175,
+        0.010900248773396015
+       ],
+       "accuracy": 0.9897534897534898
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        5.7419234508415684e-05,
+        0.021987516433000565,
+        0.8414546847343445,
+        0.09820766001939774,
+        0.038292765617370605
+       ],
+       "accuracy": 0.8886054620877779
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        1.4483351833405322e-06,
+        4.737411018140847e-06,
+        0.01569974794983864,
+        0.9842642545700073,
+        3.0890554626239464e-05
+       ],
+       "accuracy": 0.9898464128602531
+      }
+     }
+    },
+    "12": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8722346081289659,
+      "balanced_accuracy": 0.6460935628101301,
+      "nll": 0.4290134906768799,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        32,
+        125,
+        24,
+        0,
+        275
+       ],
+       [
+        0,
+        341,
+        19,
+        1,
+        25
+       ],
+       [
+        0,
+        72,
+        1699,
+        635,
+        259
+       ],
+       [
+        0,
+        0,
+        46,
+        8100,
+        9
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.07017543859649122,
+        "mean_probability": 0.08867286890745163
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.883419689119171,
+        "mean_probability": 0.8463200926780701
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.6375234521575985,
+        "mean_probability": 0.592166543006897
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.9932556713672593,
+        "mean_probability": 0.9867632985115051
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.08867286145687103,
+        0.29298681020736694,
+        0.10728658735752106,
+        5.8627541875466704e-05,
+        0.510995090007782
+       ],
+       "accuracy": 0.07017543859649122
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.003776135854423046,
+        0.8675180673599243,
+        0.047277770936489105,
+        0.004568597301840782,
+        0.07685953378677368
+       ],
+       "accuracy": 0.9025190181440181
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.00018363185517955571,
+        0.03644970431923866,
+        0.63533616065979,
+        0.21499793231487274,
+        0.11303243786096573
+       ],
+       "accuracy": 0.6786347389823284
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        3.3297963000222808e-06,
+        1.1681921932904515e-05,
+        0.004257265478372574,
+        0.9950788617134094,
+        0.0006502933101728559
+       ],
+       "accuracy": 0.9973909305068547
+      }
+     }
+    },
+    "16": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.790516206482593,
+      "balanced_accuracy": 0.6098394848860687,
+      "nll": 0.8144371509552002,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        55,
+        305,
+        8,
+        0,
+        88
+       ],
+       [
+        0,
+        380,
+        3,
+        0,
+        3
+       ],
+       [
+        2,
+        32,
+        1018,
+        76,
+        1537
+       ],
+       [
+        0,
+        23,
+        2,
+        7766,
+        364
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.1206140350877193,
+        "mean_probability": 0.09697815775871277
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9844559585492227,
+        "mean_probability": 0.9788399338722229
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.3819887429643527,
+        "mean_probability": 0.3978171944618225
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.9522992029429798,
+        "mean_probability": 0.943395733833313
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.09697815775871277,
+        0.6555723547935486,
+        0.012593929655849934,
+        1.4075844774197321e-05,
+        0.23484158515930176
+       ],
+       "accuracy": 0.12061403508771928
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.0005598840652965009,
+        0.9768247008323669,
+        0.005819089710712433,
+        0.00032385840313509107,
+        0.016472551971673965
+       ],
+       "accuracy": 0.9818893797154667
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.0010852674022316933,
+        0.030394893139600754,
+        0.4009764790534973,
+        0.058395855128765106,
+        0.509147584438324
+       ],
+       "accuracy": 0.3879718591855194
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.00018298605573363602,
+        0.0011032805778086185,
+        0.0006731900502927601,
+        0.9748885631561279,
+        0.023152964189648628
+       ],
+       "accuracy": 0.9795083749726738
+      }
+     }
+    },
+    "20": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8067226890756303,
+      "balanced_accuracy": 0.6007053342043441,
+      "nll": 0.9082128405570984,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        24,
+        267,
+        30,
+        0,
+        135
+       ],
+       [
+        1,
+        377,
+        1,
+        1,
+        6
+       ],
+       [
+        2,
+        466,
+        1065,
+        312,
+        820
+       ],
+       [
+        0,
+        178,
+        0,
+        7942,
+        35
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.05263157894736842,
+        "mean_probability": 0.08748088777065277
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9766839378238342,
+        "mean_probability": 0.9692866802215576
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.399624765478424,
+        "mean_probability": 0.3917703628540039
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.9738810545677499,
+        "mean_probability": 0.9697341918945312
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.08748088032007217,
+        0.5676438808441162,
+        0.06351436674594879,
+        0.004930899944156408,
+        0.2764299511909485
+       ],
+       "accuracy": 0.05263157894736842
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.002127537503838539,
+        0.9700406789779663,
+        0.0034984820522367954,
+        0.002989725675433874,
+        0.021343594416975975
+       ],
+       "accuracy": 0.978914736115823
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.0012862513540312648,
+        0.22215896844863892,
+        0.37554943561553955,
+        0.1045035570859909,
+        0.29650163650512695
+       ],
+       "accuracy": 0.382364478610338
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        4.113787872483954e-05,
+        0.008453180082142353,
+        0.0001668561453698203,
+        0.989112913608551,
+        0.0022267319727689028
+       ],
+       "accuracy": 0.9909502447772756
+      }
+     }
+    }
+   },
+   "audit": {
+    "4": {
+     "n_train_tokens": 642530,
+     "mean_cross_entropy": 1.2542697893136694,
+     "objective": 1.2602842971900923,
+     "max_abs_gradient": 0.0015587180586339828,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.4776275037741428,
+     "train_accuracy_by_collection": {
+      "neutral": 0.4776275037741428
+     },
+     "train_per_role_recall": {
+      "system": 0.414828879585389,
+      "user": 0.5683625667284018,
+      "cot": 0.4393335719732931,
+      "assistant": 0.42409692932625714,
+      "tool": 0.5415155712573732
+     },
+     "train_confusion_counts": [
+      [
+       53308,
+       34975,
+       10866,
+       12406,
+       16951
+      ],
+      [
+       26829,
+       73038,
+       7864,
+       9136,
+       11639
+      ],
+      [
+       10973,
+       10654,
+       56457,
+       28280,
+       22142
+      ],
+      [
+       12879,
+       12266,
+       28975,
+       54499,
+       19887
+      ],
+      [
+       14246,
+       10609,
+       18181,
+       15882,
+       69588
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        53308,
+        34975,
+        10866,
+        12406,
+        16951
+       ],
+       [
+        26829,
+        73038,
+        7864,
+        9136,
+        11639
+       ],
+       [
+        10973,
+        10654,
+        56457,
+        28280,
+        22142
+       ],
+       [
+        12879,
+        12266,
+        28975,
+        54499,
+        19887
+       ],
+       [
+        14246,
+        10609,
+        18181,
+        15882,
+        69588
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "8": {
+     "n_train_tokens": 642530,
+     "mean_cross_entropy": 0.48380573196696347,
+     "objective": 0.506981489391906,
+     "max_abs_gradient": 0.00016412960098297156,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.8163229732463854,
+     "train_accuracy_by_collection": {
+      "neutral": 0.8163229732463854
+     },
+     "train_per_role_recall": {
+      "system": 0.7210791714005572,
+      "user": 0.8504194356683734,
+      "cot": 0.7989899304312639,
+      "assistant": 0.9172412183088727,
+      "tool": 0.7938851104228596
+     },
+     "train_confusion_counts": [
+      [
+       92663,
+       17623,
+       4869,
+       1479,
+       11872
+      ],
+      [
+       14710,
+       109284,
+       1461,
+       325,
+       2726
+      ],
+      [
+       5359,
+       1540,
+       102675,
+       7599,
+       11333
+      ],
+      [
+       1208,
+       266,
+       7257,
+       117871,
+       1904
+      ],
+      [
+       11994,
+       2845,
+       10061,
+       1587,
+       102019
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        92663,
+        17623,
+        4869,
+        1479,
+        11872
+       ],
+       [
+        14710,
+        109284,
+        1461,
+        325,
+        2726
+       ],
+       [
+        5359,
+        1540,
+        102675,
+        7599,
+        11333
+       ],
+       [
+        1208,
+        266,
+        7257,
+        117871,
+        1904
+       ],
+       [
+        11994,
+        2845,
+        10061,
+        1587,
+        102019
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "12": {
+     "n_train_tokens": 642530,
+     "mean_cross_entropy": 0.6806606891739924,
+     "objective": 0.6954340089501375,
+     "max_abs_gradient": 0.0008950674172461707,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7373928065615614,
+     "train_accuracy_by_collection": {
+      "neutral": 0.7373928065615614
+     },
+     "train_per_role_recall": {
+      "system": 0.6511680388464351,
+      "user": 0.8126780072525797,
+      "cot": 0.6784585933730721,
+      "assistant": 0.8826436119714255,
+      "tool": 0.6620157813642943
+     },
+     "train_confusion_counts": [
+      [
+       83679,
+       16161,
+       8324,
+       2749,
+       17593
+      ],
+      [
+       13208,
+       104434,
+       3203,
+       576,
+       7085
+      ],
+      [
+       9224,
+       4217,
+       87186,
+       11379,
+       16500
+      ],
+      [
+       2197,
+       443,
+       9846,
+       113425,
+       2595
+      ],
+      [
+       17508,
+       8017,
+       15348,
+       2560,
+       85073
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        83679,
+        16161,
+        8324,
+        2749,
+        17593
+       ],
+       [
+        13208,
+        104434,
+        3203,
+        576,
+        7085
+       ],
+       [
+        9224,
+        4217,
+        87186,
+        11379,
+        16500
+       ],
+       [
+        2197,
+        443,
+        9846,
+        113425,
+        2595
+       ],
+       [
+        17508,
+        8017,
+        15348,
+        2560,
+        85073
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "16": {
+     "n_train_tokens": 642530,
+     "mean_cross_entropy": 0.3382439551203372,
+     "objective": 0.35742098102595754,
+     "max_abs_gradient": 8.960366948198762e-05,
+     "gradient_below_1e_4": true,
+     "train_accuracy": 0.872682987564783,
+     "train_accuracy_by_collection": {
+      "neutral": 0.872682987564783
+     },
+     "train_per_role_recall": {
+      "system": 0.8532442064961947,
+      "user": 0.9580019609979301,
+      "cot": 0.8180940967736915,
+      "assistant": 0.9561965978242261,
+      "tool": 0.7778780757318724
+     },
+     "train_confusion_counts": [
+      [
+       109647,
+       4180,
+       2930,
+       587,
+       11162
+      ],
+      [
+       3502,
+       123109,
+       498,
+       96,
+       1301
+      ],
+      [
+       3527,
+       559,
+       105130,
+       4776,
+       14514
+      ],
+      [
+       302,
+       55,
+       4191,
+       122877,
+       1081
+      ],
+      [
+       12554,
+       1898,
+       13057,
+       1035,
+       99962
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        109647,
+        4180,
+        2930,
+        587,
+        11162
+       ],
+       [
+        3502,
+        123109,
+        498,
+        96,
+        1301
+       ],
+       [
+        3527,
+        559,
+        105130,
+        4776,
+        14514
+       ],
+       [
+        302,
+        55,
+        4191,
+        122877,
+        1081
+       ],
+       [
+        12554,
+        1898,
+        13057,
+        1035,
+        99962
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "20": {
+     "n_train_tokens": 642530,
+     "mean_cross_entropy": 0.5433904989190136,
+     "objective": 0.5631707157368524,
+     "max_abs_gradient": 0.001960738657787871,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7912190870465192,
+     "train_accuracy_by_collection": {
+      "neutral": 0.7912190870465192
+     },
+     "train_per_role_recall": {
+      "system": 0.7515602384324467,
+      "user": 0.9277776913140242,
+      "cot": 0.7159587879165176,
+      "assistant": 0.911521641012871,
+      "tool": 0.6492770765567366
+     },
+     "train_confusion_counts": [
+      [
+       96580,
+       8174,
+       5086,
+       1449,
+       17217
+      ],
+      [
+       5725,
+       119225,
+       964,
+       206,
+       2386
+      ],
+      [
+       6816,
+       1640,
+       92005,
+       9128,
+       18917
+      ],
+      [
+       986,
+       128,
+       7689,
+       117136,
+       2567
+      ],
+      [
+       20390,
+       4126,
+       17580,
+       2974,
+       83436
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        96580,
+        8174,
+        5086,
+        1449,
+        17217
+       ],
+       [
+        5725,
+        119225,
+        964,
+        206,
+        2386
+       ],
+       [
+        6816,
+        1640,
+        92005,
+        9128,
+        18917
+       ],
+       [
+        986,
+        128,
+        7689,
+        117136,
+        2567
+       ],
+       [
+        20390,
+        4126,
+        17580,
+        2974,
+        83436
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    }
+   },
+   "appworld": {
+    "accuracy": 0.2711398936226683,
+    "macro_recall": 0.35226456128598105,
+    "per_role_recall": [
+     0.012295081967213115,
+     0.4977510101395136,
+     0.7466378288830344,
+     0.3691619011136345,
+     0.13547698432650976
+    ],
+    "mean_true_role_probability": [
+     0.024318507920642583,
+     0.49039403599512155,
+     0.6758638210416225,
+     0.3738640485591591,
+     0.16178972653541696
+    ],
+    "mean_trajectory_accuracy": 0.26368882887845324,
+    "confusion_counts": [
+     [
+      504,
+      336,
+      3023,
+      0,
+      37129
+     ],
+     [
+      2,
+      6529,
+      245,
+      0,
+      6341
+     ],
+     [
+      45,
+      6072,
+      129800,
+      26442,
+      11487
+     ],
+     [
+      1552,
+      5857,
+      551500,
+      337294,
+      17472
+     ],
+     [
+      115598,
+      157393,
+      514144,
+      261700,
+      164360
+     ]
+    ],
+    "probe_sha256": "f62fb748a5b2ccc596fcdb95f23f4c3d5073304a10b88a1a99eb27cd697a2c85",
+    "layers": {
+     "4": {
+      "accuracy": 0.5094815962969648,
+      "macro_recall": 0.3939587599401726,
+      "per_role_recall": [
+       0.06967213114754098,
+       0.5296942898528627,
+       0.4480689805920182,
+       0.023235833310531643,
+       0.8991225647979096
+      ],
+      "mean_true_role_probability": [
+       0.13551902718132086,
+       0.40800184873619666,
+       0.39456884135071735,
+       0.0928032050488946,
+       0.793175930113062
+      ],
+      "mean_trajectory_accuracy": 0.514481429633261,
+      "confusion_counts": [
+       [
+        2856,
+        10416,
+        1848,
+        11592,
+        14280
+       ],
+       [
+        37,
+        6948,
+        1254,
+        3127,
+        1751
+       ],
+       [
+        119,
+        3390,
+        77895,
+        9136,
+        83306
+       ],
+       [
+        584,
+        2063,
+        87359,
+        21230,
+        802439
+       ],
+       [
+        1282,
+        1326,
+        79475,
+        40301,
+        1090811
+       ]
+      ],
+      "probe_sha256": "e07ecad5f61f5878ec1132585f6ea0617abc1dc416544b80fdccf6a6b833fcea"
+     },
+     "8": {
+      "accuracy": 0.209626193029206,
+      "macro_recall": 0.4431042585672803,
+      "per_role_recall": [
+       0.06557377049180328,
+       0.937866890295037,
+       0.9267570148292167,
+       0.09556352094563166,
+       0.18976009627471263
+      ],
+      "mean_true_role_probability": [
+       0.11995912288801294,
+       0.8814164442717396,
+       0.8864832508147613,
+       0.11169748913070056,
+       0.1996759144091504
+      ],
+      "mean_trajectory_accuracy": 0.2121919921046167,
+      "confusion_counts": [
+       [
+        2688,
+        5880,
+        7056,
+        0,
+        25368
+       ],
+       [
+        0,
+        12302,
+        225,
+        1,
+        589
+       ],
+       [
+        122,
+        3780,
+        161113,
+        4003,
+        4828
+       ],
+       [
+        3716,
+        4328,
+        786082,
+        87314,
+        32235
+       ],
+       [
+        198752,
+        281772,
+        404545,
+        97910,
+        230216
+       ]
+      ],
+      "probe_sha256": "3d94c78fed12a9635d06816710f4214416bfac7d67c43ece87eb94dfb96e01f4"
+     },
+     "12": {
+      "accuracy": 0.2711398936226683,
+      "macro_recall": 0.35226456128598105,
+      "per_role_recall": [
+       0.012295081967213115,
+       0.4977510101395136,
+       0.7466378288830344,
+       0.3691619011136345,
+       0.13547698432650976
+      ],
+      "mean_true_role_probability": [
+       0.024318507920642583,
+       0.49039403599512155,
+       0.6758638210416225,
+       0.3738640485591591,
+       0.16178972653541696
+      ],
+      "mean_trajectory_accuracy": 0.26368882887845324,
+      "confusion_counts": [
+       [
+        504,
+        336,
+        3023,
+        0,
+        37129
+       ],
+       [
+        2,
+        6529,
+        245,
+        0,
+        6341
+       ],
+       [
+        45,
+        6072,
+        129800,
+        26442,
+        11487
+       ],
+       [
+        1552,
+        5857,
+        551500,
+        337294,
+        17472
+       ],
+       [
+        115598,
+        157393,
+        514144,
+        261700,
+        164360
+       ]
+      ],
+      "probe_sha256": "f62fb748a5b2ccc596fcdb95f23f4c3d5073304a10b88a1a99eb27cd697a2c85"
+     },
+     "16": {
+      "accuracy": 0.3260747613941588,
+      "macro_recall": 0.30720624718871437,
+      "per_role_recall": [
+       0.020540593286494924,
+       0.6766028817564992,
+       0.18098201856815802,
+       0.23871179576983062,
+       0.41919394656258885
+      ],
+      "mean_true_role_probability": [
+       0.03959953996873693,
+       0.6648291683012968,
+       0.22485162358257438,
+       0.23603188688065438,
+       0.39599099949102634
+      ],
+      "mean_trajectory_accuracy": 0.3332182273815253,
+      "confusion_counts": [
+       [
+        842,
+        11276,
+        1661,
+        0,
+        27213
+       ],
+       [
+        13,
+        8875,
+        102,
+        0,
+        4127
+       ],
+       [
+        1630,
+        658,
+        31463,
+        12884,
+        127211
+       ],
+       [
+        33291,
+        1619,
+        188302,
+        218105,
+        472358
+       ],
+       [
+        177303,
+        181007,
+        38611,
+        307710,
+        508564
+       ]
+      ],
+      "probe_sha256": "44f04322b43294dae37f82b70057407cb97228fa74e31785b5ac3bbe617f5315"
+     },
+     "20": {
+      "accuracy": 0.31954986039302286,
+      "macro_recall": 0.34452674851355214,
+      "per_role_recall": [
+       0.004561865729898517,
+       0.8777921780895022,
+       0.23021524797809556,
+       0.13143076039072973,
+       0.478633690379535
+      ],
+      "mean_true_role_probability": [
+       0.01640092586752854,
+       0.8413749058126361,
+       0.25801879827599417,
+       0.1330364464330915,
+       0.4478687930465033
+      ],
+      "mean_trajectory_accuracy": 0.322289104301771,
+      "confusion_counts": [
+       [
+        187,
+        21654,
+        4854,
+        0,
+        14297
+       ],
+       [
+        6,
+        11514,
+        143,
+        40,
+        1414
+       ],
+       [
+        2141,
+        12215,
+        40022,
+        11368,
+        108100
+       ],
+       [
+        23376,
+        73983,
+        200601,
+        120085,
+        495630
+       ],
+       [
+        127161,
+        346168,
+        43713,
+        115477,
+        580676
+       ]
+      ],
+      "probe_sha256": "21fdbcffb96c0afb4f426b42f38b3c446c8ff4bbb948272d1ded0bc19d6364b2"
+     }
+    },
+    "roles": [
+     "system",
+     "user",
+     "cot",
+     "assistant",
+     "tool"
+    ],
+    "trajectories": 168,
+    "scored_trajectories": 168,
+    "excluded_trajectories": [],
+    "context_limit": 131072,
+    "input_sha256": "b506007ca64c56afe9180f684baaf689965da1c245f53ea1797c01073e80d5d0",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+    "overlength_policy": "exclude"
+   },
+   "fit": {
+    "4": {
+     "iterations": 266,
+     "converged": null,
+     "warnings": []
+    },
+    "8": {
+     "iterations": 429,
+     "converged": null,
+     "warnings": []
+    },
+    "12": {
+     "iterations": 451,
+     "converged": null,
+     "warnings": []
+    },
+    "16": {
+     "iterations": 662,
+     "converged": null,
+     "warnings": []
+    },
+    "20": {
+     "iterations": 849,
+     "converged": null,
+     "warnings": []
+    }
+   }
+  },
+  "toucan": {
+   "synthetic": {
+    "4": {
+     "n_tokens": 191575,
+     "accuracy": 0.4844786637087303,
+     "balanced_accuracy": 0.4844786637087302,
+     "nll": 1.3541157245635986,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       16760,
+       12278,
+       2770,
+       2791,
+       3716
+      ],
+      [
+       7049,
+       23604,
+       2229,
+       2292,
+       3141
+      ],
+      [
+       4915,
+       6082,
+       17023,
+       6766,
+       3529
+      ],
+      [
+       5542,
+       6549,
+       6146,
+       16597,
+       3481
+      ],
+      [
+       5613,
+       6466,
+       3460,
+       3946,
+       18830
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.43742659532820044,
+       "mean_probability": 0.37998077273368835
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.6160511549001696,
+       "mean_probability": 0.4848867952823639
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.4442907477489234,
+       "mean_probability": 0.3640488386154175
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.4331723867936839,
+       "mean_probability": 0.3544747233390808
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.4914524337726739,
+       "mean_probability": 0.3991221487522125
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.34954875243319766,
+       "balanced_accuracy": 0.34954875243319766,
+       "nll": 1.7684940099716187,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         5080,
+         5127,
+         202,
+         279,
+         614
+        ],
+        [
+         2922,
+         7607,
+         150,
+         213,
+         410
+        ],
+        [
+         3139,
+         3496,
+         2049,
+         1464,
+         1154
+        ],
+        [
+         3290,
+         3658,
+         736,
+         2579,
+         1039
+        ],
+        [
+         3275,
+         3486,
+         802,
+         1301,
+         2438
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.44947796850115024,
+         "mean_probability": 0.40831488370895386
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.6730667138559547,
+         "mean_probability": 0.5439854860305786
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.18129534595646787,
+         "mean_probability": 0.18624261021614075
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.2281897009378871,
+         "mean_probability": 0.21409572660923004
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.2157140329145284,
+         "mean_probability": 0.2079066038131714
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.5409321437826232,
+       "balanced_accuracy": 0.5409321437826231,
+       "nll": 1.18074369430542,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         11680,
+         7151,
+         2568,
+         2512,
+         3102
+        ],
+        [
+         4127,
+         15997,
+         2079,
+         2079,
+         2731
+        ],
+        [
+         1776,
+         2586,
+         14974,
+         5302,
+         2375
+        ],
+        [
+         2252,
+         2891,
+         5410,
+         14018,
+         2442
+        ],
+        [
+         2338,
+         2980,
+         2658,
+         2645,
+         16392
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.4323844075074964,
+         "mean_probability": 0.3681260049343109
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.592196349905601,
+         "mean_probability": 0.4601604640483856
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.5543256950357235,
+         "mean_probability": 0.43844133615493774
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.5189353274349388,
+         "mean_probability": 0.41320809721946716
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.6068189390293562,
+         "mean_probability": 0.47912508249282837
+        }
+       }
+      }
+     }
+    },
+    "8": {
+     "n_tokens": 191575,
+     "accuracy": 0.7040375831919614,
+     "balanced_accuracy": 0.7040375831919613,
+     "nll": 0.8243399858474731,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       20145,
+       9349,
+       2578,
+       2512,
+       3731
+      ],
+      [
+       3505,
+       30922,
+       1004,
+       1222,
+       1662
+      ],
+      [
+       2652,
+       1392,
+       27936,
+       4629,
+       1706
+      ],
+      [
+       1148,
+       1086,
+       4549,
+       30703,
+       829
+      ],
+      [
+       4326,
+       2690,
+       3422,
+       2707,
+       25170
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.5257731958762887,
+       "mean_probability": 0.4782157242298126
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.8070468484927574,
+       "mean_probability": 0.7199146151542664
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.7291139240506329,
+       "mean_probability": 0.6595800518989563
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.8013310713819652,
+       "mean_probability": 0.7358817458152771
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.6569228761581626,
+       "mean_probability": 0.5890420079231262
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.5839320474252345,
+       "balanced_accuracy": 0.5839320474252345,
+       "nll": 1.1940211057662964,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         3979,
+         3247,
+         834,
+         1797,
+         1445
+        ],
+        [
+         691,
+         8549,
+         421,
+         922,
+         719
+        ],
+        [
+         857,
+         308,
+         6622,
+         2565,
+         950
+        ],
+        [
+         126,
+         44,
+         743,
+         10225,
+         164
+        ],
+        [
+         1851,
+         1362,
+         2359,
+         2107,
+         3623
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.3520615820208813,
+         "mean_probability": 0.34129446744918823
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.7564147938417979,
+         "mean_probability": 0.6776204705238342
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.5859139975225623,
+         "mean_probability": 0.5236157774925232
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.9047071314811538,
+         "mean_probability": 0.8152022957801819
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.32056273225977705,
+         "mean_probability": 0.2873043119907379
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.754288675822752,
+       "balanced_accuracy": 0.754288675822752,
+       "nll": 0.6696685552597046,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         16166,
+         6102,
+         1744,
+         715,
+         2286
+        ],
+        [
+         2814,
+         22373,
+         583,
+         300,
+         943
+        ],
+        [
+         1795,
+         1084,
+         21314,
+         2064,
+         756
+        ],
+        [
+         1022,
+         1042,
+         3806,
+         20478,
+         665
+        ],
+        [
+         2475,
+         1328,
+         1063,
+         600,
+         21547
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.59845259689779,
+         "mean_probability": 0.5355023741722107
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.8282308518120904,
+         "mean_probability": 0.7376101613044739
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.7890275052752378,
+         "mean_probability": 0.7164662480354309
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7580794432310369,
+         "mean_probability": 0.7026946544647217
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.7976529818976048,
+         "mean_probability": 0.715286374092102
+        }
+       }
+      }
+     }
+    },
+    "12": {
+     "n_tokens": 191575,
+     "accuracy": 0.6618086911131411,
+     "balanced_accuracy": 0.661808691113141,
+     "nll": 0.944813072681427,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       20098,
+       7157,
+       3204,
+       2999,
+       4857
+      ],
+      [
+       3494,
+       29446,
+       1529,
+       1393,
+       2453
+      ],
+      [
+       3216,
+       2029,
+       24564,
+       5942,
+       2564
+      ],
+      [
+       1242,
+       778,
+       5202,
+       30017,
+       1076
+      ],
+      [
+       5163,
+       3303,
+       4108,
+       3080,
+       22661
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.5245465222497716,
+       "mean_probability": 0.4606345593929291
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.7685240767323502,
+       "mean_probability": 0.6879801154136658
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.6411066162077516,
+       "mean_probability": 0.5572097897529602
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.783426856322589,
+       "mean_probability": 0.7029236555099487
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.5914393840532428,
+       "mean_probability": 0.5126252770423889
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.5245974163864803,
+       "balanced_accuracy": 0.5245974163864803,
+       "nll": 1.360766053199768,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         4301,
+         1713,
+         1236,
+         2326,
+         1726
+        ],
+        [
+         1094,
+         7067,
+         771,
+         1206,
+         1164
+        ],
+        [
+         850,
+         671,
+         5834,
+         2927,
+         1020
+        ],
+        [
+         116,
+         52,
+         1413,
+         9558,
+         163
+        ],
+        [
+         1847,
+         1485,
+         2551,
+         2534,
+         2885
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.3805521146699699,
+         "mean_probability": 0.3399011194705963
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.6252875597239427,
+         "mean_probability": 0.5534552931785583
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.5161918244558485,
+         "mean_probability": 0.44731950759887695
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.845691028136613,
+         "mean_probability": 0.7508564591407776
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.25526455494602723,
+         "mean_probability": 0.23857156932353973
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.7192166734535224,
+       "balanced_accuracy": 0.7192166734535224,
+       "nll": 0.7707819938659668,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         15797,
+         5444,
+         1968,
+         673,
+         3131
+        ],
+        [
+         2400,
+         22379,
+         758,
+         187,
+         1289
+        ],
+        [
+         2366,
+         1358,
+         18730,
+         3015,
+         1544
+        ],
+        [
+         1126,
+         726,
+         3789,
+         20459,
+         913
+        ],
+        [
+         3316,
+         1818,
+         1557,
+         546,
+         19776
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.5847925073112945,
+         "mean_probability": 0.5111482739448547
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.8284529670899197,
+         "mean_probability": 0.7442640662193298
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.6933698589567986,
+         "mean_probability": 0.6031870245933533
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7573760781845778,
+         "mean_probability": 0.6828689575195312
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.7320919557250213,
+         "mean_probability": 0.627286970615387
+        }
+       }
+      }
+     }
+    },
+    "16": {
+     "n_tokens": 191575,
+     "accuracy": 0.7695210752968811,
+     "balanced_accuracy": 0.7695210752968811,
+     "nll": 0.7050741910934448,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       27444,
+       4134,
+       2370,
+       1628,
+       2739
+      ],
+      [
+       1808,
+       35219,
+       604,
+       161,
+       523
+      ],
+      [
+       2401,
+       443,
+       29417,
+       4794,
+       1260
+      ],
+      [
+       838,
+       142,
+       4842,
+       31831,
+       662
+      ],
+      [
+       5612,
+       1037,
+       5228,
+       2928,
+       23510
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.7162730001304972,
+       "mean_probability": 0.645365834236145
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.9191961372830484,
+       "mean_probability": 0.8814340233802795
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.7677671930053503,
+       "mean_probability": 0.6955416202545166
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.830771238418374,
+       "mean_probability": 0.7705948948860168
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.6135978076471356,
+       "mean_probability": 0.5623610615730286
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.6526278534772607,
+       "balanced_accuracy": 0.6526278534772606,
+       "nll": 1.1793155670166016,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         7863,
+         1357,
+         721,
+         1148,
+         213
+        ],
+        [
+         734,
+         10159,
+         215,
+         128,
+         66
+        ],
+        [
+         1080,
+         235,
+         7714,
+         2095,
+         178
+        ],
+        [
+         61,
+         6,
+         1138,
+         10097,
+         0
+        ],
+        [
+         3560,
+         618,
+         3733,
+         2344,
+         1047
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.6957175721111307,
+         "mean_probability": 0.6123343110084534
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.8988674570872413,
+         "mean_probability": 0.8612806797027588
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.6825340647672978,
+         "mean_probability": 0.6068565845489502
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.8933817023535657,
+         "mean_probability": 0.8247665762901306
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.09263847106706778,
+         "mean_probability": 0.10994360595941544
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.8184281642172287,
+       "balanced_accuracy": 0.8184281642172287,
+       "nll": 0.5066558122634888,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         19581,
+         2777,
+         1649,
+         480,
+         2526
+        ],
+        [
+         1074,
+         25060,
+         389,
+         33,
+         457
+        ],
+        [
+         1321,
+         208,
+         21703,
+         2699,
+         1082
+        ],
+        [
+         777,
+         136,
+         3704,
+         21734,
+         662
+        ],
+        [
+         2052,
+         419,
+         1495,
+         584,
+         22463
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.7248732091955725,
+         "mean_probability": 0.6591859459877014
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.9277014770665976,
+         "mean_probability": 0.8898659348487854
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.8034279791211639,
+         "mean_probability": 0.732646644115448
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.8045755747232813,
+         "mean_probability": 0.7479300498962402
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.8315625809795284,
+         "mean_probability": 0.7516483664512634
+        }
+       }
+      }
+     }
+    },
+    "20": {
+     "n_tokens": 191575,
+     "accuracy": 0.7110792117969463,
+     "balanced_accuracy": 0.7110792117969463,
+     "nll": 0.8269307613372803,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       24728,
+       3788,
+       3621,
+       2940,
+       3238
+      ],
+      [
+       2653,
+       33782,
+       827,
+       313,
+       740
+      ],
+      [
+       2917,
+       445,
+       25670,
+       7441,
+       1842
+      ],
+      [
+       939,
+       182,
+       5627,
+       30593,
+       974
+      ],
+      [
+       5824,
+       1143,
+       5501,
+       4395,
+       21452
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.6453869241811301,
+       "mean_probability": 0.558526337146759
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.8816912436382618,
+       "mean_probability": 0.812138557434082
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.6699725955891949,
+       "mean_probability": 0.5839978456497192
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.7984601331071381,
+       "mean_probability": 0.7168626189231873
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.5598851624690069,
+       "mean_probability": 0.48666083812713623
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.5855246858963016,
+       "balanced_accuracy": 0.5855246858963015,
+       "nll": 1.2910470962524414,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         6417,
+         1022,
+         1525,
+         2119,
+         219
+        ],
+        [
+         1000,
+         9642,
+         351,
+         225,
+         84
+        ],
+        [
+         929,
+         194,
+         6160,
+         3771,
+         248
+        ],
+        [
+         102,
+         2,
+         1125,
+         10069,
+         4
+        ],
+        [
+         2833,
+         445,
+         3640,
+         3584,
+         800
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.5677756149354096,
+         "mean_probability": 0.4831311106681824
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.8531233410015926,
+         "mean_probability": 0.7756023406982422
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.5450362767651743,
+         "mean_probability": 0.47711804509162903
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.8909042647319059,
+         "mean_probability": 0.7900971174240112
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.07078393204742524,
+         "mean_probability": 0.09615914523601532
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.7636101136489838,
+       "balanced_accuracy": 0.7636101136489839,
+       "nll": 0.6327486038208008,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         18311,
+         2766,
+         2096,
+         821,
+         3019
+        ],
+        [
+         1653,
+         24140,
+         476,
+         88,
+         656
+        ],
+        [
+         1988,
+         251,
+         19510,
+         3670,
+         1594
+        ],
+        [
+         837,
+         180,
+         4502,
+         20524,
+         970
+        ],
+        [
+         2991,
+         698,
+         1861,
+         811,
+         20652
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.6778588087217265,
+         "mean_probability": 0.5900710821151733
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.893643801132788,
+         "mean_probability": 0.8274251222610474
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.7222448450745937,
+         "mean_probability": 0.6287153959274292
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7597823270277274,
+         "mean_probability": 0.6862219572067261
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.7645207862880835,
+         "mean_probability": 0.6500433087348938
+        }
+       }
+      }
+     }
+    }
+   },
+   "conversations": {
+    "4": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.42454124506945634,
+      "balanced_accuracy": 0.543195596175362,
+      "nll": 1.2503052949905396,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        213,
+        48,
+        83,
+        80,
+        32
+       ],
+       [
+        7,
+        260,
+        75,
+        44,
+        0
+       ],
+       [
+        90,
+        356,
+        1912,
+        283,
+        24
+       ],
+       [
+        140,
+        122,
+        3850,
+        2566,
+        1477
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.46710526315789475,
+        "mean_probability": 0.39669370651245117
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.6735751295336787,
+        "mean_probability": 0.5068953037261963
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.7174484052532834,
+        "mean_probability": 0.5631706118583679
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.31465358675659105,
+        "mean_probability": 0.3223157525062561
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.39669370651245117,
+        0.14727585017681122,
+        0.19350075721740723,
+        0.18641337752342224,
+        0.07611629366874695
+       ],
+       "accuracy": 0.46710526315789475
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.1193486824631691,
+        0.5415053367614746,
+        0.1706060916185379,
+        0.16246284544467926,
+        0.006077027879655361
+       ],
+       "accuracy": 0.7243900200667381
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.06078135222196579,
+        0.11015398800373077,
+        0.6229000091552734,
+        0.17333969473838806,
+        0.03282497450709343
+       ],
+       "accuracy": 0.7800727184160703
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.04022709280252457,
+        0.030557770282030106,
+        0.46237415075302124,
+        0.3258698880672455,
+        0.1409713625907898
+       ],
+       "accuracy": 0.28330440967362974
+      }
+     }
+    },
+    "8": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8291030697993483,
+      "balanced_accuracy": 0.7918280471750375,
+      "nll": 0.39137589931488037,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        203,
+        245,
+        8,
+        0,
+        0
+       ],
+       [
+        1,
+        370,
+        4,
+        11,
+        0
+       ],
+       [
+        1,
+        44,
+        2566,
+        54,
+        0
+       ],
+       [
+        0,
+        0,
+        1625,
+        6530,
+        0
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.4451754385964912,
+        "mean_probability": 0.458138644695282
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9585492227979274,
+        "mean_probability": 0.9206220507621765
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.9628517823639775,
+        "mean_probability": 0.9035786390304565
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.8007357449417535,
+        "mean_probability": 0.7429417967796326
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.4581385850906372,
+        0.48712727427482605,
+        0.03970744088292122,
+        0.0008004801929928362,
+        0.014226137660443783
+       ],
+       "accuracy": 0.4451754385964912
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.01710360124707222,
+        0.9355881214141846,
+        0.0149424122646451,
+        0.030824877321720123,
+        0.0015409835614264011
+       ],
+       "accuracy": 0.9679705778092875
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.0030482884030789137,
+        0.02331879548728466,
+        0.9147224426269531,
+        0.056911297142505646,
+        0.001999210100620985
+       ],
+       "accuracy": 0.9670923277403922
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.0005915063666179776,
+        0.0004703568993136287,
+        0.21665456891059875,
+        0.781923234462738,
+        0.00036029150942340493
+       ],
+       "accuracy": 0.8284631688237125
+      }
+     }
+    },
+    "12": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8526839307151431,
+      "balanced_accuracy": 0.7511790757756909,
+      "nll": 0.37598833441734314,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        141,
+        194,
+        43,
+        0,
+        78
+       ],
+       [
+        3,
+        357,
+        9,
+        11,
+        6
+       ],
+       [
+        1,
+        111,
+        2424,
+        123,
+        6
+       ],
+       [
+        0,
+        1,
+        1132,
+        7022,
+        0
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.3092105263157895,
+        "mean_probability": 0.28491365909576416
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9248704663212435,
+        "mean_probability": 0.8534104824066162
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.9095684803001877,
+        "mean_probability": 0.8424670100212097
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.8610668301655426,
+        "mean_probability": 0.7913637161254883
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.284913569688797,
+        0.37954702973365784,
+        0.10973429679870605,
+        0.016494056209921837,
+        0.20931100845336914
+       ],
+       "accuracy": 0.30921052631578944
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.027880916371941566,
+        0.8675732612609863,
+        0.030864138156175613,
+        0.0420730859041214,
+        0.03160857409238815
+       ],
+       "accuracy": 0.9359937349286929
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.005225936882197857,
+        0.04739515110850334,
+        0.8532133102416992,
+        0.08646711707115173,
+        0.007698489353060722
+       ],
+       "accuracy": 0.9157605367510809
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.0004753443063236773,
+        0.00026475873892195523,
+        0.15005894005298615,
+        0.8490151166915894,
+        0.00018584492499940097
+       ],
+       "accuracy": 0.9150038746138407
+      }
+     }
+    },
+    "16": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8643457382953181,
+      "balanced_accuracy": 0.7481537160256391,
+      "nll": 0.38984414935112,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        104,
+        195,
+        8,
+        6,
+        143
+       ],
+       [
+        0,
+        373,
+        11,
+        1,
+        1
+       ],
+       [
+        2,
+        1,
+        2457,
+        105,
+        100
+       ],
+       [
+        5,
+        0,
+        953,
+        7146,
+        51
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.22807017543859648,
+        "mean_probability": 0.2061488777399063
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.966321243523316,
+        "mean_probability": 0.9455851316452026
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.9219512195121952,
+        "mean_probability": 0.8384250998497009
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.8762722256284488,
+        "mean_probability": 0.8169305324554443
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.20614886283874512,
+        0.42866629362106323,
+        0.039688799530267715,
+        0.018644778057932854,
+        0.30685126781463623
+       ],
+       "accuracy": 0.22807017543859648
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.003177317790687084,
+        0.9544811248779297,
+        0.0248176958411932,
+        0.00869532860815525,
+        0.008828463964164257
+       ],
+       "accuracy": 0.973748534074621
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.002839248161762953,
+        0.0015466238837689161,
+        0.8522750735282898,
+        0.07491189986467361,
+        0.06842701137065887
+       ],
+       "accuracy": 0.9262293921624991
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.0033027285244315863,
+        0.00023134755610954016,
+        0.11817941069602966,
+        0.8723825216293335,
+        0.005904060788452625
+       ],
+       "accuracy": 0.921902977858807
+      }
+     }
+    },
+    "20": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.9113359629566112,
+      "balanced_accuracy": 0.7526406423731822,
+      "nll": 0.2823074162006378,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        105,
+        113,
+        47,
+        8,
+        183
+       ],
+       [
+        0,
+        365,
+        6,
+        13,
+        2
+       ],
+       [
+        1,
+        5,
+        2332,
+        307,
+        20
+       ],
+       [
+        23,
+        2,
+        273,
+        7826,
+        31
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.23026315789473684,
+        "mean_probability": 0.23682521283626556
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9455958549222798,
+        "mean_probability": 0.8909257650375366
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.875046904315197,
+        "mean_probability": 0.7948577404022217
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.959656652360515,
+        "mean_probability": 0.9104092717170715
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.23682524263858795,
+        0.2228059321641922,
+        0.14147290587425232,
+        0.030022846534848213,
+        0.36887308955192566
+       ],
+       "accuracy": 0.23026315789473684
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.007580199278891087,
+        0.9079239368438721,
+        0.027017775923013687,
+        0.04108642041683197,
+        0.016391688957810402
+       ],
+       "accuracy": 0.9572356115133114
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.0012614669976755977,
+        0.0028384928591549397,
+        0.8183221817016602,
+        0.15878334641456604,
+        0.01879466138780117
+       ],
+       "accuracy": 0.8957665422977489
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.0037705551367253065,
+        0.0006504567572847009,
+        0.0494176484644413,
+        0.9430254697799683,
+        0.0031360008288174868
+       ],
+       "accuracy": 0.9766250553545375
+      }
+     }
+    }
+   },
+   "audit": {
+    "4": {
+     "n_train_tokens": 1206190,
+     "mean_cross_entropy": 1.0978305873567245,
+     "objective": 1.1015993850775052,
+     "max_abs_gradient": 0.0008335748009421875,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.5608925625316078,
+     "train_accuracy_by_collection": {
+      "toucan": 0.5608925625316078
+     },
+     "train_per_role_recall": {
+      "system": 0.4841194173388935,
+      "user": 0.5799542360656281,
+      "cot": 0.5738979762723949,
+      "assistant": 0.513422429302183,
+      "tool": 0.6530687536789395
+     },
+     "train_confusion_counts": [
+      [
+       116788,
+       54674,
+       20638,
+       21219,
+       27919
+      ],
+      [
+       46044,
+       139907,
+       15728,
+       16340,
+       23219
+      ],
+      [
+       16518,
+       15570,
+       138446,
+       46427,
+       24277
+      ],
+      [
+       19599,
+       18269,
+       50916,
+       123857,
+       28597
+      ],
+      [
+       21422,
+       19617,
+       21159,
+       21495,
+       157545
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "toucan": [
+       [
+        116788,
+        54674,
+        20638,
+        21219,
+        27919
+       ],
+       [
+        46044,
+        139907,
+        15728,
+        16340,
+        23219
+       ],
+       [
+        16518,
+        15570,
+        138446,
+        46427,
+        24277
+       ],
+       [
+        19599,
+        18269,
+        50916,
+        123857,
+        28597
+       ],
+       [
+        21422,
+        19617,
+        21159,
+        21495,
+        157545
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "8": {
+     "n_train_tokens": 1206190,
+     "mean_cross_entropy": 0.5881401644226509,
+     "objective": 0.5952702329728705,
+     "max_abs_gradient": 0.0010133616519407676,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7797461428133213,
+     "train_accuracy_by_collection": {
+      "toucan": 0.7797461428133213
+     },
+     "train_per_role_recall": {
+      "system": 0.6632371351113838,
+      "user": 0.823195350649566,
+      "cot": 0.7971836941112097,
+      "assistant": 0.7971463865560152,
+      "tool": 0.8179681476384317
+     },
+     "train_confusion_counts": [
+      [
+       159998,
+       36792,
+       12341,
+       8006,
+       24101
+      ],
+      [
+       27755,
+       198586,
+       3298,
+       2013,
+       9586
+      ],
+      [
+       10983,
+       3334,
+       192311,
+       27271,
+       7339
+      ],
+      [
+       8370,
+       3880,
+       25290,
+       192302,
+       11396
+      ],
+      [
+       20854,
+       8953,
+       7588,
+       6518,
+       197325
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "toucan": [
+       [
+        159998,
+        36792,
+        12341,
+        8006,
+        24101
+       ],
+       [
+        27755,
+        198586,
+        3298,
+        2013,
+        9586
+       ],
+       [
+        10983,
+        3334,
+        192311,
+        27271,
+        7339
+       ],
+       [
+        8370,
+        3880,
+        25290,
+        192302,
+        11396
+       ],
+       [
+        20854,
+        8953,
+        7588,
+        6518,
+        197325
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "12": {
+     "n_train_tokens": 1206190,
+     "mean_cross_entropy": 0.6914105141997664,
+     "objective": 0.6961296260453606,
+     "max_abs_gradient": 0.0012094131817231787,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7369693000273588,
+     "train_accuracy_by_collection": {
+      "toucan": 0.7369693000273588
+     },
+     "train_per_role_recall": {
+      "system": 0.6287939710990805,
+      "user": 0.8299770351271358,
+      "cot": 0.7140707517057844,
+      "assistant": 0.7619612167237334,
+      "tool": 0.7500435254810602
+     },
+     "train_confusion_counts": [
+      [
+       151689,
+       32101,
+       15953,
+       8396,
+       33099
+      ],
+      [
+       22924,
+       200222,
+       3980,
+       1813,
+       12299
+      ],
+      [
+       15600,
+       5228,
+       172261,
+       35482,
+       12667
+      ],
+      [
+       9476,
+       3372,
+       30681,
+       183814,
+       13895
+      ],
+      [
+       28564,
+       12649,
+       12186,
+       6900,
+       180939
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "toucan": [
+       [
+        151689,
+        32101,
+        15953,
+        8396,
+        33099
+       ],
+       [
+        22924,
+        200222,
+        3980,
+        1813,
+        12299
+       ],
+       [
+        15600,
+        5228,
+        172261,
+        35482,
+        12667
+       ],
+       [
+        9476,
+        3372,
+        30681,
+        183814,
+        13895
+       ],
+       [
+        28564,
+        12649,
+        12186,
+        6900,
+        180939
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "16": {
+     "n_train_tokens": 1206190,
+     "mean_cross_entropy": 0.4449560333717893,
+     "objective": 0.45019196270911765,
+     "max_abs_gradient": 0.00047614299599798757,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.8366584037340717,
+     "train_accuracy_by_collection": {
+      "toucan": 0.8366584037340717
+     },
+     "train_per_role_recall": {
+      "system": 0.7908745719994362,
+      "user": 0.9452076372710767,
+      "cot": 0.7979339904990093,
+      "assistant": 0.8068007527835581,
+      "tool": 0.8424750661172784
+     },
+     "train_confusion_counts": [
+      [
+       190789,
+       14140,
+       10350,
+       5920,
+       20039
+      ],
+      [
+       9742,
+       228020,
+       1053,
+       366,
+       2057
+      ],
+      [
+       9897,
+       1422,
+       192492,
+       27754,
+       9673
+      ],
+      [
+       8216,
+       774,
+       23888,
+       194631,
+       13729
+      ],
+      [
+       19165,
+       2039,
+       9902,
+       6895,
+       203237
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "toucan": [
+       [
+        190789,
+        14140,
+        10350,
+        5920,
+        20039
+       ],
+       [
+        9742,
+        228020,
+        1053,
+        366,
+        2057
+       ],
+       [
+        9897,
+        1422,
+        192492,
+        27754,
+        9673
+       ],
+       [
+        8216,
+        774,
+        23888,
+        194631,
+        13729
+       ],
+       [
+        19165,
+        2039,
+        9902,
+        6895,
+        203237
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "20": {
+     "n_train_tokens": 1206190,
+     "mean_cross_entropy": 0.6022263253483545,
+     "objective": 0.6087594430886294,
+     "max_abs_gradient": 0.00092691819668976,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7730075692884205,
+     "train_accuracy_by_collection": {
+      "toucan": 0.7730075692884205
+     },
+     "train_per_role_recall": {
+      "system": 0.6995290957477678,
+      "user": 0.9177409860801367,
+      "cot": 0.708909873237218,
+      "assistant": 0.7696341372420598,
+      "tool": 0.7692237541349207
+     },
+     "train_confusion_counts": [
+      [
+       168753,
+       21883,
+       14670,
+       7031,
+       28901
+      ],
+      [
+       12881,
+       221394,
+       1895,
+       480,
+       4588
+      ],
+      [
+       14244,
+       3141,
+       171016,
+       37068,
+       15769
+      ],
+      [
+       8978,
+       1707,
+       29882,
+       185665,
+       15006
+      ],
+      [
+       27160,
+       5677,
+       14883,
+       7952,
+       185566
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "toucan": [
+       [
+        168753,
+        21883,
+        14670,
+        7031,
+        28901
+       ],
+       [
+        12881,
+        221394,
+        1895,
+        480,
+        4588
+       ],
+       [
+        14244,
+        3141,
+        171016,
+        37068,
+        15769
+       ],
+       [
+        8978,
+        1707,
+        29882,
+        185665,
+        15006
+       ],
+       [
+        27160,
+        5677,
+        14883,
+        7952,
+        185566
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    }
+   },
+   "appworld": {
+    "accuracy": 0.525262386801567,
+    "macro_recall": 0.45938663286458736,
+    "per_role_recall": [
+     0.10245901639344263,
+     0.45704048181748874,
+     0.7222024090286806,
+     0.4357621692614989,
+     0.5794690878218258
+    ],
+    "mean_true_role_probability": [
+     0.13901869972180775,
+     0.4549136320901064,
+     0.6537731258579141,
+     0.4229571012155507,
+     0.5238428842999111
+    ],
+    "mean_trajectory_accuracy": 0.5137043828375603,
+    "confusion_counts": [
+     [
+      4200,
+      2520,
+      1680,
+      168,
+      32424
+     ],
+     [
+      0,
+      5995,
+      76,
+      58,
+      6988
+     ],
+     [
+      24,
+      2104,
+      125552,
+      30919,
+      15247
+     ],
+     [
+      384,
+      1719,
+      386171,
+      398145,
+      127256
+     ],
+     [
+      1487,
+      6268,
+      189739,
+      312692,
+      703009
+     ]
+    ],
+    "probe_sha256": "8332af078639a342dad059c5d6160ea439b50a311a27254b79d9ffba2f28c8da",
+    "layers": {
+     "4": {
+      "accuracy": 0.5351085537141825,
+      "macro_recall": 0.45871770170999504,
+      "per_role_recall": [
+       0.319672131147541,
+       0.6253716551040635,
+       0.38108440803929916,
+       0.003966399430869839,
+       0.9634939148282016
+      ],
+      "mean_true_role_probability": [
+       0.3253672856868046,
+       0.43824157136714453,
+       0.34908272985116545,
+       0.04022449750910848,
+       0.8731530463362865
+      ],
+      "mean_trajectory_accuracy": 0.5454229307179903,
+      "confusion_counts": [
+       [
+        13104,
+        16800,
+        3192,
+        2184,
+        5712
+       ],
+       [
+        144,
+        8203,
+        314,
+        1309,
+        3147
+       ],
+       [
+        783,
+        3076,
+        66250,
+        3275,
+        100462
+       ],
+       [
+        1075,
+        1096,
+        59992,
+        3624,
+        847888
+       ],
+       [
+        1656,
+        1843,
+        33195,
+        7595,
+        1168906
+       ]
+      ],
+      "probe_sha256": "289a0937ecfb52d90a067e7fba630384bbd15700d1d1edafe6f48edc7866b1a6"
+     },
+     "8": {
+      "accuracy": 0.552165872198571,
+      "macro_recall": 0.5294120281746856,
+      "per_role_recall": [
+       0.1885245901639344,
+       0.7795989936723337,
+       0.6982846887475122,
+       0.09620707582017676,
+       0.884444792469471
+      ],
+      "mean_true_role_probability": [
+       0.2429930712249069,
+       0.7140721857629837,
+       0.6461496310202106,
+       0.12123698049103383,
+       0.826550175761365
+      ],
+      "mean_trajectory_accuracy": 0.5566784826990584,
+      "confusion_counts": [
+       [
+        7728,
+        19320,
+        1848,
+        0,
+        12096
+       ],
+       [
+        3,
+        10226,
+        95,
+        98,
+        2695
+       ],
+       [
+        263,
+        1987,
+        121394,
+        3498,
+        46704
+       ],
+       [
+        9374,
+        3276,
+        285441,
+        87902,
+        527682
+       ],
+       [
+        4193,
+        7884,
+        100542,
+        27572,
+        1073004
+       ]
+      ],
+      "probe_sha256": "ae803f21cee20b9e6384e0fcad03ee447ff24450f10b7dcff7ce24f9665856c3"
+     },
+     "12": {
+      "accuracy": 0.525262386801567,
+      "macro_recall": 0.45938663286458736,
+      "per_role_recall": [
+       0.10245901639344263,
+       0.45704048181748874,
+       0.7222024090286806,
+       0.4357621692614989,
+       0.5794690878218258
+      ],
+      "mean_true_role_probability": [
+       0.13901869972180775,
+       0.4549136320901064,
+       0.6537731258579141,
+       0.4229571012155507,
+       0.5238428842999111
+      ],
+      "mean_trajectory_accuracy": 0.5137043828375603,
+      "confusion_counts": [
+       [
+        4200,
+        2520,
+        1680,
+        168,
+        32424
+       ],
+       [
+        0,
+        5995,
+        76,
+        58,
+        6988
+       ],
+       [
+        24,
+        2104,
+        125552,
+        30919,
+        15247
+       ],
+       [
+        384,
+        1719,
+        386171,
+        398145,
+        127256
+       ],
+       [
+        1487,
+        6268,
+        189739,
+        312692,
+        703009
+       ]
+      ],
+      "probe_sha256": "8332af078639a342dad059c5d6160ea439b50a311a27254b79d9ffba2f28c8da"
+     },
+     "16": {
+      "accuracy": 0.4729863153312879,
+      "macro_recall": 0.45508222577959223,
+      "per_role_recall": [
+       0.08608996877439501,
+       0.7100709003583137,
+       0.582693878490158,
+       0.2939360275809232,
+       0.6026203536941712
+      ],
+      "mean_true_role_probability": [
+       0.13260551450350574,
+       0.6132455654107981,
+       0.5387171986419341,
+       0.29792831595564484,
+       0.5554746404550214
+      ],
+      "mean_trajectory_accuracy": 0.465154892930511,
+      "confusion_counts": [
+       [
+        3529,
+        10264,
+        8738,
+        1176,
+        17285
+       ],
+       [
+        36,
+        9314,
+        1119,
+        409,
+        2239
+       ],
+       [
+        246,
+        6,
+        101299,
+        20096,
+        52199
+       ],
+       [
+        4013,
+        91,
+        227881,
+        268562,
+        413128
+       ],
+       [
+        16476,
+        4049,
+        212222,
+        249352,
+        731096
+       ]
+      ],
+      "probe_sha256": "9bc13969ea9bc44a5e98baffc6b9dedde6d0e996b2c96639001393f5ffdc00d6"
+     },
+     "20": {
+      "accuracy": 0.5506863567356385,
+      "macro_recall": 0.468627637256505,
+      "per_role_recall": [
+       0.02459016393442623,
+       0.7208203095219944,
+       0.5451779160866514,
+       0.2851834623908939,
+       0.7673663343485589
+      ],
+      "mean_true_role_probability": [
+       0.08380747641613688,
+       0.5669115693439077,
+       0.5043199966832307,
+       0.2918277405022939,
+       0.7054097955864433
+      ],
+      "mean_trajectory_accuracy": 0.5470291328777294,
+      "confusion_counts": [
+       [
+        1008,
+        14614,
+        5881,
+        1343,
+        18146
+       ],
+       [
+        17,
+        9455,
+        1095,
+        753,
+        1797
+       ],
+       [
+        125,
+        56,
+        94777,
+        28097,
+        50791
+       ],
+       [
+        2993,
+        176,
+        171677,
+        260565,
+        478264
+       ],
+       [
+        7477,
+        919,
+        123594,
+        150240,
+        930965
+       ]
+      ],
+      "probe_sha256": "5f910ef00baa6196dea84c902cf9ea08da9821687f2544ae5e3ae1450eb8f83b"
+     }
+    },
+    "roles": [
+     "system",
+     "user",
+     "cot",
+     "assistant",
+     "tool"
+    ],
+    "trajectories": 168,
+    "scored_trajectories": 168,
+    "excluded_trajectories": [],
+    "context_limit": 131072,
+    "input_sha256": "b506007ca64c56afe9180f684baaf689965da1c245f53ea1797c01073e80d5d0",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+    "overlength_policy": "exclude"
+   },
+   "fit": {
+    "4": {
+     "iterations": 281,
+     "converged": null,
+     "warnings": []
+    },
+    "8": {
+     "iterations": 287,
+     "converged": null,
+     "warnings": []
+    },
+    "12": {
+     "iterations": 359,
+     "converged": null,
+     "warnings": []
+    },
+    "16": {
+     "iterations": 459,
+     "converged": null,
+     "warnings": []
+    },
+    "20": {
+     "iterations": 738,
+     "converged": null,
+     "warnings": []
+    }
+   }
+  },
+  "combined": {
+   "synthetic": {
+    "4": {
+     "n_tokens": 191575,
+     "accuracy": 0.5075871068772021,
+     "balanced_accuracy": 0.5075871068772022,
+     "nll": 1.2137401103973389,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       16481,
+       10284,
+       3058,
+       3483,
+       5009
+      ],
+      [
+       7067,
+       21909,
+       2450,
+       2840,
+       4049
+      ],
+      [
+       3352,
+       3379,
+       18495,
+       7720,
+       5369
+      ],
+      [
+       3986,
+       3843,
+       7178,
+       18125,
+       5183
+      ],
+      [
+       3934,
+       3796,
+       4040,
+       4314,
+       22231
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.43014485188568446,
+       "mean_probability": 0.3501533269882202
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.5718126060289703,
+       "mean_probability": 0.4248819947242737
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.4827091217538823,
+       "mean_probability": 0.3760257661342621
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.4730523293749184,
+       "mean_probability": 0.3611810505390167
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.5802166253425551,
+       "mean_probability": 0.4257282018661499
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M",
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.4389488586090957,
+       "balanced_accuracy": 0.4389488586090957,
+       "nll": 1.330670952796936,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         5181,
+         2870,
+         610,
+         659,
+         1982
+        ],
+        [
+         3156,
+         5722,
+         484,
+         505,
+         1435
+        ],
+        [
+         1574,
+         1055,
+         3857,
+         2033,
+         2783
+        ],
+        [
+         1826,
+         1218,
+         1786,
+         3881,
+         2591
+        ],
+        [
+         1532,
+         1082,
+         1287,
+         1237,
+         6164
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.45841443992213765,
+         "mean_probability": 0.3504723012447357
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.506282073969209,
+         "mean_probability": 0.38618552684783936
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.3412670323836489,
+         "mean_probability": 0.2876405417919159
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.34339055034507165,
+         "mean_probability": 0.2837682068347931
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.5453901964254114,
+         "mean_probability": 0.37611299753189087
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.5363047421611816,
+       "balanced_accuracy": 0.5363047421611816,
+       "nll": 1.164817452430725,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         11300,
+         7414,
+         2448,
+         2824,
+         3027
+        ],
+        [
+         3911,
+         16187,
+         1966,
+         2335,
+         2614
+        ],
+        [
+         1778,
+         2324,
+         14638,
+         5687,
+         2586
+        ],
+        [
+         2160,
+         2625,
+         5392,
+         14244,
+         2592
+        ],
+        [
+         2402,
+         2714,
+         2753,
+         3077,
+         16067
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.41831710657831417,
+         "mean_probability": 0.3500198721885681
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.5992300003701921,
+         "mean_probability": 0.4410722553730011
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.5418872394772887,
+         "mean_probability": 0.41300535202026367
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.527301669566505,
+         "mean_probability": 0.3935699164867401
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.5947876948136083,
+         "mean_probability": 0.4464867413043976
+        }
+       }
+      }
+     }
+    },
+    "8": {
+     "n_tokens": 191575,
+     "accuracy": 0.7384053242855279,
+     "balanced_accuracy": 0.7384053242855279,
+     "nll": 0.6923728585243225,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       22572,
+       8147,
+       2278,
+       1051,
+       4267
+      ],
+      [
+       4448,
+       31213,
+       722,
+       344,
+       1588
+      ],
+      [
+       2786,
+       1065,
+       28455,
+       3506,
+       2503
+      ],
+      [
+       1077,
+       1043,
+       4259,
+       30990,
+       946
+      ],
+      [
+       4737,
+       1981,
+       2296,
+       1071,
+       28230
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.5891165339945191,
+       "mean_probability": 0.5078839063644409
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.8146417852016181,
+       "mean_probability": 0.7149820327758789
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.7426595328200444,
+       "mean_probability": 0.6569247841835022
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.8088216103353778,
+       "mean_probability": 0.7402969002723694
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.7367871590760798,
+       "mean_probability": 0.6332359910011292
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M",
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.7162980003539197,
+       "balanced_accuracy": 0.7162980003539197,
+       "nll": 0.727033257484436,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         6834,
+         1920,
+         456,
+         373,
+         1719
+        ],
+        [
+         1531,
+         8842,
+         165,
+         125,
+         639
+        ],
+        [
+         1369,
+         97,
+         7049,
+         1111,
+         1676
+        ],
+        [
+         202,
+         18,
+         660,
+         10262,
+         160
+        ],
+        [
+         1854,
+         428,
+         1147,
+         382,
+         7491
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.6046717395151301,
+         "mean_probability": 0.5004388689994812
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.7823394089541674,
+         "mean_probability": 0.6813371181488037
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.6236949212528756,
+         "mean_probability": 0.5345460772514343
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.9079808883383472,
+         "mean_probability": 0.8011853098869324
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.662803043709078,
+         "mean_probability": 0.5513623356819153
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.7476548328582534,
+       "balanced_accuracy": 0.7476548328582535,
+       "nll": 0.6778712272644043,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         15738,
+         6227,
+         1822,
+         678,
+         2548
+        ],
+        [
+         2917,
+         22371,
+         557,
+         219,
+         949
+        ],
+        [
+         1417,
+         968,
+         21406,
+         2395,
+         827
+        ],
+        [
+         875,
+         1025,
+         3599,
+         20728,
+         786
+        ],
+        [
+         2883,
+         1553,
+         1149,
+         689,
+         20739
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.5826083737459742,
+         "mean_probability": 0.5109988451004028
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.8281568133861474,
+         "mean_probability": 0.7290588617324829
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.7924332728686189,
+         "mean_probability": 0.7081270217895508
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.76733424647392,
+         "mean_probability": 0.7148217558860779
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.7677414578166069,
+         "mean_probability": 0.6674912571907043
+        }
+       }
+      }
+     }
+    },
+    "12": {
+     "n_tokens": 191575,
+     "accuracy": 0.6894218974292052,
+     "balanced_accuracy": 0.6894218974292052,
+     "nll": 0.8182129859924316,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       21594,
+       6858,
+       2814,
+       1429,
+       5620
+      ],
+      [
+       4014,
+       30286,
+       1059,
+       384,
+       2572
+      ],
+      [
+       3376,
+       1546,
+       24566,
+       5192,
+       3635
+      ],
+      [
+       1340,
+       742,
+       4747,
+       30347,
+       1139
+      ],
+      [
+       6261,
+       2674,
+       2845,
+       1252,
+       25283
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.5635912827874201,
+       "mean_probability": 0.4739842712879181
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.7904476053764844,
+       "mean_probability": 0.6871532797813416
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.6411588150854757,
+       "mean_probability": 0.5411059856414795
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.7920396711470703,
+       "mean_probability": 0.7067670822143555
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.6598721127495759,
+       "mean_probability": 0.5336475968360901
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M",
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.6416917359759334,
+       "balanced_accuracy": 0.6416917359759335,
+       "nll": 0.895852267742157,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         6214,
+         1410,
+         562,
+         719,
+         2397
+        ],
+        [
+         1673,
+         7845,
+         308,
+         216,
+         1260
+        ],
+        [
+         1374,
+         423,
+         5731,
+         1752,
+         2022
+        ],
+        [
+         239,
+         26,
+         1027,
+         9810,
+         200
+        ],
+        [
+         2063,
+         825,
+         1102,
+         650,
+         6662
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.5498141921783755,
+         "mean_probability": 0.4437609910964966
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.6941249336400637,
+         "mean_probability": 0.593745231628418
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.5070783932047426,
+         "mean_probability": 0.4206353425979614
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.867987966731552,
+         "mean_probability": 0.7496970891952515
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.5894531941249337,
+         "mean_probability": 0.4539714753627777
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.7093917743308777,
+       "balanced_accuracy": 0.7093917743308777,
+       "nll": 0.7857294678688049,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         15380,
+         5448,
+         2252,
+         710,
+         3223
+        ],
+        [
+         2341,
+         22441,
+         751,
+         168,
+         1312
+        ],
+        [
+         2002,
+         1123,
+         18835,
+         3440,
+         1613
+        ],
+        [
+         1101,
+         716,
+         3720,
+         20537,
+         939
+        ],
+        [
+         4198,
+         1849,
+         1743,
+         602,
+         18621
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.5693554955021656,
+         "mean_probability": 0.4866294860839844
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.8307481582941547,
+         "mean_probability": 0.7262343764305115
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.6972568763188095,
+         "mean_probability": 0.5915098190307617
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7602635767963573,
+         "mean_probability": 0.6888055205345154
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.6893347647429016,
+         "mean_probability": 0.5669833421707153
+        }
+       }
+      }
+     }
+    },
+    "16": {
+     "n_tokens": 191575,
+     "accuracy": 0.8046300404541302,
+     "balanced_accuracy": 0.8046300404541302,
+     "nll": 0.5188862681388855,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       28180,
+       3235,
+       1860,
+       639,
+       4401
+      ],
+      [
+       1728,
+       35519,
+       318,
+       46,
+       704
+      ],
+      [
+       1591,
+       217,
+       29285,
+       3923,
+       3299
+      ],
+      [
+       832,
+       178,
+       4332,
+       32096,
+       877
+      ],
+      [
+       4547,
+       639,
+       3168,
+       894,
+       29067
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.7354821871329766,
+       "mean_probability": 0.6465514302253723
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.9270259689416678,
+       "mean_probability": 0.8836990594863892
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.7643220670755578,
+       "mean_probability": 0.6795613765716553
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.8376875897168211,
+       "mean_probability": 0.7751443386077881
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.7586323894036279,
+       "mean_probability": 0.6549614667892456
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M",
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.7892408423287913,
+       "balanced_accuracy": 0.7892408423287913,
+       "nll": 0.5212089419364929,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         8249,
+         764,
+         183,
+         176,
+         1930
+        ],
+        [
+         570,
+         10472,
+         32,
+         6,
+         222
+        ],
+        [
+         427,
+         54,
+         7726,
+         945,
+         2150
+        ],
+        [
+         12,
+         7,
+         874,
+         10353,
+         56
+        ],
+        [
+         1440,
+         209,
+         1518,
+         335,
+         7800
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.7298708193240134,
+         "mean_probability": 0.6265772581100464
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.9265616705007963,
+         "mean_probability": 0.8814913630485535
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.6835958237480092,
+         "mean_probability": 0.5901463627815247
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.9160325606087418,
+         "mean_probability": 0.8432080745697021
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.6901433374623961,
+         "mean_probability": 0.572996199131012
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.8110687446784881,
+       "balanced_accuracy": 0.8110687446784881,
+       "nll": 0.5179144740104675,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         19931,
+         2471,
+         1677,
+         463,
+         2471
+        ],
+        [
+         1158,
+         25047,
+         286,
+         40,
+         482
+        ],
+        [
+         1164,
+         163,
+         21559,
+         2978,
+         1149
+        ],
+        [
+         820,
+         171,
+         3458,
+         21743,
+         821
+        ],
+        [
+         3107,
+         430,
+         1650,
+         559,
+         21267
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.7378299337356088,
+         "mean_probability": 0.6549084782600403
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.9272202272979676,
+         "mean_probability": 0.8846226930618286
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.7980972124532633,
+         "mean_probability": 0.716971755027771
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.8049087476400252,
+         "mean_probability": 0.7466670870780945
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.7872876022655758,
+         "mean_probability": 0.6892550587654114
+        }
+       }
+      }
+     }
+    },
+    "20": {
+     "n_tokens": 191575,
+     "accuracy": 0.7387968158684588,
+     "balanced_accuracy": 0.7387968158684589,
+     "nll": 0.6778781414031982,
+     "uniform_accuracy": 0.2,
+     "majority_accuracy": 0.2,
+     "confusion_counts": [
+      [
+       25520,
+       3398,
+       2342,
+       1191,
+       5864
+      ],
+      [
+       2359,
+       34363,
+       466,
+       76,
+       1051
+      ],
+      [
+       2790,
+       305,
+       25079,
+       5487,
+       4654
+      ],
+      [
+       1022,
+       208,
+       5438,
+       30171,
+       1476
+      ],
+      [
+       5825,
+       903,
+       3714,
+       1471,
+       26402
+      ]
+     ],
+     "by_role": {
+      "system": {
+       "n_tokens": 38315,
+       "accuracy": 0.6660576797598852,
+       "mean_probability": 0.5602406859397888
+      },
+      "user": {
+       "n_tokens": 38315,
+       "accuracy": 0.8968550176171213,
+       "mean_probability": 0.8222261071205139
+      },
+      "cot": {
+       "n_tokens": 38315,
+       "accuracy": 0.6545478272217148,
+       "mean_probability": 0.5585703253746033
+      },
+      "assistant": {
+       "n_tokens": 38315,
+       "accuracy": 0.787446169907347,
+       "mean_probability": 0.6986114382743835
+      },
+      "tool": {
+       "n_tokens": 38315,
+       "accuracy": 0.689077384836226,
+       "mean_probability": 0.5620220303535461
+      }
+     },
+     "converged": null,
+     "train_sources": [
+      "Agent-Ark/Toucan-1.5M",
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+     ],
+     "by_collection": {
+      "neutral": {
+       "n_tokens": 56510,
+       "accuracy": 0.7059989382410193,
+       "balanced_accuracy": 0.7059989382410193,
+       "nll": 0.7110927700996399,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         7203,
+         829,
+         526,
+         388,
+         2356
+        ],
+        [
+         759,
+         10217,
+         74,
+         7,
+         245
+        ],
+        [
+         644,
+         72,
+         6234,
+         1744,
+         2608
+        ],
+        [
+         98,
+         6,
+         1302,
+         9716,
+         180
+        ],
+        [
+         1908,
+         259,
+         1954,
+         655,
+         6526
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 11302,
+         "accuracy": 0.637320828172005,
+         "mean_probability": 0.5115500092506409
+        },
+        "user": {
+         "n_tokens": 11302,
+         "accuracy": 0.9039992921606795,
+         "mean_probability": 0.8204829096794128
+        },
+        "cot": {
+         "n_tokens": 11302,
+         "accuracy": 0.5515837904795612,
+         "mean_probability": 0.4578533470630646
+        },
+        "assistant": {
+         "n_tokens": 11302,
+         "accuracy": 0.8596708547159795,
+         "mean_probability": 0.7392918467521667
+        },
+        "tool": {
+         "n_tokens": 11302,
+         "accuracy": 0.5774199256768714,
+         "mean_probability": 0.4502210319042206
+        }
+       }
+      },
+      "toucan": {
+       "n_tokens": 135065,
+       "accuracy": 0.7525191574427128,
+       "balanced_accuracy": 0.7525191574427128,
+       "nll": 0.6639813184738159,
+       "uniform_accuracy": 0.2,
+       "majority_accuracy": 0.2,
+       "confusion_counts": [
+        [
+         18317,
+         2569,
+         1816,
+         803,
+         3508
+        ],
+        [
+         1600,
+         24146,
+         392,
+         69,
+         806
+        ],
+        [
+         2146,
+         233,
+         18845,
+         3743,
+         2046
+        ],
+        [
+         924,
+         202,
+         4136,
+         20455,
+         1296
+        ],
+        [
+         3917,
+         644,
+         1760,
+         816,
+         19876
+        ]
+       ],
+       "by_role": {
+        "system": {
+         "n_tokens": 27013,
+         "accuracy": 0.6780809239995558,
+         "mean_probability": 0.5806124210357666
+        },
+        "user": {
+         "n_tokens": 27013,
+         "accuracy": 0.8938659164106171,
+         "mean_probability": 0.8229553699493408
+        },
+        "cot": {
+         "n_tokens": 27013,
+         "accuracy": 0.6976270684485247,
+         "mean_probability": 0.6007094383239746
+        },
+        "assistant": {
+         "n_tokens": 27013,
+         "accuracy": 0.7572280013326916,
+         "mean_probability": 0.6815911531448364
+        },
+        "tool": {
+         "n_tokens": 27013,
+         "accuracy": 0.7357938770221745,
+         "mean_probability": 0.608798623085022
+        }
+       }
+      }
+     }
+    }
+   },
+   "conversations": {
+    "4": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.43337334933973587,
+      "balanced_accuracy": 0.5777030739110077,
+      "nll": 1.1845530271530151,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        239,
+        48,
+        65,
+        56,
+        48
+       ],
+       [
+        4,
+        276,
+        61,
+        45,
+        0
+       ],
+       [
+        37,
+        278,
+        2039,
+        288,
+        23
+       ],
+       [
+        52,
+        53,
+        3832,
+        2500,
+        1718
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.5241228070175439,
+        "mean_probability": 0.3930716812610626
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.7150259067357513,
+        "mean_probability": 0.5017440319061279
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.7651031894934334,
+        "mean_probability": 0.5775131583213806
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.30656039239730226,
+        "mean_probability": 0.31743013858795166
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.3930717408657074,
+        0.18334822356700897,
+        0.17055118083953857,
+        0.15321581065654755,
+        0.09981311112642288
+       ],
+       "accuracy": 0.5241228070175439
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.12420249730348587,
+        0.5260809063911438,
+        0.16099649667739868,
+        0.1776019185781479,
+        0.011118210852146149
+       ],
+       "accuracy": 0.7491280403526195
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.05732821673154831,
+        0.10455863922834396,
+        0.6281679272651672,
+        0.17064568400382996,
+        0.03929946571588516
+       ],
+       "accuracy": 0.8127434008376038
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.03683110326528549,
+        0.025859706103801727,
+        0.45344263315200806,
+        0.32994404435157776,
+        0.1539226919412613
+       ],
+       "accuracy": 0.3325207110052606
+      }
+     }
+    },
+    "8": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8261876179043046,
+      "balanced_accuracy": 0.7803755043763322,
+      "nll": 0.4034920632839203,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        168,
+        272,
+        0,
+        0,
+        16
+       ],
+       [
+        1,
+        383,
+        0,
+        1,
+        1
+       ],
+       [
+        0,
+        50,
+        2561,
+        50,
+        4
+       ],
+       [
+        0,
+        0,
+        1632,
+        6523,
+        0
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.3684210526315789,
+        "mean_probability": 0.38745129108428955
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9922279792746114,
+        "mean_probability": 0.941750705242157
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.9609756097560975,
+        "mean_probability": 0.9016588926315308
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.7998773758430411,
+        "mean_probability": 0.7445084452629089
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.3874513506889343,
+        0.5194787979125977,
+        0.031733207404613495,
+        0.0004600810934789479,
+        0.060876548290252686
+       ],
+       "accuracy": 0.3684210526315789
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.02247149869799614,
+        0.9564676284790039,
+        0.007690376602113247,
+        0.006745843682438135,
+        0.0066247680224478245
+       ],
+       "accuracy": 0.9952366182204893
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.0032988276798278093,
+        0.03130870684981346,
+        0.906129777431488,
+        0.048255518078804016,
+        0.011007160879671574
+       ],
+       "accuracy": 0.9576038769468433
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.00044503409299068153,
+        0.0005019630771130323,
+        0.18467096984386444,
+        0.8141583800315857,
+        0.0002236755535705015
+       ],
+       "accuracy": 0.867189171546519
+      }
+     }
+    },
+    "12": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8768650317269765,
+      "balanced_accuracy": 0.7164263654180778,
+      "nll": 0.3351154029369354,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        56,
+        255,
+        17,
+        0,
+        128
+       ],
+       [
+        0,
+        355,
+        12,
+        6,
+        13
+       ],
+       [
+        0,
+        106,
+        2453,
+        97,
+        9
+       ],
+       [
+        0,
+        2,
+        791,
+        7362,
+        0
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.12280701754385964,
+        "mean_probability": 0.1668432503938675
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9196891191709845,
+        "mean_probability": 0.8436256647109985
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.9204502814258911,
+        "mean_probability": 0.8503663539886475
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.9027590435315758,
+        "mean_probability": 0.8367906212806702
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.1668432652950287,
+        0.4826045632362366,
+        0.07826565206050873,
+        0.008866135962307453,
+        0.2634204030036926
+       ],
+       "accuracy": 0.12280701754385964
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.02521730214357376,
+        0.8638119101524353,
+        0.03488700091838837,
+        0.0246169064193964,
+        0.05146685615181923
+       ],
+       "accuracy": 0.944998342982214
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.0036658092867583036,
+        0.046447258442640305,
+        0.857022225856781,
+        0.07392589002847672,
+        0.018938688561320305
+       ],
+       "accuracy": 0.9179626187897927
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.0003302290278952569,
+        0.00030267261900007725,
+        0.10849584639072418,
+        0.890522837638855,
+        0.0003484897897578776
+       ],
+       "accuracy": 0.9487722199597286
+      }
+     }
+    },
+    "16": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.8011490310409878,
+      "balanced_accuracy": 0.6843824319939531,
+      "nll": 0.5557464361190796,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        48,
+        259,
+        16,
+        0,
+        133
+       ],
+       [
+        0,
+        382,
+        2,
+        0,
+        2
+       ],
+       [
+        6,
+        3,
+        2176,
+        24,
+        456
+       ],
+       [
+        29,
+        1,
+        1075,
+        6737,
+        313
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.10526315789473684,
+        "mean_probability": 0.1285792738199234
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.9896373056994818,
+        "mean_probability": 0.9698666334152222
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.8165103189493433,
+        "mean_probability": 0.7385163307189941
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.8261189454322502,
+        "mean_probability": 0.7686125636100769
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.1285792738199234,
+        0.5385372638702393,
+        0.027224989607930183,
+        0.008168363943696022,
+        0.29749011993408203
+       ],
+       "accuracy": 0.10526315789473684
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.0014224483165889978,
+        0.9705560803413391,
+        0.009853582829236984,
+        0.0032130107283592224,
+        0.014954923652112484
+       ],
+       "accuracy": 0.9875404853665724
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.006492588669061661,
+        0.0036268369294703007,
+        0.750361442565918,
+        0.029460210353136063,
+        0.21005894243717194
+       ],
+       "accuracy": 0.8280904378543995
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.0064657325856387615,
+        0.0004325595509726554,
+        0.11159694939851761,
+        0.8575426936149597,
+        0.02396199107170105
+       ],
+       "accuracy": 0.9010325895315057
+      }
+     }
+    },
+    "20": {
+     "token_metrics": {
+      "n_tokens": 11662,
+      "accuracy": 0.9139941690962099,
+      "balanced_accuracy": 0.7626186839749062,
+      "nll": 0.28254202008247375,
+      "uniform_accuracy": 0.2,
+      "majority_accuracy": 0.6992797118847539,
+      "confusion_counts": [
+       [
+        122,
+        137,
+        25,
+        0,
+        172
+       ],
+       [
+        0,
+        371,
+        3,
+        4,
+        8
+       ],
+       [
+        3,
+        10,
+        2277,
+        251,
+        124
+       ],
+       [
+        20,
+        2,
+        198,
+        7889,
+        46
+       ],
+       [
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      ],
+      "by_role": {
+       "system": {
+        "n_tokens": 456,
+        "accuracy": 0.2675438596491228,
+        "mean_probability": 0.23401178419589996
+       },
+       "user": {
+        "n_tokens": 386,
+        "accuracy": 0.961139896373057,
+        "mean_probability": 0.9297328591346741
+       },
+       "cot": {
+        "n_tokens": 2665,
+        "accuracy": 0.8544090056285178,
+        "mean_probability": 0.755449116230011
+       },
+       "assistant": {
+        "n_tokens": 8155,
+        "accuracy": 0.967381974248927,
+        "mean_probability": 0.9211435914039612
+       }
+      }
+     },
+     "conversation_balanced": {
+      "system": {
+       "n_conversations": 8,
+       "n_tokens": 456,
+       "mean_probabilities": [
+        0.23401175439357758,
+        0.28272873163223267,
+        0.09117571264505386,
+        0.01897679641842842,
+        0.37310701608657837
+       ],
+       "accuracy": 0.26754385964912275
+      },
+      "user": {
+       "n_conversations": 8,
+       "n_tokens": 386,
+       "mean_probabilities": [
+        0.004903176333755255,
+        0.9370019435882568,
+        0.013241531327366829,
+        0.016259755939245224,
+        0.02859364077448845
+       ],
+       "accuracy": 0.9656145353594512
+      },
+      "cot": {
+       "n_conversations": 8,
+       "n_tokens": 2665,
+       "mean_probabilities": [
+        0.003684303257614374,
+        0.008720450103282928,
+        0.7774311900138855,
+        0.1263165920972824,
+        0.08384738862514496
+       ],
+       "accuracy": 0.8734902794944874
+      },
+      "assistant": {
+       "n_conversations": 8,
+       "n_tokens": 8155,
+       "mean_probabilities": [
+        0.00421492662280798,
+        0.0007595459464937449,
+        0.036090072244405746,
+        0.9534358978271484,
+        0.005499622318893671
+       ],
+       "accuracy": 0.9824870460637106
+      }
+     }
+    }
+   },
+   "audit": {
+    "4": {
+     "n_train_tokens": 1848720,
+     "mean_cross_entropy": 1.2149521709722735,
+     "objective": 1.216706296017113,
+     "max_abs_gradient": 0.0018746464219636875,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.5022691375654507,
+     "train_accuracy_by_collection": {
+      "neutral": 0.4244455511804896,
+      "toucan": 0.5437252837446837
+     },
+     "train_per_role_recall": {
+      "system": 0.4387089445670518,
+      "user": 0.5497100696698256,
+      "cot": 0.5063638625643688,
+      "assistant": 0.44998160889696653,
+      "tool": 0.5665812021290406
+     },
+     "train_confusion_counts": [
+      [
+       162210,
+       89012,
+       34425,
+       35218,
+       48879
+      ],
+      [
+       73534,
+       203252,
+       26511,
+       27724,
+       38723
+      ],
+      [
+       29894,
+       29240,
+       187225,
+       73249,
+       50136
+      ],
+      [
+       34868,
+       34022,
+       81438,
+       166378,
+       53038
+      ],
+      [
+       39329,
+       34043,
+       44831,
+       42051,
+       209490
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        49860,
+        35093,
+        12090,
+        12040,
+        19423
+       ],
+       [
+        27898,
+        67296,
+        9143,
+        9475,
+        14694
+       ],
+       [
+        13501,
+        13562,
+        51825,
+        27329,
+        22289
+       ],
+       [
+        15584,
+        15652,
+        28985,
+        46923,
+        21362
+       ],
+       [
+        16767,
+        13932,
+        22022,
+        18970,
+        56815
+       ]
+      ],
+      "toucan": [
+       [
+        112350,
+        53919,
+        22335,
+        23178,
+        29456
+       ],
+       [
+        45636,
+        135956,
+        17368,
+        18249,
+        24029
+       ],
+       [
+        16393,
+        15678,
+        135400,
+        45920,
+        27847
+       ],
+       [
+        19284,
+        18370,
+        52453,
+        119455,
+        31676
+       ],
+       [
+        22562,
+        20111,
+        22809,
+        23081,
+        152675
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "8": {
+     "n_train_tokens": 1848720,
+     "mean_cross_entropy": 0.6664683598841833,
+     "objective": 0.6706504425722024,
+     "max_abs_gradient": 0.0009897125581293323,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7494525942273573,
+     "train_accuracy_by_collection": {
+      "neutral": 0.7364761178466375,
+      "toucan": 0.7563650834445651
+     },
+     "train_per_role_recall": {
+      "system": 0.622782249340084,
+      "user": 0.807201739581981,
+      "cot": 0.7577729456056082,
+      "assistant": 0.8078724739279068,
+      "tool": 0.7516335626812064
+     },
+     "train_confusion_counts": [
+      [
+       230270,
+       60617,
+       20198,
+       11924,
+       46735
+      ],
+      [
+       45432,
+       298458,
+       5908,
+       2775,
+       17171
+      ],
+      [
+       19027,
+       6302,
+       280182,
+       40013,
+       24220
+      ],
+      [
+       11761,
+       5229,
+       36881,
+       298706,
+       17167
+      ],
+      [
+       41127,
+       16295,
+       22820,
+       11590,
+       277912
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        77769,
+        22738,
+        5611,
+        3671,
+        18717
+       ],
+       [
+        15192,
+        103822,
+        2257,
+        1194,
+        6041
+       ],
+       [
+        8334,
+        2377,
+        92259,
+        11178,
+        14358
+       ],
+       [
+        2539,
+        469,
+        11863,
+        109819,
+        3816
+       ],
+       [
+        16314,
+        5463,
+        13255,
+        3935,
+        89539
+       ]
+      ],
+      "toucan": [
+       [
+        152501,
+        37879,
+        14587,
+        8253,
+        28018
+       ],
+       [
+        30240,
+        194636,
+        3651,
+        1581,
+        11130
+       ],
+       [
+        10693,
+        3925,
+        187923,
+        28835,
+        9862
+       ],
+       [
+        9222,
+        4760,
+        25018,
+        188887,
+        13351
+       ],
+       [
+        24813,
+        10832,
+        9565,
+        7655,
+        188373
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "12": {
+     "n_train_tokens": 1848720,
+     "mean_cross_entropy": 0.7972203269960391,
+     "objective": 0.7999347815990279,
+     "max_abs_gradient": 0.0005416533489752277,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.6939260677658056,
+     "train_accuracy_by_collection": {
+      "neutral": 0.6571755404416915,
+      "toucan": 0.7135028478100465
+     },
+     "train_per_role_recall": {
+      "system": 0.579914751828292,
+      "user": 0.7980683932666927,
+      "cot": 0.6537604396555454,
+      "assistant": 0.7753499718724307,
+      "tool": 0.6625367822060669
+     },
+     "train_confusion_counts": [
+      [
+       214420,
+       53347,
+       27105,
+       13971,
+       60901
+      ],
+      [
+       37936,
+       295081,
+       8567,
+       3207,
+       24953
+      ],
+      [
+       27757,
+       12332,
+       241724,
+       53142,
+       34789
+      ],
+      [
+       13319,
+       4875,
+       45615,
+       286681,
+       19254
+      ],
+      [
+       53872,
+       27069,
+       31833,
+       12001,
+       244969
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        70340,
+        18873,
+        8168,
+        5634,
+        25491
+       ],
+       [
+        14050,
+        98403,
+        3930,
+        1676,
+        10447
+       ],
+       [
+        12228,
+        6008,
+        75937,
+        14977,
+        19356
+       ],
+       [
+        2740,
+        736,
+        16339,
+        104882,
+        3809
+       ],
+       [
+        20860,
+        12045,
+        17437,
+        5471,
+        72693
+       ]
+      ],
+      "toucan": [
+       [
+        144080,
+        34474,
+        18937,
+        8337,
+        35410
+       ],
+       [
+        23886,
+        196678,
+        4637,
+        1531,
+        14506
+       ],
+       [
+        15529,
+        6324,
+        165787,
+        38165,
+        15433
+       ],
+       [
+        10579,
+        4139,
+        29276,
+        181799,
+        15445
+       ],
+       [
+        33012,
+        15024,
+        14396,
+        6530,
+        172276
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "16": {
+     "n_train_tokens": 1848720,
+     "mean_cross_entropy": 0.5250809741766524,
+     "objective": 0.5282547177191591,
+     "max_abs_gradient": 0.0007165278487698526,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.8047405772642693,
+     "train_accuracy_by_collection": {
+      "neutral": 0.7902136865204737,
+      "toucan": 0.8124789626841542
+     },
+     "train_per_role_recall": {
+      "system": 0.7502866848414038,
+      "user": 0.9320800337530832,
+      "cot": 0.7554091479510148,
+      "assistant": 0.8338688389804838,
+      "tool": 0.7520581807953611
+     },
+     "train_confusion_counts": [
+      [
+       277414,
+       23473,
+       16392,
+       8046,
+       44419
+      ],
+      [
+       16693,
+       344631,
+       2261,
+       617,
+       5542
+      ],
+      [
+       17410,
+       3029,
+       279308,
+       39477,
+       30520
+      ],
+      [
+       9545,
+       1138,
+       33767,
+       308318,
+       16976
+      ],
+      [
+       45387,
+       6423,
+       29111,
+       10754,
+       278069
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        96219,
+        7380,
+        3807,
+        1709,
+        19391
+       ],
+       [
+        5791,
+        119023,
+        1049,
+        220,
+        2423
+       ],
+       [
+        8056,
+        1302,
+        93186,
+        9012,
+        16950
+       ],
+       [
+        734,
+        97,
+        10450,
+        115450,
+        1775
+       ],
+       [
+        20207,
+        3348,
+        17317,
+        3776,
+        83858
+       ]
+      ],
+      "toucan": [
+       [
+        181195,
+        16093,
+        12585,
+        6337,
+        25028
+       ],
+       [
+        10902,
+        225608,
+        1212,
+        397,
+        3119
+       ],
+       [
+        9354,
+        1727,
+        186122,
+        30465,
+        13570
+       ],
+       [
+        8811,
+        1041,
+        23317,
+        192868,
+        15201
+       ],
+       [
+        25180,
+        3075,
+        11794,
+        6978,
+        194211
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    },
+    "20": {
+     "n_train_tokens": 1848720,
+     "mean_cross_entropy": 0.696700843870519,
+     "objective": 0.7009879704733204,
+     "max_abs_gradient": 0.0034783753413528727,
+     "gradient_below_1e_4": false,
+     "train_accuracy": 0.7342799342247609,
+     "train_accuracy_by_collection": {
+      "neutral": 0.7011812678007252,
+      "toucan": 0.7519113904111293
+     },
+     "train_per_role_recall": {
+      "system": 0.6649708987840235,
+      "user": 0.9046259033277079,
+      "cot": 0.6532384568782725,
+      "assistant": 0.7914584144705527,
+      "tool": 0.6571059976632481
+     },
+     "train_confusion_counts": [
+      [
+       245869,
+       35754,
+       23589,
+       10168,
+       54364
+      ],
+      [
+       21680,
+       334480,
+       3843,
+       699,
+       9042
+      ],
+      [
+       26112,
+       6478,
+       241531,
+       53151,
+       42472
+      ],
+      [
+       11217,
+       2226,
+       42722,
+       292637,
+       20942
+      ],
+      [
+       57368,
+       12931,
+       40304,
+       16180,
+       242961
+      ]
+     ],
+     "train_confusion_counts_by_collection": {
+      "neutral": [
+       [
+        84221,
+        12147,
+        7531,
+        3063,
+        21544
+       ],
+       [
+        8119,
+        114812,
+        2040,
+        372,
+        3163
+       ],
+       [
+        12060,
+        2741,
+        77403,
+        14281,
+        22021
+       ],
+       [
+        2039,
+        174,
+        12935,
+        109249,
+        4109
+       ],
+       [
+        27334,
+        5990,
+        22706,
+        7631,
+        64845
+       ]
+      ],
+      "toucan": [
+       [
+        161648,
+        23607,
+        16058,
+        7105,
+        32820
+       ],
+       [
+        13561,
+        219668,
+        1803,
+        327,
+        5879
+       ],
+       [
+        14052,
+        3737,
+        164128,
+        38870,
+        20451
+       ],
+       [
+        9178,
+        2052,
+        29787,
+        183388,
+        16833
+       ],
+       [
+        30034,
+        6941,
+        17598,
+        8549,
+        178116
+       ]
+      ]
+     },
+     "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+    }
+   },
+   "appworld": {
+    "accuracy": 0.3810491225462614,
+    "macro_recall": 0.4032522236634275,
+    "per_role_recall": [
+     0.028664129586260734,
+     0.46672257375924375,
+     0.7987989369902098,
+     0.4169316222945796,
+     0.30514385568684343
+    ],
+    "mean_true_role_probability": [
+     0.08483798830774668,
+     0.4744066986028619,
+     0.7108756365677511,
+     0.4181345111851265,
+     0.28332081190712094
+    ],
+    "mean_trajectory_accuracy": 0.371854091768896,
+    "confusion_counts": [
+     [
+      1175,
+      1680,
+      336,
+      168,
+      37633
+     ],
+     [
+      0,
+      6122,
+      103,
+      16,
+      6876
+     ],
+     [
+      30,
+      3345,
+      138868,
+      26419,
+      5184
+     ],
+     [
+      722,
+      2274,
+      507947,
+      380940,
+      21792
+     ],
+     [
+      8022,
+      14684,
+      361497,
+      458793,
+      370199
+     ]
+    ],
+    "probe_sha256": "bfcf23e617f001094ba52d1542fa9f9805a3b484578f74c8262b76d792acb820",
+    "layers": {
+     "4": {
+      "accuracy": 0.5263830645589375,
+      "macro_recall": 0.43963645209393826,
+      "per_role_recall": [
+       0.19262295081967212,
+       0.6028055195547762,
+       0.45771544930570734,
+       0.007848523818644485,
+       0.9371898169708909
+      ],
+      "mean_true_role_probability": [
+       0.24565532056187264,
+       0.4253320568011224,
+       0.40365261692671056,
+       0.06789683763102959,
+       0.7956101622670153
+      ],
+      "mean_trajectory_accuracy": 0.5346821987196626,
+      "confusion_counts": [
+       [
+        7896,
+        18816,
+        3360,
+        3528,
+        7392
+       ],
+       [
+        77,
+        7907,
+        603,
+        2086,
+        2444
+       ],
+       [
+        457,
+        3470,
+        79572,
+        3582,
+        86765
+       ],
+       [
+        935,
+        1579,
+        93807,
+        7171,
+        810183
+       ],
+       [
+        1933,
+        2197,
+        59458,
+        12613,
+        1136994
+       ]
+      ],
+      "probe_sha256": "93cbd2dfa112909e8de102b49cf9ae96d28151e8d81cba8ca84d353ff04187a2"
+     },
+     "8": {
+      "accuracy": 0.3882016710371259,
+      "macro_recall": 0.521201193110165,
+      "per_role_recall": [
+       0.18442622950819673,
+       0.8884653503087596,
+       0.8800029911530896,
+       0.16828084384491204,
+       0.48483055073586684
+      ],
+      "mean_true_role_probability": [
+       0.22406367173219924,
+       0.7975431579294596,
+       0.7990379331540911,
+       0.1839139277524898,
+       0.4313235896792091
+      ],
+      "mean_trajectory_accuracy": 0.38639765872679355,
+      "confusion_counts": [
+       [
+        7560,
+        17808,
+        2016,
+        0,
+        13608
+       ],
+       [
+        3,
+        11654,
+        84,
+        42,
+        1334
+       ],
+       [
+        343,
+        2645,
+        152985,
+        4497,
+        13376
+       ],
+       [
+        11957,
+        3155,
+        595850,
+        153754,
+        148959
+       ],
+       [
+        32636,
+        43244,
+        347831,
+        201290,
+        588194
+       ]
+      ],
+      "probe_sha256": "593bef82c0d9512b547ba797fe69c7fa8349902f8710b65943bd4bb14a6cb072"
+     },
+     "12": {
+      "accuracy": 0.3810491225462614,
+      "macro_recall": 0.4032522236634275,
+      "per_role_recall": [
+       0.028664129586260734,
+       0.46672257375924375,
+       0.7987989369902098,
+       0.4169316222945796,
+       0.30514385568684343
+      ],
+      "mean_true_role_probability": [
+       0.08483798830774668,
+       0.4744066986028619,
+       0.7108756365677511,
+       0.4181345111851265,
+       0.28332081190712094
+      ],
+      "mean_trajectory_accuracy": 0.371854091768896,
+      "confusion_counts": [
+       [
+        1175,
+        1680,
+        336,
+        168,
+        37633
+       ],
+       [
+        0,
+        6122,
+        103,
+        16,
+        6876
+       ],
+       [
+        30,
+        3345,
+        138868,
+        26419,
+        5184
+       ],
+       [
+        722,
+        2274,
+        507947,
+        380940,
+        21792
+       ],
+       [
+        8022,
+        14684,
+        361497,
+        458793,
+        370199
+       ]
+      ],
+      "probe_sha256": "bfcf23e617f001094ba52d1542fa9f9805a3b484578f74c8262b76d792acb820"
+     },
+     "16": {
+      "accuracy": 0.4105290202031998,
+      "macro_recall": 0.40892431938989393,
+      "per_role_recall": [
+       0.040983606557377046,
+       0.7096897156361973,
+       0.4906986643351012,
+       0.3474539633896079,
+       0.45579564703118625
+      ],
+      "mean_true_role_probability": [
+       0.09501428702707662,
+       0.6161462739226125,
+       0.46797106204001054,
+       0.33803270569963395,
+       0.41023929842651047
+      ],
+      "mean_trajectory_accuracy": 0.4082658044117486,
+      "confusion_counts": [
+       [
+        1680,
+        10936,
+        4221,
+        1007,
+        23148
+       ],
+       [
+        7,
+        9309,
+        650,
+        98,
+        3053
+       ],
+       [
+        958,
+        13,
+        85306,
+        22809,
+        64760
+       ],
+       [
+        10148,
+        21,
+        274199,
+        317460,
+        311847
+       ],
+       [
+        43530,
+        9870,
+        220265,
+        386561,
+        552969
+       ]
+      ],
+      "probe_sha256": "9fb1dc4029d1ee1f1fc859b4c34c5788ad3f04c3a05abbb657f71ececd3c60dd"
+     },
+     "20": {
+      "accuracy": 0.5226643168812969,
+      "macro_recall": 0.4401331715105076,
+      "per_role_recall": [
+       0.00819672131147541,
+       0.6840741023099794,
+       0.5010929213211693,
+       0.29277806659917366,
+       0.7145240460107403
+      ],
+      "mean_true_role_probability": [
+       0.07346131352515882,
+       0.5538420393954067,
+       0.47329609367532294,
+       0.2962415442766377,
+       0.62612315744284
+      ],
+      "mean_trajectory_accuracy": 0.5200415267852628,
+      "confusion_counts": [
+       [
+        336,
+        11574,
+        6030,
+        840,
+        22212
+       ],
+       [
+        3,
+        8973,
+        575,
+        398,
+        3168
+       ],
+       [
+        211,
+        90,
+        87113,
+        23508,
+        62924
+       ],
+       [
+        3008,
+        82,
+        188724,
+        267504,
+        454357
+       ],
+       [
+        11917,
+        515,
+        124845,
+        209061,
+        866857
+       ]
+      ],
+      "probe_sha256": "f7e23f2726c85c2b805962796b2a22bd9ffbcd10375751c75f34f7d2b59d1053"
+     }
+    },
+    "roles": [
+     "system",
+     "user",
+     "cot",
+     "assistant",
+     "tool"
+    ],
+    "trajectories": 168,
+    "scored_trajectories": 168,
+    "excluded_trajectories": [],
+    "context_limit": 131072,
+    "input_sha256": "b506007ca64c56afe9180f684baaf689965da1c245f53ea1797c01073e80d5d0",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+    "overlength_policy": "exclude"
+   },
+   "fit": {
+    "4": {
+     "iterations": 291,
+     "converged": null,
+     "warnings": []
+    },
+    "8": {
+     "iterations": 328,
+     "converged": null,
+     "warnings": []
+    },
+    "12": {
+     "iterations": 345,
+     "converged": null,
+     "warnings": []
+    },
+    "16": {
+     "iterations": 386,
+     "converged": null,
+     "warnings": []
+    },
+    "20": {
+     "iterations": 762,
+     "converged": null,
+     "warnings": []
+    }
+   }
+  }
+ }
+}

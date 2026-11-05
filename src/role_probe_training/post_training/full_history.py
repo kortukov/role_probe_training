@@ -18,14 +18,19 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def score(root, input_path, output, base=False, overlength='error'):
+def score(root, input_path, output, base=False, overlength='error', probe_paths=None):
+    """`probe_paths` ({layer: path}) scores other standard-data probes on the unchanged model."""
     if base:
-        paths = {i: Path(f'experiment_reports/role_probes/{"gptoss20b_baseline" if i in (12,16) else "gptoss20b_layers"}/probes/layer_{i}.npz') for i in (4,8,12,16,20)}
-        runtime = RoleModel('.cache/models/gpt-oss-20b', str(paths[12]), 0, adapters=False)
+        paths = probe_paths or {i: Path(f'experiment_reports/gptoss_role_probes/{"gptoss20b_baseline" if i in (12,16) else "gptoss20b_layers"}/probes/layer_{i}.npz') for i in (4,8,12,16,20)}
+        # RoleModel only needs a layer-12 artifact to initialise; scoring uses its own hooks.
+        init_probe = paths.get(12) or Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz')
+        runtime = RoleModel('.cache/models/gpt-oss-20b', str(init_probe), 0, adapters=False)
         tokenizer, model = runtime.tokenizer, runtime.base
         runtime.close()
         revision = '6cee5e81ee83917806bbde320786a8fb61efebee'
     else:
+        if probe_paths:
+            raise ValueError('Explicit probe paths are only supported for the unchanged model (--base)')
         model_path = root / 'data/post_training/model'
         tokenizer, model = load(model_path)
         paths = {12: root / 'post_training/probes/layer_12.npz'}
@@ -86,7 +91,8 @@ def score(root, input_path, output, base=False, overlength='error'):
             'mean_true_role_probability':np.divide(probability_sums[layer],support,out=np.zeros(5),where=support>0).tolist(),
             'mean_trajectory_accuracy':float(np.mean(per_trace[layer])),
             'confusion_counts':matrix.tolist(), 'probe_sha256':digest(paths[layer])}
-    result = {**layers['12'], 'layers':layers, 'roles':list(ROLES),
+    primary = layers['12'] if '12' in layers else layers[str(min(probes))]
+    result = {**primary, 'layers':layers, 'roles':list(ROLES),
               'trajectories':len(examples), 'scored_trajectories':scored,
               'excluded_trajectories':excluded, 'context_limit':limit,
               'input_sha256':digest(input_path), 'model_revision':revision,
@@ -103,5 +109,8 @@ if __name__ == '__main__':
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--base',action='store_true')
     parser.add_argument('--overlength',choices=['error','exclude'],default='error')
+    parser.add_argument('--probe',action='append',default=[],metavar='LAYER=PATH',
+                        help='Score these probe files instead of the published base probes (repeatable, needs --base)')
     args=parser.parse_args()
-    score(args.root,args.input,args.output,args.base,args.overlength)
+    probe_paths = {int(k): Path(v) for k, v in (item.split('=', 1) for item in args.probe)} or None
+    score(args.root,args.input,args.output,args.base,args.overlength,probe_paths)

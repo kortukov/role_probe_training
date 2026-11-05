@@ -29,7 +29,7 @@ def load(path):
 
 def fit(root):
     model_path=root/'data/post_training/model'; tokenizer,model=load(model_path)
-    documents=Path('experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
+    documents=Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
     examples=probe_examples(tokenizer,documents)
     features=[]; labels=[]; splits=[]
     for i,example in enumerate(examples):

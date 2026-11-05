@@ -9,7 +9,7 @@ from role_probe_training.probes.evaluation import plot_summary
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--output', default='experiment_reports/role_probes/gptoss20b_baseline')
+    parser.add_argument('--output', default='experiment_reports/gptoss_role_probes/gptoss20b_baseline')
     args = parser.parse_args()
     root = Path(args.output)
     (root/'plots').mkdir(parents=True, exist_ok=True)

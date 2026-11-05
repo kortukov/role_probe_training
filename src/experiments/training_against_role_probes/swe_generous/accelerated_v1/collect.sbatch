@@ -13,7 +13,7 @@ cd "$SLURM_SUBMIT_DIR"
 root=${1:?report root}; mode=${2:-full}
 concurrency=${3:?concurrency 8 or 16}
 [[ "$concurrency" == 8 || "$concurrency" == 16 ]] || exit 2
-project=src/experiments/agentic_eval
+project=src/experiments/eval_role_probes/agentic_eval
 native_scratch=$(mktemp -d /tmp/swe-native-${SLURM_JOB_ID}-XXXXXX)
 export LOCAL_JOB_DIR="$native_scratch"
 trap 'rm -rf "$native_scratch"' EXIT

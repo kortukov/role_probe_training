@@ -10,7 +10,7 @@ from role_probe_training.probes.linear import RoleProbe
 
 BASE_REVISION='6cee5e81ee83917806bbde320786a8fb61efebee'
 SITE='post_attention_layernorm_output_pre_mlp'
-DOCUMENTS=Path('experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
+DOCUMENTS=Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
 
 
 def digest(path):

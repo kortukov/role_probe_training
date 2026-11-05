@@ -31,7 +31,7 @@ def main():
     torch.cuda.set_device(0)
     started = time.perf_counter()
     runtime = RoleModel('.cache/models/gpt-oss-20b',
-        'experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
+        'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
     set_peft_model_state_dict(runtime.model, load_file(adapter))
     torch.cuda.synchronize()
     (args.output/'startup.json').write_text(json.dumps(dict(backend='HF/PEFT eager decode masks',
@@ -46,7 +46,7 @@ def main():
                 pass
             for phase,tokens in [('warmup',16),('micro',128),('episodes',8192)]:
                 generation['max_tokens']=tokens
-                subprocess.run(['.tools/bin/uv','run','--project','src/experiments/agentic_eval/swe',
+                subprocess.run(['.tools/bin/uv','run','--project','src/experiments/eval_role_probes/agentic_eval/swe_bench/env',
                     '--frozen','--no-sync','python',
                     'src/experiments/training_against_role_probes/on_policy/benchmark_client.py',
                     '--url',url,'--model','on-policy-role-model','--output',str(args.output),

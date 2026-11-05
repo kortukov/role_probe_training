@@ -30,21 +30,31 @@ def train(config, tokenizer, model, documents, output, metadata):
     if config['token_stride'] != 1:
         raise ValueError('Reproduction requires all content tokens (token_stride=1)')
     layers = config['layers']
+    # Which sources' training documents fit the probe; held-out documents of every
+    # source are always scored, so all arms share identical test sets.
+    train_sources = set(config.get('train_sources') or [s['id'] for s in config['sources']])
+    documents = [d for d in documents if d['split'] != 'train' or d['source'] in train_sources]
     features = {layer: [] for layer in layers}
-    labels, splits = [], []
+    labels, splits, collections = [], [], []
     for index, document in enumerate(documents):
+        headers = document.get('header', {})
         for role in ROLES:
-            enc = tokenize_messages(tokenizer, [{'role': role, 'content': document['text']}])
+            # Toucan documents carry native header fields for their own role (replay.py
+            # convention); C4/Dolma documents have none and render exactly as before.
+            message = {'role': role, 'content': document['text'], **headers.get(role, {})}
+            enc = tokenize_messages(tokenizer, [message])
             positions = np.flatnonzero(enc['labels'] >= 0)
             states = extract_states(model, enc['input_ids'], layers, positions)
             for layer in layers:
                 features[layer].append(states[layer].astype(np.float16))
             labels.extend(enc['labels'][positions])
             splits.extend([document['split']] * len(positions))
+            collections.extend([document.get('collection', 'neutral')] * len(positions))
         if (index+1) % 10 == 0:
             print(f'Extracted {index+1}/{len(documents)} training documents', flush=True)
     labels = np.asarray(labels)
     mask = np.asarray(splits) == 'train'
+    collections = np.asarray(collections)
     results = {}
     for layer in layers:
         x = np.concatenate(features.pop(layer))
@@ -58,9 +68,15 @@ def train(config, tokenizer, model, documents, output, metadata):
         probe.save(path)
         loaded = RoleProbe.load(path)
         np.testing.assert_allclose(loaded.predict_proba(x[:32]), probe.predict_proba(x[:32]))
-        results[str(layer)] = metrics(labels[~mask], loaded.predict_proba(x[~mask]))
+        probabilities = loaded.predict_proba(x[~mask])
+        results[str(layer)] = metrics(labels[~mask], probabilities)
         results[str(layer)]['converged'] = probe.metadata['converged']
-        print(f'Block {layer}: held-out accuracy {results[str(layer)]["accuracy"]:.4f}', flush=True)
+        results[str(layer)]['train_sources'] = sorted(train_sources)
+        results[str(layer)]['by_collection'] = {
+            name: metrics(labels[~mask][collections[~mask] == name], probabilities[collections[~mask] == name])
+            for name in sorted(set(collections[~mask]))}
+        print(f'Block {layer}: held-out accuracy {results[str(layer)]["accuracy"]:.4f}; by collection ' +
+              ', '.join(f'{k} {v["accuracy"]:.4f}' for k, v in results[str(layer)]['by_collection'].items()), flush=True)
         del x
     write_json(output / 'metrics' / 'synthetic.json', results)
 
@@ -138,7 +154,7 @@ def evaluate(config, tokenizer, model, conversations, output):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', default='src/experiments/gptoss_role_probes/config.json')
-    parser.add_argument('--output', default='experiment_reports/role_probes/gptoss20b_baseline')
+    parser.add_argument('--output', default='experiment_reports/gptoss_role_probes/gptoss20b_baseline')
     parser.add_argument('--stage', choices=['all', 'train', 'evaluate', 'audit'], default='all')
     args = parser.parse_args()
     config = json.loads(Path(args.config).read_text())
@@ -149,8 +165,9 @@ def main():
     tokenizer, model = load_model(config['model_path'])
     input_dir = output/'artifacts'/'inputs'
     prepared = json.loads((input_dir/'config.json').read_text())
-    # Generation length does not affect the prepared training texts or user prompts.
-    if {k:v for k,v in prepared.items() if k != 'max_new_tokens'} != {k:v for k,v in config.items() if k != 'max_new_tokens'}:
+    # Generation length and the fitted-source selection do not affect the prepared texts or prompts.
+    ignored = {'max_new_tokens', 'train_sources'}
+    if {k:v for k,v in prepared.items() if k not in ignored} != {k:v for k,v in config.items() if k not in ignored}:
         raise ValueError('Prepared inputs do not match the requested configuration')
     metadata = {
         'stage': args.stage, 'generation_max_new_tokens': config['max_new_tokens'],
@@ -170,7 +187,8 @@ def main():
     if args.stage == 'audit':
         from role_probe_training.probes.audit import audit_objective
         result = audit_objective(tokenizer, model, read_jsonl(input_dir/'documents.jsonl'),
-            {layer: output/'probes'/f'layer_{layer}.npz' for layer in config['layers']})
+            {layer: output/'probes'/f'layer_{layer}.npz' for layer in config['layers']},
+            train_sources=config.get('train_sources'))
         write_json(output/'metrics'/'optimizer_audit.json', result)
     if args.stage in ('all','train'):
         train(config, tokenizer, model, read_jsonl(input_dir/'documents.jsonl'), output, metadata)

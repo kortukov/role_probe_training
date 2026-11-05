@@ -98,13 +98,13 @@ the FP32 attention adapters at inference; probe scoring loads the same adapters
 through PEFT. Use one GPU per server (no tensor/pipeline parallelism).
 
 Environments are the existing `agentic_eval/server_current` (vLLM),
-`agentic_eval/swe` (Inspect), and `training_against_role_probes/runtime` (activation extraction/scoring), and the
+`agentic_eval/swe_bench/env` (Inspect), and `training_against_role_probes/runtime` (activation extraction/scoring), and the
 root `.venv` (cuML fitting in a separate CUDA-13 process). Standard-data activations
 are retained under `data/post_training/probe_features/`.
 Install this package in the server environment without changing its dependencies:
 
 ```bash
-.tools/bin/uv pip install --python src/experiments/agentic_eval/server_current/.venv/bin/python --no-deps -e .
+.tools/bin/uv pip install --python src/experiments/eval_role_probes/agentic_eval/server_current/.venv/bin/python --no-deps -e .
 ```
 
 Entry points are in `src/experiments/training_against_role_probes/post_training/`:
@@ -125,7 +125,7 @@ If infrastructure requires whole-shard replacement, `post_training/shard_sources
 records the source job for each replaced shard; assembly validates full task coverage.
 
 Fresh probes use all content tokens from the original 250-passage source at
-`experiment_reports/role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl`,
+`experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl`,
 up to 1,024 tokens per passage rendering, with the original passage split.
 The standard cuML multinomial logistic fit uses C=0.005, 5,000 maximum iterations
 and no feature scaling. No training-loop probe weights initialize this fit.
@@ -154,7 +154,7 @@ The main report is regenerated only after all model/benchmark cohorts are ready:
 
 `post_training/comparison.json` in the parent experiment consolidates all four
 models. Base AppWorld/retail histories and task scores are reused from
-`experiment_reports/agentic/`. SWE uses the completed matched native-context
+`experiment_reports/eval_role_probes/agentic_eval/`. SWE uses the completed matched native-context
 cohorts for all four models. Original base probes and independently fitted
 standard-data probes for the trained models are reused. See the
 [shared SWE reproduction guide](../RUNNING.md#corrected-swe-evaluation).

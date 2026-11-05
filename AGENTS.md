@@ -8,6 +8,9 @@
 - All first-party code lives in `src/`. Reusable code belongs in
   `src/role_probe_training/`; experiment entry points and job scripts belong in
   `src/experiments/`. Upstream Git submodules are the explicit exception.
+- Probe experiments are grouped as `src/experiments/gptoss_role_probes/` (fitting and
+  training data) and `src/experiments/eval_role_probes/` (`agentic_eval/<benchmark>/`,
+  `chat_eval/<dataset>/`); `experiment_reports/` mirrors this hierarchy.
 - Move reusable logic into modules and group related modules in their own folders
   as needs emerge. Prefer simple, readable Python and the Zen of Python. Avoid
   speculative abstractions, unnecessary frameworks and premature structure.
@@ -59,7 +62,7 @@
 
 - Keep this file concise and store detailed operational knowledge in
   [agent_docs](agent_docs/README.md).
-- Read [agent_docs/CLUSTER.md](agent_docs/CLUSTER.md) before preparing cluster jobs.
+- Read [agent_docs/CLUSTER.md](agent_docs/CLUSTER.md) for Evgenii's jobs/[agent_docs/HX2.md](agent_docs/HX2.md) for Xiaoxue's jobs before preparing cluster jobs.
   Use uv directly in Slurm jobs by default; containers are not part of this
   project's initial setup. Follow cluster storage and resource rules.
 - Update documentation when a workflow changes or a useful operational fact is
@@ -67,7 +70,7 @@
 
 ## Role-probe implementation
 
-- Current reproduction: [GPT-OSS-20B baseline](experiment_reports/role_probes/gptoss20b_baseline/README.md).
+- Current reproduction: [GPT-OSS-20B baseline](experiment_reports/gptoss_role_probes/gptoss20b_baseline/README.md).
   Reusable code lives in `src/role_probe_training/probes/`.
 - Upstream activations are **post-attention-layernorm outputs / pre-MLP inputs**,
   not decoder-block outputs. Probe metadata must record this site, the zero-based
@@ -79,9 +82,11 @@
   and argmax role accuracy are different metrics. Tool-role transfer requires
   validation on actual tool-bearing trajectories; clean chat alone is insufficient.
 - Current probe weights: layers 12/16 in the baseline experiment and layers 4/8/20
-  in [additional-layer fitting](experiment_reports/role_probes/gptoss20b_layers/README.md).
-  Fits have convergence limitations. Use the current [agentic evaluations](experiment_reports/agentic/probe_transfer/README.md)
-  to assess transfer to actual reasoning and tool messages.
+  in [additional-layer fitting](experiment_reports/gptoss_role_probes/gptoss20b_layers/README.md).
+  Fits have convergence limitations. Use the current [agentic evaluations](experiment_reports/eval_role_probes/agentic_eval/probe_scoring/probe_transfer/README.md)
+  to assess transfer to actual reasoning and tool messages. Probes fitted on Toucan tool-use
+  text, alone or with the neutral passages, live in the
+  [training-data comparison](experiment_reports/gptoss_role_probes/training_data/README.md).
 
 - Probe evaluation must replay each scored conversation whole, without chunking
   or truncation. Histories above the model's native context limit are explicitly

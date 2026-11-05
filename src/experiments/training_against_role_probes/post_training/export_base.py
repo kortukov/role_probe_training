@@ -10,7 +10,7 @@ a = p.parse_args()
 if a.output.exists():
     raise FileExistsError(a.output)
 runtime = RoleModel('.cache/models/gpt-oss-20b',
-    'experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz', 0, adapters=False)
+    'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz', 0, adapters=False)
 runtime.close()
 model = runtime.base
 if hasattr(model.config, 'quantization_config'):

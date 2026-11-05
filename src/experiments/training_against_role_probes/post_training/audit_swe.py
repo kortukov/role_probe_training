@@ -5,7 +5,7 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path('experiment_reports/training_against_role_probes')
-SWE = Path('experiment_reports/agentic/swe_bench_full')
+SWE = Path('experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories')
 
 
 def read(path):

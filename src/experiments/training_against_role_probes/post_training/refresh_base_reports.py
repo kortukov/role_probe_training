@@ -6,6 +6,9 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path('experiment_reports')
+REPORT_FOLDERS = {'probe_transfer': ROOT/'eval_role_probes/agentic_eval/probe_scoring/probe_transfer',
+                  'probe_layer_comparison': ROOT/'eval_role_probes/agentic_eval/probe_scoring/probe_layer_comparison',
+                  'appworld_probe_transfer': ROOT/'eval_role_probes/agentic_eval/appworld/probe_transfer'}
 BASE = ROOT/'training_against_role_probes/base_model'
 ROLES = ['system','user','cot','assistant','tool']
 DATASETS = [('appworld_test','appworld_test_normal','AppWorld normal test',168),
@@ -44,7 +47,7 @@ def main(native_swe=False):
             continue
         selected = DATASETS[:1] if report == 'appworld_probe_transfer' else DATASETS
         selected_aliases = {item[1] for item in selected}
-        folder=ROOT/'agentic'/report
+        folder=REPORT_FOLDERS[report]
         path=folder/'metrics.json';previous=json.loads(path.read_text())
         previous['datasets']={name:{'prediction_directory':d['prediction_directory'],'layers':{l:d['layers'][l] for l in layers}} for name,d in converted.items() if name in selected_aliases}
         previous['method']['context_policy']='whole conversation; no chunking or truncation; above 131072 tokens explicitly unscorable'

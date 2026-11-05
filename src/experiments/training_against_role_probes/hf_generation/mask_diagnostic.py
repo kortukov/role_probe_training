@@ -35,7 +35,7 @@ def main():
     try:
         torch.cuda.set_device(0);torch.manual_seed(123)
         runtime=RoleModel('.cache/models/gpt-oss-20b',
-            'experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
+            'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
         if not args.mode.endswith('-base'):
             meta=json.loads(Path('experiment_reports/training_against_role_probes/kl_iteration/same_batch/data/post_training/model/export.json').read_text())
             adapter=Path(meta['checkpoint'])/'adapter/adapter_model.safetensors'

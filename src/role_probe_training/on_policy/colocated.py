@@ -27,7 +27,7 @@ class ColocatedServer:
             sock.bind(('127.0.0.1', 0))
             port = sock.getsockname()[1]
         self.url = f'http://127.0.0.1:{port}'
-        project = Path('src/experiments/agentic_eval/server_current').resolve()
+        project = Path('src/experiments/eval_role_probes/agentic_eval/server_current').resolve()
         env = os.environ.copy()
         devices = env.get('CUDA_VISIBLE_DEVICES', '0,1').split(',')
         env['CUDA_VISIBLE_DEVICES'] = devices[int(runtime.device)]

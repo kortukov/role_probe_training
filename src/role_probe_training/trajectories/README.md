@@ -36,7 +36,7 @@ probe training. A 16K full window peaked at 136.67 GiB on B200 in the hardware
 smoke test. Trajectories longer than this have incomplete prior context after
 a boundary; report their coverage and single-window results separately.
 
-`src/experiments/agentic_probes/report.py` consumes directories of these records
+`src/experiments/eval_role_probes/agentic_eval/probe_scoring/report.py` consumes directories of these records
 and emits aggregate metrics and an appendix of confusion matrices,
 and a standalone HTML viewer. Add datasets via repeated `--dataset NAME=PATH`.
 The viewer stores each gzip/base64 record in its own inert HTML data block (avoiding JavaScript source-size limits), decompresses one trajectory on

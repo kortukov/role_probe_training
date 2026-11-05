@@ -18,9 +18,9 @@ def main():
     p.add_argument('--shard-index',type=int,default=0)
     p.add_argument('--shard-count',type=int,default=1)
     a=p.parse_args()
-    paths={12:'experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz',
-           16:'experiment_reports/role_probes/gptoss20b_baseline/probes/layer_16.npz',
-           **{i:f'experiment_reports/role_probes/gptoss20b_layers/probes/layer_{i}.npz' for i in (4,8,20)}}
+    paths={12:'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',
+           16:'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_16.npz',
+           **{i:f'experiment_reports/gptoss_role_probes/gptoss20b_layers/probes/layer_{i}.npz' for i in (4,8,20)}}
     runtime=RoleModel('.cache/models/gpt-oss-20b',paths[12],0,adapters=False)
     examples=trajectory_examples(runtime.tokenizer,a.input)
     a.output.mkdir(parents=True,exist_ok=True)

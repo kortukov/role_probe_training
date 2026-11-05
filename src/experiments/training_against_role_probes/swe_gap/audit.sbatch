@@ -8,4 +8,4 @@
 #SBATCH --output=experiment_reports/training_against_role_probes/swe_gap/logs/%x-%j.out
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
-.tools/bin/uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/training_against_role_probes/swe_gap/audit.py
+.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_gap/audit.py

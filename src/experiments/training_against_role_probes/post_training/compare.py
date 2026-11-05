@@ -42,7 +42,7 @@ def compare(root, native_swe=False):
             scored = result.get('scored_trajectories', expected)
             assert scored + len(excluded) == expected
             assert all(x['tokens'] > result['context_limit'] for x in excluded)
-            probe_path = (Path('experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz')
+            probe_path = (Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz')
                           if sub == 'base_model' else folder/'post_training/probes/layer_12.npz')
             assert result['probe_sha256'] == hashlib.sha256(probe_path.read_bytes()).hexdigest()
             metadata = json.loads(probe_path.with_suffix('.json').read_text())

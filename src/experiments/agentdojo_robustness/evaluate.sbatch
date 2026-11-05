@@ -11,7 +11,7 @@ set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 model_kind=${1:?base or trained}; mode=${2:-full}
 root=experiment_reports/prompt_injection/agentdojo_same_batch_27000
-project=src/experiments/agentic_eval/server_current
+project=src/experiments/eval_role_probes/agentic_eval/server_current
 driver=src/experiments/agentdojo_robustness/driver
 scratch=$(mktemp -d /tmp/role-agentdojo-${SLURM_JOB_ID}-XXXXXX)
 export PATH="$PWD/.tools/bin:$PATH" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
@@ -47,7 +47,7 @@ for ((i=0;i<240;i++)); do
  sleep 5
 done
 [[ "$ready" == 1 ]]
-uv run --project src/experiments/agentic_eval/swe --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py --base-url "http://127.0.0.1:$port/v1" --model role-agentdojo > "$out/tool-check-$SLURM_JOB_ID.json"
+uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py --base-url "http://127.0.0.1:$port/v1" --model role-agentdojo > "$out/tool-check-$SLURM_JOB_ID.json"
 pids=()
 suites=(workspace slack travel banking)
 if [[ "$mode" == smoke ]]; then suites=(banking); fi

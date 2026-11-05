@@ -15,7 +15,7 @@ job_scratch=$(mktemp -d /tmp/role-eval-${SLURM_JOB_ID}-XXXXXX)
 export LOCAL_JOB_DIR="$job_scratch"
 trap 'rm -rf "$job_scratch"' EXIT
 root=${1:?report root}; name=${2:?model name}; mode=${3:-full}
-project=src/experiments/agentic_eval
+project=src/experiments/eval_role_probes/agentic_eval
 export PATH="$PWD/.tools/bin:$PATH" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton"
 export HF_HOME="$PWD/.cache/huggingface" HF_DATASETS_CACHE="$PWD/.cache/datasets"

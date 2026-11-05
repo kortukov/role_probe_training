@@ -16,7 +16,7 @@ export TMPDIR="$LOCAL_JOB_DIR/tmp" TORCHINDUCTOR_CACHE_DIR="$LOCAL_JOB_DIR/induc
 mkdir -p "$TMPDIR"
 script=src/experiments/training_against_role_probes/post_training/check_serving.py
 .tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python "$script" reference --root "$root"
-project=src/experiments/agentic_eval
+project=src/experiments/eval_role_probes/agentic_eval
 export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH" MAX_JOBS=8 VLLM_USE_FLASHINFER_SAMPLER=0
 port=$((18000+SLURM_JOB_ID%10000))

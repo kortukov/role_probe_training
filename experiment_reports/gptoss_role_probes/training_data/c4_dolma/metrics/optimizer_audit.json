@@ -1,0 +1,477 @@
+{
+  "4": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 1.2542697893136694,
+    "objective": 1.2602842971900923,
+    "max_abs_gradient": 0.0015587180586339828,
+    "gradient_below_1e_4": false,
+    "train_accuracy": 0.4776275037741428,
+    "train_accuracy_by_collection": {
+      "neutral": 0.4776275037741428
+    },
+    "train_per_role_recall": {
+      "system": 0.414828879585389,
+      "user": 0.5683625667284018,
+      "cot": 0.4393335719732931,
+      "assistant": 0.42409692932625714,
+      "tool": 0.5415155712573732
+    },
+    "train_confusion_counts": [
+      [
+        53308,
+        34975,
+        10866,
+        12406,
+        16951
+      ],
+      [
+        26829,
+        73038,
+        7864,
+        9136,
+        11639
+      ],
+      [
+        10973,
+        10654,
+        56457,
+        28280,
+        22142
+      ],
+      [
+        12879,
+        12266,
+        28975,
+        54499,
+        19887
+      ],
+      [
+        14246,
+        10609,
+        18181,
+        15882,
+        69588
+      ]
+    ],
+    "train_confusion_counts_by_collection": {
+      "neutral": [
+        [
+          53308,
+          34975,
+          10866,
+          12406,
+          16951
+        ],
+        [
+          26829,
+          73038,
+          7864,
+          9136,
+          11639
+        ],
+        [
+          10973,
+          10654,
+          56457,
+          28280,
+          22142
+        ],
+        [
+          12879,
+          12266,
+          28975,
+          54499,
+          19887
+        ],
+        [
+          14246,
+          10609,
+          18181,
+          15882,
+          69588
+        ]
+      ]
+    },
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  },
+  "8": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 0.48380573196696347,
+    "objective": 0.506981489391906,
+    "max_abs_gradient": 0.00016412960098297156,
+    "gradient_below_1e_4": false,
+    "train_accuracy": 0.8163229732463854,
+    "train_accuracy_by_collection": {
+      "neutral": 0.8163229732463854
+    },
+    "train_per_role_recall": {
+      "system": 0.7210791714005572,
+      "user": 0.8504194356683734,
+      "cot": 0.7989899304312639,
+      "assistant": 0.9172412183088727,
+      "tool": 0.7938851104228596
+    },
+    "train_confusion_counts": [
+      [
+        92663,
+        17623,
+        4869,
+        1479,
+        11872
+      ],
+      [
+        14710,
+        109284,
+        1461,
+        325,
+        2726
+      ],
+      [
+        5359,
+        1540,
+        102675,
+        7599,
+        11333
+      ],
+      [
+        1208,
+        266,
+        7257,
+        117871,
+        1904
+      ],
+      [
+        11994,
+        2845,
+        10061,
+        1587,
+        102019
+      ]
+    ],
+    "train_confusion_counts_by_collection": {
+      "neutral": [
+        [
+          92663,
+          17623,
+          4869,
+          1479,
+          11872
+        ],
+        [
+          14710,
+          109284,
+          1461,
+          325,
+          2726
+        ],
+        [
+          5359,
+          1540,
+          102675,
+          7599,
+          11333
+        ],
+        [
+          1208,
+          266,
+          7257,
+          117871,
+          1904
+        ],
+        [
+          11994,
+          2845,
+          10061,
+          1587,
+          102019
+        ]
+      ]
+    },
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  },
+  "12": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 0.6806606891739924,
+    "objective": 0.6954340089501375,
+    "max_abs_gradient": 0.0008950674172461707,
+    "gradient_below_1e_4": false,
+    "train_accuracy": 0.7373928065615614,
+    "train_accuracy_by_collection": {
+      "neutral": 0.7373928065615614
+    },
+    "train_per_role_recall": {
+      "system": 0.6511680388464351,
+      "user": 0.8126780072525797,
+      "cot": 0.6784585933730721,
+      "assistant": 0.8826436119714255,
+      "tool": 0.6620157813642943
+    },
+    "train_confusion_counts": [
+      [
+        83679,
+        16161,
+        8324,
+        2749,
+        17593
+      ],
+      [
+        13208,
+        104434,
+        3203,
+        576,
+        7085
+      ],
+      [
+        9224,
+        4217,
+        87186,
+        11379,
+        16500
+      ],
+      [
+        2197,
+        443,
+        9846,
+        113425,
+        2595
+      ],
+      [
+        17508,
+        8017,
+        15348,
+        2560,
+        85073
+      ]
+    ],
+    "train_confusion_counts_by_collection": {
+      "neutral": [
+        [
+          83679,
+          16161,
+          8324,
+          2749,
+          17593
+        ],
+        [
+          13208,
+          104434,
+          3203,
+          576,
+          7085
+        ],
+        [
+          9224,
+          4217,
+          87186,
+          11379,
+          16500
+        ],
+        [
+          2197,
+          443,
+          9846,
+          113425,
+          2595
+        ],
+        [
+          17508,
+          8017,
+          15348,
+          2560,
+          85073
+        ]
+      ]
+    },
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  },
+  "16": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 0.3382439551203372,
+    "objective": 0.35742098102595754,
+    "max_abs_gradient": 8.960366948198762e-05,
+    "gradient_below_1e_4": true,
+    "train_accuracy": 0.872682987564783,
+    "train_accuracy_by_collection": {
+      "neutral": 0.872682987564783
+    },
+    "train_per_role_recall": {
+      "system": 0.8532442064961947,
+      "user": 0.9580019609979301,
+      "cot": 0.8180940967736915,
+      "assistant": 0.9561965978242261,
+      "tool": 0.7778780757318724
+    },
+    "train_confusion_counts": [
+      [
+        109647,
+        4180,
+        2930,
+        587,
+        11162
+      ],
+      [
+        3502,
+        123109,
+        498,
+        96,
+        1301
+      ],
+      [
+        3527,
+        559,
+        105130,
+        4776,
+        14514
+      ],
+      [
+        302,
+        55,
+        4191,
+        122877,
+        1081
+      ],
+      [
+        12554,
+        1898,
+        13057,
+        1035,
+        99962
+      ]
+    ],
+    "train_confusion_counts_by_collection": {
+      "neutral": [
+        [
+          109647,
+          4180,
+          2930,
+          587,
+          11162
+        ],
+        [
+          3502,
+          123109,
+          498,
+          96,
+          1301
+        ],
+        [
+          3527,
+          559,
+          105130,
+          4776,
+          14514
+        ],
+        [
+          302,
+          55,
+          4191,
+          122877,
+          1081
+        ],
+        [
+          12554,
+          1898,
+          13057,
+          1035,
+          99962
+        ]
+      ]
+    },
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  },
+  "20": {
+    "n_train_tokens": 642530,
+    "mean_cross_entropy": 0.5433904989190136,
+    "objective": 0.5631707157368524,
+    "max_abs_gradient": 0.001960738657787871,
+    "gradient_below_1e_4": false,
+    "train_accuracy": 0.7912190870465192,
+    "train_accuracy_by_collection": {
+      "neutral": 0.7912190870465192
+    },
+    "train_per_role_recall": {
+      "system": 0.7515602384324467,
+      "user": 0.9277776913140242,
+      "cot": 0.7159587879165176,
+      "assistant": 0.911521641012871,
+      "tool": 0.6492770765567366
+    },
+    "train_confusion_counts": [
+      [
+        96580,
+        8174,
+        5086,
+        1449,
+        17217
+      ],
+      [
+        5725,
+        119225,
+        964,
+        206,
+        2386
+      ],
+      [
+        6816,
+        1640,
+        92005,
+        9128,
+        18917
+      ],
+      [
+        986,
+        128,
+        7689,
+        117136,
+        2567
+      ],
+      [
+        20390,
+        4126,
+        17580,
+        2974,
+        83436
+      ]
+    ],
+    "train_confusion_counts_by_collection": {
+      "neutral": [
+        [
+          96580,
+          8174,
+          5086,
+          1449,
+          17217
+        ],
+        [
+          5725,
+          119225,
+          964,
+          206,
+          2386
+        ],
+        [
+          6816,
+          1640,
+          92005,
+          9128,
+          18917
+        ],
+        [
+          986,
+          128,
+          7689,
+          117136,
+          2567
+        ],
+        [
+          20390,
+          4126,
+          17580,
+          2974,
+          83436
+        ]
+      ]
+    },
+    "note": "Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status."
+  }
+}

@@ -22,7 +22,7 @@ def main():
         assert saved['checkpoint']==str(a.checkpoint)
         assert all(x==0 for x in saved['activation_merge_relative_rms'])
     runtime=RoleModel('.cache/models/gpt-oss-20b',
-        'experiment_reports/role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
+        'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
     adapter=a.checkpoint/'adapter/adapter_model.safetensors'
     set_peft_model_state_dict(runtime.model,load_file(adapter))
     runtime.model.gradient_checkpointing_disable()
