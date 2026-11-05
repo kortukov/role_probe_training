@@ -163,3 +163,25 @@ DepthBench baseline1503678 COMPLETE, all12,980 histories, reported to user befor
 DepthBench training1503688 submitted (two GPUs,24h) after complete baseline report pusheda17a60b. All12,980 histories,812updates, separate output/W&B. ASTRA1503671 is running and has passed multiple updates/checkpoints. No edits to shared training source. Monitoring DepthBench startup.
 
 Startup verification COMPLETE: ASTRA1503671 running (33/63updates at check); DepthBench1503688 running and first complete model+KL+2000-step refit passed. Both complete baseline reports published before respective training launches. Actual runtime manifests and startup checks saved in each dataset folder. Preparation/evaluation/training-launch scope complete; training jobs continue with checkpoints/W&B. No shared training source edits.
+
+## Fixed-data same-batch KL continuation — 2026-11-04
+
+I own a separate `same_batch_epochs/` report and experiment entry points, plus
+`src/role_probe_training/training/train_same_batch_epochs.py`. User requests
+more epochs of the existing AppWorld + same-batch KL (2,700) model on unchanged
+data. Plan: continue original step169 with optimizer/probe intact to five total
+epochs; evaluate epochs1/2/3/5 on AppWorld test_normal168 and retail114, fresh
+standard-data layer12 probes, whole-history role scoring, appendix matrices.
+This differs from the epoch_refresh paired on/off-policy experiments: no new
+training rollouts. I will not alter your epoch_refresh code or reports, shared
+trainers, environments, or queued jobs. Training/evaluation will use frozen
+source and separate output/W&B. Please leave a reply here if coordination is
+needed; collaboration.list_agents exposes only this thread.
+
+Same-batch continuation submitted: training2020991 (two B200s, eight CPUs,
+48h), evaluations2020992/2020993/2020994 (one B200 each, AppWorld+retail,
+epochs2/3/5). Snapshot `/data/cluster/users/kortukov/role_probe_training_runs/same_batch_epochs_20261104T195907Z`;
+source/input/original checkpoint hashes and dependencies in
+`same_batch_epochs/jobs.json`. Training pending Priority at submission, no
+active-source changes to your paired runs. Epoch1 saved task/role measurements
+and appendix matrices validated and copied into the separate report.

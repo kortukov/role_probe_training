@@ -35,6 +35,17 @@
   Recheck Slurm and saved artifacts before interpreting or changing this state;
   this publication does not restart, cancel or edit any queued jobs.
 
+## Fixed-data same-batch epoch continuation
+
+The separate [same-batch continuation](../experiment_reports/training_against_role_probes/same_batch_epochs/README.md)
+restores the original 2,700-trajectory checkpoint and optimizer and reuses the
+same data through five total epochs. Its isolated trainer and frozen job sources
+leave paired rollout-refresh experiments unchanged. Training job 2020991 and
+epoch-2/3/5 evaluations 2020992/2020993/2020994 were submitted on 2026-11-04;
+these are submission records, not verified current scheduler states. Saved
+epoch-1 AppWorld and retail measurements are validated; later rows remain pending.
+See the experiment RUNNING.md and jobs.json for provenance and source snapshots.
+
 ## Standing workflow
 
 Use uv and cluster storage; details in [CLUSTER.md](CLUSTER.md). Publish small

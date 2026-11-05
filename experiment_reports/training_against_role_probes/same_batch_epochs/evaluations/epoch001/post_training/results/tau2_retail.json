@@ -1,0 +1,158 @@
+{
+  "benchmark": "tau2_retail",
+  "task": {
+    "benchmark": "tau2_retail",
+    "samples": 114,
+    "sample_errors": 0,
+    "export_errors": 0,
+    "limited_samples": 6,
+    "metrics": {
+      "retail_scorer": {
+        "successes": 62,
+        "scored": 114,
+        "total": 114,
+        "success_rate": 0.543859649122807
+      }
+    },
+    "input_sha256": "a77c924f235c86839ec592433e4bb7b089bdf333a9abc579ff072a7e046f203b"
+  },
+  "probe": {
+    "accuracy": 0.7875645975659642,
+    "macro_recall": 0.5472080106089933,
+    "per_role_recall": [
+      0.1938296445338699,
+      0.4391131324616259,
+      0.9298134396602667,
+      0.7711625261046281,
+      0.4021213102845756
+    ],
+    "mean_true_role_probability": [
+      0.2078862487783895,
+      0.43741802836274074,
+      0.9183906881378971,
+      0.7655558620015972,
+      0.4056677742569385
+    ],
+    "mean_trajectory_accuracy": 0.6833958728276948,
+    "confusion_counts": [
+      [
+        32946,
+        103284,
+        31578,
+        0,
+        2166
+      ],
+      [
+        2051,
+        11586,
+        1235,
+        10851,
+        662
+      ],
+      [
+        15347,
+        484,
+        1276049,
+        80423,
+        68
+      ],
+      [
+        1929,
+        18,
+        88927,
+        309075,
+        842
+      ],
+      [
+        420,
+        885,
+        35126,
+        85382,
+        81929
+      ]
+    ],
+    "probe_sha256": "3a97907fa11bbe8dc7bfb9771d20c906b5d785ed842d1ff595f9b492c32f044b",
+    "layers": {
+      "12": {
+        "accuracy": 0.7875645975659642,
+        "macro_recall": 0.5472080106089933,
+        "per_role_recall": [
+          0.1938296445338699,
+          0.4391131324616259,
+          0.9298134396602667,
+          0.7711625261046281,
+          0.4021213102845756
+        ],
+        "mean_true_role_probability": [
+          0.2078862487783895,
+          0.43741802836274074,
+          0.9183906881378971,
+          0.7655558620015972,
+          0.4056677742569385
+        ],
+        "mean_trajectory_accuracy": 0.6833958728276948,
+        "confusion_counts": [
+          [
+            32946,
+            103284,
+            31578,
+            0,
+            2166
+          ],
+          [
+            2051,
+            11586,
+            1235,
+            10851,
+            662
+          ],
+          [
+            15347,
+            484,
+            1276049,
+            80423,
+            68
+          ],
+          [
+            1929,
+            18,
+            88927,
+            309075,
+            842
+          ],
+          [
+            420,
+            885,
+            35126,
+            85382,
+            81929
+          ]
+        ],
+        "probe_sha256": "3a97907fa11bbe8dc7bfb9771d20c906b5d785ed842d1ff595f9b492c32f044b"
+      }
+    },
+    "roles": [
+      "system",
+      "user",
+      "cot",
+      "assistant",
+      "tool"
+    ],
+    "trajectories": 114,
+    "scored_trajectories": 114,
+    "excluded_trajectories": [],
+    "context_limit": 131072,
+    "input_sha256": "a77c924f235c86839ec592433e4bb7b089bdf333a9abc579ff072a7e046f203b",
+    "model_revision": "bf5def61b31ae13c7dcee646b39c38f3b47bfa3c00036e8742d0dfe4301cfcea",
+    "context_policy": "Whole conversation in one forward pass; no chunking or truncation",
+    "overlength_policy": "exclude"
+  },
+  "checkpoint": "experiment_reports/training_against_role_probes/kl_iteration/same_batch/runs/training/epoch1/checkpoints/step00169",
+  "model_revision": "bf5def61b31ae13c7dcee646b39c38f3b47bfa3c00036e8742d0dfe4301cfcea",
+  "source_sha256": {
+    "experiment_reports/training_against_role_probes/kl_iteration/same_batch/predictions/post_training/tau2_retail/summary.json": "312ada521d7c0a39355eedfc982d4c8cb5247255accf086919f13140192d8342",
+    "experiment_reports/training_against_role_probes/kl_iteration/same_batch/post_training/task_results.json": "dc7d8c8a56a4e2bc3c9410f9e7cfdbb1a6662fc43bdc4c05572c15522310cf94",
+    "experiment_reports/training_against_role_probes/kl_iteration/same_batch/data/post_training/model/export.json": "2764180258f6d85773e75c515c8dfb218f847507c7deb33b12fb6c86994f70c5"
+  },
+  "reused_saved_evaluation": true
+}

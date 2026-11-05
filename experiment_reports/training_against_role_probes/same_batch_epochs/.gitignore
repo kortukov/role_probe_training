@@ -1,0 +1,5 @@
+runs/
+data/
+predictions/
+logs/
+.report.lock
