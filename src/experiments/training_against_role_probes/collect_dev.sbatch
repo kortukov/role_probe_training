@@ -43,6 +43,6 @@ done
 printf '{"server_startup_seconds": %s}\n' "$((SECONDS-server_started))" > "$run_dir/startup.json"
 samples=8
 seed=9301
-uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
  --base-url "http://127.0.0.1:$port/v1" --split dev --samples "$samples" \
  --seed "$seed" --concurrency 8 --output "$run_dir/dev"

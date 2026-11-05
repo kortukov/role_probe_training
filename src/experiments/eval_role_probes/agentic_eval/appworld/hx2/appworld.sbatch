@@ -50,13 +50,13 @@ done
 printf '{"server_startup_seconds": %s, "node": "%s"}\n' "$((SECONDS-server_started))" "$(hostname)" > "$run_dir/startup.json"
 if [[ "${1:-}" == "--pilot" ]]; then
  for concurrency in 1 8; do
-  uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
    --base-url "http://127.0.0.1:$port/v1" --split train --samples 4 --concurrency "$concurrency" \
    --output "$run_dir/train-c$concurrency"
  done
 else
  for split in "$@"; do
-  uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
    --base-url "http://127.0.0.1:$port/v1" --split "$split" --concurrency 8 --output "$run_dir/$split"
  done
 fi

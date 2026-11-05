@@ -69,9 +69,9 @@ start_server uv run --project "$project/server_current" --frozen --no-sync vllm 
  "${worker[@]}" --kernel-config '{"enable_jit_warmup":false}' \
  --cudagraph-capture-sizes 1 2 4 --max-cudagraph-capture-size 4
 trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$native_scratch"' EXIT
-uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/context_check.json"
-uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/tool_check.json"
 selection=(--all --shard-index "$idx" --shard-count 4)
 if [[ "$mode" == pilot ]]; then
@@ -79,7 +79,7 @@ if [[ "$mode" == pilot ]]; then
 elif [[ "$mode" != full ]]; then
  echo 'Mode must be pilot or full'; exit 1
 fi
-uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/run.py \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/run.py \
  --base-url "http://127.0.0.1:$port/v1" --model-id "$served" --model-revision "$revision" \
  --benchmark swe_bench "${selection[@]}" --seed 123 --reasoning-effort high \
  --concurrency 4 --time-limit 7200 --max-tokens 16384 --token-limit 0 --repository-python --message-limit 2000 \

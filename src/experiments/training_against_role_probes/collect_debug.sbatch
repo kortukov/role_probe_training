@@ -45,6 +45,6 @@ printf '{"server_startup_seconds": %s}\n' "$((SECONDS-server_started))" > "$run_
 samples=90
 if [[ "$SLURM_ARRAY_TASK_ID" == 3 ]]; then samples=30; fi
 seed=$((7301 + SLURM_ARRAY_TASK_ID))
-uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
  --base-url "http://127.0.0.1:$port/v1" --split train --samples "$samples" \
  --seed "$seed" --concurrency 8 --output "$run_dir/train"

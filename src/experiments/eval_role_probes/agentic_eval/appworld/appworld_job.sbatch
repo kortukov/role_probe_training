@@ -26,7 +26,7 @@ run_dir="$PWD/experiment_reports/eval_role_probes/agentic_eval/appworld/base_tra
 mkdir -p "$run_dir"
 port=$((18000+SLURM_JOB_ID%10000))
 if [[ -n "${APPWORLD_PILOT_ROOT:-}" ]]; then
- uv run --project "$project/swe" --frozen --no-sync python - "$APPWORLD_PILOT_ROOT" <<'PYCODE'
+ uv run --project "$project/swe_bench/env" --frozen --no-sync python - "$APPWORLD_PILOT_ROOT" <<'PYCODE'
 import json,sys
 from pathlib import Path
 for directory in ('train-c1','train-c8'):
@@ -57,18 +57,18 @@ done
 printf '{"server_startup_seconds": %s}\n' "$((SECONDS-server_started))" > "$run_dir/startup.json"
 if [[ "${1:-}" == "--pilot" ]]; then
  for concurrency in 1 8; do
-  uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
    --base-url "http://127.0.0.1:$port/v1" --split train --samples 4 --concurrency "$concurrency" \
    --output "$run_dir/train-c$concurrency"
  done
 else
  if [[ "${SWE_DIAGNOSTIC:-0}" == 1 ]]; then
-  uv run --project "$project/swe" --frozen --no-sync python "$project/swe_replay.py" \
+  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/swe_bench/swe_replay.py" \
    --base-url "http://127.0.0.1:$port/v1" \
    --output "$run_dir/swe-request-diagnostic.json"
  fi
  for split in train test_normal test_challenge; do
-  uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
    --base-url "http://127.0.0.1:$port/v1" --split "$split" --concurrency 8 --output "$run_dir/$split"
  done
 fi

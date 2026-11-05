@@ -54,9 +54,9 @@ for ((i=0;i<180;i++)); do
  sleep 5
 done
 [[ "$ready" == 1 ]]
-uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/context_check.json"
-uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/tool_check.json"
 selection=(--all --shard-index "$idx" --shard-count 4)
 if [[ "$mode" == pilot ]]; then
@@ -64,7 +64,7 @@ if [[ "$mode" == pilot ]]; then
 elif [[ "$mode" != full ]]; then
  echo 'Mode must be pilot or full'; exit 1
 fi
-uv run --project "$project/swe" --frozen --no-sync python "$project/swe_run.py" \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/swe_bench/swe_run.py" \
  --base-url "http://127.0.0.1:$port/v1" --model-id "$served" --model-revision "$revision" \
  --benchmark swe_bench "${selection[@]}" --seed 123 --reasoning-effort high \
  --concurrency 4 --time-limit 3600 --max-tokens 16384 --token-limit 10000000 --message-limit 200 \

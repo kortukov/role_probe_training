@@ -29,4 +29,4 @@ for ((i=0;i<120;i++)); do
  sleep 5
 done
 [[ "$ready" == 1 ]]
-.tools/bin/uv run --project "$project/swe" --frozen --no-sync python "$script" compare --root "$root" --base-url "http://127.0.0.1:$port/v1" --model check
+.tools/bin/uv run --project "$project/swe_bench/env" --frozen --no-sync python "$script" compare --root "$root" --base-url "http://127.0.0.1:$port/v1" --model check

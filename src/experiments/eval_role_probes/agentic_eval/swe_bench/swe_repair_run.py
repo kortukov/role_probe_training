@@ -73,7 +73,7 @@ def main():
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
                 "sandbox_provider": "apptainer (writable isolated instance; network none; no host binds); digest-pinned official images via mirror.gcr.io",
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "swe/uv.lock", Path(__file__).with_name("swe_repair_job.sbatch"), Path(__file__).parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "env/uv.lock", Path(__file__).with_name("swe_repair_job.sbatch"), Path(__file__).parent.parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:

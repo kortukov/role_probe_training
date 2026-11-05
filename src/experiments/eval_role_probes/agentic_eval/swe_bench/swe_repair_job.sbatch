@@ -22,7 +22,7 @@ export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken"
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK" TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR" "$TIKTOKEN_CACHE_DIR"
 project=src/experiments/eval_role_probes/agentic_eval
-client_project="$project/swe"
+client_project="$project/swe_bench/env"
 export APPTAINER_CACHEDIR="$LOCAL_JOB_DIR/apptainer-cache"
 export APPTAINER_TMPDIR="$LOCAL_JOB_DIR/apptainer-tmp"
 mkdir -p "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR"
@@ -33,7 +33,7 @@ mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))
 cleanup() {
     if [[ -f "$run_dir/manifest.json" ]]; then
-        uv run --project "$client_project" --frozen --no-sync python "$project/export.py" "$run_dir" || true
+        uv run --project "$client_project" --frozen --no-sync python "$project/shared/export.py" "$run_dir" || true
     fi
     kill "$server_pid" 2>/dev/null || true
 }
@@ -51,7 +51,7 @@ for ((i=0;i<180;i++)); do
     sleep 5
 done
 if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
-uv run --project "$client_project" --frozen --no-sync python "$project/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
+uv run --project "$client_project" --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
-uv run --project "$client_project" --frozen --no-sync python "$project/swe_repair_run.py" \
+uv run --project "$client_project" --frozen --no-sync python "$project/swe_bench/swe_repair_run.py" \
     --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" --benchmark swe_bench --all --concurrency 2 --time-limit 1800 --shard-index "$SLURM_ARRAY_TASK_ID" --shard-count 1 --sample-id matplotlib__matplotlib-26342 --sample-id django__django-17084 "$@"

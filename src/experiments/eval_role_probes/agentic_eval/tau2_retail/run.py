@@ -67,7 +67,7 @@ def main():
                 "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).with_name("uv.lock"), Path(__file__).with_name("job.sbatch"), Path(__file__).parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent.parent / "uv.lock", Path(__file__).with_name("job.sbatch"), Path(__file__).parent.parent / "server/uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:

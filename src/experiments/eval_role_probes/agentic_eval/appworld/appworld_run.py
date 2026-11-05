@@ -55,7 +55,7 @@ def main():
             Path(__file__).with_name('appworld_job.sbatch'),
             Path(__file__).with_name('appworld_parallel_job.sbatch'),
             Path('src/role_probe_training/trajectories/appworld.py'),
-            Path(__file__).parent/'server_current/uv.lock',Path(__file__).parent/'swe/uv.lock']}}
+            Path(__file__).parent.parent/'server_current/uv.lock',Path(__file__).parent.parent/'swe_bench/env/uv.lock']}}
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     model = get_model('vllm/'+args.model_id,base_url=args.base_url,api_key='local',
         config=GenerateConfig(temperature=1,seed=args.seed,max_tokens=args.max_tokens,

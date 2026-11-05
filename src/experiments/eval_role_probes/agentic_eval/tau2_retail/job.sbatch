@@ -28,7 +28,7 @@ mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))
 cleanup() {
     if [[ -f "$run_dir/manifest.json" ]]; then
-        uv run --project "$project" --frozen --no-sync python "$project/export.py" "$run_dir" || true
+        uv run --project "$project" --frozen --no-sync python "$project/shared/export.py" "$run_dir" || true
     fi
     kill "$server_pid" 2>/dev/null || true
 }
@@ -46,7 +46,7 @@ for ((i=0;i<180;i++)); do
     sleep 5
 done
 if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
-uv run --project "$project" --frozen --no-sync python "$project/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
+uv run --project "$project" --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
-uv run --project "$project" --frozen --no-sync python "$project/run.py" \
+uv run --project "$project" --frozen --no-sync python "$project/tau2_retail/run.py" \
     --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" "$@"

@@ -42,20 +42,20 @@ start_server uv run --project "$project/server_current" --frozen --no-sync vllm 
  --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16
 trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$job_scratch"' EXIT
 
-uv run --project "$project/swe" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
+uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/smoke.json"
 if [[ "$mode" == smoke ]]; then exit 0; fi
 common=(--base-url "http://127.0.0.1:$port/v1" --model-id "$served" --model-revision "$revision" --seed 123)
 if (( idx < 2 )); then
- uv run --project "$project/swe" --frozen --no-sync python "$project/appworld_run.py" \
+ uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
   "${common[@]}" --split test_normal --shard-index "$idx" --shard-count 2 --concurrency 8 --output "$run/appworld_test"
 elif (( idx == 2 )); then
  : "${AZURE_OPENAI_API_KEY:?Azure credentials must be inherited}" "${AZURE_OPENAI_ENDPOINT:?}"
- uv run --project "$project/swe" --frozen --no-sync python "$project/swe_run.py" \
+ uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/swe_bench/swe_run.py" \
   "${common[@]}" --benchmark tau2_retail --all --concurrency 16 --time-limit 1800 --max-tokens 16384 \
   --token-limit 500000 --temperature 0 --user-model openai/azure/gpt-4.1 --output "$run/tau2_retail"
 else
- uv run --project "$project/swe" --frozen --no-sync python "$project/swe_run.py" \
+ uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/swe_bench/swe_run.py" \
   "${common[@]}" --benchmark swe_bench --all --shard-index "$((idx-3))" --shard-count 4 \
   --concurrency 8 --time-limit 1800 --max-tokens 8192 --token-limit 2000000 --message-limit 200 \
   --temperature 1 --output "$run/swe_bench"
