@@ -217,3 +217,27 @@ Row percentages:
 | Tool | 0.6 | 0.1 | 52.8 | 44.9 | 1.7 |
 
 Excluded histories: 5. The linked result records every exclusion and its token length.
+
+## Epoch 9
+
+Task success: 75/114. Role coverage: 113/114 histories. Native context: 131,072 tokens. [Counts and provenance](checkpoints/epoch009/post_training/results/tau2_retail.json).
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 69947 | 17402 | 68026 | 0 | 13108 |
+| User | 1147 | 6907 | 7929 | 14378 | 9 |
+| Reasoning | 14005 | 68 | 990498 | 789466 | 38 |
+| Assistant | 1728 | 3 | 194728 | 331995 | 0 |
+| Tool | 1253 | 94 | 109263 | 86550 | 2906 |
+
+Row percentages:
+
+| True / predicted | System | User | Reasoning | Assistant | Tool |
+|---|---:|---:|---:|---:|---:|
+| System | 41.5 | 10.3 | 40.4 | 0.0 | 7.8 |
+| User | 3.8 | 22.7 | 26.1 | 47.3 | 0.0 |
+| Reasoning | 0.8 | 0.0 | 55.2 | 44.0 | 0.0 |
+| Assistant | 0.3 | 0.0 | 36.8 | 62.8 | 0.0 |
+| Tool | 0.6 | 0.0 | 54.6 | 43.3 | 1.5 |
+
+Excluded histories: 1. The linked result records every exclusion and its token length.

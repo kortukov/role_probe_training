@@ -502,5 +502,61 @@
     ],
     "scored_histories": 109,
     "result": "checkpoints/epoch008/post_training/results/tau2_retail.json"
+  },
+  {
+    "epoch": 9,
+    "task": {
+      "successes": 75,
+      "scored": 114,
+      "total": 114,
+      "success_rate": 0.6578947368421053
+    },
+    "role_accuracy": 0.5152598910579956,
+    "per_role_recall": [
+      0.4151576123407109,
+      0.22742838327296674,
+      0.5520939760043476,
+      0.6282382194098256,
+      0.014525206681795008
+    ],
+    "confusion_counts": [
+      [
+        69947,
+        17402,
+        68026,
+        0,
+        13108
+      ],
+      [
+        1147,
+        6907,
+        7929,
+        14378,
+        9
+      ],
+      [
+        14005,
+        68,
+        990498,
+        789466,
+        38
+      ],
+      [
+        1728,
+        3,
+        194728,
+        331995,
+        0
+      ],
+      [
+        1253,
+        94,
+        109263,
+        86550,
+        2906
+      ]
+    ],
+    "scored_histories": 113,
+    "result": "checkpoints/epoch009/post_training/results/tau2_retail.json"
   }
 ]
