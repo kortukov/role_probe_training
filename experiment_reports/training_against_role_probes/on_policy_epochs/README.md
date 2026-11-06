@@ -53,6 +53,7 @@ precision and is not substituted for this baseline.
 | 6 | 42.1 | 53.8 | 52.3 | 26.0 | 58.5 | 59.8 | 3.1 |
 | 7 | 58.8 | 48.1 | 60.5 | 24.1 | 46.7 | 68.9 | 2.9 |
 | 8 | 54.4 | 50.3 | 58.7 | 21.5 | 51.1 | 66.9 | 1.0 |
+| 9 | 58.8 | 51.0 | 53.7 | 25.3 | 52.4 | 65.9 | 3.4 |
 
 All values are percentages. Epoch 0 is the untrained checkpoint evaluated with the same protocol. [Checkpoint coverage and confusion matrices](APPENDIX.md).
 <!-- /epoch-results -->
@@ -60,7 +61,7 @@ All values are percentages. Epoch 0 is the untrained checkpoint evaluated with t
 ## Message
 
 <!-- epoch-message -->
-The latest evaluated checkpoint is epoch 8: task success is 54.4% and overall role accuracy is 50.3%. Relative to epoch 0, these change by -4.4 and +19.1 percentage points, respectively. The table gives the measured progression across completed epochs. These single-attempt measurements are descriptive. Role accuracy and task success measure different behavior; differing role-score coverage can affect comparisons. Compare both refresh schedules at matched epochs before attributing differences to refresh frequency.
+The latest evaluated checkpoint is epoch 9: task success is 58.8% and overall role accuracy is 51.0%. Relative to epoch 0, these change by +0.0 and +19.7 percentage points, respectively. The table gives the measured progression across completed epochs. These single-attempt measurements are descriptive. Role accuracy and task success measure different behavior; differing role-score coverage can affect comparisons. Compare both refresh schedules at matched epochs before attributing differences to refresh frequency.
 <!-- /epoch-message -->
 
 [Reproduction and execution status](RUNNING.md)
