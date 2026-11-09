@@ -48,3 +48,8 @@ x = (np.eye(5)[y]*5 + rng.normal(size=(len(y), 5))*.1).astype(np.float32)
 probe = fit_probe(x, y, metadata={'layer':12}, C=1.)
 assert (probe.predict(x) == np.asarray(ROLES)[y]).all()
 print('PASS: cuML fit and NumPy probability reconstruction', probe.metadata, flush=True)
+groups = np.arange(len(y)) // 5  # five tokens per example
+order = np.argsort(groups, kind='stable')
+probe = fit_probe(x[order], y[order], metadata={'layer':12}, backend='adamw', groups=groups[order], max_iter=2000)
+assert (probe.predict(x) == np.asarray(ROLES)[y]).all()
+print('PASS: AdamW (training_against_probes) fit on the GPU and NumPy probability reconstruction', probe.metadata, flush=True)

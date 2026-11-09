@@ -1,4 +1,11 @@
-"""Train reusable probes and evaluate a small clean conversational baseline."""
+"""Train reusable probes and evaluate a small clean conversational baseline.
+
+`--backend` selects how probes are fitted from scratch: `cuml` (default, the role-probe
+paper's logistic regression) or `adamw` (the training_against_probes step-0 fit). Several
+backends in one `train` run share one activation extraction. cuML results keep their
+paths (probes/, metrics/synthetic.json, ...); every other backend adds its name as a
+suffix (probes_adamw/, metrics/synthetic_adamw.json, ...), so both can be compared.
+"""
 
 import argparse
 import hashlib
@@ -28,7 +35,11 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2) + '\n')
 
 
-def train(config, tokenizer, model, documents, output, metadata):
+def suffix(backend):
+    return '' if backend == 'cuml' else f'_{backend}'
+
+
+def train(config, tokenizer, model, documents, output, metadata, backends=('cuml',), fit_steps=5000):
     if config['token_stride'] != 1:
         raise ValueError('Reproduction requires all content tokens (token_stride=1)')
     layers = config['layers']
@@ -37,7 +48,7 @@ def train(config, tokenizer, model, documents, output, metadata):
     train_sources = set(config.get('train_sources') or [s['id'] for s in config['sources']])
     documents = [d for d in documents if d['split'] != 'train' or d['source'] in train_sources]
     features = {layer: [] for layer in layers}
-    labels, splits, collections = [], [], []
+    labels, splits, collections, groups = [], [], [], []
     for index, document in enumerate(documents):
         headers = document.get('header', {})
         for role in ROLES:
@@ -51,35 +62,41 @@ def train(config, tokenizer, model, documents, output, metadata):
             labels.extend(enc['labels'][positions])
             splits.extend([document['split']] * len(positions))
             collections.extend([document.get('collection', 'neutral')] * len(positions))
+            groups.extend([len(ROLES)*index + ROLES.index(role)] * len(positions))  # one rendered message
         if (index+1) % 10 == 0:
             print(f'Extracted {index+1}/{len(documents)} training documents', flush=True)
     labels = np.asarray(labels)
     mask = np.asarray(splits) == 'train'
     collections = np.asarray(collections)
-    results = {}
+    groups = np.asarray(groups)
+    results = {backend: {} for backend in backends}
     for layer in layers:
         x = np.concatenate(features.pop(layer))
-        print(f'Fitting block {layer}: {mask.sum()} train / {(~mask).sum()} test tokens', flush=True)
-        probe = fit_probe(x[mask], labels[mask], C=config['C'], metadata={
-            **metadata, 'layer': layer, 'activation': 'post_attention_layernorm_output_pre_mlp',
-            'layer_indexing': 'zero_based', 'hidden_size': x.shape[1],
-            'training_config': config,
-        })
-        path = output / 'probes' / f'layer_{layer}.npz'
-        probe.save(path)
-        loaded = RoleProbe.load(path)
-        np.testing.assert_allclose(loaded.predict_proba(x[:32]), probe.predict_proba(x[:32]))
-        probabilities = loaded.predict_proba(x[~mask])
-        results[str(layer)] = metrics(labels[~mask], probabilities)
-        results[str(layer)]['converged'] = probe.metadata['converged']
-        results[str(layer)]['train_sources'] = sorted(train_sources)
-        results[str(layer)]['by_collection'] = {
-            name: metrics(labels[~mask][collections[~mask] == name], probabilities[collections[~mask] == name])
-            for name in sorted(set(collections[~mask]))}
-        print(f'Block {layer}: held-out accuracy {results[str(layer)]["accuracy"]:.4f}; by collection ' +
-              ', '.join(f'{k} {v["accuracy"]:.4f}' for k, v in results[str(layer)]['by_collection'].items()), flush=True)
+        for backend in backends:
+            print(f'Fitting block {layer} with {backend}: {mask.sum()} train / {(~mask).sum()} test tokens', flush=True)
+            fit_arguments = (dict(C=config['C']) if backend == 'cuml' else
+                             dict(max_iter=fit_steps, groups=groups[mask], seed=config['seed']))
+            probe = fit_probe(x[mask], labels[mask], backend=backend, **fit_arguments, metadata={
+                **metadata, 'layer': layer, 'activation': 'post_attention_layernorm_output_pre_mlp',
+                'layer_indexing': 'zero_based', 'hidden_size': x.shape[1],
+                'training_config': config,
+            })
+            path = output / f'probes{suffix(backend)}' / f'layer_{layer}.npz'
+            probe.save(path)
+            loaded = RoleProbe.load(path)
+            np.testing.assert_allclose(loaded.predict_proba(x[:32]), probe.predict_proba(x[:32]))
+            probabilities = loaded.predict_proba(x[~mask])
+            result = results[backend][str(layer)] = metrics(labels[~mask], probabilities)
+            result['converged'] = probe.metadata['converged']
+            result['train_sources'] = sorted(train_sources)
+            result['by_collection'] = {
+                name: metrics(labels[~mask][collections[~mask] == name], probabilities[collections[~mask] == name])
+                for name in sorted(set(collections[~mask]))}
+            print(f'Block {layer} ({backend}): held-out accuracy {result["accuracy"]:.4f}; by collection ' +
+                  ', '.join(f'{k} {v["accuracy"]:.4f}' for k, v in result['by_collection'].items()), flush=True)
         del x
-    write_json(output / 'metrics' / 'synthetic.json', results)
+    for backend in backends:
+        write_json(output / 'metrics' / f'synthetic{suffix(backend)}.json', results[backend])
 
 
 def render_config(config):
@@ -134,10 +151,10 @@ def generate_conversations(config, tokenizer, model, prompts, path):
     return conversations
 
 
-def evaluate(config, tokenizer, model, conversations, output):
-    probes = {layer: RoleProbe.load(output/'probes'/f'layer_{layer}.npz') for layer in config['layers']}
+def evaluate(config, tokenizer, model, conversations, output, backend='cuml'):
+    probes = {layer: RoleProbe.load(output/f'probes{suffix(backend)}'/f'layer_{layer}.npz') for layer in config['layers']}
     summaries = {layer: [] for layer in probes}
-    prediction_path = output/'artifacts'/'token_predictions.jsonl'
+    prediction_path = output/'artifacts'/f'token_predictions{suffix(backend)}.jsonl'
     with prediction_path.open('w') as handle:
         for conv in conversations:
             enc = encode_record(conv)
@@ -166,9 +183,9 @@ def evaluate(config, tokenizer, model, conversations, output):
                                      np.concatenate([r['probabilities'] for r in rows])),
             'conversation_balanced': summary,
         }
-        plot_summary(summary, output/'plots'/f'clean_chat_layer_{layer}.png',
-                     f'GPT-OSS-20B clean conversations — block {layer}')
-    write_json(output/'metrics'/'conversations.json', results)
+        plot_summary(summary, output/'plots'/f'clean_chat_layer_{layer}{suffix(backend)}.png',
+                     f'GPT-OSS-20B clean conversations — block {layer}' + (f' ({backend} probe)' if suffix(backend) else ''))
+    write_json(output/'metrics'/f'conversations{suffix(backend)}.json', results)
     return results
 
 
@@ -177,14 +194,20 @@ def main():
     parser.add_argument('--config', default='src/experiments/gptoss_role_probes/config.json')
     parser.add_argument('--output', default='experiment_reports/gptoss_role_probes/gptoss20b_baseline')
     parser.add_argument('--stage', choices=['all', 'train', 'evaluate', 'audit'], default='all')
+    parser.add_argument('--backend', nargs='+', choices=['cuml', 'adamw'], default=['cuml'],
+                        help='probe fitter(s); see the module docstring for the output paths')
+    parser.add_argument('--fit-steps', type=int, default=5000,
+                        help='optimizer steps of the adamw backend (upstream probe_training.max_steps)')
     args = parser.parse_args()
+    if args.stage == 'audit' and args.backend != ['cuml']:
+        parser.error('The optimizer audit checks the cuML logistic-regression objective only')
     config = json.loads(Path(args.config).read_text())
     output = Path(args.output)
-    for folder in ['artifacts', 'probes', 'metrics', 'plots']:
+    for folder in ['artifacts', 'metrics', 'plots'] + [f'probes{suffix(backend)}' for backend in args.backend]:
         (output/folder).mkdir(parents=True, exist_ok=True)
     torch.manual_seed(config['seed']); np.random.seed(config['seed'])
-    if importlib.util.find_spec('cuml') is None:
-        raise SystemExit('Probe fitting needs cuML: run with `uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python ...`')
+    if 'cuml' in args.backend and args.stage in ('all', 'train') and importlib.util.find_spec('cuml') is None:
+        raise SystemExit('Probe fitting with the cuml backend needs cuML: run with `uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python ...`')
     tokenizer, model = load_model(config['model_path'])
     input_dir = output/'artifacts'/'inputs'
     prepared = json.loads((input_dir/'config.json').read_text())
@@ -195,6 +218,7 @@ def main():
         raise ValueError('Prepared inputs do not match the requested configuration')
     metadata = {
         'stage': args.stage, 'generation_max_new_tokens': config['max_new_tokens'],
+        'probe_backends': args.backend, 'adamw_fit_steps': args.fit_steps if 'adamw' in args.backend else None,
         'model_id': config['model_id'], 'model_revision': config['model_revision'],
         'precision': 'MXFP4 checkpoint dequantized to BF16', 'attention': 'eager',
         'rendering': render_config(config).metadata(),
@@ -205,10 +229,11 @@ def main():
         'versions': {p: importlib.metadata.version(p) for p in ['torch','transformers','scikit-learn','cuml-cu13','numpy','datasets',LIBRARY]},
         'input_sha256': hashlib.sha256((input_dir/'documents.jsonl').read_bytes()).hexdigest(),
         'source_sha256': {str(p): hashlib.sha256(p.read_bytes()).hexdigest()
-                          for root in ['src/role_probe_training/probes','src/role_probe_training/harmony','src/experiments/gptoss_role_probes']
-                          for p in Path(root).glob('*.py')},
+                          for p in [q for root in ['src/role_probe_training/probes','src/role_probe_training/harmony','src/experiments/gptoss_role_probes']
+                                    for q in Path(root).glob('*.py')] + [Path('src/role_probe_training/training/probe_fit.py')]},
     }
-    write_json(output/'metrics'/f'run_metadata_{args.stage}.json', metadata)
+    tag = '' if args.backend == ['cuml'] else '_' + '_'.join(args.backend)
+    write_json(output/'metrics'/f'run_metadata_{args.stage}{tag}.json', metadata)
     if args.stage == 'audit':
         from role_probe_training.probes.audit import audit_objective
         result = audit_objective(tokenizer, model, read_jsonl(input_dir/'documents.jsonl'),
@@ -216,7 +241,8 @@ def main():
             train_sources=config.get('train_sources'))
         write_json(output/'metrics'/'optimizer_audit.json', result)
     if args.stage in ('all','train'):
-        train(config, tokenizer, model, read_jsonl(input_dir/'documents.jsonl'), output, metadata)
+        train(config, tokenizer, model, read_jsonl(input_dir/'documents.jsonl'), output, metadata,
+              args.backend, args.fit_steps)
     if args.stage in ('all','evaluate'):
         path = output/'artifacts'/'conversations.jsonl'
         if path.exists():
@@ -228,7 +254,8 @@ def main():
         else:
             conversations = generate_conversations(config, tokenizer, model,
                 read_jsonl(input_dir/'prompts.jsonl'), path)
-        evaluate(config, tokenizer, model, conversations, output)
+        for backend in args.backend:
+            evaluate(config, tokenizer, model, conversations, output, backend)
     print('Completed', args.stage, flush=True)
 
 

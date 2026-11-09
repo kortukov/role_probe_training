@@ -1,4 +1,14 @@
-"""Multinomial L2 logistic regression, saved as portable NumPy arrays + JSON."""
+"""Five-class linear role probes, saved as portable NumPy arrays + JSON.
+
+Two ways to fit one from scratch (`fit_probe(backend=...)`):
+
+* "cuml": multinomial L2 logistic regression solved on the GPU, the fitter of the role-probe
+  paper (submodules/prompt-injection-as-role-confusion). "sklearn" is its CPU stand-in for checks.
+* "adamw": the gradient-descent fitter of the training_against_probes paper
+  (training/probe_fit.py), which the training loop also uses for its refits.
+
+Either way the stored weights apply to raw activations.
+"""
 
 import json
 import warnings
@@ -45,10 +55,24 @@ class RoleProbe:
         return cls(weight, bias, metadata)
 
 
-def fit_probe(states, labels, *, metadata, C=0.005, max_iter=5000, backend="cuml"):
-    """Upstream GPU fitter; CPU backend is for small checks, not this experiment."""
+def mean_norm_scale(states, chunk=65536):
+    """sqrt(mean ||x||^2) over tokens: the input scale of the training_against_probes fitter."""
+    total = sum(float(np.square(states[lo:lo+chunk], dtype=np.float64).sum()) for lo in range(0, len(states), chunk))
+    return float(np.sqrt(total / len(states)))
+
+
+def fit_probe(states, labels, *, metadata, C=0.005, max_iter=5000, backend="cuml", groups=None, seed=123):
+    """Fit a probe from scratch.
+
+    backend "cuml" (or "sklearn" for small CPU checks) solves L2 logistic regression with
+    strength C in at most max_iter solver iterations. Backend "adamw" runs the
+    training_against_probes step-0 fit for max_iter optimizer steps; it ignores C and needs
+    `groups`, the example (rendered passage-role message) each token belongs to, because it
+    batches by example.
+    """
     if set(np.unique(labels)) != set(range(len(ROLES))):
         raise ValueError("All five roles must occur in the training split")
+    extra = {}
     if backend == "cuml":
         import cupy as cp
         from cuml.linear_model import LogisticRegression as GPULogisticRegression
@@ -75,16 +99,40 @@ def fit_probe(states, labels, *, metadata, C=0.005, max_iter=5000, backend="cuml
         weight, bias = model.coef_, model.intercept_
         iterations = int(model.n_iter_.max())
         warning_messages = [str(w.message) for w in caught]
+    elif backend == "adamw":
+        if groups is None:
+            raise ValueError("The adamw backend batches by example and needs `groups`")
+        import torch
+        from role_probe_training.training.probe_fit import SETTINGS, fit_from_scratch
+        module, scale, taken = fit_from_scratch(states, labels, groups, classes=len(ROLES), steps=max_iter, seed=seed)
+        with torch.no_grad():
+            head = torch.as_tensor(np.asarray(states[:32], dtype=np.float32), device=module.weight.device)
+            reference = torch.softmax(module(head).double(), dim=-1).cpu().numpy()
+        weight, bias = module.raw()
+        iterations, warning_messages, C = max_iter, [], None
+        extra = {"input_scale": scale, "fit": {**SETTINGS, "optimizer_steps": taken, "seed": seed,
+                                               "examples": int(len(np.unique(groups)))}}
+        del module
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
     else:
         raise ValueError(f"Unknown probe fitting backend: {backend}")
+    notes = {
+        "cuml": "cuML C++ line-search warnings require log review; iteration count alone does not establish convergence.",
+        "sklearn": "scikit-learn L-BFGS; converged means it stopped before max_iter without warnings.",
+        "adamw": "Fixed-length AdamW schedule (training_against_probes step-0 fit); it is not run to a convergence criterion.",
+    }
     probe = RoleProbe(weight, bias, {
+        # input_scale describes the fitting activations; the stored weights apply to raw
+        # activations (scaling none). The training loop reuses it for its refits.
+        "input_scale": extra["input_scale"] if "input_scale" in extra else mean_norm_scale(states),
         **metadata, "format_version": 1, "roles": list(ROLES),
         "C": C, "scaling": "none", "solver": backend,
         "iterations": iterations, "max_iter": max_iter,
         "warnings": warning_messages,
         "converged": (bool(iterations < max_iter and not warning_messages)
                       if backend == "sklearn" else None),
-        "termination_note": "cuML C++ line-search warnings require log review; iteration count alone does not establish convergence.",
+        "termination_note": notes[backend], **extra,
     })
     if not np.isfinite(weight).all() or not np.isfinite(bias).all():
         raise ValueError("Non-finite fitted probe")

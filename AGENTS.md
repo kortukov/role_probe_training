@@ -97,6 +97,11 @@
   to assess transfer to actual reasoning and tool messages. Probes fitted on Toucan tool-use
   text, alone or with the neutral passages, live in the
   [training-data comparison](experiment_reports/gptoss_role_probes/training_data/README.md).
+- A probe can be fitted from scratch in two ways (`fit_probe(backend=...)`, `--backend` on the
+  fitting scripts): `cuml`, the role-probe paper's logistic regression behind all reported
+  numbers, and `adamw`, the step-0 fit of training_against_probes
+  (`src/role_probe_training/training/probe_fit.py`). In-loop refits use the same AdamW fitter;
+  only its loss differs from upstream. Stored weights always apply to raw activations.
 
 - Prompts are rendered only by `src/role_probe_training/harmony/` with the pinned
   oss-harmony library (see [HARMONY_RENDERING.md](HARMONY_RENDERING.md)). Turns the model

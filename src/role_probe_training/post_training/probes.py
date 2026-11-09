@@ -1,4 +1,8 @@
-"""Fit fresh standard-data probes and score fresh agent trajectories."""
+"""Fit fresh standard-data probes and score fresh agent trajectories.
+
+`fit --backend cuml adamw` extracts the activations once and fits one probe per backend
+(see fit_saved.py); `score --backend ...` chooses which of them scores the trajectories.
+"""
 import argparse
 import hashlib
 import json
@@ -11,6 +15,7 @@ from peft import PeftModel
 from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states
+from role_probe_training.post_training.fit_saved import BACKENDS, probe_path
 from role_probe_training.training.data import probe_examples, trajectory_examples
 
 
@@ -27,21 +32,23 @@ def load(path):
     return tokenizer,model
 
 
-def fit(root):
+def fit(root, backends=('cuml',)):
     model_path=root/'data/post_training/model'; tokenizer,model=load(model_path)
     documents=Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
     examples=probe_examples(documents)
-    features=[]; labels=[]; splits=[]
+    features=[]; labels=[]; splits=[]; groups=[]
     for i,example in enumerate(examples):
         y=np.asarray(example['labels']); positions=np.flatnonzero(y>=0)
         features.append(extract_states(model,example['ids'],[12],positions)[12].astype(np.float16))
         labels.append(y[positions]); splits.extend([example['split']]*len(positions))
+        groups.extend([i]*len(positions))  # the passage-role example of each token
         if (i+1)%100==0:print(f'Extracted {i+1}/{len(examples)} standard passage-role examples',flush=True)
     x=np.concatenate(features); del features
     y=np.concatenate(labels); mask=np.asarray(splits)=='train'
     export=json.loads((model_path/'export.json').read_text())
     cache=root/'data/post_training/probe_features'; cache.mkdir(parents=True,exist_ok=True)
     np.save(cache/'states.npy',x); np.save(cache/'labels.npy',y); np.save(cache/'train.npy',mask)
+    np.save(cache/'groups.npy',np.asarray(groups,dtype=np.int32))
     metadata={
         'model_revision':export['adapter_sha256'],'model_export':str(model_path),
         'base_model_revision':export['base_revision'],'layer':12,'layer_indexing':'zero_based',
@@ -53,15 +60,17 @@ def fit(root):
     (cache/'metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
     del x, y, model
     torch.cuda.empty_cache()
-    # cuML cannot be installed next to vLLM (numba pins): fit in the probe-fitting environment.
-    subprocess.run([str(Path.cwd()/'src/experiments/gptoss_role_probes/fit_env/.venv/bin/python'),'-m',
-        'role_probe_training.post_training.fit_saved','--root',str(root)],check=True)
+    # cuML cannot be installed next to vLLM (numba pins): fit in the probe-fitting environment,
+    # which also holds torch for the adamw backend.
+    for backend in backends:
+        subprocess.run([str(Path.cwd()/'src/experiments/gptoss_role_probes/fit_env/.venv/bin/python'),'-m',
+            'role_probe_training.post_training.fit_saved','--root',str(root),'--backend',backend],check=True)
 
 
 
-def score(root,input_path,output):
+def score(root,input_path,output,backend='cuml'):
     model_path=root/'data/post_training/model';tokenizer,model=load(model_path)
-    probe=RoleProbe.load(root/'post_training/probes/layer_12.npz')
+    probe=RoleProbe.load(probe_path(root,backend))
     export=json.loads((model_path/'export.json').read_text())
     assert probe.metadata['model_revision']==export['adapter_sha256']
     examples=trajectory_examples(input_path)
@@ -86,7 +95,8 @@ def score(root,input_path,output):
         'macro_recall':float(recalls[support>0].mean()),'per_role_recall':recalls.tolist(),
         'mean_trajectory_accuracy':float(np.mean(per_trace)),'confusion_counts':matrix.tolist(),
         'input_sha256':hashlib.sha256(input_path.read_bytes()).hexdigest(),
-        'probe_sha256':hashlib.sha256((root/'post_training/probes/layer_12.npz').read_bytes()).hexdigest(),
+        'probe_sha256':hashlib.sha256(probe_path(root,backend).read_bytes()).hexdigest(),
+        'probe_backend':probe.metadata['solver'],
         'model_revision':export['adapter_sha256'],'context_policy':'full trajectory, no windows or truncation'}
     (output/'summary.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result),flush=True)
@@ -95,10 +105,13 @@ def score(root,input_path,output):
 def main():
     p=argparse.ArgumentParser(__doc__);p.add_argument('stage',choices=['fit','score'])
     p.add_argument('--root',type=Path,required=True);p.add_argument('--input',type=Path);p.add_argument('--output',type=Path)
+    p.add_argument('--backend',nargs='+',choices=BACKENDS,default=['cuml'],
+                   help='probe fitter(s): fit accepts several, score exactly one')
     a=p.parse_args()
-    if a.stage=='fit':fit(a.root)
+    if a.stage=='fit':fit(a.root,a.backend)
     else:
         if not a.input or not a.output:p.error('Scoring requires input and output')
-        score(a.root,a.input,a.output)
+        if len(a.backend)!=1:p.error('Scoring uses exactly one probe backend')
+        score(a.root,a.input,a.output,a.backend[0])
 
 if __name__=='__main__':main()

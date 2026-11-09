@@ -27,6 +27,9 @@ for arm in c4_dolma toucan combined; do
     --config src/experiments/gptoss_role_probes/training_data/$arm.json \
     --output experiment_reports/gptoss_role_probes/training_data/$arm --stage train
 done
+# To compare fitters, add `--backend cuml adamw` to the train and evaluate commands: one activation
+# extraction then also fits the training_against_probes step-0 probe (AdamW, 5,000 steps) into
+# $arm/probes_adamw/ with metrics/synthetic_adamw.json, next to the cuML results.
 # Clean chat: generate the 12 conversations once in c4_dolma, then reuse them (--from) in the other arms.
 sbatch src/experiments/gptoss_role_probes/hx2/evaluate.sbatch --config .../c4_dolma.json --output $root/c4_dolma
 sbatch src/experiments/gptoss_role_probes/hx2/evaluate.sbatch --config .../toucan.json --output $root/toucan --from $root/c4_dolma

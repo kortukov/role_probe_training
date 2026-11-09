@@ -71,7 +71,8 @@ be described as identical original sampled rows without verification.
   separately at the start/end. Measure logging/validation overhead.
 
 The first run uses layer 12, token-weighted cross-entropy, effective batch16,
-microbatch2 per GPU and one epoch. Standard-data refits use 2000 SGD steps,
+microbatch2 per GPU and one epoch. Standard-data refits use 2000 optimizer steps
+(plain SGD in the recorded runs; the upstream AdamW fitter since 2026-11-09),
 32 passage-role examples per step with every content token retained; this
 multiclass, token-level objective adapts the upstream binary sequence objective.
 

@@ -1,10 +1,12 @@
-"""Warm-start probe refitting on all standard passage content, never agent data."""
-import math
-import random
+"""Warm-start probe refitting on all standard passage content, never agent data.
+
+The optimisation is the fitter of training_against_probes (probe_fit.py): AdamW, its
+cosine schedule and batching, a frozen input scale. Only the loss differs from upstream.
+"""
 import time
 import torch
 import torch.distributed as dist
-import torch.nn.functional as F
+from .probe_fit import fit, input_scale
 
 
 def summarize_counts(matrix):
@@ -22,6 +24,9 @@ def refit_probe(runtime, examples, *, steps=2000, batch_size=32, seed=123):
     Each shuffled pass visits every standard fitting example; there is no token
     subsampling. Split assignment remains the original passage-level assignment.
     Per-rank activation caches stay on their GPU and are freed before model updates.
+    The probe continues from its current weights with a new optimizer and schedule.
+    Its input scale stays as fixed before training; a probe whose artifact recorded none
+    gets it here, once, from the fitting activations of the current model.
     """
     rank=dist.get_rank(); world=dist.get_world_size()
     start=time.perf_counter(); features={}; labels={}
@@ -43,32 +48,18 @@ def refit_probe(runtime, examples, *, steps=2000, batch_size=32, seed=123):
     if steps and steps*batch_size<len(fitting):
         raise ValueError('Refitting budget must cover every standard fitting example')
     counts=[sum(y>=0 for y in x['labels']) for x in examples]
-    runtime.probe.requires_grad_(True)
-    optimizer=torch.optim.SGD(runtime.probe.parameters(),lr=1e-3,weight_decay=1e-4)
-    generator=random.Random(seed); order=[]; cursor=0
-    last_loss=0.
-    for step in range(steps):
-        if cursor>=len(order):
-            order=fitting.copy(); generator.shuffle(order); cursor=0
-        batch=order[cursor:cursor+batch_size]; cursor+=len(batch)
-        denominator=sum(counts[i] for i in batch)
-        local=[i for i in batch if i%world==rank]
-        optimizer.zero_grad(set_to_none=True)
-        if local:
-            x=torch.cat([features[i] for i in local]).float()
-            y=torch.cat([labels[i] for i in local])
-            loss=F.cross_entropy(runtime.probe(x),y,reduction='sum')/denominator
-        else:
-            loss=sum(p.sum()*0 for p in runtime.probe.parameters())
-        loss.backward()
-        for param in runtime.probe.parameters(): dist.all_reduce(param.grad)
-        torch.nn.utils.clip_grad_norm_(runtime.probe.parameters(),1.)
-        # Upstream refit schedule: 50-step linear warmup, then cosine decay.
-        factor=(step+1)/50 if step<50 else .5*(1+math.cos(math.pi*(step-50)/max(1,steps-50)))
-        optimizer.param_groups[0]['lr']=1e-3*factor
-        optimizer.step()
-        last_loss=loss.detach()
-    runtime.probe.requires_grad_(False)
+    if not bool(runtime.probe.scale_set):
+        total=torch.zeros(2,dtype=torch.float64,device=runtime.device)
+        for i in fitting:
+            if i in features:
+                total[0]+=features[i].double().square().sum(); total[1]+=features[i].shape[0]
+        dist.all_reduce(total)
+        runtime.probe.rescale(input_scale(total[0],total[1]))
+    def batch(indices):
+        local=[i for i in indices if i in features]
+        if not local: return None
+        return torch.cat([features[i] for i in local]).float(),torch.cat([labels[i] for i in local])
+    rates=fit(runtime.probe,batch,fitting,counts,steps=steps,batch_size=batch_size,seed=seed,sync=dist.all_reduce)
     confusion=torch.zeros((5,5),device=runtime.device,dtype=torch.long)
     with torch.no_grad():
         for i in heldout:
@@ -79,4 +70,5 @@ def refit_probe(runtime, examples, *, steps=2000, batch_size=32, seed=123):
     torch.cuda.synchronize()
     return {**summarize_counts(confusion),'extraction_seconds':extracted,
             'seconds':time.perf_counter()-start,'steps':steps,'batch_passage_roles':batch_size,
+            'optimizer':'AdamW','optimizer_steps':len(rates),'input_scale':float(runtime.probe.input_scale),
             'training_examples':len(fitting),'training_tokens':sum(counts[i] for i in fitting)}

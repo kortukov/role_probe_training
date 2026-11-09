@@ -82,10 +82,19 @@ Reproduction entry points are `prepare_kl.py` and `generate_kl.sbatch`.
 Probe refitting uses only the original 250 C4/Dolma passages from
 `experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl`,
 all five role renderings, all content tokens and the original passage split.
-Each refit warm-starts the probe and runs 2,000 SGD steps: learning rate 1e-3,
-weight decay 1e-4, 50-step warmup followed by cosine decay, clipping 1. A minibatch
-contains 32 passage-role examples with all their content tokens. This adapts the
-upstream sequence-level binary probe to token-level multiclass labels.
+Each refit warm-starts the probe and follows the upstream fitter, implemented in
+`src/role_probe_training/training/probe_fit.py` after `train_combined_probes` of
+training_against_probes 9c3f80c: a new AdamW optimizer (learning rate 1e-3, weight decay
+1e-4, betas 0.9/0.95), the cosine schedule with 50 warmup steps over 2,000 steps, clipping
+1, bfloat16 autocast, and minibatches of 32 passage-role examples with all their content
+tokens. The probe reads activations divided by one fixed scale, the root mean squared
+activation norm of the fitting tokens. The scale comes from the initial probe's metadata
+(`input_scale`) or, for a probe file without it, is measured at the first refit; it then
+stays frozen. The only intended difference from upstream is the loss: token-level
+five-class cross-entropy instead of a sequence-level binary loss. The runs recorded in this
+report used plain SGD on unscaled activations with the same schedule. The switch to AdamW
+was made on 2026-11-09; no run has used it yet, and checkpoints from before it cannot be
+resumed.
 
 ## Model training and restart
 
@@ -153,7 +162,9 @@ are now the root environment, with cuML fitting as a separate process in
 Standard-data activations are retained under `data/post_training/probe_features/`.
 
 Entry points are in `src/experiments/training_against_role_probes/post_training/`:
-`export.sbatch CHECKPOINT OUTPUT`, `probes.sbatch fit --root ROOT`,
+`export.sbatch CHECKPOINT OUTPUT`, `probes.sbatch fit --root ROOT` (add `--backend cuml adamw` to
+also fit the training_against_probes step-0 probe into `post_training/probes_adamw/`, and
+`--backend adamw` to `score` to use it),
 `collect.sbatch ROOT MODEL_NAME`, `assemble.sbatch ROOT COLLECTION_JOB_ID`,
 `whole_score.sbatch ROOT --overlength exclude`, then `report.sbatch ROOT`. Export must finish before fitting
 and collecting; scoring requires both fitting and assembly. Collection array

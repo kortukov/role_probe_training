@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Mxfp4Config
 from role_probe_training.harmony import ROLES
+from .probe_fit import SETTINGS, ScaledLinear
 from role_probe_training.probes.linear import RoleProbe
 from .data import collate
 
@@ -39,10 +40,11 @@ class RoleModel:
         assert artifact.metadata['activation']=='post_attention_layernorm_output_pre_mlp'
         assert artifact.metadata['model_revision']=='6cee5e81ee83917806bbde320786a8fb61efebee'
         self.probe_metadata=artifact.metadata
-        self.probe=torch.nn.Linear(artifact.weight.shape[1],len(ROLES),device=device,dtype=torch.float32)
-        with torch.no_grad():
-            self.probe.weight.copy_(torch.as_tensor(artifact.weight,device=device))
-            self.probe.bias.copy_(torch.as_tensor(artifact.bias,device=device))
+        # The probe reads activations divided by a fixed scale, as in training_against_probes.
+        # Stored weights are for raw activations; an artifact that records the scale of its
+        # fitting activations supplies it, otherwise the first refit measures and freezes it.
+        self.probe=ScaledLinear(artifact.weight.shape[1],len(ROLES),device=device,dtype=torch.float32)
+        self.probe.load_raw(artifact.weight,artifact.bias,artifact.metadata.get('input_scale'))
         self.probe.requires_grad_(False)
         self.hidden=None
         def capture(module,args,output): self.hidden=output
@@ -67,10 +69,13 @@ class RoleModel:
         return loss,counts
 
     def save_probe(self,path,step):
-        RoleProbe(self.probe.weight.detach().cpu().numpy(),self.probe.bias.detach().cpu().numpy(),
-            {**self.probe_metadata,'model_update_step':step,'refit':'warm-start SGD on standard passages',
-             'solver':'torch_sgd','training_objective':'content-token multiclass cross-entropy',
-             'C':None,'refit_learning_rate':1e-3,'refit_weight_decay':1e-4,
+        weight,bias=self.probe.raw()
+        RoleProbe(weight,bias,
+            {**self.probe_metadata,'model_update_step':step,
+             'refit':'warm-start AdamW on standard passages (training_against_probes schedule)',
+             'solver':'torch_adamw','training_objective':'content-token multiclass cross-entropy',
+             'C':None,'refit_settings':SETTINGS,
+             'input_scale':float(self.probe.input_scale) if bool(self.probe.scale_set) else None,
              'max_iter':None,'iterations':None,'converged':None,'warnings':[]}).save(path)
 
     def close(self): self.handle.remove()
