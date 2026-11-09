@@ -22,6 +22,25 @@ project=src/experiments/eval_role_probes/agentic_eval
 export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
 export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8
-uv run --project "$project/server_current" --frozen --no-sync python src/experiments/training_against_role_probes/generate_kl.py \
- --input experiment_reports/training_against_role_probes/data/kl/prompts.json \
- --output experiment_reports/training_against_role_probes/data/kl/anchors.jsonl
+data=experiment_reports/training_against_role_probes/data/kl
+server_log="experiment_reports/training_against_role_probes/logs/role-kl-$SLURM_JOB_ID.server.log"
+mkdir -p "$data" "$(dirname "$server_log")"
+port=$((18000 + SLURM_JOB_ID % 10000))
+# vLLM only samples token IDs; generate_kl.py (root environment) renders the prompts with the
+# repository's Harmony renderer, as the Harmony proxy does for trajectories.
+uv run --project "$project/server_current" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+    --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
+    --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
+    --attention-backend TRITON_ATTN --moe-backend triton --kernel-config '{"enable_jit_warmup":false}' \
+    --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 > "$server_log" 2>&1 &
+server_pid=$!
+trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+ready=0
+for ((i=0;i<180;i++)); do
+    if curl --silent --fail "http://127.0.0.1:$port/health" > /dev/null; then ready=1; break; fi
+    if ! kill -0 "$server_pid" 2>/dev/null; then tail -60 "$server_log"; exit 1; fi
+    sleep 5
+done
+if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
+uv run --frozen --no-sync python src/experiments/training_against_role_probes/generate_kl.py \
+    --input "$data/prompts.json" --output "$data/anchors.jsonl" --vllm-url "http://127.0.0.1:$port"

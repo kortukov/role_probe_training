@@ -50,7 +50,7 @@ class ColocatedServer:
             '--max-logprobs','-1',
             '--no-enable-prefix-caching','--generation-config','vllm',
             '--attention-backend','TRITON_ATTN','--moe-backend','triton',
-            '--worker-cls','role_probe_training.on_policy_recovery.worker.HarmonyWorker',
+            '--worker-cls','role_probe_training.on_policy.vllm_worker.RefreshWorker',
             '--kernel-config','{"enable_jit_warmup":false}',
             '--cudagraph-capture-sizes','1','2','4','8','--max-cudagraph-capture-size','8']
         self.log = (self.output/'server.log').open('w')
@@ -121,13 +121,6 @@ class ColocatedServer:
         with (self.output/'refresh.jsonl').open('a') as stream:
             stream.write(json.dumps(record)+'\n')
         return record
-
-    def parse_completion(self, tokens, tools):
-        response = self.request('/collective_rpc', dict(method='parse_role_completion', args=[tokens, tools], timeout=60))
-        results = response['results']
-        if len(results) != 1:
-            raise ValueError('Expected one parser worker')
-        return results[0]
 
     def sample(self, prompt, budget, stops, seed):
         if self.sleeping or self.policy_step is None:

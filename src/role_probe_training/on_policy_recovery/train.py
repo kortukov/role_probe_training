@@ -51,10 +51,10 @@ def main():
     source_paths += list(Path('src/role_probe_training/on_policy_repaired').glob('*.py'))
     source_paths += list(Path('src/role_probe_training/on_policy_harmony').glob('*.py'))
     source_paths += list(Path('src/role_probe_training/on_policy_recovery').glob('*.py'))
+    source_paths += list(Path('src/role_probe_training/harmony').glob('*.py'))
     source_paths += [Path('src/role_probe_training/trajectories')/name for name in
                      ('appworld.py', 'replay.py', 'inspect_export.py')]
-    source_paths += [Path('src/role_probe_training/probes/harmony.py'),
-                     Path('src/experiments/eval_role_probes/agentic_eval/appworld/appworld_worker.py'),
+    source_paths += [Path('src/experiments/eval_role_probes/agentic_eval/appworld/appworld_worker.py'),
                      Path('src/experiments/eval_role_probes/agentic_eval/swe_bench/env/uv.lock'),
                      Path('src/experiments/training_against_role_probes/runtime/uv.lock'),
                      Path('src/experiments/eval_role_probes/agentic_eval/server_current/uv.lock'),
@@ -83,8 +83,8 @@ def main():
     runtime = RoleModel(config['model'], config['probe'], rank)
     parameters = [p for p in runtime.model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=config['learning_rate'], weight_decay=1e-4)
-    standard = probe_examples(runtime.tokenizer, config['probe_documents'])
-    validation = trajectory_examples(runtime.tokenizer, config['validation'])
+    standard = probe_examples(config['probe_documents'])
+    validation = trajectory_examples(config['validation'])
     start_step = 0
     if args.resume:
         state = torch.load(args.resume/'training.pt', map_location='cpu', weights_only=False)

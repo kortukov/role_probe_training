@@ -26,8 +26,7 @@ def main():
     adapter=a.checkpoint/'adapter/adapter_model.safetensors'
     set_peft_model_state_dict(runtime.model,load_file(adapter))
     runtime.model.gradient_checkpointing_disable()
-    examples=trajectory_examples(runtime.tokenizer,
-        'experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl')[:2]
+    examples=trajectory_examples('experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl')[:2]
     examples=[{**x,'ids':x['ids'][:1024],'labels':x['labels'][:1024]} for x in examples]
     def snapshot():
         result=[]

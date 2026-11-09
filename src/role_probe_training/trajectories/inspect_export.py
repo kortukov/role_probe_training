@@ -1,12 +1,80 @@
 """Export agent histories and individual generation contexts from Inspect logs.
 
-Keep the original .eval: this normalized chat representation is not a claim of
-byte-identical serving prompts. In particular Harmony may discard old reasoning.
+Keep the original .eval. The chat representation here is for reading and benchmark
+scoring; the probes read the token records the Harmony server wrote (`history`), which
+are joined onto each trajectory by conversation key.
 """
 import hashlib
 import json
 import math
 from pathlib import Path
+
+
+def conversation_key(messages):
+    """Identify a conversation by its leading system/developer text and first user text.
+
+    Computed identically by the Harmony server (from the request body) and by this
+    exporter (from the Inspect log), without any Harmony dependency.
+    """
+    instructions, first_user = [], None
+    for message in messages:
+        content = message.get("content") if isinstance(message, dict) else message.content
+        if isinstance(content, list):
+            content = "".join(part.get("text", "") if isinstance(part, dict) else getattr(part, "text", "")
+                              for part in content)
+        role = message.get("role") if isinstance(message, dict) else message.role
+        if role in ("system", "developer") and first_user is None:
+            instructions.append(content or "")
+        elif role == "user":
+            first_user = content or ""
+            break
+        else:
+            break
+    payload = json.dumps([instructions, first_user], ensure_ascii=False)
+    return hashlib.sha256(payload.encode()).hexdigest()
+
+
+def attach_history(row, records, context_stops=0):
+    """Give one trajectory row the token record of its last model call.
+
+    `records` are the Harmony server's request records of this conversation and
+    `context_stops` the number of calls the server refused for lack of context (those
+    appear as Inspect model events without a record). A conversation without any
+    recorded call gets `history: None` and is unscorable for role metrics.
+    """
+    indices = sorted(r["generation_index"] for r in records)
+    if indices != list(range(len(indices))):
+        raise ValueError(f"Sample {row['sample_id']}: missing, duplicate or colliding generation records")
+    if len(records) + context_stops != row["generation_records"]:
+        raise ValueError(f"Sample {row['sample_id']}: {len(records)} server records and {context_stops} context "
+                         f"stops but {row['generation_records']} Inspect model events")
+    row["history"] = max(records, key=lambda r: r["generation_index"]) if records else None
+    row["unlabelled_generated_tokens"] = sum(
+        e["content_end"] - e["content_start"] for r in records for e in r["completion_messages"]
+        if e["label"] is None)
+    return row
+
+
+def attach_histories(rows, requests_path):
+    """Join the Harmony server's records onto exported rows by conversation key."""
+    by_key, stops = {}, {}
+    with Path(requests_path).open() as stream:
+        for line in stream:
+            if line.strip():
+                record = json.loads(line)
+                by_key.setdefault(record["episode_id"], []).append(record)
+    stops_path = Path(requests_path).with_name("episode_stops.jsonl")
+    if stops_path.exists():
+        for line in stops_path.read_text().splitlines():
+            if line.strip():
+                key = json.loads(line)["episode_id"]
+                stops[key] = stops.get(key, 0) + 1
+    keys = [conversation_key(row["messages"]) for row in rows]
+    if len(set(keys)) != len(keys):
+        raise ValueError("Two exported samples share a conversation key; run epochs separately")
+    for row, key in zip(rows, keys):
+        attach_history(row, by_key.get(key, []), stops.get(key, 0))
+    return rows
 
 
 def dump(value):
@@ -78,7 +146,7 @@ def wilson(successes, total):
     return [max(0, center-half), min(1, center+half)]
 
 
-def export_logs(paths, output, benchmark, provenance, sample_sources=None):
+def export_logs(paths, output, benchmark, provenance, sample_sources=None, requests_path=None):
     from inspect_ai.log import read_eval_log
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -131,6 +199,8 @@ def export_logs(paths, output, benchmark, provenance, sample_sources=None):
                     "input": [dump(m) for m in event.input], "output": dump(event.output),
                     "tools": [dump(t) for t in event.tools], "config": dump(event.config),
                     "error": event.error, "retries": event.retries, "call": dump(event.call)})
+    if requests_path is not None:
+        attach_histories(rows, requests_path)
     for name, data in (("trajectories.jsonl", rows), ("generations.jsonl", requests)):
         target = output / name
         temporary = target.with_suffix(".tmp")

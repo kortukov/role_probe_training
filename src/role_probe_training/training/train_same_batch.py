@@ -74,12 +74,12 @@ def main():
     runtime=RoleModel(config['model'],config['probe'],rank)
     parameters=[x for x in runtime.model.parameters() if x.requires_grad]
     optimizer=torch.optim.AdamW(parameters,lr=config.get('learning_rate',5e-5),weight_decay=1e-4)
-    training=trajectory_examples(runtime.tokenizer,config['trajectories'])
-    validation=trajectory_examples(runtime.tokenizer,config['validation'])
+    training=trajectory_examples(config['trajectories'])
+    validation=trajectory_examples(config['validation'])
     training_tasks={r['sample_id'] for r in read_jsonl(config['trajectories'])}
     validation_tasks={r['sample_id'] for r in read_jsonl(config['validation'])}
     if training_tasks & validation_tasks: raise ValueError('Training and validation tasks overlap')
-    standard=probe_examples(runtime.tokenizer,config['probe_documents'])
+    standard=probe_examples(config['probe_documents'])
     anchors=kl_examples(config['kl_anchors'])
     if any(len(x['ids'])>runtime.base.config.max_position_embeddings for x in anchors):
         raise ValueError('KL history exceeds native context; no truncation is allowed')

@@ -61,9 +61,11 @@ including the header tokens. So:
   it, whether a reasoning block precedes a tool call or a final answer also changes the
   activations the probe reads on the assistant and tool tokens. The boundary is also
   where the probes struggle most: in the hx2 AppWorld cohort only 21 percent of calls
-  reasoned on the analysis channel, the rest deliberated in commentary preambles that
-  are correctly labelled assistant, and the dominant error is assistant text predicted
-  as chain of thought. Each pipeline made its own choice about which earlier reasoning
+  reasoned on the analysis channel; the rest deliberated in commentary preambles. The
+  ground-truth label of a token is fixed by the channel the model wrote it on, not by
+  what the text looks like, so those preambles count as `assistant` even though they read
+  like reasoning, and the dominant probe error is preamble text predicted as chain of
+  thought. Each pipeline made its own choice about which earlier reasoning
   to keep: vLLM 0.32 kept it inside a tool loop, vLLM 0.11 dropped all of it, the
   Hugging Face template kept it only within the current tool-call chain, and the
   hand-written replay always inserted every block. Section 2 gives the exact rules.
@@ -97,9 +99,14 @@ rewrites: vLLM's source writes the tool-call content type as plain `json` becaus
 its words, "there is not clear evidence that improves accuracy over `json` and some
 anecdotes to the contrary", and it rewrites earlier tool-call headers back to the
 pre-0.0.10 form because "GPT-OSS can echo the latter as a malformed header with the
-recipient in both positions". Second, policies about what to keep: vLLM 0.32 removes
-every chain-of-thought message before the last final answer, which goes beyond the
-library's default, treats only the first system or developer message as developer
+recipient in both positions". Second, policies about what to keep: on every request,
+vLLM 0.32 looks through the history the client sent, finds the last assistant message on
+the final channel, and removes every chain-of-thought message before it (the library's
+default only does this when the final answer is the very last message). Nothing is
+removed while no final answer exists yet, so reasoning accumulates through a tool loop
+and is still present when the final answer is generated; it disappears on the next
+request after that answer, which only happens when the user speaks again. vLLM 0.32 also
+treats only the first system or developer message as developer
 instructions, and renders the newline that Inspect sends as content on tool-call turns
 as a blank commentary message; vLLM 0.11 kept only the tool calls of earlier assistant
 turns. Third, library version drift: the tool-call header changed at oss-harmony 0.0.10,
@@ -115,7 +122,7 @@ final answer only at the end. At each new request:
 
 | Pipeline | Earlier reasoning in the prompt |
 |---|---|
-| vLLM 0.32 (AppWorld on hx2) | Kept. Inspect sends it back in a `reasoning` field, vLLM renders it on the analysis channel and drops only analysis before the last final answer, which inside an episode does not exist yet. Each block was preceded by the blank commentary message. Preambles came back as assistant text. |
+| vLLM 0.32 (AppWorld on hx2) | Kept throughout. Inspect sends it back in a `reasoning` field and vLLM renders it on the analysis channel; it would drop reasoning from before a final answer, but an AppWorld episode ends at its first final answer (Inspect's loop stops when the model returns no tool call), so no request ever followed one. Each block was preceded by the blank commentary message. Preambles came back as assistant text. |
 | vLLM 0.11 (retail, SWE-bench) | Dropped entirely, together with the preambles. From the second turn on, the model never saw its own earlier reasoning. |
 | Hugging Face template (on-policy shim) | Kept within the current tool-call chain, dropped once a later turn has no tool call. A preamble sent as content next to a tool call was rendered on the analysis channel, so assistant text came back as chain of thought. |
 | Hand-written renderer (old replay for probe scoring) | Always inserted: every logged `thinking` field became an analysis message, whatever the model had seen. |
@@ -146,23 +153,46 @@ thought, and the tool output is a quoted string.
 
 ## 3. What the change does
 
-**One renderer.** `src/role_probe_training/harmony/` wraps the oss-harmony library
-(version pinned in `pyproject.toml`, import name `openai_harmony`). It renders the
+**One renderer.** `src/role_probe_training/harmony/` wraps the Harmony library. That
+library has two names: it is installed as the package `oss-harmony` (the name uv and pip
+use, pinned in `pyproject.toml`; it is a fork of OpenAI's `openai-harmony` package), and
+Python code imports it as the module `openai_harmony`. It renders the
 Harmony system message, the developer message with instructions and tool schemas, user
 messages and tool outputs exactly as the library does, keeps all chain of thought in the
 prompt, and attaches per-token role labels derived from each message's author and
-channel. Header and control tokens are unlabelled. Settings that are not part of the
+channel. Header tokens and special tokens are unlabelled. (The special tokens are the
+seven reserved vocabulary entries `<|start|>`, `<|channel|>`, `<|constrain|>`,
+`<|message|>`, `<|end|>`, `<|call|>` and `<|return|>`. Each is a single token that
+tokenising ordinary text can never produce; together with the header text they mark the
+structure of the conversation rather than its content.) Settings that are not part of the
 conversation but become prompt tokens, the reasoning effort and the system-message date,
 are fixed in configuration and recorded with every output together with the library
 version. The Hugging Face chat template is no longer used anywhere.
 
-**Model turns are replayed, never re-rendered.** Parsing a generated turn and rendering
-it again is lossy: the model does not always emit headers in the library's exact form,
-and the OpenAI-style message format loses the channel of a preamble. So an earlier
-assistant turn in a prompt is the model's own completion tokens, verbatim, preceded by
-`<|start|>assistant`; only a final answer's `<|return|>` becomes `<|end|>`, as in every
-Harmony rendering of earlier turns. Structured assistant text is rendered only when no
-model produced it (dataset answers, Toucan tool-use text, probe-fitting documents).
+**Model turns are replayed, never re-rendered.** When the server builds a prompt, it
+does not rebuild the model's earlier turns from parsed messages. That would be lossy, for
+two reasons. First, the model writes its own headers: after the prompt ends in
+`<|start|>assistant`, the channel, the recipient and the content type are all tokens the
+model generates, and they do not always match the library's form. An audit of raw
+completions from the on-policy runs found calls to the Python tool with content type
+`code` and no `<|constrain|>` token, and late-turn headers with the recipient written in
+two places, which is also the malformed echo vLLM's source mentions. In the hx2 AppWorld
+cohort the model even wrote a header fragment, `commentary to=functions.python code<|message|>`,
+inside its reasoning. Parsing such a turn into channel, recipient and arguments and
+rendering it again produces the library's canonical header, not the tokens the model
+wrote. Second, the OpenAI-style message format does not record whether a piece of
+assistant text was a preamble on the commentary channel or a final answer, so the channel
+cannot be restored from it. Instead, every earlier model turn is inserted as the
+token IDs the model generated for it, exactly as recorded. Two details make this fit the
+Harmony format. First, the model was prompted with `<|start|>assistant` and wrote the rest
+of the header itself, so its recorded tokens begin at `<|channel|>`; the server puts
+`<|start|>assistant` back in front of them. Second, the model ends a final answer with
+`<|return|>`, but Harmony renders a final answer from an earlier turn with `<|end|>`, so
+that one token is replaced; tool calls keep their `<|call|>`. Assistant text is rendered
+from a structured message (role, channel, text) by the Harmony library, through this
+repository's renderer, only where no model generated it, so there are no tokens to
+replay: the reference answers of the No Robots dataset, the Toucan tool-use text, and the
+passages used to fit the probes.
 
 **Token records replace re-rendering for the probes.** Every model call is recorded as
 `prompt_ids`, `completion_ids`, the message spans of both, and the rendering settings.
@@ -174,11 +204,17 @@ and refuses rows without one. There is no fallback to re-rendering old trajector
 that renders with the library, samples completion token IDs from vLLM's completions
 endpoint, parses with the library's streaming parser, and writes the records. It asserts
 on every request that the new prompt extends the previous prompt of the conversation
-exactly. It serves two users:
+exactly. Earlier assistant turns are replayed whether they ended in a tool call (keyed by
+the call IDs the server issued) or in a text answer the user then replied to (keyed by
+conversation and turn number, with the text checked against what was generated), so
+multi-turn chats such as the retail benchmark work. One sampling temperature is fixed per
+server and every request must use it: every evaluation collection (AppWorld, retail,
+SWE-bench) decodes greedily at temperature 0, while on-policy training samples at 1. It
+serves two users:
 
 * the on-policy training loop, through per-episode routes with seed validation (the
   former shim's `template_messages`, template patch and vLLM-side parser are gone);
-* evaluation collections, through `shared/harmony_proxy.py` between Inspect and vLLM.
+* evaluation collections, through `src/experiments/eval_role_probes/agentic_eval/shared/harmony_proxy.py` between Inspect and vLLM.
 
 ## 4. What is affected downstream
 
@@ -186,7 +222,10 @@ exactly. It serves two users:
 (`src/experiments/gptoss_role_probes/`), Toucan document headers (`prepare.py`), the No
 Robots chat evaluation (`chat_eval/norobots/`), agentic probe scoring
 (`probe_scoring/run.py`), the trajectory exporter (`inspect_export.py`, which joins the
-records onto trajectories by conversation key), the AppWorld runner and its hx2 launcher,
+records onto trajectories by conversation key), the AppWorld, retail and SWE-bench runners
+and their Slurm job files (each job starts one Harmony proxy in front of vLLM, runs the
+smoke test and the collection through it, and joins the proxy's `requests.jsonl` onto the
+export; the shared `smoke.py` and `export.py` take the proxy's settings and file),
 the on-policy recovery module (`serving.py`, `collection.py`, `collect.py`,
 `colocated.py`, `train.py`), and the training data helpers (`trajectory_examples(path)`
 and `probe_examples(path)` no longer take a tokenizer). The hand-written renderer
@@ -215,11 +254,24 @@ results are not directly comparable with earlier runs.
 to the training runtime lock. Training manifests hash the new `harmony/` sources;
 resuming checkpoints made before this change needs the usual migration record.
 
-**Left unchanged.** The retail and SWE-bench runners still point Inspect at vLLM's chat
-endpoint and need the same proxy before their cohorts are regenerated. Diagnostics that
-call the Hugging Face template (`shared/tokenize_check.py`, `generate_kl.py`,
-`on_policy/generation_diagnostic.py`) and the archived shims (`on_policy/serving.py`,
-`generation/serving.py`) are not on any current path and were not touched.
+**Left unchanged.** The SWE-bench collection scripts of the training experiments
+(`src/experiments/training_against_role_probes/swe_*/run.py` and their Slurm files), which
+evaluate trained checkpoints, still give Inspect the address of vLLM's own chat endpoint
+and would produce trajectories without `history`. They need the same proxy changes as the
+evaluation runners before a trained checkpoint is re-evaluated on SWE-bench.
+
+**KL anchors.** `src/experiments/training_against_role_probes/generate_kl.py` produces the
+fixed KL anchor set that every training script reads: 800 Dolci-Instruct prompts as single
+user messages, greedy base-model completions of up to 1,536 tokens, exact token IDs in
+`experiment_reports/training_against_role_probes/data/kl/anchors.jsonl`. It now renders the
+prompts with this repository's renderer and samples token IDs from a vLLM server that
+`generate_kl.sbatch` starts, the same way the Harmony proxy samples trajectories. Before
+2026-11-08 it rendered them with the Hugging Face chat template inside vLLM's Python API. For
+a single user message without tools the template and the library produce identical token IDs
+(verified for the same date), so the recorded anchors (the coauthor's job 1501243) already
+match the new rendering apart from the date in the system message, which is now the fixed
+date that all prompts share.
+
 
 **How to verify.** From the repository root, with `TIKTOKEN_CACHE_DIR=$PWD/.cache/tiktoken`:
 
@@ -232,7 +284,8 @@ uv run python src/experiments/gptoss_role_probes/checks.py
 
 **Verified so far (CPU).** The renderer reproduces the library's conversation rendering
 token for token; the Hugging Face tokenizer re-encodes the rendered text to the same IDs;
-labels cover exactly the content tokens; control-token strings inside content stay text;
+labels cover exactly the content tokens; the text of a special token written inside a
+message, such as a user typing `<|end|>`, stays ordinary text and never becomes the token;
 the prefix property holds across turns; the server round-trips a two-turn tool
 conversation with a fake sampler, validates seeds and routes, and refuses an assistant
 turn it did not generate. Still to do: a one-episode run against a live vLLM server, the

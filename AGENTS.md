@@ -88,6 +88,11 @@
   text, alone or with the neutral passages, live in the
   [training-data comparison](experiment_reports/gptoss_role_probes/training_data/README.md).
 
+- Prompts are rendered only by `src/role_probe_training/harmony/` with the pinned
+  oss-harmony library (see [HARMONY_RENDERING.md](HARMONY_RENDERING.md)). Turns the model
+  generated are replayed from their generated token IDs, never re-rendered from text, and
+  probes score the token records (`history`) written by the Harmony chat server. Do not
+  use the Hugging Face chat template or hand-written Harmony headers anywhere.
 - Probe evaluation must replay each scored conversation whole, without chunking
   or truncation. Histories above the model's native context limit are explicitly
   unscorable for role metrics; retain every attempt in task-success denominators

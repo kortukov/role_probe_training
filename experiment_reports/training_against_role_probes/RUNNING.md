@@ -64,7 +64,11 @@ The fixed KL pool uses the first 5,000 valid first-user prompts from ordinary
 loader recipe; identical prompt IDs to the original authors' private local pool
 are not established. GPT-OSS generates greedy completions of up to 1,536 tokens.
 Exact Harmony prompt/completion token IDs are stored in `data/kl/anchors.jsonl`;
-source and generation manifests are adjacent. Generation job **1501243** completed.
+source and generation manifests are adjacent. Generation job **1501243** completed
+with prompts rendered by the Hugging Face chat template. `generate_kl.sbatch` now
+renders them with `src/role_probe_training/harmony/` and samples token IDs from a
+vLLM server (see [HARMONY_RENDERING.md](../../HARMONY_RENDERING.md)); for these
+single-message prompts both renderings give the same tokens apart from the date.
 
 KL(base || adapted) scores unshifted completion positions under the upstream
 2,048-token combined cap, with coefficient 16 and 16 sampled anchors per update.

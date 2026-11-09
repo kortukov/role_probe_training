@@ -7,7 +7,6 @@ from pathlib import Path
 import random
 import statistics
 
-from transformers import AutoTokenizer
 from role_probe_training.trajectories.replay import encode_record
 
 
@@ -16,12 +15,11 @@ def main():
     p.add_argument('--data', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
     args = p.parse_args()
-    tokenizer = AutoTokenizer.from_pretrained('.cache/models/gpt-oss-20b', local_files_only=True)
     lengths, messages, roles = [], [], Counter()
     prefix_tools = {cap: [] for cap in (4096, 8192, 16384)}
     for line in args.data.open():
         row = json.loads(line)
-        encoded = encode_record(tokenizer, row)
+        encoded = encode_record(row)
         lengths.append(len(encoded['input_ids']))
         messages.append(len(row['messages']))
         roles.update(int(label) for label in encoded['labels'] if label >= 0)

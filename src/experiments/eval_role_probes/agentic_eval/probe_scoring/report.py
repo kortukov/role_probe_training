@@ -7,7 +7,7 @@ import gzip
 import json
 from pathlib import Path
 import numpy as np
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 
 p=argparse.ArgumentParser(__doc__)
 p.add_argument('--dataset',action='append',required=True,help='NAME=prediction-directory (repeatable; recursively reads *.json.gz)')

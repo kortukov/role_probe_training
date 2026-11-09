@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states
 from role_probe_training.training.data import trajectory_examples
@@ -37,7 +37,7 @@ def score(root, input_path, output, base=False, overlength='error', probe_paths=
         revision = json.loads((model_path / 'export.json').read_text())['adapter_sha256']
     probes = {i: RoleProbe.load(p) for i,p in paths.items()}
     assert all(p.metadata['model_revision'] == revision for p in probes.values())
-    examples = trajectory_examples(tokenizer, input_path)
+    examples = trajectory_examples(input_path)
     limit = model.config.max_position_embeddings
     excluded = [{'trajectory_id':x['id'], 'tokens':len(x['ids']), 'reason':'exceeds_native_context'}
                 for x in examples if len(x['ids']) > limit]

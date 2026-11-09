@@ -3,7 +3,7 @@
 import numpy as np
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix, log_loss
 
-from .harmony import ROLES
+from role_probe_training.harmony import ROLES
 
 
 def metrics(labels, probabilities):

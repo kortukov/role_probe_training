@@ -4,7 +4,7 @@ import torch
 import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Mxfp4Config
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from .data import collate
 

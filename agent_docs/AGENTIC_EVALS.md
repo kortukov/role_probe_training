@@ -20,17 +20,30 @@ stale-material removal follow [REPORT_WRITING.md](REPORT_WRITING.md).
 
 ## Environments and execution
 
-Use Inspect for execution, logs, scores and concurrency. Clients and the vLLM
+Use Inspect for execution, logs, scores and concurrency. Inspect never talks to vLLM
+directly: it talks to the Harmony proxy (`shared/harmony_proxy.py`, root environment),
+which renders every prompt with oss-harmony, replays earlier assistant turns from their
+generated tokens, samples token IDs from vLLM's completions endpoint and records them.
+See [HARMONY_RENDERING.md](../HARMONY_RENDERING.md). Clients and the vLLM
 server use separate locked uv projects because their dependency requirements
 differ. Retail uses `src/experiments/eval_role_probes/agentic_eval`; SWE uses the `swe_bench/env/` project
 with swebench 4.1.0. New AppWorld and repaired SWE runs use `server_current/`
 (vLLM 0.32.0, compiled Triton kernels). `server/` (vLLM 0.11.0) remains for
-retail and reproduction of the recorded SWE cohort. After
+retail and reproduction of the recorded SWE cohort; both versions return token IDs
+from the completions endpoint, which is all the proxy uses. After
 syncing a client lock, install the root package into that client with
 `uv pip install --python CLIENT/.venv/bin/python --no-deps -e .`, then use
 `uv run --frozen --no-sync`. Do not modify the probe-training environment.
 
-`job.sbatch` launches retail and `swe_job.sbatch` launches SWE. All output lives
+`job.sbatch` launches retail and `swe_job.sbatch` launches SWE. Each job starts vLLM,
+then one Harmony proxy on `port + 10000` with the run's reasoning effort, `max_tokens`
+and temperature (0 for every evaluation collection; the tau2 agent is generated at 0 by the benchmark code anyway), runs
+`shared/smoke.py` and the runner against the proxy with `--requests
+$run_dir/proxy/requests.jsonl`, and re-exports with that file on exit. The proxy rejects
+a request whose settings differ, and after any error it refuses every further request,
+so one failed conversation stops the whole collection loudly rather than leaving gaps.
+The SWE collection scripts under `src/experiments/training_against_role_probes/swe_*/`
+still bypass the proxy and must not be used for new cohorts until changed. All output lives
 under the current benchmark's `runs/` and `logs/` directories. The runners support
 fixed selection and disjoint sharding. Use fresh run directories and reject
 duplicate task IDs when consolidating. Generation batches across conversations;
@@ -68,6 +81,16 @@ Missing tool names use `__unknown_tool__`, `name_missing: true`, and
 `original_function`, preserving the history instead of dropping it. Never infer
 roles or channels from the text's meaning.
 
+The probes do not read `messages`. Each row also carries `history`: the Harmony
+proxy's record of the sample's last model call (`prompt_ids`, `completion_ids`,
+`prompt_messages`, `completion_messages`, `rendering`), joined by conversation key
+from the proxy's `requests.jsonl`. The key hashes the leading system message and the
+first user message; two samples with the same key abort the export, so run epochs
+separately. `history: null` means no model call happened
+(context limit before the first generation); such rows stay in task-success
+denominators and are unscorable for role metrics. `unlabelled_generated_tokens`
+counts generated content whose channel gives no role.
+
 For τ², export `sample.store['StoredAgentState:RetailAgent:messages']`.
 `sample.messages` belongs to the privileged customer simulator and must not be
 used as the agent history. `generations.jsonl` preserves individual evaluated-model
@@ -81,12 +104,13 @@ writes data/metrics while preserving authored reports.
 
 ## Probe replay and artifacts
 
-`trajectories/replay.py` renders standardized retrospective Harmony, preserving
-reasoning and tool metadata. This is not exact generation-time context recovery.
-Tool schemas are synthetic system context excluded from accuracy. Original
-message content receives labels from roles and channels; structural tokens are
-excluded. Native serving templates can omit earlier reasoning, so retain source
-logs for any future exact-context analysis.
+`trajectories/replay.py::encode_record` reads a row's `history` token record: the
+exact prompt and completion of the last model call, so scoring sees precisely the
+tokens the model saw and wrote. Nothing is re-rendered; rows without a record are
+rejected and must be regenerated through the proxy. Labels come from message
+roles and channels of the recorded spans; header and control tokens are excluded.
+The Harmony system message and the tool-schema block of the developer message have
+`source_message_index=-1` and are excluded from accuracy.
 
 Capture zero-based post-attention-layernorm outputs, the pre-MLP inputs. The
 model is dequantized to BF16 with original eager attention. All five probes read
@@ -120,6 +144,8 @@ Git, as requested by the benchmark authors. Tune only on train/dev; inspect test
 results in aggregate. Measure rollout time with the parent's monotonic clock,
 not AppWorld's simulated time. Training-split collection does not train weights.
 
+`appworld_run.py` takes `--base-url` of the proxy and `--requests`, the proxy's
+`requests.jsonl`; `hx2/appworld.sbatch` starts one proxy per collection.
 AppWorld scoring must run even when Inspect interrupts generation at a limit.
 The adapter evaluates the final world state in a shielded `finally` block before
 closing its worker; `appworld_check.py` verifies this and parallel oracle solutions.

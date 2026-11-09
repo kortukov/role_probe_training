@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import numpy as np
 
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 
 BASE_REVISION='6cee5e81ee83917806bbde320786a8fb61efebee'
@@ -47,7 +47,7 @@ def extract(root,kind):
     from role_probe_training.training.data import probe_examples
     from role_probe_training.probes.model import extract_states
     tokenizer,model=load(kind)
-    examples=probe_examples(tokenizer,DOCUMENTS)
+    examples=probe_examples(DOCUMENTS)
     cache=root/'role_perception'/kind/'data/post_training/probe_features'
     cache.mkdir(parents=True,exist_ok=True)
     features=[];labels=[];splits=[]
@@ -89,7 +89,7 @@ def score(root,kind,limit_count=None):
     for subset in ('clean','attacked'):
         info=inputs[subset];input_path=Path(info['input'])
         assert digest(input_path)==info['input_sha256']
-        examples=trajectory_examples(tokenizer,input_path)
+        examples=trajectory_examples(input_path)
         if limit_count is not None:examples=examples[:limit_count]
         output=root/'predictions/role_perception'/kind/subset
         output.mkdir(parents=True,exist_ok=True)

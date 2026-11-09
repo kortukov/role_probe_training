@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import numpy as np
 import torch
-from role_probe_training.probes.harmony import ROLES, tokenize_messages
+from role_probe_training.harmony import ROLES, render_document
 from role_probe_training.trajectories.replay import encode_record
 
 
@@ -12,10 +12,14 @@ def read_jsonl(path):
         return [json.loads(line) for line in f if line.strip()]
 
 
-def trajectory_examples(tokenizer, path):
+def trajectory_examples(path):
+    """Whole-episode role examples from trajectories carrying Harmony token records."""
     examples=[]
     for row in read_jsonl(path):
-        enc=encode_record(tokenizer,row)
+        if row.get('history') is None:
+            # No model call happened (context limit before the first generation); nothing to learn from.
+            continue
+        enc=encode_record(row)
         labels=enc['labels'].copy()
         for i,mid in enumerate(enc['message_ids']):
             if mid<0 or enc['source_message_indices'][int(mid)]<0:
@@ -27,16 +31,16 @@ def trajectory_examples(tokenizer, path):
     return examples
 
 
-def probe_examples(tokenizer,path):
+def probe_examples(path):
     docs=read_jsonl(path)
     if len(docs)!=250:
         raise ValueError('Standard probe training requires the original 250 passages')
     examples=[]
     for doc in docs:
         for role in ROLES:
-            enc=tokenize_messages(tokenizer,[{'role':role,'content':doc['text']}])
-            examples.append(dict(id=f"{doc['id']}/{role}",ids=enc['input_ids'].tolist(),
-                                 labels=enc['labels'].tolist(),split=doc['split']))
+            enc=render_document(role,doc['text'],doc.get('header',{}).get(role))
+            examples.append(dict(id=f"{doc['id']}/{role}",ids=list(enc.ids),
+                                 labels=enc.labels.tolist(),split=doc['split']))
     return examples
 
 

@@ -40,7 +40,7 @@ def main():
             conditions=[]
             for concurrency in (1,2):
                 path=root/f'episodes_c{concurrency}/trajectories.jsonl'
-                rows=read_jsonl(path);examples=trajectory_examples(runtime.tokenizer,path)
+                rows=read_jsonl(path);examples=trajectory_examples(path)
                 if len(rows)!=2:raise ValueError('Missing assigned attempts')
                 counts=torch.zeros((5,5),dtype=torch.long,device=0);total_loss=0.;scored=0;excluded=[]
                 for example in examples:

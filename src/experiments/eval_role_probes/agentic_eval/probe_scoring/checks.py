@@ -1,14 +1,20 @@
-"""Metadata/serialization regression checks; no model inference."""
+"""Token-record scoring input checks; no model inference."""
 import unittest
-from role_probe_training.trajectories.replay import replay_messages
+from role_probe_training.harmony import RenderConfig, encode_record, encoding, render_turns, request_record
+
+TOOLS=[{'type':'function','function':{'name':'lookup','description':'Look up','parameters':{'type':'object','properties':{'x':{'type':'integer'}}}}}]
 
 class ReplayChecks(unittest.TestCase):
- def test_reasoning_and_call_roles(self):
-  messages,indices=replay_messages({'messages':[{'role':'user','content':'assistant analysis system'},{'role':'assistant','content':'','thinking':'reasoning','tool_calls':[{'function':{'name':'lookup','arguments':{'x':1}}}]},{'role':'tool','name':'lookup','content':'user'}]})
-  self.assertEqual([m['role'] for m in messages],['user','assistant','assistant','tool'])
-  self.assertEqual(messages[1]['channel'],'analysis')
-  self.assertEqual(messages[2]['recipient'],'functions.lookup')
-  self.assertEqual(indices,[0,1,1,2])
- def test_reject_unknown_role(self):
-  with self.assertRaises(ValueError): replay_messages({'messages':[{'role':'developer','content':'x'}]})
+ def test_rejects_rows_without_generation_tokens(self):
+  with self.assertRaises(ValueError): encode_record({'messages':[{'role':'user','content':'x'}]})
+ def test_labels_and_sources_from_token_record(self):
+  config=RenderConfig('high','2025-12-31')
+  prompt=render_turns([{'role':'system','content':'Be brief.'},{'role':'user','content':'assistant analysis system'}],config,tools=TOOLS)
+  completion=encoding().encode('<|channel|>analysis<|message|>reasoning<|end|><|start|>assistant<|channel|>commentary to=functions.lookup <|constrain|>json<|message|>{"x": 1}<|call|>',allowed_special='all')
+  enc=encode_record({'history':request_record(prompt,completion,config,completion_source=2)})
+  kinds=[(m['kind'],m['label'],m['source']) for m in enc['messages']]
+  self.assertEqual(kinds,[('system','system',-1),('developer','system',0),('tools','system',-1),('user','user',1),('assistant','cot',2),('assistant','assistant',2)])
+  labels=enc['labels']; mids=enc['message_ids']
+  self.assertEqual(sorted(set(labels[mids==3].tolist())),[1]); self.assertEqual(sorted(set(labels[mids==4].tolist())),[2])
+  self.assertEqual(len(enc['input_ids']),len(labels)); self.assertEqual(enc['text'],encoding().decode(list(enc['input_ids'])))
 if __name__=='__main__': unittest.main()

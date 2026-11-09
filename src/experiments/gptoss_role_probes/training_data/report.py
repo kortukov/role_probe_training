@@ -8,7 +8,7 @@ import argparse
 import json
 from pathlib import Path
 
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 
 ARM_LABELS = {'c4_dolma': 'C4/Dolma', 'toucan': 'Toucan', 'combined': 'Combined'}
 COLLECTIONS = {'neutral': 'C4/Dolma held-out', 'toucan': 'Toucan held-out'}

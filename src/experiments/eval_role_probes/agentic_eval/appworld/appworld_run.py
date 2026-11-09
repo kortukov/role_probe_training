@@ -1,4 +1,7 @@
-"""Collect split-separated AppWorld trajectories with one shared inference server."""
+"""Collect split-separated AppWorld trajectories through the Harmony proxy of one shared vLLM server.
+
+`--base-url` is the proxy (shared/harmony_proxy.py); `--requests` is the proxy's
+requests.jsonl, whose token records are joined onto the exported trajectories."""
 import argparse
 import hashlib
 import json
@@ -18,7 +21,8 @@ from role_probe_training.trajectories.inspect_export import export_logs
 def main():
     p = argparse.ArgumentParser(__doc__)
     p.add_argument('--output', type=Path, required=True)
-    p.add_argument('--base-url', required=True)
+    p.add_argument('--base-url', required=True, help='Harmony proxy URL ending in /v1')
+    p.add_argument('--requests', type=Path, required=True, help='the proxy\'s requests.jsonl for this run')
     p.add_argument('--split', choices=['train','dev','test_normal','test_challenge'], required=True)
     p.add_argument('--samples', type=int)
     p.add_argument('--concurrency', type=int, default=8)
@@ -27,6 +31,7 @@ def main():
     p.add_argument('--seed', type=int, default=123)
     p.add_argument('--max-steps', type=int, default=50)
     p.add_argument('--max-tokens', type=int, default=8192)
+    p.add_argument('--temperature', type=float, default=0, help='must equal the proxy\'s --temperature')
     p.add_argument('--image', default='.cache/appworld/appworld.sif')
     p.add_argument('--data', default='.cache/appworld/data')
     p.add_argument('--model-id', default='openai/gpt-oss-20b')
@@ -45,7 +50,7 @@ def main():
     if (args.output/'manifest.json').exists():
         raise ValueError('Use a fresh output directory')
     manifest = {'benchmark':'appworld_'+args.split, 'sample_ids':ids, 'full_selection':full_selection,
-        'settings':vars(args)|{'output':str(args.output)},
+        'settings':vars(args)|{'output':str(args.output),'requests':str(args.requests)},
         'model':args.model_id, 'model_revision':args.model_revision,
         'git_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
         'container_sha256':hashlib.sha256(Path(args.image).read_bytes()).hexdigest(),
@@ -55,10 +60,12 @@ def main():
             Path(__file__).with_name('appworld_job.sbatch'),
             Path(__file__).with_name('appworld_parallel_job.sbatch'),
             Path('src/role_probe_training/trajectories/appworld.py'),
-            Path(__file__).parent.parent/'server_current/uv.lock',Path(__file__).parent.parent/'swe_bench/env/uv.lock']}}
+            Path(__file__).parent.parent/'server_current/uv.lock',Path(__file__).parent.parent/'swe_bench/env/uv.lock',
+            Path(__file__).parent.parent/'shared/harmony_proxy.py',Path('uv.lock')]},
+        'serving':'vLLM completions by token id behind the Harmony proxy; prompts rendered by oss-harmony'}
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     model = get_model('vllm/'+args.model_id,base_url=args.base_url,api_key='local',
-        config=GenerateConfig(temperature=1,seed=args.seed,max_tokens=args.max_tokens,
+        config=GenerateConfig(temperature=args.temperature,seed=args.seed,max_tokens=args.max_tokens,
                               reasoning_effort='high',max_retries=1,timeout=300,
                               max_connections=args.concurrency))
     task = appworld_task(ids,args.split,args.image,args.data,args.output/'worlds',
@@ -70,7 +77,7 @@ def main():
               log_dir=str(args.output/'logs'),log_model_api=True,display='plain')
     elapsed=time.perf_counter()-started
     completed_utc=datetime.now(timezone.utc).isoformat()
-    export_logs([l.location for l in logs],args.output,'appworld_'+args.split,manifest)
+    export_logs([l.location for l in logs],args.output,'appworld_'+args.split,manifest,requests_path=args.requests)
     timings=[]
     for log in logs:
         for s in read_eval_log(log.location).samples:

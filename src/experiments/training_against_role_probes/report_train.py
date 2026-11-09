@@ -3,7 +3,7 @@ import argparse
 import json
 from pathlib import Path
 import numpy as np
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 
 
 def main():

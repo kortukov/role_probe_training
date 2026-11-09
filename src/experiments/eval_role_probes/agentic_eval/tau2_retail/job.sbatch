@@ -26,16 +26,17 @@ report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/eval_role_probes/agentic_
 run_dir="$PWD/$report_root/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))
+proxy_port=$((port + 10000))  # never another job's vLLM port (18000-27999)
 cleanup() {
     if [[ -f "$run_dir/manifest.json" ]]; then
-        uv run --project "$project" --frozen --no-sync python "$project/shared/export.py" "$run_dir" || true
+        requests=(); [[ -f "$run_dir/proxy/requests.jsonl" ]] && requests=(--requests "$run_dir/proxy/requests.jsonl")
+        uv run --project "$project" --frozen --no-sync python "$project/shared/export.py" "$run_dir" "${requests[@]}" || true
     fi
-    kill "$server_pid" 2>/dev/null || true
+    for pid in "${proxy_pid:-}" "$server_pid"; do [[ -n "$pid" ]] && kill "$pid" 2>/dev/null || true; done
 }
 uv run --project "$project/server" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
     --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
     --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
-    --tool-call-parser openai --enable-auto-tool-choice \
     --enforce-eager --disable-log-requests > "$run_dir/server.log" 2>&1 &
 server_pid=$!
 trap cleanup EXIT
@@ -46,7 +47,20 @@ for ((i=0;i<180;i++)); do
     sleep 5
 done
 if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
-uv run --project "$project" --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$port/v1" > "$run_dir/smoke.json"
+# Harmony proxy (root environment) between Inspect and vLLM: renders prompts with oss-harmony,
+# samples token IDs from vLLM and records them in $run_dir/proxy/requests.jsonl. Its reasoning
+# effort, max_tokens and temperature must equal what the run sends (the tau2 agent is generated at temperature 0).
+uv run --frozen --no-sync python "$project/shared/harmony_proxy.py" --vllm-url "http://127.0.0.1:$port" \
+    --model openai/gpt-oss-20b --output "$run_dir/proxy" --port "$proxy_port" --reasoning-effort high \
+    --max-tokens 16384 --context-limit 32768 --temperature 0 > "$run_dir/proxy.log" 2>&1 &
+proxy_pid=$!
+for ((i=0;i<60;i++)); do
+    curl --silent --fail "http://127.0.0.1:$proxy_port/v1/models" > /dev/null && break
+    kill -0 "$proxy_pid" 2>/dev/null || { cat "$run_dir/proxy.log"; exit 1; }
+    sleep 1
+done
+uv run --project "$project" --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" \
+    --max-tokens 16384 --temperature 0 > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
 uv run --project "$project" --frozen --no-sync python "$project/tau2_retail/run.py" \
-    --output "$run_dir" --base-url "http://127.0.0.1:$port/v1" "$@"
+    --output "$run_dir" --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$run_dir/proxy/requests.jsonl" "$@"

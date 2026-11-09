@@ -43,7 +43,7 @@ def collect(runtime, config, episodes, step, root, rank, *, sampler=None):
     records = read_jsonl(folder/'trajectories.jsonl')
     if {x['trajectory_id'] for x in records} != {x['id'] for x in episodes}:
         raise ValueError('Incomplete fresh episode batch')
-    examples = trajectory_examples(runtime.tokenizer, folder/'trajectories.jsonl')
+    examples = trajectory_examples(folder/'trajectories.jsonl')
     for example in examples:
         if len(example['ids']) > runtime.base.config.max_position_embeddings:
             raise ValueError('Full role history exceeds native limit; retained, not truncated')
@@ -72,7 +72,8 @@ def main():
     source_paths += list(Path('src/role_probe_training/training').glob('*.py'))
     source_paths += [Path('src/role_probe_training/trajectories')/name for name in
                      ('appworld.py', 'replay.py', 'inspect_export.py')]
-    source_paths += [Path('src/role_probe_training/probes/harmony.py'),
+    source_paths += list(Path('src/role_probe_training/harmony').glob('*.py'))
+    source_paths += [
                      Path('src/experiments/eval_role_probes/agentic_eval/appworld/appworld_worker.py'),
                      Path('src/experiments/eval_role_probes/agentic_eval/swe_bench/env/uv.lock'),
                      Path('src/experiments/training_against_role_probes/runtime/uv.lock'),
@@ -102,8 +103,8 @@ def main():
     runtime = RoleModel(config['model'], config['probe'], rank)
     parameters = [p for p in runtime.model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=config['learning_rate'], weight_decay=1e-4)
-    standard = probe_examples(runtime.tokenizer, config['probe_documents'])
-    validation = trajectory_examples(runtime.tokenizer, config['validation'])
+    standard = probe_examples(config['probe_documents'])
+    validation = trajectory_examples(config['validation'])
     start_step = 0
     if args.resume:
         state = torch.load(args.resume/'training.pt', map_location='cpu', weights_only=False)

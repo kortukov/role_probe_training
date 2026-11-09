@@ -2,9 +2,10 @@
 
 Text sources (C4/Dolma) are sampled exactly as in the baseline. A `toucan` source adds
 tool-use messages from Agent-Ark/Toucan-1.5M: every message of a sample becomes one
-document, tool calls/responses carry the native GPT-OSS header metadata used by
-`trajectories/replay.py`, samples never share an MCP server, and the held-out split is
-assigned per sample so all its messages stay on one side.
+document, tool calls/responses carry the Harmony header fields (channel, recipient,
+function name) that `role_probe_training.harmony.render_document` renders, samples never
+share an MCP server, and the held-out split is assigned per sample so all its messages
+stay on one side.
 """
 
 import argparse
@@ -131,18 +132,18 @@ def toucan_messages(row):
 
 
 def toucan_headers(message, first_function):
-    """Per-role header fields added when this message is wrapped in that role.
+    """Per-role Harmony header fields added when this message is wrapped in that role.
 
-    Only the wrap matching the message's native role (and the tool-role function
-    name) differs from the generic C4/Dolma headers; see trajectories/replay.py.
+    Only the wrap matching the message's native role (and the tool-role function name)
+    differs from the generic C4/Dolma headers. A tool call renders as a commentary
+    message to `functions.<name>` with the library's `<|constrain|>json` content type and
+    `<|call|>` ending; assistant text before a call is a commentary preamble.
     """
     headers = {'tool': {'name': message['function'] or first_function}}
     if message['role'] == 'tool_call':
-        headers['assistant'] = {'channel': 'commentary', 'recipient': 'functions.' + message['function'],
-                                'ending': '<|call|>'}
+        headers['assistant'] = {'channel': 'commentary', 'recipient': 'functions.' + message['function']}
     elif message['role'] == 'assistant':
-        headers['assistant'] = ({'channel': 'commentary', 'ending': '<|end|>'} if message['followed_by_call']
-                                else {'channel': 'final', 'ending': '<|return|>'})
+        headers['assistant'] = {'channel': 'commentary' if message['followed_by_call'] else 'final'}
     return headers
 
 

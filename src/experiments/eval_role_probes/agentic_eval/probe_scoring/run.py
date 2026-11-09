@@ -8,7 +8,7 @@ from pathlib import Path
 import time
 import numpy as np
 import torch
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import load_model
 from role_probe_training.trajectories.replay import encode_record
@@ -33,7 +33,7 @@ def main():
         assert probe.metadata['model_revision']=='6cee5e81ee83917806bbde320786a8fb61efebee'
         assert probe.metadata['roles']==list(ROLES)
         probes[probe.metadata['layer']]=probe
-    manifest={'schema_version':1,'input':str(a.input),'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),'probe_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in a.probes},'probe_metadata':{str(k):v.metadata for k,v in probes.items()},'context_window':a.context_window,'context_policy':'nonoverlapping windows; no token dropping; positions restart at each window; original eager attention, single model forward per window','shard_index':a.shard_index,'shard_count':a.shard_count,'slurm_job_id':os.environ.get('SLURM_JOB_ID'),'rendering':'retrospective Harmony; preserves all reasoning; tool schemas added as system context; not exact serving prompts','labels':'content tokens only; special/header/boundary tokens excluded; synthetic tool-schema context separately identified by source_message_index=-1'}
+    manifest={'schema_version':1,'input':str(a.input),'input_sha256':hashlib.sha256(a.input.read_bytes()).hexdigest(),'probe_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in a.probes},'probe_metadata':{str(k):v.metadata for k,v in probes.items()},'context_window':a.context_window,'context_policy':'nonoverlapping windows; no token dropping; positions restart at each window; original eager attention, single model forward per window','shard_index':a.shard_index,'shard_count':a.shard_count,'slurm_job_id':os.environ.get('SLURM_JOB_ID'),'rendering':'exact generation tokens recorded by the Harmony server (prompt plus completion of the last model call); no re-rendering','labels':'content tokens only; header/control tokens excluded; the Harmony system message and the tool-schema block are identified by source_message_index=-1 and excluded from accuracy'}
     mp=a.output/'manifest.json'
     if mp.exists() and json.loads(mp.read_text())['input_sha256']!=manifest['input_sha256']:
         raise ValueError('Cannot resume on different input')
@@ -58,7 +58,9 @@ def main():
             if destination.exists(): continue
             start=time.monotonic()
             try:
-                enc=encode_record(tokenizer,record)
+                if record.get('history') is None:
+                    raise ValueError(f'{record["sample_id"]}: no model call recorded; unscorable')
+                enc=encode_record(record)
                 ids=enc['input_ids']; n=len(ids)
                 if not 0 < a.context_window <= model.config.max_position_embeddings:
                     raise ValueError('Context window must fit model')
@@ -79,7 +81,7 @@ def main():
                     matrix=np.zeros((len(ROLES),len(ROLES)),dtype=np.int64)
                     np.add.at(matrix,(labels[content_mask],pred[content_mask]),1)
                     layers[k]={'predictions':pred.tolist(),'probabilities':prob.round(6).tolist(),'confusion_matrix':matrix.tolist(),'correct':int(np.trace(matrix)),'tokens':int(matrix.sum()),'accuracy':float(np.trace(matrix)/matrix.sum()) if matrix.sum() else None}
-                out={'schema_version':1,'benchmark':record['benchmark'],'sample_id':record['sample_id'],'source_index':index,'roles':ROLES,'trajectory':record,'rendered_messages':enc['messages'],'source_message_indices':enc['source_message_indices'],'text':enc['text'],'input_ids':ids.tolist(),'offsets':enc['offsets'].tolist(),'labels':labels.tolist(),'message_ids':enc['message_ids'].tolist(),'score_mask':content_mask.tolist(),'layers':layers,'context_window_starts':list(range(0,n,a.context_window)),'seconds':time.monotonic()-start}
+                out={'schema_version':1,'benchmark':record['benchmark'],'sample_id':record['sample_id'],'source_index':index,'roles':ROLES,'trajectory':record,'rendered_messages':enc['messages'],'rendering_metadata':enc['rendering'],'source_message_indices':enc['source_message_indices'],'text':enc['text'],'input_ids':ids.tolist(),'offsets':enc['offsets'].tolist(),'labels':labels.tolist(),'message_ids':enc['message_ids'].tolist(),'score_mask':content_mask.tolist(),'layers':layers,'context_window_starts':list(range(0,n,a.context_window)),'seconds':time.monotonic()-start}
                 temporary=destination.with_suffix('.tmp')
                 with gzip.open(temporary,'wt') as target: json.dump(out,target,ensure_ascii=False,separators=(',',':'))
                 temporary.replace(destination)

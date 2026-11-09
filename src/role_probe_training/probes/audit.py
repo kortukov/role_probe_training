@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.special import logsumexp, softmax
 
-from .harmony import ROLES, tokenize_messages
+from role_probe_training.harmony import ROLES, render_document
 from .linear import RoleProbe
 from .model import extract_states
 
@@ -33,7 +33,7 @@ def audit_objective(tokenizer, model, documents, probe_paths, train_sources=None
         headers = document.get('header', {})
         collection = document.get('collection', 'neutral')
         for label, role in enumerate(ROLES):
-            enc = tokenize_messages(tokenizer, [{'role':role, 'content':document['text'], **headers.get(role, {})}])
+            enc = render_document(role, document['text'], headers.get(role)).encoded()
             positions = np.flatnonzero(enc['labels'] >= 0)
             states = extract_states(model, enc['input_ids'], list(probes), positions)
             count += len(positions)

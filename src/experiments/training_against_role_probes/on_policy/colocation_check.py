@@ -85,7 +85,7 @@ def main():
             raise ValueError('Initial policy KL must be zero')
         record('updated',gradient_norm=float(norm),reverse_kl=float(totals[1]/denominators[1]),
                peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,**memory())
-        probe=refit_probe(runtime,probe_examples(runtime.tokenizer,config['probe_documents']),
+        probe=refit_probe(runtime,probe_examples(config['probe_documents']),
                           steps=config['refit_steps'],seed=124)
         record('refitted',probe=probe)
         refresh=server.synchronize(1)

@@ -11,7 +11,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from role_probe_training.probes.harmony import ROLES, SYSTEM_PROMPT, parse_generated, render, tokenize_messages
+from role_probe_training.harmony import (LIBRARY, LIBRARY_VERSION, ROLES, RenderConfig, completion_prompt, encode_record,
+                                         encoding, render_document, render_turns, request_record, tokens, walk_completion)
 from role_probe_training.probes.model import extract_states, load_model
 from role_probe_training.probes.linear import RoleProbe, fit_probe
 from role_probe_training.probes.evaluation import metrics, conversation_summary, plot_summary
@@ -41,8 +42,7 @@ def train(config, tokenizer, model, documents, output, metadata):
         for role in ROLES:
             # Toucan documents carry native header fields for their own role (replay.py
             # convention); C4/Dolma documents have none and render exactly as before.
-            message = {'role': role, 'content': document['text'], **headers.get(role, {})}
-            enc = tokenize_messages(tokenizer, [message])
+            enc = render_document(role, document['text'], headers.get(role)).encoded()
             positions = np.flatnonzero(enc['labels'] >= 0)
             states = extract_states(model, enc['input_ids'], layers, positions)
             for layer in layers:
@@ -81,29 +81,49 @@ def train(config, tokenizer, model, documents, output, metadata):
     write_json(output / 'metrics' / 'synthetic.json', results)
 
 
+def render_config(config):
+    return RenderConfig(config.get('reasoning_effort', 'medium'), config.get('conversation_start_date', '2025-12-31'))
+
+
+def check_chat_completion(completion):
+    """Reject anything but complete analysis/final messages ending with <|return|>."""
+    entries, error = walk_completion(completion)
+    if error is not None:
+        return entries, f'unparseable: {error}'
+    if not completion or completion[-1] != tokens().ret or not entries or not entries[-1]['complete']:
+        return entries, 'generation did not finish a final answer'
+    for entry in entries:
+        if entry['role'] != 'assistant' or entry['recipient'] or entry['channel'] not in ('analysis', 'final'):
+            return entries, f"unexpected generated message: channel {entry['channel']!r} recipient {entry['recipient']!r}"
+    if entries[-1]['channel'] != 'final':
+        return entries, 'last message is not final'
+    return entries, None
+
+
 @torch.inference_mode()
 def generate_conversations(config, tokenizer, model, prompts, path):
-    """Persist native assistant analysis/final messages, retaining failure counts."""
+    """Persist each generation as a token record (prompt and completion token IDs with
+    message spans) plus readable messages, retaining failure counts."""
     conversations, failures = [], []
+    rendering_config = render_config(config)
     with path.open('w') as handle:
         for index, prompt in enumerate(prompts):
-            messages = [{'role': 'system', 'content': SYSTEM_PROMPT},
-                        {'role': 'user', 'content': prompt['content']}]
-            prefix, _ = render(messages, bos=True)
-            prefix += '<|start|>assistant'
-            ids = tokenizer(prefix, add_special_tokens=False, return_tensors='pt').input_ids.to(model.device)
+            turns = [{'role': 'user', 'content': prompt['content']}]
+            rendering = render_turns(turns, rendering_config)
+            ids = torch.tensor([completion_prompt(rendering)], device=model.device)
             generated = model.generate(ids, attention_mask=torch.ones_like(ids),
                 max_new_tokens=config['max_new_tokens'], do_sample=True, temperature=1., top_p=1., top_k=0,
-                eos_token_id=tokenizer.eos_token_id,
+                eos_token_id=list(tokens().stop),
                 pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id)
-            continuation = '<|start|>assistant' + tokenizer.decode(generated[0, ids.shape[1]:], skip_special_tokens=False)
-            try:
-                assistant = parse_generated(continuation)
-            except ValueError as error:
-                failures.append({'id': prompt['id'], 'reason': str(error), 'raw': continuation})
-                print(f'Conversation {index+1}: incomplete, excluded', flush=True)
+            completion = generated[0, ids.shape[1]:].tolist()
+            entries, reason = check_chat_completion(completion)
+            if reason is not None:
+                failures.append({'id': prompt['id'], 'reason': reason, 'raw': encoding().decode(completion)})
+                print(f'Conversation {index+1}: {reason}, excluded', flush=True)
                 continue
-            record = {'id': prompt['id'], 'dataset': 'toxic-chat', 'messages': messages + assistant}
+            record = request_record(rendering, completion, rendering_config, id=prompt['id'], dataset='toxic-chat',
+                completion_source=len(turns), messages=turns + [
+                    {'role': 'assistant', 'channel': e['channel'], 'content': e['content']} for e in entries])
             conversations.append(record)
             handle.write(json.dumps(record) + '\n'); handle.flush()
             print(f'Generated conversation {index+1}/{len(prompts)}', flush=True)
@@ -119,7 +139,7 @@ def evaluate(config, tokenizer, model, conversations, output):
     prediction_path = output/'artifacts'/'token_predictions.jsonl'
     with prediction_path.open('w') as handle:
         for conv in conversations:
-            enc = tokenize_messages(tokenizer, conv['messages'], bos=True)
+            enc = encode_record(conv)
             positions = np.flatnonzero(enc['labels'] >= 0)
             states = extract_states(model, enc['input_ids'], list(probes), positions)
             labels = enc['labels'][positions]
@@ -165,22 +185,24 @@ def main():
     tokenizer, model = load_model(config['model_path'])
     input_dir = output/'artifacts'/'inputs'
     prepared = json.loads((input_dir/'config.json').read_text())
-    # Generation length and the fitted-source selection do not affect the prepared texts or prompts.
-    ignored = {'max_new_tokens', 'train_sources'}
+    # Generation length, the fitted-source selection and the Harmony system-message settings
+    # do not affect the prepared texts or prompts.
+    ignored = {'max_new_tokens', 'train_sources', 'reasoning_effort', 'conversation_start_date'}
     if {k:v for k,v in prepared.items() if k not in ignored} != {k:v for k,v in config.items() if k not in ignored}:
         raise ValueError('Prepared inputs do not match the requested configuration')
     metadata = {
         'stage': args.stage, 'generation_max_new_tokens': config['max_new_tokens'],
         'model_id': config['model_id'], 'model_revision': config['model_revision'],
         'precision': 'MXFP4 checkpoint dequantized to BF16', 'attention': 'eager',
+        'rendering': render_config(config).metadata(),
         'git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
         'git_dirty': bool(subprocess.check_output(['git', 'status', '--porcelain'], text=True).strip()),
         'upstream_commit': subprocess.check_output(['git', '-C', 'submodules/prompt-injection-as-role-confusion', 'rev-parse', 'HEAD'], text=True).strip(),
         'slurm_job_id': os.environ.get('SLURM_JOB_ID'), 'gpu': torch.cuda.get_device_name(),
-        'versions': {p: importlib.metadata.version(p) for p in ['torch','transformers','scikit-learn','cuml-cu13','numpy','datasets']},
+        'versions': {p: importlib.metadata.version(p) for p in ['torch','transformers','scikit-learn','cuml-cu13','numpy','datasets',LIBRARY]},
         'input_sha256': hashlib.sha256((input_dir/'documents.jsonl').read_bytes()).hexdigest(),
         'source_sha256': {str(p): hashlib.sha256(p.read_bytes()).hexdigest()
-                          for root in ['src/role_probe_training/probes','src/experiments/gptoss_role_probes']
+                          for root in ['src/role_probe_training/probes','src/role_probe_training/harmony','src/experiments/gptoss_role_probes']
                           for p in Path(root).glob('*.py')},
     }
     write_json(output/'metrics'/f'run_metadata_{args.stage}.json', metadata)

@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import numpy as np
 import torch
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from .data import read_jsonl,trajectory_examples
 from .model import RoleModel
@@ -22,7 +22,7 @@ def main():
            16:'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_16.npz',
            **{i:f'experiment_reports/gptoss_role_probes/gptoss20b_layers/probes/layer_{i}.npz' for i in (4,8,20)}}
     runtime=RoleModel('.cache/models/gpt-oss-20b',paths[12],0,adapters=False)
-    examples=trajectory_examples(runtime.tokenizer,a.input)
+    examples=trajectory_examples(a.input)
     a.output.mkdir(parents=True,exist_ok=True)
     metadata=dict(input=str(a.input),input_sha256=hashlib.sha256(a.input.read_bytes()).hexdigest(),
         roles=list(ROLES),layers=sorted(paths),context_policy='full trajectory; no truncation or independent windows',

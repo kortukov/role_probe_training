@@ -8,7 +8,7 @@ import time
 import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, Mxfp4Config
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.trajectories.replay import encode_record
 
@@ -71,7 +71,7 @@ def main():
             if identifier in done:
                 continue
             start = time.monotonic()
-            enc = encode_record(tokenizer, row)
+            enc = encode_record(row)
             labels = enc['labels'].copy()
             for j, mid in enumerate(enc['message_ids']):
                 if mid < 0 or enc['source_message_indices'][int(mid)] < 0:

@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states
 from role_probe_training.training.data import probe_examples, trajectory_examples
@@ -30,7 +30,7 @@ def load(path):
 def fit(root):
     model_path=root/'data/post_training/model'; tokenizer,model=load(model_path)
     documents=Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
-    examples=probe_examples(tokenizer,documents)
+    examples=probe_examples(documents)
     features=[]; labels=[]; splits=[]
     for i,example in enumerate(examples):
         y=np.asarray(example['labels']); positions=np.flatnonzero(y>=0)
@@ -64,7 +64,7 @@ def score(root,input_path,output):
     probe=RoleProbe.load(root/'post_training/probes/layer_12.npz')
     export=json.loads((model_path/'export.json').read_text())
     assert probe.metadata['model_revision']==export['adapter_sha256']
-    examples=trajectory_examples(tokenizer,input_path)
+    examples=trajectory_examples(input_path)
     output.mkdir(parents=True,exist_ok=True)
     matrix=np.zeros((5,5),dtype=np.int64); per_trace=[]
     with (output/'index.jsonl').open('w') as index:

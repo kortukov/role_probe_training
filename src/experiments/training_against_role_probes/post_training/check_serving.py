@@ -19,7 +19,7 @@ if a.stage=='reference':
     runtime=RoleModel('.cache/models/gpt-oss-20b','experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
     set_peft_model_state_dict(runtime.model,load_file(Path(export['checkpoint'])/'adapter/adapter_model.safetensors'))
     runtime.model.gradient_checkpointing_disable()
-    examples=trajectory_examples(runtime.tokenizer,'experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl')[:2]
+    examples=trajectory_examples('experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl')[:2]
     rows=[]
     with torch.no_grad():
         for x in examples:

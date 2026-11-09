@@ -19,7 +19,7 @@ def main():
         raise FileExistsError(target)
     tokenizer = AutoTokenizer.from_pretrained('.cache/models/gpt-oss-20b', local_files_only=True)
     source = output/'data/train27000/trajectories.jsonl'
-    examples = trajectory_examples(tokenizer, source)
+    examples = trajectory_examples(source)
     assert len(examples) == 27000
     label_set = {2, 3}
     selection = 'All 27000 AppWorld training trajectories; exact current role-loss batch'

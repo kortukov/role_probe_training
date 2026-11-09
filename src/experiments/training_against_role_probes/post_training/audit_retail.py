@@ -4,19 +4,15 @@ from collections import Counter
 from pathlib import Path
 
 import numpy as np
-from transformers import AutoTokenizer
-from role_probe_training.probes.harmony import render
-from role_probe_training.trajectories.replay import replay_messages
+from role_probe_training.trajectories.replay import encode_record
 
 root = Path('experiment_reports/training_against_role_probes')
-tokenizer = AutoTokenizer.from_pretrained('.cache/models/gpt-oss-20b',local_files_only=True)
 report = {}
 for sub in ['base_model', '', 'astra_sft_1k', 'depthbench']:
     rows = [json.loads(line) for line in (root/sub/'data/post_training/tau2_retail/trajectories.jsonl').read_text().splitlines()]
     records = []
     for row in rows:
-        text,_ = render(replay_messages(row)[0],bos=True)
-        length = len(tokenizer(text,add_special_tokens=False)['input_ids'])
+        length = len(encode_record(row)['input_ids'])
         assistants = [m for m in row['messages'] if m['role']=='assistant']
         empty_turns = sum(bool(m.get('thinking')) and not (m.get('content') or m.get('tool_calls')) for m in assistants)
         records.append({'sample_id':str(row['sample_id']),'tokens':length,

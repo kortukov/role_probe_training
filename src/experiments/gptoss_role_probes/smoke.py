@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from role_probe_training.probes.harmony import ROLES, tokenize_messages
+from role_probe_training.harmony import ROLES, render_document
 from role_probe_training.probes.model import extract_states, load_model
 
 parser = argparse.ArgumentParser()
@@ -17,7 +17,7 @@ print('Torch:', torch.__version__, 'CUDA:', torch.version.cuda, flush=True)
 print('GPU:', torch.cuda.get_device_name(), flush=True)
 tokenizer, model = load_model(args.model)
 for role in ROLES:
-    enc = tokenize_messages(tokenizer, [{'role': role, 'content': 'The garden contains green plants and a small wooden bench.'}])
+    enc = render_document(role, 'The garden contains green plants and a small wooden bench.').encoded()
     assert np.all(enc['labels'][enc['labels'] >= 0] == ROLES.index(role))
     positions = np.flatnonzero(enc['labels'] >= 0)
     states = extract_states(model, enc['input_ids'], [12, 16], positions)

@@ -19,7 +19,7 @@ import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Mxfp4Config
 
-from role_probe_training.probes.harmony import ROLES
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.trajectories.replay import encode_record
 
@@ -28,7 +28,7 @@ def encode_examples(path, tokenizer, cap):
     examples = []
     for line in path.open():
         row = json.loads(line)
-        encoded = encode_record(tokenizer, row)
+        encoded = encode_record(row)
         labels = np.asarray(encoded['labels']).copy()
         for i, mid in enumerate(encoded['message_ids']):
             if mid < 0 or encoded['source_message_indices'][int(mid)] < 0:

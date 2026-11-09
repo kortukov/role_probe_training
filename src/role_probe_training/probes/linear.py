@@ -9,7 +9,7 @@ import numpy as np
 from scipy.special import softmax
 from sklearn.linear_model import LogisticRegression
 
-from .harmony import ROLES
+from role_probe_training.harmony import ROLES
 
 
 @dataclass

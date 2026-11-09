@@ -1,4 +1,8 @@
-"""Run a reproducible benchmark selection and export agent traces; use inside an allocation."""
+"""Run a reproducible benchmark selection and export agent traces; use inside an allocation.
+
+`--base-url` is the Harmony proxy (shared/harmony_proxy.py) in front of vLLM; `--requests` is the
+proxy's requests.jsonl, whose token records are joined onto the exported trajectories. The proxy's
+reasoning effort, max_tokens and temperature must equal the values this run sends."""
 import argparse
 import hashlib
 import importlib.metadata
@@ -30,7 +34,8 @@ def main():
     parser.add_argument("--all", action="store_true", help="Evaluate every dataset sample")
     parser.add_argument("--seed", type=int, default=123)
     parser.add_argument("--concurrency", type=int, default=8)
-    parser.add_argument("--base-url", default="http://127.0.0.1:8000/v1")
+    parser.add_argument("--base-url", required=True, help="Harmony proxy URL ending in /v1")
+    parser.add_argument("--requests", type=Path, required=True, help="the proxy's requests.jsonl for this run")
     parser.add_argument("--user-model", default="openai/azure/gpt-4.1")
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default="high")
     parser.add_argument("--time-limit", type=int, default=900)
@@ -73,12 +78,13 @@ def main():
                 "full_selection": full_selection, "dataset_size": len(task.dataset), "model_id": args.model_id,
                 "model_revision": args.model_revision,
                 "user_model": args.user_model if args.benchmark == "tau2_retail" else None,
-                "settings": vars(args) | {"output": str(args.output)},
+                "settings": vars(args) | {"output": str(args.output), "requests": str(args.requests)},
+                "serving": "vLLM completions by token id behind the Harmony proxy; prompts rendered by oss-harmony",
                 "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
                 "sandbox_provider": "apptainer (writable isolated instance; network none; no host binds); digest-pinned official images via mirror.gcr.io",
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent / "env/uv.lock", Path(__file__).with_name("swe_job.sbatch"), Path(__file__).parent.parent / os.environ.get("SWE_SERVER_PROJECT", "server") / "uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent.parent / "shared/harmony_proxy.py", Path("uv.lock"), Path(__file__).parent / "env/uv.lock", Path(__file__).with_name("swe_job.sbatch"), Path(__file__).parent.parent / os.environ.get("SWE_SERVER_PROJECT", "server") / "uv.lock", Path("src/role_probe_training/trajectories/inspect_export.py"), Path("src/role_probe_training/trajectories/apptainer_mirror.py"), Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:
@@ -96,7 +102,7 @@ def main():
                 sample_id=selected, epochs=1, max_samples=args.concurrency, max_connections=args.concurrency,
                 time_limit=args.time_limit, token_limit=args.token_limit, message_limit=args.message_limit if args.benchmark=="swe_bench" else None, fail_on_error=False,
                 log_dir=str(args.output / "logs"), log_model_api=True, display="plain")
-    export_logs([log.location for log in logs], args.output, args.benchmark, manifest)
+    export_logs([log.location for log in logs], args.output, args.benchmark, manifest, requests_path=args.requests)
     if any(log.status != "success" for log in logs):
         raise SystemExit("Evaluation incomplete; inspect logs and summary")
 

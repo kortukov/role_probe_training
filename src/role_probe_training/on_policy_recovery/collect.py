@@ -10,7 +10,7 @@ import urllib.request
 from inspect_ai import eval
 from inspect_ai.model import GenerateConfig, get_model
 from role_probe_training.trajectories.appworld import appworld_task
-from role_probe_training.trajectories.inspect_export import export_logs
+from role_probe_training.trajectories.inspect_export import attach_history, export_logs
 
 
 def run_episode(plan, root, base_url, episode):
@@ -72,6 +72,7 @@ def main():
     # Every request has been answered, so the shared server logs are complete.
     events = read_jsonl(root/'parser_events.jsonl')
     stops = read_jsonl(root/'episode_stops.jsonl')
+    requests = read_jsonl(root/'requests.jsonl')
     records = []
     for episode in plan['episodes']:
         if episode['id'] in cached:
@@ -83,6 +84,9 @@ def main():
                 continue
             row = rows[0]
             row['trajectory_id'] = episode['id']
+            # The probes read the exact tokens of the episode's last model call.
+            attach_history(row, [x for x in requests if x['episode_id'] == episode['id']],
+                           sum(x['episode_id'] == episode['id'] for x in stops))
             row['invalid_model_outputs'] = [x for x in events if x['episode_id'] == episode['id'] and x['invalid']]
             row['episode_stops'] = [x for x in stops if x['episode_id'] == episode['id']]
             row['model_context_stops'] += sum(x['reason'] == 'serving_context_limit' for x in row['episode_stops'])

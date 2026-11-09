@@ -3,6 +3,8 @@
 Per arm and layer it reports overall token accuracy, per-role recall, per-turn accuracy
 (system, user k, reasoning k, assistant k), mean per-conversation accuracy, and the
 system-turn accuracy split by whether the sample supplied its own system message.
+`--mode replay` renders the dataset's own answers with the Harmony library; `--mode
+generated` reads the token records written by generate.py without re-rendering.
 """
 import argparse
 import json
@@ -11,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
-from role_probe_training.probes.harmony import ROLES, tokenize_messages
+from role_probe_training.harmony import ROLES, RenderConfig, history, render_turns
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states, load_model
 
@@ -21,15 +23,18 @@ def read_jsonl(path):
     return [json.loads(line) for line in Path(path).read_text(encoding='utf-8').split('\n') if line.strip()]
 
 
-def turn_labels(messages):
-    """One label per message: 'system', 'user 1', 'reasoning 1', 'assistant 1', 'user 2', ..."""
+def turn_labels(rendering):
+    """One label per rendered message: 'system' (Harmony system message, developer message and
+    tool schemas), 'user 1', 'reasoning 1', 'assistant 1', 'user 2', ..."""
     labels, seen = [], defaultdict(int)
-    for message in messages:
-        role = message['role']
-        if role == 'system':
+    for entry in rendering.messages:
+        if entry['kind'] in ('system', 'developer', 'tools'):
             labels.append('system')
             continue
-        name = 'reasoning' if role == 'assistant' and message.get('channel') == 'analysis' else role
+        if entry['kind'] == 'assistant':
+            name = 'reasoning' if entry['channel'] == 'analysis' else 'assistant'
+        else:
+            name = entry['kind']
         seen[name] += 1
         labels.append(f'{name} {seen[name]}')
     return labels
@@ -38,7 +43,9 @@ def turn_labels(messages):
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--input', type=Path, required=True)
-    parser.add_argument('--messages-key', default='messages')
+    parser.add_argument('--mode', choices=['replay', 'generated'], required=True)
+    parser.add_argument('--reasoning-effort', default='medium')
+    parser.add_argument('--date', default='2025-12-31')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--arms', type=Path, nargs='+', required=True, help='Arm directories holding probes/layer_L.npz')
     parser.add_argument('--layers', type=int, nargs='+', default=[4, 8, 12, 16, 20])
@@ -55,16 +62,18 @@ def main():
     turns = {k: defaultdict(lambda: [0, 0]) for k in keys}
     per_sample = {k: [] for k in keys}
     system_split = {k: {'with_sample_system': [0, 0], 'without_sample_system': [0, 0]} for k in keys}
+    config = RenderConfig(args.reasoning_effort, args.date)
     for n, row in enumerate(rows):
-        messages = row[args.messages_key]
-        labels_by_turn = turn_labels(messages)
-        enc = tokenize_messages(tokenizer, messages, bos=True)
+        rendering = render_turns(row['replay_turns'], config) if args.mode == 'replay' else history(row)
+        labels_by_turn = turn_labels(rendering)
+        enc = rendering.encoded()
         positions = np.flatnonzero(enc['labels'] >= 0)
         labels = enc['labels'][positions]
         message_ids = enc['message_ids'][positions]
         states = extract_states(model, enc['input_ids'], args.layers, positions)
         saved = {'labels': labels.astype(np.int8), 'message_ids': message_ids.astype(np.int16),
-                 'turn_labels': np.asarray(labels_by_turn)}
+                 'turn_labels': np.asarray(labels_by_turn),
+                 'message_kinds': np.asarray([m['kind'] for m in rendering.messages])}
         for arm, layers in probes.items():
             for L, probe in layers.items():
                 predictions = probe.predict_proba(states[L]).argmax(1)
@@ -83,7 +92,7 @@ def main():
         np.savez_compressed(args.output / 'predictions' / f'{row["id"]}.npz', **saved)
         if (n + 1) % 50 == 0:
             print(f'Scored {n + 1}/{len(rows)} conversations', flush=True)
-    result = {'n_conversations': len(rows), 'input': str(args.input), 'messages_key': args.messages_key, 'roles': list(ROLES), 'arms': {}}
+    result = {'n_conversations': len(rows), 'input': str(args.input), 'mode': args.mode, 'rendering': config.metadata(), 'roles': list(ROLES), 'arms': {}}
     for arm in probes:
         result['arms'][arm] = {}
         for L in args.layers:
