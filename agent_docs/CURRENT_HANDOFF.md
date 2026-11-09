@@ -30,6 +30,13 @@
 - The old trainer variants were removed at d96fe7a; historical training code is
   recoverable from Git. Do not remove modules still imported by queued jobs or
   referenced by checkpoint source hashes.
+- Planned removal once the on-policy model is retrained under the Harmony rendering
+  and no queued job imports them: the Hugging Face serving pipeline of the earlier
+  pilots (`src/role_probe_training/on_policy/serving.py`, `train.py`, `collect.py`,
+  `colocated.py`, the `generation/` package, `hf_generation/` and the old trainer
+  Slurm files, serving benchmarks and checks under `experiments/.../on_policy/`),
+  together with the appworld2700 and appworld270 pilot reports. The exact list is in
+  [HARMONY_RENDERING.md](../HARMONY_RENDERING.md), section 4.
 - Optional KL request batching is off unless `kl_batch_tokens` is set. The saved
   96-request check shows faster execution but changed BF16 losses/gradients;
   it is not numerically identical to sequential replay. Keep per-request replay

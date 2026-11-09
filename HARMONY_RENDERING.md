@@ -277,6 +277,27 @@ a single user message without tools the template and the library produce identic
 match the new rendering apart from the date in the system message, which is now the fixed
 date that all prompts share.
 
+**Removed on 2026-11-08.** `src/experiments/eval_role_probes/agentic_eval/shared/tokenize_check.py`
+counted tokens by re-rendering exported chats with the template; `history` makes it
+unnecessary. `src/experiments/training_against_role_probes/on_policy/generation_diagnostic.py`
+and its Slurm file replayed the request that crashed the earlier on-policy pilot's Hugging Face
+serving shim under synchronous CUDA error reporting. Both are in Git history.
+
+**To remove after the new on-policy run.** The earlier on-policy pipeline served the model
+with Hugging Face generation inside the training process and rendered prompts with the chat
+template. It consists of `src/role_probe_training/on_policy/serving.py`, `train.py`,
+`collect.py` and `colocated.py`, the whole `src/role_probe_training/generation/` package, and
+the scripts that import them: everything in
+`src/experiments/training_against_role_probes/hf_generation/` and, in
+`src/experiments/training_against_role_probes/on_policy/`, the trainer Slurm files, the serving
+benchmarks and the serving checks (`checks.py` keeps its KL cases). `on_policy_recovery/serving.py`
+replaced that pipeline, but the pipeline trained the appworld2700, appworld270_batch16 and
+appworld270_batch64 pilots, whose reports the main training report still cites and whose
+checkpoint migration records hash its files. Delete the pipeline and those pilot reports
+together once the on-policy model retrained under the new rendering replaces their numbers,
+and once no queued job imports the modules (`agent_docs/CURRENT_HANDOFF.md`). Keep
+`src/role_probe_training/on_policy/data.py`, `objective.py` and `vllm_worker.py`: the
+current trainers import them.
 
 **How to verify.** From the repository root, with `TIKTOKEN_CACHE_DIR=$PWD/.cache/tiktoken`:
 

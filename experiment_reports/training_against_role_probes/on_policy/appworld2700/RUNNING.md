@@ -82,16 +82,17 @@ are rejected without rerunning generation on a potentially poisoned CUDA context
 The CUDA root cause is not yet established; explicit device selection is not a
 claim that the illegal access is resolved.
 
-Diagnostic array 1691770 runs
-[`generation_diagnostic.sbatch`](../../../../src/experiments/training_against_role_probes/on_policy/generation_diagnostic.sbatch)
-on `ber-testing`: one GPU, four CPUs, 96 GiB host memory, 20 minutes per control,
-serial concurrency. It compares flex attention in the serving thread, flex in the
-main thread and eager attention in the serving thread. All replay the failed
-rank-0 input with synchronous CUDA errors and at most 768 generated tokens, then
-check reverse-KL backward after generation if generation succeeds. These short
-diagnostic limits do not change production training budgets. Eager attention is
-a diagnostic control only; it is not enabled for full-history production.
-Results are retained in `runs/diagnostics/1691770/`. The colocated replacement pipeline is described below.
+Diagnostic array 1691770 ran `generation_diagnostic.sbatch` on `ber-testing`: one GPU,
+four CPUs, 96 GiB host memory, 20 minutes per control, serial concurrency. It compared
+flex attention in the serving thread, flex in the main thread and eager attention in
+the serving thread. All replayed the failed rank-0 input with synchronous CUDA errors
+and at most 768 generated tokens, then checked reverse-KL backward after generation
+if generation succeeded. These short diagnostic limits did not change production
+training budgets. Eager attention was a diagnostic control only; it was not enabled
+for full-history production. Results are retained in `runs/diagnostics/1691770/`.
+The diagnostic script and its Slurm file, which rendered prompts with the Hugging Face
+chat template, were removed from the repository on 2026-11-08 and remain in Git
+history. The colocated replacement pipeline is described below.
 
 ## vLLM serving study
 
