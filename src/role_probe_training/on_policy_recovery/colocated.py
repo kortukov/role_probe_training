@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import socket
 import subprocess
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -27,7 +28,7 @@ class ColocatedServer:
             sock.bind(('127.0.0.1', 0))
             port = sock.getsockname()[1]
         self.url = f'http://127.0.0.1:{port}'
-        project = Path('src/experiments/eval_role_probes/agentic_eval/server_current').resolve()
+        environment = Path('.venv').resolve()  # the root environment, installed with the vllm extra
         env = os.environ.copy()
         devices = env.get('CUDA_VISIBLE_DEVICES', '0,1').split(',')
         env['CUDA_VISIBLE_DEVICES'] = devices[int(runtime.device)]
@@ -36,14 +37,13 @@ class ColocatedServer:
                        'ROLE_WORLD_SIZE','MASTER_ADDR','MASTER_PORT') or key.startswith('TORCHELASTIC_'):
                 env.pop(key, None)
         env.update(VLLM_SERVER_DEV_MODE='1', VLLM_USE_FLASHINFER_SAMPLER='0',
-                   CUDA_HOME=str(project/'.venv/lib/python3.12/site-packages/nvidia/cu13'))
+                   CUDA_HOME=str(environment/'lib/python3.12/site-packages/nvidia/cu13'))
         env['PATH'] = env['CUDA_HOME']+'/bin:'+env['PATH']
         env['TIKTOKEN_CACHE_DIR'] = str(Path('.cache/tiktoken').resolve())
         for key in ('TORCHINDUCTOR_CACHE_DIR','TRITON_CACHE_DIR','VLLM_CACHE_ROOT'):
             env[key] = str(self.stage/key)
         model = Path('experiment_reports/training_against_role_probes/kl_iteration/same_batch/data/post_training/model').resolve()
-        command = ['.tools/bin/uv','run','--project',str(project),'--frozen','--no-sync',
-            'vllm','serve',str(model),'--served-model-name','on-policy-role-model',
+        command = [str(Path(sys.executable).with_name('vllm')),'serve',str(model),'--served-model-name','on-policy-role-model',
             '--host','127.0.0.1','--port',str(port),'--max-model-len','32768',
             '--max-num-seqs','8','--gpu-memory-utilization','0.45',
             '--kv-cache-memory-bytes',str(8*1024**3),'--enable-sleep-mode',

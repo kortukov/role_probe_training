@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import importlib.metadata
+import importlib.util
 import json
 import os
 import subprocess
@@ -182,6 +183,8 @@ def main():
     for folder in ['artifacts', 'probes', 'metrics', 'plots']:
         (output/folder).mkdir(parents=True, exist_ok=True)
     torch.manual_seed(config['seed']); np.random.seed(config['seed'])
+    if importlib.util.find_spec('cuml') is None:
+        raise SystemExit('Probe fitting needs cuML: run with `uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python ...`')
     tokenizer, model = load_model(config['model_path'])
     input_dir = output/'artifacts'/'inputs'
     prepared = json.loads((input_dir/'config.json').read_text())

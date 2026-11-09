@@ -2,9 +2,19 @@
 
 ## Environment and code
 
-- Use uv: `uv sync --locked`, `uv run ...`, and `uv add <dependency>`.
-  Keep `pyproject.toml`, `.python-version` and `uv.lock` consistent. Python 3.12
-  is the initial default; revisit compatibility when adding training libraries.
+- Use uv: `uv sync --locked --extra vllm`, `uv run ...`, and `uv add <dependency>`.
+  Keep `pyproject.toml`, `.python-version` and `uv.lock` consistent. Python 3.12.
+- One root environment serves, collects, scores and trains; vLLM is its `vllm` extra.
+  Two small projects remain because they cannot share it: cuML probe fitting
+  (`src/experiments/gptoss_role_probes/fit_env`) and the AppWorld data package
+  (`agentic_eval/appworld/env`). Read [agent_docs/ENVIRONMENTS.md](agent_docs/ENVIRONMENTS.md)
+  before changing a dependency; do not add new sub-project environments without need.
+- Where this repository and Xiaoxue's `prompt_injection_interp` project need the same
+  package, take that project's version constraint (since 2026-11-09: `transformers==5.9.0`,
+  `vllm==0.27.1`, `peft==0.18.1`, `agentdojo==0.1.35`, `huggingface-hub` 1.x, `torch>=2.9.1`
+  and the lower bounds of numpy, matplotlib, datasets, scikit-learn, accelerate and wandb).
+  `oss-harmony==0.0.12` stays: that project uses the upstream `openai-harmony`, which
+  provides the same import name.
 - All first-party code lives in `src/`. Reusable code belongs in
   `src/role_probe_training/`; experiment entry points and job scripts belong in
   `src/experiments/`. Upstream Git submodules are the explicit exception.

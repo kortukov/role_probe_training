@@ -9,9 +9,9 @@ rollouts are retained under ignored `data/` and `runs/` on cluster storage.
 git clone https://github.com/anaykulkarni/TIER.git experiment_reports/training_against_role_probes/depthbench/data/upstream
 git -C experiment_reports/training_against_role_probes/depthbench/data/upstream checkout 7e309ca7b651a02b5ee23d2b208ff360b1ff0d9a
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/prepare_corpora.py
-.tools/bin/uv sync --locked --project src/experiments/training_against_role_probes/collection_runtime
-.tools/bin/uv pip install --python src/experiments/training_against_role_probes/collection_runtime/.venv/bin/python \
-  --no-deps -e . -e experiment_reports/training_against_role_probes/depthbench/data/upstream
+.tools/bin/uv sync --locked --extra vllm
+.tools/bin/uv pip install --python .venv/bin/python \
+  --no-deps -e experiment_reports/training_against_role_probes/depthbench/data/upstream
 sbatch --chdir=/data/cluster/users/kortukov/role_probe_training \
   src/experiments/training_against_role_probes/collect_depthbench.sbatch
 ```
@@ -21,7 +21,7 @@ Logs: `../logs/depthbench-data-1501281.out`; source outputs:
 `runs/1501281/{smoke,collection}/calls_0/` through `calls_6/`.
 The seven-task smoke requires explicit reasoning before production collection.
 
-The vLLM server uses the existing isolated `server_current` lock (vLLM0.32),
+The vLLM server of the recorded collection used the former `server_current` lock (vLLM 0.32),
 original MXFP4 GPT-OSS-20B revision `6cee5e81ee83917806bbde320786a8fb61efebee`,
 32768 maximum context, Triton attention/MoE, 16 concurrent sequences.
 Sampling: temperature1, medium reasoning, 8192 new tokens per assistant call,
@@ -125,15 +125,12 @@ against the original adapter model before saving. The custom vLLM worker applies
 the FP32 attention adapters at inference; probe scoring loads the same adapters
 through PEFT. Use one GPU per server (no tensor/pipeline parallelism).
 
-Environments are the existing `agentic_eval/server_current` (vLLM),
-`agentic_eval/swe_bench/env` (Inspect), and `training_against_role_probes/runtime` (activation extraction/scoring), and the
-root `.venv` (cuML fitting in a separate CUDA-13 process). Standard-data activations
-are retained under `data/post_training/probe_features/`.
-Install this package in the server environment without changing its dependencies:
-
-```bash
-.tools/bin/uv pip install --python src/experiments/eval_role_probes/agentic_eval/server_current/.venv/bin/python --no-deps -e .
-```
+The recorded runs used the former `agentic_eval/server_current` (vLLM),
+`agentic_eval/swe_bench/env` (Inspect) and `training_against_role_probes/runtime`
+(activation extraction/scoring) environments and the root `.venv` for cuML fitting. These
+are now the root environment, with cuML fitting as a separate process in
+`src/experiments/gptoss_role_probes/fit_env` ([ENVIRONMENTS.md](../../../agent_docs/ENVIRONMENTS.md)).
+Standard-data activations are retained under `data/post_training/probe_features/`.
 
 Entry points are in `src/experiments/training_against_role_probes/post_training/`:
 `export.sbatch CHECKPOINT OUTPUT`, `probes.sbatch fit --root ROOT`,

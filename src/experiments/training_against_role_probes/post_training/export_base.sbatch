@@ -11,4 +11,4 @@
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export OMP_NUM_THREADS=4
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/training_against_role_probes/post_training/export_base.py --output experiment_reports/training_against_role_probes/base_model/data/swe_native/model
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/export_base.py --output experiment_reports/training_against_role_probes/base_model/data/swe_native/model

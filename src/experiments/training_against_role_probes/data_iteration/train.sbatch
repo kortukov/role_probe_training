@@ -23,8 +23,7 @@ export WANDB_ENTITY=kortukov
 export WANDB_PROJECT=training_against_role_probes
 export WANDB_DIR="$PWD/experiment_reports/training_against_role_probes/wandb"
 mkdir -p "$TMPDIR" "$WANDB_DIR"
-runtime=src/experiments/training_against_role_probes/runtime
 config=${1:?Pass a training configuration JSON}
 shift
-.tools/bin/uv run --project "$runtime" --frozen --no-sync torchrun --standalone --nproc-per-node=2 \
+.tools/bin/uv run --frozen --no-sync torchrun --standalone --nproc-per-node=2 \
  --module role_probe_training.training.train_same_batch --config "$config" "$@"

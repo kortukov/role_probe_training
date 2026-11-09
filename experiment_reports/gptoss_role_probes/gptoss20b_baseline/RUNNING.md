@@ -8,7 +8,8 @@ export PATH="$PWD/.tools/bin:$PATH"
 export HF_HOME="$PWD/.cache/huggingface"
 export HF_DATASETS_CACHE="$PWD/.cache/datasets"
 export HF_HUB_DISABLE_IMPLICIT_TOKEN=1
-uv sync --locked
+uv sync --locked --extra vllm
+uv sync --locked --project src/experiments/gptoss_role_probes/fit_env
 git submodule update --init --recursive
 ```
 

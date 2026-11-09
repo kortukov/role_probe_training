@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import subprocess
+import sys
 from role_probe_training.training.data import read_jsonl, trajectory_examples
 from role_probe_training.on_policy.data import validate_requests
 from .recovery import stage_cache
@@ -23,8 +24,7 @@ def collect(runtime, config, episodes, step, root, rank, *, sampler=None):
             stage_cache(spec, rank, plan, folder)
     with serve(runtime, folder, step-1, config['generation'], sampler=sampler) as (url, state):
         with (folder/'collector.log').open('w') as stream:
-            subprocess.run(['.tools/bin/uv', 'run', '--project', 'src/experiments/eval_role_probes/agentic_eval/swe_bench/env',
-                '--frozen', '--no-sync', 'python', '-m', 'role_probe_training.on_policy_recovery.collect',
+            subprocess.run([sys.executable, '-m', 'role_probe_training.on_policy_recovery.collect',
                 '--plan', str(folder/'plan.json'), '--base-url', url, '--concurrency', str(concurrency)],
                 stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=18000)
         if state['errors']:

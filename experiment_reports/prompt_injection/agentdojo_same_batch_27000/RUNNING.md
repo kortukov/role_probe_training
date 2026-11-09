@@ -1,20 +1,20 @@
 # Reproduction
 
-Run from the repository on cluster storage. The isolated driver environment uses
-Python 3.12 and AgentDojo 0.1.35; its exact dependencies are in
-[uv.lock](../../../src/experiments/agentdojo_robustness/driver/uv.lock).
-The existing server environment pins vLLM 0.32.0. GPU jobs use one B200,
+Run from the repository on cluster storage. The recorded runs used an isolated driver
+environment (Python 3.12, AgentDojo 0.1.35) and a server environment pinning vLLM 0.32.0.
+Both are now the root environment ([ENVIRONMENTS.md](../../../agent_docs/ENVIRONMENTS.md)),
+which keeps AgentDojo 0.1.35 and pins vLLM 0.27.1. GPU jobs use one B200,
 four CPUs and 256 GiB RAM. The smoke test uses ber-testing; production uses
 ber-gpu1 with a 24-hour budget. No existing user jobs are changed.
 
 ```bash
-.tools/bin/uv sync --locked --project src/experiments/agentdojo_robustness/driver
-.tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_robustness/check_driver.py
+.tools/bin/uv sync --locked --extra vllm
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentdojo_robustness/check_driver.py
 sbatch --export=ALL --partition=ber-testing --time=01:00:00 src/experiments/agentdojo_robustness/evaluate.sbatch trained smoke
 # For a still-live smoke job, production can use afterok:
 sbatch --export=ALL --dependency=afterok:SMOKE_JOB src/experiments/agentdojo_robustness/evaluate.sbatch base full
 sbatch --export=ALL --dependency=afterok:SMOKE_JOB src/experiments/agentdojo_robustness/evaluate.sbatch trained full
-.tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
 ```
 
 The driver explicitly runs clean tasks before attacks in every suite. Four suites
@@ -95,8 +95,8 @@ FP16 standard-data workflow. The probe site is post-attention-layernorm/pre-MLP,
 never decoder-block output. Stopping limitations are recorded with the probe.
 
 ```bash
-.tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_roles/assemble.py
-.tools/bin/uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_roles/check.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentdojo_roles/assemble.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/agentdojo_roles/check.py
 sbatch --export=ALL src/experiments/agentdojo_roles/evaluate.sbatch base
 sbatch --export=ALL src/experiments/agentdojo_roles/evaluate.sbatch trained
 ```

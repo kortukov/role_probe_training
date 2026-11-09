@@ -11,4 +11,4 @@
 #SBATCH --time=00:30:00
 #SBATCH --output=experiment_reports/gptoss_role_probes/training_data/logs/%x-%j.out
 source src/experiments/gptoss_role_probes/hx2/common.sh
-srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/gptoss_role_probes/smoke.py
+srun --cpu-bind=none uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python -u src/experiments/gptoss_role_probes/smoke.py

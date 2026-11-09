@@ -15,6 +15,6 @@ trap 'rm -rf "$scratch"' EXIT
 export TMPDIR="$scratch" TORCHINDUCTOR_CACHE_DIR="$scratch/inductor" TRITON_CACHE_DIR="$scratch/triton" OMP_NUM_THREADS=4
 export HF_HOME="$PWD/.cache/huggingface"
 uvbin="$PWD/.tools/bin/uv"
-"$uvbin" run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/adapter_release/prepare_vllm.py \
+"$uvbin" run --frozen --no-sync python src/experiments/adapter_release/prepare_vllm.py \
  --adapter "$root/data/hf_adapter" --base .cache/models/gpt-oss-20b --output "$root/data/adapter_reconstructed"
-"$uvbin" run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/adapter_release/verify_export.py
+"$uvbin" run --frozen --no-sync python src/experiments/adapter_release/verify_export.py

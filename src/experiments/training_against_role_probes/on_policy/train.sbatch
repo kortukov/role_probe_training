@@ -23,6 +23,6 @@ export WANDB_BASE_URL=https://api.forge.coreweave.com
 export WANDB_ENTITY=kortukov WANDB_PROJECT=training_against_role_probes
 export WANDB_DIR="$PWD/experiment_reports/training_against_role_probes/on_policy/appworld2700/wandb"
 mkdir -p "$TMPDIR" "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR" "$WANDB_DIR"
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
     torchrun --standalone --nproc-per-node=2 --module role_probe_training.on_policy.train \
     --config src/experiments/training_against_role_probes/on_policy/config.json "$@"

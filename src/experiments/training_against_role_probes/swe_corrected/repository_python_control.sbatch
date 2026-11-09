@@ -13,4 +13,4 @@ trap 'rm -rf "$scorer_scratch"' EXIT
 export TMPDIR="$scorer_scratch" APPTAINER_TMPDIR="$scorer_scratch" APPTAINER_CACHEDIR="$scorer_scratch/cache"
 export SWE_IMAGE_CACHE="$PWD/.cache/swe-images" HF_HOME="$PWD/.cache/huggingface" HF_DATASETS_CACHE="$PWD/.cache/datasets"
 export INSPECT_EVALS_CACHE_DIR="$PWD/.cache/inspect-evals"
-.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/repository_python_control.py --activate-testbed --output "experiment_reports/training_against_role_probes/swe_corrected/data/repository-python-$SLURM_JOB_ID"
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/repository_python_control.py --activate-testbed --output "experiment_reports/training_against_role_probes/swe_corrected/data/repository-python-$SLURM_JOB_ID"

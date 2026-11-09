@@ -23,6 +23,10 @@
   configured with `collection_concurrency`. Each episode uses a fresh process
   because Inspect caches base URLs per process. Episode seed/route validation
   must remain enabled. Recovery preserves whole episodes and original failures.
+- 2026-11-09: the ten uv environments were merged into three
+  ([ENVIRONMENTS.md](ENVIRONMENTS.md)). On DE.BER1 run `uv sync --locked --extra vllm` and
+  the probe-fitting sync before submitting anything; training now runs on torch
+  2.13.0+cu130, peft 0.18.1 and Transformers 5.9.0, and has not been re-run at scale there.
 - The old trainer variants were removed at d96fe7a; historical training code is
   recoverable from Git. Do not remove modules still imported by queued jobs or
   referenced by checkpoint source hashes.

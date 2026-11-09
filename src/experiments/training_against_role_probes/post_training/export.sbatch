@@ -15,6 +15,6 @@ export LOCAL_JOB_DIR="$job_scratch"
 trap 'rm -rf "$job_scratch"' EXIT
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TORCHINDUCTOR_CACHE_DIR="$LOCAL_JOB_DIR/inductor" TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton" OMP_NUM_THREADS=4
 mkdir -p "$TMPDIR"
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python -m role_probe_training.post_training.export_model \
+.tools/bin/uv run --frozen --no-sync python -m role_probe_training.post_training.export_model \
  --checkpoint "${1:-experiment_reports/training_against_role_probes/runs/training/appworld2700/checkpoints/step00169}" \
  --output "${2:-experiment_reports/training_against_role_probes/data/post_training/model}" "${@:3}"

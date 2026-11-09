@@ -61,7 +61,7 @@ ASTRA assembly uses its `post_training/swe_inspect_generous_shard_sources.json` 
 
 Generate a provisional meeting snapshot from saved attempts only:
 ```bash
-.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_generous/accelerated_v1/snapshot.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_generous/accelerated_v1/snapshot.py
 ```
 Snapshot target:30October2026 14:00UTC; meeting15:00Europe/London. CPU snapshot job1726413 has a begin time,
 not a guaranteed start time. Production monitoring refreshes/publishes the snapshot if full results remain pending.

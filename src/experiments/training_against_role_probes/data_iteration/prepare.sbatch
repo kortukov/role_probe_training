@@ -11,6 +11,5 @@ cd "$SLURM_SUBMIT_DIR"
 export OMP_NUM_THREADS=8 TOKENIZERS_PARALLELISM=false
 root=experiment_reports/training_against_role_probes/data_iteration/same_batch_27000
 code=src/experiments/training_against_role_probes/data_iteration
-runtime=src/experiments/training_against_role_probes/runtime
-.tools/bin/uv run --project "$runtime" --frozen --no-sync python "$code/assemble.py" --runs "$root/runs/collection/${1:?collection job}" --output "$root/data/train27000"
-.tools/bin/uv run --project "$runtime" --frozen --no-sync python "$code/prepare.py" --root "$root"
+.tools/bin/uv run --frozen --no-sync python "$code/assemble.py" --runs "$root/runs/collection/${1:?collection job}" --output "$root/data/train27000"
+.tools/bin/uv run --frozen --no-sync python "$code/prepare.py" --root "$root"

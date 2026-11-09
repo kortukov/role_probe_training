@@ -20,12 +20,12 @@ export HF_HOME=/hx2-weka/home/xy2222/.cache/huggingface HF_HUB_OFFLINE=1
 export VLLM_CACHE_ROOT="$PWD/.cache/vllm-agentic" TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken"
 export TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8 MAX_JOBS=8 VLLM_USE_FLASHINFER_SAMPLER=0
 project=src/experiments/eval_role_probes/agentic_eval
-export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
 root=experiment_reports/eval_role_probes/chat_eval/norobots
 port=$((18000+SLURM_JOB_ID%10000))
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
-uv run --project "$project/server_current" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+uv run --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
  --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
  --max-model-len 8192 --max-num-seqs 64 --gpu-memory-utilization 0.85 \
  --attention-backend TRITON_ATTN --moe-backend triton \

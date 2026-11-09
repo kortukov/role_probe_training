@@ -60,7 +60,7 @@ def main():
             Path(__file__).with_name('appworld_job.sbatch'),
             Path(__file__).with_name('appworld_parallel_job.sbatch'),
             Path('src/role_probe_training/trajectories/appworld.py'),
-            Path(__file__).parent.parent/'server_current/uv.lock',Path(__file__).parent.parent/'swe_bench/env/uv.lock',
+            Path('uv.lock'),
             Path(__file__).parent.parent/'shared/harmony_proxy.py',Path('uv.lock')]},
         'serving':'vLLM completions by token id behind the Harmony proxy; prompts rendered by oss-harmony'}
     (args.output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

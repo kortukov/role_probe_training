@@ -18,6 +18,6 @@ export TRITON_CACHE_DIR="$LOCAL_JOB_DIR/trainer-triton" OMP_NUM_THREADS=4 TOKENI
 export APPTAINER_CACHEDIR="$LOCAL_JOB_DIR/apptainer-cache" APPTAINER_TMPDIR="$LOCAL_JOB_DIR/apptainer-tmp"
 export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=4
 mkdir -p "$TMPDIR" "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR"
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
  torchrun --standalone --nproc-per-node=2 src/experiments/training_against_role_probes/on_policy/colocation_check.py \
  --output "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/colocation/$SLURM_JOB_ID"

@@ -15,7 +15,8 @@
 From the repository root on hx2:
 
 ```bash
-uv sync --locked
+uv sync --locked --extra vllm
+uv sync --locked --project src/experiments/gptoss_role_probes/fit_env
 export HF_HOME=/hx2-weka/home/xy2222/.cache/huggingface
 uv run --frozen --no-sync python src/experiments/gptoss_role_probes/prepare.py \
   --config src/experiments/gptoss_role_probes/training_data/c4_dolma.json \

@@ -16,7 +16,7 @@ export TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton" OMP_NUM_THREADS=4 TOKENIZERS_PAR
 mkdir -p "$TMPDIR"
 modes=(mask-trained mask-base)
 unset CUDA_LAUNCH_BLOCKING
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
  python src/experiments/training_against_role_probes/hf_generation/mask_diagnostic.py \
  --mode "${modes[$SLURM_ARRAY_TASK_ID]}" \
  --output "experiment_reports/training_against_role_probes/on_policy/appworld2700/runs/hf_cuda/$SLURM_ARRAY_JOB_ID/${modes[$SLURM_ARRAY_TASK_ID]}"

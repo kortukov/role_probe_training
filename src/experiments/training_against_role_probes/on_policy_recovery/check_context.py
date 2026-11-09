@@ -1,4 +1,5 @@
 """Real HTTP/Inspect context-stop test, without GPU generation or truncation."""
+import sys
 import json,subprocess,tempfile,urllib.request
 from pathlib import Path
 from types import SimpleNamespace
@@ -28,7 +29,7 @@ with tempfile.TemporaryDirectory(prefix='context-check-') as tmp:
         # Exercise the same Inspect generate(tool_calls='loop') path, not just HTTP.
         post('/episode',{'id':'inspect','seed':123})
         script=Path('src/experiments/training_against_role_probes/on_policy_recovery/check_inspect_stop.py')
-        subprocess.run(['.tools/bin/uv','run','--project','src/experiments/eval_role_probes/agentic_eval/swe_bench/env','--frozen','--no-sync','python',str(script),url+'/episodes/inspect'],check=True)
+        subprocess.run([sys.executable,str(script),url+'/episodes/inspect'],check=True)
     events=[json.loads(x) for x in (Path(tmp)/'episode_stops.jsonl').read_text().splitlines()]
     assert len(events)==3 and all(e['reason']=='serving_context_limit' for e in events)
 print('Context limit: no generation, no truncation, explicit stop metadata, next episode healthy, Inspect loop terminates.')

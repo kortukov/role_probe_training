@@ -11,13 +11,11 @@ set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 model_kind=${1:?base or trained}; mode=${2:-full}
 root=experiment_reports/prompt_injection/agentdojo_same_batch_27000
-project=src/experiments/eval_role_probes/agentic_eval/server_current
-driver=src/experiments/agentdojo_robustness/driver
 scratch=$(mktemp -d /tmp/role-agentdojo-${SLURM_JOB_ID}-XXXXXX)
 export PATH="$PWD/.tools/bin:$PATH" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
 export TMPDIR="$scratch/tmp" TRITON_CACHE_DIR="$scratch/triton" VLLM_CACHE_ROOT="$scratch/vllm" TORCHINDUCTOR_CACHE_DIR="$scratch/inductor"
 export HF_HOME="$PWD/.cache/huggingface" TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken" VLLM_USE_FLASHINFER_SAMPLER=0
-export CUDA_HOME="$PWD/$project/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH" FLASHINFER_WORKSPACE_BASE="$scratch" MAX_JOBS=4
 mkdir -p "$TMPDIR"
 worker=()
@@ -32,7 +30,7 @@ extra=()
 if [[ "$mode" == smoke ]]; then out="$root/runs/smoke-$model_kind"; extra=(--smoke); fi
 mkdir -p "$out"
 port=$((18000+SLURM_JOB_ID%10000))
-uv run --project "$project" --frozen --no-sync vllm serve "$model" \
+uv run --frozen --no-sync vllm serve "$model" \
  --served-model-name role-agentdojo --host 127.0.0.1 --port "$port" \
  --max-model-len 12288 --max-num-seqs 4 --gpu-memory-utilization 0.85 \
  --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice \
@@ -47,17 +45,17 @@ for ((i=0;i<240;i++)); do
  sleep 5
 done
 [[ "$ready" == 1 ]]
-uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py --base-url "http://127.0.0.1:$port/v1" --model role-agentdojo > "$out/tool-check-$SLURM_JOB_ID.json"
+uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py --base-url "http://127.0.0.1:$port/v1" --model role-agentdojo > "$out/tool-check-$SLURM_JOB_ID.json"
 pids=()
 suites=(workspace slack travel banking)
 if [[ "$mode" == smoke ]]; then suites=(banking); fi
 for suite in "${suites[@]}"; do
- uv run --project "$driver" --frozen --no-sync python src/experiments/agentdojo_robustness/run.py --port "$port" --suite "$suite" --output "$out" "${extra[@]}" > "$out/$suite-$SLURM_JOB_ID.log" 2>&1 &
+ uv run --frozen --no-sync python src/experiments/agentdojo_robustness/run.py --port "$port" --suite "$suite" --output "$out" "${extra[@]}" > "$out/$suite-$SLURM_JOB_ID.log" 2>&1 &
  pids+=($!)
 done
 rc=0
 for pid in "${pids[@]}"; do wait "$pid" || rc=1; done
 if [[ "$mode" == full ]]; then
- flock "$root/.summary.lock" uv run --project "$driver" --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
+ flock "$root/.summary.lock" uv run --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
 fi
 exit "$rc"

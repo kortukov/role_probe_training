@@ -250,15 +250,20 @@ channel, earlier chain of thought stays in the prompt, the blank assistant messa
 Inspect used to inject is gone, and the system-message date is fixed. New on-policy
 results are not directly comparable with earlier runs.
 
-**Environments and provenance.** `oss-harmony==0.0.12` was added to the root project and
-to the training runtime lock. Training manifests hash the new `harmony/` sources;
-resuming checkpoints made before this change needs the usual migration record.
+**Environments and provenance.** `oss-harmony==0.0.12` is pinned in the root project, which
+since 2026-11-09 is the one environment for serving, collection, scoring and training
+(`agent_docs/ENVIRONMENTS.md`). vLLM runs from the same environment and imports this fork
+too, because the upstream `openai-harmony` is excluded. Training manifests hash the new
+`harmony/` sources; resuming checkpoints made before this change needs the usual migration
+record.
 
 **Left unchanged.** The SWE-bench collection scripts of the training experiments
 (`src/experiments/training_against_role_probes/swe_*/run.py` and their Slurm files), which
 evaluate trained checkpoints, still give Inspect the address of vLLM's own chat endpoint
 and would produce trajectories without `history`. They need the same proxy changes as the
-evaluation runners before a trained checkpoint is re-evaluated on SWE-bench.
+evaluation runners before a trained checkpoint is re-evaluated on SWE-bench. Their
+commands already run from the root environment (vLLM 0.27.1), but they still pass vLLM's
+tool-call parser flags, which the proxy path does not use.
 
 **KL anchors.** `src/experiments/training_against_role_probes/generate_kl.py` produces the
 fixed KL anchor set that every training script reads: 800 Dolci-Instruct prompts as single

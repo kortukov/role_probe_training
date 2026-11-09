@@ -15,12 +15,12 @@ root=${1:?report root}
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TORCHINDUCTOR_CACHE_DIR="$LOCAL_JOB_DIR/inductor" TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton" OMP_NUM_THREADS=4
 mkdir -p "$TMPDIR"
 script=src/experiments/training_against_role_probes/post_training/check_serving.py
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python "$script" reference --root "$root"
+.tools/bin/uv run --frozen --no-sync python "$script" reference --root "$root"
 project=src/experiments/eval_role_probes/agentic_eval
-export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH" MAX_JOBS=8 VLLM_USE_FLASHINFER_SAMPLER=0
 port=$((18000+SLURM_JOB_ID%10000))
-.tools/bin/uv run --project "$project/server_current" --frozen --no-sync vllm serve "$PWD/$root/data/post_training/model" --served-model-name check --host 127.0.0.1 --port "$port" --max-model-len 2048 --max-num-seqs 2 --gpu-memory-utilization .8 --enforce-eager --attention-backend TRITON_ATTN --moe-backend triton --worker-cls role_probe_training.post_training.vllm_worker.RoleWorker --kernel-config '{"enable_jit_warmup":false}' > "$root/data/post_training/check_server.log" 2>&1 &
+.tools/bin/uv run --frozen --no-sync vllm serve "$PWD/$root/data/post_training/model" --served-model-name check --host 127.0.0.1 --port "$port" --max-model-len 2048 --max-num-seqs 2 --gpu-memory-utilization .8 --enforce-eager --attention-backend TRITON_ATTN --moe-backend triton --worker-cls role_probe_training.post_training.vllm_worker.RoleWorker --kernel-config '{"enable_jit_warmup":false}' > "$root/data/post_training/check_server.log" 2>&1 &
 pid=$!; trap 'kill "$pid" 2>/dev/null || true' EXIT
 ready=0
 for ((i=0;i<120;i++)); do
@@ -29,4 +29,4 @@ for ((i=0;i<120;i++)); do
  sleep 5
 done
 [[ "$ready" == 1 ]]
-.tools/bin/uv run --project "$project/swe_bench/env" --frozen --no-sync python "$script" compare --root "$root" --base-url "http://127.0.0.1:$port/v1" --model check
+.tools/bin/uv run --frozen --no-sync python "$script" compare --root "$root" --base-url "http://127.0.0.1:$port/v1" --model check

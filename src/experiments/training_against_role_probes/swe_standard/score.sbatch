@@ -17,6 +17,6 @@ export TMPDIR="$score_scratch/tmp" TORCHINDUCTOR_CACHE_DIR="$score_scratch/induc
 mkdir -p "$TMPDIR"
 args=()
 if [[ "$root" == */base_model ]]; then args=(--base); fi
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python -m role_probe_training.post_training.full_history \
+.tools/bin/uv run --frozen --no-sync python -m role_probe_training.post_training.full_history \
  --root "$root" --input "$root/data/swe_inspect_standard/evaluation/trajectories.jsonl" \
  --output "$root/predictions/swe_inspect_standard" --overlength exclude "${args[@]}"

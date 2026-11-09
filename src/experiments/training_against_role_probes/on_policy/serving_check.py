@@ -3,6 +3,7 @@ from contextlib import nullcontext
 import json
 from pathlib import Path
 import subprocess
+import sys
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -63,8 +64,7 @@ async def main():
                for b in output.message.content), output
 asyncio.run(main())
 '''
-            subprocess.run(['.tools/bin/uv', 'run', '--project', 'src/experiments/eval_role_probes/agentic_eval/swe_bench/env',
-                '--frozen', '--no-sync', 'python', '-c', code, url], check=True, timeout=60)
+            subprocess.run([sys.executable, '-c', code, url], check=True, timeout=60)
             assert not state['errors']
         records = [json.loads(line) for line in (Path(directory)/'requests.jsonl').read_text().splitlines()]
         assert len(records) == 2 and all(x['policy_step'] == 7 for x in records)

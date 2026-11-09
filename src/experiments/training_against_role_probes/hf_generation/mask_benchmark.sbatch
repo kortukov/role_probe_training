@@ -18,9 +18,9 @@ unset CUDA_LAUNCH_BLOCKING
 mkdir -p "$TMPDIR" "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR"
 root=experiment_reports/training_against_role_probes/on_policy/appworld2700
 run="$root/runs/hf_benchmark/$SLURM_JOB_ID"
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
  python src/experiments/training_against_role_probes/hf_generation/mask_benchmark.py \
  --output "$run" --diagnostic "$root/runs/hf_cuda/$HF_DIAGNOSTIC_JOB/mask-trained"
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
  python src/experiments/training_against_role_probes/hf_generation/metrics.py \
  --hf "$run" --vllm "$root/runs/serving_benchmark/1691825/1" --output "$run/comparison.json"

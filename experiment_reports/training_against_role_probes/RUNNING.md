@@ -4,11 +4,13 @@
 
 Reusable implementation: `src/role_probe_training/training/`. Entry points,
 configurations and Slurm scripts: `src/experiments/training_against_role_probes/`.
-Training uses the isolated, locked `runtime/` environment (PyTorch 2.9.1+cu128,
-Transformers 4.57.6, PEFT 0.20). Prepare it with:
+Training runs in the root environment (PyTorch 2.13.0+cu130, PEFT 0.18.1, Transformers
+5.9.0; see [ENVIRONMENTS.md](../../agent_docs/ENVIRONMENTS.md)). The recorded training
+runs used the former isolated `runtime/` environment (PyTorch 2.9.1+cu128, PEFT 0.20,
+Transformers 4.57.6), whose lock is in Git history at commit 358845a. Prepare it with:
 
 ```bash
-.tools/bin/uv sync --locked --project src/experiments/training_against_role_probes/runtime
+.tools/bin/uv sync --locked --extra vllm
 ```
 
 Base model: `.cache/models/gpt-oss-20b`, revision
@@ -143,15 +145,12 @@ against the original adapter model before saving. The custom vLLM worker applies
 the FP32 attention adapters at inference; probe scoring loads the same adapters
 through PEFT. Use one GPU per server (no tensor/pipeline parallelism).
 
-Environments are the existing `agentic_eval/server_current` (vLLM),
-`agentic_eval/swe_bench/env` (Inspect), and `training_against_role_probes/runtime` (activation extraction/scoring), and the
-root `.venv` (cuML fitting in a separate CUDA-13 process). Standard-data activations
-are retained under `data/post_training/probe_features/`.
-Install this package in the server environment without changing its dependencies:
-
-```bash
-.tools/bin/uv pip install --python src/experiments/eval_role_probes/agentic_eval/server_current/.venv/bin/python --no-deps -e .
-```
+The recorded runs used the former `agentic_eval/server_current` (vLLM),
+`agentic_eval/swe_bench/env` (Inspect) and `training_against_role_probes/runtime`
+(activation extraction/scoring) environments and the root `.venv` for cuML fitting. These
+are now the root environment, with cuML fitting as a separate process in
+`src/experiments/gptoss_role_probes/fit_env` ([ENVIRONMENTS.md](../../agent_docs/ENVIRONMENTS.md)).
+Standard-data activations are retained under `data/post_training/probe_features/`.
 
 Entry points are in `src/experiments/training_against_role_probes/post_training/`:
 `export.sbatch CHECKPOINT OUTPUT`, `probes.sbatch fit --root ROOT`,

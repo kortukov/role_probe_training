@@ -22,6 +22,10 @@ export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken"
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK" TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR" "$TIKTOKEN_CACHE_DIR"
 project=src/experiments/eval_role_probes/agentic_eval
+# vLLM comes from the root environment's vllm extra (0.27.1, compiled Triton kernels).
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export PATH="$CUDA_HOME/bin:$PATH"
+export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8 VLLM_USE_FLASHINFER_SAMPLER=0
 report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories}"
 run_dir="$PWD/$report_root/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
@@ -30,14 +34,15 @@ proxy_port=$((port + 10000))  # never another job's vLLM port (18000-27999)
 cleanup() {
     if [[ -f "$run_dir/manifest.json" ]]; then
         requests=(); [[ -f "$run_dir/proxy/requests.jsonl" ]] && requests=(--requests "$run_dir/proxy/requests.jsonl")
-        uv run --project "$project" --frozen --no-sync python "$project/shared/export.py" "$run_dir" "${requests[@]}" || true
+        uv run --frozen --no-sync python "$project/shared/export.py" "$run_dir" "${requests[@]}" || true
     fi
     for pid in "${proxy_pid:-}" "$server_pid"; do [[ -n "$pid" ]] && kill "$pid" 2>/dev/null || true; done
 }
-uv run --project "$project/server" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+uv run --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
     --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
     --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
-    --enforce-eager --disable-log-requests > "$run_dir/server.log" 2>&1 &
+    --attention-backend TRITON_ATTN --moe-backend triton --kernel-config '{"enable_jit_warmup":false}' \
+    --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 > "$run_dir/server.log" 2>&1 &
 server_pid=$!
 trap cleanup EXIT
 ready=0
@@ -59,8 +64,8 @@ for ((i=0;i<60;i++)); do
     kill -0 "$proxy_pid" 2>/dev/null || { cat "$run_dir/proxy.log"; exit 1; }
     sleep 1
 done
-uv run --project "$project" --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" \
+uv run --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" \
     --max-tokens 16384 --temperature 0 > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
-uv run --project "$project" --frozen --no-sync python "$project/tau2_retail/run.py" \
+uv run --frozen --no-sync python "$project/tau2_retail/run.py" \
     --output "$run_dir" --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$run_dir/proxy/requests.jsonl" "$@"

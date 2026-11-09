@@ -4,6 +4,7 @@ from role_probe_training.generation.masks import eager_decode_masks
 import json
 from pathlib import Path
 import subprocess
+import sys
 import time
 import urllib.request
 
@@ -46,8 +47,7 @@ def main():
                 pass
             for phase,tokens in [('warmup',16),('micro',128),('episodes',8192)]:
                 generation['max_tokens']=tokens
-                subprocess.run(['.tools/bin/uv','run','--project','src/experiments/eval_role_probes/agentic_eval/swe_bench/env',
-                    '--frozen','--no-sync','python',
+                subprocess.run([sys.executable,
                     'src/experiments/training_against_role_probes/on_policy/benchmark_client.py',
                     '--url',url,'--model','on-policy-role-model','--output',str(args.output),
                     '--phase',phase],check=True,timeout=2400)

@@ -26,4 +26,4 @@ if [[ -n "$from" && ! -f "$output/artifacts/conversations.jsonl" ]]; then
   cp "$from/artifacts/conversations.jsonl" "$from/artifacts/generation_failures.json" "$output/artifacts/"
   echo "Copied shared conversations from $from"
 fi
-srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/gptoss_role_probes/run.py "${args[@]}" --stage evaluate
+srun --cpu-bind=none uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python -u src/experiments/gptoss_role_probes/run.py "${args[@]}" --stage evaluate

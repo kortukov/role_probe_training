@@ -19,14 +19,14 @@ export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken" TOKENIZERS_PARALLELISM=false OM
 mkdir -p "$TMPDIR"
 export VLLM_USE_FLASHINFER_SAMPLER=0
 project=src/experiments/eval_role_probes/agentic_eval
-export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
 export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8
 run_dir="$PWD/experiment_reports/eval_role_probes/agentic_eval/appworld/base_trajectories/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000+SLURM_JOB_ID%10000))
 if [[ -n "${APPWORLD_PILOT_ROOT:-}" ]]; then
- uv run --project "$project/swe_bench/env" --frozen --no-sync python - "$APPWORLD_PILOT_ROOT" <<'PYCODE'
+ uv run --frozen --no-sync python - "$APPWORLD_PILOT_ROOT" <<'PYCODE'
 import json,sys
 from pathlib import Path
 for directory in ('train-c1','train-c8'):
@@ -40,7 +40,7 @@ print('Training pilot passed: complete tool-bearing trajectories with reasoning,
 PYCODE
 fi
 server_started=$SECONDS
-uv run --project "$project/server_current" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+uv run --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
  --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
  --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
  --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice --kernel-config '{"enable_jit_warmup":false}' --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 \
@@ -57,18 +57,18 @@ done
 printf '{"server_startup_seconds": %s}\n' "$((SECONDS-server_started))" > "$run_dir/startup.json"
 if [[ "${1:-}" == "--pilot" ]]; then
  for concurrency in 1 8; do
-  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
+  uv run --frozen --no-sync python "$project/appworld/appworld_run.py" \
    --base-url "http://127.0.0.1:$port/v1" --split train --samples 4 --concurrency "$concurrency" \
    --output "$run_dir/train-c$concurrency"
  done
 else
  if [[ "${SWE_DIAGNOSTIC:-0}" == 1 ]]; then
-  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/swe_bench/swe_replay.py" \
+  uv run --frozen --no-sync python "$project/swe_bench/swe_replay.py" \
    --base-url "http://127.0.0.1:$port/v1" \
    --output "$run_dir/swe-request-diagnostic.json"
  fi
  for split in train test_normal test_challenge; do
-  uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
+  uv run --frozen --no-sync python "$project/appworld/appworld_run.py" \
    --base-url "http://127.0.0.1:$port/v1" --split "$split" --concurrency 8 --output "$run_dir/$split"
  done
 fi

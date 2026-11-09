@@ -1,6 +1,6 @@
 # Reproduction
 
-Use the repository's locked `agentic_eval/swe_bench/env` Inspect client and `agentic_eval/server_current` vLLM environment. AppWorld runs in its official container, separately from Inspect because their Pydantic requirements conflict. The container currently reports AppWorld 0.1.3; each run records its SHA-256. The host download environment is locked to 0.1.3.post1.
+Use the root environment installed with `uv sync --locked --extra vllm` (the recorded cohort used the former `agentic_eval/swe_bench/env` Inspect client and `agentic_eval/server_current` vLLM 0.32.0 environments). AppWorld runs in its official container, separately from Inspect because their Pydantic requirements conflict. The container currently reports AppWorld 0.1.3; each run records its SHA-256. The host download environment is locked to 0.1.3.post1.
 
 ```bash
 .tools/bin/uv sync --locked --project src/experiments/eval_role_probes/agentic_eval/appworld/env

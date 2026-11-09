@@ -13,4 +13,4 @@ trap 'rm -rf "$gap_scratch"' EXIT
 export TMPDIR="$gap_scratch" APPTAINER_TMPDIR="$gap_scratch" APPTAINER_CACHEDIR="$gap_scratch/cache"
 export SWE_IMAGE_CACHE="$PWD/.cache/swe-images" HF_HOME="$PWD/.cache/huggingface" HF_DATASETS_CACHE="$PWD/.cache/datasets"
 export INSPECT_EVALS_CACHE_DIR="$PWD/.cache/inspect-evals"
-.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_gap/regrade.py --output "experiment_reports/training_against_role_probes/swe_gap/data/regrade-$SLURM_JOB_ID"
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_gap/regrade.py --output "experiment_reports/training_against_role_probes/swe_gap/data/regrade-$SLURM_JOB_ID"

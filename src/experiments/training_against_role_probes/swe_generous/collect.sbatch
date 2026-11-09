@@ -19,9 +19,9 @@ export PATH="$PWD/.tools/bin:$PATH" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=fal
 export TMPDIR="$native_scratch/tmp" TRITON_CACHE_DIR="$native_scratch/triton"
 export HF_HOME="$PWD/.cache/huggingface" HF_DATASETS_CACHE="$PWD/.cache/datasets"
 export INSPECT_EVALS_CACHE_DIR="$PWD/.cache/inspect-evals" SWE_IMAGE_CACHE="$PWD/.cache/swe-images"
-export SWE_SERVER_PROJECT=server_current VLLM_CACHE_ROOT="$native_scratch/vllm" TORCHINDUCTOR_CACHE_DIR="$native_scratch/inductor"
+export VLLM_CACHE_ROOT="$native_scratch/vllm" TORCHINDUCTOR_CACHE_DIR="$native_scratch/inductor"
 export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken" VLLM_USE_FLASHINFER_SAMPLER=0
-export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH" FLASHINFER_WORKSPACE_BASE="$native_scratch" MAX_JOBS=8
 export APPTAINER_CACHEDIR="$native_scratch/apptainer-cache" APPTAINER_TMPDIR="$native_scratch/apptainer-tmp"
 mkdir -p "$TMPDIR" "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR"
@@ -62,16 +62,16 @@ start_server() {
  return 1
 }
 
-start_server uv run --project "$project/server_current" --frozen --no-sync vllm serve "$model" \
+start_server uv run --frozen --no-sync vllm serve "$model" \
  --served-model-name "$served" --host 127.0.0.1 --port "$port" \
  --max-model-len 131072 --max-num-seqs 4 --gpu-memory-utilization 0.85 \
  --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice \
  "${worker[@]}" --kernel-config '{"enable_jit_warmup":false}' \
  --cudagraph-capture-sizes 1 2 4 --max-cudagraph-capture-size 4
 trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$native_scratch"' EXIT
-uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
+uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/context_check.json"
-uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
+uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
  --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/tool_check.json"
 selection=(--all --shard-index "$idx" --shard-count 4)
 if [[ "$mode" == pilot ]]; then
@@ -79,7 +79,7 @@ if [[ "$mode" == pilot ]]; then
 elif [[ "$mode" != full ]]; then
  echo 'Mode must be pilot or full'; exit 1
 fi
-uv run --project "$project/swe_bench/env" --frozen --no-sync python src/experiments/training_against_role_probes/swe_generous/run.py \
+uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_generous/run.py \
  --base-url "http://127.0.0.1:$port/v1" --model-id "$served" --model-revision "$revision" \
  --benchmark swe_bench "${selection[@]}" --seed 123 --reasoning-effort high \
  --concurrency 4 --time-limit 7200 --max-tokens 16384 --token-limit 0 --message-limit 2000 \

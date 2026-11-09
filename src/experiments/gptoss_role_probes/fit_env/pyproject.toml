@@ -1,0 +1,18 @@
+[project]
+name = "role-probe-fit"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+# The probe-fitting environment: the root package plus cuML, which cannot be installed next to
+# vLLM (numba pins). torch is pinned to the main environment's version so that activations are
+# computed by the same torch in both.
+dependencies = [
+    "role-probe-training",
+    "cuml-cu13==26.10.0",
+    "torch==2.13.0",
+]
+
+[tool.uv.sources]
+role-probe-training = { path = "../../../..", editable = true }
+
+[tool.uv]
+cache-dir = ".uv-cache"

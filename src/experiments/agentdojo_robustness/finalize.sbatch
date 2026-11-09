@@ -9,6 +9,6 @@
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export PATH="$PWD/.tools/bin:$PATH"
-uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
+uv run --frozen --no-sync python src/experiments/agentdojo_robustness/summarize.py
 # A publishing failure leaves the completed local report untouched.
-uv run --project src/experiments/agentdojo_robustness/driver --frozen --no-sync python src/experiments/agentdojo_robustness/publish.py
+uv run --frozen --no-sync python src/experiments/agentdojo_robustness/publish.py

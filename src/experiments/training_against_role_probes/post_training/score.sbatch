@@ -21,5 +21,5 @@ mkdir -p "$TMPDIR"
 root=${1:?report root}
 benchmarks=(appworld_test tau2_retail swe_bench)
 benchmark=${benchmarks[$SLURM_ARRAY_TASK_ID]}
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python -m role_probe_training.post_training.probes score \
+.tools/bin/uv run --frozen --no-sync python -m role_probe_training.post_training.probes score \
  --root "$root" --input "$root/data/post_training/$benchmark/trajectories.jsonl" --output "$root/predictions/post_training/$benchmark"

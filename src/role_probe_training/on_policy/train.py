@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import time
 import traceback
 
@@ -32,8 +33,7 @@ def collect(runtime, config, episodes, step, root, rank, *, sampler=None):
     (folder/'plan.json').write_text(json.dumps(plan, indent=2)+'\n')
     with serve(runtime, folder, step-1, config['generation'], sampler=sampler) as (url, state):
         with (folder/'collector.log').open('w') as stream:
-            subprocess.run(['.tools/bin/uv', 'run', '--project', 'src/experiments/eval_role_probes/agentic_eval/swe_bench/env',
-                '--frozen', '--no-sync', 'python', '-m', 'role_probe_training.on_policy.collect',
+            subprocess.run([sys.executable, '-m', 'role_probe_training.on_policy.collect',
                 '--plan', str(folder/'plan.json'), '--base-url', url],
                 stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=18000)
         if state['errors']:
@@ -75,9 +75,7 @@ def main():
     source_paths += list(Path('src/role_probe_training/harmony').glob('*.py'))
     source_paths += [
                      Path('src/experiments/eval_role_probes/agentic_eval/appworld/appworld_worker.py'),
-                     Path('src/experiments/eval_role_probes/agentic_eval/swe_bench/env/uv.lock'),
-                     Path('src/experiments/training_against_role_probes/runtime/uv.lock'),
-                     Path('src/experiments/eval_role_probes/agentic_eval/server_current/uv.lock'),
+                     Path('uv.lock'),
                      Path('src/role_probe_training/post_training/vllm_worker.py')]
     manifest = dict(config=config, world_size=world, updates=len(batches),
         data_sha256={key: sha256(config[key]) for key in

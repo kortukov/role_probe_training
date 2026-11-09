@@ -53,8 +53,8 @@ def fit(root):
     (cache/'metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
     del x, y, model
     torch.cuda.empty_cache()
-    # cuML uses CUDA 13; keep its libraries separate from the PEFT/CUDA-12 runtime.
-    subprocess.run([str(Path.cwd()/'.venv/bin/python'),'-m',
+    # cuML cannot be installed next to vLLM (numba pins): fit in the probe-fitting environment.
+    subprocess.run([str(Path.cwd()/'src/experiments/gptoss_role_probes/fit_env/.venv/bin/python'),'-m',
         'role_probe_training.post_training.fit_saved','--root',str(root)],check=True)
 
 

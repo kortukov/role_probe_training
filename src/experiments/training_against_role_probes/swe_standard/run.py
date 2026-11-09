@@ -82,7 +82,7 @@ def main():
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
                 "sandbox_provider": "apptainer_repository_snapshot: repository interpreter, localhost, initial-file snapshot; stock Inspect agent/scorer; network disabled",
                 "protocol": "swe_inspect_standard_v1",
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).with_name("collect.sbatch"), Path("src/experiments/eval_role_probes/agentic_eval/swe_bench/env/uv.lock"), Path("src/experiments/eval_role_probes/agentic_eval/server_current/uv.lock"), *[Path("src/role_probe_training/trajectories") / name for name in ["inspect_export.py", "apptainer.py", "apptainer_mirror.py", "swe_testbed.py", "swe_testbed_python.py", "swe_localhost.py", "swe_snapshot.py"]], Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).with_name("collect.sbatch"), Path("uv.lock"), *[Path("src/role_probe_training/trajectories") / name for name in ["inspect_export.py", "apptainer.py", "apptainer_mirror.py", "swe_testbed.py", "swe_testbed_python.py", "swe_localhost.py", "swe_snapshot.py"]], Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:

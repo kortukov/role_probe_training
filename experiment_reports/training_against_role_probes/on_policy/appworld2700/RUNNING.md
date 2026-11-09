@@ -5,8 +5,8 @@ training and Inspect environments. Do not synchronize or alter shared environmen
 while other experiments run. No dependencies were added for this iteration.
 
 ```bash
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/training_against_role_probes/on_policy/checks.py
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/training_against_role_probes/on_policy/serving_check.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/on_policy/checks.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/on_policy/serving_check.py
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/on_policy/submit.py
 ```
 
@@ -167,13 +167,12 @@ Benchmark 1726415 uses the isolated
 sampling settings and task budgets. Submission:
 
 ```bash
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync python src/experiments/training_against_role_probes/hf_generation/check_disconnects.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/hf_generation/check_disconnects.py
 env HF_DIAGNOSTIC_JOB=1691975 sbatch --export=ALL src/experiments/training_against_role_probes/hf_generation/disconnect_benchmark.sbatch
 ```
 
-For the CPU regression command, use `uv run --project
-src/experiments/training_against_role_probes/runtime --frozen --no-sync` to match
-the training environment used for verification. Completed GPU outputs are in
+For the CPU regression command, use `uv run --frozen --no-sync` (the verification
+used the former `training_against_role_probes/runtime` environment). Completed GPU outputs are in
 `runs/hf_benchmark/1726415/`, including `comparison.json` from successful episode
 collection/scoring. Disconnects are recorded in `tokens/disconnects.jsonl` and
 cancelled generations in `tokens/requests.jsonl`; neither becomes a fatal model

@@ -28,6 +28,6 @@ if [[ -z "${COLOCATION_CHECK_DIR:-}" || ! -f "$COLOCATION_CHECK_DIR/passed.json"
  echo "Missing successful two-GPU colocation diagnostic" >&2
  exit 1
 fi
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
     torchrun --standalone --nproc-per-node=2 --module role_probe_training.on_policy.train \
     --config src/experiments/training_against_role_probes/on_policy/colocated_config.json "$@"

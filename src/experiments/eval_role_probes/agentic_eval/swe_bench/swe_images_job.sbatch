@@ -18,6 +18,6 @@ export TMPDIR="$LOCAL_JOB_DIR/tmp"
 mkdir -p "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR" "$TMPDIR"
 # Include the verified official blobs needed by two damaged registry layers.
 cp -a "$PWD/.cache/apptainer-repair/cache" "$APPTAINER_CACHEDIR/"
-.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python \
+.tools/bin/uv run --frozen --no-sync python \
   src/experiments/eval_role_probes/agentic_eval/swe_bench/cache_swe_image.py --all \
   --shard-index "$SLURM_ARRAY_TASK_ID" --shard-count 32

@@ -99,7 +99,7 @@ confirmed the route/seed guard.
 Compare once the run finishes:
 
 ```bash
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
   python src/experiments/training_against_role_probes/on_policy_concurrent/compare.py \
   --sequential experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_single_gpu \
   --concurrent experiment_reports/training_against_role_probes/on_policy/appworld270_batch64/runs/epoch1_concurrent_v2 \

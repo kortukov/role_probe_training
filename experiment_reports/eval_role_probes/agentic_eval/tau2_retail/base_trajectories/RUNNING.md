@@ -5,7 +5,7 @@ Generation runs and immutable inputs are recorded in [metrics/provenance.json](m
 Combine completed disjoint shards:
 
 ```bash
-.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/eval_role_probes/agentic_eval/shared/finalize.py --benchmark tau2_retail --run experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories/runs/1459495 --selection-manifest experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories/runs/1459495/manifest.json --output experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories
+.tools/bin/uv run --frozen --no-sync python src/experiments/eval_role_probes/agentic_eval/shared/finalize.py --benchmark tau2_retail --run experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories/runs/1459495 --selection-manifest experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories/runs/1459495/manifest.json --output experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories
 ```
 
 ## Launching a full run
@@ -14,9 +14,7 @@ Run from the repository root. The submitting shell must export `AZURE_OPENAI_API
 
 ```bash
 export PATH="$PWD/.tools/bin:$PATH"
-uv sync --project src/experiments/eval_role_probes/agentic_eval --locked
-uv sync --project src/experiments/eval_role_probes/agentic_eval/server --locked
-uv pip install --python src/experiments/eval_role_probes/agentic_eval/.venv/bin/python --no-deps -e .
+uv sync --locked --extra vllm
 mkdir -p experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories/logs
 sbatch src/experiments/eval_role_probes/agentic_eval/tau2_retail/job.sbatch --all --concurrency 16 --time-limit 1800 --user-model openai/azure/gpt-4.1
 ```

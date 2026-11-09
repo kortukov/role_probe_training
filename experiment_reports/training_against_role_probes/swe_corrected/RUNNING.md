@@ -1,7 +1,8 @@
 # Reproduction and continuation
 
-Use the locked `src/experiments/eval_role_probes/agentic_eval/swe_bench/env` client and `server_current` serving
-environments, plus `training_against_role_probes/runtime` for probes. All execution
+The recorded runs used the former `agentic_eval/swe_bench/env` client, `server_current` serving and
+`training_against_role_probes/runtime` probe environments, which are now the root environment
+([ENVIRONMENTS.md](../../../agent_docs/ENVIRONMENTS.md)). All execution
 uses Slurm from `/data/cluster/users/kortukov/role_probe_training`. Do not change
 source or environments used by active jobs. This runner is isolated from concurrent
 KL collection code; consolidate shared logic after the protocol is validated.

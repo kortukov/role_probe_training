@@ -6,8 +6,10 @@
 - Data: `runs/<job>/test_normal/trajectories.jsonl` (ignored; benchmark content stays off Git).
   `metrics/` keeps the summary, timing and manifest with task IDs removed.
 - Jobs: pilot 1584579, normal test 1584591 (`logs/job_ids.txt`).
-- Environments: `agentic_eval/swe_bench/env` (Inspect client), `agentic_eval/server_current` (vLLM 0.32.0),
-  `agentic_eval/appworld/env` (data download), all `uv sync --locked`; see [HX2.md](../../../../../agent_docs/HX2.md).
+- Environments: this recorded cohort used the former `agentic_eval/swe_bench/env` (Inspect client) and
+  `agentic_eval/server_current` (vLLM 0.32.0) projects. They are now the root environment
+  (`uv sync --locked --extra vllm`, vLLM 0.27.1); `agentic_eval/appworld/env` (data download) is unchanged.
+  See [ENVIRONMENTS.md](../../../../../agent_docs/ENVIRONMENTS.md) and [HX2.md](../../../../../agent_docs/HX2.md).
 
 ```bash
 export APPTAINER_CACHEDIR=/hx2-weka/home/xy2222/.cache/apptainer

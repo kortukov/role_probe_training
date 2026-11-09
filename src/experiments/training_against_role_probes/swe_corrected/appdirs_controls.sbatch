@@ -15,4 +15,4 @@ export SWE_IMAGE_CACHE="$PWD/.cache/swe-images" HF_HOME="$PWD/.cache/huggingface
 export INSPECT_EVALS_CACHE_DIR="$PWD/.cache/inspect-evals"
 export SWE_GRADING_ARTIFACTS="$PWD/experiment_reports/training_against_role_probes/swe_corrected/data/appdirs-controls-$SLURM_JOB_ID/test_outputs"
 export SWE_APPDIRS_FIXTURE="$PWD/experiment_reports/training_against_role_probes/swe_corrected/data/appdirs-fixture"
-.tools/bin/uv run --project src/experiments/eval_role_probes/agentic_eval/swe_bench/env --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/appdirs_controls.py --output "experiment_reports/training_against_role_probes/swe_corrected/data/appdirs-controls-$SLURM_JOB_ID"
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_corrected/appdirs_controls.py --output "experiment_reports/training_against_role_probes/swe_corrected/data/appdirs-controls-$SLURM_JOB_ID"

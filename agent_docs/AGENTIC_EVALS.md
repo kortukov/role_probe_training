@@ -24,16 +24,16 @@ Use Inspect for execution, logs, scores and concurrency. Inspect never talks to 
 directly: it talks to the Harmony proxy (`shared/harmony_proxy.py`, root environment),
 which renders every prompt with oss-harmony, replays earlier assistant turns from their
 generated tokens, samples token IDs from vLLM's completions endpoint and records them.
-See [HARMONY_RENDERING.md](../HARMONY_RENDERING.md). Clients and the vLLM
-server use separate locked uv projects because their dependency requirements
-differ. Retail uses `src/experiments/eval_role_probes/agentic_eval`; SWE uses the `swe_bench/env/` project
-with swebench 4.1.0. New AppWorld and repaired SWE runs use `server_current/`
-(vLLM 0.32.0, compiled Triton kernels). `server/` (vLLM 0.11.0) remains for
-retail and reproduction of the recorded SWE cohort; both versions return token IDs
-from the completions endpoint, which is all the proxy uses. After
-syncing a client lock, install the root package into that client with
-`uv pip install --python CLIENT/.venv/bin/python --no-deps -e .`, then use
-`uv run --frozen --no-sync`. Do not modify the probe-training environment.
+See [HARMONY_RENDERING.md](../HARMONY_RENDERING.md). Inspect (inspect-ai 0.3.283,
+inspect-evals 0.25.0, swebench 4.1.0), the proxy and vLLM all live in the root
+environment, installed with `uv sync --locked --extra vllm`
+([ENVIRONMENTS.md](ENVIRONMENTS.md)); jobs use `uv run --frozen --no-sync` with no
+`--project`. vLLM is 0.27.1 with compiled Triton kernels, the version of Xiaoxue's
+`prompt_injection_interp` project (the recorded cohorts used 0.32.0 and 0.11.0 from
+separate server environments). The proxy only uses vLLM's completions endpoint by token
+ID. `shared/hx2/serving_smoke.sbatch` checks that path, one tool round trip through the
+proxy and one Inspect request. Only the AppWorld package itself keeps its own project,
+`appworld/env/`.
 
 `job.sbatch` launches retail and `swe_job.sbatch` launches SWE. Each job starts vLLM,
 then one Harmony proxy on `port + 10000` with the run's reasoning effort, `max_tokens`

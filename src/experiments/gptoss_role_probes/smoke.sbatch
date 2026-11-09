@@ -17,4 +17,4 @@ export HF_HOME="$PWD/.cache/huggingface"
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton"
 export OMP_NUM_THREADS="$SLURM_CPUS_PER_TASK" TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR"
-srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/gptoss_role_probes/smoke.py
+srun --cpu-bind=none uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python -u src/experiments/gptoss_role_probes/smoke.py

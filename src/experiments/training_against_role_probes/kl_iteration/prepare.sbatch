@@ -9,7 +9,6 @@
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
 export OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
-runtime=src/experiments/training_against_role_probes/runtime
-.tools/bin/uv run --project "$runtime" --frozen --no-sync python src/experiments/training_against_role_probes/checks.py
-.tools/bin/uv run --project "$runtime" --frozen --no-sync python src/experiments/training_against_role_probes/kl_iteration/checks.py
-.tools/bin/uv run --project "$runtime" --frozen --no-sync python src/experiments/training_against_role_probes/kl_iteration/prepare.py "${1:?variant}"
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/checks.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/kl_iteration/checks.py
+.tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/kl_iteration/prepare.py "${1:?variant}"

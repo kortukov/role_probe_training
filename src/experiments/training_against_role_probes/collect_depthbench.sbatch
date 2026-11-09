@@ -18,12 +18,12 @@ export HF_HOME="$PWD/.cache/huggingface" VLLM_CACHE_ROOT="$PWD/.cache/vllm-agent
 export TIKTOKEN_CACHE_DIR="$PWD/.cache/tiktoken" TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8
 export VLLM_USE_FLASHINFER_SAMPLER=0
 project=src/experiments/eval_role_probes/agentic_eval
-export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH" FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8
 run_dir="$PWD/experiment_reports/training_against_role_probes/depthbench/runs/$SLURM_JOB_ID"
 mkdir -p "$TMPDIR" "$run_dir"
 port=$((18000+SLURM_JOB_ID%10000))
-uv run --project "$project/server_current" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+uv run --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
  --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
  --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
  --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice \
@@ -38,10 +38,9 @@ for ((i=0;i<180;i++)); do
  sleep 5
 done
 [[ "$ready" == 1 ]]
-client=src/experiments/training_against_role_probes/collection_runtime
-uv run --project "$client" --frozen --no-sync python -u src/experiments/training_against_role_probes/collect_depthbench.py \
+uv run --frozen --no-sync python -u src/experiments/training_against_role_probes/collect_depthbench.py \
  --base-url "http://127.0.0.1:$port/v1" --output "$run_dir/smoke" --smoke --attempts 1 --concurrency 7
-uv run --project "$client" --frozen --no-sync python -c \
+uv run --frozen --no-sync python -c \
  'import json,sys; s=json.load(open(sys.argv[1])); assert s["trajectories"]==7 and s["errors"]==0 and s["reasoning_bearing"]==7, s' "$run_dir/smoke/summary.json"
-uv run --project "$client" --frozen --no-sync python -u src/experiments/training_against_role_probes/collect_depthbench.py \
+uv run --frozen --no-sync python -u src/experiments/training_against_role_probes/collect_depthbench.py \
  --base-url "http://127.0.0.1:$port/v1" --output "$run_dir/collection" --attempts 20 --concurrency 16

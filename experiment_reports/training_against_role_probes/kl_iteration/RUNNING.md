@@ -36,7 +36,7 @@ The locked runtime is shared with the [original experiment](../RUNNING.md).
 Prepare fresh output folders using:
 
 ```bash
-.tools/bin/uv sync --locked --project src/experiments/training_against_role_probes/runtime
+.tools/bin/uv sync --locked --extra vllm
 sbatch src/experiments/training_against_role_probes/kl_iteration/prepare.sbatch agentic800
 sbatch src/experiments/training_against_role_probes/kl_iteration/prepare.sbatch same_batch
 ```

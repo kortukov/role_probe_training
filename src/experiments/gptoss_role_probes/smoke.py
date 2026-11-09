@@ -1,6 +1,7 @@
 """GPU smoke test: loading, content masks and pre-MLP indexing."""
 
 import argparse
+import importlib.util
 import json
 from pathlib import Path
 
@@ -15,6 +16,8 @@ parser.add_argument('--model', default='.cache/models/gpt-oss-20b')
 args = parser.parse_args()
 print('Torch:', torch.__version__, 'CUDA:', torch.version.cuda, flush=True)
 print('GPU:', torch.cuda.get_device_name(), flush=True)
+if importlib.util.find_spec('cuml') is None:
+    raise SystemExit('This smoke test fits a probe with cuML: run with `uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python ...`')
 tokenizer, model = load_model(args.model)
 for role in ROLES:
     enc = render_document(role, 'The garden contains green plants and a small wooden bench.').encoded()

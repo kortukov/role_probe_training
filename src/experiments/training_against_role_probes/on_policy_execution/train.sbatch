@@ -22,6 +22,6 @@ export WANDB_DIR="$PWD/$VARIANT_REPORT/wandb"
 mkdir -p "$TMPDIR" "$APPTAINER_CACHEDIR" "$APPTAINER_TMPDIR" "$WANDB_DIR"
 ranks=${SLURM_GPUS_ON_NODE:?Slurm GPU count is required}
 [[ "$ranks" == 1 || "$ranks" == 2 ]] || { echo "Require one or two GPUs" >&2; exit 2; }
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
  torchrun --standalone --nproc-per-node="$ranks" --module role_probe_training.on_policy_training.train \
  --config "$VARIANT_CONFIG" "$@"

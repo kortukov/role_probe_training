@@ -15,5 +15,5 @@ source /etc/slurm/local_job_dir.sh
 export TMPDIR="$LOCAL_JOB_DIR/tmp" TORCHINDUCTOR_CACHE_DIR="$LOCAL_JOB_DIR/inductor"
 export TRITON_CACHE_DIR="$LOCAL_JOB_DIR/triton" OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR"
-.tools/bin/uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+.tools/bin/uv run --frozen --no-sync \
  python src/experiments/training_against_role_probes/on_policy_concurrent/kl_batching_check.py "$@"

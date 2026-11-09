@@ -24,8 +24,7 @@ export WANDB_ENTITY=kortukov
 export WANDB_PROJECT=training_against_role_probes
 export WANDB_DIR="$PWD/experiment_reports/training_against_role_probes/wandb"
 mkdir -p "$TMPDIR" "$WANDB_DIR"
-runtime=src/experiments/training_against_role_probes/runtime
 output=experiment_reports/training_against_role_probes/predictions/train2700/shard$SLURM_ARRAY_TASK_ID
-.tools/bin/uv run --project "$runtime" --frozen --no-sync python -m role_probe_training.training.score \
+.tools/bin/uv run --frozen --no-sync python -m role_probe_training.training.score \
  --input experiment_reports/training_against_role_probes/data/train2700/trajectories.jsonl \
  --output "$output" --shard-index "$SLURM_ARRAY_TASK_ID" --shard-count 2

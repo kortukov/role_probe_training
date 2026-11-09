@@ -27,7 +27,7 @@ for arm_dir in "$@"; do
   arm=$(basename "$arm_dir"); probes=()
   for layer in 4 8 12 16 20; do probes+=(--probe "$layer=$arm_dir/probes/layer_$layer.npz"); done
   echo "=== scoring arm $arm ==="
-  uv run --project src/experiments/training_against_role_probes/runtime --frozen --no-sync \
+  uv run --frozen --no-sync \
     python -m role_probe_training.post_training.full_history --root "$arm_dir" --input "$input" \
     --output "$output_root/$arm" --base --overlength exclude "${probes[@]}"
 done

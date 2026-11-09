@@ -25,14 +25,14 @@ export TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=8 MAX_JOBS=8 VLLM_USE_FLASHI
 export APPTAINER_CACHEDIR=/hx2-weka/home/xy2222/.cache/apptainer
 mkdir -p "$VLLM_CACHE_ROOT" "$TIKTOKEN_CACHE_DIR"
 project=src/experiments/eval_role_probes/agentic_eval
-export CUDA_HOME="$PWD/$project/server_current/.venv/lib/python3.12/site-packages/nvidia/cu13"
+export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
 run_dir="$PWD/experiment_reports/eval_role_probes/agentic_eval/appworld/base_trajectories_hx2/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000+SLURM_JOB_ID%10000))
 nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader
 server_started=$SECONDS
-uv run --project "$project/server_current" --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
+uv run --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
  --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
  --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
  --attention-backend TRITON_ATTN --moe-backend triton \
@@ -62,7 +62,7 @@ collect() {  # collect OUTPUT_DIR APPWORLD_RUN_ARGS...
   kill -0 "$proxy_pid" 2>/dev/null || { cat "$output.proxy.log"; exit 1; }
   sleep 1
  done
- uv run --project "$project/swe_bench/env" --frozen --no-sync python "$project/appworld/appworld_run.py" \
+ uv run --frozen --no-sync python "$project/appworld/appworld_run.py" \
   --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$output/proxy/requests.jsonl" --output "$output" "$@"
  local status=$?
  kill "$proxy_pid" 2>/dev/null; wait "$proxy_pid" 2>/dev/null || true

@@ -14,7 +14,7 @@ Training generation allows 8,192 tokens per response, 32,768 context tokens and
 [report aggregation](../../../src/experiments/training_against_role_probes/epoch_refresh/report.py).
 
 ```bash
-.tools/bin/uv sync --locked
+.tools/bin/uv sync --locked --extra vllm
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/epoch_refresh/submit.py
 # Review the dry-run job plan, then submit from a frozen source snapshot:
 .tools/bin/uv run --frozen --no-sync python src/experiments/training_against_role_probes/epoch_refresh/submit.py --submit
