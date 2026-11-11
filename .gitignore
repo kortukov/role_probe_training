@@ -21,3 +21,6 @@ experiment_reports/gptoss_role_probes/gptoss20b_baseline/logs/
 experiment_reports/gptoss_role_probes/training_data/inputs/
 experiment_reports/gptoss_role_probes/training_data/logs/
 experiment_reports/gptoss_role_probes/training_data/*/artifacts/
+experiment_reports/gptoss_role_probes/header_roles/artifacts/
+experiment_reports/gptoss_role_probes/header_roles/logs/
+.claude/

@@ -393,9 +393,99 @@ Calls to these tools must go to the commentary channel: 'functions'.
 The last line appears only when function tools are declared; the date and reasoning level
 are the configured values recorded with every output.
 
-In this repository's labels, system and developer content is `system`, user content is
-`user`, analysis content is `cot`, commentary and final content (including tool-call
-arguments) is `assistant`, and tool output is `tool`. Header tokens are never labelled.
-The library's own system message and the tools block of the developer message are
-labelled `system` but marked with source index -1 and excluded from accuracy, because no
-conversation participant wrote them.
+In this repository's five-role labels, system and developer content is `system`, user
+content is `user`, analysis content is `cot`, commentary and final content (including
+tool-call arguments) is `assistant`, and tool output is `tool`. Header tokens are never
+labelled. The library's own system message and the tools block of the developer message
+are labelled `system` but marked with source index -1 and excluded from accuracy in
+trajectory scoring, because no conversation participant wrote them.
+
+## 6. Two role sets: the five roles and one role per header form
+
+Since 2026-11-09 the content tokens can be labelled in either of two role sets. Both are
+defined in `src/role_probe_training/harmony/render.py`, and a probe belongs to one of them:
+its metadata lists its roles, and every consumer either reads the set from the probe or
+refuses a probe of the other set. The header roles label every token the five roles label,
+and some that the five roles leave out (below).
+
+* `ROLES`, the five roles of the role-probe paper, behind every number reported so far.
+* `HEADER_ROLES`, ten roles, one for each header form of section 5. They are a role set of
+  their own: header probes are fitted, scored and reported as ten roles and are not reduced
+  to the five.
+
+A header role is decided by three parsed fields of the message, never by the header text,
+so the model's own spellings of a header fall into the same role:
+
+| Header role | Author | Channel | Recipient |
+|---|---|---|---|
+| `system` | system | none | none |
+| `developer` | developer | none | none |
+| `user` | user | none | none |
+| `analysis` | assistant | analysis | none |
+| `commentary` | assistant | commentary | none |
+| `final` | assistant | final | none |
+| `tool_call` | assistant | commentary | set |
+| `tool_output` | a tool | commentary | any |
+| `analysis_tool_call` | assistant | analysis | set |
+| `analysis_tool_output` | a tool | analysis | any |
+
+What the names cover:
+
+* **`commentary` is the text before a call, not the call.** Three header forms use the
+  commentary channel: the assistant's preamble, its tool call and the tool's output. The
+  role `commentary` is only the first, the message with no recipient. The JSON arguments
+  are `tool_call` and the returned text is `tool_output`.
+* **`system` is the library's message; `developer` is what a client calls the system
+  prompt.** In a served conversation the only text under the `system` header is the fixed
+  message of section 5 (about 60 to 70 tokens), and instructions are rendered under
+  `developer`, after the library's `# Instructions` heading.
+* **Header-role scoring counts every labelled token; five-role scoring skips library-written
+  context.** A header role is the header a token sits under, so header-role trajectory
+  scoring counts the library's system message as `system` and the tool-schema block of the
+  developer message as `developer`. The system message is the same text in every
+  conversation, and the schema block is generated from the tool definitions, which matters
+  when reading `system` and `developer` recall. Five-role trajectory scoring still excludes
+  both, because there `system` means the instructions given to the model.
+  `Rendering.score_mask` holds this rule. The clean-chat evaluation of the fitting script
+  scores the library's message in both sets.
+* **Tool calls and tool outputs are split by channel, not by tool.** Commentary is meant to
+  be shown to the user and analysis is not, so a call or an output on the analysis channel
+  has its own role (`analysis_tool_call`, `analysis_tool_output`). The library puts the
+  built-in tools (`python`, `browser`) there. A function call that the model writes on the
+  analysis channel is `analysis_tool_call` too. A call or an output on the final channel or
+  without a channel, which the library does not produce, counts with the commentary roles.
+* **The analysis tool roles are rare in our trajectories.** No run declares a built-in
+  tool, so `analysis_tool_call` occurs only when the model writes a function call on the
+  analysis channel. The renderer puts every function output on the commentary channel,
+  also after such a call, so `analysis_tool_output` occurs only when the model itself
+  writes a tool-output message on the analysis channel (next point), and in fitting wraps.
+* **A message the model wrote under another author's header is labelled by that header.**
+  Generation stops only at `<|return|>` or `<|call|>`, so after an `<|end|>` the model
+  writes the next header itself and can give it any author: a tool output
+  (`functions.NAME to=assistant<|channel|>analysis`) or a user turn. The server marks such
+  a turn invalid and the episode ends, but the tokens stay in the record. A header role is
+  the header a token sits under, so these messages are `analysis_tool_output`,
+  `tool_output`, `user` and so on, and they are scored. The five roles leave them
+  unlabelled, because the header names one author and the model is the real one.
+* **Unlabelled in both sets:** an assistant message with no channel or an unknown one.
+
+Fitting wraps every passage once per role of the chosen set (`render_document`), so a header
+probe sees ten renderings of a passage where a five-role probe sees five. The developer
+wrap is the library's developer message with the passage as its instructions; the tool-call
+wrap is a commentary message to `functions.NAME` with `<|constrain|>json`, ending in
+`<|call|>`. `NAME` is the document's function for Toucan documents and `tool` otherwise.
+The two analysis tool wraps are the built-in python tool's forms for every document:
+`assistant to=python<|channel|>analysis <|constrain|>code` for the call and
+`python to=assistant<|channel|>analysis` for the output.
+
+Where each set is supported:
+
+| Code | Role set |
+|---|---|
+| `gptoss_role_probes/run.py` (fit, clean-chat evaluation, optimizer audit) | `--roles five` (default) or `--roles header`; header outputs carry a `_header` suffix |
+| `gptoss_role_probes/header_roles/fit.py` (header-role probes on the C4/Dolma passages, both fitters run to a convergence test) | header roles only |
+| `agentic_eval/probe_scoring/run.py` (trajectory scoring) | the set of the probes it is given |
+| `agentic_eval/probe_scoring/report.py` and its viewer, `chat_eval/norobots/` | five roles only |
+| training against probes (`src/role_probe_training/training/`, `post_training/`) | five roles only; header probes are refused |
+
+Fitted header-role probes and their accuracy: [header-role fits](experiment_reports/gptoss_role_probes/header_roles/README.md).

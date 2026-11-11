@@ -1,4 +1,7 @@
-"""Five-class linear role probes, saved as portable NumPy arrays + JSON.
+"""Linear role probes, saved as portable NumPy arrays + JSON.
+
+A probe has one class per role of its role set (`roles` in its metadata): the five roles
+or the header roles of role_probe_training.harmony.
 
 Two ways to fit one from scratch (`fit_probe(backend=...)`):
 
@@ -34,6 +37,10 @@ class RoleProbe:
             raise ValueError("Expected [content_tokens, hidden_size] pre-MLP states")
         return softmax(states @ self.weight.T + self.bias, axis=-1)
 
+    @property
+    def roles(self):
+        return tuple(self.metadata["roles"])
+
     def predict(self, states):
         roles = np.asarray(self.metadata["roles"])
         return roles[self.predict_proba(states).argmax(axis=-1)]
@@ -61,26 +68,36 @@ def mean_norm_scale(states, chunk=65536):
     return float(np.sqrt(total / len(states)))
 
 
-def fit_probe(states, labels, *, metadata, C=0.005, max_iter=5000, backend="cuml", groups=None, seed=123):
-    """Fit a probe from scratch.
+def fit_probe(states, labels, *, metadata, roles=ROLES, C=0.005, max_iter=5000, backend="cuml", groups=None, seed=123,
+              dtype="float32", solver_options=None, on_step=None):
+    """Fit a probe from scratch; `labels` index into `roles` (ROLES or HEADER_ROLES).
 
     backend "cuml" (or "sklearn" for small CPU checks) solves L2 logistic regression with
     strength C in at most max_iter solver iterations. Backend "adamw" runs the
     training_against_probes step-0 fit for max_iter optimizer steps; it ignores C and needs
     `groups`, the example (rendered passage-role message) each token belongs to, because it
     batches by example.
+
+    `dtype` and `solver_options` (extra cuML LogisticRegression arguments such as tol,
+    lbfgs_memory or verbose) leave the cuML objective unchanged and only control how
+    precisely it is solved. For the adamw backend `solver_options` may hold `learning_rate`, a
+    peak rate other than upstream's 1e-3; `on_step` is that fitter's monitoring hook.
     """
-    if set(np.unique(labels)) != set(range(len(ROLES))):
-        raise ValueError("All five roles must occur in the training split")
+    roles = tuple(roles)
+    if set(np.unique(labels)) != set(range(len(roles))):
+        raise ValueError(f"All {len(roles)} roles must occur in the training split")
     extra = {}
     if backend == "cuml":
         import cupy as cp
         from cuml.linear_model import LogisticRegression as GPULogisticRegression
-        model = GPULogisticRegression(penalty="l2", C=C, max_iter=max_iter,
-                                      linesearch_max_iter=100, fit_intercept=True,
-                                      output_type="numpy")
-        x = cp.asarray(states, dtype=cp.float32)
+        model = GPULogisticRegression(penalty="l2", C=C, max_iter=max_iter, fit_intercept=True, output_type="numpy",
+                                      **{"linesearch_max_iter": 100, **(solver_options or {})})
+        # Cast on the GPU in pieces: a double-precision copy of the activations does not fit in host memory.
+        x = cp.empty(states.shape, dtype=dtype)
+        for lo in range(0, len(states), 65536):
+            x[lo:lo+65536] = cp.asarray(states[lo:lo+65536])
         y = cp.asarray(labels, dtype=cp.int32)
+        extra = {"dtype": str(dtype), "solver_options": {"linesearch_max_iter": 100, **(solver_options or {})}}
         with warnings.catch_warnings(record=True) as caught:
             warnings.simplefilter("always")
             model.fit(x, y)
@@ -104,13 +121,17 @@ def fit_probe(states, labels, *, metadata, C=0.005, max_iter=5000, backend="cuml
             raise ValueError("The adamw backend batches by example and needs `groups`")
         import torch
         from role_probe_training.training.probe_fit import SETTINGS, fit_from_scratch
-        module, scale, taken = fit_from_scratch(states, labels, groups, classes=len(ROLES), steps=max_iter, seed=seed)
+        options = {"learning_rate": SETTINGS["learning_rate"], **(solver_options or {})}
+        if set(options) != {"learning_rate"}:
+            raise ValueError("The adamw backend accepts only the solver option learning_rate")
+        module, scale, taken = fit_from_scratch(states, labels, groups, classes=len(roles), steps=max_iter, seed=seed,
+                                                on_step=on_step, **options)
         with torch.no_grad():
             head = torch.as_tensor(np.asarray(states[:32], dtype=np.float32), device=module.weight.device)
             reference = torch.softmax(module(head).double(), dim=-1).cpu().numpy()
         weight, bias = module.raw()
         iterations, warning_messages, C = max_iter, [], None
-        extra = {"input_scale": scale, "fit": {**SETTINGS, "optimizer_steps": taken, "seed": seed,
+        extra = {"input_scale": scale, "fit": {**SETTINGS, **options, "optimizer_steps": taken, "seed": seed,
                                                "examples": int(len(np.unique(groups)))}}
         del module
         if torch.cuda.is_available():
@@ -126,7 +147,7 @@ def fit_probe(states, labels, *, metadata, C=0.005, max_iter=5000, backend="cuml
         # input_scale describes the fitting activations; the stored weights apply to raw
         # activations (scaling none). The training loop reuses it for its refits.
         "input_scale": extra["input_scale"] if "input_scale" in extra else mean_norm_scale(states),
-        **metadata, "format_version": 1, "roles": list(ROLES),
+        **metadata, "format_version": 1, "roles": list(roles),
         "C": C, "scaling": "none", "solver": backend,
         "iterations": iterations, "max_iter": max_iter,
         "warnings": warning_messages,

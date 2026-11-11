@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.special import logsumexp, softmax
 
-from role_probe_training.harmony import ROLES, render_document
+from role_probe_training.harmony import document_header, render_document
 from .linear import RoleProbe
 from .model import extract_states
 
@@ -16,6 +16,10 @@ def audit_objective(tokenizer, model, documents, probe_paths, train_sources=None
     gradient is diagnostic, not a guarantee about out-of-distribution accuracy.
     """
     probes = {layer: RoleProbe.load(path) for layer, path in probe_paths.items()}
+    role_sets = {probe.roles for probe in probes.values()}
+    if len(role_sets) != 1:
+        raise ValueError('Audited probes must share one role set')
+    roles = role_sets.pop()
     gw = {layer: np.zeros_like(p.weight, dtype=np.float64) for layer,p in probes.items()}
     gb = {layer: np.zeros_like(p.bias, dtype=np.float64) for layer,p in probes.items()}
     loss = {layer: 0.0 for layer in probes}
@@ -23,17 +27,16 @@ def audit_objective(tokenizer, model, documents, probe_paths, train_sources=None
     # Training-set accuracy, overall and per document collection, from the same logits.
     correct = {layer: {} for layer in probes}
     totals = {}
-    role_hits = {layer: np.zeros(len(ROLES)) for layer in probes}
-    role_totals = np.zeros(len(ROLES))
+    role_hits = {layer: np.zeros(len(roles)) for layer in probes}
+    role_totals = np.zeros(len(roles))
     # Full true-role x predicted-role counts, overall and per collection.
     confusion = {layer: {} for layer in probes}
     # Mirror run.py: only the fitted sources' training documents, with their native headers.
     fitted = [d for d in documents if d['split'] == 'train' and (train_sources is None or d['source'] in set(train_sources))]
     for index, document in enumerate(fitted):
-        headers = document.get('header', {})
         collection = document.get('collection', 'neutral')
-        for label, role in enumerate(ROLES):
-            enc = render_document(role, document['text'], headers.get(role)).encoded()
+        for label, role in enumerate(roles):
+            enc = render_document(role, document['text'], document_header(document, role)).encoded(roles)
             positions = np.flatnonzero(enc['labels'] >= 0)
             states = extract_states(model, enc['input_ids'], list(probes), positions)
             count += len(positions)
@@ -46,8 +49,8 @@ def audit_objective(tokenizer, model, documents, probe_paths, train_sources=None
                 hits = int((predicted == label).sum())
                 correct[layer][collection] = correct[layer].get(collection, 0) + hits
                 role_hits[layer][label] += hits
-                counts = confusion[layer].setdefault(collection, np.zeros((len(ROLES), len(ROLES)), dtype=np.int64))
-                counts[label] += np.bincount(predicted, minlength=len(ROLES))
+                counts = confusion[layer].setdefault(collection, np.zeros((len(roles), len(roles)), dtype=np.int64))
+                counts[label] += np.bincount(predicted, minlength=len(roles))
                 loss[layer] += float((logsumexp(logits,axis=1)-logits[:,label]).sum())
                 residual = softmax(logits,axis=1)
                 residual[:,label] -= 1
@@ -69,7 +72,7 @@ def audit_objective(tokenizer, model, documents, probe_paths, train_sources=None
             'gradient_below_1e_4': maximum < 1e-4,
             'train_accuracy': sum(correct[layer].values()) / count,
             'train_accuracy_by_collection': {c: correct[layer][c] / totals[c] for c in totals},
-            'train_per_role_recall': {ROLES[i]: float(role_hits[layer][i] / role_totals[i]) for i in range(len(ROLES))},
+            'train_per_role_recall': {roles[i]: float(role_hits[layer][i] / role_totals[i]) for i in range(len(roles))},
             'train_confusion_counts': sum(confusion[layer].values()).tolist(),
             'train_confusion_counts_by_collection': {c: m.tolist() for c, m in confusion[layer].items()},
             'note': 'Independent float64 gradient of mean cross-entropy plus sample-normalized L2; not an assertion about cuML termination status.',

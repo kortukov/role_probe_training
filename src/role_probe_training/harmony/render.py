@@ -10,8 +10,17 @@ follow. Two rules keep rendered prompts identical to what the model saw:
   model produced, are rendered from structured content.
 * The chat template of the Hugging Face checkpoint is not used anywhere.
 
-Labels come from message metadata only: the author role and channel of each rendered
-message. Header and control tokens are unlabelled (-1).
+Labels come from message metadata only: the author role, channel and recipient of each
+rendered message. Header and control tokens are unlabelled (-1).
+
+Two role sets label the content tokens. `ROLES` are the five roles of the role-probe
+paper. `HEADER_ROLES` give every Harmony header form its own role: they split `system`
+into the system and the developer message, `assistant` into commentary text, the final
+answer and tool calls, and tool calls and tool outputs by channel (commentary is meant
+for the user, analysis is not). A header role is the header a token sits under, so the
+header roles also label a message the model wrote under another author's header, which
+the five roles leave unlabelled. A probe is fitted and scored in one set, recorded in
+its metadata.
 """
 import dataclasses
 import importlib.metadata
@@ -23,6 +32,9 @@ from openai_harmony import (Author, DeveloperContent, HarmonyEncodingName, Messa
                             RenderOptions, Role, SystemContent, ToolDescription, load_harmony_encoding)
 
 ROLES = ("system", "user", "cot", "assistant", "tool")
+HEADER_ROLES = ("system", "developer", "user", "analysis", "commentary", "final", "tool_call", "tool_output",
+                "analysis_tool_call", "analysis_tool_output")
+ROLE_SETS = {"five": ROLES, "header": HEADER_ROLES}
 LIBRARY = "oss-harmony"
 LIBRARY_VERSION = importlib.metadata.version(LIBRARY)
 # The tool-call content type the model was trained with; vLLM 0.32 deliberately
@@ -32,6 +44,10 @@ TOOL_CALL_CONTENT_TYPE = "<|constrain|>json"
 # itself ends the turn it is generating with <|return|>.
 PRIOR_FINAL_ENDING = "<|end|>"
 DEFAULT_TOOL_NAME = "tool"
+# The built-in tool whose calls and outputs the library puts on the analysis channel; the
+# fitting wraps of `analysis_tool_call` and `analysis_tool_output` use its header forms.
+ANALYSIS_TOOL_NAME = "python"
+ANALYSIS_TOOL_CONTENT_TYPE = "<|constrain|>code"
 _ENCODING = None
 
 
@@ -119,6 +135,29 @@ def label_for(role, channel, recipient=None):
     return None
 
 
+def header_role(role, channel=None, recipient=None):
+    """Header role (HEADER_ROLES) of content tokens; None exactly when `label_for` is None.
+
+    An assistant message addressed to a recipient is a tool call; other assistant text
+    is named after its channel, so `commentary` is the text before a call (the preamble),
+    not the call. Tool calls and tool outputs on the analysis channel, which is not meant
+    for the user, have their own roles; `tool_call` and `tool_output` are the ones on the
+    commentary channel (and on the final channel or without one, which the library does
+    not produce). The tool's name plays no part.
+    """
+    if role == "assistant":
+        if channel not in ("analysis", "commentary", "final"):
+            return None
+        if recipient:
+            return "analysis_tool_call" if channel == "analysis" else "tool_call"
+        return channel
+    if role == "tool":
+        return "analysis_tool_output" if channel == "analysis" else "tool_output"
+    if role in ("system", "developer", "user"):
+        return role
+    return None
+
+
 @dataclasses.dataclass
 class Rendering:
     """Token IDs plus one entry per rendered message with token positions.
@@ -134,11 +173,45 @@ class Rendering:
 
     @property
     def labels(self):
+        return self.labels_for(ROLES)
+
+    def labels_for(self, roles):
+        """Per-token class index in `roles` (ROLES or HEADER_ROLES); -1 where unlabelled.
+
+        Entries store the five-role label. The header role is derived from the author,
+        channel and recipient, and labels every token the five roles label. It also
+        labels a generated message whose author is not the assistant (a tool output or a
+        user turn the model wrote itself), by the header the model gave it; among the
+        five roles such a message has no label.
+        """
+        roles = tuple(roles)
+        if roles not in ROLE_SETS.values():
+            raise ValueError(f"Unknown role set: {roles}")
         labels = np.full(len(self.ids), -1, dtype=np.int64)
         for entry in self.messages:
-            if entry["label"] is not None:
-                labels[entry["content_start"]:entry["content_end"]] = ROLES.index(entry["label"])
+            if roles == HEADER_ROLES:
+                name = header_role(entry["role"], entry["channel"], entry["recipient"])
+            else:
+                name = entry["label"]
+            if name is not None:
+                labels[entry["content_start"]:entry["content_end"]] = roles.index(name)
         return labels
+
+    def score_mask(self, roles=ROLES):
+        """Tokens that count in role metrics: labelled content of messages with a true role.
+
+        Among the five roles, context that no turn authored (source -1) is excluded: the
+        library's system message and the tool-schema block of the developer message,
+        because `system` there means the instructions given to the model. A header role
+        is the header a token sits under, so among the header roles both are scored: the
+        library's message as `system`, the tool-schema block as `developer`.
+        """
+        header = tuple(roles) == HEADER_ROLES
+        mask = np.zeros(len(self.ids), dtype=bool)
+        for entry in self.messages:
+            if entry["source"] >= 0 or (header and entry["kind"] in ("system", "tools")):
+                mask[entry["content_start"]:entry["content_end"]] = True
+        return mask & (self.labels_for(roles) >= 0)
 
     @property
     def message_ids(self):
@@ -151,8 +224,8 @@ class Rendering:
     def source_message_indices(self):
         return [entry["source"] for entry in self.messages]
 
-    def encoded(self):
-        return {"input_ids": np.asarray(self.ids, dtype=np.int64), "labels": self.labels,
+    def encoded(self, roles=ROLES):
+        return {"input_ids": np.asarray(self.ids, dtype=np.int64), "labels": self.labels_for(roles),
                 "message_ids": self.message_ids}
 
     def text_and_offsets(self):
@@ -219,15 +292,47 @@ def _message(role, content, *, channel=None, recipient=None, content_type=None, 
     return message
 
 
-def render_document(role, text, header=None):
-    """Wrap one text in one role for probe fitting (no system message, no BOS).
+def document_header(document, role):
+    """Native Harmony header fields of a fitting document for one role wrap.
 
-    `header` may carry the Harmony fields of the message's native role: channel,
-    recipient, content_type for assistant text; name for tool output.
+    Toucan documents carry them under the five-role names (prepare.py); C4/Dolma
+    documents have none. Both tool wraps of the header roles take the document's
+    function name, which the five roles keep under `tool`.
+    """
+    headers = document.get("header") or {}
+    return headers.get("tool" if role in ("tool_call", "tool_output") else role)
+
+
+def render_document(role, text, header=None):
+    """Wrap one text in one role of either role set for probe fitting (no system message, no BOS).
+
+    For the five roles, `header` may carry the Harmony fields of the message's native
+    role: channel, recipient, content_type for `assistant` text; name for `tool` output.
+    A header role fixes its channel and recipient itself (see `header_role`); `header`
+    can only name the function of `tool_call` and `tool_output`. The two analysis tool
+    roles are the built-in python tool's call and output, the forms the library has on
+    that channel.
     """
     header = dict(header or {})
     if not isinstance(text, str):
         raise TypeError("Document text must be a string")
+    if role == "developer":
+        # As served: the library's developer message with the text as its instructions.
+        return Rendering(*_developer(text, [], 0))
+    if role in ("commentary", "final"):
+        role, header = "assistant", {"channel": role}
+    elif role == "tool_call":
+        role, header = "assistant", {"channel": "commentary",
+                                     "recipient": "functions." + (header.get("name") or DEFAULT_TOOL_NAME)}
+    elif role == "analysis":
+        role = "cot"
+    elif role == "tool_output":
+        role = "tool"
+    elif role == "analysis_tool_call":
+        role, header = "assistant", {"channel": "analysis", "recipient": ANALYSIS_TOOL_NAME,
+                                     "content_type": ANALYSIS_TOOL_CONTENT_TYPE}
+    elif role == "analysis_tool_output":
+        role, header = "tool", {"author": ANALYSIS_TOOL_NAME, "channel": "analysis"}
     if role == "system":
         message = _message(Role.SYSTEM, text)
         fields = dict(role="system", kind="system", label="system")
@@ -247,9 +352,10 @@ def render_document(role, text, header=None):
         fields = dict(role="assistant", kind="assistant", channel=channel, recipient=recipient,
                       content_type=content_type, label=label_for("assistant", channel))
     elif role == "tool":
-        name = "functions." + (header.get("name") or DEFAULT_TOOL_NAME)
-        message = _message(Role.TOOL, text, channel="commentary", recipient="assistant", name=name)
-        fields = dict(role="tool", kind="tool", channel="commentary", recipient="assistant", name=name, label="tool")
+        name = header.get("author") or "functions." + (header.get("name") or DEFAULT_TOOL_NAME)
+        channel = header.get("channel", "commentary")
+        message = _message(Role.TOOL, text, channel=channel, recipient="assistant", name=name)
+        fields = dict(role="tool", kind="tool", channel=channel, recipient="assistant", name=name, label="tool")
     else:
         raise ValueError(f"Unsupported role: {role}")
     ids = list(encoding().render(message))

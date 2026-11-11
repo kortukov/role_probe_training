@@ -1,0 +1,141 @@
+{
+  "input_scale": 43.12965119068949,
+  "git_commit": "8fa575fac3b23de7c243200c55c9768c0279c132",
+  "git_dirty": true,
+  "slurm_job_id": "1649825",
+  "gpu": "NVIDIA H200",
+  "versions": {
+    "torch": "2.13.0",
+    "transformers": "5.9.0",
+    "cuml-cu13": "26.10.0",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1",
+    "oss-harmony": "0.0.12"
+  },
+  "source_sha256": {
+    "src/role_probe_training/probes/__init__.py": "51cf860236e198445304124eb4d74308bd998868a1d13d1ed66116b72341c8a2",
+    "src/role_probe_training/probes/audit.py": "d1fa7339a5caa09c416776f45841ac23a2ec42dae4c45c902adc18eef0ff751c",
+    "src/role_probe_training/probes/evaluation.py": "c2eb1d61aa84b552a7e32937327f059c16490c0e6e98bd51b1ff84eb7be18e0b",
+    "src/role_probe_training/probes/linear.py": "5634e0da5fa08d481d4588c9f2561fe32c93284f468860deba2666dfab573c57",
+    "src/role_probe_training/probes/model.py": "98a665088e9c2281f29b53aa4af28012e9a56c6d332bad6630f4d53fa7007955",
+    "src/role_probe_training/harmony/__init__.py": "96ee7c43d1afa054268aaf6b5673f445401678fc104e223078cf48bf470c263b",
+    "src/role_probe_training/harmony/parse.py": "052a71e73da976c7ccd15d2b3bc934fcdf4e1ab1f119ec9c9b7eb441180e7c92",
+    "src/role_probe_training/harmony/records.py": "ce73284613e257591b13b4f85b4f8e7ab131a78b07e2936a12e6ab38deeb9788",
+    "src/role_probe_training/harmony/render.py": "5caff114c166ab0e9d88cba3174f440dac58002f2609afc405be070b0e49638a",
+    "src/role_probe_training/harmony/server.py": "f70968830d9d81e64746bd86740243bdfbc30e247fd74c00fae9fa06bbbedf0c",
+    "src/experiments/gptoss_role_probes/header_roles/fit.py": "48aecc51d8dda79c64537d73193b9f245eccbcda88dbc2fc1fc69e9915f76331",
+    "src/experiments/gptoss_role_probes/header_roles/report.py": "297096e23181720ae8464f534755b25554ac841317dd7c8cabc45478861164d4",
+    "src/role_probe_training/training/probe_fit.py": "8c016ce5c3a4841659ccb3fcf1d6176d8197d91524f8174f43d5d1c4dfb6e3f5"
+  },
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "role_set": "header",
+  "layer": 12,
+  "activation": "post_attention_layernorm_output_pre_mlp",
+  "layer_indexing": "zero_based",
+  "hidden_size": 2880,
+  "precision": "MXFP4 checkpoint dequantized to BF16",
+  "attention": "eager",
+  "rendering": {
+    "library": "oss-harmony",
+    "version": "0.0.12",
+    "reasoning_effort": "high",
+    "conversation_start_date": "2025-12-31",
+    "auto_drop_analysis": false,
+    "tool_call_content_type": "<|constrain|>json",
+    "prior_final_ending": "<|end|>",
+    "bos": false,
+    "model_turns": "replayed from generated token ids"
+  },
+  "training_config": {
+    "model_id": "openai/gpt-oss-20b",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "model_path": ".cache/models/gpt-oss-20b",
+    "documents": "experiment_reports/gptoss_role_probes/training_data/inputs/documents.jsonl",
+    "n_documents": 250,
+    "documents_sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+    "sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+    ],
+    "roles": "header",
+    "layers": [
+      4,
+      8,
+      12,
+      16,
+      20
+    ],
+    "C": 0.005,
+    "seed": 123,
+    "cuml": {
+      "dtype": "float64",
+      "max_iter": 200000,
+      "lbfgs_memory": 5,
+      "verbose": 5,
+      "tols": [
+        0.0001,
+        1e-05,
+        1e-06,
+        1e-07
+      ],
+      "gradient_tolerance": 0.0001
+    },
+    "adamw": {
+      "steps": [
+        5000,
+        20000,
+        80000,
+        320000,
+        1280000
+      ],
+      "evaluations": 200,
+      "relative_tolerance": 0.001,
+      "learning_rate": 0.1
+    }
+  },
+  "input_sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+  "format_version": 1,
+  "roles": [
+    "system",
+    "developer",
+    "user",
+    "analysis",
+    "commentary",
+    "final",
+    "tool_call",
+    "tool_output",
+    "analysis_tool_call",
+    "analysis_tool_output"
+  ],
+  "C": null,
+  "scaling": "none",
+  "solver": "adamw",
+  "iterations": 1280000,
+  "max_iter": 1280000,
+  "warnings": [],
+  "converged": false,
+  "termination_note": "Converged means: the final training loss changed by less than relative_tolerance when the number of steps was multiplied by the next factor in the schedule.",
+  "fit": {
+    "optimizer": "AdamW",
+    "learning_rate": 0.1,
+    "weight_decay": 0.0001,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "schedule": "cosine",
+    "warmup_steps": 50,
+    "clip_grad_norm": 1.0,
+    "batch_examples": 32,
+    "autocast": "bfloat16",
+    "input_normalization": "unit_norm",
+    "loss": "mean five-class cross-entropy over the content tokens of a batch",
+    "reference": "training_against_probes 9c3f80c, src/probes/train.py::train_combined_probes",
+    "optimizer_steps": 1280001,
+    "seed": 123,
+    "examples": 2250
+  },
+  "max_saved_probability_error": 2.980833513177572e-05,
+  "relative_change_from_previous": 0.010236224935015274
+}

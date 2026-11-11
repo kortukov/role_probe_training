@@ -6,18 +6,18 @@ from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_m
 from role_probe_training.harmony import ROLES
 
 
-def metrics(labels, probabilities):
+def metrics(labels, probabilities, roles=ROLES):
     predictions = probabilities.argmax(axis=1)
     present = np.unique(labels)
     return {
         "n_tokens": len(labels),
         "accuracy": float(accuracy_score(labels, predictions)),
         "balanced_accuracy": float(balanced_accuracy_score(labels, predictions)),
-        "nll": float(log_loss(labels, probabilities, labels=np.arange(len(ROLES)))),
-        "uniform_accuracy": 1 / len(ROLES),
-        "majority_accuracy": float(np.bincount(labels, minlength=len(ROLES)).max() / len(labels)),
-        "confusion_counts": confusion_matrix(labels, predictions, labels=np.arange(len(ROLES))).tolist(),
-        "by_role": {ROLES[r]: {
+        "nll": float(log_loss(labels, probabilities, labels=np.arange(len(roles)))),
+        "uniform_accuracy": 1 / len(roles),
+        "majority_accuracy": float(np.bincount(labels, minlength=len(roles)).max() / len(labels)),
+        "confusion_counts": confusion_matrix(labels, predictions, labels=np.arange(len(roles))).tolist(),
+        "by_role": {roles[r]: {
             "n_tokens": int((labels == r).sum()),
             "accuracy": float((predictions[labels == r] == r).mean()),
             "mean_probability": float(probabilities[labels == r, r].mean()),
@@ -25,14 +25,14 @@ def metrics(labels, probabilities):
     }
 
 
-def conversation_summary(rows):
+def conversation_summary(rows, roles=ROLES):
     """First average tokens within (conversation, true role), then conversations.
 
     rows: iterable of {conversation_id, labels, probabilities}. No role/token
     balancing is silently applied to the overall token accuracy.
     """
     by_role = {}
-    for role_id, role in enumerate(ROLES):
+    for role_id, role in enumerate(roles):
         means, accuracies, count = [], [], 0
         for row in rows:
             mask = row['labels'] == role_id
@@ -50,20 +50,20 @@ def conversation_summary(rows):
     return by_role
 
 
-def plot_summary(summary, path, title):
+def plot_summary(summary, path, title, roles=ROLES):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    columns = [r for r in ROLES if r in summary]
+    columns = [r for r in roles if r in summary]
     data = np.asarray([summary[r]['mean_probabilities'] for r in columns]).T
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, ax = plt.subplots(figsize=(2 + len(roles), 1.5 + .7 * len(roles)))
     im = ax.imshow(data, vmin=0, vmax=1, cmap='YlOrBr')
     ax.set_xticks(range(len(columns)), columns)
-    ax.set_yticks(range(len(ROLES)), ROLES)
+    ax.set_yticks(range(len(roles)), roles)
     ax.set_xlabel('Ground-truth message role')
     ax.set_ylabel('Predicted role probability')
     ax.set_title(title)
-    for i in range(len(ROLES)):
+    for i in range(len(roles)):
         for j in range(len(columns)):
             ax.text(j, i, f'{data[i, j]:.1%}', ha='center', va='center',
                     color='white' if data[i, j] > .65 else 'black')

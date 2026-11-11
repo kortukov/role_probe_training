@@ -55,6 +55,11 @@ verified live on 2026-10-30 (`sinfo`, `sacctmgr`, a one-GPU probe job) unless ma
 - [Probe training-data comparison](../experiment_reports/gptoss_role_probes/training_data/README.md):
   C4/Dolma vs Toucan vs combined probes. Prepared inputs regenerate byte-identically
   (documents hash `5a76ba32...` for the first 250 lines) from the pinned sources.
+- [Header-role probe fits](../experiment_reports/gptoss_role_probes/header_roles/README.md):
+  ten-role probes on the same 250 C4/Dolma passages. Everything ran on `interactive-gpu`
+  (starts within seconds; one running job per user, so chain jobs with
+  `--dependency=afterany`). Its cached activations (about 40 GB, ignored) are under the
+  experiment's `artifacts/`.
 - Agentic trajectories must be regenerated here; the coauthor's data cannot be copied.
   Priority: AppWorld normal test first, SWE-bench only if tractable, no tau2 retail
   (no Azure simulator credentials).

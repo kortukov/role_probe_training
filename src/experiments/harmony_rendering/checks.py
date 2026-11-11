@@ -166,6 +166,133 @@ class RendererChecks(unittest.TestCase):
         span = injected.ids[injected.messages[0]['content_start']:injected.messages[0]['content_end']]
         self.assertFalse(any(enc.is_special_token(t) for t in span), 'control strings in content must stay text')
 
+    def test_header_roles_label_each_header_form(self):
+        text = 'Text.'
+        developer = Message.from_role_and_content(Role.DEVELOPER, DeveloperContent.new().with_instructions(text))
+        tool_output = (Message.from_author_and_content(Author.new(Role.TOOL, 'functions.tool'), text)
+                       .with_recipient('assistant').with_channel('commentary'))
+        wraps = {'system': Message.from_role_and_content(Role.SYSTEM, text), 'developer': developer,
+                 'user': Message.from_role_and_content(Role.USER, text), 'analysis': assistant(text, 'analysis'),
+                 'commentary': assistant(text, 'commentary'), 'final': assistant(text, 'final'),
+                 'tool_call': assistant(text, 'commentary', 'functions.tool'), 'tool_output': tool_output,
+                 'analysis_tool_call': Message.from_role_and_content(Role.ASSISTANT, text).with_channel('analysis')
+                     .with_recipient('python').with_content_type('code'),
+                 'analysis_tool_output': Message.from_author_and_content(Author.new(Role.TOOL, 'python'), text)
+                     .with_recipient('assistant').with_channel('analysis')}
+        self.assertEqual(tuple(wraps), h.HEADER_ROLES)
+        for role, message in wraps.items():
+            rendering = h.render_document(role, text)
+            self.assertEqual(rendering.ids, list(enc.render(message)), role)
+            labels = rendering.labels_for(h.HEADER_ROLES)
+            self.assertEqual(set(labels[labels >= 0].tolist()), {h.HEADER_ROLES.index(role)}, role)
+            # Both role sets label the same tokens.
+            self.assertTrue(((rendering.labels >= 0) == (labels >= 0)).all())
+        self.assertEqual(enc.decode(h.render_document('developer', text).ids),
+                         '<|start|>developer<|message|># Instructions\n\nText.<|end|>')
+        self.assertEqual(enc.decode(h.render_document('analysis_tool_call', text).ids),
+                         '<|start|>assistant to=python<|channel|>analysis <|constrain|>code<|message|>Text.<|call|>')
+        self.assertEqual(enc.decode(h.render_document('analysis_tool_output', text).ids),
+                         '<|start|>python to=assistant<|channel|>analysis<|message|>Text.<|end|>')
+        call = h.render_document('tool_call', '{"a": 1}', {'name': 'f'})
+        self.assertEqual(enc.decode(call.ids), '<|start|>assistant<|channel|>commentary to=functions.f <|constrain|>json<|message|>{"a": 1}<|call|>')
+        self.assertEqual(h.render_document('tool_output', 'done', {'name': 'f'}).ids, h.render_document('tool', 'done', {'name': 'f'}).ids)
+        with self.assertRaises(ValueError):
+            h.render_document('user', text).labels_for(('user', 'assistant'))
+
+    def test_header_roles_in_a_conversation(self):
+        rendering = h.render_turns(TURNS, CONFIG, tools=TOOLS)
+        five, header = rendering.labels, rendering.labels_for(h.HEADER_ROLES)
+        names = [h.HEADER_ROLES[header[m['content_start']]] for m in rendering.messages]
+        self.assertEqual(names, ['system', 'developer', 'developer', 'user', 'analysis', 'commentary', 'tool_call',
+                                 'tool_output', 'analysis', 'final', 'user'])
+        self.assertTrue(((five >= 0) == (header >= 0)).all())
+        # Scored tokens: the library's system message and the tool-schema block count among the
+        # header roles only, as `system` and `developer`.
+        origin = np.asarray([rendering.messages[i]['source'] if i >= 0 else -2 for i in rendering.message_ids])
+        np.testing.assert_array_equal(rendering.score_mask(), (five >= 0) & (origin >= 0))
+        scored = rendering.score_mask(h.HEADER_ROLES)
+        system, developer, tools = rendering.messages[:3]
+        self.assertEqual([m['kind'] for m in (system, developer, tools)], ['system', 'developer', 'tools'])
+        self.assertTrue(scored[system['content_start']:system['content_end']].all())
+        self.assertFalse(rendering.score_mask()[system['content_start']:system['content_end']].any())
+        self.assertTrue(scored[tools['content_start']:tools['content_end']].all())
+        self.assertFalse(rendering.score_mask()[tools['content_start']:tools['content_end']].any())
+        self.assertEqual(set(header[tools['content_start']:tools['content_end']].tolist()), {h.HEADER_ROLES.index('developer')})
+        np.testing.assert_array_equal(scored, header >= 0)
+        tools_only = h.render_turns(TURNS[1:2], CONFIG, tools=TOOLS)  # no instructions: the block is the whole message
+        self.assertEqual([m['kind'] for m in tools_only.messages], ['system', 'tools', 'user'])
+        np.testing.assert_array_equal(tools_only.score_mask(h.HEADER_ROLES), tools_only.labels_for(h.HEADER_ROLES) >= 0)
+        self.assertEqual(int(tools_only.score_mask().sum()), tools_only.messages[2]['content_end'] - tools_only.messages[2]['content_start'])
+        self.assertEqual({h.HEADER_ROLES[i] for i in header[scored]},
+                         set(h.HEADER_ROLES) - {'analysis_tool_call', 'analysis_tool_output'})
+        self.assertFalse(scored[header < 0].any())
+        record = h.request_record(h.render_turns(TURNS[:4], CONFIG, tools=TOOLS), TURN_2, CONFIG, completion_source=4)
+        encoded = h.encode_record({'history': record}, h.HEADER_ROLES)
+        self.assertTrue(encoded['score_mask'][encoded['messages'][0]['content_start']])
+        self.assertFalse(h.encode_record({'history': record})['score_mask'][encoded['messages'][0]['content_start']])
+        final = encoded['messages'][-1]
+        self.assertEqual(encoded['labels'][final['content_start']], h.HEADER_ROLES.index('final'))
+        self.assertEqual(h.encode_record({'history': record})['labels'][final['content_start']], h.ROLES.index('assistant'))
+
+    def test_header_role_rules(self):
+        # Tool calls and tool outputs are split by channel: analysis is not meant for the user.
+        self.assertEqual(h.header_role('assistant', 'analysis', 'python'), 'analysis_tool_call')
+        self.assertEqual(h.header_role('assistant', 'analysis', 'functions.f'), 'analysis_tool_call')
+        self.assertEqual(h.header_role('assistant', 'commentary', 'functions.f'), 'tool_call')
+        self.assertEqual(h.header_role('assistant', 'final', 'functions.f'), 'tool_call')
+        self.assertEqual(h.header_role('tool', 'analysis', 'assistant'), 'analysis_tool_output')
+        self.assertEqual(h.header_role('tool', 'commentary', 'assistant'), 'tool_output')
+        self.assertEqual(h.header_role('tool'), 'tool_output')
+        for role in ('system', 'developer', 'user', 'assistant', 'tool', 'other', None):
+            for channel in ('analysis', 'commentary', 'final', 'functions.x', None):
+                for recipient in (None, 'functions.x'):
+                    name = h.header_role(role, channel, recipient)
+                    self.assertEqual(name is None, h.label_for(role, channel, recipient) is None, (role, channel, recipient))
+        # A function call the model writes on the analysis channel is `analysis_tool_call`, in either
+        # recipient position. The server answers every function call on the commentary channel.
+        for text in ('<|channel|>analysis to=functions.get_weather <|constrain|>json<|message|>{"city":"Paris"}<|call|>',
+                     ' to=functions.get_weather<|channel|>analysis <|constrain|>json<|message|>{"city":"Paris"}<|call|>'):
+            turns = TURNS[:2] + [{'role': 'assistant', 'tokens': enc.encode(text, allowed_special='all')},
+                                 {'role': 'tool', 'name': 'get_weather', 'content': '{"temperature": 20}'}]
+            rendering = h.render_turns(turns, CONFIG, tools=TOOLS)
+            header = rendering.labels_for(h.HEADER_ROLES)
+            self.assertEqual([h.HEADER_ROLES[header[m['content_start']]] for m in rendering.messages[-2:]],
+                             ['analysis_tool_call', 'tool_output'])
+            self.assertEqual([h.ROLES[rendering.labels[m['content_start']]] for m in rendering.messages[-2:]], ['cot', 'tool'])
+        # A message the model wrote under another author's header has no five-role label; the header
+        # roles label it by that header, and header-role scoring counts it.
+        written = {'functions.get_weather to=assistant<|channel|>analysis': 'analysis_tool_output',
+                   'functions.get_weather<|channel|>commentary to=assistant': 'tool_output', 'user': 'user'}
+        for header_text, expected in written.items():
+            generated = enc.encode('<|channel|>analysis<|message|>Run it.<|end|><|start|>' + header_text +
+                                   '<|message|>made up<|end|><|start|>assistant<|channel|>final<|message|>Done.<|return|>',
+                                   allowed_special='all')
+            record = h.request_record(h.render_turns(TURNS[:2], CONFIG, tools=TOOLS), generated, CONFIG, completion_source=2)
+            five, header = h.encode_record({'history': record}), h.encode_record({'history': record}, h.HEADER_ROLES)
+            message = header['messages'][-2]
+            span = slice(message['content_start'], message['content_end'])
+            self.assertIsNone(message['label'])
+            self.assertEqual(set(five['labels'][span].tolist()), {-1})
+            self.assertFalse(five['score_mask'][span].any())
+            self.assertEqual({h.HEADER_ROLES[i] for i in header['labels'][span]}, {expected})
+            self.assertTrue(header['score_mask'][span].all())
+            # Everything the five roles label keeps its header role.
+            self.assertTrue((header['labels'][five['labels'] >= 0] >= 0).all())
+            self.assertTrue(h.completion_to_chat(*h.walk_completion(generated)[:1], TOOLS)['invalid'])
+        # A generated message under a malformed header stays unlabelled in both sets.
+        garbled = enc.encode('<|channel|>functions.get_weather to=assistant <|constrain|>json<|message|>{"x":1}<|call|>',
+                             allowed_special='all')
+        replayed = h.Rendering(list(h.tokens().assistant_header) + garbled, h.walk_completion(garbled)[0])
+        self.assertTrue((replayed.labels_for(h.HEADER_ROLES) == -1).all())
+        # Toucan documents name their function once; both tool wraps of the header roles use it.
+        document = {'header': {'tool': {'name': 'f'}, 'assistant': {'channel': 'commentary', 'recipient': 'functions.f'}}}
+        self.assertEqual(h.document_header(document, 'tool_call'), {'name': 'f'})
+        self.assertEqual(h.document_header(document, 'tool_output'), {'name': 'f'})
+        self.assertEqual(h.document_header(document, 'assistant'), document['header']['assistant'])
+        self.assertIsNone(h.document_header(document, 'final'))
+        self.assertIsNone(h.document_header({'text': 'x'}, 'tool_call'))
+        self.assertIsNone(h.document_header(document, 'analysis_tool_call'))
+
     def test_hf_tokenizer_agrees(self):
         path = Path('.cache/models/gpt-oss-20b')
         if not path.exists():

@@ -55,6 +55,8 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / 'predictions').mkdir(exist_ok=True)
     probes = {arm.name: {L: RoleProbe.load(arm / 'probes' / f'layer_{L}.npz') for L in args.layers} for arm in args.arms}
+    if any(probe.roles != ROLES for layers in probes.values() for probe in layers.values()):
+        parser.error('This scorer and its report tables cover the five roles only')
     tokenizer, model = load_model(args.model)
     rows = read_jsonl(args.input)[:args.limit]
     keys = [(a, L) for a in probes for L in args.layers]

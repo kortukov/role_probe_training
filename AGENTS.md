@@ -88,6 +88,13 @@
 - Preserve the upstream training scale (configured 250 passages, up to 1,024
   tokens, all content tokens). Do not silently subsample tokens or reduce training
   data to save time. Small conversational evaluation is separate from training.
+- Two role sets exist side by side: the five roles (`ROLES`, behind every reported number) and
+  one role per Harmony header form (`HEADER_ROLES`, ten roles; `--roles header` on the fitting
+  script). A probe belongs to one set, recorded in its metadata; never apply it to labels of the
+  other. Definitions and where each set is supported: [HARMONY_RENDERING.md](HARMONY_RENDERING.md) section 6.
+  Header-role weights (layers 4/8/12/16/20, C4/Dolma passages only) and their accuracy:
+  [header-role fits](experiment_reports/gptoss_role_probes/header_roles/README.md). Use the
+  cuML weights (`probes_header/`); the AdamW fits there did not converge.
 - Ground-truth roles come from message/channel metadata. Mean role probabilities
   and argmax role accuracy are different metrics. Tool-role transfer requires
   validation on actual tool-bearing trajectories; clean chat alone is insufficient.

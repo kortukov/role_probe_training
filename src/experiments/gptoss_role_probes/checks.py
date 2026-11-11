@@ -12,9 +12,9 @@ from pathlib import Path
 import numpy as np
 from openai_harmony import Author, Message, Role
 
-from role_probe_training.harmony import ROLES, encoding, render_document, walk_completion
+from role_probe_training.harmony import HEADER_ROLES, ROLES, encoding, render_document, walk_completion
 from role_probe_training.probes.linear import RoleProbe, fit_probe
-from role_probe_training.probes.evaluation import conversation_summary
+from role_probe_training.probes.evaluation import conversation_summary, metrics
 
 
 def adamw_backend(x, y):
@@ -110,11 +110,29 @@ def main():
         path=Path(folder)/'probe.npz'; probe.save(path)
         np.testing.assert_allclose(RoleProbe.load(path).predict_proba(x), probe.predict_proba(x))
     adamw_backend(x, y)
+    # A probe has one class per role of its role set and records the set in its metadata.
+    n = len(HEADER_ROLES)
+    yh = np.repeat(np.arange(n), 20)
+    xh = np.eye(n)[yh]*8 + rng.normal(size=(len(yh), n))*.1
+    header_probe = fit_probe(xh, yh, metadata={'layer':12}, roles=HEADER_ROLES, C=1., backend='sklearn')
+    assert header_probe.roles == HEADER_ROLES and probe.roles == ROLES and header_probe.weight.shape == (n, n)
+    assert (header_probe.predict(xh) == np.asarray(HEADER_ROLES)[yh]).all()
+    scored = metrics(yh, header_probe.predict_proba(xh), HEADER_ROLES)
+    assert set(scored['by_role']) == set(HEADER_ROLES) and scored['uniform_accuracy'] == 1/n and np.shape(scored['confusion_counts']) == (n, n)
+    with tempfile.TemporaryDirectory() as folder:
+        path=Path(folder)/'probe.npz'; header_probe.save(path)
+        assert RoleProbe.load(path).roles == HEADER_ROLES
+    try:
+        fit_probe(x, y, metadata={'layer':12}, roles=HEADER_ROLES, C=1., backend='sklearn')
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Fitting must reject labels that do not cover the role set')
     # Unequal-length conversations must each get equal weight in the summary.
     rows=[{'labels':np.zeros(1,dtype=int),'probabilities':np.eye(5)[[0]]},
           {'labels':np.zeros(9,dtype=int),'probabilities':np.eye(5)[np.ones(9,dtype=int)]}]
     np.testing.assert_allclose(conversation_summary(rows)['system']['mean_probabilities'], [.5,.5,0,0,0])
-    print('PASS: library-identical wrappers, content masks, Unicode, repeated text, control tokens, completion parser, probe round-trip, AdamW fitter, aggregation')
+    print('PASS: library-identical wrappers, content masks, Unicode, repeated text, control tokens, completion parser, probe round-trip, AdamW fitter, header-role probe, aggregation')
 
 
 if __name__ == '__main__':

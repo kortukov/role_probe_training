@@ -101,18 +101,22 @@ def optimizer_steps(steps, examples, batch_size=BATCH_EXAMPLES):
     return min(steps + 1, passes * math.ceil(examples / batch_size))
 
 
-def fit(probe, batch, examples, counts, *, steps, batch_size=BATCH_EXAMPLES, seed=123, sync=None):
+def fit(probe, batch, examples, counts, *, steps, batch_size=BATCH_EXAMPLES, seed=123, sync=None, on_step=None,
+        learning_rate=LEARNING_RATE):
     """Run one upstream fit on `probe` in place; returns the learning rate of every optimizer step.
 
     `batch(indices)` returns this process's (features, labels) for those examples, or None if it
     holds none of them. `counts[i]` is the token count of example i over all processes, so the
     loss is the mean over the whole batch. `sync` sums gradients over processes in place.
+    `on_step(done, batch_loss, probe)` is called after every optimizer step, for monitoring
+    only; it must not change the probe. `learning_rate` is upstream's unless a from-scratch
+    fit asks for another peak rate; training and its refits never pass it.
     """
     parameters = list(probe.parameters())
     examples = list(examples)
     probe.requires_grad_(True)
     probe.train()
-    optimizer = torch.optim.AdamW(parameters, lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY, betas=BETAS)
+    optimizer = torch.optim.AdamW(parameters, lr=learning_rate, weight_decay=WEIGHT_DECAY, betas=BETAS)
     scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=WARMUP_STEPS, num_training_steps=steps)
     generator = random.Random(seed)
     order, cursor, rates = [], 0, []
@@ -137,16 +141,19 @@ def fit(probe, batch, examples, counts, *, steps, batch_size=BATCH_EXAMPLES, see
         optimizer.step()
         optimizer.zero_grad(set_to_none=True)
         scheduler.step()
+        if on_step is not None:
+            on_step(len(rates), float(loss.detach()), probe)
     probe.requires_grad_(False)
     return rates
 
 
-def fit_from_scratch(states, labels, groups, *, classes, steps=STEP0_STEPS, seed=123, device=None):
+def fit_from_scratch(states, labels, groups, *, classes, steps=STEP0_STEPS, seed=123, device=None, on_step=None,
+                     learning_rate=LEARNING_RATE):
     """Upstream step-0 fit: a freshly initialised probe on tokens grouped into examples.
 
     `groups[i]` names the example (one rendered passage-role message) that token i belongs
     to; an example's tokens must be contiguous. Returns the probe, its input scale and the
-    number of optimizer steps taken.
+    number of optimizer steps taken. `on_step` and `learning_rate` are passed to `fit`.
     """
     device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
     groups = np.asarray(groups)
@@ -173,5 +180,6 @@ def fit_from_scratch(states, labels, groups, *, classes, steps=STEP0_STEPS, seed
         rows = torch.cat([torch.arange(starts[i], ends[i], device=device) for i in indices])
         return x[rows].float(), y[rows]
 
-    rates = fit(probe, batch, range(len(starts)), (ends-starts).tolist(), steps=steps, seed=seed)
+    rates = fit(probe, batch, range(len(starts)), (ends-starts).tolist(), steps=steps, seed=seed, on_step=on_step,
+                learning_rate=learning_rate)
     return probe, scale, len(rates)

@@ -36,8 +36,8 @@ def history(record):
     return rendering
 
 
-def encode_record(record):
-    """Scoring input for one trajectory row or request record.
+def encode_record(record, roles=ROLES):
+    """Scoring input for one trajectory row or request record, labelled in one role set.
 
     Trajectory rows carry their final request under `history`. Rows without
     generation tokens cannot be scored: regenerate them through the Harmony server.
@@ -48,8 +48,8 @@ def encode_record(record):
                          "instead of re-rendering its messages")
     rendering = history(source)
     text, offsets = rendering.text_and_offsets()
-    return {"input_ids": np.asarray(rendering.ids, dtype=np.int64), "labels": rendering.labels,
-            "message_ids": rendering.message_ids, "messages": rendering.messages,
+    return {"input_ids": np.asarray(rendering.ids, dtype=np.int64), "labels": rendering.labels_for(roles),
+            "score_mask": rendering.score_mask(roles), "message_ids": rendering.message_ids, "messages": rendering.messages,
             "source_message_indices": rendering.source_message_indices,
             "text": text, "offsets": offsets, "rendering": source["rendering"]}
 
