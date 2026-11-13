@@ -1,0 +1,29 @@
+{
+  "name": "ladder-small_k1",
+  "wandb_id": "ladder-small_k1-20261113",
+  "model": ".cache/models/gpt-oss-20b",
+  "probe": "experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_16.npz",
+  "tasks": ".cache/appworld/data/datasets/train.txt",
+  "validation": "experiment_reports/training_against_role_probes/on_policy_progress/data/dev/trajectories.jsonl",
+  "probe_documents": "experiment_reports/gptoss_role_probes/lbfgs_fitter/artifacts/inputs/documents.jsonl",
+  "output": "experiment_reports/training_against_role_probes/on_policy_progress/small_k1/runs/training",
+  "image": ".cache/appworld/appworld.sif",
+  "appworld_data": ".cache/appworld/data",
+  "seed": 123,
+  "learning_rate": 5e-05,
+  "kl_coefficient": 16,
+  "eval_interval": 6,
+  "generation": {
+    "max_tokens": 8192,
+    "context_limit": 32768,
+    "max_steps": 50
+  },
+  "serving_backend": "colocated_vllm",
+  "batch_size": 16,
+  "epochs": 1,
+  "attempts_per_task": 6,
+  "refresh": "epoch",
+  "collection_concurrency": 8,
+  "collection_timeout": 36000,
+  "wandb_mode": "offline"
+}

@@ -21,7 +21,7 @@ def digest(path):
 def score(root, input_path, output, base=False, overlength='error', probe_paths=None):
     """`probe_paths` ({layer: path}) scores other standard-data probes on the unchanged model."""
     if base:
-        paths = probe_paths or {i: Path(f'experiment_reports/gptoss_role_probes/{"gptoss20b_baseline" if i in (12,16) else "gptoss20b_layers"}/probes/layer_{i}.npz') for i in (4,8,12,16,20)}
+        paths = probe_paths or {i: Path(f'experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_{i}.npz') for i in (12,16)}
         # RoleModel only needs some probe artifact to initialise; scoring uses its own hooks.
         init_probe = next(iter(paths.values()))
         runtime = RoleModel('.cache/models/gpt-oss-20b', str(init_probe), 0, adapters=False)

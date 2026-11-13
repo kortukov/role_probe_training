@@ -26,7 +26,7 @@ def collect(runtime, config, episodes, step, root, rank, *, sampler=None):
         with (folder/'collector.log').open('w') as stream:
             subprocess.run([sys.executable, '-m', 'role_probe_training.on_policy_recovery.collect',
                 '--plan', str(folder/'plan.json'), '--base-url', url, '--concurrency', str(concurrency)],
-                stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=18000)
+                stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=config.get('collection_timeout', 18000))
         if state['errors']:
             raise RuntimeError('Serving errors; inspect retained server_errors.json')
     # Concurrent requests interleave; restore the sequential plan/generation order.

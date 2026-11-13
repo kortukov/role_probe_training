@@ -42,8 +42,8 @@ def main():
     torch.manual_seed(config['seed'])
     root = Path(config['output'])
     root.mkdir(parents=True, exist_ok=True)
-    batches = schedule(config['trajectories'], config['validation'], config['seed'],
-                       epochs=config['epochs'], batch_size=config['batch_size'])
+    batches = schedule(config['tasks'], config['validation'], config['seed'], epochs=config['epochs'],
+                       attempts_per_task=config.get('attempts_per_task', 1), batch_size=config['batch_size'])
     updates_per_epoch = len(batches) // config['epochs']
     if config['refresh'] not in ('batch', 'epoch'):
         raise ValueError('refresh must be batch or epoch')
@@ -61,7 +61,7 @@ def main():
                      Path('src/role_probe_training/post_training/vllm_worker.py')]
     manifest = dict(config=config, world_size=world, updates=len(batches), updates_per_epoch=updates_per_epoch,
         data_sha256={key: sha256(config[key]) for key in
-                     ('trajectories', 'validation', 'probe', 'probe_documents')},
+                     ('tasks', 'validation', 'probe', 'probe_documents')},
         source_sha256={str(path): sha256(path) for path in source_paths},
         git_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
         torch=torch.__version__, gpu=torch.cuda.get_device_name(),

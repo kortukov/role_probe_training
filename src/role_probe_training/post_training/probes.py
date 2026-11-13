@@ -33,7 +33,7 @@ def load(path):
 
 def fit(root, layers=(12,16)):
     model_path=root/'data/post_training/model'; tokenizer,model=load(model_path)
-    documents=Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/artifacts/inputs/documents.jsonl')
+    documents=Path('experiment_reports/gptoss_role_probes/lbfgs_fitter/artifacts/inputs/documents.jsonl')
     examples=probe_examples(documents)
     features={layer:[] for layer in layers}; labels=[]; splits=[]
     for i,example in enumerate(examples):
