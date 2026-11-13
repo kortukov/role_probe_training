@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import numpy as np
 import torch
-from role_probe_training.harmony import ROLES, render_document
+from role_probe_training.harmony import ROLES, document_header, render_document
 from role_probe_training.trajectories.replay import encode_record
 
 
@@ -12,18 +12,19 @@ def read_jsonl(path):
         return [json.loads(line) for line in f if line.strip()]
 
 
-def trajectory_examples(path):
-    """Whole-episode role examples from trajectories carrying Harmony token records."""
+def trajectory_examples(path, roles=ROLES):
+    """Whole-episode role examples from trajectories carrying Harmony token records.
+
+    Labels index into `roles` (ROLES or HEADER_ROLES); tokens outside the role set's score
+    mask (headers, and for the five roles context that no turn authored) are -1."""
     examples=[]
     for row in read_jsonl(path):
         if row.get('history') is None:
             # No model call happened (context limit before the first generation); nothing to learn from.
             continue
-        enc=encode_record(row)
+        enc=encode_record(row,roles)
         labels=enc['labels'].copy()
-        for i,mid in enumerate(enc['message_ids']):
-            if mid<0 or enc['source_message_indices'][int(mid)]<0:
-                labels[i]=-1
+        labels[~enc['score_mask']]=-1
         examples.append(dict(id=row.get('trajectory_id',row['sample_id']),
             ids=enc['input_ids'].tolist(),labels=labels.tolist()))
     if len({x['id'] for x in examples})!=len(examples):
@@ -31,16 +32,16 @@ def trajectory_examples(path):
     return examples
 
 
-def probe_examples(path):
+def probe_examples(path, roles=ROLES):
     docs=read_jsonl(path)
     if len(docs)!=250:
         raise ValueError('Standard probe training requires the original 250 passages')
     examples=[]
     for doc in docs:
-        for role in ROLES:
-            enc=render_document(role,doc['text'],doc.get('header',{}).get(role))
+        for role in roles:
+            enc=render_document(role,doc['text'],document_header(doc,role))
             examples.append(dict(id=f"{doc['id']}/{role}",ids=list(enc.ids),
-                                 labels=enc.labels.tolist(),split=doc['split']))
+                                 labels=enc.labels_for(roles).tolist(),split=doc['split']))
     return examples
 
 

@@ -6,17 +6,18 @@ Status: prepared, not run (2026-11-13). Run 1 of the [training status page](../R
 
 The best off-policy recipe so far (same-batch KL on fixed base-model rollouts) was found
 with the old chat templates and layer-12 cuML probes. Does it still raise role accuracy
-while keeping task success when rollouts come from the Harmony renderer, the probe sits at
-layer 16 and is refitted to convergence after every update?
+while keeping task success when rollouts come from the Harmony renderer and the probe has ten
+roles (one per Harmony header form), sits at layer 16 and is refitted to convergence after
+every update?
 
 ## Evaluation setup
 
 **Training.** GPT-OSS-20B with rank-64 LoRA adapters, one epoch over 2,700 base-model
 AppWorld rollouts (30 attempts on each of the 90 training tasks, no filtering by outcome),
-169 updates of 16 rollouts. Each update adds the role cross-entropy read by the probe and,
+169 updates of 16 rollouts. Each update adds the cross-entropy of the ten-role probe and,
 with coefficient 16, the KL divergence from the base model on the tokens the model wrote in
 the same 16 rollouts. After every update the probe is refitted to convergence on the 250
-neutral passages. Whole histories, no truncation.
+neutral passages, each wrapped in all ten headers. Whole histories, no truncation.
 
 **Evaluation.** A probe fitted from scratch on the trained model, scored on fresh runs of
 AppWorld test, τ² retail and SWE-bench at temperature 1.

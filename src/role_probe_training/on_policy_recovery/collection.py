@@ -36,7 +36,7 @@ def collect(runtime, config, episodes, step, root, rank, *, sampler=None):
     records = read_jsonl(folder/'trajectories.jsonl')
     if {x['trajectory_id'] for x in records} != {x['id'] for x in episodes}:
         raise ValueError('Incomplete fresh episode batch')
-    examples = trajectory_examples(folder/'trajectories.jsonl')
+    examples = trajectory_examples(folder/'trajectories.jsonl', runtime.roles)
     for example in examples:
         if len(example['ids']) > runtime.base.config.max_position_embeddings:
             raise ValueError('Full role history exceeds native limit; retained, not truncated')

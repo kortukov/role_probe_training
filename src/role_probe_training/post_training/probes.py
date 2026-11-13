@@ -11,7 +11,7 @@ import numpy as np
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
-from role_probe_training.harmony import ROLES
+from role_probe_training.harmony import ROLE_SETS, ROLES
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states
 from role_probe_training.post_training.fit_saved import fit_cache, probe_path
@@ -31,10 +31,10 @@ def load(path):
     return tokenizer,model
 
 
-def fit(root, layers=(12,16)):
+def fit(root, layers=(12,16), roles=ROLES):
     model_path=root/'data/post_training/model'; tokenizer,model=load(model_path)
     documents=Path('experiment_reports/gptoss_role_probes/lbfgs_fitter/artifacts/inputs/documents.jsonl')
-    examples=probe_examples(documents)
+    examples=probe_examples(documents,roles)
     features={layer:[] for layer in layers}; labels=[]; splits=[]
     for i,example in enumerate(examples):
         y=np.asarray(example['labels']); positions=np.flatnonzero(y>=0)
@@ -48,7 +48,7 @@ def fit(root, layers=(12,16)):
     for layer in layers: np.save(cache/f'states_{layer}.npy',np.concatenate(features.pop(layer)))
     np.save(cache/'labels.npy',y); np.save(cache/'train.npy',mask)
     metadata={
-        'model_revision':export['adapter_sha256'],'model_export':str(model_path),
+        'model_revision':export['adapter_sha256'],'model_export':str(model_path),'roles':list(roles),
         'base_model_revision':export['base_revision'],'layers':list(layers),'layer_indexing':'zero_based',
         'activation':'post_attention_layernorm_output_pre_mlp','fresh_fit':True,
         'initialization':'from scratch; no training-loop probe weights',
@@ -66,16 +66,17 @@ def score(root,input_path,output,layer=12):
     probe=RoleProbe.load(probe_path(root,layer))
     export=json.loads((model_path/'export.json').read_text())
     assert probe.metadata['model_revision']==export['adapter_sha256']
-    examples=trajectory_examples(input_path)
+    roles=probe.roles; n=len(roles)
+    examples=trajectory_examples(input_path,roles)
     output.mkdir(parents=True,exist_ok=True)
-    matrix=np.zeros((5,5),dtype=np.int64); per_trace=[]
+    matrix=np.zeros((n,n),dtype=np.int64); per_trace=[]
     with (output/'index.jsonl').open('w') as index:
         for i,x in enumerate(examples):
             if len(x['ids'])>model.config.max_position_embeddings:raise ValueError('Trajectory exceeds full context')
             states=extract_states(model,x['ids'],[layer])[layer]
             probabilities=probe.predict_proba(states)
             pred=probabilities.argmax(-1).astype(np.int8);labels=np.asarray(x['labels'],dtype=np.int8)
-            valid=labels>=0; counts=np.zeros((5,5),dtype=np.int64)
+            valid=labels>=0; counts=np.zeros((n,n),dtype=np.int64)
             np.add.at(counts,(labels[valid],pred[valid]),1);matrix+=counts
             per_trace.append(float(counts.trace()/counts.sum()))
             name=f'{i:06d}.npz'
@@ -83,8 +84,8 @@ def score(root,input_path,output,layer=12):
                 predictions=pred,probabilities=probabilities.astype(np.float16))
             index.write(json.dumps({'trajectory_id':x['id'],'file':name,'confusion_counts':counts.tolist()})+'\n');index.flush()
             if (i+1)%10==0:print(f'Scored {i+1}/{len(examples)} trajectories',flush=True)
-    support=matrix.sum(1); recalls=np.divide(matrix.diagonal(),support,out=np.zeros(5),where=support>0)
-    result={'trajectories':len(examples),'roles':list(ROLES),'accuracy':float(matrix.trace()/matrix.sum()),
+    support=matrix.sum(1); recalls=np.divide(matrix.diagonal(),support,out=np.zeros(n),where=support>0)
+    result={'trajectories':len(examples),'roles':list(roles),'accuracy':float(matrix.trace()/matrix.sum()),
         'macro_recall':float(recalls[support>0].mean()),'per_role_recall':recalls.tolist(),
         'mean_trajectory_accuracy':float(np.mean(per_trace)),'confusion_counts':matrix.tolist(),
         'input_sha256':hashlib.sha256(input_path.read_bytes()).hexdigest(),
@@ -99,9 +100,10 @@ def main():
     p=argparse.ArgumentParser(__doc__);p.add_argument('stage',choices=['fit','score'])
     p.add_argument('--root',type=Path,required=True);p.add_argument('--input',type=Path);p.add_argument('--output',type=Path)
     p.add_argument('--layers',type=int,nargs='+',default=[12,16],help='layers to fit (fit stage)')
+    p.add_argument('--roles',choices=sorted(ROLE_SETS),default='five',help='role set of the fitted probes (fit stage)')
     p.add_argument('--layer',type=int,default=12,help='layer whose probe scores the trajectories (score stage)')
     a=p.parse_args()
-    if a.stage=='fit':fit(a.root,tuple(a.layers))
+    if a.stage=='fit':fit(a.root,tuple(a.layers),ROLE_SETS[a.roles])
     else:
         if not a.input or not a.output:p.error('Scoring requires input and output')
         score(a.root,a.input,a.output,a.layer)

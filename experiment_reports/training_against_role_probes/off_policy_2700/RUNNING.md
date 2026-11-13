@@ -23,9 +23,10 @@ Settings (in `train_config.json` unless noted):
 - Rollouts: base model in its MXFP4 checkpoint behind the Harmony proxy, temperature 1,
   high reasoning, 8,192 output tokens, 32,768 context, 50 steps, 8 concurrent tasks
   (`collect.sbatch`).
-- Probe: `experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_16.npz`; for
-  layer 12 change `probe` to `layer_12.npz`. The layer and activation site come from the
-  probe file.
+- Probe: `experiment_reports/gptoss_role_probes/lbfgs_fitter/probes_header/layer_16.npz`, the
+  ten-role probe at layer 16. The role set, layer and activation site come from the probe
+  file: the trainer labels rollouts and passages in the probe's role set. The five-role
+  probes are in `lbfgs_fitter/probes/`.
 - Probe passages: `experiment_reports/gptoss_role_probes/lbfgs_fitter/artifacts/inputs/documents.jsonl`
   (250 passages; not in Git, written by the `prepare` stage of
   `src/experiments/gptoss_role_probes/run.py`).

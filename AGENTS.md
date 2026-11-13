@@ -87,7 +87,10 @@
 - Preserve the upstream training scale (configured 250 passages, up to 1,024
   tokens, all content tokens). Do not silently subsample tokens or reduce training
   data to save time. Small conversational evaluation is separate from training.
-- Two role sets exist side by side: the five roles (`ROLES`, behind every reported number) and
+- Training against the probes and its evaluation use the ten header roles at layer 16 since
+  2026-11-13 (`lbfgs_fitter/probes_header/layer_16.npz`); code takes the role set from the probe
+  file and labels data in that set (`trajectory_examples(path, roles)`, `probe_examples(path, roles)`).
+- Two role sets exist side by side: the five roles (`ROLES`, behind every number reported before that) and
   one role per Harmony header form (`HEADER_ROLES`, ten roles; `--roles header` on the fitting
   script). A probe belongs to one set, recorded in its metadata; never apply it to labels of the
   other. Definitions and where each set is supported: [HARMONY_RENDERING.md](HARMONY_RENDERING.md) section 6.
