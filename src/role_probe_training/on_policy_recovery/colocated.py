@@ -42,7 +42,9 @@ class ColocatedServer:
         env['TIKTOKEN_CACHE_DIR'] = str(Path('.cache/tiktoken').resolve())
         for key in ('TORCHINDUCTOR_CACHE_DIR','TRITON_CACHE_DIR','VLLM_CACHE_ROOT'):
             env[key] = str(self.stage/key)
-        model = Path('experiment_reports/training_against_role_probes/kl_iteration/same_batch/data/post_training/model').resolve()
+        # The unchanged base model in BF16 with zero attention adapters; every refresh overwrites the
+        # expert weights and attention adapters with the current policy (see its export.json).
+        model = Path('experiment_reports/training_against_role_probes/base_model/data/colocated_shell/model').resolve()
         command = [str(Path(sys.executable).with_name('vllm')),'serve',str(model),'--served-model-name','on-policy-role-model',
             '--host','127.0.0.1','--port',str(port),'--max-model-len','32768',
             '--max-num-seqs','8','--gpu-memory-utilization','0.45',
