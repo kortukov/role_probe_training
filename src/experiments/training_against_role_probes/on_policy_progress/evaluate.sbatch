@@ -11,7 +11,7 @@
 #SBATCH --exclude=vca-gpu-0701-03,vca-gpu-0701-05,vca-gpu-0702-02
 #SBATCH --output=experiment_reports/training_against_role_probes/on_policy_progress/logs/%x-%j.out
 # sbatch --job-name=eval-NAME evaluate.sbatch NAME CHECKPOINT
-# Fast evaluation of one trained checkpoint: export it, fit fresh probes (layers 12 and 16) on
+# Fast evaluation of one trained checkpoint: export it, fit fresh ten-role probes (layers 12 and 16) on
 # the trained model, run AppWorld test and tau2 retail through the Harmony proxy at
 # temperature 1, score the whole histories with the fresh probes, write eval/results.json.
 set -euo pipefail
@@ -37,7 +37,7 @@ trap 'kill $proxy_pid $server_pid 2>/dev/null || true; rm -rf "$job_scratch"' EX
 # 1. Export the adapter and fit fresh probes on the trained model.
 model="$PWD/$root/data/post_training/model"
 uv run --frozen --no-sync python -m role_probe_training.post_training.export_model --checkpoint "$checkpoint" --output "$model"
-uv run --frozen --no-sync python -m role_probe_training.post_training.probes fit --root "$root" --layers 12 16
+uv run --frozen --no-sync python -m role_probe_training.post_training.probes fit --root "$root" --layers 12 16 --roles header
 revision=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["adapter_sha256"])' "$model/export.json")
 
 # 2. Serve the trained model. It is served under the base model's name because the retail
