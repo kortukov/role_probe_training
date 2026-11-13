@@ -59,9 +59,14 @@ Harmony proxy.
 
 ## Folders
 
+The run data of every old-template experiment (rollouts, checkpoints, per-token predictions)
+was deleted on 2026-11-13; their reports, metrics and code remain, so their numbers can be
+read but not recomputed. Three final checkpoints are kept in `kept_old_models/`.
+
 | Folder | Contents | Status |
 |---|---|---|
 | `off_policy_2700/` | run 1: same-batch KL on 2,700 rollouts under the unified setup | current, prepared |
+| `kept_old_models/` | final checkpoints of the three best old-template models (two off-policy, one on-policy), kept for now | old template |
 | `kl_iteration/`, `data_iteration/` | off-policy runs with agentic and same-batch KL; 2,700 and 27,000 trajectories | old template |
 | `same_batch_epochs/` | more epochs on the fixed 2,700 trajectories | old template |
 | `off_policy_epochs/`, `on_policy_epochs/` | ten-epoch comparison of the two rollout-refresh schedules | old template |

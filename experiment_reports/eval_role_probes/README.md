@@ -37,7 +37,7 @@ the temperature-0 comparison, will be written when they finish.
 | `agentic_eval/swe_bench/harmony_base_t1/` | SWE-bench Verified run of the base model | current |
 | `agentic_eval/tau2_retail/harmony_base_t1/` | τ² retail run of the base model | current, queued |
 | `agentic_eval/probe_scoring/harmony_lbfgs/` | probe scores of the runs above, layers 12 and 16 | current |
-| `agentic_eval/*/harmony_base/`, `tau2_retail/harmony_base_ctx131k/` | the same runs at temperature 0, which makes the model repeat itself in its reasoning | superseded by temperature 1 |
+| `agentic_eval/appworld/harmony_base/`, `tau2_retail/harmony_base/`, `tau2_retail/harmony_base_ctx131k/` | the same runs at temperature 0, which makes the model repeat itself in its reasoning (AppWorld 12.5%, retail 45.6–50.0% task success; one SWE-bench shard solved 45 of 125 tasks before the run was stopped and its data deleted) | superseded by temperature 1 |
 | `agentic_eval/*/base_trajectories*/` | base-model runs behind every number published before 2026-11-13 | old template |
 | `agentic_eval/probe_scoring/probe_transfer/`, `probe_layer_comparison/`, `appworld/probe_transfer/` | probe scores of those runs, layers 4–20 | old template |
 | `chat_eval/norobots/` | probes on human chat conversations | earlier probes (cuML) |

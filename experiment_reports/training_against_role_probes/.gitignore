@@ -6,3 +6,4 @@ wandb/
 predictions/
 
 .epoch-publication.lock
+kept_old_models/*/
