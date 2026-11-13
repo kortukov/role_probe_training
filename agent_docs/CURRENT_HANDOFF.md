@@ -2,7 +2,7 @@
 
 ## Published experiments
 
-- The [training comparison](../experiment_reports/training_against_role_probes/README.md)
+- The [training comparison](../experiment_reports/training_against_role_probes/OLD_TEMPLATE_RESULTS.md)
   contains all seven fixed-data models, three on-policy variants and validated
   task/whole-history role results. The [seven-model SWE cohort](../experiment_reports/training_against_role_probes/swe_generous/README.md)
   is complete. Keep newer validated seven-model measurements; do not replace them

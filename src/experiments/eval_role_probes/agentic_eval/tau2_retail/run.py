@@ -37,6 +37,7 @@ def main():
     parser.add_argument("--requests", type=Path, required=True, help="the proxy's requests.jsonl for this run")
     parser.add_argument("--user-model", default="openai/azure/gpt-4.1")
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default="high")
+    parser.add_argument("--temperature", type=float, default=1, help="must equal the proxy's --temperature")
     parser.add_argument("--time-limit", type=int, default=900)
     parser.add_argument("--max-tokens", type=int, default=16384)
     parser.add_argument("--token-limit", type=int, default=500000)
@@ -73,14 +74,14 @@ def main():
                 "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
-                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent.parent / "shared/harmony_proxy.py", Path("uv.lock"), Path(__file__).parent.parent / "uv.lock", Path(__file__).with_name("job.sbatch"), Path("uv.lock"), Path("src/role_probe_training/trajectories/inspect_export.py"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
+                "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).parent.parent / "shared/harmony_proxy.py", Path("uv.lock"), Path(__file__).with_name("job.sbatch"), Path("src/role_probe_training/trajectories/inspect_export.py"), Path(".cache/models/gpt-oss-20b/tokenizer.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     if args.prepare_only:
         print(json.dumps({"sample_ids": selected, "dataset_size": len(ordered)}))
         return
     model = get_model("vllm/openai/gpt-oss-20b", base_url=args.base_url, api_key="local",
-                      config=GenerateConfig(temperature=0, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
+                      config=GenerateConfig(temperature=args.temperature, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
                                             reasoning_effort=args.reasoning_effort, max_connections=args.concurrency))
     user = None
     if args.benchmark == "tau2_retail":

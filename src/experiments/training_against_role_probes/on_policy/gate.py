@@ -25,7 +25,7 @@ def main():
         assert events[-1]['event'] == 'pilot_completed' and events[-1]['updates'] == 2
         assert abs(updates[0]['reverse_kl']) < 1e-5
         for update in updates:
-            assert update['refit_steps'] == 2000 and update['probe_training_tokens'] > 0
+            assert update['refit_iterations'] >= 0 and update['probe_training_tokens'] > 0
             assert update['collection_attempts'] == 16
             assert all(math.isfinite(update[key]) for key in
                        ('role_loss', 'reverse_kl', 'gradient_norm', 'probe_heldout_accuracy'))

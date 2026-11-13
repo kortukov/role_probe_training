@@ -34,41 +34,114 @@ def conversation_key(messages):
     return hashlib.sha256(payload.encode()).hexdigest()
 
 
-def attach_history(row, records, context_stops=0):
+def _text(content):
+    if isinstance(content, list):
+        content = "".join(part.get("text", "") if isinstance(part, dict) else getattr(part, "text", "")
+                          for part in content if (part.get("type", "text") if isinstance(part, dict)
+                                                  else getattr(part, "type", "text")) == "text")
+    return (content or "").strip()
+
+
+def prefix_keys(messages):
+    """One key per position: a hash chain over the client-visible messages before it.
+
+    `prefix_keys(messages)[i]` identifies the request whose message list was `messages[:i]`,
+    whatever other conversations run at the same time: two conversations share a key only
+    while everything the client sent is identical. Role, text, issued tool-call IDs and
+    the answered call ID enter the hash; reasoning does not. Computed identically by the
+    Harmony server (request bodies) and by this exporter (exported rows).
+    """
+    keys, state = [], hashlib.sha256(b"harmony-prefix")
+    for message in messages:
+        keys.append(state.hexdigest())
+        get = message.get if isinstance(message, dict) else lambda name, default=None: getattr(message, name, default)
+        calls = [call["id"] if isinstance(call, dict) else call.id for call in get("tool_calls") or []]
+        item = json.dumps([get("role"), _text(get("content")), calls, get("tool_call_id")], ensure_ascii=False)
+        state = hashlib.sha256(state.digest() + item.encode())
+    keys.append(state.hexdigest())
+    return keys
+
+
+def attach_history(row, records, context_stops=0, cancelled=0):
     """Give one trajectory row the token record of its last model call.
 
     `records` are the Harmony server's request records of this conversation and
-    `context_stops` the number of calls the server refused for lack of context (those
+    `context_stops` the number of calls the server refused for lack of context and
+    `cancelled` the number that failed on the client before reaching the server (both
     appear as Inspect model events without a record). A conversation without any
     recorded call gets `history: None` and is unscorable for role metrics.
     """
     indices = sorted(r["generation_index"] for r in records)
     if indices != list(range(len(indices))):
         raise ValueError(f"Sample {row['sample_id']}: missing, duplicate or colliding generation records")
-    if len(records) + context_stops != row["generation_records"]:
+    if len(records) + context_stops + cancelled != row["generation_records"]:
         raise ValueError(f"Sample {row['sample_id']}: {len(records)} server records and {context_stops} context "
                          f"stops but {row['generation_records']} Inspect model events")
     row["history"] = max(records, key=lambda r: r["generation_index"]) if records else None
+    # The server answers a capped turn without an action and a refused call with an ordinary stop,
+    # so Inspect's stop reasons undercount both; the server's records are the count.
+    from role_probe_training.harmony.render import tokens
+    row["generation_token_caps"] = sum(r["completion_ids"][-1] not in tokens().stop for r in records)
+    row["model_context_stops"] = context_stops
     row["unlabelled_generated_tokens"] = sum(
         e["content_end"] - e["content_start"] for r in records for e in r["completion_messages"]
         if e["label"] is None)
     return row
 
 
-def attach_histories(rows, requests_path):
-    """Join the Harmony server's records onto exported rows by conversation key."""
-    by_key, stops = {}, {}
+def records_of(row, calls, by_prefix, stops_by_prefix):
+    """The server records and context stops of one row, found from its logged model calls.
+
+    `calls` holds, per Inspect model event, the prefix key of the request body Inspect
+    logged, the tool-call IDs of the answer and the event's error. The record of an event is
+    the one the server wrote for exactly those request messages; two conversations that sent
+    identical messages got interchangeable generations, told apart by the call IDs where
+    there are any. A call that failed on the client and never reached the server (cancelled
+    at a sample limit) has no record. Returns the records, the number of context stops and
+    the number of such cancelled calls.
+    """
+    records, stops, cancelled = [], 0, 0
+    for index, (key, call_ids, error) in enumerate(calls):
+        candidates = by_prefix.get(key, [])
+        matches = [r for r in candidates if r["call_ids"] == call_ids] or candidates
+        if matches:
+            records.append(matches[-1])  # a request the client retried: the last record is the one later prompts replay
+        elif stops_by_prefix.get(key):
+            stops += 1
+        elif error:
+            cancelled += 1
+        else:
+            raise ValueError(f"Sample {row['sample_id']}: no server record for model call {index}")
+    return records, stops, cancelled
+
+
+def attach_histories(rows, requests_path, calls=None):
+    """Join the Harmony server's records onto exported rows.
+
+    With `calls` (one list per row, see `records_of`) and records that carry prefix keys,
+    every model call is matched to its record by the exact messages it sent. Otherwise a
+    row takes the records of its conversation key, which must then be unique.
+    """
+    by_key, stops, by_prefix, stops_by_prefix = {}, {}, {}, {}
     with Path(requests_path).open() as stream:
         for line in stream:
             if line.strip():
                 record = json.loads(line)
                 by_key.setdefault(record["episode_id"], []).append(record)
+                if "prefix_key" in record:
+                    by_prefix.setdefault(record["prefix_key"], []).append(record)
     stops_path = Path(requests_path).with_name("episode_stops.jsonl")
     if stops_path.exists():
         for line in stops_path.read_text().splitlines():
             if line.strip():
-                key = json.loads(line)["episode_id"]
-                stops[key] = stops.get(key, 0) + 1
+                stop = json.loads(line)
+                stops[stop["episode_id"]] = stops.get(stop["episode_id"], 0) + 1
+                if "prefix_key" in stop:
+                    stops_by_prefix[stop["prefix_key"]] = stops_by_prefix.get(stop["prefix_key"], 0) + 1
+    if calls is not None and by_prefix:
+        for row, row_calls in zip(rows, calls):
+            attach_history(row, *records_of(row, row_calls, by_prefix, stops_by_prefix))
+        return rows
     keys = [conversation_key(row["messages"]) for row in rows]
     if len(set(keys)) != len(keys):
         raise ValueError("Two exported samples share a conversation key; run epochs separately")
@@ -150,7 +223,7 @@ def export_logs(paths, output, benchmark, provenance, sample_sources=None, reque
     from inspect_ai.log import read_eval_log
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    rows, requests, seen, log_results = [], [], set(), []
+    rows, requests, seen, log_results, calls = [], [], set(), [], []
     for path in paths:
         log = read_eval_log(str(path), resolve_attachments="full")
         log_results.append({"path": str(path), "status": log.status,
@@ -193,6 +266,12 @@ def export_logs(paths, output, benchmark, provenance, sample_sources=None, reque
                         ("###STOP###", "###OUT-OF-SCOPE###", "###TRANSFER###")) if benchmark == "tau2_retail" else None,
                    "all_model_errors": [e.error for e in sample.events if e.event == "model" and e.error], "agent_model_errors": [e.error for e in events if e.error]}
             rows.append(row)
+            # What each call sent, as logged by Inspect (log_model_api), identifies its server record.
+            calls.append([(prefix_keys(event.call.request["messages"])[-1],
+                           [call.id for choice in event.output.choices[:1] for call in choice.message.tool_calls or []],
+                           event.error)
+                          for event in events] if all(event.call and event.call.request.get("messages") for event in events)
+                         else None)
             for index, event in enumerate(events):
                 requests.append({"schema_version": 1, "benchmark": benchmark, "sample_id": sample.id,
                     "epoch": sample.epoch, "generation_index": index, "model": event.model,
@@ -200,7 +279,7 @@ def export_logs(paths, output, benchmark, provenance, sample_sources=None, reque
                     "tools": [dump(t) for t in event.tools], "config": dump(event.config),
                     "error": event.error, "retries": event.retries, "call": dump(event.call)})
     if requests_path is not None:
-        attach_histories(rows, requests_path)
+        attach_histories(rows, requests_path, None if any(c is None for c in calls) else calls)
     for name, data in (("trajectories.jsonl", rows), ("generations.jsonl", requests)):
         target = output / name
         temporary = target.with_suffix(".tmp")

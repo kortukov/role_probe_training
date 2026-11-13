@@ -39,7 +39,7 @@ def main():
     parser.add_argument("--user-model", default="openai/azure/gpt-4.1")
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default="high")
     parser.add_argument("--time-limit", type=int, default=900)
-    parser.add_argument("--temperature", type=float, default=0)
+    parser.add_argument("--temperature", type=float, default=1)
     parser.add_argument("--message-limit", type=int, default=30)
     parser.add_argument("--max-tokens", type=int, default=16384)
     parser.add_argument("--token-limit", type=int, default=500000)

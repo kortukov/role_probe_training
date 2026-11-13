@@ -1,7 +1,6 @@
 """GPU smoke test: loading, content masks and pre-MLP indexing."""
 
 import argparse
-import importlib.util
 import json
 from pathlib import Path
 
@@ -16,8 +15,6 @@ parser.add_argument('--model', default='.cache/models/gpt-oss-20b')
 args = parser.parse_args()
 print('Torch:', torch.__version__, 'CUDA:', torch.version.cuda, flush=True)
 print('GPU:', torch.cuda.get_device_name(), flush=True)
-if importlib.util.find_spec('cuml') is None:
-    raise SystemExit('This smoke test fits a probe with cuML: run with `uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python ...`')
 tokenizer, model = load_model(args.model)
 for role in ROLES:
     enc = render_document(role, 'The garden contains green plants and a small wooden bench.').encoded()
@@ -47,9 +44,5 @@ y = np.repeat(np.arange(5), 30)
 x = (np.eye(5)[y]*5 + rng.normal(size=(len(y), 5))*.1).astype(np.float32)
 probe = fit_probe(x, y, metadata={'layer':12}, C=1.)
 assert (probe.predict(x) == np.asarray(ROLES)[y]).all()
-print('PASS: cuML fit and NumPy probability reconstruction', probe.metadata, flush=True)
-groups = np.arange(len(y)) // 5  # five tokens per example
-order = np.argsort(groups, kind='stable')
-probe = fit_probe(x[order], y[order], metadata={'layer':12}, backend='adamw', groups=groups[order], max_iter=2000)
-assert (probe.predict(x) == np.asarray(ROLES)[y]).all()
-print('PASS: AdamW (training_against_probes) fit on the GPU and NumPy probability reconstruction', probe.metadata, flush=True)
+assert probe.metadata['converged']
+print('PASS: L-BFGS fit on the GPU and NumPy probability reconstruction', probe.metadata, flush=True)

@@ -21,4 +21,4 @@ export TOKENIZERS_PARALLELISM=false
 mkdir -p "$TMPDIR"
 # Only small probes, summaries, plots and trajectories are written to shared storage.
 # Activations stay in RAM and are released after each fit.
-srun --cpu-bind=none uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python -u src/experiments/gptoss_role_probes/run.py "$@"
+srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/gptoss_role_probes/run.py "$@"

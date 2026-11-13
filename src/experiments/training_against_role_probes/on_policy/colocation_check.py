@@ -85,8 +85,7 @@ def main():
             raise ValueError('Initial policy KL must be zero')
         record('updated',gradient_norm=float(norm),reverse_kl=float(totals[1]/denominators[1]),
                peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,**memory())
-        probe=refit_probe(runtime,probe_examples(config['probe_documents']),
-                          steps=config['refit_steps'],seed=124)
+        probe=refit_probe(runtime,probe_examples(config['probe_documents']))
         record('refitted',probe=probe)
         refresh=server.synchronize(1)
         record('policy_one_ready',refresh=refresh,**memory())
@@ -103,7 +102,7 @@ def main():
         dist.barrier()
         if rank==0:
             (args.output/'passed.json').write_text(json.dumps(dict(two_gpu_colocation=True,
-                full_episode_per_rank_before_and_after=True,refit_steps=2000,
+                full_episode_per_rank_before_and_after=True,
                 production_batch_size_validated=False,checkpoint_resume_validated=False),indent=2)+'\n')
     finally:
         if server is not None:server.close()

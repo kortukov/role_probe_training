@@ -85,7 +85,7 @@ def main():
     c = json.loads((CODE/'config.json').read_text())
     original = json.loads((ORIGINAL/'runs/training/epoch1/manifest.json').read_text())
     for key in ('model','probe','trajectories','expected_trajectories','validation','probe_documents','kl_anchors',
-                'seed','learning_rate','kl_coefficient','refit_steps','kl_sampling'):
+                'seed','learning_rate','kl_coefficient','kl_sampling'):
         if c[key] != original[key]:
             raise ValueError(f'Continuation changes optimization or input setting: {key}')
     if not (CHECKPOINT/'training.pt').is_file():

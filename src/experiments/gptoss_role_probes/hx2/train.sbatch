@@ -13,4 +13,4 @@
 # Usage: sbatch train.sbatch --config CONFIG --output OUTPUT [--stage train|evaluate|audit|all]
 # Activations for all five layers stay in host RAM (float16) until each fit; hence --mem.
 source src/experiments/gptoss_role_probes/hx2/common.sh
-srun --cpu-bind=none uv run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python -u src/experiments/gptoss_role_probes/run.py "$@"
+srun --cpu-bind=none uv run --frozen --no-sync python -u src/experiments/gptoss_role_probes/run.py "$@"

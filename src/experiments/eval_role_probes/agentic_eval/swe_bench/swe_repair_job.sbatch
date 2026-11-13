@@ -58,10 +58,10 @@ done
 if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
 # Harmony proxy (root environment) between Inspect and vLLM: renders prompts with oss-harmony,
 # samples token IDs from vLLM and records them in $run_dir/proxy/requests.jsonl. Its reasoning
-# effort, max_tokens and temperature must equal what the run sends (swe_repair_run.py generates at temperature 0).
+# effort, max_tokens and temperature must equal what the run sends (swe_repair_run.py generates at temperature 1, the rule for every collection).
 uv run --frozen --no-sync python "$project/shared/harmony_proxy.py" --vllm-url "http://127.0.0.1:$port" \
     --model openai/gpt-oss-20b --output "$run_dir/proxy" --port "$proxy_port" --reasoning-effort high \
-    --max-tokens 16384 --context-limit 32768 --temperature 0 > "$run_dir/proxy.log" 2>&1 &
+    --max-tokens 16384 --context-limit 32768 --temperature 1 > "$run_dir/proxy.log" 2>&1 &
 proxy_pid=$!
 for ((i=0;i<60;i++)); do
     curl --silent --fail "http://127.0.0.1:$proxy_port/v1/models" > /dev/null && break
@@ -69,7 +69,7 @@ for ((i=0;i<60;i++)); do
     sleep 1
 done
 uv run --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" \
-    --max-tokens 16384 --temperature 0 > "$run_dir/smoke.json"
+    --max-tokens 16384 --temperature 1 > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
 uv run --frozen --no-sync python "$project/swe_bench/swe_repair_run.py" \
     --output "$run_dir" --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$run_dir/proxy/requests.jsonl" --benchmark swe_bench --all --concurrency 2 --time-limit 1800 --shard-index "$SLURM_ARRAY_TASK_ID" --shard-count 1 --sample-id matplotlib__matplotlib-26342 --sample-id django__django-17084 "$@"

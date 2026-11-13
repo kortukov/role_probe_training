@@ -89,7 +89,6 @@ def main():
                            sum(x['episode_id'] == episode['id'] for x in stops))
             row['invalid_model_outputs'] = [x for x in events if x['episode_id'] == episode['id'] and x['invalid']]
             row['episode_stops'] = [x for x in stops if x['episode_id'] == episode['id']]
-            row['model_context_stops'] += sum(x['reason'] == 'serving_context_limit' for x in row['episode_stops'])
             if row['error'] or row['export_errors'] or row['agent_model_errors']:
                 failures.append(f"Episode {episode['id']} failed; retained for audit, no automatic reroll")
             if any(status != 'success' for status in statuses[episode['id']]):

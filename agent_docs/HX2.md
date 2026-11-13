@@ -17,8 +17,7 @@ verified live on 2026-10-30 (`sinfo`, `sacctmgr`, a one-GPU probe job) unless ma
   itself: submit with `--partition=interactive-gpu` and no `--qos` (the account only
   allows `normal`; `--qos=interactive` is rejected). Verified 2026-11-09 with the
   probe smoke job, which ran within a minute of submission.
-- Driver 580.65.06, CUDA 13.0 (RHEL 9.6): the repo's `cu130` torch and the `cuml-cu13`
-  probe-fitting environment run unchanged. `/tmp` on GPU nodes is only 1 GB: put `TMPDIR`, Triton and
+- Driver 580.65.06, CUDA 13.0 (RHEL 9.6): the repo's `cu130` torch runs unchanged. `/tmp` on GPU nodes is only 1 GB: put `TMPDIR`, Triton and
   matplotlib caches on `/scratch/$USER/...` (see `hx2/common.sh`). Apptainer is
   installed on login and compute nodes. Compute nodes have outbound internet.
 - Storage: weka home `/hx2-weka/home/xy2222` (9 TB filesystem, shared). No per-user
@@ -27,10 +26,9 @@ verified live on 2026-10-30 (`sinfo`, `sacctmgr`, a one-GPU probe job) unless ma
 ## Environment
 
 - `uv` is at `~/.local/bin/uv`; system Python is 3.9, uv installs 3.12 itself.
-  Install with `uv sync --locked --extra vllm` in the repo root and
-  `uv sync --locked --project src/experiments/gptoss_role_probes/fit_env` for cuML probe
-  fitting; jobs use `uv run --frozen --no-sync`. Layout and reasons:
-  [ENVIRONMENTS.md](ENVIRONMENTS.md). Both environments are installed on hx2.
+  Install with `uv sync --locked --extra vllm` in the repo root; jobs use
+  `uv run --frozen --no-sync`. Layout and reasons:
+  [ENVIRONMENTS.md](ENVIRONMENTS.md). The main environment is installed on hx2.
 - Shared dependency versions come from `/hx2-weka/home/xy2222/prompt_injection_interp/pyproject.toml`
   (rule in [AGENTS.md](../AGENTS.md)). On 2026-11-09 this moved Transformers from 4.57.6
   to 5.9.0, vLLM from 0.32.0 to 0.27.1 and peft from 0.20.0 to 0.18.1. Probe weights and

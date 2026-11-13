@@ -1,26 +1,23 @@
 # Python environments
 
-Since 2026-11-09 the repository has three uv environments. Before that it had ten: the root
-plus nine sub-projects under `src/experiments/`, each with its own lock.
+The repository has two uv environments. Before 2026-11-09 it had ten: the root plus nine
+sub-projects under `src/experiments/`, each with its own lock. A third environment for cuML
+probe fitting existed until 2026-11-13, when every probe fit moved to the project's torch
+L-BFGS fitter (`src/role_probe_training/training/probe_lbfgs.py`), which runs in the main
+environment.
 
 | environment | defined by | install | used for |
 |---|---|---|---|
-| main | root `pyproject.toml` and `uv.lock` | `uv sync --locked --extra vllm` | vLLM serving, the Harmony proxy, Inspect collections (AppWorld, retail, SWE-bench), agentdojo, probe scoring, training |
-| probe fitting | `src/experiments/gptoss_role_probes/fit_env/` | `uv sync --locked --project src/experiments/gptoss_role_probes/fit_env` | every from-scratch probe fit with cuML: `gptoss_role_probes/run.py` and `smoke.py`, `post_training/fit_saved.py` |
+| main | root `pyproject.toml` and `uv.lock` | `uv sync --locked --extra vllm` | vLLM serving, the Harmony proxy, Inspect collections (AppWorld, retail, SWE-bench), agentdojo, probe fitting and scoring, training |
 | AppWorld data | `src/experiments/eval_role_probes/agentic_eval/appworld/env/` | `uv sync --locked --project src/experiments/eval_role_probes/agentic_eval/appworld/env` | the AppWorld package itself (data download, world servers) |
 
 Jobs run `uv run --frozen --no-sync ...` from the repository root for the main environment
-and add `--project <folder>` for the other two. A node that never serves the model can
+and add `--project <folder>` for the AppWorld data environment. A node that never serves the model can
 install the main environment without `--extra vllm`; the versions of everything else are
 the same either way.
 
-## Why three and not one
+## Why two and not one
 
-- **cuML cannot sit next to vLLM.** vLLM 0.27.1 requires numba 0.65.0 exactly and cuML
-  26.10.0, the latest release, requires numba below 0.65. cuML is only needed for
-  from-scratch probe fits, so it moved to its own small project, which installs the root
-  package plus cuML. The training-time probe refit is PyTorch gradient descent and does
-  not use cuML.
 - **AppWorld needs pydantic 1**, and everything else needs pydantic 2.
 - Everything else resolves together: vLLM, Inspect with inspect-evals and swebench,
   agentdojo, peft, wandb and the probe code.
@@ -44,9 +41,6 @@ the same either way.
 - **Shared packages take the version constraint of `prompt_injection_interp`**
   (rule in [AGENTS.md](../AGENTS.md)): transformers 5.9.0, vLLM 0.27.1, peft 0.18.1,
   agentdojo 0.1.35.
-- **The probe-fitting project pins `torch==2.13.0`** so that activations are computed by
-  the same torch in both environments. `run.py` and `smoke.py` stop before loading the
-  model when cuML is missing, instead of failing after activation extraction.
 
 ## What changed for existing work
 
@@ -76,8 +70,9 @@ the same either way.
 - **GPU, main environment:** serving smoke job 1648398 (`shared/hx2/serving_smoke.sbatch`):
   vLLM 0.27.1 running on the forked Harmony library, completions by token ID, a tool round
   trip through the Harmony proxy and an Inspect request through the proxy.
-- **GPU, probe-fitting environment:** probe smoke job 1648396
-  (`gptoss_role_probes/hx2/smoke.sbatch`): model load, activation site and a cuML fit.
+- **GPU, former probe-fitting environment:** probe smoke job 1648396
+  (`gptoss_role_probes/hx2/smoke.sbatch`): model load, activation site and a cuML fit. The
+  smoke test now fits with L-BFGS in the main environment; that version has not been run.
 - **Not yet run in the new layout:** a training job, the on-policy colocated serving with
   its custom vLLM worker class, a full benchmark episode (AppWorld pilot, SWE-bench
   sandbox, retail), and anything on DE.BER1.

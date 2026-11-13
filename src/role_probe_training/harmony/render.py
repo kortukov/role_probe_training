@@ -414,7 +414,7 @@ def render_turns(turns, config, tools=None, *, system=True):
     index = 0
     instructions, sources = [], []
     while index < len(turns) and turns[index]["role"] in ("system", "developer"):
-        instructions.append(turns[index]["content"])
+        instructions.append(_text(turns[index]["content"]))
         sources.append(index)
         index += 1
     if system:
@@ -471,19 +471,34 @@ def replay_turn(completion):
     including the stop token). A final answer's <|return|> becomes <|end|> as in every
     Harmony rendering of earlier turns; tool calls keep <|call|>. Labels come from the
     parsed message boundaries and channels.
+
+    The model's tokens are replayed as generated even when they are not a well-formed turn,
+    because the model did see them and clients (a user simulator, an agent loop) may continue:
+
+    * A turn cut off by the generation limit has no stop token. It is closed with one <|end|>
+      that the model did not generate, as a chat template renders truncated text. An unfinished
+      message keeps `complete=False` and is marked `closed_by_replay`. Nothing is added when
+      the limit fell right after an <|end|> the model wrote itself.
+    * A turn the Harmony library cannot parse keeps the messages parsed before the failure;
+      its remaining tokens are replayed without labels (the record of the generation holds
+      `completion_parse_error`).
     """
     from .parse import walk_completion
     control = tokens()
     completion = list(completion)
-    if not completion or completion[-1] not in control.stop:
-        raise ValueError("Generated turn does not end with <|return|> or <|call|>; cannot be replayed")
-    entries, error = walk_completion(completion)
-    if error is not None:
-        raise ValueError(f"Generated turn is not parseable Harmony: {error}")
+    if not completion:
+        raise ValueError("Empty generated turn; cannot be replayed")
+    entries, _ = walk_completion(completion)
     ids = list(control.assistant_header) + completion
+    entries = [dict(entry, source=0) for entry in entries]
     if ids[-1] == control.ret:
         ids[-1] = control.end
-    return Rendering(ids, [dict(entry, source=0) for entry in entries])
+    elif ids[-1] not in control.stop and ids[-1] != control.end:
+        # No <|end|> is added when the limit fell right after a message the model had closed itself.
+        ids.append(control.end)
+        if entries and not entries[-1]["complete"]:
+            entries[-1].update(end=len(ids), closed_by_replay=True)
+    return Rendering(ids, entries)
 
 
 def completion_prompt(rendering):

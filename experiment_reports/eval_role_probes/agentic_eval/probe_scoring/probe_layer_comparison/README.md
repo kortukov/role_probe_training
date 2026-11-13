@@ -46,7 +46,7 @@ Role recognition varies strongly by role and layer; no single aggregate accuracy
 establishes reliable recognition of every role. These are base-model measurements,
 not evidence about training effects. The corrected SWE run solves 181/500 tasks (36.2%); seven sandbox runtime
 errors remain counted as failures. The current
-[base-versus-trained comparison](../../../../training_against_role_probes/README.md)
+[base-versus-trained comparison](../../../../training_against_role_probes/OLD_TEMPLATE_RESULTS.md)
 reports task performance separately from role accuracy.
 
 [Reproduction instructions](RUNNING.md)

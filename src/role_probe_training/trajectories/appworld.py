@@ -34,7 +34,7 @@ class WorldWorker:
     def __init__(self, image, data, outputs, task_id, experiment, oracle=False):
         self.output = Path(outputs) / task_id
         self.output.mkdir(parents=True, exist_ok=True)
-        worker = Path(__file__).resolve().parents[2] / 'experiments/agentic_eval/appworld_worker.py'
+        worker = Path(__file__).resolve().parents[2] / 'experiments/eval_role_probes/agentic_eval/appworld/appworld_worker.py'
         self.command = ['apptainer', 'exec', '--containall', '--cleanenv', '--no-mount',
                         'hostfs,bind-paths', '--net', '--network', 'none', '--pwd', '/run',
                         '--bind', f'{Path(data).resolve()}:/run/data:ro',

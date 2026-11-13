@@ -49,7 +49,7 @@ def main():
               'generation_seeds': list(range(8301, 8331)),
               'sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
               'limited_attempts': sum(bool(r['limit']) or bool(r['limit_events']) for r in rows),
-              'reasoning_bearing': sum(any(m.get('thinking') for m in r['messages']) for r in rows),
+              'with_token_records': sum(r.get('history') is not None for r in rows),
               'collection_shards': [{k: t[k] for k in ('started_utc', 'completed_utc', 'wall_seconds', 'tasks')}
                                     for t in timings]}
     scorer_names = sorted({name for row in rows for name in row['scores']})

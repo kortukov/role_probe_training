@@ -1,0 +1,20 @@
+{
+  "name": "offpolicy2700-harmony-layer16",
+  "wandb_id": "offpolicy2700-harmony-layer16-v1",
+  "model": ".cache/models/gpt-oss-20b",
+  "probe": "experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_16.npz",
+  "trajectories": "experiment_reports/training_against_role_probes/off_policy_2700/data/train2700/trajectories.jsonl",
+  "expected_trajectories": 2700,
+  "validation": "experiment_reports/training_against_role_probes/off_policy_2700/data/dev/trajectories.jsonl",
+  "probe_documents": "experiment_reports/gptoss_role_probes/lbfgs_fitter/artifacts/inputs/documents.jsonl",
+  "kl_anchors": "experiment_reports/training_against_role_probes/off_policy_2700/data/anchors.jsonl",
+  "output": "experiment_reports/training_against_role_probes/off_policy_2700/runs/training/epoch1",
+  "seed": 123,
+  "epochs": 1,
+  "microbatch": 2,
+  "learning_rate": 5e-05,
+  "kl_coefficient": 16,
+  "eval_interval": 5,
+  "checkpoint_interval": 10,
+  "kl_sampling": "same_role_batch"
+}

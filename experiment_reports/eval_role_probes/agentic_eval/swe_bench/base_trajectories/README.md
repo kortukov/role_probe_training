@@ -28,6 +28,6 @@ metric and only coincidentally rounds to the same percentage as task success.
 This complete native-context run supersedes the earlier constrained SWE cohorts.
 Seven sandbox runtime errors remain counted as task failures. This setup does not
 reproduce the model card's agent/harness or its validated task subset. See the
-[current four-model comparison and limitations](../../../../training_against_role_probes/README.md).
+[current four-model comparison and limitations](../../../../training_against_role_probes/OLD_TEMPLATE_RESULTS.md).
 
 [Reproduction instructions](RUNNING.md)

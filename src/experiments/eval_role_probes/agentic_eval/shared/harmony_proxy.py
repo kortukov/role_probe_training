@@ -25,8 +25,8 @@ def main():
     parser.add_argument('--reasoning-effort', default='high')
     parser.add_argument('--date', default=RenderConfig.conversation_start_date, help='Harmony system message date')
     parser.add_argument('--max-tokens', type=int, default=8192)
-    parser.add_argument('--temperature', type=float, default=0.0,
-                        help='sampling temperature (0 = greedy, the default for evaluation collections); '
+    parser.add_argument('--temperature', type=float, default=1.0,
+                        help='sampling temperature (1, the model default, for every collection; 0 = greedy); '
                              'every client request must use the same value')
     parser.add_argument('--context-limit', type=int, default=32768)
     parser.add_argument('--timeout', type=int, default=1800, help='seconds to wait for one vLLM completion')

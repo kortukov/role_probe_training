@@ -33,8 +33,7 @@ dependencies = [
 # not pull its compiled kernels. It pins torch (2.13.0) for the whole lock.
 #   uv sync --locked --extra vllm    # nodes that serve the model
 #   uv sync --locked                 # everywhere else
-# cuML cannot share this environment (vLLM needs numba 0.65.0, cuML needs numba < 0.65): probe
-# fitting runs from src/experiments/gptoss_role_probes/fit_env. AppWorld's own package needs
+# AppWorld's own package needs
 # pydantic 1 and keeps src/experiments/eval_role_probes/agentic_eval/appworld/env.
 [project.optional-dependencies]
 vllm = [

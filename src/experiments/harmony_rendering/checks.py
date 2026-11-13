@@ -105,12 +105,39 @@ class RendererChecks(unittest.TestCase):
         self.assertEqual(''.join(text[a:b] for a, b in offsets.tolist()), text)
         self.assertIn('😀 héllo', text)
 
-    def test_replay_requires_a_finished_turn(self):
+    def test_replay_of_finished_and_capped_turns(self):
+        # A turn cut off by the generation limit is closed with one <|end|>.
+        capped = h.replay_turn(TURN_2[:-1])
+        self.assertEqual(capped.ids, h.tokens().assistant_header + TURN_2[:-1] + [h.tokens().end])
+        self.assertTrue(capped.messages[-1]['closed_by_replay'] and not capped.messages[-1]['complete'])
+        # A limit that fell right after a message the model closed adds no second <|end|>.
+        closed = h.encoding().encode('<|channel|>analysis<|message|>Think.<|end|>', allowed_special='all')
+        self.assertEqual(h.replay_turn(closed).ids, h.tokens().assistant_header + closed)
         with self.assertRaises(ValueError):
-            h.replay_turn(TURN_2[:-1])
+            h.replay_turn([])
+        # A turn the library cannot parse is replayed verbatim; only the messages before the failure are labelled.
+        encode = lambda text: h.encoding().encode(text, allowed_special='all')
+        broken = encode('<|channel|>analysis<|message|>Think.<|end|><|start|>assistant<|channel|>final <|constrain|>commentary to=x y<|message|>Hi<|return|>')
+        entries, error = h.walk_completion(broken)
+        self.assertIsNotNone(error)
+        replayed = h.replay_turn(broken)
+        self.assertEqual(replayed.ids, h.tokens().assistant_header + broken[:-1] + [h.tokens().end])
+        self.assertEqual(len(replayed.messages), len(entries))
         replayed = h.replay_turn(TURN_2)
         self.assertEqual(replayed.ids[-1], h.tokens().end)
         self.assertEqual(replayed.ids[:2], h.tokens().assistant_header)
+
+    def test_final_message_with_content_type(self):
+        # GPT-OSS answers `final <|constrain|>json` when its instructions ask for JSON: text, not a tool call.
+        completion = h.encoding().encode('<|channel|>final <|constrain|>json<|message|>{"message":"hi"}<|return|>',
+                                         allowed_special='all')
+        entries, error = h.walk_completion(completion)
+        self.assertIsNone(error)
+        self.assertEqual((entries[0]['recipient'], entries[0]['content_type']), (None, '<|constrain|>json'))
+        from role_probe_training.harmony.parse import completion_to_chat
+        parsed = completion_to_chat(entries, [])
+        self.assertFalse(parsed['invalid'])
+        self.assertEqual(parsed['message']['content'], '{"message":"hi"}')
 
     def test_completion_parsing(self):
         entries, error = h.walk_completion(TURN_1)

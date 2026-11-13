@@ -27,6 +27,8 @@ export CUDA_HOME="$PWD/.venv/lib/python3.12/site-packages/nvidia/cu13"
 export PATH="$CUDA_HOME/bin:$PATH"
 export FLASHINFER_WORKSPACE_BASE="$LOCAL_JOB_DIR" MAX_JOBS=8 VLLM_USE_FLASHINFER_SAMPLER=0
 report_root="${AGENTIC_REPORT_ROOT:-experiment_reports/eval_role_probes/agentic_eval/tau2_retail/base_trajectories}"
+context_limit="${AGENTIC_CONTEXT_LIMIT:-32768}"  # 32768 as in the published run; the new renderer keeps earlier reasoning, so long chats may need 131072
+temperature="${AGENTIC_TEMPERATURE:-1}"  # 1 is the rule for every collection; 0 decodes greedily
 run_dir="$PWD/$report_root/runs/$SLURM_JOB_ID"
 mkdir -p "$run_dir"
 port=$((18000 + SLURM_JOB_ID % 10000))
@@ -40,7 +42,7 @@ cleanup() {
 }
 uv run --frozen --no-sync vllm serve "$PWD/.cache/models/gpt-oss-20b" \
     --served-model-name openai/gpt-oss-20b --host 127.0.0.1 --port "$port" \
-    --max-model-len 32768 --max-num-seqs 16 --gpu-memory-utilization 0.80 \
+    --max-model-len "$context_limit" --max-num-seqs 16 --gpu-memory-utilization 0.80 \
     --attention-backend TRITON_ATTN --moe-backend triton --kernel-config '{"enable_jit_warmup":false}' \
     --cudagraph-capture-sizes 1 2 4 8 16 --max-cudagraph-capture-size 16 > "$run_dir/server.log" 2>&1 &
 server_pid=$!
@@ -54,10 +56,10 @@ done
 if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
 # Harmony proxy (root environment) between Inspect and vLLM: renders prompts with oss-harmony,
 # samples token IDs from vLLM and records them in $run_dir/proxy/requests.jsonl. Its reasoning
-# effort, max_tokens and temperature must equal what the run sends (the tau2 agent is generated at temperature 0).
+# effort, max_tokens and temperature must equal what the run sends. 1 is the rule for every collection; AGENTIC_TEMPERATURE=0 decodes greedily.
 uv run --frozen --no-sync python "$project/shared/harmony_proxy.py" --vllm-url "http://127.0.0.1:$port" \
     --model openai/gpt-oss-20b --output "$run_dir/proxy" --port "$proxy_port" --reasoning-effort high \
-    --max-tokens 16384 --context-limit 32768 --temperature 0 > "$run_dir/proxy.log" 2>&1 &
+    --max-tokens 16384 --context-limit "$context_limit" --temperature "$temperature" > "$run_dir/proxy.log" 2>&1 &
 proxy_pid=$!
 for ((i=0;i<60;i++)); do
     curl --silent --fail "http://127.0.0.1:$proxy_port/v1/models" > /dev/null && break
@@ -65,7 +67,7 @@ for ((i=0;i<60;i++)); do
     sleep 1
 done
 uv run --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" \
-    --max-tokens 16384 --temperature 0 > "$run_dir/smoke.json"
+    --max-tokens 16384 --temperature "$temperature" > "$run_dir/smoke.json"
 if [[ "${1:-}" == "--smoke-only" ]]; then exit 0; fi
 uv run --frozen --no-sync python "$project/tau2_retail/run.py" \
-    --output "$run_dir" --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$run_dir/proxy/requests.jsonl" "$@"
+    --output "$run_dir" --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$run_dir/proxy/requests.jsonl" --temperature "$temperature" "$@"

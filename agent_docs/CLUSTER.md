@@ -35,8 +35,7 @@ set `UV_PYTHON_INSTALL_DIR` to storage under `/data/cluster` as well. This initi
 environment uses the system interpreter `/usr/bin/python3.12`.
 
 Before submitting, run `uv sync --locked --extra vllm` from the repo on appropriate storage
-(and `uv sync --locked --project src/experiments/gptoss_role_probes/fit_env` for cuML probe
-fitting; see [ENVIRONMENTS.md](ENVIRONMENTS.md)).
+(see [ENVIRONMENTS.md](ENVIRONMENTS.md)).
 Jobs can use `uv run --frozen --no-sync ...` against that prepared environment to
 avoid downloads and concurrent environment changes. Do not change an environment
 or code used by queued/running jobs; Slurm copies the submission script, not the

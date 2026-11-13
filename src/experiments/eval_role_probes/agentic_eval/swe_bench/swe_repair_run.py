@@ -86,7 +86,7 @@ def main():
         print(json.dumps({"sample_ids": selected, "dataset_size": len(task.dataset)}))
         return
     model = get_model("vllm/openai/gpt-oss-20b", base_url=args.base_url, api_key="local",
-                      config=GenerateConfig(temperature=0, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
+                      config=GenerateConfig(temperature=1, seed=args.seed, max_tokens=args.max_tokens, max_retries=2, timeout=300,
                                             reasoning_effort=args.reasoning_effort, max_connections=args.concurrency))
     user = None
     if args.benchmark == "tau2_retail":

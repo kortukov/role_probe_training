@@ -38,8 +38,7 @@ def walk_completion(completion):
         after = parser.state
         if before != StreamState.CONTENT and after == StreamState.CONTENT:
             current.update(role=_role_name(parser.current_role), channel=parser.current_channel,
-                           recipient=parser.current_recipient, content_type=parser.current_content_type,
-                           content_start=base + index + 1)
+                           **_addressing(parser), content_start=base + index + 1)
         if before == StreamState.CONTENT and after != StreamState.CONTENT:
             message = parser.messages[-1]
             current.update(content_end=base + index, end=base + index + 1, complete=True,
@@ -50,11 +49,23 @@ def walk_completion(completion):
         end = base + len(completion)
         if "content_start" not in current:
             current.update(role=_role_name(parser.current_role), channel=parser.current_channel,
-                           recipient=parser.current_recipient, content_type=parser.current_content_type,
-                           content_start=end)
+                           **_addressing(parser), content_start=end)
         current.update(content_end=end, end=end, complete=False, content=parser.current_content or "")
         entries.append(_finish(current))
     return entries, error
+
+
+def _addressing(parser):
+    """Recipient and content type of the message being parsed.
+
+    The library reports a content type without a recipient (`<|channel|>final <|constrain|>json`,
+    which GPT-OSS writes when its instructions ask for JSON) as the recipient. Such a message
+    is addressed to nobody: it is ordinary text with a content type.
+    """
+    recipient, content_type = parser.current_recipient, parser.current_content_type
+    if recipient and recipient.startswith("<|constrain|>") and not content_type:
+        recipient, content_type = None, recipient
+    return {"recipient": recipient, "content_type": content_type}
 
 
 def _finish(entry):

@@ -50,7 +50,7 @@ and the [experiment report template](experiment_reports/_template/README.md).
 
 ## Training and prompt injection robustness
 
-- [Training comparison](experiment_reports/training_against_role_probes/README.md):
+- [Training status and next runs](experiment_reports/training_against_role_probes/README.md); [old-template training comparison](experiment_reports/training_against_role_probes/OLD_TEMPLATE_RESULTS.md):
   fixed-data and on-policy role training, task utility and whole-history role recovery.
 - [Fixed-data epoch continuation](experiment_reports/training_against_role_probes/same_batch_epochs/README.md):
   continuation on the original 2,700 histories, with saved baseline measurements and pending later epochs.

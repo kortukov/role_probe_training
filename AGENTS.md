@@ -5,8 +5,7 @@
 - Use uv: `uv sync --locked --extra vllm`, `uv run ...`, and `uv add <dependency>`.
   Keep `pyproject.toml`, `.python-version` and `uv.lock` consistent. Python 3.12.
 - One root environment serves, collects, scores and trains; vLLM is its `vllm` extra.
-  Two small projects remain because they cannot share it: cuML probe fitting
-  (`src/experiments/gptoss_role_probes/fit_env`) and the AppWorld data package
+  One small project remains because it cannot share it: the AppWorld data package
   (`agentic_eval/appworld/env`). Read [agent_docs/ENVIRONMENTS.md](agent_docs/ENVIRONMENTS.md)
   before changing a dependency; do not add new sub-project environments without need.
 - Where this repository and Xiaoxue's `prompt_injection_interp` project need the same
@@ -93,22 +92,28 @@
   script). A probe belongs to one set, recorded in its metadata; never apply it to labels of the
   other. Definitions and where each set is supported: [HARMONY_RENDERING.md](HARMONY_RENDERING.md) section 6.
   Header-role weights (layers 4/8/12/16/20, C4/Dolma passages only) and their accuracy:
-  [header-role fits](experiment_reports/gptoss_role_probes/header_roles/README.md). Use the
-  cuML weights (`probes_header/`); the AdamW fits there did not converge.
+  [header-role fits](experiment_reports/gptoss_role_probes/header_roles/README.md), a finished
+  cuML-versus-AdamW comparison whose code was removed (its `RUNNING.md` names the commit). For
+  layers 12/16 prefer the converged header probes of the L-BFGS fitter experiment below.
 - Ground-truth roles come from message/channel metadata. Mean role probabilities
   and argmax role accuracy are different metrics. Tool-role transfer requires
   validation on actual tool-bearing trajectories; clean chat alone is insufficient.
-- Current probe weights: layers 12/16 in the baseline experiment and layers 4/8/20
-  in [additional-layer fitting](experiment_reports/gptoss_role_probes/gptoss20b_layers/README.md).
-  Fits have convergence limitations. Use the current [agentic evaluations](experiment_reports/eval_role_probes/agentic_eval/probe_scoring/probe_transfer/README.md)
+- Current probe weights: layers 12/16, both role sets, fitted to convergence on the unified
+  Harmony rendering, in `experiment_reports/gptoss_role_probes/lbfgs_fitter/` (`probes/`,
+  `probes_header/`). The cuML weights behind numbers reported before 2026-11-13 are layers
+  12/16 in the baseline experiment and layers 4/8/20
+  in [additional-layer fitting](experiment_reports/gptoss_role_probes/gptoss20b_layers/README.md);
+  those fits have convergence limitations. Use the current [agentic evaluations](experiment_reports/eval_role_probes/agentic_eval/probe_scoring/probe_transfer/README.md)
   to assess transfer to actual reasoning and tool messages. Probes fitted on Toucan tool-use
   text, alone or with the neutral passages, live in the
   [training-data comparison](experiment_reports/gptoss_role_probes/training_data/README.md).
-- A probe can be fitted from scratch in two ways (`fit_probe(backend=...)`, `--backend` on the
-  fitting scripts): `cuml`, the role-probe paper's logistic regression behind all reported
-  numbers, and `adamw`, the step-0 fit of training_against_probes
-  (`src/role_probe_training/training/probe_fit.py`). In-loop refits use the same AdamW fitter;
-  only its loss differs from upstream. Stored weights always apply to raw activations.
+- There is one probe fitter, `src/role_probe_training/training/probe_lbfgs.py`: full-batch
+  `torch.optim.LBFGS` on the role-probe paper's objective (mean cross-entropy plus
+  `||W||^2 / (2 C n)`, C = 0.005, raw activations), solved in double precision until the
+  largest gradient entry is at most 1e-6. From-scratch fits (`fit_probe`, the fitting script),
+  fresh evaluation probes of trained checkpoints and the warm-started refits inside the
+  training loop all use it. Do not add another probe optimizer; a fit that misses the
+  gradient test is an error, not a result. Stored weights always apply to raw activations.
 
 - Prompts are rendered only by `src/role_probe_training/harmony/` with the pinned
   oss-harmony library (see [HARMONY_RENDERING.md](HARMONY_RENDERING.md)). Turns the model

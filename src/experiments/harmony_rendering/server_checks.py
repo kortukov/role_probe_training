@@ -11,7 +11,7 @@ from pathlib import Path
 
 from role_probe_training import harmony as h
 from role_probe_training.harmony.server import HarmonyChatServer
-from role_probe_training.trajectories.inspect_export import attach_histories, conversation_key
+from role_probe_training.trajectories.inspect_export import attach_histories, conversation_key, prefix_keys
 
 from checks import TOOLS, TURN_1, TURN_2, CONFIG
 
@@ -85,6 +85,65 @@ class ServerChecks(unittest.TestCase):
             self.assertEqual(sorted(set(labels.tolist())), [-1, 0, 1, 2, 3, 4])
             self.assertTrue((Path(folder) / 'inputs.jsonl').exists() and (Path(folder) / 'parser_events.jsonl').exists())
 
+    def test_client_continues_after_a_capped_turn_and_a_json_answer(self):
+        """A generation cut off by the token limit, then a user message, then a JSON final answer."""
+        encode = lambda text: h.encoding().encode(text, allowed_special='all')
+        capped = encode('<|channel|>analysis<|message|>Thinking without an end')
+        answer = encode('<|channel|>final <|constrain|>json<|message|>{"message":"Done."}<|return|>')
+        with tempfile.TemporaryDirectory() as folder:
+            server = HarmonyChatServer(folder, FakeSampler([capped, answer]), config=CONFIG, context_limit=4096,
+                                       max_tokens=512, model_name='m')
+            body = {'seed': 7, 'max_tokens': 512, 'reasoning_effort': 'high', 'model': 'm'}
+            with server.serving() as url:
+                route = url + '/v1/chat/completions'
+                status, first = post(route, {'messages': MESSAGES, **body})
+                self.assertEqual(status, 200, first)
+                self.assertEqual(first['choices'][0]['message']['content'], '')
+                history = MESSAGES + [first['choices'][0]['message'], {'role': 'user', 'content': 'Please continue.'}]
+                status, second = post(route, {'messages': history, **body})
+                self.assertEqual(status, 200, second)
+                self.assertEqual(second['choices'][0]['message']['content'], '{"message":"Done."}')
+            rows = [json.loads(line) for line in (Path(folder) / 'requests.jsonl').read_text().splitlines()]
+            self.assertEqual([r['invalid'] for r in rows], [True, False])
+            # The unfinished message is closed with one <|end|> before the next user message.
+            closed = rows[0]['prompt_ids'] + capped + [h.tokens().end]
+            self.assertEqual(rows[1]['prompt_ids'][:len(closed)], closed)
+            row = {'sample_id': 's', 'messages': history + [second['choices'][0]['message']], 'generation_records': 2}
+            attach_histories([row], Path(folder) / 'requests.jsonl')
+            labels = h.encode_record(row)['labels']
+            self.assertEqual(len(labels), len(rows[1]['prompt_ids']) + len(answer))
+
+    def test_two_conversations_with_the_same_start(self):
+        """Two samples with identical instructions and first user message, interleaved (tau2 retail twins)."""
+        encode = lambda text: h.encoding().encode(text, allowed_special='all')
+        turn = lambda text: encode(f'<|channel|>analysis<|message|>Think.<|end|><|start|>assistant<|channel|>final<|message|>{text}<|return|>')
+        first, second_a, second_b = turn('Which order?'), turn('Order A is shipped.'), turn('Order B is delayed.')
+        with tempfile.TemporaryDirectory() as folder:
+            # Both conversations open identically, so the first generation is requested twice.
+            server = HarmonyChatServer(folder, FakeSampler([first, first, second_a, second_b]), config=CONFIG,
+                                       context_limit=4096, max_tokens=512, model_name='m')
+            body = {'seed': 7, 'max_tokens': 512, 'reasoning_effort': 'high', 'model': 'm'}
+            finals = {}
+            with server.serving() as url:
+                route = url + '/v1/chat/completions'
+                opening = [post(route, {'messages': MESSAGES, **body})[1]['choices'][0]['message'] for _ in 'ab']
+                for name, reply in zip('ab', opening):
+                    history = MESSAGES + [reply, {'role': 'user', 'content': f'Order {name.upper()}.'}]
+                    status, answer = post(route, {'messages': history, **body})
+                    self.assertEqual(status, 200, answer)
+                    finals[name] = history + [answer['choices'][0]['message']]
+            self.assertEqual(finals['a'][-1]['content'], 'Order A is shipped.')
+            self.assertEqual(finals['b'][-1]['content'], 'Order B is delayed.')
+            rows = [{'sample_id': name, 'messages': finals[name], 'generation_records': 2} for name in 'ab']
+            with self.assertRaises(ValueError):  # the conversation key alone cannot tell them apart
+                attach_histories([dict(row) for row in rows], Path(folder) / 'requests.jsonl')
+            # Each model call is identified by the messages it sent (two calls per sample, no tool calls).
+            calls = [[(prefix_keys(finals[name][:2])[-1], [], None), (prefix_keys(finals[name][:4])[-1], [], None)] for name in 'ab']
+            attach_histories(rows, Path(folder) / 'requests.jsonl', calls)
+            for row, completion in zip(rows, (second_a, second_b)):
+                self.assertEqual(row['history']['completion_ids'], completion)
+                self.assertEqual(row['history']['generation_index'], 1)
+
     def test_episode_mode_validates_seed_and_route(self):
         with tempfile.TemporaryDirectory() as folder:
             sampler = FakeSampler([TURN_1, TURN_2])
@@ -151,7 +210,7 @@ class ServerChecks(unittest.TestCase):
                 altered = history[:-2] + [{'role': 'assistant', 'content': 'It is 21C.'}, history[-1]]
                 status, body = post(route, {'model': 'm', 'messages': altered, 'tools': TOOLS, **extra})
                 self.assertEqual(status, 500)
-                self.assertIn('differs from the text', body['error']['message'])
+                self.assertIn('no retained generation tokens', body['error']['message'])  # text the server did not generate
             server = HarmonyChatServer(folder + '/c', FakeSampler([TURN_2, TURN_1, TURN_2]), config=CONFIG,
                                        context_limit=4096, max_tokens=512, model_name='m', temperature=0)
             with server.serving() as url:

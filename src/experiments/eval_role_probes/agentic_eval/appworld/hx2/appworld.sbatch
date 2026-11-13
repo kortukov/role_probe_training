@@ -55,7 +55,7 @@ collect() {  # collect OUTPUT_DIR APPWORLD_RUN_ARGS...
  local proxy_port=$((port+10000))  # never another job's vLLM port (18000-27999)
  uv run --frozen --no-sync python "$project/shared/harmony_proxy.py" --vllm-url "http://127.0.0.1:$port" \
   --model openai/gpt-oss-20b --output "$output/proxy" --port "$proxy_port" --reasoning-effort high \
-  --max-tokens 8192 --context-limit 32768 --temperature 0 > "$output.proxy.log" 2>&1 &
+  --max-tokens 8192 --context-limit 32768 --temperature 1 > "$output.proxy.log" 2>&1 &
  local proxy_pid=$!
  for ((i=0;i<60;i++)); do
   curl --silent --fail "http://127.0.0.1:$proxy_port/v1/models" >/dev/null && break

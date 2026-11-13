@@ -33,7 +33,7 @@ Probe coverage is 168/168 AppWorld histories.
 Role recognition varies strongly by role and layer; no single aggregate accuracy
 establishes reliable recognition of every role. These are base-model measurements,
 not evidence about training effects. The current
-[base-versus-trained comparison](../../../../training_against_role_probes/README.md)
+[base-versus-trained comparison](../../../../training_against_role_probes/OLD_TEMPLATE_RESULTS.md)
 reports task performance separately from role accuracy.
 
 [Reproduction instructions](RUNNING.md)

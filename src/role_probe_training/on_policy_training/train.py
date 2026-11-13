@@ -193,7 +193,7 @@ def main():
             dist.all_reduce(totals)
             dist.all_reduce(counts)
             peak = torch.cuda.max_memory_allocated()/2**30
-            probe = refit_probe(runtime, standard, steps=config['refit_steps'], seed=123+step)
+            probe = refit_probe(runtime, standard)
             successes = sum(row.get('scores', {}).get('appworld_success', {}).get('value') in ('C', 1)
                             for row in records)
             attempts = torch.tensor([successes, len(records)], device=rank)
@@ -204,7 +204,7 @@ def main():
                 collection_successes=int(attempts[0]), collection_attempts=int(attempts[1]),
                 gradient_norm=grad_norm.item(), peak_update_gib=peak,
                 collection_seconds=collection_seconds, refit_seconds=probe['seconds'],
-                refit_steps=probe['steps'], probe_training_tokens=probe['training_tokens'],
+                refit_iterations=probe['iterations'], probe_training_tokens=probe['training_tokens'],
                 probe_heldout_accuracy=probe['accuracy'], total_seconds=time.perf_counter()-started)
             log('update', **record)
             if run:

@@ -34,9 +34,9 @@ else
  revision=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["adapter_sha256"])' "$model/export.json")
  worker=(--worker-cls role_probe_training.post_training.vllm_worker.RoleWorker)
 fi
-served=openai/gpt-oss-20b-swe-native
+served=openai/gpt-oss-20b  # the name shared/smoke.py and the proxy use
 idx=${SLURM_ARRAY_TASK_ID:-0}
-run="$root/runs/swe_inspect_generous/${SLURM_ARRAY_JOB_ID:-$SLURM_JOB_ID}/shard$idx"
+run="${AGENTIC_REPORT_ROOT:-$root}/runs/swe_inspect_generous/${SLURM_ARRAY_JOB_ID:-$SLURM_JOB_ID}/shard$idx"
 mkdir -p "$run"
 port=$((18000+SLURM_JOB_ID%10000))
 # Retry transient imports/server initialization only, before any benchmark call.
@@ -65,14 +65,27 @@ start_server() {
 start_server uv run --frozen --no-sync vllm serve "$model" \
  --served-model-name "$served" --host 127.0.0.1 --port "$port" \
  --max-model-len 131072 --max-num-seqs 4 --gpu-memory-utilization 0.85 \
- --attention-backend TRITON_ATTN --moe-backend triton --tool-call-parser openai --enable-auto-tool-choice \
+ --attention-backend TRITON_ATTN --moe-backend triton \
  "${worker[@]}" --kernel-config '{"enable_jit_warmup":false}' \
  --cudagraph-capture-sizes 1 2 4 --max-cudagraph-capture-size 4
-trap 'kill "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$native_scratch"' EXIT
-uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/native_context_check.py \
- --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/context_check.json"
-uv run --frozen --no-sync python src/experiments/training_against_role_probes/post_training/server_smoke.py \
- --base-url "http://127.0.0.1:$port/v1" --model "$served" > "$run/tool_check.json"
+# Harmony proxy between Inspect and vLLM: renders prompts with oss-harmony, samples token IDs
+# from vLLM and records them in $run/proxy/requests.jsonl. Reasoning effort, max_tokens and
+# temperature must equal what run.py sends. 1 is the rule for every collection (the model default and the
+# sampling of the published SWE-bench runs); AGENTIC_TEMPERATURE=0 decodes greedily.
+temperature="${AGENTIC_TEMPERATURE:-1}"
+proxy_port=$((port+10000))  # never another job's vLLM port (18000-27999)
+uv run --frozen --no-sync python "$project/shared/harmony_proxy.py" --vllm-url "http://127.0.0.1:$port" \
+ --model "$served" --output "$PWD/$run/proxy" --port "$proxy_port" --reasoning-effort high \
+ --max-tokens 16384 --context-limit 131072 --temperature "$temperature" > "$run/proxy.log" 2>&1 &
+proxy_pid=$!
+trap 'kill "$proxy_pid" "$server_pid" 2>/dev/null || true; wait "$server_pid" 2>/dev/null || true; rm -rf "$native_scratch"' EXIT
+for ((i=0;i<60;i++)); do
+ curl --silent --fail "http://127.0.0.1:$proxy_port/v1/models" >/dev/null && break
+ kill -0 "$proxy_pid" 2>/dev/null || { cat "$run/proxy.log"; exit 1; }
+ sleep 1
+done
+uv run --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" \
+ --max-tokens 16384 --temperature "$temperature" > "$run/smoke.json"
 selection=(--all --shard-index "$idx" --shard-count 4)
 if [[ "$mode" == pilot ]]; then
  selection=(--sample-id astropy__astropy-13398 --sample-id astropy__astropy-14182 --sample-id django__django-11119 --sample-id django__django-14155 --sample-id sympy__sympy-13878 --sample-id scikit-learn__scikit-learn-9288)
@@ -80,7 +93,7 @@ elif [[ "$mode" != full ]]; then
  echo 'Mode must be pilot or full'; exit 1
 fi
 uv run --frozen --no-sync python src/experiments/training_against_role_probes/swe_generous/run.py \
- --base-url "http://127.0.0.1:$port/v1" --model-id "$served" --model-revision "$revision" \
+ --base-url "http://127.0.0.1:$proxy_port/v1" --requests "$PWD/$run/proxy/requests.jsonl" --model-id "$served" --model-revision "$revision" \
  --benchmark swe_bench "${selection[@]}" --seed 123 --reasoning-effort high \
  --concurrency 4 --time-limit 7200 --max-tokens 16384 --token-limit 0 --message-limit 2000 \
- --temperature 1 --output "$run/swe_bench"
+ --temperature "$temperature" --output "$run/swe_bench"

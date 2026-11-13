@@ -22,7 +22,7 @@ async def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument("base_url", help="Harmony proxy URL ending in /v1")
     parser.add_argument("--max-tokens", type=int, default=16384)
-    parser.add_argument("--temperature", type=float, default=0)
+    parser.add_argument("--temperature", type=float, default=1)
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default="high")
     args = parser.parse_args()
     model = get_model("vllm/openai/gpt-oss-20b", base_url=args.base_url, api_key="local",

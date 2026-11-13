@@ -17,8 +17,7 @@ export TMPDIR="$scratch" TRITON_CACHE_DIR="$scratch/triton" TORCHINDUCTOR_CACHE_
 export OMP_NUM_THREADS=4 TOKENIZERS_PARALLELISM=false
 uv="$PWD/.tools/bin/uv"
 "$uv" run --frozen --no-sync python -m role_probe_training.post_training.agentdojo extract --root "$root" --model "$kind"
-# CUDA-13 cuML runs in a separate interpreter from the CUDA-12 PEFT runtime.
-"$uv" run --project src/experiments/gptoss_role_probes/fit_env --frozen --no-sync python -m role_probe_training.post_training.fit_saved --root "$root/role_perception/$kind"
+"$uv" run --frozen --no-sync python -m role_probe_training.post_training.fit_saved --root "$root/role_perception/$kind"
 # Verify the scoring path on full clean/attacked histories before the complete pass.
 "$uv" run --frozen --no-sync python -m role_probe_training.post_training.agentdojo score --root "$root" --model "$kind" --limit-count 1
 "$uv" run --frozen --no-sync python -m role_probe_training.post_training.agentdojo score --root "$root" --model "$kind"

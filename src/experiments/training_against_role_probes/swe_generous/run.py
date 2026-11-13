@@ -30,11 +30,12 @@ def main():
     parser.add_argument("--all", action="store_true", help="Evaluate every dataset sample")
     parser.add_argument("--seed", type=int, default=123)
     parser.add_argument("--concurrency", type=int, default=8)
-    parser.add_argument("--base-url", default="http://127.0.0.1:8000/v1")
+    parser.add_argument("--base-url", required=True, help="Harmony proxy URL ending in /v1")
+    parser.add_argument("--requests", type=Path, required=True, help="the proxy's requests.jsonl for this run")
     parser.add_argument("--user-model", default="openai/azure/gpt-4.1")
     parser.add_argument("--reasoning-effort", choices=["low", "medium", "high"], default="high")
     parser.add_argument("--time-limit", type=int, default=7200)
-    parser.add_argument("--temperature", type=float, default=1)
+    parser.add_argument("--temperature", type=float, default=0)
     parser.add_argument("--message-limit", type=int, default=2000)
     parser.add_argument("--max-tokens", type=int, default=16384)
     parser.add_argument("--token-limit", type=int, default=0)
@@ -76,12 +77,13 @@ def main():
                 "full_selection": full_selection, "dataset_size": len(task.dataset), "model_id": args.model_id,
                 "model_revision": args.model_revision,
                 "user_model": args.user_model if args.benchmark == "tau2_retail" else None,
-                "settings": vars(args) | {"output": str(args.output)},
+                "settings": vars(args) | {"output": str(args.output), "requests": str(args.requests)},
+                "serving": "vLLM completions by token id behind the Harmony proxy; prompts rendered by oss-harmony",
                 "git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
                 "versions": {name: importlib.metadata.version(name) for name in ["inspect-ai", "inspect-evals"]},
                 "sandbox_provider": "apptainer_repository_snapshot: repository interpreter, localhost, initial-file snapshot; stock Inspect agent/scorer; network disabled",
-                "protocol": "swe_inspect_generous_v1",
+                "protocol": "swe_inspect_generous_v2_harmony_proxy",
                 "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(__file__), Path(__file__).with_name("collect.sbatch"), Path("uv.lock"), *[Path("src/role_probe_training/trajectories") / name for name in ["inspect_export.py", "apptainer.py", "apptainer_mirror.py", "swe_testbed.py", "swe_testbed_python.py", "swe_localhost.py", "swe_snapshot.py"]], Path("experiment_reports/eval_role_probes/agentic_eval/swe_bench/base_trajectories/image_manifest.json")]},
                 "dataset_sha256": hashlib.sha256(json.dumps([dataset_record(s) for s in ordered], sort_keys=True).encode()).hexdigest()}
     (args.output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
@@ -100,7 +102,7 @@ def main():
                 sample_id=selected, epochs=1, max_samples=args.concurrency, max_connections=args.concurrency,
                 time_limit=args.time_limit, token_limit=args.token_limit, message_limit=args.message_limit if args.benchmark=="swe_bench" else None, fail_on_error=False,
                 log_dir=str(args.output / "logs"), log_model_api=True, display="plain")
-    export_logs([log.location for log in logs], args.output, args.benchmark, manifest)
+    export_logs([log.location for log in logs], args.output, args.benchmark, manifest, requests_path=args.requests)
     if any(log.status != "success" for log in logs):
         raise SystemExit("Evaluation incomplete; inspect logs and summary")
 

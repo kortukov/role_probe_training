@@ -1,15 +1,21 @@
 # Running this experiment
 
-- Code: [fit.py](../../../src/experiments/gptoss_role_probes/header_roles/fit.py) (activation
+> **The code of this experiment was removed after commit `3fe11e5`.** The project now fits
+> every probe with one L-BFGS fitter (`src/role_probe_training/training/probe_lbfgs.py`), and
+> the cuML and AdamW fitters this experiment compares no longer exist in the working tree.
+> Check out `3fe11e5` to rerun it; every path below refers to that commit. Header-role probes
+> from the current fitter: [L-BFGS fitter](../lbfgs_fitter/README.md).
+
+- Code: `fit.py` (activation
   cache, both fitters, convergence tests, fitter agreement),
-  [report.py](../../../src/experiments/gptoss_role_probes/header_roles/report.py) (tables,
+  `report.py` (tables,
   appendix, plots), hx2 job scripts
-  [header_roles.sbatch](../../../src/experiments/gptoss_role_probes/hx2/header_roles.sbatch) and
-  [header_roles_parallel.sbatch](../../../src/experiments/gptoss_role_probes/hx2/header_roles_parallel.sbatch).
+  `header_roles.sbatch` and
+  `header_roles_parallel.sbatch`.
   Role definitions and wraps: `src/role_probe_training/harmony/render.py`
   ([HARMONY_RENDERING.md](../../../HARMONY_RENDERING.md) section 6). Fitters:
   `src/role_probe_training/probes/linear.py` and `src/role_probe_training/training/probe_fit.py`.
-- Settings: [config.json](../../../src/experiments/gptoss_role_probes/header_roles/config.json)
+- Settings: `config.json`
   holds the layers, C, seed, the cuML tolerance and limits and the AdamW schedule lengths.
 - Data: the 250 C4/Dolma passages are the first 250 lines of
   `experiment_reports/gptoss_role_probes/training_data/inputs/documents.jsonl` (ignored;

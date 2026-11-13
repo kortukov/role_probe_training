@@ -1,0 +1,130 @@
+{
+  "input_scale": 43.12959236824826,
+  "stage": "train",
+  "role_set": "header",
+  "generation_max_new_tokens": 4000,
+  "probe_backends": [
+    "lbfgs",
+    "cuml"
+  ],
+  "adamw_fit_steps": null,
+  "model_id": "openai/gpt-oss-20b",
+  "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "precision": "MXFP4 checkpoint dequantized to BF16",
+  "attention": "eager",
+  "rendering": {
+    "library": "oss-harmony",
+    "version": "0.0.12",
+    "reasoning_effort": "medium",
+    "conversation_start_date": "2025-12-31",
+    "auto_drop_analysis": false,
+    "tool_call_content_type": "<|constrain|>json",
+    "prior_final_ending": "<|end|>",
+    "bos": false,
+    "model_turns": "replayed from generated token ids"
+  },
+  "git_commit": "3fe11e5e8358c3ca03567f0afcca4e4aa1243b93",
+  "git_dirty": true,
+  "upstream_commit": "ec333c40fd43fe991e1ebf66765051b6d7e35784",
+  "slurm_job_id": "2729949",
+  "gpu": "NVIDIA B200",
+  "versions": {
+    "torch": "2.13.0",
+    "transformers": "5.9.0",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "datasets": "4.8.5",
+    "oss-harmony": "0.0.12",
+    "cuml-cu13": "26.10.0"
+  },
+  "input_sha256": "5a76ba32879fab3538ffb647acfe13e59611e18659dd3084432883186d59fd29",
+  "source_sha256": {
+    "src/role_probe_training/probes/audit.py": "d1fa7339a5caa09c416776f45841ac23a2ec42dae4c45c902adc18eef0ff751c",
+    "src/role_probe_training/probes/evaluation.py": "c2eb1d61aa84b552a7e32937327f059c16490c0e6e98bd51b1ff84eb7be18e0b",
+    "src/role_probe_training/probes/__init__.py": "51cf860236e198445304124eb4d74308bd998868a1d13d1ed66116b72341c8a2",
+    "src/role_probe_training/probes/linear.py": "12e735a4a813609780f11d6e0ba0cd71bb7c532c85fb1c307fff23232805309b",
+    "src/role_probe_training/probes/model.py": "98a665088e9c2281f29b53aa4af28012e9a56c6d332bad6630f4d53fa7007955",
+    "src/role_probe_training/harmony/__init__.py": "82747641dc35a2ea3b128ea01bd2ca8d50fab7ebbf94cd85dfaa6512876a9443",
+    "src/role_probe_training/harmony/render.py": "9ffd11c74314de945ec04a2b15d705127d281eee9495e33f41d3f715b63c73e2",
+    "src/role_probe_training/harmony/server.py": "f70968830d9d81e64746bd86740243bdfbc30e247fd74c00fae9fa06bbbedf0c",
+    "src/role_probe_training/harmony/parse.py": "052a71e73da976c7ccd15d2b3bc934fcdf4e1ab1f119ec9c9b7eb441180e7c92",
+    "src/role_probe_training/harmony/records.py": "ce73284613e257591b13b4f85b4f8e7ab131a78b07e2936a12e6ab38deeb9788",
+    "src/experiments/gptoss_role_probes/prepare.py": "0421210f3f59e7e18b696149c00fbeb48d52269ea788063dc1f11ad83b295bab",
+    "src/experiments/gptoss_role_probes/checks.py": "fe8da9a749cfcdaaa778cc53afea5aa43c30169356e46a097af0089c0fe1a46e",
+    "src/experiments/gptoss_role_probes/run.py": "d16b2da20e3d4e98dd565dceeb5aed3db1f48f6dbb0235b7685acfa70c7e328d",
+    "src/experiments/gptoss_role_probes/smoke.py": "f5795e05b3d55e5aa440c4535c06572fd466e0e6bcb4294dea52461b597833f4",
+    "src/experiments/gptoss_role_probes/plot.py": "0929efd6aebef26b0125cb59e1e17f1985b1f2422ab39f1d1768f8517bebd96e",
+    "src/role_probe_training/training/probe_fit.py": "8c016ce5c3a4841659ccb3fcf1d6176d8197d91524f8174f43d5d1c4dfb6e3f5",
+    "src/role_probe_training/training/probe_lbfgs.py": "0788db0e7cc36118cfeca5107f5bd6ce0e60bcc0262581e558b2bd1d7ab3ef5b"
+  },
+  "layer": 12,
+  "activation": "post_attention_layernorm_output_pre_mlp",
+  "layer_indexing": "zero_based",
+  "hidden_size": 2880,
+  "training_config": {
+    "model_id": "openai/gpt-oss-20b",
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "model_path": ".cache/models/gpt-oss-20b",
+    "seed": 123,
+    "n_documents": 250,
+    "sequence_length": 1024,
+    "token_stride": 1,
+    "test_fraction": 0.1,
+    "layers": [
+      12,
+      16
+    ],
+    "C": 0.005,
+    "n_conversations": 12,
+    "max_new_tokens": 4000,
+    "sources": [
+      {
+        "id": "allenai/c4",
+        "name": "en",
+        "split": "validation",
+        "revision": "1588ec454efa1a09f29cd18ddd04fe05fc8653a2",
+        "fraction": 0.25
+      },
+      {
+        "id": "allenai/dolma3_mix-150B-1025",
+        "name": null,
+        "split": "train",
+        "revision": "3a8349c2f7946cdc56f8ccf22c555672be0b3208",
+        "fraction": 0.75
+      }
+    ],
+    "conversation_source": {
+      "id": "lmsys/toxic-chat",
+      "name": "toxicchat1123",
+      "split": "test",
+      "revision": "29df8e4dba60e1f4af4b4075c0705c5b313548a8"
+    },
+    "shuffle_buffer": 50000
+  },
+  "format_version": 1,
+  "roles": [
+    "system",
+    "developer",
+    "user",
+    "analysis",
+    "commentary",
+    "final",
+    "tool_call",
+    "tool_output",
+    "analysis_tool_call",
+    "analysis_tool_output"
+  ],
+  "C": 0.005,
+  "scaling": "none",
+  "solver": "cuml",
+  "iterations": 369,
+  "max_iter": 5000,
+  "warnings": [],
+  "converged": null,
+  "termination_note": "cuML C++ line-search warnings require log review; iteration count alone does not establish convergence.",
+  "dtype": "float32",
+  "solver_options": {
+    "linesearch_max_iter": 100
+  },
+  "max_saved_probability_error": 2.3245811462402344e-06
+}

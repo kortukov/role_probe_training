@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Mxfp4Config
 from role_probe_training.harmony import ROLES
-from .probe_fit import SETTINGS, ScaledLinear
+from . import probe_lbfgs
 from role_probe_training.probes.linear import RoleProbe
 from .data import collate
 
@@ -36,19 +36,21 @@ class RoleModel:
         self.model.train()
         artifact=RoleProbe.load(probe_path)
         assert artifact.metadata['roles']==list(ROLES)
-        assert artifact.metadata['layer']==12
+        self.layer=artifact.metadata['layer']
         assert artifact.metadata['activation']=='post_attention_layernorm_output_pre_mlp'
         assert artifact.metadata['model_revision']=='6cee5e81ee83917806bbde320786a8fb61efebee'
         self.probe_metadata=artifact.metadata
-        # The probe reads activations divided by a fixed scale, as in training_against_probes.
-        # Stored weights are for raw activations; an artifact that records the scale of its
-        # fitting activations supplies it, otherwise the first refit measures and freezes it.
-        self.probe=ScaledLinear(artifact.weight.shape[1],len(ROLES),device=device,dtype=torch.float32)
-        self.probe.load_raw(artifact.weight,artifact.bias,artifact.metadata.get('input_scale'))
+        # A linear probe on raw activations, as stored. Training starts from the artifact's
+        # weights, so the artifact must come from the project's fitter (probe_lbfgs) for the
+        # first model update to see a converged probe.
+        self.probe=torch.nn.Linear(artifact.weight.shape[1],len(ROLES),device=device,dtype=torch.float32)
+        with torch.no_grad():
+            self.probe.weight.copy_(torch.as_tensor(artifact.weight)); self.probe.bias.copy_(torch.as_tensor(artifact.bias))
+        self.last_probe_refit=artifact.metadata.get('fit')
         self.probe.requires_grad_(False)
         self.hidden=None
         def capture(module,args,output): self.hidden=output
-        self.handle=self.base.model.layers[12].post_attention_layernorm.register_forward_hook(capture)
+        self.handle=self.base.model.layers[self.layer].post_attention_layernorm.register_forward_hook(capture)
 
     def states(self, examples):
         ids,attention,labels,_=collate(examples,self.device,self.pad_id)
@@ -69,13 +71,12 @@ class RoleModel:
         return loss,counts
 
     def save_probe(self,path,step):
-        weight,bias=self.probe.raw()
-        RoleProbe(weight,bias,
+        fit=self.last_probe_refit or {}
+        RoleProbe(self.probe.weight.detach().cpu().numpy(),self.probe.bias.detach().cpu().numpy(),
             {**self.probe_metadata,'model_update_step':step,
-             'refit':'warm-start AdamW on standard passages (training_against_probes schedule)',
-             'solver':'torch_adamw','training_objective':'content-token multiclass cross-entropy',
-             'C':None,'refit_settings':SETTINGS,
-             'input_scale':float(self.probe.input_scale) if bool(self.probe.scale_set) else None,
-             'max_iter':None,'iterations':None,'converged':None,'warnings':[]}).save(path)
+             'refit':'warm-start full-batch L-BFGS on standard passages (probe_lbfgs)',
+             'solver':'lbfgs','C':fit.get('C',probe_lbfgs.C),'fit':fit,
+             'max_iter':fit.get('max_iterations'),'iterations':fit.get('iterations'),
+             'converged':fit.get('converged'),'warnings':[]}).save(path)
 
     def close(self): self.handle.remove()

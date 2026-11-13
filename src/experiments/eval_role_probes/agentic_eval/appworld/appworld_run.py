@@ -31,7 +31,7 @@ def main():
     p.add_argument('--seed', type=int, default=123)
     p.add_argument('--max-steps', type=int, default=50)
     p.add_argument('--max-tokens', type=int, default=8192)
-    p.add_argument('--temperature', type=float, default=0, help='must equal the proxy\'s --temperature')
+    p.add_argument('--temperature', type=float, default=1, help='must equal the proxy\'s --temperature')
     p.add_argument('--image', default='.cache/appworld/appworld.sif')
     p.add_argument('--data', default='.cache/appworld/data')
     p.add_argument('--model-id', default='openai/gpt-oss-20b')

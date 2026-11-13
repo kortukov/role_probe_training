@@ -2,7 +2,7 @@
 
 ## Motivation & RQ
 
-Provide the unchanged GPT-OSS-20B reference for the [trained-model comparison](../README.md).
+Provide the unchanged GPT-OSS-20B reference for the [trained-model comparison](../OLD_TEMPLATE_RESULTS.md).
 
 ## Evaluation setup
 
@@ -16,7 +16,7 @@ accuracy is recall. Task success counts all selected tasks, including errors.
 
 ## Factual observations
 
-Results are consolidated in the [main comparison](../README.md) and the
+Results are consolidated in the [main comparison](../OLD_TEMPLATE_RESULTS.md) and the
 [whole-history layer comparison](../../eval_role_probes/agentic_eval/probe_scoring/probe_layer_comparison/README.md).
 The earlier SWE task run contains 226 API-error attempts and different decoding
 settings; its task score must not be treated as a controlled training comparison.

@@ -45,7 +45,7 @@ def save_checkpoint(runtime, optimizer, root, step, config, microbatch):
         if temporary.exists(): shutil.rmtree(temporary)
         temporary.mkdir(parents=True)
         runtime.model.save_pretrained(temporary/'adapter')
-        runtime.save_probe(temporary/'layer_12.npz',step)
+        runtime.save_probe(temporary/f'layer_{runtime.layer}.npz',step)
         torch.save(dict(optimizer=optimizer.state_dict(),probe=runtime.probe.state_dict(),
                         step=step,microbatch=microbatch,config=config),temporary/'training.pt')
         temporary.rename(target)
@@ -177,7 +177,7 @@ def main():
             torch.cuda.synchronize(); update_seconds=time.perf_counter()-start
             peak=torch.cuda.max_memory_allocated()/2**30
             # Freeze model computation and refresh probes on standard data only.
-            probe_metrics=refit_probe(runtime,standard,steps=config.get('refit_steps',2000),seed=123+step)
+            probe_metrics=refit_probe(runtime,standard)
             record=dict(step=step,role_loss=totals[0].item()/role_denominator,
                 kl=totals[1].item()/kl_denominator,role_accuracy=summarize_counts(confusion)['accuracy'],
                 gradient_norm=grad_norm.item(),microbatch=microbatch,update_seconds=update_seconds,

@@ -47,7 +47,7 @@ if [[ "$ready" != 1 ]]; then echo 'Server startup timeout'; exit 1; fi
 echo "vLLM ready after ${SECONDS}s"
 uv run --frozen --no-sync python "$project/shared/harmony_proxy.py" --vllm-url "http://127.0.0.1:$port" \
     --model openai/gpt-oss-20b --output "$scratch/proxy" --port "$proxy_port" --reasoning-effort high \
-    --max-tokens 16384 --context-limit 32768 --temperature 0 > "$scratch/proxy.log" 2>&1 &
+    --max-tokens 16384 --context-limit 32768 --temperature 1 > "$scratch/proxy.log" 2>&1 &
 proxy_pid=$!
 for ((i=0;i<60;i++)); do
     curl --silent --fail "http://127.0.0.1:$proxy_port/v1/models" > /dev/null && break
@@ -56,6 +56,6 @@ for ((i=0;i<60;i++)); do
 done
 uv run --frozen --no-sync python "$project/shared/serving_smoke.py" --vllm-url "http://127.0.0.1:$port" \
     --proxy-url "http://127.0.0.1:$proxy_port/v1" --max-tokens 16384
-uv run --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" --max-tokens 16384 --temperature 0 > "$scratch/inspect_smoke.json"
+uv run --frozen --no-sync python "$project/shared/smoke.py" "http://127.0.0.1:$proxy_port/v1" --max-tokens 16384 --temperature 1 > "$scratch/inspect_smoke.json"
 echo "PASS Inspect request through the proxy: $(head -c 300 "$scratch/inspect_smoke.json" | tr '\n' ' ')"
 echo "proxy recorded $(wc -l < "$scratch/proxy/requests.jsonl") requests"

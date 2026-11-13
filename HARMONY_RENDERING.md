@@ -208,8 +208,10 @@ exactly. Earlier assistant turns are replayed whether they ended in a tool call 
 the call IDs the server issued) or in a text answer the user then replied to (keyed by
 conversation and turn number, with the text checked against what was generated), so
 multi-turn chats such as the retail benchmark work. One sampling temperature is fixed per
-server and every request must use it: every evaluation collection (AppWorld, retail,
-SWE-bench) decodes greedily at temperature 0, while on-policy training samples at 1. It
+server and every request must use it: every collection (AppWorld, retail, SWE-bench and
+on-policy training) samples at temperature 1, the model's default. Greedy decoding at 0
+was tried on 2026-11-13 and makes the model repeat itself in its reasoning up to the
+generation limit, which lowers task success and fills the histories with looping text. It
 serves two users:
 
 * the on-policy training loop, through per-episode routes with seed validation (the

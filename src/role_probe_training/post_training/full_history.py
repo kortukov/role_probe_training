@@ -22,8 +22,8 @@ def score(root, input_path, output, base=False, overlength='error', probe_paths=
     """`probe_paths` ({layer: path}) scores other standard-data probes on the unchanged model."""
     if base:
         paths = probe_paths or {i: Path(f'experiment_reports/gptoss_role_probes/{"gptoss20b_baseline" if i in (12,16) else "gptoss20b_layers"}/probes/layer_{i}.npz') for i in (4,8,12,16,20)}
-        # RoleModel only needs a layer-12 artifact to initialise; scoring uses its own hooks.
-        init_probe = paths.get(12) or Path('experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz')
+        # RoleModel only needs some probe artifact to initialise; scoring uses its own hooks.
+        init_probe = next(iter(paths.values()))
         runtime = RoleModel('.cache/models/gpt-oss-20b', str(init_probe), 0, adapters=False)
         tokenizer, model = runtime.tokenizer, runtime.base
         runtime.close()
@@ -33,7 +33,7 @@ def score(root, input_path, output, base=False, overlength='error', probe_paths=
             raise ValueError('Explicit probe paths are only supported for the unchanged model (--base)')
         model_path = root / 'data/post_training/model'
         tokenizer, model = load(model_path)
-        paths = {12: root / 'post_training/probes/layer_12.npz'}
+        paths = {int(p.stem.split('_')[1]): p for p in sorted((root / 'post_training/probes').glob('layer_*.npz'))}
         revision = json.loads((model_path / 'export.json').read_text())['adapter_sha256']
     probes = {i: RoleProbe.load(p) for i,p in paths.items()}
     assert all(p.metadata['model_revision'] == revision for p in probes.values())

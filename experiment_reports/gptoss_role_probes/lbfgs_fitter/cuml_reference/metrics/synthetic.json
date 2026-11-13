@@ -1,0 +1,304 @@
+{
+  "12": {
+    "n_tokens": 56510,
+    "accuracy": 0.6911874004600955,
+    "balanced_accuracy": 0.6911874004600955,
+    "nll": 0.7825967073440552,
+    "uniform_accuracy": 0.2,
+    "majority_accuracy": 0.2,
+    "confusion_counts": [
+      [
+        7027,
+        1471,
+        584,
+        478,
+        1742
+      ],
+      [
+        1705,
+        8046,
+        184,
+        88,
+        1279
+      ],
+      [
+        1370,
+        296,
+        6456,
+        1512,
+        1668
+      ],
+      [
+        304,
+        31,
+        879,
+        9991,
+        97
+      ],
+      [
+        1500,
+        988,
+        1091,
+        184,
+        7539
+      ]
+    ],
+    "by_role": {
+      "system": {
+        "n_tokens": 11302,
+        "accuracy": 0.6217483631215714,
+        "mean_probability": 0.5373610258102417
+      },
+      "user": {
+        "n_tokens": 11302,
+        "accuracy": 0.7119093965669793,
+        "mean_probability": 0.6384570598602295
+      },
+      "cot": {
+        "n_tokens": 11302,
+        "accuracy": 0.5712263316227216,
+        "mean_probability": 0.49515166878700256
+      },
+      "assistant": {
+        "n_tokens": 11302,
+        "accuracy": 0.8840028313572819,
+        "mean_probability": 0.8272637128829956
+      },
+      "tool": {
+        "n_tokens": 11302,
+        "accuracy": 0.6670500796319235,
+        "mean_probability": 0.5703380703926086
+      }
+    },
+    "converged": null,
+    "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+    ],
+    "by_collection": {
+      "neutral": {
+        "n_tokens": 56510,
+        "accuracy": 0.6911874004600955,
+        "balanced_accuracy": 0.6911874004600955,
+        "nll": 0.7825967073440552,
+        "uniform_accuracy": 0.2,
+        "majority_accuracy": 0.2,
+        "confusion_counts": [
+          [
+            7027,
+            1471,
+            584,
+            478,
+            1742
+          ],
+          [
+            1705,
+            8046,
+            184,
+            88,
+            1279
+          ],
+          [
+            1370,
+            296,
+            6456,
+            1512,
+            1668
+          ],
+          [
+            304,
+            31,
+            879,
+            9991,
+            97
+          ],
+          [
+            1500,
+            988,
+            1091,
+            184,
+            7539
+          ]
+        ],
+        "by_role": {
+          "system": {
+            "n_tokens": 11302,
+            "accuracy": 0.6217483631215714,
+            "mean_probability": 0.5373610258102417
+          },
+          "user": {
+            "n_tokens": 11302,
+            "accuracy": 0.7119093965669793,
+            "mean_probability": 0.6384570598602295
+          },
+          "cot": {
+            "n_tokens": 11302,
+            "accuracy": 0.5712263316227216,
+            "mean_probability": 0.49515166878700256
+          },
+          "assistant": {
+            "n_tokens": 11302,
+            "accuracy": 0.8840028313572819,
+            "mean_probability": 0.8272637128829956
+          },
+          "tool": {
+            "n_tokens": 11302,
+            "accuracy": 0.6670500796319235,
+            "mean_probability": 0.5703380703926086
+          }
+        }
+      }
+    }
+  },
+  "16": {
+    "n_tokens": 56510,
+    "accuracy": 0.8532472128826757,
+    "balanced_accuracy": 0.8532472128826756,
+    "nll": 0.3869384527206421,
+    "uniform_accuracy": 0.2,
+    "majority_accuracy": 0.2,
+    "confusion_counts": [
+      [
+        8827,
+        618,
+        206,
+        97,
+        1554
+      ],
+      [
+        452,
+        10362,
+        13,
+        0,
+        475
+      ],
+      [
+        289,
+        40,
+        8837,
+        740,
+        1396
+      ],
+      [
+        21,
+        19,
+        581,
+        10651,
+        30
+      ],
+      [
+        782,
+        284,
+        630,
+        66,
+        9540
+      ]
+    ],
+    "by_role": {
+      "system": {
+        "n_tokens": 11302,
+        "accuracy": 0.7810122102282782,
+        "mean_probability": 0.7139047980308533
+      },
+      "user": {
+        "n_tokens": 11302,
+        "accuracy": 0.9168288798442753,
+        "mean_probability": 0.889422595500946
+      },
+      "cot": {
+        "n_tokens": 11302,
+        "accuracy": 0.781897009378871,
+        "mean_probability": 0.7352390885353088
+      },
+      "assistant": {
+        "n_tokens": 11302,
+        "accuracy": 0.9423995752964077,
+        "mean_probability": 0.9149338006973267
+      },
+      "tool": {
+        "n_tokens": 11302,
+        "accuracy": 0.844098389665546,
+        "mean_probability": 0.7787970304489136
+      }
+    },
+    "converged": null,
+    "train_sources": [
+      "allenai/c4",
+      "allenai/dolma3_mix-150B-1025"
+    ],
+    "by_collection": {
+      "neutral": {
+        "n_tokens": 56510,
+        "accuracy": 0.8532472128826757,
+        "balanced_accuracy": 0.8532472128826756,
+        "nll": 0.3869384527206421,
+        "uniform_accuracy": 0.2,
+        "majority_accuracy": 0.2,
+        "confusion_counts": [
+          [
+            8827,
+            618,
+            206,
+            97,
+            1554
+          ],
+          [
+            452,
+            10362,
+            13,
+            0,
+            475
+          ],
+          [
+            289,
+            40,
+            8837,
+            740,
+            1396
+          ],
+          [
+            21,
+            19,
+            581,
+            10651,
+            30
+          ],
+          [
+            782,
+            284,
+            630,
+            66,
+            9540
+          ]
+        ],
+        "by_role": {
+          "system": {
+            "n_tokens": 11302,
+            "accuracy": 0.7810122102282782,
+            "mean_probability": 0.7139047980308533
+          },
+          "user": {
+            "n_tokens": 11302,
+            "accuracy": 0.9168288798442753,
+            "mean_probability": 0.889422595500946
+          },
+          "cot": {
+            "n_tokens": 11302,
+            "accuracy": 0.781897009378871,
+            "mean_probability": 0.7352390885353088
+          },
+          "assistant": {
+            "n_tokens": 11302,
+            "accuracy": 0.9423995752964077,
+            "mean_probability": 0.9149338006973267
+          },
+          "tool": {
+            "n_tokens": 11302,
+            "accuracy": 0.844098389665546,
+            "mean_probability": 0.7787970304489136
+          }
+        }
+      }
+    }
+  }
+}

@@ -37,7 +37,8 @@ proxy and one Inspect request. Only the AppWorld package itself keeps its own pr
 
 `job.sbatch` launches retail and `swe_job.sbatch` launches SWE. Each job starts vLLM,
 then one Harmony proxy on `port + 10000` with the run's reasoning effort, `max_tokens`
-and temperature (0 for every evaluation collection; the tau2 agent is generated at 0 by the benchmark code anyway), runs
+and temperature (1 for every collection since 2026-11-13; `AGENTIC_TEMPERATURE=0` on the retail, AppWorld and
+generous SWE-bench jobs decodes greedily; the retail user simulator stays at 0), runs
 `shared/smoke.py` and the runner against the proxy with `--requests
 $run_dir/proxy/requests.jsonl`, and re-exports with that file on exit. The proxy rejects
 a request whose settings differ, and after any error it refuses every further request,

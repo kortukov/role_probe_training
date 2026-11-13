@@ -17,53 +17,6 @@ from role_probe_training.probes.linear import RoleProbe, fit_probe
 from role_probe_training.probes.evaluation import conversation_summary, metrics
 
 
-def adamw_backend(x, y):
-    """The training_against_probes fitter: schedule, input scale, storage for raw activations."""
-    import torch
-    from role_probe_training.training.probe_fit import ScaledLinear, fit, optimizer_steps
-    groups = np.repeat(np.arange(len(y)//4), 4)  # four tokens per example, every example one role
-    probe = fit_probe(x, y, metadata={'layer':12}, backend='adamw', groups=groups, max_iter=2000, seed=7)
-    assert (probe.predict(x) == np.asarray(ROLES)[y]).all()
-    scale = float(np.sqrt(np.square(x).sum(1).mean()))
-    assert probe.metadata['solver'] == 'adamw' and probe.metadata['C'] is None and probe.metadata['scaling'] == 'none'
-    assert abs(probe.metadata['input_scale'] - scale) < 1e-4 * scale
-    # 25 examples fit in one batch, so upstream's 2000 passes hold exactly 2000 batches.
-    assert probe.metadata['fit']['optimizer_steps'] == 2000 and probe.metadata['fit']['examples'] == len(y)//4
-    again = fit_probe(x, y, metadata={'layer':12}, backend='adamw', groups=groups, max_iter=2000, seed=7)
-    np.testing.assert_array_equal(again.weight, probe.weight)
-    with tempfile.TemporaryDirectory() as folder:
-        path=Path(folder)/'probe.npz'; probe.save(path)
-        np.testing.assert_allclose(RoleProbe.load(path).predict_proba(x), probe.predict_proba(x))
-    for bad in (None, np.tile(np.arange(len(y)//4), 4)):  # missing, then non-contiguous examples
-        try:
-            fit_probe(x, y, metadata={'layer':12}, backend='adamw', groups=bad, max_iter=3)
-        except ValueError:
-            continue
-        raise AssertionError('The adamw backend must reject missing or non-contiguous groups')
-    # Changing the input scale must not change the function; raw() must undo it exactly.
-    torch.manual_seed(0)
-    module = ScaledLinear(5, 5)
-    points = torch.as_tensor(x[:16], dtype=torch.float32)
-    before = module(points)
-    module.rescale(scale)
-    assert bool(module.scale_set) and abs(float(module.input_scale) - scale) < 1e-5
-    torch.testing.assert_close(module(points), before, rtol=1e-5, atol=1e-5)
-    weight, bias = module.raw()
-    np.testing.assert_allclose(points.numpy() @ weight.T + bias, before.detach().numpy(), rtol=1e-5, atol=1e-5)
-    restored = ScaledLinear(5, 5); restored.load_raw(weight, bias, scale)
-    torch.testing.assert_close(restored(points), before, rtol=1e-5, atol=1e-5)
-    # Upstream schedule: steps+1 optimizer steps, zero rate first and last, peak after 50 warmup steps.
-    one_batch = lambda indices: (points[:4], torch.as_tensor(y[:4]))
-    rates = fit(module, one_batch, range(40), [4]*40, steps=200, seed=0)
-    assert len(rates) == 201 and rates[0] == 0 and rates[-1] == 0 and abs(rates[50] - 1e-3) < 1e-12
-    assert all(a < b for a, b in zip(rates[:50], rates[1:51])) and all(a > b for a, b in zip(rates[50:-1], rates[51:]))
-    assert not module.weight.requires_grad
-    # The fitting sets used here: 1,125 passage-role examples, refits of 2,000 and step-0 fits of 5,000.
-    assert optimizer_steps(2000, 1125) == 2001 and optimizer_steps(5000, 1125) == 5001
-    # Upstream stops at the configured count only when its passes hold exactly that many batches.
-    assert optimizer_steps(200, 8) == 200 and len(fit(module, one_batch, range(8), [4]*8, steps=200, seed=0)) == 200
-
-
 def main():
     enc = encoding()
     reference = {
@@ -104,17 +57,17 @@ def main():
     rng = np.random.default_rng(0)
     y = np.repeat(np.arange(5), 20)
     x = np.eye(5)[y]*8 + rng.normal(size=(len(y), 5))*.1
-    probe = fit_probe(x, y, metadata={'layer':12}, C=1., backend='sklearn')
+    probe = fit_probe(x, y, metadata={'layer':12}, C=1.)
     assert (probe.predict(x) == np.asarray(ROLES)[y]).all()
     with tempfile.TemporaryDirectory() as folder:
         path=Path(folder)/'probe.npz'; probe.save(path)
         np.testing.assert_allclose(RoleProbe.load(path).predict_proba(x), probe.predict_proba(x))
-    adamw_backend(x, y)
+    assert probe.metadata['solver'] == 'lbfgs' and probe.metadata['converged'] and probe.metadata['scaling'] == 'none'
     # A probe has one class per role of its role set and records the set in its metadata.
     n = len(HEADER_ROLES)
     yh = np.repeat(np.arange(n), 20)
     xh = np.eye(n)[yh]*8 + rng.normal(size=(len(yh), n))*.1
-    header_probe = fit_probe(xh, yh, metadata={'layer':12}, roles=HEADER_ROLES, C=1., backend='sklearn')
+    header_probe = fit_probe(xh, yh, metadata={'layer':12}, roles=HEADER_ROLES, C=1.)
     assert header_probe.roles == HEADER_ROLES and probe.roles == ROLES and header_probe.weight.shape == (n, n)
     assert (header_probe.predict(xh) == np.asarray(HEADER_ROLES)[yh]).all()
     scored = metrics(yh, header_probe.predict_proba(xh), HEADER_ROLES)
@@ -123,7 +76,7 @@ def main():
         path=Path(folder)/'probe.npz'; header_probe.save(path)
         assert RoleProbe.load(path).roles == HEADER_ROLES
     try:
-        fit_probe(x, y, metadata={'layer':12}, roles=HEADER_ROLES, C=1., backend='sklearn')
+        fit_probe(x, y, metadata={'layer':12}, roles=HEADER_ROLES, C=1.)
     except ValueError:
         pass
     else:
@@ -132,7 +85,7 @@ def main():
     rows=[{'labels':np.zeros(1,dtype=int),'probabilities':np.eye(5)[[0]]},
           {'labels':np.zeros(9,dtype=int),'probabilities':np.eye(5)[np.ones(9,dtype=int)]}]
     np.testing.assert_allclose(conversation_summary(rows)['system']['mean_probabilities'], [.5,.5,0,0,0])
-    print('PASS: library-identical wrappers, content masks, Unicode, repeated text, control tokens, completion parser, probe round-trip, AdamW fitter, header-role probe, aggregation')
+    print('PASS: library-identical wrappers, content masks, Unicode, repeated text, control tokens, completion parser, probe fit and round-trip, header-role probe, aggregation')
 
 
 if __name__ == '__main__':
