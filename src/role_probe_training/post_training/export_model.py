@@ -7,7 +7,7 @@ import torch
 from peft import set_peft_model_state_dict
 from safetensors.torch import load_file, save_file
 from role_probe_training.training.model import RoleModel
-from role_probe_training.training.data import trajectory_examples, collate
+from role_probe_training.training.data import probe_examples, collate
 
 
 def main():
@@ -22,11 +22,12 @@ def main():
         assert saved['checkpoint']==str(a.checkpoint)
         assert all(x==0 for x in saved['activation_merge_relative_rms'])
     runtime=RoleModel('.cache/models/gpt-oss-20b',
-        'experiment_reports/gptoss_role_probes/gptoss20b_baseline/probes/layer_12.npz',0)
+        'experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_12.npz',0)  # any probe: only the hook site is used
     adapter=a.checkpoint/'adapter/adapter_model.safetensors'
     set_peft_model_state_dict(runtime.model,load_file(adapter))
     runtime.model.gradient_checkpointing_disable()
-    examples=trajectory_examples('experiment_reports/training_against_role_probes/runs/dev/1501280/dev/trajectories.jsonl')[:2]
+    # Two fixed inputs on which the merged expert weights must reproduce the adapter's activations.
+    examples=probe_examples('experiment_reports/gptoss_role_probes/lbfgs_fitter/artifacts/inputs/documents.jsonl')[:2]
     examples=[{**x,'ids':x['ids'][:1024],'labels':x['labels'][:1024]} for x in examples]
     def snapshot():
         result=[]

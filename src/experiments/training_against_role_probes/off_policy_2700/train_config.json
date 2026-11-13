@@ -2,7 +2,7 @@
   "name": "offpolicy2700-harmony-layer16",
   "wandb_id": "offpolicy2700-harmony-layer16-v1",
   "model": ".cache/models/gpt-oss-20b",
-  "probe": "experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_16.npz",
+  "probe": "experiment_reports/gptoss_role_probes/lbfgs_fitter/probes_header/layer_16.npz",
   "trajectories": "experiment_reports/training_against_role_probes/off_policy_2700/data/train2700/trajectories.jsonl",
   "expected_trajectories": 2700,
   "validation": "experiment_reports/training_against_role_probes/off_policy_2700/data/dev/trajectories.jsonl",

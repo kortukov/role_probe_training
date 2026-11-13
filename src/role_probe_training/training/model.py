@@ -4,7 +4,7 @@ import torch
 import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, Mxfp4Config
-from role_probe_training.harmony import ROLES
+from role_probe_training.harmony import ROLE_SETS
 from . import probe_lbfgs
 from role_probe_training.probes.linear import RoleProbe
 from .data import collate
@@ -35,7 +35,8 @@ class RoleModel:
         # Dropout is zero; train mode selects the memory-efficient routed-expert path.
         self.model.train()
         artifact=RoleProbe.load(probe_path)
-        assert artifact.metadata['roles']==list(ROLES)
+        self.roles=tuple(artifact.metadata['roles'])  # the probe's role set labels all training data
+        assert self.roles in ROLE_SETS.values()
         self.layer=artifact.metadata['layer']
         assert artifact.metadata['activation']=='post_attention_layernorm_output_pre_mlp'
         assert artifact.metadata['model_revision']=='6cee5e81ee83917806bbde320786a8fb61efebee'
@@ -43,7 +44,7 @@ class RoleModel:
         # A linear probe on raw activations, as stored. Training starts from the artifact's
         # weights, so the artifact must come from the project's fitter (probe_lbfgs) for the
         # first model update to see a converged probe.
-        self.probe=torch.nn.Linear(artifact.weight.shape[1],len(ROLES),device=device,dtype=torch.float32)
+        self.probe=torch.nn.Linear(artifact.weight.shape[1],len(self.roles),device=device,dtype=torch.float32)
         with torch.no_grad():
             self.probe.weight.copy_(torch.as_tensor(artifact.weight)); self.probe.bias.copy_(torch.as_tensor(artifact.bias))
         self.last_probe_refit=artifact.metadata.get('fit')
@@ -67,7 +68,8 @@ class RoleModel:
         logits=self.probe(hidden[valid].float())
         loss=F.cross_entropy(logits,labels[valid],reduction='sum')
         predicted=logits.argmax(-1)
-        counts=torch.bincount(labels[valid]*5+predicted,minlength=25).reshape(5,5)
+        n=len(self.roles)
+        counts=torch.bincount(labels[valid]*n+predicted,minlength=n*n).reshape(n,n)
         return loss,counts
 
     def save_probe(self,path,step):

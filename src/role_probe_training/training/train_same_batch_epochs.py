@@ -36,7 +36,7 @@ def sync_gradients(parameters):
 @torch.no_grad()
 def evaluate(runtime, examples):
     rank=dist.get_rank(); world=dist.get_world_size()
-    confusion=torch.zeros((5,5),device=runtime.device,dtype=torch.long)
+    confusion=torch.zeros((len(runtime.roles),)*2,device=runtime.device,dtype=torch.long)
     for example in examples[rank::world]:
         _,counts=runtime.role_loss([example]); confusion+=counts
     dist.all_reduce(confusion)
@@ -88,12 +88,12 @@ def main():
     runtime=RoleModel(config['model'],config['probe'],rank)
     parameters=[x for x in runtime.model.parameters() if x.requires_grad]
     optimizer=torch.optim.AdamW(parameters,lr=config.get('learning_rate',5e-5),weight_decay=1e-4)
-    training=trajectory_examples(config['trajectories'])
-    validation=trajectory_examples(config['validation'])
+    training=trajectory_examples(config['trajectories'],runtime.roles)
+    validation=trajectory_examples(config['validation'],runtime.roles)
     training_tasks={r['sample_id'] for r in read_jsonl(config['trajectories'])}
     validation_tasks={r['sample_id'] for r in read_jsonl(config['validation'])}
     if training_tasks & validation_tasks: raise ValueError('Training and validation tasks overlap')
-    standard=probe_examples(config['probe_documents'])
+    standard=probe_examples(config['probe_documents'],runtime.roles)
     anchors=kl_examples(config['kl_anchors'])
     if any(len(x['ids'])>runtime.base.config.max_position_embeddings for x in anchors):
         raise ValueError('KL history exceeds native context; no truncation is allowed')
@@ -158,7 +158,7 @@ def main():
             while True:
                 optimizer.zero_grad(set_to_none=True)
                 torch.cuda.reset_peak_memory_stats()
-                confusion=torch.zeros((5,5),device=rank,dtype=torch.long)
+                confusion=torch.zeros((len(runtime.roles),)*2,device=rank,dtype=torch.long)
                 totals=torch.zeros(2,device=rank,dtype=torch.float64)
                 error=None; role_seconds=kl_seconds=0.
                 try:

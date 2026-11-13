@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from role_probe_training.harmony import ROLES
+from role_probe_training.harmony import ROLE_SETS
 from role_probe_training.probes.linear import RoleProbe
 from role_probe_training.probes.model import extract_states
 from role_probe_training.training.data import trajectory_examples
@@ -21,7 +21,7 @@ def digest(path):
 def score(root, input_path, output, base=False, overlength='error', probe_paths=None):
     """`probe_paths` ({layer: path}) scores other standard-data probes on the unchanged model."""
     if base:
-        paths = probe_paths or {i: Path(f'experiment_reports/gptoss_role_probes/{"gptoss20b_baseline" if i in (12,16) else "gptoss20b_layers"}/probes/layer_{i}.npz') for i in (4,8,12,16,20)}
+        paths = probe_paths or {i: Path(f'experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_{i}.npz') for i in (12,16)}
         # RoleModel only needs some probe artifact to initialise; scoring uses its own hooks.
         init_probe = next(iter(paths.values()))
         runtime = RoleModel('.cache/models/gpt-oss-20b', str(init_probe), 0, adapters=False)
@@ -37,16 +37,18 @@ def score(root, input_path, output, base=False, overlength='error', probe_paths=
         revision = json.loads((model_path / 'export.json').read_text())['adapter_sha256']
     probes = {i: RoleProbe.load(p) for i,p in paths.items()}
     assert all(p.metadata['model_revision'] == revision for p in probes.values())
-    assert all(p.roles == ROLES for p in probes.values()), 'trajectory_examples labels the five roles only'
-    examples = trajectory_examples(input_path)
+    roles = next(iter(probes.values())).roles
+    assert roles in ROLE_SETS.values() and all(p.roles == roles for p in probes.values()), 'one role set per scoring run'
+    n = len(roles)
+    examples = trajectory_examples(input_path, roles)
     limit = model.config.max_position_embeddings
     excluded = [{'trajectory_id':x['id'], 'tokens':len(x['ids']), 'reason':'exceeds_native_context'}
                 for x in examples if len(x['ids']) > limit]
     if excluded and overlength == 'error':
         raise ValueError(f'{len(excluded)} histories exceed {limit} tokens; explicit exclusion policy required')
     output.mkdir(parents=True, exist_ok=True)
-    matrices = {i: np.zeros((5,5),dtype=np.int64) for i in probes}
-    probability_sums = {i: np.zeros(5) for i in probes}
+    matrices = {i: np.zeros((n,n),dtype=np.int64) for i in probes}
+    probability_sums = {i: np.zeros(n) for i in probes}
     per_trace = {i: [] for i in probes}
     scored = 0
     with (output / 'index.jsonl').open('w') as index:
@@ -64,11 +66,11 @@ def score(root, input_path, output, base=False, overlength='error', probe_paths=
             for layer, probe in probes.items():
                 probabilities = probe.predict_proba(states.pop(layer))
                 predictions = probabilities.argmax(-1).astype(np.int8)
-                counts = np.zeros((5,5),dtype=np.int64)
+                counts = np.zeros((n,n),dtype=np.int64)
                 np.add.at(counts,(labels[valid],predictions[valid]),1)
                 matrices[layer] += counts
                 per_trace[layer].append(float(counts.trace()/counts.sum()))
-                for role in range(5):
+                for role in range(n):
                     probability_sums[layer][role] += probabilities[labels == role,role].sum(dtype=np.float64)
                 counts_by_layer[str(layer)] = counts.tolist()
                 saved[f'probabilities_{layer}'] = probabilities.astype(np.float16)
@@ -84,16 +86,16 @@ def score(root, input_path, output, base=False, overlength='error', probe_paths=
     layers = {}
     for layer,matrix in matrices.items():
         support = matrix.sum(1)
-        recalls = np.divide(matrix.diagonal(),support,out=np.zeros(5),where=support>0)
+        recalls = np.divide(matrix.diagonal(),support,out=np.zeros(n),where=support>0)
         layers[str(layer)] = {
             'accuracy':float(matrix.trace()/matrix.sum()),
             'macro_recall':float(recalls[support>0].mean()),
             'per_role_recall':recalls.tolist(),
-            'mean_true_role_probability':np.divide(probability_sums[layer],support,out=np.zeros(5),where=support>0).tolist(),
+            'mean_true_role_probability':np.divide(probability_sums[layer],support,out=np.zeros(n),where=support>0).tolist(),
             'mean_trajectory_accuracy':float(np.mean(per_trace[layer])),
             'confusion_counts':matrix.tolist(), 'probe_sha256':digest(paths[layer])}
     primary = layers['12'] if '12' in layers else layers[str(min(probes))]
-    result = {**primary, 'layers':layers, 'roles':list(ROLES),
+    result = {**primary, 'layers':layers, 'roles':list(roles),
               'trajectories':len(examples), 'scored_trajectories':scored,
               'excluded_trajectories':excluded, 'context_limit':limit,
               'input_sha256':digest(input_path), 'model_revision':revision,

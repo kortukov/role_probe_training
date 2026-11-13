@@ -81,8 +81,8 @@ def main():
     runtime = RoleModel(config['model'], config['probe'], rank)
     parameters = [p for p in runtime.model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(parameters, lr=config['learning_rate'], weight_decay=1e-4)
-    standard = probe_examples(config['probe_documents'])
-    validation = trajectory_examples(config['validation'])
+    standard = probe_examples(config['probe_documents'], runtime.roles)
+    validation = trajectory_examples(config['validation'], runtime.roles)
     start_step = 0
     if args.resume:
         state = torch.load(args.resume/'training.pt', map_location='cpu', weights_only=False)
@@ -163,7 +163,7 @@ def main():
                 raise ValueError('Empty role or KL objective')
             optimizer.zero_grad(set_to_none=True)
             totals = torch.zeros(2, device=rank, dtype=torch.float64)
-            counts = torch.zeros((5,5), device=rank, dtype=torch.long)
+            counts = torch.zeros((len(runtime.roles),)*2, device=rank, dtype=torch.long)
             torch.cuda.reset_peak_memory_stats()
             for example in examples:
                 loss, confusion = runtime.role_loss([example])

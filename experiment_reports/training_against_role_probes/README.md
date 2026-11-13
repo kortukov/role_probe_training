@@ -39,10 +39,11 @@ Run 1 repeats the best off-policy recipe under the current setup. Only the items
 | Rollout generation, *changed* | regenerated through the Harmony proxy (the old saved rollouts have no token records and cannot be used); temperature 1, high reasoning, 8,192 output tokens, 32,768 context, 50 steps |
 | Loss | role cross-entropy through the probe, plus KL(current ‖ base) on the model's own tokens of the same batch, coefficient 16 (`"kl_sampling": "same_role_batch"`) |
 | Optimisation | 1 epoch, effective batch 16 (169 updates), learning rate 5e-5, seed 123, whole histories without truncation |
-| Probe layer, *changed* | 16 (planned; confirm against the [stage 1 table](../eval_role_probes/README.md) once SWE-bench is scored). The old runs used 12 |
-| Starting probe, *changed* | `experiment_reports/gptoss_role_probes/lbfgs_fitter/probes/layer_16.npz` |
-| Probe refit, *changed* | after every update, L-BFGS to convergence on the 250 neutral passages (`lbfgs_fitter/artifacts/inputs/documents.jsonl`); the old runs took 2,000 SGD steps |
-| Evaluation, *changed* | fresh converged probe per checkpoint; AppWorld test, τ² retail, SWE-bench, all at temperature 1; compare with the new base-model row |
+| Probe roles, *changed* | ten roles, one per Harmony header form (system, developer, user, analysis, commentary, final, tool call, tool output, and tool call and output on the analysis channel). The old runs used five roles |
+| Probe layer, *changed* | 16. The old runs used 12 |
+| Starting probe, *changed* | `experiment_reports/gptoss_role_probes/lbfgs_fitter/probes_header/layer_16.npz`. The trainer takes the role set, layer and activation site from this file and labels rollouts and passages accordingly |
+| Probe refit, *changed* | after every update, L-BFGS to convergence on the 250 neutral passages, each wrapped in all ten headers (`lbfgs_fitter/artifacts/inputs/documents.jsonl`); the old runs took 2,000 SGD steps |
+| Evaluation, *changed* | fresh converged ten-role probe per checkpoint; AppWorld test, τ² retail, SWE-bench, all at temperature 1; compare with the new base-model row |
 
 Run 2 changes only the data: 300 attempts per task (seeds 8301–8600, 27,000 rollouts,
 1,688 updates; the old run took 60 hours on two B200 GPUs). Run 3 is on-policy training

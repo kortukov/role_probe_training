@@ -13,6 +13,7 @@ from pathlib import Path
 import numpy as np
 
 from role_probe_training.probes.evaluation import metrics
+from role_probe_training.harmony import ROLES
 from role_probe_training.probes.linear import fit_probe
 
 
@@ -26,15 +27,16 @@ def fit_cache(root):
     train = np.load(cache / 'train.npy')
     metadata = json.loads((cache / 'metadata.json').read_text())
     layers = metadata.get('layers') or [metadata['layer']]
+    roles = tuple(metadata.get('roles', ROLES))
     results = {}
     for layer in layers:
         name = f'states_{layer}.npy' if 'layers' in metadata else 'states.npy'
         states = np.load(cache / name, mmap_mode='r')
-        probe = fit_probe(states[train], labels[train], metadata={**metadata, 'layer': layer})
+        probe = fit_probe(states[train], labels[train], metadata={**metadata, 'layer': layer}, roles=roles)
         if not probe.metadata['converged']:
             raise RuntimeError(f'Layer-{layer} probe fit did not converge: {probe.metadata["fit"]}')
         probe.save(probe_path(root, layer))
-        results[str(layer)] = metrics(labels[~train], probe.predict_proba(states[~train]))
+        results[str(layer)] = metrics(labels[~train], probe.predict_proba(states[~train]), roles)
         print(json.dumps({'layer': layer, 'heldout_standard_accuracy': results[str(layer)]['accuracy'],
                           'iterations': probe.metadata['iterations']}), flush=True)
     (root / 'post_training/probe_fit.json').write_text(
