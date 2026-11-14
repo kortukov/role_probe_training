@@ -16,7 +16,8 @@ from safetensors.torch import save_file
 
 
 class ColocatedServer:
-    def __init__(self, runtime, output):
+    def __init__(self, runtime, output, *, max_sequences=8):
+        # `max_sequences` is how many rollouts are generated at once (the collection concurrency).
         self.runtime = runtime
         self.output = Path(output)
         self.output.mkdir(parents=True, exist_ok=True)
@@ -47,14 +48,15 @@ class ColocatedServer:
         model = Path('experiment_reports/training_against_role_probes/base_model/data/colocated_shell/model').resolve()
         command = [str(Path(sys.executable).with_name('vllm')),'serve',str(model),'--served-model-name','on-policy-role-model',
             '--host','127.0.0.1','--port',str(port),'--max-model-len','32768',
-            '--max-num-seqs','8','--gpu-memory-utilization','0.45',
-            '--kv-cache-memory-bytes',str(8*1024**3),'--enable-sleep-mode',
+            '--max-num-seqs',str(max_sequences),'--gpu-memory-utilization','0.45',
+            '--kv-cache-memory-bytes',str(max_sequences*1024**3),'--enable-sleep-mode',
             '--max-logprobs','-1',
             '--no-enable-prefix-caching','--generation-config','vllm',
             '--attention-backend','TRITON_ATTN','--moe-backend','triton',
             '--worker-cls','role_probe_training.on_policy.vllm_worker.RefreshWorker',
             '--kernel-config','{"enable_jit_warmup":false}',
-            '--cudagraph-capture-sizes','1','2','4','8','--max-cudagraph-capture-size','8']
+            '--cudagraph-capture-sizes',*[str(n) for n in (1,2,4,8,16,32,64) if n<=max_sequences],
+            '--max-cudagraph-capture-size',str(max(n for n in (1,2,4,8,16,32,64) if n<=max_sequences))]
         self.log = (self.output/'server.log').open('w')
         self.process = subprocess.Popen(command, env=env, stdout=self.log, stderr=subprocess.STDOUT)
         try:

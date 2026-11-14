@@ -119,7 +119,8 @@ def main():
     try:
         if config.get('serving_backend') == 'colocated_vllm':
             from role_probe_training.on_policy_recovery.colocated import ColocatedServer
-            server = ColocatedServer(runtime, root/f'serving/rank{rank}/resume{start_step}')
+            server = ColocatedServer(runtime, root/f'serving/rank{rank}/resume{start_step}',
+                                     max_sequences=config.get('collection_concurrency', 8))
             server.sleep()
         if start_step == 0:
             log('validation', step=0, metrics=evaluate(runtime, validation))
