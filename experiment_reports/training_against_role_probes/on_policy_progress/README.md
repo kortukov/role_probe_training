@@ -87,6 +87,13 @@ present, in %. Runs named `_five` use the five-role probe, the others the ten-ro
   has 36 updates instead of 34 because each epoch's last batch is partial.
 - 2026-11-13. Switched from five to ten roles before any run started; the first submissions
   (five roles) were cancelled in the queue.
+- 2026-11-14. Rollout collection speed against the number of rollouts generated at once
+  (base model, 64 training tasks per level, one B200, no errors at any level): 8 at once
+  478 rollouts per hour, 16: 658, 32: 672, 64: 817. Generation totals 650, 1,020, 1,130 and
+  1,350 tokens per second, so the GPU saturates around 32; with only 64 tasks the higher
+  levels are also held back by their slowest tasks. The ladder collects 32 at once.
+- 2026-11-14. The on-policy KL term now replays each rollout once instead of once per model
+  call (same positions and value; 15 times fewer tokens on saved AppWorld rollouts).
 - 2026-11-13. This is the first time the trainer and the evaluation job run in the unified
   setup; a failure in either is a pipeline finding, not a result.
 

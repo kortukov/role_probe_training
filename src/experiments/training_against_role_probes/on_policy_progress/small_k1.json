@@ -23,7 +23,7 @@
   "epochs": 1,
   "attempts_per_task": 6,
   "refresh": "epoch",
-  "collection_concurrency": 16,
+  "collection_concurrency": 32,
   "collection_timeout": 36000,
   "wandb_mode": "offline"
 }
