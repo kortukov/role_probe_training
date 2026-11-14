@@ -20,7 +20,8 @@ from role_probe_training.training.refit import refit_probe, summarize_counts
 from role_probe_training.training.train_same_batch import evaluate, save_checkpoint, sync_gradients
 from role_probe_training.epoch_training.data import schedule, select_pool
 from role_probe_training.on_policy.data import sha256
-from role_probe_training.on_policy.objective import episode_histories, kl_batches, reverse_kl_histories, reverse_kl_sums
+from role_probe_training.on_policy.objective import (episode_histories, kl_batches, reverse_kl_histories,
+                                                     reverse_kl_sums, role_and_kl)
 
 from role_probe_training.on_policy_recovery.collection import collect
 
@@ -184,22 +185,37 @@ def main():
             totals = torch.zeros(2, device=rank, dtype=torch.float64)
             counts = torch.zeros((len(runtime.roles),)*2, device=rank, dtype=torch.long)
             torch.cuda.reset_peak_memory_stats()
+            coefficient = config['kl_coefficient']
+            if config.get('kl_replay', 'episode') == 'episode':
+                # One replay per episode covers the sampled tokens of all its model calls, and the
+                # same pass of the current model serves the role loss (see on_policy/objective.py).
+                kl_items = episode_histories(requests)
+                merged = {item['episode_id']: item for item in kl_items if 'episode_id' in item}
+                kl_items = [[item] for item in kl_items if 'episode_id' not in item]
+            else:
+                merged, kl_items = {}, kl_batches(requests, config.get('kl_batch_tokens'))
+            shared = 0
             for example in examples:
-                loss, confusion = runtime.role_loss([example])
-                (loss/denominators[0]).backward()
+                item = merged.get(example['id'])
+                if item is not None and item['tokens'] == example['ids']:
+                    del merged[example['id']]
+                    loss, kl, confusion = role_and_kl(runtime, example, item)
+                    (loss/denominators[0] + coefficient*kl/denominators[1]).backward()
+                    totals[1] += kl.detach().double()
+                    shared += 1
+                    del kl
+                else:
+                    loss, confusion = runtime.role_loss([example])
+                    (loss/denominators[0]).backward()
                 totals[0] += loss.detach().double()
                 counts += confusion
                 runtime.hidden = None
                 del loss, confusion
+            kl_items += [[item] for item in merged.values()]  # episodes without a role example
             done = 0
-            # One replay per episode covers the sampled tokens of all its model calls (same KL
-            # positions, about 15 times fewer tokens replayed than one replay per call).
-            kl_items = ([[item] for item in episode_histories(requests)] if config.get('kl_replay', 'episode') == 'episode'
-                        else kl_batches(requests, config.get('kl_batch_tokens')))
             for batch in kl_items:
-                loss = (reverse_kl_histories(runtime, batch) if config.get('kl_replay', 'episode') == 'episode'
-                        else reverse_kl_sums(runtime, batch))
-                (config['kl_coefficient']*loss/denominators[1]).backward()
+                loss = (reverse_kl_histories(runtime, batch) if 'tokens' in batch[0] else reverse_kl_sums(runtime, batch))
+                (coefficient*loss/denominators[1]).backward()
                 totals[1] += loss.detach().double()
                 runtime.hidden = None
                 del loss
@@ -207,6 +223,7 @@ def main():
                 if done//32 > (done-len(batch))//32:
                     log('kl_progress',step=step,requests_done=done,
                         requests_total=len(kl_items),seconds=time.perf_counter()-started)
+            log('objective_passes', step=step, shared_role_and_kl=shared, separate_kl=len(kl_items))
             sync_gradients(parameters)
             grad_norm = torch.nn.utils.clip_grad_norm_(parameters, 1.)
             if not torch.isfinite(grad_norm):

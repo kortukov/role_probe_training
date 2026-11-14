@@ -59,7 +59,7 @@ def episode_histories(requests):
                 break
             columns += range(len(prompt) - 1, len(prompt) + len(completion) - 1)
         if consistent and len(set(columns)) == len(columns):
-            items.append(dict(tokens=tokens, columns=columns))
+            items.append(dict(tokens=tokens, columns=columns, episode_id=last['episode_id']))
         else:
             items += [dict(tokens=r['prompt_ids'] + r['completion_ids'],
                            columns=list(range(len(r['prompt_ids']) - 1, len(r['prompt_ids']) + len(r['completion_ids']) - 1)))
@@ -106,6 +106,52 @@ def reverse_kl_histories(runtime, items, chunk_size=64):
         total = total + checkpoint(projected_kl, current[lo:lo + chunk_size],
                                    reference[lo:lo + chunk_size], use_reentrant=False)
     return total
+
+
+def role_and_kl(runtime, example, item, chunk_size=64):
+    """Role loss and reverse KL of one episode from a single pass of the current model.
+
+    `example` is the episode's role example ({'ids', 'labels'}) and `item` its
+    `episode_histories` entry over the same tokens. The current model runs once: its
+    probe-layer activations give the role cross-entropy (summed over labelled tokens) and
+    its last hidden states the KL at the sampled positions. The base model runs once without
+    gradient. Returns (role loss sum, KL sum, role confusion counts); the two sums are what
+    `runtime.role_loss` and `reverse_kl_histories` return from separate passes.
+    """
+    tokens = item['tokens']
+    if example['ids'] != tokens:
+        raise ValueError('Role example and KL history of an episode must be the same tokens')
+    if len(tokens) > runtime.base.config.max_position_embeddings:
+        raise ValueError('Generation context exceeds native limit; no truncation')
+    ids = torch.tensor([tokens], device=runtime.device)
+    attention = torch.ones_like(ids)
+    with runtime.model.disable_adapter(), torch.no_grad():
+        reference = runtime.base.model(input_ids=ids, attention_mask=attention,
+                                       use_cache=False).last_hidden_state
+    runtime.hidden = None
+    current = runtime.base.model(input_ids=ids, attention_mask=attention,
+                                 use_cache=False).last_hidden_state
+    probed, runtime.hidden = runtime.hidden, None
+    labels = torch.tensor(example['labels'], device=runtime.device)
+    valid = labels >= 0
+    logits = runtime.probe(probed[0, valid].float())
+    role = F.cross_entropy(logits, labels[valid], reduction='sum')
+    classes = len(runtime.roles)
+    counts = torch.bincount(labels[valid] * classes + logits.argmax(-1), minlength=classes * classes).reshape(classes, classes)
+    columns = torch.tensor(item['columns'], device=runtime.device)
+    current, reference = current[0, columns], reference[0, columns]
+
+    def projected_kl(q, p):
+        with torch.no_grad():
+            log_p = F.log_softmax(runtime.base.lm_head(p).float(), dim=-1)
+        log_q = F.log_softmax(runtime.base.lm_head(q).float(), dim=-1)
+        return (log_q.exp() * (log_q - log_p)).sum()
+
+    kl = current.sum() * 0
+    for lo in range(0, len(current), chunk_size):
+        kl = kl + checkpoint(projected_kl, current[lo:lo + chunk_size],
+                             reference[lo:lo + chunk_size], use_reentrant=False)
+    return role, kl, counts
 
 
 def kl_batches(requests, max_tokens=None):

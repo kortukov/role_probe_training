@@ -94,6 +94,9 @@ present, in %. Runs named `_five` use the five-role probe, the others the ten-ro
   levels are also held back by their slowest tasks. The ladder collects 32 at once.
 - 2026-11-14. The on-policy KL term now replays each rollout once instead of once per model
   call (same positions and value; 15 times fewer tokens on saved AppWorld rollouts).
+- 2026-11-14. Each update now runs the trained model once per rollout for both the role loss
+  and the KL term (it ran twice); the base model's pass is unchanged. Same losses and
+  gradient, checked on the toy model.
 - 2026-11-13. This is the first time the trainer and the evaluation job run in the unified
   setup; a failure in either is a pipeline finding, not a result.
 

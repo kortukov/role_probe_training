@@ -9,7 +9,8 @@ import torch
 import torch.nn.functional as F
 
 from role_probe_training.on_policy.data import schedule, validate_requests
-from role_probe_training.on_policy.objective import episode_histories, reverse_kl_histories, reverse_kl_sum, reverse_kl_sums
+from role_probe_training.on_policy.objective import (episode_histories, reverse_kl_histories, reverse_kl_sum,
+                                                     reverse_kl_sums, role_and_kl)
 from role_probe_training.on_policy.serving import parse_completion, template_messages
 
 
@@ -24,6 +25,8 @@ class Backbone(torch.nn.Module):
         hidden = self.embedding(input_ids).cumsum(1)
         if self.active:
             hidden = hidden+self.adapter
+        if getattr(self, 'capture', None) is not None:
+            self.capture.hidden = hidden
         return SimpleNamespace(last_hidden_state=hidden)
 
     @contextmanager
@@ -59,6 +62,39 @@ def check_episode_histories(runtime, backbone):
     # Calls that do not extend each other keep one pass per call.
     broken = [first, dict(second, prompt_ids=[1, 9, 3, 4, 5])]
     assert len(episode_histories(broken)) == 2
+
+
+def check_shared_pass(runtime, backbone):
+    """One pass of the current model gives the same role loss, KL and gradient as two."""
+    probe = torch.nn.Linear(7, 3).requires_grad_(False)
+    runtime.probe, runtime.roles = probe, ('x', 'y', 'z')
+    request = dict(episode_id='a', generation_index=0, prompt_ids=[1, 2, 3], completion_ids=[4, 5, 6])
+    item, = episode_histories([request])
+    example = dict(ids=[1, 2, 3, 4, 5, 6], labels=[-1, 0, 1, 2, 2, -1])
+    labels = torch.tensor(example['labels']); valid = labels >= 0
+    backbone.adapter.grad = None
+    # Separate passes; the toy backbone's output stands in for the probe-layer activations.
+    logits = probe(backbone(torch.tensor([example['ids']])).last_hidden_state[0, valid])
+    role = F.cross_entropy(logits, labels[valid], reduction='sum')
+    kl = reverse_kl_histories(runtime, [item], chunk_size=2)
+    (role / 4 + 16 * kl / 3).backward()
+    separate = backbone.adapter.grad.clone()
+    backbone.adapter.grad = None
+    backbone.capture = runtime  # the forward hook of the real model
+    shared_role, shared_kl, counts = role_and_kl(runtime, example, item, chunk_size=2)
+    backbone.capture = None
+    (shared_role / 4 + 16 * shared_kl / 3).backward()
+    torch.testing.assert_close(shared_role, role)
+    torch.testing.assert_close(shared_kl, kl)
+    torch.testing.assert_close(backbone.adapter.grad, separate)
+    assert int(counts.sum()) == 4 and counts.shape == (3, 3)
+    backbone.adapter.grad = None
+    try:
+        role_and_kl(runtime, dict(example, ids=[1, 2, 3, 4, 5, 7]), item)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('Different role and KL tokens were accepted')
 
 
 def main():
@@ -161,7 +197,8 @@ def main():
     else:
         raise AssertionError('Stale policy was accepted')
     check_episode_histories(runtime, backbone)
-    print('PASS: reverse-KL direction/value/gradient/causal shift, one pass per episode, zero-adapter KL, '
+    check_shared_pass(runtime, backbone)
+    print('PASS: reverse-KL direction/value/gradient/causal shift, one pass per episode, shared role/KL pass, zero-adapter KL, '
           'frozen base, Harmony tool/reasoning parsing, complete task schedule and stale-policy rejection.')
 
 
