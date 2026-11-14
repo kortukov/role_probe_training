@@ -149,7 +149,7 @@ class ColocatedServer:
         self.runtime.hidden = None
         del hidden
         result = self.request('/v1/completions',dict(model='on-policy-role-model',prompt=prompt,
-            max_tokens=1,temperature=0,logprobs=-1,return_tokens_as_token_ids=True,
+            max_tokens=1,temperature=0,logprobs=len(log_q),return_tokens_as_token_ids=True,
             return_token_ids=True))
         values = result['choices'][0]['logprobs']['top_logprobs'][0]
         log_p = torch.full_like(log_q,float('nan'))
