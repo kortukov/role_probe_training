@@ -85,6 +85,7 @@ def main():
     optimizer = torch.optim.AdamW(parameters, lr=config['learning_rate'], weight_decay=1e-4)
     standard = probe_examples(config['probe_documents'], runtime.roles)
     validation = trajectory_examples(config['validation'], runtime.roles)
+    validation_prompt = validation[0]['ids'][:2048]
     start_step = 0
     if args.resume:
         state = torch.load(args.resume/'training.pt', map_location='cpu', weights_only=False)
@@ -136,6 +137,9 @@ def main():
                 if refresh:
                     if server is not None:
                         log('serving_refresh', step=step, refresh=server.synchronize(step-1))
+                        # Check the served distribution before spending the collection time on it.
+                        log('serving_distribution', step=step, stage='before_collection',
+                            comparison=server.compare_distribution(validation_prompt))
                     episodes = (batches[index] if config['refresh'] == 'batch' else
                                 [e for b in batches[epoch_start:epoch_start+updates_per_epoch] for e in b])
                     examples, requests, records = collect(runtime, config,
