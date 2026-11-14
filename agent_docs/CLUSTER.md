@@ -355,3 +355,27 @@ Initial training jobs: on-policy `2020749`, off-policy `2020781`; exact dependen
 DAGs and commands are in each report's `jobs.json`. At submission both were pending
 scheduler Priority, with no start estimate. CPU schedule/report checks and training
 imports passed; production GPU execution and the measurements are still pending.
+
+### Measured CPU and memory of rollout collection and training (2026-11-14)
+
+Live `sacct` readings of our own jobs, one B200 each:
+
+| Job | Cores allocated | Average cores used | Peak RSS |
+|---|---|---|---|
+| Concurrency test, up to 64 AppWorld rollouts at once (standalone vLLM) | 32 | 1.4 | 46.5 GB |
+| Epoch trainer, collection of 270 rollouts at 8 at once (no update reached) | 16 | 1.3 | 60.7 GB |
+| Retail collection, 114 tasks | 8 | 0.4 | 10.7 GB |
+
+AppWorld rollout collection is bound by generation, not by CPU: 32 or 64 environments at
+once use under two cores on average. The ladder jobs (`on_policy_progress/train.sbatch`,
+`evaluate.sbatch`) therefore request 8 cores and 160 GB with 32 rollouts at once. The
+160 GB keeps headroom over the 118 GiB peak of an earlier training job (see above); the
+update phase of the epoch trainer has not been measured in the unified setup.
+
+What decides when a job starts here (live `scontrol show config`, `sprio`, `sinfo`):
+priority is QOS plus fair share (weight 100,000) plus age (weight 8,000 over seven days);
+job size does not enter it. Size matters for placement: a node has 96 cores and 1.5 TB for
+8 GPUs, i.e. 12 cores and 193 GB per GPU, and when one GPU frees on a busy node there are
+often only 4 to 32 free cores. A 32-core one-GPU job fitted 4 of 11 nodes at the time of
+measurement and a 16-core job 9 of 11. Usage is billed as cores + 0.0625 per GiB + 48 per
+GPU, so 32 cores and 256 GB cost 96 per hour against 66 for 8 cores and 160 GB.

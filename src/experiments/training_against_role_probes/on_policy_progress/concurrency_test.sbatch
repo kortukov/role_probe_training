@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gpus=1
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=256G
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=96G
 #SBATCH --time=01:30:00
 #SBATCH --output=experiment_reports/training_against_role_probes/on_policy_progress/logs/%x-%j.out
 # How many AppWorld rollouts can one GPU generate at once? Collects 64 training tasks from the
