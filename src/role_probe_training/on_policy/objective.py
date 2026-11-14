@@ -18,19 +18,69 @@ def reverse_kl_sums(runtime, requests, chunk_size=64):
     chunks; attention histories are never chunked. Histories are fixed for this
     gradient: this is not a trajectory policy-gradient estimator.
     """
-    sequences, rows, columns = [], [], []
-    for row, request in enumerate(requests):
-        prompt = request['prompt_ids']
-        completion = request['completion_ids']
+    items = []
+    for request in requests:
+        prompt, completion = request['prompt_ids'], request['completion_ids']
         if not prompt or not completion:
             raise ValueError('KL requires a nonempty prompt and sampled completion')
-        tokens = prompt + completion
+        # Hidden state t predicts token t+1, including the FIRST completion token.
+        items.append(dict(tokens=prompt + completion, columns=list(range(len(prompt) - 1, len(prompt) + len(completion) - 1))))
+    return reverse_kl_histories(runtime, items, chunk_size)
+
+
+def episode_histories(requests):
+    """One replay per episode in place of one per model call, with the same KL positions.
+
+    The requests of an episode extend each other: a later prompt starts with the earlier
+    prompt and completion (the Harmony server checks this on every call). Under causal
+    attention the hidden state before a sampled token is then the same in the earlier
+    request and in the episode's last one, so the whole episode needs a single pass over its
+    last request with the positions of every call's sampled tokens. Only the last token of
+    an earlier completion may differ (a final answer's <|return|> is replayed as <|end|>);
+    it lies after every position that predicts that completion. An episode whose requests
+    do not extend each other this way keeps one item per request.
+    """
+    episodes = {}
+    for request in requests:
+        episodes.setdefault(request['episode_id'], []).append(request)
+    items = []
+    for group in episodes.values():
+        group = sorted(group, key=lambda request: request['generation_index'])
+        last = group[-1]
+        tokens = last['prompt_ids'] + last['completion_ids']
+        columns, consistent = [], True
+        for request in group:
+            prompt, completion = request['prompt_ids'], request['completion_ids']
+            if not prompt or not completion:
+                raise ValueError('KL requires a nonempty prompt and sampled completion')
+            context = prompt + completion[:-1]  # everything a position predicting this completion can see
+            if tokens[:len(context)] != context:
+                consistent = False
+                break
+            columns += range(len(prompt) - 1, len(prompt) + len(completion) - 1)
+        if consistent and len(set(columns)) == len(columns):
+            items.append(dict(tokens=tokens, columns=columns))
+        else:
+            items += [dict(tokens=r['prompt_ids'] + r['completion_ids'],
+                           columns=list(range(len(r['prompt_ids']) - 1, len(r['prompt_ids']) + len(r['completion_ids']) - 1)))
+                      for r in group]
+    return items
+
+
+def reverse_kl_histories(runtime, items, chunk_size=64):
+    """Sum KL(current || base) at the given positions of each token sequence.
+
+    `items` are {'tokens', 'columns'}: hidden state `column` predicts the sampled token at
+    `column + 1`. Several sequences share a right-padded pass.
+    """
+    sequences, rows, columns = [], [], []
+    for row, item in enumerate(items):
+        tokens = item['tokens']
         if len(tokens) > runtime.base.config.max_position_embeddings:
             raise ValueError('Generation context exceeds native limit; no truncation')
         sequences.append(tokens)
-        # Hidden state t predicts token t+1, including the FIRST completion token.
-        columns += range(len(prompt) - 1, len(tokens) - 1)
-        rows += [row] * len(completion)
+        columns += item['columns']
+        rows += [row] * len(item['columns'])
     width = max(map(len, sequences))
     ids = torch.tensor([x + [runtime.pad_id] * (width - len(x)) for x in sequences], device=runtime.device)
     attention = torch.ones_like(ids)

@@ -20,7 +20,7 @@ from role_probe_training.training.refit import refit_probe, summarize_counts
 from role_probe_training.training.train_same_batch import evaluate, save_checkpoint, sync_gradients
 from role_probe_training.epoch_training.data import schedule, select_pool
 from role_probe_training.on_policy.data import sha256
-from role_probe_training.on_policy.objective import kl_batches, reverse_kl_sums
+from role_probe_training.on_policy.objective import episode_histories, kl_batches, reverse_kl_histories, reverse_kl_sums
 
 from role_probe_training.on_policy_recovery.collection import collect
 
@@ -192,8 +192,13 @@ def main():
                 runtime.hidden = None
                 del loss, confusion
             done = 0
-            for batch in kl_batches(requests, config.get('kl_batch_tokens')):
-                loss = reverse_kl_sums(runtime, batch)
+            # One replay per episode covers the sampled tokens of all its model calls (same KL
+            # positions, about 15 times fewer tokens replayed than one replay per call).
+            kl_items = ([[item] for item in episode_histories(requests)] if config.get('kl_replay', 'episode') == 'episode'
+                        else kl_batches(requests, config.get('kl_batch_tokens')))
+            for batch in kl_items:
+                loss = (reverse_kl_histories(runtime, batch) if config.get('kl_replay', 'episode') == 'episode'
+                        else reverse_kl_sums(runtime, batch))
                 (config['kl_coefficient']*loss/denominators[1]).backward()
                 totals[1] += loss.detach().double()
                 runtime.hidden = None
@@ -201,7 +206,7 @@ def main():
                 done += len(batch)
                 if done//32 > (done-len(batch))//32:
                     log('kl_progress',step=step,requests_done=done,
-                        requests_total=len(requests),seconds=time.perf_counter()-started)
+                        requests_total=len(kl_items),seconds=time.perf_counter()-started)
             sync_gradients(parameters)
             grad_norm = torch.nn.utils.clip_grad_norm_(parameters, 1.)
             if not torch.isfinite(grad_norm):

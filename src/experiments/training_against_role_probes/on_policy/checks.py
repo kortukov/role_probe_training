@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 
 from role_probe_training.on_policy.data import schedule, validate_requests
-from role_probe_training.on_policy.objective import reverse_kl_sum, reverse_kl_sums
+from role_probe_training.on_policy.objective import episode_histories, reverse_kl_histories, reverse_kl_sum, reverse_kl_sums
 from role_probe_training.on_policy.serving import parse_completion, template_messages
 
 
@@ -33,6 +33,32 @@ class Backbone(torch.nn.Module):
             yield
         finally:
             self.active = True
+
+
+def check_episode_histories(runtime, backbone):
+    """One pass per episode equals one pass per model call, in value and gradient."""
+    # Three calls of one episode (the middle one ends a final answer: its last token 9 is
+    # replayed as 8 in later prompts) and a second episode with a single call.
+    first = dict(episode_id='a', generation_index=0, prompt_ids=[1, 2], completion_ids=[3, 4])
+    second = dict(episode_id='a', generation_index=1, prompt_ids=[1, 2, 3, 4, 5], completion_ids=[6, 9])
+    third = dict(episode_id='a', generation_index=2, prompt_ids=[1, 2, 3, 4, 5, 6, 8, 7], completion_ids=[2, 3, 1])
+    other = dict(episode_id='b', generation_index=0, prompt_ids=[4], completion_ids=[5, 6])
+    requests = [third, other, first, second]
+    backbone.adapter.grad = None
+    separate = reverse_kl_sums(runtime, requests, chunk_size=2)
+    separate.backward()
+    separate_gradient = backbone.adapter.grad.clone()
+    backbone.adapter.grad = None
+    items = episode_histories(requests)
+    assert len(items) == 2 and sorted(len(item['columns']) for item in items) == [2, 7]
+    merged = reverse_kl_histories(runtime, items, chunk_size=2)
+    merged.backward()
+    torch.testing.assert_close(merged, separate)
+    torch.testing.assert_close(backbone.adapter.grad, separate_gradient)
+    backbone.adapter.grad = None
+    # Calls that do not extend each other keep one pass per call.
+    broken = [first, dict(second, prompt_ids=[1, 9, 3, 4, 5])]
+    assert len(episode_histories(broken)) == 2
 
 
 def main():
@@ -134,7 +160,8 @@ def main():
         pass
     else:
         raise AssertionError('Stale policy was accepted')
-    print('PASS: reverse-KL direction/value/gradient/causal shift, zero-adapter KL, '
+    check_episode_histories(runtime, backbone)
+    print('PASS: reverse-KL direction/value/gradient/causal shift, one pass per episode, zero-adapter KL, '
           'frozen base, Harmony tool/reasoning parsing, complete task schedule and stale-policy rejection.')
 
 
